@@ -22,9 +22,8 @@ export class SetCaptchaLocationsPacket extends Packet {
         const size = bytes.readInt();
         this.locations = new Array(size);
 
-        let count = 0;
-        while (count < size) {
-            this.locations.push(CaptchaLocation.ALL[bytes.readInt()]);
+        for (let i = 0; i < size; i++) {
+            this.locations[i] = CaptchaLocation.ALL[bytes.readInt()];
         }
 
         return this.locations;

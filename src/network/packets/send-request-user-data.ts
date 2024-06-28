@@ -2,12 +2,12 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetUserIsPlaying extends Packet {
+export class SendRequestUserDataPacket extends Packet {
 
     public userId: string;
 
     constructor(bytes: ByteArray) {
-        super(Protocol.SET_USER_IS_PLAYING, bytes)
+        super(Protocol.SEND_REQUEST_USER_DATA, bytes)
     }
 
     public decode() {

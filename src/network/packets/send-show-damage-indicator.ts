@@ -2,12 +2,12 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SomeBooleanPacket extends Packet {
+export class SendShowDamageIndicatorPacket extends Packet {
 
     public enabled: boolean;
 
     constructor(bytes: ByteArray) {
-        super(Protocol.SOME_BOOLEAN, bytes)
+        super(Protocol.SEND_SHOW_DAMAGE_INDICATOR, bytes)
     }
 
     public decode() {

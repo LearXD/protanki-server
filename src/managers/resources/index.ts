@@ -1,14 +1,13 @@
 import { Server } from "../../server";
 
-import path from 'path';
-import fs from 'fs';
 import { Client } from "../../game/client";
 import { SetLoadResourcesPacket } from "../../network/packets/set-load-resources";
 import { ByteArray } from "../../utils/network/byte-array";
 
 export enum ResourceType {
-    AUTHENTICATED = 'authenticated',
-    BASE = 'base'
+    LOBBY = 'lobby',
+    AUTH = 'auth',
+    GARAGE = 'garage',
 }
 
 export class ResourcesManager {
@@ -25,21 +24,26 @@ export class ResourcesManager {
         const assetsManager = this.server.getAssetsManager();
 
         this.resources.set(
-            ResourceType.AUTHENTICATED,
-            assetsManager.getResource('authenticated.json').resources
+            ResourceType.LOBBY,
+            assetsManager.getResource('lobby.json').resources
         );
 
         this.resources.set(
-            ResourceType.BASE,
-            assetsManager.getResource('base.json').resources
+            ResourceType.AUTH,
+            assetsManager.getResource('auth.json').resources
+        );
+
+        this.resources.set(
+            ResourceType.GARAGE,
+            assetsManager.getResource('garage.json').resources
         );
     }
 
     public sendResources(client: Client, resource: ResourceType) {
-        return this.sendLoadResourcesToClient(client, this.resources.get(resource));
+        return this.sendLoadResources(client, this.resources.get(resource));
     }
 
-    public sendLoadResourcesToClient(client: Client, resources: any[]) {
+    public sendLoadResources(client: Client, resources: any[]) {
         return new Promise((resolve) => {
             const setLoadResourcesPacket = new SetLoadResourcesPacket(new ByteArray());
             setLoadResourcesPacket.resources = resources;

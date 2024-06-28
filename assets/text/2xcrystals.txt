@@ -1,0 +1,8 @@
+SetAddSpecialItemPacket -875418096 {
+  image: 948382,
+  bottomText: null,
+  topText: 'Parabéns, você recebeu o cartão bônus "Double Crystal". Com ele, você é cobrado duas vezes mais cristais do que de costume ao comprá-los com dinheiro real. Não importa quantos cristais você compre, você receberá de presente a mesma quantia. O cartão é válido apenas por 24 horas. 
+Tenha tempo para fazer compras lucrativas!\n' +
+    '\n' +
+    'Atenção! Os cristais de bônus não são levados em consideração ao deduzir referências.'
+}

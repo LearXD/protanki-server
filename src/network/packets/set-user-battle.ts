@@ -3,7 +3,7 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetBattleDataOfJoinedUserPacket extends Packet {
+export class SetUserBattlePacket extends Packet {
 
     public battle: string
     public map: string
@@ -17,7 +17,7 @@ export class SetBattleDataOfJoinedUserPacket extends Packet {
     public user: string
 
     constructor(bytes: ByteArray) {
-        super(Protocol.SET_BATTLE_DATA_OF_JOINED_USER, bytes)
+        super(Protocol.SET_USER_BATTLE, bytes)
     }
 
     public decode() {

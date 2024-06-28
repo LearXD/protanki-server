@@ -65,7 +65,7 @@ export class AuthHandler {
     }
 
     private async handleClientAuthenticated(client: Client) {
-        await this.server.getResourcesManager().sendResources(client, ResourceType.AUTHENTICATED);
+        await this.server.getResourcesManager().sendResources(client, ResourceType.LOBBY);
         client.sendGameLoaded();
 
         client.setLayoutState(LayoutState.BATTLE_SELECT);

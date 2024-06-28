@@ -11,6 +11,7 @@ import { SetViewingBattlePacket } from '../../network/packets/set-viewing-battle
 import Logger from '../../utils/logger';
 import { SendCreateBattlePacket } from '../../network/packets/send-create-battle';
 import { SetAddBattleOnListPacket } from '../../network/packets/set-add-battle-on-list';
+import { SetRemoveBattlesScreenPacket } from '../../network/packets/set-remove-battles-screen';
 
 export class BattlesManager {
 
@@ -98,6 +99,11 @@ export class BattlesManager {
         Logger.debug(`Created battle ${battle.getId()} with name ${name} and map ${mapName}`)
 
         return battle;
+    }
+
+    public removeBattleScreen(client: Client) {
+        const setRemoveBattlesScreenPacket = new SetRemoveBattlesScreenPacket(new ByteArray());
+        client.sendPacket(setRemoveBattlesScreenPacket);
     }
 
     public generateId() {

@@ -38,8 +38,8 @@ import { SetCountryLocaleNamePacket } from "./packets/set-country-locale-name";
 import { SendLoginHashPacket } from "./packets/send-login-hash";
 import { SetChatCostPacket } from "./packets/set-chat-cost";
 import { SetChatMessagesPacket } from "./packets/set-chat-messages";
-import { SomeBooleanPacket } from "./packets/some-boolean";
-import { SetUserIsPlaying } from "./packets/set-user-is-playing";
+import { SendShowDamageIndicatorPacket } from "./packets/send-show-damage-indicator";
+import { SendRequestUserDataPacket } from "./packets/send-request-user-data";
 import { SetRemoveUserFromBattleCounterPacket } from "./packets/set-remove-user-from-battle-counter";
 import { SetMapsDataPacket } from "./packets/set-maps-data";
 import { SetBattleListPacket } from "./packets/set-battle-list";
@@ -47,7 +47,7 @@ import { SetViewingBattlePacket } from "./packets/set-viewing-battle";
 import { SetViewingBattleDataPacket } from "./packets/set-viewing-battle-data";
 import { SetUserOnlinePacket } from "./packets/set-user-online";
 import { UserRankDataPacket } from "./packets/user-rank-data";
-import { SetBattleDataOfJoinedUserPacket } from "./packets/set-battle-data-of-joined-user";
+import { SetUserBattlePacket } from "./packets/set-user-battle";
 import { SetUserPremiumDataPacket } from "./packets/set-user-premium-data";
 import { SetRemoveUserFromTeamBattleCounterPacket } from "./packets/set-remove-user-from-team-battle-counter";
 import { SetRemoveUserPlayingPacket } from "./packets/set-remove-user-playing";
@@ -346,7 +346,7 @@ export class Network {
         this.registerPacket(Protocol.SET_ACHIEVEMENT_CC, SetAchievementCCPacket)
 
         this.registerPacket(Protocol.SET_BATTLE_INVITE_CC, SetBattleInviteCCPacket)
-        this.registerPacket(Protocol.SET_BATTLE_DATA_OF_JOINED_USER, SetBattleDataOfJoinedUserPacket)
+        this.registerPacket(Protocol.SET_USER_BATTLE, SetUserBattlePacket)
 
         this.registerPacket(Protocol.SET_BATTLE_STATISTICS_CC, SetBattleStatisticsCCPacket)
         this.registerPacket(Protocol.SET_BATTLE_STATISTICS_DM_CC, SetBattleStatisticsDMCCPacket)
@@ -367,10 +367,10 @@ export class Network {
         this.registerPacket(Protocol.SET_CHAT_COST, SetChatCostPacket)
         this.registerPacket(Protocol.SET_CHAT_MESSAGES, SetChatMessagesPacket)
 
-        this.registerPacket(Protocol.SOME_BOOLEAN, SomeBooleanPacket)
+        this.registerPacket(Protocol.SEND_SHOW_DAMAGE_INDICATOR, SendShowDamageIndicatorPacket)
 
         this.registerPacket(Protocol.SET_USER_ID_USERS_INFO_TEAM, SetUserIdUsersInfoTeamPacket)
-        this.registerPacket(Protocol.SET_USER_IS_PLAYING, SetUserIsPlaying)
+        this.registerPacket(Protocol.SEND_REQUEST_USER_DATA, SendRequestUserDataPacket)
         this.registerPacket(Protocol.SET_REMOVE_USER_PLAYING, SetRemoveUserPlayingPacket)
         this.registerPacket(Protocol.SET_BATTLE_USER_LEFT_NOTIFICATION, SetBattleUserLeftNotificationPacket)
 

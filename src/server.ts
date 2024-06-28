@@ -15,6 +15,7 @@ import { BattlesManager } from './managers/battles';
 import { MapsManager } from './managers/maps';
 import { Client } from './game/client';
 import { SimplePacket } from './network/packets/simple-packet';
+import { GarageManager } from './managers/garage';
 
 export class Server {
 
@@ -34,6 +35,7 @@ export class Server {
     private chatManager: ChatManager;
     private battleManager: BattlesManager;
     private mapsManager: MapsManager;
+    private garageManager: GarageManager;
 
     private whitelisted: boolean = false;
 
@@ -59,6 +61,7 @@ export class Server {
         this.chatManager = new ChatManager(this);
         this.mapsManager = new MapsManager(this);
         this.battleManager = new BattlesManager(this);
+        this.garageManager = new GarageManager(this);
 
         this.network = new Network();
         this.sendMessage('Servidor online papai')
@@ -118,6 +121,7 @@ export class Server {
     public getChatManager() { return this.chatManager }
     public getBattlesManager() { return this.battleManager }
     public getMapsManager() { return this.mapsManager }
+    public getGarageManager() { return this.garageManager }
 
     public isWhitelisted() { return this.whitelisted }
 

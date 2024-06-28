@@ -5,7 +5,7 @@ import { Packet } from "./packet";
 
 export class SetUserGarageItemsPacket extends Packet {
 
-    public items: string | object;
+    public items: object;
 
     constructor(bytes: ByteArray) {
         super(Protocol.SET_USER_GARAGE_ITEMS, bytes)
@@ -14,10 +14,10 @@ export class SetUserGarageItemsPacket extends Packet {
     public decode() {
         const bytes = this.cloneBytes();
 
-        this.items = bytes.readString();
+        const json = bytes.readString();
 
         try {
-            this.items = JSON.parse(this.items);
+            this.items = JSON.parse(json);
         } catch (e) {
             Logger.error('SetUserGarageItemsPacket', e);
         }
@@ -29,10 +29,7 @@ export class SetUserGarageItemsPacket extends Packet {
 
     public encode() {
         const bytes = new ByteArray();
-        if (typeof this.items === 'object') {
-            this.items = JSON.stringify(this.items);
-        }
-        bytes.writeString(this.items as string);
+        bytes.writeString(JSON.stringify(this.items));
         return bytes;
     }
 }

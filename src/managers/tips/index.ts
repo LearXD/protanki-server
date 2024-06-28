@@ -41,7 +41,7 @@ export class TipsManager {
                 return resolve(false)
             }
 
-            await this.server.getResourcesManager().sendLoadResourcesToClient(client, [resource]);
+            await this.server.getResourcesManager().sendLoadResources(client, [resource]);
 
             const validateResourcePacket = new ValidateResourcePacket(new ByteArray());
             validateResourcePacket.resourceId = resource.idlow

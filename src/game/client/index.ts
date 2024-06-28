@@ -29,6 +29,7 @@ import { SendChatMessagePacket } from "../../network/packets/send-chat-message";
 import { SendCreateBattlePacket } from "../../network/packets/send-create-battle";
 import { SetViewingBattlePacket } from "../../network/packets/set-viewing-battle";
 import { Battle } from "../battle";
+import { SendOpenGaragePacket } from "../../network/packets/send-open-garage";
 
 const IGNORE_PACKETS = [
     1484572481 // Pong
@@ -87,7 +88,7 @@ export class Client {
         this.sendPacket(captchaLocationsPacket);
 
         await this.getServer().getTipsManager().sendTipToClient(this);
-        await this.getServer().getResourcesManager().sendResources(this, ResourceType.BASE);
+        await this.getServer().getResourcesManager().sendResources(this, ResourceType.AUTH);
 
         this.getServer().getAuthHandler().sendAuthConfig(this);
 
@@ -188,11 +189,21 @@ export class Client {
         }
 
         if (packet instanceof SendCreateBattlePacket) {
-            this.getServer().getBattlesManager().handleCreateBattle(this, packet)
+            this.getServer()
+                .getBattlesManager()
+                .handleCreateBattle(this, packet)
         }
 
         if (packet instanceof SetViewingBattlePacket) {
-            this.getServer().getBattlesManager().handleViewBattle(this, packet.battleId.trim())
+            this.getServer()
+                .getBattlesManager()
+                .handleViewBattle(this, packet.battleId.trim())
+        }
+
+        if (packet instanceof SendOpenGaragePacket) {
+            this.getServer()
+                .getGarageManager()
+                .handleOpenGarage(this);
         }
 
     }
