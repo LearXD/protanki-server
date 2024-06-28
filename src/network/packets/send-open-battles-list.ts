@@ -2,11 +2,11 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SendLoadBattlesScreenPacket extends Packet {
+export class SendOpenBattlesListPacket extends Packet {
 
 
     constructor(bytes: ByteArray) {
-        super(Protocol.SEND_LOAD_BATTLES_SCREEN, bytes)
+        super(Protocol.SEND_OPEN_BATTLES_LIST, bytes)
     }
 
     public decode() {

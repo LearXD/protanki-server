@@ -1,5 +1,3 @@
-import { v4 } from 'uuid'
-
 import { Battle, IBattleData } from "../../game/battle";
 import { Client } from "../../game/client";
 import { SetBattleListPacket } from "../../network/packets/set-battle-list";
@@ -7,15 +5,17 @@ import { Server } from "../../server";
 import { BattleMode, BattleModes } from "../../utils/game/battle-mode";
 import { EquipmentConstraintsMode, EquipmentConstraintsModes } from "../../utils/game/equipment-constraints-mode";
 import { ByteArray } from "../../utils/network/byte-array";
-import { SetViewingBattlePacket } from '../../network/packets/set-viewing-battle';
 import Logger from '../../utils/logger';
 import { SendCreateBattlePacket } from '../../network/packets/send-create-battle';
 import { SetAddBattleOnListPacket } from '../../network/packets/set-add-battle-on-list';
 import { SetRemoveBattlesScreenPacket } from '../../network/packets/set-remove-battles-screen';
+import { LayoutState } from '../../utils/game/layout-state';
 
 export class BattlesManager {
 
     private battles: Battle[] = [];
+
+    public getBattles() { return this.battles }
 
     constructor(
         private readonly server: Server
@@ -49,10 +49,19 @@ export class BattlesManager {
         battle.addViewer(client);
     }
 
+    public handleOpenBattlesList(client: Client) {
+        client.setLayoutState(LayoutState.BATTLE_SELECT)
+        client.setSubLayoutState(LayoutState.BATTLE_SELECT, LayoutState.BATTLE_SELECT)
+
+        this.sendBattles(client);
+    }
+
     public handleViewBattle(client: Client, battleId: string) {
         try {
             const battle = this.getBattle(battleId);
-            battle.addViewer(client);
+            if (client.getViewingBattle().getId() != battleId) {
+                battle.addViewer(client);
+            }
         } catch (error) {
             if (error instanceof Error)
                 Logger.error(error.message)
@@ -62,24 +71,7 @@ export class BattlesManager {
     public createBattle(
         name: string,
         mapName: string,
-        config: IBattleData = {
-            autoBalance: true,
-            battleMode: BattleMode.DM,
-            equipmentConstraintsMode: EquipmentConstraintsMode.NONE,
-            friendlyFire: false,
-            scoreLimit: 20,
-            timeLimitInSec: 600,
-            maxPeopleCount: 10,
-            parkourMode: false,
-            privateBattle: false,
-            proBattle: false,
-            rankRange: { max: 30, min: 1 },
-            reArmorEnabled: true,
-            theme: 'default',
-            withoutBonuses: false,
-            withoutCrystals: false,
-            withoutSupplies: false
-        }
+        config?: IBattleData
     ) {
         const map = this.server.getMapsManager().getMap(mapName)
 
@@ -88,8 +80,7 @@ export class BattlesManager {
         }
 
         // TODO: Validate limits
-
-        const battle = new Battle(this.generateId(), name, config, map);
+        const battle = new Battle(name, map, config);
 
         const sendBattleCreated = new SetAddBattleOnListPacket(new ByteArray());
         sendBattleCreated.data = battle.toBattleListItem();
@@ -106,10 +97,6 @@ export class BattlesManager {
         client.sendPacket(setRemoveBattlesScreenPacket);
     }
 
-    public generateId() {
-        return v4().substring(0, 8) + v4().substring(0, 8)
-    }
-
     public addBattle(battle: Battle) {
         this.battles.push(battle);
     }
@@ -124,9 +111,10 @@ export class BattlesManager {
         return battle;
     }
 
-    public getBattles() { return this.battles }
-
     public sendBattles(client: Client) {
+        this.server.getMapsManager()
+            .sendMapsData(client);
+
         const setBattleListPacket = new SetBattleListPacket(new ByteArray());
         setBattleListPacket.battles = this.battles.map(battle => battle.toBattleListItem());
         client.sendPacket(setBattleListPacket);

@@ -12,7 +12,7 @@ import { ResolveCallbackPacket } from "../../network/packets/resolve-callback";
 import { SetLanguagePacket } from "../../network/packets/set-language";
 import { PongPacket } from "../../network/packets/pong";
 import { PingPacket } from "../../network/packets/ping";
-import { ResolveValidateResourcePacketPacket } from "../../network/packets/resolve-validate-resource";
+import { SendRequestLoadScreenPacketPacket } from "../../network/packets/send-request-load-screen";
 import { SendLoginPacket } from "../../network/packets/send-login";
 import { SetCryptKeysPacket } from "../../network/packets/set-crypt-keys";
 import { SetNetworkParamsPacket } from "../../network/packets/set-network-params";
@@ -22,7 +22,7 @@ import { CaptchaLocation } from "../../utils/game/captcha-location";
 import { ResolveFullLoadedPacket } from "../../network/packets/resolve-full-loaded";
 import { SetGameLoadedPacket } from "../../network/packets/set-game-loaded";
 import { SetLayoutStatePacket } from "../../network/packets/set-layout-state";
-import { LayoutStateType } from "../../utils/game/layout-state";
+import { LayoutState, LayoutStateType } from "../../utils/game/layout-state";
 import { SetSubLayoutStatePacket } from "../../network/packets/set-sub-layout-state";
 import { ResourceType } from "../../managers/resources";
 import { SendChatMessagePacket } from "../../network/packets/send-chat-message";
@@ -30,6 +30,7 @@ import { SendCreateBattlePacket } from "../../network/packets/send-create-battle
 import { SetViewingBattlePacket } from "../../network/packets/set-viewing-battle";
 import { Battle } from "../battle";
 import { SendOpenGaragePacket } from "../../network/packets/send-open-garage";
+import { SendOpenBattlesListPacket } from "../../network/packets/send-open-battles-list";
 
 const IGNORE_PACKETS = [
     1484572481 // Pong
@@ -48,6 +49,8 @@ export class Client {
     private lastPong: number = 0;
 
     private viewingBattle: Battle;
+
+    public layoutState: LayoutStateType = LayoutState.BATTLE_SELECT;
 
     public resourcesLoaded: number = 1;
     public resourcesCallbackPool: Map<number, () => void> = new Map();
@@ -112,6 +115,9 @@ export class Client {
 
     public getEncoder(): XorDecoder { return this.encoder }
 
+    public getLanguage() { return this.language }
+    public getLayoutState() { return this.layoutState }
+
     public getUsername() { return this.username }
     public getPosition(): Vector3d { return this.position }
     public getViewingBattle() { return this.viewingBattle }
@@ -135,8 +141,26 @@ export class Client {
     }
 
     public setLayoutState(state: LayoutStateType) {
+
+        if (this.getLayoutState() === state) return;
+
+        switch (this.getLayoutState()) {
+            case LayoutState.GARAGE:
+                this.getServer()
+                    .getGarageManager()
+                    .removeGarageScreen(this);
+                break;
+            case LayoutState.BATTLE_SELECT:
+                this.getServer()
+                    .getBattlesManager()
+                    .removeBattleScreen(this);
+        }
+
+        this.layoutState = state;
+
         const setLayoutStatePacket = new SetLayoutStatePacket(new ByteArray());
         setLayoutStatePacket.state = state;
+
         this.sendPacket(setLayoutStatePacket);
     }
 
@@ -171,7 +195,7 @@ export class Client {
             this.language = packet.language;
         }
 
-        if (packet instanceof ResolveValidateResourcePacketPacket) {
+        if (packet instanceof SendRequestLoadScreenPacketPacket) {
             this.getServer()
                 .getTipsManager()
                 .sendTipToClient(this);
@@ -204,6 +228,13 @@ export class Client {
             this.getServer()
                 .getGarageManager()
                 .handleOpenGarage(this);
+        }
+
+        if (packet instanceof SendOpenBattlesListPacket) {
+            this.getServer()
+                .getBattlesManager()
+                .handleOpenBattlesList(this);
+
         }
 
     }

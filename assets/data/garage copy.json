@@ -53,8 +53,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -116,8 +116,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -179,8 +179,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -188,6 +188,82 @@
       "remainingTimeInSec": -1,
       "modificationID": 3,
       "object3ds": 768112
+    },
+    {
+      "id": "flamethrower",
+      "name": "Lança-chamas",
+      "description": "Quando as batalhas acontecem de perto, não há arma melhor do que um pássaro de fogo. Esta é uma arma de aniquilação em massa que pode e vai derreter qualquer tanque e sua tripulação em pouco tempo. É altamente eficaz em espaços confinados contra movimentos lentos Firebird é relativamente lento quando se trata de recarregar, mas você também pode atirar com uma arma parcialmente recarregada.",
+      "isInventory": false,
+      "index": 150,
+      "next_price": 7100,
+      "next_rank": 8,
+      "type": 1,
+      "baseItemId": 43761,
+      "previewResourceId": 43761,
+      "rank": 1,
+      "category": "weapon",
+      "properts": [
+        {
+          "property": "DAMAGE_PER_SECOND",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "DAMAGE_PER_PERIOD",
+              "value": "41",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "WEAPON_CHARGE_RATE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "WEAPON_RELOAD_TIME",
+              "value": "12.00",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "TURRET_TURN_SPEED",
+          "value": "95.3",
+          "subproperties": null
+        },
+        {
+          "property": "SHOT_RANGE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "WEAPON_MIN_DAMAGE_RADIUS",
+              "value": "23.7",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "FIRE_DAMAGE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "FLAME_TEMPERATURE_LIMIT",
+              "value": "9.4",
+              "subproperties": null
+            }
+          ]
+        }
+      ],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 150,
+      "remainingTimeInSec": -1,
+      "modificationID": 0,
+      "object3ds": 521900
     },
     {
       "id": "flamethrower",
@@ -255,8 +331,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -331,8 +407,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -407,8 +483,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -416,6 +492,75 @@
       "remainingTimeInSec": -1,
       "modificationID": 3,
       "object3ds": 758687
+    },
+    {
+      "id": "twins",
+      "name": "Gêmeos",
+      "description": "Esta arma de plasma de dois canos de disparo rápido derreterá o inimigo em segundos. Levando em conta o fato de que, ao atingir outros tanques com Twins, você derruba a mira, a arma é ideal quando se trata de tiroteio dinâmico a distâncias médias.",
+      "isInventory": false,
+      "index": 200,
+      "next_price": 12350,
+      "next_rank": 9,
+      "type": 1,
+      "baseItemId": 103660,
+      "previewResourceId": 103660,
+      "rank": 2,
+      "category": "weapon",
+      "properts": [
+        {
+          "property": "DAMAGE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "DAMAGE_FROM",
+              "value": "8.8",
+              "subproperties": null
+            },
+            {
+              "property": "DAMAGE_TO",
+              "value": "10.5",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "IMPACT_FORCE",
+          "value": "97",
+          "subproperties": null
+        },
+        {
+          "property": "TURRET_TURN_SPEED",
+          "value": "89.6",
+          "subproperties": null
+        },
+        {
+          "property": "SHOT_RANGE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "WEAPON_MIN_DAMAGE_RADIUS",
+              "value": "60.7",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "WEAPON_MIN_DAMAGE_PERCENT",
+          "value": "5.8",
+          "subproperties": null
+        }
+      ],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 350,
+      "remainingTimeInSec": -1,
+      "modificationID": 0,
+      "object3ds": 495014
     },
     {
       "id": "twins",
@@ -476,8 +621,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -545,8 +690,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -614,8 +759,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -623,6 +768,75 @@
       "remainingTimeInSec": -1,
       "modificationID": 3,
       "object3ds": 499715
+    },
+    {
+      "id": "railgun",
+      "name": "Canhão-elétrico",
+      "description": "Se armas de calibre médio não são suficientes para sua auto-expressão, esta arma é certa para você. Arma de grande calibre com enorme velocidade de boca e projéteis usando urânio empobrecido. Projéteis cinéticos extremamente poderosos e precisos podem atravessar o tanque do inimigo ou acerte vários alvos na linha de fogo com um único tiro. Uma escolha ideal para guerra de trincheiras de longo alcance e sniping. Lembre-se de que leva muito tempo para recarregar a arma e garantir que seus oponentes não tirem vantagem disso.",
+      "isInventory": false,
+      "index": 250,
+      "next_price": 17600,
+      "next_rank": 10,
+      "type": 1,
+      "baseItemId": 882259,
+      "previewResourceId": 882259,
+      "rank": 3,
+      "category": "weapon",
+      "properts": [
+        {
+          "property": "DAMAGE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "DAMAGE_FROM",
+              "value": "68",
+              "subproperties": null
+            },
+            {
+              "property": "DAMAGE_TO",
+              "value": "106",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "IMPACT_FORCE",
+          "value": "369",
+          "subproperties": null
+        },
+        {
+          "property": "WEAPON_CHARGE_RATE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "WEAPON_RELOAD_TIME",
+              "value": "5.85",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "TURRET_TURN_SPEED",
+          "value": "56.2",
+          "subproperties": null
+        },
+        {
+          "property": "WEAPON_WEAKENING_COEFF",
+          "value": "35.36",
+          "subproperties": null
+        }
+      ],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 800,
+      "remainingTimeInSec": -1,
+      "modificationID": 0,
+      "object3ds": 906685
     },
     {
       "id": "railgun",
@@ -683,8 +897,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -752,8 +966,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -821,8 +1035,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -830,6 +1044,76 @@
       "remainingTimeInSec": -1,
       "modificationID": 3,
       "object3ds": 839339
+    },
+    {
+      "id": "isida",
+      "name": "Isida",
+      "description": "A ideia desta arma única surgiu nos tempos da guerra fria, mas só ganhou vida com o desenvolvimento da física quântica e das nanotecnologias. O coração desta máquina-maravilha é gerador de nanorrobôs capazes de reproduzir ou destruir a estrutura de qualquer material não biológico. A arma é equipada com emissor de impulso que permite transportar nanomassa no canal magnético a uma distância de cerca de vinte metros. Material molecular, derivado quando nanorrobôs estão funcionando no modo de destruição de alvos, é usado para fixar o próprio chassi do atirador . Assim, Isida causa dano a inimigos e cura aliados, o que a torna inestimável em batalhas de equipe.",
+      "isInventory": false,
+      "index": 300,
+      "next_price": 22850,
+      "next_rank": 11,
+      "type": 1,
+      "baseItemId": 896849,
+      "previewResourceId": 896849,
+      "rank": 4,
+      "category": "weapon",
+      "properts": [
+        {
+          "property": "ISIS_HEALING_PER_SECOND",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "ISIS_HEALING_PER_PERIOD",
+              "value": "22",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "ISIS_DAMAGE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "DAMAGE_PER_PERIOD",
+              "value": "40",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "ISIS_SELF_HEALING_PERCENT",
+          "value": "35.97",
+          "subproperties": null
+        },
+        {
+          "property": "WEAPON_CHARGE_RATE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "WEAPON_RELOAD_TIME",
+              "value": "11.11",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "TURRET_TURN_SPEED",
+          "value": "91.7",
+          "subproperties": null
+        }
+      ],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 1250,
+      "remainingTimeInSec": -1,
+      "modificationID": 0,
+      "object3ds": 638066
     },
     {
       "id": "isida",
@@ -891,8 +1175,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -961,8 +1245,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -1031,8 +1315,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -1040,6 +1324,81 @@
       "remainingTimeInSec": -1,
       "modificationID": 3,
       "object3ds": 999935
+    },
+    {
+      "id": "thunder",
+      "name": "Trovão",
+      "description": "sta arma de calibre médio de segunda geração é a melhor escolha para batalhas dinâmicas. Dano de respingo (certifique-se de não se acertar!) permite que você ataque um grupo de veículos inimigos. Recarga rápida lhe dará uma vantagem distinta sobre tanques pesados do inimigo. Equipado com armadura leve, o trovão é uma das armas mais perigosas no campo de batalha.",
+      "isInventory": false,
+      "index": 350,
+      "next_price": 28100,
+      "next_rank": 12,
+      "type": 1,
+      "baseItemId": 205433,
+      "previewResourceId": 205433,
+      "rank": 5,
+      "category": "weapon",
+      "properts": [
+        {
+          "property": "DAMAGE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "DAMAGE_FROM",
+              "value": "42",
+              "subproperties": null
+            },
+            {
+              "property": "DAMAGE_TO",
+              "value": "68",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "IMPACT_FORCE",
+          "value": "169",
+          "subproperties": null
+        },
+        {
+          "property": "WEAPON_CHARGE_RATE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "WEAPON_RELOAD_TIME",
+              "value": "3.15",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "TURRET_TURN_SPEED",
+          "value": "77",
+          "subproperties": null
+        },
+        {
+          "property": "SHOT_RANGE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "WEAPON_MIN_DAMAGE_RADIUS",
+              "value": "56.9",
+              "subproperties": null
+            }
+          ]
+        }
+      ],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 1450,
+      "remainingTimeInSec": -1,
+      "modificationID": 0,
+      "object3ds": 503709
     },
     {
       "id": "thunder",
@@ -1106,8 +1465,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -1181,8 +1540,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -1256,8 +1615,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -1326,8 +1685,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -1335,6 +1694,76 @@
       "remainingTimeInSec": -1,
       "modificationID": 0,
       "object3ds": 412744
+    },
+    {
+      "id": "shotgun",
+      "name": "Martelo",
+      "description": "A equipe por trás do desenvolvimento desta torreta anti-tanque, realmente penso fora da caixa. Em vez de usar armadura-perfurando escudos regulares, esta torreta dispara estilhaços, carregados com pentes de tungstênio. Estes são carregador para dentro da torreta usando um sistema de carregamento cilíndrico robótico. O resultado é uma torreta que praticamente martela tanques inimidos. Devido à sua mecânica única, esta é uma torreta que é melhor usada para combates de curto e médio alcance, porque perde o seu \"soco\" conforme aumenta a distância.",
+      "isInventory": false,
+      "index": 400,
+      "next_price": 79200,
+      "next_rank": 17,
+      "type": 1,
+      "baseItemId": 412745,
+      "previewResourceId": 412747,
+      "rank": 10,
+      "category": "weapon",
+      "properts": [
+        {
+          "property": "DAMAGE_PER_SECOND",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "DAMAGE_PER_PERIOD",
+              "value": "75.6",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "IMPACT_FORCE",
+          "value": "29",
+          "subproperties": null
+        },
+        {
+          "property": "WEAPON_CHARGE_RATE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "WEAPON_RELOAD_TIME",
+              "value": "2.04",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "TURRET_TURN_SPEED",
+          "value": "104",
+          "subproperties": null
+        },
+        {
+          "property": "SHOT_RANGE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "WEAPON_MIN_DAMAGE_RADIUS",
+              "value": "55.2",
+              "subproperties": null
+            }
+          ]
+        }
+      ],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 17600,
+      "remainingTimeInSec": -1,
+      "modificationID": 1,
+      "object3ds": 412746
     },
     {
       "id": "shotgun",
@@ -1396,8 +1825,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -1466,8 +1895,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -1475,6 +1904,71 @@
       "remainingTimeInSec": -1,
       "modificationID": 3,
       "object3ds": 412750
+    },
+    {
+      "id": "freeze",
+      "name": "Lança-gelo",
+      "description": "A ideia do sistema de armas Freeze nasceu em uma aldeia russa desolada. Usando uma velha geladeira quebrada «Sever» e um aspirador de pó «Buran», o inventor local fez o «atirador de gelo». Um engenheiro profissional que estava pescando perto da aldeia notou isso a invenção e a trouxe para o Instituto de Pesquisa Zhukov. Lá, o desajeitado \"atirador de gelo\" tornou-se a formidável arma de congelamento. Ela inunda o inimigo com a composição química baseada em freon. As vítimas sofrem danos e todos os seus movimentos e processos se tornam mais lentos. Embora um fluxo de fogo pode descongelar o alvo.",
+      "isInventory": false,
+      "index": 450,
+      "next_price": 28100,
+      "next_rank": 12,
+      "type": 1,
+      "baseItemId": 262762,
+      "previewResourceId": 262762,
+      "rank": 5,
+      "category": "weapon",
+      "properts": [
+        {
+          "property": "DAMAGE_PER_SECOND",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "DAMAGE_PER_PERIOD",
+              "value": "48",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "WEAPON_CHARGE_RATE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "WEAPON_RELOAD_TIME",
+              "value": "13.48",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "TURRET_TURN_SPEED",
+          "value": "125.1",
+          "subproperties": null
+        },
+        {
+          "property": "SHOT_RANGE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "WEAPON_MIN_DAMAGE_RADIUS",
+              "value": "24.8",
+              "subproperties": null
+            }
+          ]
+        }
+      ],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 1450,
+      "remainingTimeInSec": -1,
+      "modificationID": 0,
+      "object3ds": 791739
     },
     {
       "id": "freeze",
@@ -1531,8 +2025,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -1596,8 +2090,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -1661,8 +2155,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -1670,6 +2164,81 @@
       "remainingTimeInSec": -1,
       "modificationID": 3,
       "object3ds": 388185
+    },
+    {
+      "id": "ricochet",
+      "name": "Ricochete",
+      "description": "A arma de plasma ricochete é um novo projeto secreto de cientistas siberianos. Para produzir esta equipe de armas de 22 profissionais de alta classe, trabalham no bunker subterrâneo há mais de três anos sem permissão para sair na superfície. E eles criaram uma arma única . Ele lança cargas de plasma camufladas com um campo negativo inteligente. Quando tal carga atinge o tanque, ela explode, mas salta de qualquer outra superfície. Então, com Ricochete, você pode aquecer alvos fora do seu alcance de visibilidade. Mas tenha cuidado! Não fique no como uma carga liberada, pois você não pode causar danos a si mesmo.",
+      "isInventory": false,
+      "index": 500,
+      "next_price": 33350,
+      "next_rank": 13,
+      "type": 1,
+      "baseItemId": 86316,
+      "previewResourceId": 86316,
+      "rank": 6,
+      "category": "weapon",
+      "properts": [
+        {
+          "property": "DAMAGE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "DAMAGE_FROM",
+              "value": "19",
+              "subproperties": null
+            },
+            {
+              "property": "DAMAGE_TO",
+              "value": "23",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "IMPACT_FORCE",
+          "value": "164",
+          "subproperties": null
+        },
+        {
+          "property": "WEAPON_CHARGE_RATE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "WEAPON_RELOAD_TIME",
+              "value": "0.56",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "TURRET_TURN_SPEED",
+          "value": "91.3",
+          "subproperties": null
+        },
+        {
+          "property": "SHOT_RANGE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "WEAPON_MIN_DAMAGE_RADIUS",
+              "value": "67.4",
+              "subproperties": null
+            }
+          ]
+        }
+      ],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 1700,
+      "remainingTimeInSec": -1,
+      "modificationID": 0,
+      "object3ds": 833050
     },
     {
       "id": "ricochet",
@@ -1736,8 +2305,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -1811,8 +2380,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -1886,8 +2455,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -1895,6 +2464,76 @@
       "remainingTimeInSec": -1,
       "modificationID": 3,
       "object3ds": 482110
+    },
+    {
+      "id": "machinegun",
+      "name": "Vulcão",
+      "description": "Um canhão de disparo rápido, perfeito para combates de médio e longo alcance. Ele tem um sistema de controle exclusivo que impede que o sistema de mira seja derrubado mesmo sob fogo inimigo pesado. Lembre-se de que o disparo prolongado pode causar superaquecimento e danificar seu tanque!",
+      "isInventory": false,
+      "index": 550,
+      "next_price": 22850,
+      "next_rank": 11,
+      "type": 1,
+      "baseItemId": 412753,
+      "previewResourceId": 412753,
+      "rank": 4,
+      "category": "weapon",
+      "properts": [
+        {
+          "property": "DAMAGE_PER_SECOND",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "DAMAGE_PER_PERIOD",
+              "value": "33",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "IMPACT_FORCE",
+          "value": "66",
+          "subproperties": null
+        },
+        {
+          "property": "WEAPON_CHARGE_RATE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "WEAPON_RELOAD_TIME",
+              "value": "4.92",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "TURRET_TURN_SPEED",
+          "value": "86.4",
+          "subproperties": null
+        },
+        {
+          "property": "SHOT_RANGE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "WEAPON_MIN_DAMAGE_RADIUS",
+              "value": "149.6",
+              "subproperties": null
+            }
+          ]
+        }
+      ],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 1250,
+      "remainingTimeInSec": -1,
+      "modificationID": 0,
+      "object3ds": 412752
     },
     {
       "id": "machinegun",
@@ -1956,8 +2595,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -2026,8 +2665,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -2096,8 +2735,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -2105,6 +2744,81 @@
       "remainingTimeInSec": -1,
       "modificationID": 3,
       "object3ds": 412758
+    },
+    {
+      "id": "shaft",
+      "name": "Shaft",
+      "description": "A arma Shaft foi projetada por cientistas que deram suas enormes possibilidades. Ela pode fazer café, entregar pizzas, pagar contas, mas sua principal característica é o modo sniper, que permite que você fique um passo à frente de seus oponentes. Tenha uma oportunidade única para lutar a longas e curtas distâncias, pois você pode disparar do Shaft sem usar sua mira de atirador.",
+      "isInventory": false,
+      "index": 600,
+      "next_price": 38600,
+      "next_rank": 14,
+      "type": 1,
+      "baseItemId": 507813,
+      "previewResourceId": 507813,
+      "rank": 7,
+      "category": "weapon",
+      "properts": [
+        {
+          "property": "AIMING_MODE_DAMAGE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "SHAFT_AIMING_MODE_MAX_DAMAGE",
+              "value": "187",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "DAMAGE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "DAMAGE_FROM",
+              "value": "55",
+              "subproperties": null
+            },
+            {
+              "property": "DAMAGE_TO",
+              "value": "68",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "IMPACT_FORCE",
+          "value": "199",
+          "subproperties": null
+        },
+        {
+          "property": "WEAPON_CHARGE_RATE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "WEAPON_RELOAD_TIME",
+              "value": "3.59",
+              "subproperties": null
+            }
+          ]
+        },
+        {
+          "property": "TURRET_TURN_SPEED",
+          "value": "75",
+          "subproperties": null
+        }
+      ],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 1900,
+      "remainingTimeInSec": -1,
+      "modificationID": 0,
+      "object3ds": 740019
     },
     {
       "id": "shaft",
@@ -2171,8 +2885,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -2246,8 +2960,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -2321,8 +3035,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -2330,6 +3044,64 @@
       "remainingTimeInSec": -1,
       "modificationID": 3,
       "object3ds": 933781
+    },
+    {
+      "id": "wasp",
+      "name": "Vespa",
+      "description": "Leve, econômico, fácil de operar — Vespa é uma carroceria perfeito para iniciantes. Vespa atualizado pode atingir uma alta velocidade, que em combinação com tamanho pequeno dá liberdade de ação no campo de batalha. Devido ao baixo peso, Vespa pode ser facilmente enrolado pelo tiro de um inimigo.",
+      "isInventory": false,
+      "index": 700,
+      "next_price": 7650,
+      "next_rank": 9,
+      "type": 2,
+      "baseItemId": 629496,
+      "previewResourceId": 629496,
+      "rank": 2,
+      "category": "armor",
+      "properts": [
+        {
+          "property": "HULL_ARMOR",
+          "value": "94",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_SPEED",
+          "value": "10.80",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_TURN_SPEED",
+          "value": "93.9",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_MASS",
+          "value": "1376",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_POWER",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "HULL_ACCELERATION",
+              "value": "9.4",
+              "subproperties": null
+            }
+          ]
+        }
+      ],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 200,
+      "remainingTimeInSec": -1,
+      "modificationID": 0,
+      "object3ds": 160287
     },
     {
       "id": "wasp",
@@ -2379,8 +3151,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -2437,8 +3209,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -2495,8 +3267,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -2504,6 +3276,64 @@
       "remainingTimeInSec": -1,
       "modificationID": 3,
       "object3ds": 20647
+    },
+    {
+      "id": "hornet",
+      "name": "Zangão",
+      "description": "Esta carrocería compacta utilização de materiais compósitos de última geração, o que o torna leve, rápido e garante alta capacidade de sobrevivência mesmo após um golpe direto. Zangão é perfeito para ataques rápidos.",
+      "isInventory": false,
+      "index": 750,
+      "next_price": 21000,
+      "next_rank": 12,
+      "type": 2,
+      "baseItemId": 209092,
+      "previewResourceId": 209092,
+      "rank": 5,
+      "category": "armor",
+      "properts": [
+        {
+          "property": "HULL_ARMOR",
+          "value": "122",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_SPEED",
+          "value": "10.00",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_TURN_SPEED",
+          "value": "90.8",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_MASS",
+          "value": "1616",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_POWER",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "HULL_ACCELERATION",
+              "value": "10.4",
+              "subproperties": null
+            }
+          ]
+        }
+      ],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 500,
+      "remainingTimeInSec": -1,
+      "modificationID": 0,
+      "object3ds": 916624
     },
     {
       "id": "hornet",
@@ -2553,8 +3383,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -2611,8 +3441,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -2669,8 +3499,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -2685,32 +3515,32 @@
       "description": "Caçador é a carroceria mais versátil do jogo. Graças ao equilíbrio entre placas de armadura de aço reforçadas e baixo consumo de energia, esta armadura é para todos os fins. É boa para todos, de velocistas a atiradores. Sendo tão versátil, você nunca fique sem emprego em um campo de guerra.",
       "isInventory": false,
       "index": 800,
-      "next_price": 3200,
-      "next_rank": 8,
+      "next_price": 54400,
+      "next_rank": 15,
       "type": 2,
       "baseItemId": 826132,
-      "previewResourceId": 826132,
-      "rank": 1,
+      "previewResourceId": 289133,
+      "rank": 8,
       "category": "armor",
       "properts": [
         {
           "property": "HULL_ARMOR",
-          "value": "144",
+          "value": "187",
           "subproperties": null
         },
         {
           "property": "HULL_SPEED",
-          "value": "8.00",
+          "value": "8.60",
           "subproperties": null
         },
         {
           "property": "HULL_TURN_SPEED",
-          "value": "75.8",
+          "value": "95.3",
           "subproperties": null
         },
         {
           "property": "HULL_MASS",
-          "value": "1965",
+          "value": "2280",
           "subproperties": null
         },
         {
@@ -2719,7 +3549,7 @@
           "subproperties": [
             {
               "property": "HULL_ACCELERATION",
-              "value": "9.6",
+              "value": "11",
               "subproperties": null
             }
           ]
@@ -2727,15 +3557,15 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
-      "price": 0,
+      "price": 3200,
       "remainingTimeInSec": -1,
-      "modificationID": 0,
-      "object3ds": 227169
+      "modificationID": 1,
+      "object3ds": 377977
     },
     {
       "id": "hunter",
@@ -2785,8 +3615,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -2843,8 +3673,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -2852,6 +3682,64 @@
       "remainingTimeInSec": -1,
       "modificationID": 3,
       "object3ds": 257012
+    },
+    {
+      "id": "dictator",
+      "name": "Ditador",
+      "description": "Devido ao sistema de defesa ativo aprimorado e ao uso dos mais novos materiais compostos, esta blindagem absorve efetivamente a energia de um impacto de quase qualquer arma de calibre. Com o Dictator, você pode lutar na linha de frente de qualquer batalha. Sendo um dos cascos mais rápidos e protegidos no jogo, o Ditador é grande, o que o torna um alvo fácil.",
+      "isInventory": false,
+      "index": 850,
+      "next_price": 16550,
+      "next_rank": 11,
+      "type": 2,
+      "baseItemId": 904690,
+      "previewResourceId": 904690,
+      "rank": 4,
+      "category": "armor",
+      "properts": [
+        {
+          "property": "HULL_ARMOR",
+          "value": "188",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_SPEED",
+          "value": "7.00",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_TURN_SPEED",
+          "value": "89",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_MASS",
+          "value": "2410",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_POWER",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "HULL_ACCELERATION",
+              "value": "10.9",
+              "subproperties": null
+            }
+          ]
+        }
+      ],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 400,
+      "remainingTimeInSec": -1,
+      "modificationID": 0,
+      "object3ds": 931026
     },
     {
       "id": "dictator",
@@ -2901,8 +3789,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -2959,8 +3847,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3017,8 +3905,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3026,6 +3914,64 @@
       "remainingTimeInSec": -1,
       "modificationID": 3,
       "object3ds": 802804
+    },
+    {
+      "id": "viking",
+      "name": "Viking",
+      "description": "Esta blindagem incorpora todas as tecnologias militares modernas. A blindagem reforçada e o motor «Tipo 2» fazem do Viking uma das carrocerias mais versáteis. Ataque o inimigo ou cubra seus companheiros de equipe – esta carroceria provará ser bom e confiável em qualquer situação.",
+      "isInventory": false,
+      "index": 900,
+      "next_price": 29900,
+      "next_rank": 14,
+      "type": 2,
+      "baseItemId": 730749,
+      "previewResourceId": 730749,
+      "rank": 7,
+      "category": "armor",
+      "properts": [
+        {
+          "property": "HULL_ARMOR",
+          "value": "195",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_SPEED",
+          "value": "7.80",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_TURN_SPEED",
+          "value": "80.6",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_MASS",
+          "value": "2235",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_POWER",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "HULL_ACCELERATION",
+              "value": "11.5",
+              "subproperties": null
+            }
+          ]
+        }
+      ],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 700,
+      "remainingTimeInSec": -1,
+      "modificationID": 0,
+      "object3ds": 513347
     },
     {
       "id": "viking",
@@ -3075,8 +4021,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3133,8 +4079,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3191,8 +4137,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3200,6 +4146,64 @@
       "remainingTimeInSec": -1,
       "modificationID": 3,
       "object3ds": 937522
+    },
+    {
+      "id": "titan",
+      "name": "Titã",
+      "description": "Placas de armadura de liga Titan combinadas com geometria especial tornam esta carroceria altamente eficaz mesmo contra armas de grande calibre. Com o Titan, você pode mergulhar no meio de uma batalha sem qualquer hesitação. Observe que, devido à baixa velocidade, esta carroceria não é adequado para ataques rápidos atrás das linhas inimigas.",
+      "isInventory": false,
+      "index": 950,
+      "next_price": 12100,
+      "next_rank": 10,
+      "type": 2,
+      "baseItemId": 882375,
+      "previewResourceId": 882375,
+      "rank": 3,
+      "category": "armor",
+      "properts": [
+        {
+          "property": "HULL_ARMOR",
+          "value": "224",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_SPEED",
+          "value": "5.30",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_TURN_SPEED",
+          "value": "55.7",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_MASS",
+          "value": "3571",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_POWER",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "HULL_ACCELERATION",
+              "value": "11.7",
+              "subproperties": null
+            }
+          ]
+        }
+      ],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 300,
+      "remainingTimeInSec": -1,
+      "modificationID": 0,
+      "object3ds": 819540
     },
     {
       "id": "titan",
@@ -3249,8 +4253,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3307,8 +4311,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3365,8 +4369,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3374,6 +4378,64 @@
       "remainingTimeInSec": -1,
       "modificationID": 3,
       "object3ds": 142350
+    },
+    {
+      "id": "mammoth",
+      "name": "Mamute",
+      "description": "Este não é um tanque - é uma fortaleza sobre trilhos. Mamute é o carro-chefe entre outras carrocerias. Extremamente pesado, reforçado com superconcreto este casco é lento, o que não impede o Mamute de lutar com sucesso contra vários tanques inimigos.",
+      "isInventory": false,
+      "index": 1000,
+      "next_price": 25450,
+      "next_rank": 13,
+      "type": 2,
+      "baseItemId": 542698,
+      "previewResourceId": 542698,
+      "rank": 6,
+      "category": "armor",
+      "properts": [
+        {
+          "property": "HULL_ARMOR",
+          "value": "268",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_SPEED",
+          "value": "4.40",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_TURN_SPEED",
+          "value": "54",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_MASS",
+          "value": "4262",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_POWER",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "HULL_ACCELERATION",
+              "value": "11.3",
+              "subproperties": null
+            }
+          ]
+        }
+      ],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 600,
+      "remainingTimeInSec": -1,
+      "modificationID": 0,
+      "object3ds": 139472
     },
     {
       "id": "mammoth",
@@ -3423,8 +4485,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3481,8 +4543,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3539,8 +4601,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3565,8 +4627,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3590,14 +4652,39 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
       "price": 100,
       "remainingTimeInSec": -1,
       "coloring": 98644
+    },
+    {
+      "id": "black",
+      "name": "Preta",
+      "description": "Esta cor tornou-se o padrão não oficial para a divisão de tanques sabotadores, cuja principal tarefa é penetrar no território inimigo durante a noite. Dentro dos círculos militares, essas divisões de elite foram apelidadas de «Os pontos negros da morte».",
+      "isInventory": false,
+      "index": 2950,
+      "next_price": 100,
+      "next_rank": 1,
+      "type": 3,
+      "baseItemId": 468704,
+      "previewResourceId": 468704,
+      "rank": 1,
+      "category": "paint",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 100,
+      "remainingTimeInSec": -1,
+      "coloring": 976299
     },
     {
       "id": "white",
@@ -3615,8 +4702,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3640,8 +4727,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3671,14 +4758,45 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
       "price": 500,
       "remainingTimeInSec": -1,
       "coloring": 817810
+    },
+    {
+      "id": "marine",
+      "name": "Marinha",
+      "description": "Devido à sua alta resistência ao contato prolongado com água salgada, os navios-tanque inteligentes usam essa cor para pintar seus tanques por dentro, usando-o como um grande barril para salgar pepinos durante o inverno.",
+      "isInventory": false,
+      "index": 3150,
+      "next_price": 500,
+      "next_rank": 2,
+      "type": 3,
+      "baseItemId": 682329,
+      "previewResourceId": 682329,
+      "rank": 2,
+      "category": "paint",
+      "properts": [
+        {
+          "property": "FIREBIRD_RESISTANCE",
+          "value": "10",
+          "subproperties": null
+        }
+      ],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 500,
+      "remainingTimeInSec": -1,
+      "coloring": 662824
     },
     {
       "id": "swamp",
@@ -3702,8 +4820,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3733,8 +4851,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3764,8 +4882,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3795,8 +4913,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3826,8 +4944,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3857,8 +4975,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3888,8 +5006,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3919,8 +5037,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3950,8 +5068,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -3991,14 +5109,55 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
       "price": 6500,
       "remainingTimeInSec": -1,
       "coloring": 523797
+    },
+    {
+      "id": "storm",
+      "name": "Tempestade",
+      "description": "Um disfarce perfeito para operações noturnas secretas, esta tinta torna o tanque praticamente invisível ao entardecer.",
+      "isInventory": false,
+      "index": 3700,
+      "next_price": 6500,
+      "next_rank": 9,
+      "type": 3,
+      "baseItemId": 364130,
+      "previewResourceId": 364130,
+      "rank": 9,
+      "category": "paint",
+      "properts": [
+        {
+          "property": "FIREBIRD_RESISTANCE",
+          "value": "17",
+          "subproperties": null
+        },
+        {
+          "property": "FREEZE_RESISTANCE",
+          "value": "7",
+          "subproperties": null
+        },
+        {
+          "property": "SHOTGUN_RESISTANCE",
+          "value": "6",
+          "subproperties": null
+        }
+      ],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 6500,
+      "remainingTimeInSec": -1,
+      "coloring": 265602
     },
     {
       "id": "carbon",
@@ -4032,8 +5191,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4073,8 +5232,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4114,8 +5273,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4155,8 +5314,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4196,8 +5355,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4237,8 +5396,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4273,8 +5432,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4314,8 +5473,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4360,8 +5519,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4396,8 +5555,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4437,8 +5596,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4478,8 +5637,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4519,8 +5678,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4565,8 +5724,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4601,8 +5760,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4642,8 +5801,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4683,8 +5842,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4729,8 +5888,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4770,8 +5929,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4816,8 +5975,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4862,8 +6021,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4903,8 +6062,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4944,8 +6103,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -4985,8 +6144,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5026,8 +6185,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5067,8 +6226,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5108,8 +6267,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5149,8 +6308,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5185,8 +6344,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5231,8 +6390,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5272,8 +6431,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5318,8 +6477,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5359,8 +6518,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5400,8 +6559,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5441,8 +6600,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5487,8 +6646,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5528,8 +6687,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5574,8 +6733,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5615,8 +6774,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5656,8 +6815,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5697,8 +6856,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5738,8 +6897,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5784,8 +6943,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5830,8 +6989,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5871,8 +7030,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5917,8 +7076,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -5958,8 +7117,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6004,8 +7163,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6050,8 +7209,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6096,8 +7255,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6142,8 +7301,8 @@
       ],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6167,12 +7326,132 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
       "price": 2000,
+      "remainingTimeInSec": -1
+    },
+    {
+      "id": "health",
+      "name": "Kit de Reparação",
+      "description": "Restaura gradualmente a «saúde» a uma taxa de 30 HP/s. Cura até a cura completa ou até que todos os HPs sejam dados. A quantidade de HPs no kit médico é igual à «saúde» total do tanque. Próximo uso dentro de 30 segundos após ativação prévia do medkit. Um item obrigatório em um campo de guerra. Um conjunto de itens médicos bem equilibrados, embalados em uma caixa, ajuda a permanecer vivo em situações muito perigosas. A própria caixa pode desempenhar o papel de porta de compostagem.",
+      "isInventory": true,
+      "index": 7600,
+      "next_price": 150,
+      "next_rank": 3,
+      "type": 4,
+      "baseItemId": 716565,
+      "previewResourceId": 716565,
+      "rank": 3,
+      "category": "inventory",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 150,
+      "remainingTimeInSec": -1
+    },
+    {
+      "id": "armor",
+      "name": "Blindagem Dupla",
+      "description": "Dobra a proteção para um minuto.\n\nUm conjunto de placas de kevlar avançadas, montadas em slots padrão. Sendo colocadas de maneira correta, elas podem absorver até 50% da energia cinética e térmica do impacto, fornecendo blindagem dupla.\n\nOs dispositivos funcionam pelo período de um minuto.",
+      "isInventory": true,
+      "index": 7650,
+      "next_price": 50,
+      "next_rank": 4,
+      "type": 4,
+      "baseItemId": 824172,
+      "previewResourceId": 824172,
+      "rank": 4,
+      "category": "inventory",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 50,
+      "remainingTimeInSec": -1
+    },
+    {
+      "id": "double_damage",
+      "name": "Destruição Dupla",
+      "description": "Dobra as características do canhão para um minuto.\n\nUm dispositivo único - pequeno cluth de metal montado em um barril do destilado superior de suporte da torre com a ajuda de dois parafusos (20) e um parafuso de trava. Ele acelera várias vezes o projétil de ant nutture, plasma ou nanopeso de impulso, criando o dobro de potência para qualquer disparo. e se torna inútil.",
+      "isInventory": true,
+      "index": 7700,
+      "next_price": 50,
+      "next_rank": 4,
+      "type": 4,
+      "baseItemId": 71622,
+      "previewResourceId": 71622,
+      "rank": 4,
+      "category": "inventory",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 50,
+      "remainingTimeInSec": -1
+    },
+    {
+      "id": "n2o",
+      "name": "Aumento de velocidade",
+      "description": "Aumenta a velocidade por um minuto.\n\nO óxido de nitrogênio deve estar em todos os tanques. Primeiro, é um combustível maravilhoso para aceleração. Segundo, o óxido de nitrogênio também conhecido como gás hilariante pode ser usado para narcose e até mesmo por diversão. Se você conhecer você deveria saber - ele apagou o N20.",
+      "isInventory": true,
+      "index": 7750,
+      "next_price": 50,
+      "next_rank": 4,
+      "type": 4,
+      "baseItemId": 153186,
+      "previewResourceId": 153186,
+      "rank": 4,
+      "category": "inventory",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 50,
+      "remainingTimeInSec": -1
+    },
+    {
+      "id": "mine",
+      "name": "Mina",
+      "description": "Sinaliza os inimigos.\n\nA mina que desativou se seu dono foi morto, deixou a batalha terminada. Em batalhas de equipe, as minas não reagem aos aliados.\n\nA mina é amiga, camarada e irmã de um tanqueiro experiente. Para ganhar a retaguarda do inimigo e minar seu cajado, proteja os camaradas durante a retirada, bloqueie as aproximações da base - tudo isso é possível devido ao dispositivo mortal imperceptível.",
+      "isInventory": true,
+      "index": 7800,
+      "next_price": 50,
+      "next_rank": 5,
+      "type": 4,
+      "baseItemId": 504645,
+      "previewResourceId": 504645,
+      "rank": 5,
+      "category": "inventory",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 50,
       "remainingTimeInSec": -1
     },
     {
@@ -6191,8 +7470,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6215,12 +7494,36 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
       "price": 12500,
+      "remainingTimeInSec": 2592000
+    },
+    {
+      "id": "pro_battle",
+      "name": "Passe de Batalha PRO",
+      "description": "A duração é de 1 mês. Permite que você crie suas próprias batalhas e escolha suas configurações, além de participar de «Batalhas PRO» um número ilimitado de vezes dentro de 31 dias a partir da data da compra.\n\nPágina da assinatura em N.",
+      "isInventory": true,
+      "index": 8200,
+      "next_price": 500,
+      "next_rank": 1,
+      "type": 5,
+      "baseItemId": 906431,
+      "previewResourceId": 906431,
+      "rank": 1,
+      "category": "special",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 500,
       "remainingTimeInSec": 2592000
     },
     {
@@ -6239,8 +7542,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6263,8 +7566,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6287,8 +7590,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6311,8 +7614,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6335,8 +7638,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6359,8 +7662,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6383,8 +7686,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6407,8 +7710,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6431,8 +7734,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6455,8 +7758,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6479,8 +7782,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6516,6 +7819,110 @@
       }
     },
     {
+      "id": "inventory_200",
+      "name": "«Suprimentos 200»",
+      "description": "",
+      "isInventory": true,
+      "index": 10550,
+      "next_price": 0,
+      "next_rank": 7,
+      "type": 6,
+      "baseItemId": 390894,
+      "previewResourceId": 390894,
+      "rank": 7,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 35000,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 617155,
+        "discountInPercent": 50,
+        "kitItems": [
+          {
+            "count": 200,
+            "id": "health_m0"
+          },
+          {
+            "count": 200,
+            "id": "armor_m0"
+          },
+          {
+            "count": 200,
+            "id": "double_damage_m0"
+          },
+          {
+            "count": 200,
+            "id": "n2o_m0"
+          },
+          {
+            "count": 200,
+            "id": "mine_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "inventory_300",
+      "name": "«Suprimentos 300»",
+      "description": "",
+      "isInventory": true,
+      "index": 10600,
+      "next_price": 0,
+      "next_rank": 8,
+      "type": 6,
+      "baseItemId": 922189,
+      "previewResourceId": 922189,
+      "rank": 8,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 52500,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 348039,
+        "discountInPercent": 50,
+        "kitItems": [
+          {
+            "count": 300,
+            "id": "health_m0"
+          },
+          {
+            "count": 300,
+            "id": "armor_m0"
+          },
+          {
+            "count": 300,
+            "id": "double_damage_m0"
+          },
+          {
+            "count": 300,
+            "id": "n2o_m0"
+          },
+          {
+            "count": 300,
+            "id": "mine_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
       "id": "inventory_400",
       "name": "«Suprimentos 400»",
       "description": "",
@@ -6531,8 +7938,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6583,8 +7990,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6635,8 +8042,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6687,8 +8094,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6739,8 +8146,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6791,8 +8198,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6843,8 +8250,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6895,8 +8302,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6947,8 +8354,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -6999,8 +8406,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -7051,8 +8458,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -7088,6 +8495,1286 @@
       }
     },
     {
+      "id": "saboteur",
+      "name": "«Sabotador»",
+      "description": "",
+      "isInventory": true,
+      "index": 11200,
+      "next_price": 0,
+      "next_rank": 2,
+      "type": 6,
+      "baseItemId": 607771,
+      "previewResourceId": 607771,
+      "rank": 2,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 425,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 665987,
+        "discountInPercent": 50,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "wasp_m0"
+          },
+          {
+            "count": 1,
+            "id": "flamethrower_m0"
+          },
+          {
+            "count": 1,
+            "id": "flora_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "stormtrooper",
+      "name": "«Stormtrooper»",
+      "description": "",
+      "isInventory": true,
+      "index": 11250,
+      "next_price": 0,
+      "next_rank": 2,
+      "type": 6,
+      "baseItemId": 985260,
+      "previewResourceId": 985260,
+      "rank": 2,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 575,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 208023,
+        "discountInPercent": 50,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "hornet_m0"
+          },
+          {
+            "count": 1,
+            "id": "flamethrower_m0"
+          },
+          {
+            "count": 1,
+            "id": "marine_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "brick",
+      "name": "«Tijolo»",
+      "description": "",
+      "isInventory": true,
+      "index": 11300,
+      "next_price": 0,
+      "next_rank": 2,
+      "type": 6,
+      "baseItemId": 437288,
+      "previewResourceId": 437288,
+      "rank": 2,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 775,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 555871,
+        "discountInPercent": 50,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "titan_m0"
+          },
+          {
+            "count": 1,
+            "id": "twins_m0"
+          },
+          {
+            "count": 1,
+            "id": "swamp_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "almighty",
+      "name": "«Poderoso»",
+      "description": "",
+      "isInventory": true,
+      "index": 11350,
+      "next_price": 0,
+      "next_rank": 2,
+      "type": 6,
+      "baseItemId": 291770,
+      "previewResourceId": 291770,
+      "rank": 2,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 945,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 641622,
+        "discountInPercent": 55,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "dictator_m0"
+          },
+          {
+            "count": 1,
+            "id": "twins_m0"
+          },
+          {
+            "count": 1,
+            "id": "magma_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "cadet",
+      "name": "«Cadete»",
+      "description": "",
+      "isInventory": true,
+      "index": 11400,
+      "next_price": 0,
+      "next_rank": 2,
+      "type": 6,
+      "baseItemId": 326095,
+      "previewResourceId": 326095,
+      "rank": 2,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 1325,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 617677,
+        "discountInPercent": 50,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "hornet_m0"
+          },
+          {
+            "count": 1,
+            "id": "railgun_m0"
+          },
+          {
+            "count": 1,
+            "id": "forester_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "decree",
+      "name": "«Decreto»",
+      "description": "",
+      "isInventory": true,
+      "index": 11450,
+      "next_price": 0,
+      "next_rank": 2,
+      "type": 6,
+      "baseItemId": 29164,
+      "previewResourceId": 29164,
+      "rank": 2,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 850,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 634,
+        "discountInPercent": 50,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "dictator_m0"
+          },
+          {
+            "count": 1,
+            "id": "railgun_m0"
+          },
+          {
+            "count": 1,
+            "id": "flora_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "universal_soldier",
+      "name": "«Soldado Universal»",
+      "description": "",
+      "isInventory": true,
+      "index": 11500,
+      "next_price": 0,
+      "next_rank": 2,
+      "type": 6,
+      "baseItemId": 836341,
+      "previewResourceId": 836341,
+      "rank": 2,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 1325,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 465714,
+        "discountInPercent": 50,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "hornet_m0"
+          },
+          {
+            "count": 1,
+            "id": "shotgun_m0"
+          },
+          {
+            "count": 1,
+            "id": "magma_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "nidavellir",
+      "name": "«Niðavellir»",
+      "description": "",
+      "isInventory": true,
+      "index": 11550,
+      "next_price": 0,
+      "next_rank": 2,
+      "type": 6,
+      "baseItemId": 365453,
+      "previewResourceId": 365453,
+      "rank": 2,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 1280,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 660123,
+        "discountInPercent": 60,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "titan_m0"
+          },
+          {
+            "count": 1,
+            "id": "shotgun_m0"
+          },
+          {
+            "count": 1,
+            "id": "metallic_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "zenyatta",
+      "name": "«Zenyatta»",
+      "description": "",
+      "isInventory": true,
+      "index": 11600,
+      "next_price": 0,
+      "next_rank": 2,
+      "type": 6,
+      "baseItemId": 690369,
+      "previewResourceId": 690369,
+      "rank": 2,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 1530,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 870461,
+        "discountInPercent": 55,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "dictator_m0"
+          },
+          {
+            "count": 1,
+            "id": "isida_m0"
+          },
+          {
+            "count": 1,
+            "id": "safari_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "military_doctor",
+      "name": "«Médico militar»",
+      "description": "",
+      "isInventory": true,
+      "index": 11650,
+      "next_price": 0,
+      "next_rank": 2,
+      "type": 6,
+      "baseItemId": 339033,
+      "previewResourceId": 339033,
+      "rank": 2,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 1125,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 301526,
+        "discountInPercent": 50,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "hornet_m0"
+          },
+          {
+            "count": 1,
+            "id": "isida_m0"
+          },
+          {
+            "count": 1,
+            "id": "marine_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "geyser",
+      "name": "«Geyser»",
+      "description": "",
+      "isInventory": true,
+      "index": 11700,
+      "next_price": 0,
+      "next_rank": 2,
+      "type": 6,
+      "baseItemId": 897186,
+      "previewResourceId": 897186,
+      "rank": 2,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 1275,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 713226,
+        "discountInPercent": 50,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "dictator_m0"
+          },
+          {
+            "count": 1,
+            "id": "machinegun_m0"
+          },
+          {
+            "count": 1,
+            "id": "swamp_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "yin_yang",
+      "name": "«Yin yang»",
+      "description": "",
+      "isInventory": true,
+      "index": 11750,
+      "next_price": 0,
+      "next_rank": 2,
+      "type": 6,
+      "baseItemId": 458866,
+      "previewResourceId": 458866,
+      "rank": 2,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 1620,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 212942,
+        "discountInPercent": 60,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "hornet_m0"
+          },
+          {
+            "count": 1,
+            "id": "freeze_m0"
+          },
+          {
+            "count": 1,
+            "id": "lava_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "krakatau",
+      "name": "«Krakatoa»",
+      "description": "",
+      "isInventory": true,
+      "index": 11800,
+      "next_price": 0,
+      "next_rank": 3,
+      "type": 6,
+      "baseItemId": 882814,
+      "previewResourceId": 882814,
+      "rank": 3,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 1440,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 47742,
+        "discountInPercent": 60,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "mammoth_m0"
+          },
+          {
+            "count": 1,
+            "id": "machinegun_m0"
+          },
+          {
+            "count": 1,
+            "id": "invader_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "varan",
+      "name": "«Varan»",
+      "description": "",
+      "isInventory": true,
+      "index": 11850,
+      "next_price": 0,
+      "next_rank": 3,
+      "type": 6,
+      "baseItemId": 360591,
+      "previewResourceId": 360591,
+      "rank": 3,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 1820,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 420434,
+        "discountInPercent": 60,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "mammoth_m0"
+          },
+          {
+            "count": 1,
+            "id": "thunder_m0"
+          },
+          {
+            "count": 1,
+            "id": "dragon_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "visitor",
+      "name": "«Alienígena»",
+      "description": "",
+      "isInventory": true,
+      "index": 11900,
+      "next_price": 0,
+      "next_rank": 3,
+      "type": 6,
+      "baseItemId": 35179,
+      "previewResourceId": 35179,
+      "rank": 3,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 1732,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 890583,
+        "discountInPercent": 55,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "dictator_m0"
+          },
+          {
+            "count": 1,
+            "id": "ricochet_m0"
+          },
+          {
+            "count": 1,
+            "id": "invader_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "bomber",
+      "name": "«Bombista»",
+      "description": "",
+      "isInventory": true,
+      "index": 11950,
+      "next_price": 0,
+      "next_rank": 4,
+      "type": 6,
+      "baseItemId": 71573,
+      "previewResourceId": 71573,
+      "rank": 4,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 1700,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 458537,
+        "discountInPercent": 60,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "viking_m0"
+          },
+          {
+            "count": 1,
+            "id": "thunder_m0"
+          },
+          {
+            "count": 1,
+            "id": "metallic_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "berserk",
+      "name": "«Berserk»",
+      "description": "",
+      "isInventory": true,
+      "index": 12000,
+      "next_price": 0,
+      "next_rank": 4,
+      "type": 6,
+      "baseItemId": 207518,
+      "previewResourceId": 207518,
+      "rank": 4,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 1755,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 614127,
+        "discountInPercent": 55,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "viking_m0"
+          },
+          {
+            "count": 1,
+            "id": "freeze_m0"
+          },
+          {
+            "count": 1,
+            "id": "safari_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "commando",
+      "name": "«Comando»",
+      "description": "",
+      "isInventory": true,
+      "index": 12050,
+      "next_price": 0,
+      "next_rank": 4,
+      "type": 6,
+      "baseItemId": 620162,
+      "previewResourceId": 620162,
+      "rank": 4,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 1960,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 357931,
+        "discountInPercent": 60,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "viking_m0"
+          },
+          {
+            "count": 1,
+            "id": "ricochet_m0"
+          },
+          {
+            "count": 1,
+            "id": "dragon_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "invisible",
+      "name": "«Invisível»",
+      "description": "",
+      "isInventory": true,
+      "index": 12100,
+      "next_price": 0,
+      "next_rank": 4,
+      "type": 6,
+      "baseItemId": 499713,
+      "previewResourceId": 499713,
+      "rank": 4,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 1875,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 289779,
+        "discountInPercent": 50,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "hornet_m0"
+          },
+          {
+            "count": 1,
+            "id": "shaft_m0"
+          },
+          {
+            "count": 1,
+            "id": "forester_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "bunker",
+      "name": "«Bunker»",
+      "description": "",
+      "isInventory": true,
+      "index": 12150,
+      "next_price": 0,
+      "next_rank": 4,
+      "type": 6,
+      "baseItemId": 304476,
+      "previewResourceId": 304476,
+      "rank": 4,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 2200,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 546461,
+        "discountInPercent": 60,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "mammoth_m0"
+          },
+          {
+            "count": 1,
+            "id": "shaft_m0"
+          },
+          {
+            "count": 1,
+            "id": "lead_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "supplier",
+      "name": "«O fornecedor»",
+      "description": "",
+      "isInventory": true,
+      "index": 12200,
+      "next_price": 0,
+      "next_rank": 4,
+      "type": 6,
+      "baseItemId": 392652,
+      "previewResourceId": 392652,
+      "rank": 4,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 4440,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 120574,
+        "discountInPercent": 60,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "flamethrower_m0"
+          },
+          {
+            "count": 1,
+            "id": "twins_m0"
+          },
+          {
+            "count": 1,
+            "id": "railgun_m0"
+          },
+          {
+            "count": 1,
+            "id": "shotgun_m0"
+          },
+          {
+            "count": 1,
+            "id": "isida_m0"
+          },
+          {
+            "count": 1,
+            "id": "machinegun_m0"
+          },
+          {
+            "count": 1,
+            "id": "thunder_m0"
+          },
+          {
+            "count": 1,
+            "id": "freeze_m0"
+          },
+          {
+            "count": 1,
+            "id": "ricochet_m0"
+          },
+          {
+            "count": 1,
+            "id": "shaft_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "collector",
+      "name": "«Colecionador»",
+      "description": "",
+      "isInventory": true,
+      "index": 12250,
+      "next_price": 0,
+      "next_rank": 4,
+      "type": 6,
+      "baseItemId": 76601,
+      "previewResourceId": 76601,
+      "rank": 4,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 1350,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 390004,
+        "discountInPercent": 50,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "wasp_m0"
+          },
+          {
+            "count": 1,
+            "id": "titan_m0"
+          },
+          {
+            "count": 1,
+            "id": "dictator_m0"
+          },
+          {
+            "count": 1,
+            "id": "hornet_m0"
+          },
+          {
+            "count": 1,
+            "id": "mammoth_m0"
+          },
+          {
+            "count": 1,
+            "id": "viking_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "full",
+      "name": "«Full»",
+      "description": "",
+      "isInventory": true,
+      "index": 12300,
+      "next_price": 0,
+      "next_rank": 4,
+      "type": 6,
+      "baseItemId": 700174,
+      "previewResourceId": 700174,
+      "rank": 4,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 4830,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 957718,
+        "discountInPercent": 65,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "flamethrower_m0"
+          },
+          {
+            "count": 1,
+            "id": "twins_m0"
+          },
+          {
+            "count": 1,
+            "id": "railgun_m0"
+          },
+          {
+            "count": 1,
+            "id": "shotgun_m0"
+          },
+          {
+            "count": 1,
+            "id": "isida_m0"
+          },
+          {
+            "count": 1,
+            "id": "machinegun_m0"
+          },
+          {
+            "count": 1,
+            "id": "thunder_m0"
+          },
+          {
+            "count": 1,
+            "id": "freeze_m0"
+          },
+          {
+            "count": 1,
+            "id": "ricochet_m0"
+          },
+          {
+            "count": 1,
+            "id": "shaft_m0"
+          },
+          {
+            "count": 1,
+            "id": "wasp_m0"
+          },
+          {
+            "count": 1,
+            "id": "titan_m0"
+          },
+          {
+            "count": 1,
+            "id": "dictator_m0"
+          },
+          {
+            "count": 1,
+            "id": "hornet_m0"
+          },
+          {
+            "count": 1,
+            "id": "mammoth_m0"
+          },
+          {
+            "count": 1,
+            "id": "viking_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "siberian",
+      "name": "«Siberiano»",
+      "description": "",
+      "isInventory": true,
+      "index": 12350,
+      "next_price": 0,
+      "next_rank": 5,
+      "type": 6,
+      "baseItemId": 846169,
+      "previewResourceId": 846169,
+      "rank": 5,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 3375,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 660670,
+        "discountInPercent": 50,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "hunter_m1"
+          },
+          {
+            "count": 1,
+            "id": "freeze_m0"
+          },
+          {
+            "count": 1,
+            "id": "lava_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "pirate",
+      "name": "«Pirata»",
+      "description": "",
+      "isInventory": true,
+      "index": 12400,
+      "next_price": 0,
+      "next_rank": 6,
+      "type": 6,
+      "baseItemId": 482389,
+      "previewResourceId": 482389,
+      "rank": 6,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 14025,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 817162,
+        "discountInPercent": 50,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "hunter_m1"
+          },
+          {
+            "count": 1,
+            "id": "twins_m1"
+          },
+          {
+            "count": 1,
+            "id": "roger_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "firefly",
+      "name": "«Vaga-Lume»",
+      "description": "",
+      "isInventory": true,
+      "index": 12450,
+      "next_price": 0,
+      "next_rank": 6,
+      "type": 6,
+      "baseItemId": 743352,
+      "previewResourceId": 743352,
+      "rank": 6,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 10625,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 890775,
+        "discountInPercent": 50,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "wasp_m1"
+          },
+          {
+            "count": 1,
+            "id": "flamethrower_m1"
+          },
+          {
+            "count": 1,
+            "id": "carbon_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
+      "id": "savage",
+      "name": "«Selvagem»",
+      "description": "",
+      "isInventory": true,
+      "index": 12500,
+      "next_price": 0,
+      "next_rank": 6,
+      "type": 6,
+      "baseItemId": 431685,
+      "previewResourceId": 431685,
+      "rank": 6,
+      "category": "kit",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 8050,
+      "remainingTimeInSec": -1,
+      "kit": {
+        "image": 66990,
+        "discountInPercent": 50,
+        "kitItems": [
+          {
+            "count": 1,
+            "id": "wasp_m1"
+          },
+          {
+            "count": 1,
+            "id": "smoky_m1"
+          },
+          {
+            "count": 1,
+            "id": "magma_m0"
+          }
+        ],
+        "isTimeless": true,
+        "timeLeftInSeconds": 0
+      }
+    },
+    {
       "id": "lizard",
       "name": "«Lagarto»",
       "description": "",
@@ -7103,8 +9790,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -7147,8 +9834,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -7191,8 +9878,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -7235,8 +9922,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -7279,8 +9966,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -7323,8 +10010,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -7367,8 +10054,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -7411,8 +10098,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -7455,8 +10142,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -7499,8 +10186,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -7543,8 +10230,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -7587,8 +10274,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -7631,8 +10318,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -7675,8 +10362,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -7719,8 +10406,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -7763,8 +10450,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -7807,8 +10494,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -7851,8 +10538,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -7895,8 +10582,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -7939,8 +10626,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -7983,8 +10670,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8027,8 +10714,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8071,8 +10758,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8115,8 +10802,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8159,8 +10846,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8203,8 +10890,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8247,8 +10934,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8291,8 +10978,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8335,8 +11022,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8379,8 +11066,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8423,8 +11110,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8467,8 +11154,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8511,8 +11198,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8555,8 +11242,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8599,8 +11286,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8643,8 +11330,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8687,8 +11374,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8731,8 +11418,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8775,8 +11462,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8819,8 +11506,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8863,8 +11550,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8907,8 +11594,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8951,8 +11638,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -8995,8 +11682,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -9039,8 +11726,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -9083,8 +11770,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -9127,8 +11814,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -9171,8 +11858,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -9215,8 +11902,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -9259,8 +11946,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -9303,8 +11990,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -9347,8 +12034,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -9391,8 +12078,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -9435,8 +12122,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -9479,8 +12166,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -9523,8 +12210,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -9567,8 +12254,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -9611,8 +12298,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -9655,8 +12342,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -9699,8 +12386,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -9743,8 +12430,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -9787,8 +12474,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -9831,8 +12518,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -9875,8 +12562,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -9919,8 +12606,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -9963,8 +12650,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10007,8 +12694,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10051,8 +12738,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10095,8 +12782,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10139,8 +12826,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10183,8 +12870,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10227,8 +12914,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10271,8 +12958,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10315,8 +13002,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10359,8 +13046,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10403,8 +13090,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10447,8 +13134,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10491,8 +13178,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10535,8 +13222,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10579,8 +13266,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10623,8 +13310,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10667,8 +13354,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10711,8 +13398,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10755,8 +13442,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10799,8 +13486,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10843,8 +13530,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10887,8 +13574,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10931,8 +13618,8 @@
       "properts": [],
       "discount": {
         "percent": 0,
-        "timeLeftInSeconds": -1719579978,
-        "timeToStartInSeconds": -1719579978
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
       },
       "grouped": false,
       "isForRent": false,
@@ -10959,5 +13646,8 @@
         "timeLeftInSeconds": 0
       }
     }
-  ]
+  ],
+  "delayMountArmorInSec": 0,
+  "delayMountWeaponInSec": 0,
+  "delayMountColorInSec": 0
 }

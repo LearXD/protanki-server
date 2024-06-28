@@ -7,7 +7,7 @@ import { ValidateResourcePacket } from "./packets/validate-resource";
 import { SetLanguagePacket } from "./packets/set-language";
 import { SetNetworkParamsPacket } from "./packets/set-network-params";
 import { SimplePacket } from "./packets/simple-packet";
-import { ResolveValidateResourcePacketPacket } from "./packets/resolve-validate-resource";
+import { SendRequestLoadScreenPacketPacket } from "./packets/send-request-load-screen";
 import { ResolveCallbackPacket } from "./packets/resolve-callback";
 import { SetAuthResourcesPacket } from "./packets/set-auth-resources";
 import { SetLoadResourcesPacket } from "./packets/set-load-resources";
@@ -243,7 +243,7 @@ import { SendStartRailgunShotPacket } from "./packets/send-start-railgun-shot";
 import { SendTwinsFirstShotPacket } from "./packets/send-twins-first-shot";
 import { SetHammerShotPacket } from "./packets/set-hammer-shot";
 import { SendHammerShotPacket } from "./packets/send-hammer-shot";
-import { SendLoadBattlesScreenPacket } from "./packets/send-load-battles-screen";
+import { SendOpenBattlesListPacket } from "./packets/send-open-battles-list";
 import { SetFriendRequestPacket } from "./packets/set-friend-request";
 import { SetSendFriendRequestPacket } from "./packets/set-send-friend-request";
 import { SendOpenLinkPacket } from "./packets/send-open-link";
@@ -302,7 +302,7 @@ export class Network {
         this.registerPacket(Protocol.SET_CAPTCHA_LOCATIONS, SetCaptchaLocationsPacket)
 
         this.registerPacket(Protocol.VALIDATE_RESOURCE, ValidateResourcePacket)
-        this.registerPacket(Protocol.RESOLVE_VALIDATE_RESOURCE, ResolveValidateResourcePacketPacket)
+        this.registerPacket(Protocol.SEND_REQUEST_LOAD_SCREEN, SendRequestLoadScreenPacketPacket)
 
         this.registerPacket(Protocol.SET_LANGUAGE, SetLanguagePacket)
 
@@ -600,7 +600,7 @@ export class Network {
         this.registerPacket(Protocol.SEND_TWINS_FIRST_SHOT, SendTwinsFirstShotPacket);
         this.registerPacket(Protocol.SET_HAMMER_SHOT, SetHammerShotPacket);
         this.registerPacket(Protocol.SEND_HAMMER_SHOT, SendHammerShotPacket);
-        this.registerPacket(Protocol.SEND_LOAD_BATTLES_SCREEN, SendLoadBattlesScreenPacket);
+        this.registerPacket(Protocol.SEND_OPEN_BATTLES_LIST, SendOpenBattlesListPacket);
         this.registerPacket(Protocol.SET_FRIEND_REQUEST, SetFriendRequestPacket);
         this.registerPacket(Protocol.SET_SEND_FRIEND_REQUEST, SetSendFriendRequestPacket);
         this.registerPacket(Protocol.SEND_OPEN_LINK, SendOpenLinkPacket);

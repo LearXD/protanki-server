@@ -1,5 +1,3 @@
-import bcrypt from "bcrypt";
-
 import { Client } from "../../game/client";
 import { SetAuthResourcesPacket } from "../../network/packets/set-auth-resources";
 import { SetInviteEnabledPacket } from "../../network/packets/set-invite-enabled";
@@ -7,16 +5,8 @@ import { Server } from "../../server";
 import { ByteArray } from "../../utils/network/byte-array";
 import { SetEmailInfoPacket } from "../../network/packets/set-email-info";
 import { SetBattleInviteCCPacket } from "../../network/packets/set-battle-invite-cc";
-import { SetFriendsDataPacket } from "../../network/packets/set-friends-data";
 import { LayoutState } from "../../utils/game/layout-state";
-import { SetChatInitParamsPacket } from "../../network/packets/set-chat-init-params";
-import { SetChatCostPacket } from "../../network/packets/set-chat-cost";
 import { SetAchievementCCPacket } from "../../network/packets/set-achievement-cc";
-import { SetChatMessagesPacket } from "../../network/packets/set-chat-messages";
-import { SetViewingBattlePacket } from "../../network/packets/set-viewing-battle";
-import { SetViewingBattleDataPacket } from "../../network/packets/set-viewing-battle-data";
-import { SetBattleListPacket } from "../../network/packets/set-battle-list";
-import { SetMapsDataPacket } from "../../network/packets/set-maps-data";
 import { ResourceType } from "../../managers/resources";
 
 export class AuthHandler {
@@ -65,13 +55,13 @@ export class AuthHandler {
     }
 
     private async handleClientAuthenticated(client: Client) {
-        await this.server.getResourcesManager().sendResources(client, ResourceType.LOBBY);
         client.sendGameLoaded();
 
         client.setLayoutState(LayoutState.BATTLE_SELECT);
-        client.setSubLayoutState(LayoutState.BATTLE_SELECT, LayoutState.BATTLE_SELECT)
 
-        this.server.getUserDataManager().handleAuthenticated(client);
+        this.server.getUserDataManager()
+            .handleAuthenticated(client);
+
         this.sendUserEmail(client);
 
         // TODO: see this packet latter
@@ -79,18 +69,23 @@ export class AuthHandler {
         setBattleInviteCCPacket.resourceId = 106777
         client.sendPacket(setBattleInviteCCPacket);
 
-        this.server.getFriendsManager().sendFriendsData(client);
+        this.server.getFriendsManager()
+            .sendFriendsData(client);
 
-        this.server.getChatManager().sendChatConfig(client);
-        this.server.getChatManager().sendChatMessages(client);
+        await this.server.getResourcesManager().sendResources(client, ResourceType.LOBBY);
+        client.setSubLayoutState(LayoutState.BATTLE_SELECT, LayoutState.BATTLE_SELECT)
 
         const setAchievementCCPacket = new SetAchievementCCPacket(new ByteArray());
-        setAchievementCCPacket.achievements = ['FIRST_RANK_UP', 'FIRST_PURCHASE', 'SET_EMAIL'];
+        setAchievementCCPacket.achievements = ['FIRST_RANK_UP'];
         client.sendPacket(setAchievementCCPacket);
 
-        this.server.getMapsManager().sendMapsData(client);
-        this.server.getBattlesManager().sendBattles(client);
+        this.server.getBattlesManager()
+            .sendBattles(client);
 
+        this.server.getChatManager()
+            .sendChatConfig(client);
+        this.server.getChatManager()
+            .sendChatMessages(client);
     }
 
     public handleLogin(

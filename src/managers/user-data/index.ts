@@ -68,13 +68,15 @@ export class UserDataManager {
         setUserPropertyPacket.score = data.getScore();
         setUserPropertyPacket.serverNumber = 1;
         setUserPropertyPacket.uid = data.getUsername();
-        setUserPropertyPacket.userProfileUrl = '';
+        setUserPropertyPacket.userProfileUrl = 'http://ratings.generaltanks.com/pt_br/user/';
 
         client.sendPacket(setUserPropertyPacket);
     }
 
     public handleAuthenticated(client: Client) {
         this.sendPremiumData(client);
+        this.server.getLocaleManager()
+            .sendLocaleConfig(client)
         this.sendUserProperty(client);
     }
 }

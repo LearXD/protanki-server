@@ -40,8 +40,8 @@ export class UserData {
             {
                 crystals: 1000000,
                 garage: {
-                    hasDoubleCrystal: true,
-                    durationCrystalAbonement: -1,
+                    hasDoubleCrystal: false,
+                    durationCrystalAbonement: 48602763,
                     items: []
                 },
                 rank: {
@@ -55,7 +55,7 @@ export class UserData {
                 premium: {
                     notified: false,
                     startedAt: Date.now(),
-                    endAt: Date.now() + (1000 * 30)
+                    endAt: Date.now()// + (1000 * 30)
                 }
             }
         )
@@ -83,36 +83,19 @@ export class UserData {
 
         return {
             enabled: leftTime > 0,
-            showReminder: true,
-            showWelcome: !data.notified,
+            showReminder: false,
+            showWelcome: leftTime > 0 && !data.notified,
             reminderTime: Date.now(),
-            leftTime,
-            lifeTime: premiumTime - leftTime
+            leftTime: leftTime > 0 ? leftTime : -1,
+            lifeTime: -1
         }
     }
 
-    public getUsername() {
-        return this.username;
-    }
-
-    public getGarage() {
-        return this.data.garage;
-    }
-
-    public getCrystals() {
-        return this.data.crystals;
-    }
-
-    public getRank() {
-        return this.data.rank;
-    }
-
-    public getScore() {
-        return this.data.rank.score;
-    }
-
-    public getRating() {
-        return this.data.rating;
-    }
+    public getUsername() { return this.username }
+    public getGarage() { return this.data.garage }
+    public getCrystals() { return this.data.crystals }
+    public getRank() { return this.data.rank }
+    public getScore() { return this.data.rank.score }
+    public getRating() { return this.data.rating }
 
 }

@@ -31,7 +31,7 @@ export class Protocol {
 
     /** RESOURCE */
     static VALIDATE_RESOURCE = 2094741924
-    static RESOLVE_VALIDATE_RESOURCE = -1376947245
+    static SEND_REQUEST_LOAD_SCREEN = -1376947245
 
 
     /** INVITE? */
@@ -561,7 +561,7 @@ export class Protocol {
     static SET_HAMMER_SHOT = 471157826;
 
     /** ???? */
-    static SEND_LOAD_BATTLES_SCREEN = 1452181070;
+    static SEND_OPEN_BATTLES_LIST = 1452181070;
 
 
     /** REQUEST BATTLE */

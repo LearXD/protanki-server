@@ -18,7 +18,7 @@ export class CaptchaLocation {
 
     public static readonly LOCATIONS = [
         CaptchaLocation.ACCOUNT_SETTINGS_FORM,
-        // CaptchaLocation.REGISTER_FORM,
+        CaptchaLocation.REGISTER_FORM,
         CaptchaLocation.RESTORE_PASSWORD_FORM,
         CaptchaLocation.EMAIL_CHANGE_HASH
     ]

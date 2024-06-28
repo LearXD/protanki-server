@@ -1,10 +1,12 @@
-import { IBattleLimit, IMap } from "../../managers/maps"
+import { v4 } from "uuid"
+
+import { IMap } from "../../managers/maps"
 import { IBattleList } from "../../network/packets/set-battle-list"
 import { SetRemoveViewingBattlePacket } from "../../network/packets/set-remove-viewing-battle"
 import { SetViewingBattlePacket } from "../../network/packets/set-viewing-battle"
 import { SetViewingBattleDataPacket } from "../../network/packets/set-viewing-battle-data"
-import { BattleModes } from "../../utils/game/battle-mode"
-import { EquipmentConstraintsModes } from "../../utils/game/equipment-constraints-mode"
+import { BattleMode, BattleModes } from "../../utils/game/battle-mode"
+import { EquipmentConstraintsMode, EquipmentConstraintsModes } from "../../utils/game/equipment-constraints-mode"
 import { ByteArray } from "../../utils/network/byte-array"
 import { Client } from "../client"
 
@@ -33,6 +35,7 @@ export interface IBattleData {
 
 export class Battle {
 
+    private id: string;
     private roundStarted: boolean = false
 
     private usersBlue: string[] = []
@@ -44,11 +47,32 @@ export class Battle {
     private viewers: Map<string, Client> = new Map()
 
     constructor(
-        private id: string,
         private name: string,
-        private data: IBattleData,
-        private map: IMap
+        private map: IMap,
+        private data: IBattleData = {
+            autoBalance: true,
+            battleMode: BattleMode.DM,
+            equipmentConstraintsMode: EquipmentConstraintsMode.NONE,
+            friendlyFire: false,
+            scoreLimit: 20,
+            timeLimitInSec: 600,
+            maxPeopleCount: 10,
+            parkourMode: false,
+            privateBattle: false,
+            proBattle: false,
+            rankRange: { max: 30, min: 1 },
+            reArmorEnabled: true,
+            theme: 'default',
+            withoutBonuses: false,
+            withoutCrystals: false,
+            withoutSupplies: false
+        },
     ) {
+        this.id = Battle.generateId()
+    }
+
+    public static generateId() {
+        return `${v4().substring(0, 8)}${v4().substring(0, 8)}`
     }
 
     public getId() { return this.id }

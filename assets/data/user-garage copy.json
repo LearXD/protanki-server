@@ -1,349 +1,200 @@
 {
-    "items": [
+  "items": [
+    {
+      "id": "green",
+      "name": "Verde",
+      "description": "Um tributo à tradição do tanque clássico, esta cor simples, tão amada por designers de todo o mundo, tornou-se uma tinta padrão para modelos de fábrica.",
+      "isInventory": false,
+      "index": 1100,
+      "next_price": 0,
+      "next_rank": 1,
+      "type": 3,
+      "baseItemId": 388967,
+      "previewResourceId": 388967,
+      "rank": 1,
+      "category": "paint",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 0,
+      "remainingTimeInSec": -1,
+      "coloring": 966681
+    },
+    {
+      "id": "smoky",
+      "name": "Canhão-fumegante",
+      "description": "Canhão de tanque de médio calibre que geralmente é usado em tanques leves e de treinamento. A chave para sua popularidade é o baixo preço e a facilidade de manutenção. Coloque-o em um casco leve e use uma estratégia de desgaste contra tanques pesados e desajeitados de seus oponentes. Vários upgrades podem aumentar significativamente o dano causado por este bebezinho. Lembre-se que a eficácia do canhão-fumegante diminui com a distância.",
+      "isInventory": false,
+      "index": 100,
+      "next_price": 7100,
+      "next_rank": 8,
+      "type": 1,
+      "baseItemId": 651066,
+      "previewResourceId": 651066,
+      "rank": 1,
+      "category": "weapon",
+      "properts": [
         {
-            "id": "smoky",
-            "name": "Canhão-fumegante",
-            "description": "Canhão de tanque de médio calibre que geralmente é usado em tanques leves e de treinamento. A chave para sua popularidade é o baixo preço e a facilidade de manutenção. Coloque-o em um casco leve e use uma estratégia de desgaste contra tanques pesados e desajeitados de seus oponentes. Vários upgrades podem aumentar significativamente o dano causado por este bebezinho. Lembre-se que a eficácia do canhão-fumegante diminui com a distância.",
-            "isInventory": false,
-            "index": 100,
-            "next_price": 7100,
-            "next_rank": 8,
-            "type": 1,
-            "baseItemId": 651066,
-            "previewResourceId": 651066,
-            "rank": 1,
-            "category": "weapon",
-            "properts": [
-                {
-                    "property": "DAMAGE",
-                    "value": null,
-                    "subproperties": [
-                        {
-                            "property": "DAMAGE_FROM",
-                            "value": "22",
-                            "subproperties": null
-                        },
-                        {
-                            "property": "DAMAGE_TO",
-                            "value": "28",
-                            "subproperties": null
-                        }
-                    ]
-                },
-                {
-                    "property": "IMPACT_FORCE",
-                    "value": "175",
-                    "subproperties": null
-                },
-                {
-                    "property": "TURRET_TURN_SPEED",
-                    "value": "71.5",
-                    "subproperties": null
-                },
-                {
-                    "property": "CRITICAL_HIT_CHANCE",
-                    "value": "8",
-                    "subproperties": null
-                },
-                {
-                    "property": "CRITICAL_HIT_DAMAGE",
-                    "value": "50",
-                    "subproperties": null
-                }
-            ],
-            "discount": {
-                "percent": 0,
-                "timeLeftInSeconds": -1719579247,
-                "timeToStartInSeconds": -1719579247
+          "property": "DAMAGE",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "DAMAGE_FROM",
+              "value": "22",
+              "subproperties": null
             },
-            "grouped": false,
-            "isForRent": false,
-            "price": 0,
-            "remainingTimeInSec": -1,
-            "modificationID": 0,
-            "object3ds": 205731
+            {
+              "property": "DAMAGE_TO",
+              "value": "28",
+              "subproperties": null
+            }
+          ]
         },
         {
-            "id": "holiday",
-            "name": "Feriado",
-            "description": "Uma tinta única e «inteligente» que pode mudar sua aparência dependendo da ocasião. Em um dia normal, é simplesmente uma textura quadriculada em preto e branco. Mas quando chega um feriado, sua aparência muda drasticamente.",
-            "isInventory": false,
-            "index": 1200,
-            "next_price": 0,
-            "next_rank": 1,
-            "type": 3,
-            "baseItemId": 971083,
-            "previewResourceId": 971083,
-            "rank": 1,
-            "category": "paint",
-            "properts": [],
-            "discount": {
-                "percent": 0,
-                "timeLeftInSeconds": -1719579247,
-                "timeToStartInSeconds": -1719579247
-            },
-            "grouped": false,
-            "isForRent": false,
-            "price": 0,
-            "remainingTimeInSec": -1,
-            "coloring": 423333
+          "property": "IMPACT_FORCE",
+          "value": "175",
+          "subproperties": null
         },
         {
-            "id": "hunter",
-            "name": "Caçador",
-            "description": "Caçador é a carroceria mais versátil do jogo. Graças ao equilíbrio entre placas de armadura de aço reforçadas e baixo consumo de energia, esta armadura é para todos os fins. É boa para todos, de velocistas a atiradores. Sendo tão versátil, você nunca fique sem emprego em um campo de guerra.",
-            "isInventory": false,
-            "index": 800,
-            "next_price": 54400,
-            "next_rank": 15,
-            "type": 2,
-            "baseItemId": 826132,
-            "previewResourceId": 289133,
-            "rank": 8,
-            "category": "armor",
-            "properts": [
-                {
-                    "property": "HULL_ARMOR",
-                    "value": "187",
-                    "subproperties": null
-                },
-                {
-                    "property": "HULL_SPEED",
-                    "value": "8.60",
-                    "subproperties": null
-                },
-                {
-                    "property": "HULL_TURN_SPEED",
-                    "value": "95.3",
-                    "subproperties": null
-                },
-                {
-                    "property": "HULL_MASS",
-                    "value": "2280",
-                    "subproperties": null
-                },
-                {
-                    "property": "HULL_POWER",
-                    "value": null,
-                    "subproperties": [
-                        {
-                            "property": "HULL_ACCELERATION",
-                            "value": "11",
-                            "subproperties": null
-                        }
-                    ]
-                }
-            ],
-            "discount": {
-                "percent": 0,
-                "timeLeftInSeconds": -1719579247,
-                "timeToStartInSeconds": -1719579247
-            },
-            "grouped": false,
-            "isForRent": false,
-            "price": 3200,
-            "remainingTimeInSec": -1,
-            "modificationID": 1,
-            "object3ds": 377977
+          "property": "TURRET_TURN_SPEED",
+          "value": "71.5",
+          "subproperties": null
         },
         {
-            "id": "mine",
-            "name": "Mina",
-            "description": "Sinaliza os inimigos.\n\nA mina que desativou se seu dono foi morto, deixou a batalha terminada. Em batalhas de equipe, as minas não reagem aos aliados.\n\nA mina é amiga, camarada e irmã de um tanqueiro experiente. Para ganhar a retaguarda do inimigo e minar seu cajado, proteja os camaradas durante a retirada, bloqueie as aproximações da base - tudo isso é possível devido ao dispositivo mortal imperceptível.",
-            "isInventory": true,
-            "index": 7800,
-            "next_price": 50,
-            "next_rank": 5,
-            "type": 4,
-            "baseItemId": 504645,
-            "previewResourceId": 504645,
-            "rank": 5,
-            "category": "inventory",
-            "properts": [],
-            "discount": {
-                "percent": 0,
-                "timeLeftInSeconds": -1719579247,
-                "timeToStartInSeconds": -1719579247
-            },
-            "grouped": false,
-            "isForRent": false,
-            "price": 50,
-            "remainingTimeInSec": -1,
-            "count": 190
+          "property": "CRITICAL_HIT_CHANCE",
+          "value": "8",
+          "subproperties": null
         },
         {
-            "id": "double_crystalls",
-            "name": "Dobro de cristais",
-            "description": "O nome deste cartão é auto-explicativo. Comprando cristais com dinheiro real você ganha o dobro deles do que o normal. Qualquer quantidade de cristais que você comprou será multiplicada por dois! Mas cuidado! Este cartão permanece ativo por apenas 24 horas. Certifique-se de usá-lo enquanto pode para aproveitar ao máximo suas compras!",
-            "isInventory": true,
-            "index": 8150,
-            "next_price": -1,
-            "next_rank": 1,
-            "type": 5,
-            "baseItemId": 948382,
-            "previewResourceId": 948382,
-            "rank": 1,
-            "category": "special",
-            "properts": [],
-            "discount": {
-                "percent": 0,
-                "timeLeftInSeconds": -1719579247,
-                "timeToStartInSeconds": -1719579247
-            },
-            "grouped": false,
-            "isForRent": false,
-            "price": -1,
-            "remainingTimeInSec": 83072
-        },
-        {
-            "id": "green",
-            "name": "Verde",
-            "description": "Um tributo à tradição do tanque clássico, esta cor simples, tão amada por designers de todo o mundo, tornou-se uma tinta padrão para modelos de fábrica.",
-            "isInventory": false,
-            "index": 1100,
-            "next_price": 0,
-            "next_rank": 1,
-            "type": 3,
-            "baseItemId": 388967,
-            "previewResourceId": 388967,
-            "rank": 1,
-            "category": "paint",
-            "properts": [],
-            "discount": {
-                "percent": 0,
-                "timeLeftInSeconds": -1719579247,
-                "timeToStartInSeconds": -1719579247
-            },
-            "grouped": false,
-            "isForRent": false,
-            "price": 0,
-            "remainingTimeInSec": -1,
-            "coloring": 966681
-        },
-        {
-            "id": "health",
-            "name": "Kit de Reparação",
-            "description": "Restaura gradualmente a «saúde» a uma taxa de 30 HP/s. Cura até a cura completa ou até que todos os HPs sejam dados. A quantidade de HPs no kit médico é igual à «saúde» total do tanque. Próximo uso dentro de 30 segundos após ativação prévia do medkit. Um item obrigatório em um campo de guerra. Um conjunto de itens médicos bem equilibrados, embalados em uma caixa, ajuda a permanecer vivo em situações muito perigosas. A própria caixa pode desempenhar o papel de porta de compostagem.",
-            "isInventory": true,
-            "index": 7600,
-            "next_price": 150,
-            "next_rank": 3,
-            "type": 4,
-            "baseItemId": 716565,
-            "previewResourceId": 716565,
-            "rank": 3,
-            "category": "inventory",
-            "properts": [],
-            "discount": {
-                "percent": 0,
-                "timeLeftInSeconds": -1719579247,
-                "timeToStartInSeconds": -1719579247
-            },
-            "grouped": false,
-            "isForRent": false,
-            "price": 150,
-            "remainingTimeInSec": -1,
-            "count": 37
-        },
-        {
-            "id": "n2o",
-            "name": "Aumento de velocidade",
-            "description": "Aumenta a velocidade por um minuto.\n\nO óxido de nitrogênio deve estar em todos os tanques. Primeiro, é um combustível maravilhoso para aceleração. Segundo, o óxido de nitrogênio também conhecido como gás hilariante pode ser usado para narcose e até mesmo por diversão. Se você conhecer você deveria saber - ele apagou o N20.",
-            "isInventory": true,
-            "index": 7750,
-            "next_price": 50,
-            "next_rank": 4,
-            "type": 4,
-            "baseItemId": 153186,
-            "previewResourceId": 153186,
-            "rank": 4,
-            "category": "inventory",
-            "properts": [],
-            "discount": {
-                "percent": 0,
-                "timeLeftInSeconds": -1719579247,
-                "timeToStartInSeconds": -1719579247
-            },
-            "grouped": false,
-            "isForRent": false,
-            "price": 50,
-            "remainingTimeInSec": -1,
-            "count": 88
-        },
-        {
-            "id": "double_damage",
-            "name": "Destruição Dupla",
-            "description": "Dobra as características do canhão para um minuto.\n\nUm dispositivo único - pequeno cluth de metal montado em um barril do destilado superior de suporte da torre com a ajuda de dois parafusos (20) e um parafuso de trava. Ele acelera várias vezes o projétil de ant nutture, plasma ou nanopeso de impulso, criando o dobro de potência para qualquer disparo. e se torna inútil.",
-            "isInventory": true,
-            "index": 7700,
-            "next_price": 50,
-            "next_rank": 4,
-            "type": 4,
-            "baseItemId": 71622,
-            "previewResourceId": 71622,
-            "rank": 4,
-            "category": "inventory",
-            "properts": [],
-            "discount": {
-                "percent": 0,
-                "timeLeftInSeconds": -1719579247,
-                "timeToStartInSeconds": -1719579247
-            },
-            "grouped": false,
-            "isForRent": false,
-            "price": 50,
-            "remainingTimeInSec": -1,
-            "count": 50
-        },
-        {
-            "id": "armor",
-            "name": "Blindagem Dupla",
-            "description": "Dobra a proteção para um minuto.\n\nUm conjunto de placas de kevlar avançadas, montadas em slots padrão. Sendo colocadas de maneira correta, elas podem absorver até 50% da energia cinética e térmica do impacto, fornecendo blindagem dupla.\n\nOs dispositivos funcionam pelo período de um minuto.",
-            "isInventory": true,
-            "index": 7650,
-            "next_price": 50,
-            "next_rank": 4,
-            "type": 4,
-            "baseItemId": 824172,
-            "previewResourceId": 824172,
-            "rank": 4,
-            "category": "inventory",
-            "properts": [],
-            "discount": {
-                "percent": 0,
-                "timeLeftInSeconds": -1719579247,
-                "timeToStartInSeconds": -1719579247
-            },
-            "grouped": false,
-            "isForRent": false,
-            "price": 50,
-            "remainingTimeInSec": -1,
-            "count": 46
-        },
-        {
-            "id": "pro_battle",
-            "name": "Passe de Batalha PRO",
-            "description": "A duração é de 1 mês. Permite que você crie suas próprias batalhas e escolha suas configurações, além de participar de «Batalhas PRO» um número ilimitado de vezes dentro de 31 dias a partir da data da compra.\n\nPágina da assinatura em N.",
-            "isInventory": true,
-            "index": 8200,
-            "next_price": 500,
-            "next_rank": 1,
-            "type": 5,
-            "baseItemId": 906431,
-            "previewResourceId": 906431,
-            "rank": 1,
-            "category": "special",
-            "properts": [],
-            "discount": {
-                "percent": 0,
-                "timeLeftInSeconds": -1719579247,
-                "timeToStartInSeconds": -1719579247
-            },
-            "grouped": false,
-            "isForRent": false,
-            "price": 1850,
-            "remainingTimeInSec": 295503
+          "property": "CRITICAL_HIT_DAMAGE",
+          "value": "50",
+          "subproperties": null
         }
-    ],
-    "garageBoxId": 170001
+      ],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 0,
+      "remainingTimeInSec": -1,
+      "modificationID": 0,
+      "object3ds": 205731
+    },
+    {
+      "id": "newbie",
+      "name": "Passe Iniciante",
+      "description": "Com o passe de iniciante, o jogador ganha 50% a mais de experiência e 100% a cada batalha disputada.",
+      "isInventory": true,
+      "index": 7900,
+      "next_price": -1,
+      "next_rank": 1,
+      "type": 5,
+      "baseItemId": 643245,
+      "previewResourceId": 643245,
+      "rank": 1,
+      "category": "special",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": -1,
+      "remainingTimeInSec": 932235
+    },
+    {
+      "id": "hunter",
+      "name": "Caçador",
+      "description": "Caçador é a carroceria mais versátil do jogo. Graças ao equilíbrio entre placas de armadura de aço reforçadas e baixo consumo de energia, esta armadura é para todos os fins. É boa para todos, de velocistas a atiradores. Sendo tão versátil, você nunca fique sem emprego em um campo de guerra.",
+      "isInventory": false,
+      "index": 800,
+      "next_price": 3200,
+      "next_rank": 8,
+      "type": 2,
+      "baseItemId": 826132,
+      "previewResourceId": 826132,
+      "rank": 1,
+      "category": "armor",
+      "properts": [
+        {
+          "property": "HULL_ARMOR",
+          "value": "144",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_SPEED",
+          "value": "8.00",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_TURN_SPEED",
+          "value": "75.8",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_MASS",
+          "value": "1965",
+          "subproperties": null
+        },
+        {
+          "property": "HULL_POWER",
+          "value": null,
+          "subproperties": [
+            {
+              "property": "HULL_ACCELERATION",
+              "value": "9.6",
+              "subproperties": null
+            }
+          ]
+        }
+      ],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 0,
+      "remainingTimeInSec": -1,
+      "modificationID": 0,
+      "object3ds": 227169
+    },
+    {
+      "id": "holiday",
+      "name": "Feriado",
+      "description": "Uma tinta única e «inteligente» que pode mudar sua aparência dependendo da ocasião. Em um dia normal, é simplesmente uma textura quadriculada em preto e branco. Mas quando chega um feriado, sua aparência muda drasticamente.",
+      "isInventory": false,
+      "index": 1200,
+      "next_price": 0,
+      "next_rank": 1,
+      "type": 3,
+      "baseItemId": 971083,
+      "previewResourceId": 971083,
+      "rank": 1,
+      "category": "paint",
+      "properts": [],
+      "discount": {
+        "percent": 0,
+        "timeLeftInSeconds": -1719597239,
+        "timeToStartInSeconds": -1719597239
+      },
+      "grouped": false,
+      "isForRent": false,
+      "price": 0,
+      "remainingTimeInSec": -1,
+      "coloring": 423333
+    }
+  ],
+  "garageBoxId": 170001
 }
