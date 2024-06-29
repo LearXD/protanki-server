@@ -4,7 +4,7 @@ import { PingPacket } from "./packets/ping";
 import { PongPacket } from "./packets/pong";
 import { SetCaptchaLocationsPacket } from "./packets/set-captcha-locations";
 import { ValidateResourcePacket } from "./packets/validate-resource";
-import { SetLanguagePacket } from "./packets/set-language";
+import { SEND_LANGUAGE } from "./packets/send-languague";
 import { SetNetworkParamsPacket } from "./packets/set-network-params";
 import { SimplePacket } from "./packets/simple-packet";
 import { SendRequestLoadScreenPacketPacket } from "./packets/send-request-load-screen";
@@ -304,7 +304,7 @@ export class Network {
         this.registerPacket(Protocol.VALIDATE_RESOURCE, ValidateResourcePacket)
         this.registerPacket(Protocol.SEND_REQUEST_LOAD_SCREEN, SendRequestLoadScreenPacketPacket)
 
-        this.registerPacket(Protocol.SET_LANGUAGE, SetLanguagePacket)
+        this.registerPacket(Protocol.SET_LANGUAGE, SEND_LANGUAGE)
 
         this.registerPacket(Protocol.SET_LOAD_RESOURCES, SetLoadResourcesPacket)
         this.registerPacket(Protocol.RESOLVE_CALLBACK, ResolveCallbackPacket)

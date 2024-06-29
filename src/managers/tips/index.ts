@@ -32,23 +32,24 @@ export class TipsManager {
         return resource;
     }
 
-    public async sendTipToClient(client: Client): Promise<boolean> {
-        return new Promise(async (resolve) => {
-            const resource = await this.loadTip();
+    public async sendTipToClient(client: Client) {
 
-            if (!resource) {
-                Logger.alert(TipsManager.name, 'Não foi possível carregar a dica');
-                return resolve(false)
-            }
+        const resource = await this.loadTip();
 
-            await this.server.getResourcesManager().sendLoadResources(client, [resource]);
+        if (!resource) {
+            Logger.alert(TipsManager.name, 'Não foi possível carregar a dica');
+            return
+        }
 
-            const validateResourcePacket = new ValidateResourcePacket(new ByteArray());
-            validateResourcePacket.resourceId = resource.idlow
-            client.sendPacket(validateResourcePacket);
+        await this.server.getResourcesManager()
+            .sendLoadResources(client, [resource]);
 
-            resolve(true);
-        });
+        return resource
+    }
 
+    public sendShowTip(client: Client, id: number) {
+        const validateResourcePacket = new ValidateResourcePacket(new ByteArray());
+        validateResourcePacket.resourceId = id
+        client.sendPacket(validateResourcePacket);
     }
 }

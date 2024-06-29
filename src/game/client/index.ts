@@ -9,7 +9,7 @@ import { MathUtils } from "../../utils/math";
 import { ByteArray } from "../../utils/network/byte-array";
 import { XorDecoder, XorType } from "../../utils/network/decoder";
 import { ResolveCallbackPacket } from "../../network/packets/resolve-callback";
-import { SetLanguagePacket } from "../../network/packets/set-language";
+import { SEND_LANGUAGE } from "../../network/packets/send-languague";
 import { PongPacket } from "../../network/packets/pong";
 import { PingPacket } from "../../network/packets/ping";
 import { SendRequestLoadScreenPacketPacket } from "../../network/packets/send-request-load-screen";
@@ -90,8 +90,15 @@ export class Client {
         captchaLocationsPacket.locations = CaptchaLocation.LOCATIONS;
         this.sendPacket(captchaLocationsPacket);
 
-        await this.getServer().getTipsManager().sendTipToClient(this);
-        await this.getServer().getResourcesManager().sendResources(this, ResourceType.AUTH);
+        const tip = await this.getServer().getTipsManager()
+            .sendTipToClient(this);
+
+        await Promise.all([
+            this.getServer().getResourcesManager()
+                .sendResources(this, ResourceType.AUTH),
+            this.getServer().getTipsManager()
+                .sendShowTip(this, tip.idlow)
+        ])
 
         this.getServer().getAuthHandler().sendAuthConfig(this);
 
@@ -190,7 +197,7 @@ export class Client {
             }
         }
 
-        if (packet instanceof SetLanguagePacket) {
+        if (packet instanceof SEND_LANGUAGE) {
             Logger.log(this.getIdentifier(), `Language set to '${packet.language}'`)
             this.language = packet.language;
         }

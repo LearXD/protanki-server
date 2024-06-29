@@ -72,7 +72,7 @@ export class AuthHandler {
         this.server.getFriendsManager()
             .sendFriendsData(client);
 
-        await this.server.getResourcesManager().sendResources(client, ResourceType.LOBBY);
+        this.server.getResourcesManager().sendResources(client, ResourceType.LOBBY);
         client.setSubLayoutState(LayoutState.BATTLE_SELECT, LayoutState.BATTLE_SELECT)
 
         const setAchievementCCPacket = new SetAchievementCCPacket(new ByteArray());

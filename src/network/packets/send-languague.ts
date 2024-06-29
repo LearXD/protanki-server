@@ -2,7 +2,7 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetLanguagePacket extends Packet {
+export class SEND_LANGUAGE extends Packet {
 
     public language: string
 
