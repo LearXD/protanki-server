@@ -33,6 +33,11 @@ export class AssetsManager {
         if (!fs.existsSync(path)) {
             throw new Error(`File not found: ${path}`);
         }
-        return JSON.parse(fs.readFileSync(path, 'utf-8'));
+        try {
+            return JSON.parse(fs.readFileSync(path, 'utf-8'));
+        } catch (error) {
+            console.error(error);
+            return {} as R
+        }
     }
 }

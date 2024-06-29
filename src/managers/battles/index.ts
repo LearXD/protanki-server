@@ -5,7 +5,7 @@ import { Server } from "../../server";
 import { BattleMode, BattleModes } from "../../utils/game/battle-mode";
 import { EquipmentConstraintsMode, EquipmentConstraintsModes } from "../../utils/game/equipment-constraints-mode";
 import { ByteArray } from "../../utils/network/byte-array";
-import Logger from '../../utils/logger';
+import { Logger } from '../../utils/logger';
 import { SendCreateBattlePacket } from '../../network/packets/send-create-battle';
 import { SetAddBattleOnListPacket } from '../../network/packets/set-add-battle-on-list';
 import { SetRemoveBattlesScreenPacket } from '../../network/packets/set-remove-battles-screen';

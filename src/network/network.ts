@@ -3,7 +3,7 @@ import { Protocol } from "./protocol";
 import { PingPacket } from "./packets/ping";
 import { PongPacket } from "./packets/pong";
 import { SetCaptchaLocationsPacket } from "./packets/set-captcha-locations";
-import { ValidateResourcePacket } from "./packets/validate-resource";
+import { SetTipResourcePacket } from "./packets/set-tip-resource";
 import { SEND_LANGUAGE } from "./packets/send-languague";
 import { SetNetworkParamsPacket } from "./packets/set-network-params";
 import { SimplePacket } from "./packets/simple-packet";
@@ -149,7 +149,7 @@ import { SendCheckBattleNamePacket } from "./packets/send-check-battle-name";
 import { SetBattleNamePacket } from "./packets/set-battle-name";
 import { SendAutoDestroyPacket } from "./packets/send-auto-destroy";
 import { SetDestroyTankPacket } from "./packets/set-destroy-tank";
-import Logger from "../utils/logger";
+import { Logger } from "../utils/logger";
 import { SetGameLoadedPacket } from "./packets/set-game-loaded";
 import { SetRemoveTankEffectPacket } from "./packets/set-remove-tank-effect";
 import { SendShotVoidPacket } from "./packets/send-shot-void";
@@ -301,7 +301,7 @@ export class Network {
         this.registerPacket(Protocol.SET_NETWORK_PARAMS, SetNetworkParamsPacket)
         this.registerPacket(Protocol.SET_CAPTCHA_LOCATIONS, SetCaptchaLocationsPacket)
 
-        this.registerPacket(Protocol.VALIDATE_RESOURCE, ValidateResourcePacket)
+        this.registerPacket(Protocol.SET_TIP_RESOURCE, SetTipResourcePacket)
         this.registerPacket(Protocol.SEND_REQUEST_LOAD_SCREEN, SendRequestLoadScreenPacketPacket)
 
         this.registerPacket(Protocol.SET_LANGUAGE, SEND_LANGUAGE)
@@ -640,7 +640,7 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_AND_CHAT, SetRemoveBattlesAndChatPacket);
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);
 
-        Logger.debug('NETWORK', `${this.packetPool.size} packets registered`)
+        Logger.info('NETWORK', `${this.packetPool.size} packets registered`)
     }
 
     private registerPacket<P = SimplePacket>(id: number, packet: P) {

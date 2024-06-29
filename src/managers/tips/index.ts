@@ -1,8 +1,8 @@
-import Logger from "../../utils/logger";
+import { Logger } from "../../utils/logger";
 import { Client } from "../../game/client";
 import { Server } from "../../server";
 import { MathUtils } from "../../utils/math";
-import { ValidateResourcePacket } from "../../network/packets/validate-resource";
+import { SetTipResourcePacket } from "../../network/packets/set-tip-resource";
 import { ByteArray } from "../../utils/network/byte-array";
 
 // TODO: Implement the logic fot not repeating the same tip
@@ -21,7 +21,7 @@ export class TipsManager {
         return this.resources;
     }
 
-    public async loadTip() {
+    public loadTip() {
         const resource = this.getResources()[MathUtils.randomInt(0, this.getResources().length - 1)];
 
         if (!resource) {
@@ -32,24 +32,31 @@ export class TipsManager {
         return resource;
     }
 
-    public async sendTipToClient(client: Client) {
+    public async sendAllLoadingTips(client: Client) {
+        await this.server.getResourcesManager()
+            .sendLoadResources(client, this.getResources());
+    }
 
-        const resource = await this.loadTip();
+    public async sendLoadingTip(client: Client) {
+
+        const resource = this.loadTip();
 
         if (!resource) {
             Logger.alert(TipsManager.name, 'Não foi possível carregar a dica');
-            return
+            return null
         }
 
         await this.server.getResourcesManager()
             .sendLoadResources(client, [resource]);
 
+        this.sendShowLoadingTip(client, resource.idlow);
+
         return resource
     }
 
-    public sendShowTip(client: Client, id: number) {
-        const validateResourcePacket = new ValidateResourcePacket(new ByteArray());
-        validateResourcePacket.resourceId = id
-        client.sendPacket(validateResourcePacket);
+    public sendShowLoadingTip(client: Client, id: number) {
+        const setTipResourcePacket = new SetTipResourcePacket(new ByteArray());
+        setTipResourcePacket.resourceId = id
+        client.sendPacket(setTipResourcePacket);
     }
 }

@@ -5,6 +5,8 @@ import { Packet } from "./packet";
 export class SetCountryLocaleNamePacket extends Packet {
 
     public countries: { code: string, countryName: string }[] = []
+    public defaultCountry: string;
+    public boolean_1: boolean;
 
     constructor(bytes: ByteArray) {
         super(Protocol.SET_COUNTRY_LOCALE_NAME, bytes)
@@ -23,8 +25,13 @@ export class SetCountryLocaleNamePacket extends Packet {
             }
         }
 
+        this.defaultCountry = bytes.readString();
+        this.boolean_1 = bytes.readBoolean();
+
         return {
-            countries: this.countries
+            countries: this.countries,
+            defaultCountry: this.defaultCountry,
+            boolean_1: this.boolean_1
         }
     }
 
@@ -36,6 +43,9 @@ export class SetCountryLocaleNamePacket extends Packet {
             bytes.writeString(country.code);
             bytes.writeString(country.countryName);
         });
+
+        bytes.writeString(this.defaultCountry);
+        bytes.writeBoolean(this.boolean_1);
 
         return bytes;
     }

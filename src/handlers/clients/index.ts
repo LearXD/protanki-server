@@ -2,12 +2,12 @@ import net from 'net';
 
 import { Server } from "../../server";
 import { Client } from '../../game/client';
-import Logger from '../../utils/logger';
+import { Logger } from '../../utils/logger';
 import { SimplePacket } from '../../network/packets/simple-packet';
 
 export class ClientsHandler {
 
-    private static readonly IDENTIFIER = 'CLIENT_HANDLER';
+    private static readonly IDENTIFIER = 'CLIENT-HANDLER';
     private clients: Map<string, Client> = new Map();
 
     public constructor(
@@ -18,7 +18,7 @@ export class ClientsHandler {
         const client = new Client(socket, this.server);
 
         socket.on('data', client.handleData.bind(client));
-        socket.on('error', () => this.handleDisconnection.bind(client));
+        socket.on('error', client.close.bind(client));
         socket.on('close', () => this.handleDisconnection(client));
 
         this.clients.set(client.getIdentifier(), client);

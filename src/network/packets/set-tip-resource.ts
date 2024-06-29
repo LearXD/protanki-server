@@ -2,12 +2,12 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class ValidateResourcePacket extends Packet {
+export class SetTipResourcePacket extends Packet {
 
     public resourceId: number;
 
     constructor(bytes: ByteArray) {
-        super(Protocol.VALIDATE_RESOURCE, bytes)
+        super(Protocol.SET_TIP_RESOURCE, bytes)
     }
 
     public decode() {

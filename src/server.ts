@@ -1,11 +1,12 @@
 import net from 'net';
 import path from 'path';
 
+import { Logger } from './utils/logger';
+
 import { ClientsHandler } from './handlers/clients';
-import Logger from './utils/logger';
 import { Network } from './network/network';
 import { AssetsManager } from './managers/assets';
-import { AuthHandler } from './handlers/auth';
+import { AuthManager } from './handlers/auth';
 import { TipsManager } from './managers/tips';
 import { ResourcesManager } from './managers/resources';
 import { UserDataManager } from './managers/user-data';
@@ -26,7 +27,7 @@ export class Server {
     private network: Network;
 
     private clientsHandler: ClientsHandler;
-    private authHandler: AuthHandler;
+    private authManager: AuthManager;
 
     private assetsManager: AssetsManager;
     private tipsManager: TipsManager;
@@ -52,22 +53,24 @@ export class Server {
         this.registerListeners();
 
         this.clientsHandler = new ClientsHandler(this);
-        this.authHandler = new AuthHandler(this);
 
         this.assetsManager = new AssetsManager(path.resolve('./assets'));
-
-        this.tipsManager = new TipsManager(this);
         this.resourcesManager = new ResourcesManager(this);
+
+        this.authManager = new AuthManager(this);
+        this.tipsManager = new TipsManager(this);
+        this.localeManager = new LocaleManager(this);
+
         this.userDataManager = new UserDataManager(this);
         this.friendsManager = new FriendsManager(this);
+
         this.chatManager = new ChatManager(this);
         this.mapsManager = new MapsManager(this);
         this.battleManager = new BattlesManager(this);
+
         this.garageManager = new GarageManager(this);
-        this.localeManager = new LocaleManager(this);
 
         this.network = new Network();
-        this.sendMessage('Servidor online papai')
     }
 
     public static getInstance() {
@@ -89,7 +92,9 @@ export class Server {
         this.init();
 
         this.server.listen(port, () => {
-            Logger.info(Server.IDENTIFIER, `Server started on port ${port} (${Date.now() - start}ms)`);
+            const time = Date.now() - start;
+            this.sendMessage(`[SERVER] Servidor iniciado em ${time} ms`)
+            Logger.info(Server.IDENTIFIER, `Server started on port ${port} (${time}ms)`);
         })
     }
 
@@ -114,7 +119,7 @@ export class Server {
     }
 
     public getClientHandler() { return this.clientsHandler }
-    public getAuthHandler() { return this.authHandler }
+    public getAuthManager() { return this.authManager }
 
     public getTipsManager() { return this.tipsManager }
     public getAssetsManager() { return this.assetsManager }

@@ -11,7 +11,7 @@ enum Colors {
     OK = '#00FF00'
 }
 
-export default class Logger {
+export class Logger {
 
     static getPrefix(
         prefix?: string

@@ -1,6 +1,6 @@
 import net from "net";
 
-import Logger from "../../utils/logger";
+import { Logger } from "../../utils/logger";
 import { Packet } from "../../network/packets/packet";
 import { SimplePacket } from "../../network/packets/simple-packet";
 import { Server } from "../../server";
@@ -15,8 +15,6 @@ import { PingPacket } from "../../network/packets/ping";
 import { SendRequestLoadScreenPacketPacket } from "../../network/packets/send-request-load-screen";
 import { SendLoginPacket } from "../../network/packets/send-login";
 import { SetCryptKeysPacket } from "../../network/packets/set-crypt-keys";
-import { SetNetworkParamsPacket } from "../../network/packets/set-network-params";
-import { SocialNetwork } from "../../utils/game/social-network";
 import { SetCaptchaLocationsPacket } from "../../network/packets/set-captcha-locations";
 import { CaptchaLocation } from "../../utils/game/captcha-location";
 import { ResolveFullLoadedPacket } from "../../network/packets/resolve-full-loaded";
@@ -33,7 +31,8 @@ import { SendOpenGaragePacket } from "../../network/packets/send-open-garage";
 import { SendOpenBattlesListPacket } from "../../network/packets/send-open-battles-list";
 
 const IGNORE_PACKETS = [
-    1484572481 // Pong
+    1484572481, // Pong
+    -555602629
 ]
 
 export class Client {
@@ -52,11 +51,12 @@ export class Client {
 
     public layoutState: LayoutStateType = LayoutState.BATTLE_SELECT;
 
-    public resourcesLoaded: number = 1;
+    public resourcesLoaded: number = 0;
     public resourcesCallbackPool: Map<number, () => void> = new Map();
 
     private encoder: XorDecoder;
     private bufferPool: ByteArray = new ByteArray();
+    private loadedResources: { id: number, version: number }[];
 
     public constructor(
         private readonly socket: net.Socket,
@@ -82,28 +82,23 @@ export class Client {
         cryptPacket.keys = this.getEncoder().getKeys();
         this.sendPacket(cryptPacket, false);
 
-        const socialNetworksPacket = new SetNetworkParamsPacket(new ByteArray());
-        socialNetworksPacket.socialParams = SocialNetwork.NETWORKS;
-        this.sendPacket(socialNetworksPacket);
+        await this.getServer()
+            .getResourcesManager()
+            .sendResources(this, ResourceType.AUTH)
 
         const captchaLocationsPacket = new SetCaptchaLocationsPacket(new ByteArray());
         captchaLocationsPacket.locations = CaptchaLocation.LOCATIONS;
         this.sendPacket(captchaLocationsPacket);
 
-        const tip = await this.getServer().getTipsManager()
-            .sendTipToClient(this);
+        await this.getServer()
+            .getTipsManager()
+            .sendLoadingTip(this);
 
-        await Promise.all([
-            this.getServer().getResourcesManager()
-                .sendResources(this, ResourceType.AUTH),
-            this.getServer().getTipsManager()
-                .sendShowTip(this, tip.idlow)
-        ])
+        this.getServer()
+            .getAuthManager()
+            .sendAuthConfig(this);
 
-        this.getServer().getAuthHandler().sendAuthConfig(this);
 
-        const resolveFullLoadedPacket = new ResolveFullLoadedPacket(new ByteArray());
-        this.sendPacket(resolveFullLoadedPacket);
     }
 
     public update() {
@@ -130,6 +125,17 @@ export class Client {
     public getViewingBattle() { return this.viewingBattle }
     public getPing() { return this.lastPong - this.lastPing }
 
+    public getLoadedResources() { return this.loadedResources }
+
+    public isResourceLoaded(id: number, version: number) {
+        return this.loadedResources.some(
+            resource => resource.id === id && resource.version === version
+        );
+    }
+
+    public addLoadedResource(id: number, version: number) {
+        this.loadedResources.push({ id, version });
+    }
 
     public setUsername(username: string) {
         this.username = username;
@@ -205,11 +211,11 @@ export class Client {
         if (packet instanceof SendRequestLoadScreenPacketPacket) {
             this.getServer()
                 .getTipsManager()
-                .sendTipToClient(this);
+                .sendLoadingTip(this);
         }
 
         if (packet instanceof SendLoginPacket) {
-            this.server.getAuthHandler()
+            this.server.getAuthManager()
                 .handleLogin(this, packet.username, packet.password, packet.remember);
         }
 
@@ -247,11 +253,16 @@ export class Client {
     }
 
     public sendPacket(packet: SimplePacket, encrypt: boolean = true) {
+
         packet.setBytes(packet.encode());
         const buffer = packet.getBytes();
 
         if (buffer.length() && encrypt) {
             packet.setBytes(this.getEncoder().encrypt(buffer));
+        }
+
+        if (!IGNORE_PACKETS.includes(packet.getPacketId())) {
+            Logger.log(this.getIdentifier(), `Packet ${packet.constructor.name} (${packet.getPacketId()}) sent - ${buffer.length()} bytes`)
         }
 
         const data = packet.toByteArray().getBuffer()

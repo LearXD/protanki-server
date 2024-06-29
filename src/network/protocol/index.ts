@@ -30,7 +30,7 @@ export class Protocol {
 
 
     /** RESOURCE */
-    static VALIDATE_RESOURCE = 2094741924
+    static SET_TIP_RESOURCE = 2094741924
     static SEND_REQUEST_LOAD_SCREEN = -1376947245
 
 

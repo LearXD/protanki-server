@@ -8,8 +8,11 @@ import { SetBattleInviteCCPacket } from "../../network/packets/set-battle-invite
 import { LayoutState } from "../../utils/game/layout-state";
 import { SetAchievementCCPacket } from "../../network/packets/set-achievement-cc";
 import { ResourceType } from "../../managers/resources";
+import { SetNetworkParamsPacket } from "../../network/packets/set-network-params";
+import { SocialNetwork } from "../../utils/game/social-network";
+import { ResolveFullLoadedPacket } from "../../network/packets/resolve-full-loaded";
 
-export class AuthHandler {
+export class AuthManager {
 
     private static readonly RESOURCES = {
         bgResource: 122842,
@@ -40,18 +43,24 @@ export class AuthHandler {
     }
 
     public sendAuthConfig(client: Client) {
+        const socialNetworksPacket = new SetNetworkParamsPacket(new ByteArray());
+        socialNetworksPacket.socialParams = SocialNetwork.NETWORKS;
+        client.sendPacket(socialNetworksPacket);
+
         const setInviteEnabledPacket = new SetInviteEnabledPacket(new ByteArray());
         setInviteEnabledPacket.inviteEnabled = this.server.isWhitelisted();
         client.sendPacket(setInviteEnabledPacket);
 
         const setAuthResourcesPacket = new SetAuthResourcesPacket(new ByteArray());
 
-        setAuthResourcesPacket.bgResource = AuthHandler.RESOURCES.bgResource
-        setAuthResourcesPacket.enableRequiredEmail = AuthHandler.RESOURCES.enableRequiredEmail
-        setAuthResourcesPacket.maxPasswordLength = AuthHandler.RESOURCES.maxPasswordLength
-        setAuthResourcesPacket.minPasswordLength = AuthHandler.RESOURCES.minPasswordLength
+        setAuthResourcesPacket.bgResource = AuthManager.RESOURCES.bgResource
+        setAuthResourcesPacket.enableRequiredEmail = AuthManager.RESOURCES.enableRequiredEmail
+        setAuthResourcesPacket.maxPasswordLength = AuthManager.RESOURCES.maxPasswordLength
+        setAuthResourcesPacket.minPasswordLength = AuthManager.RESOURCES.minPasswordLength
 
         client.sendPacket(setAuthResourcesPacket);
+
+        this.sendAuthScreen(client)
     }
 
     private async handleClientAuthenticated(client: Client) {
@@ -84,8 +93,14 @@ export class AuthHandler {
 
         this.server.getChatManager()
             .sendChatConfig(client);
+
         this.server.getChatManager()
             .sendChatMessages(client);
+    }
+
+    public sendAuthScreen(client: Client) {
+        const resolveFullLoadedPacket = new ResolveFullLoadedPacket(new ByteArray());
+        client.sendPacket(resolveFullLoadedPacket);
     }
 
     public handleLogin(
