@@ -179,6 +179,9 @@ import { SetRemoveViewingBattlePacket } from "./packets/set-remove-viewing-battl
 import { SetCaptchaLocation2Packet } from "./packets/set-captcha-location-2";
 
 // GENERATE IMPORT HERE
+import { SendShowNotificationsPacket } from "./packets/send-show-notifications";
+import { SetOpenConfigPacket } from "./packets/set-open-config";
+import { SendOpenConfigPacket } from "./packets/send-open-config";
 import { ValidateFriendPacket } from "./packets/validate-friend";
 import { SetAlreadySentFriendRequestPopupPacket } from "./packets/set-already-sent-friend-request-popup";
 import { SetRemoveFriendPacket } from "./packets/set-remove-friend";
@@ -658,6 +661,9 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);
 
         // GENERATE REGISTER HERE
+		this.registerPacket(Protocol.SEND_SHOW_NOTIFICATIONS, SendShowNotificationsPacket);
+		this.registerPacket(Protocol.SET_OPEN_CONFIG, SetOpenConfigPacket);
+		this.registerPacket(Protocol.SEND_OPEN_CONFIG, SendOpenConfigPacket);
         this.registerPacket(Protocol.VALIDATE_FRIEND, ValidateFriendPacket);
         this.registerPacket(Protocol.SET_ALREADY_SENT_FRIEND_REQUEST_POPUP, SetAlreadySentFriendRequestPopupPacket);
         this.registerPacket(Protocol.SET_REMOVE_FRIEND, SetRemoveFriendPacket);

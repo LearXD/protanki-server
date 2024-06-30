@@ -1,6 +1,7 @@
 import { Client } from "../../game/client";
 import { UserData } from "../../game/user-data";
 import { SetNotificationEnabledPacket } from "../../network/packets/set-notification-enabled";
+import { SetOpenConfigPacket } from "../../network/packets/set-open-config";
 import { SetPremiumDataPacket } from "../../network/packets/set-premium-data";
 import { SetPremiumLeftTimePacket } from "../../network/packets/set-premium-left-time";
 import { SetSocialNetworkPanelCCPacket } from "../../network/packets/set-social-network-panel-cc";
@@ -119,9 +120,7 @@ export class UserDataManager {
     }
 
     public handleOpenConfig(client: Client) {
-
-
-
-
+        const setOpenConfigPacket = new SetOpenConfigPacket(new ByteArray());
+        client.sendPacket(setOpenConfigPacket);
     }
 }

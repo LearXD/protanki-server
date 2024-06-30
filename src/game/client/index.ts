@@ -42,6 +42,7 @@ import { ValidateFriendPacket } from "../../network/packets/validate-friend";
 import { SendRequestUserDataPacket } from "../../network/packets/send-request-user-data";
 import { SendRequestConfigDataPacket } from "../../network/packets/send-request-config-data";
 import { SendRequestCaptchaPacket } from "../../network/packets/send-request-captcha";
+import { SendOpenConfigPacket } from "../../network/packets/send-open-config";
 
 const IGNORE_PACKETS = [
     1484572481, // Pong
@@ -338,6 +339,12 @@ export class Client {
             this.getServer()
                 .getUserDataManager()
                 .handleSendConfigData(this);
+        }
+
+        if (packet instanceof SendOpenConfigPacket) {
+            this.getServer()
+                .getUserDataManager()
+                .handleOpenConfig(this);
         }
 
     }
