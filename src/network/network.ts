@@ -13,7 +13,7 @@ import { SetAuthResourcesPacket } from "./packets/set-auth-resources";
 import { SetLoadResourcesPacket } from "./packets/set-load-resources";
 import { SetInviteEnabledPacket } from "./packets/set-invite-enabled";
 import { ResolveFullLoadedPacket } from "./packets/resolve-full-loaded";
-import { SetCaptchaLocationPacket } from "./packets/set-captcha-location";
+import { SendRequestCaptchaPacket } from "./packets/send-request-captcha";
 import { SetCaptchaDataPacket } from "./packets/set-captcha-data";
 import { CheckUsernamePacket } from "./packets/check-username";
 import { SetAdvisedUsernames } from "./packets/set-advised-usernames";
@@ -46,7 +46,7 @@ import { SetBattleListPacket } from "./packets/set-battle-list";
 import { SetViewingBattlePacket } from "./packets/set-viewing-battle";
 import { SetViewingBattleDataPacket } from "./packets/set-viewing-battle-data";
 import { SetUserOnlinePacket } from "./packets/set-user-online";
-import { UserRankDataPacket } from "./packets/user-rank-data";
+import { SetUserRankPacket } from "./packets/set-user-rank";
 import { SetUserBattlePacket } from "./packets/set-user-battle";
 import { SetUserPremiumDataPacket } from "./packets/set-user-premium-data";
 import { SetRemoveUserFromTeamBattleCounterPacket } from "./packets/set-remove-user-from-team-battle-counter";
@@ -62,7 +62,7 @@ import { SetRemoveBattleFromListPacket } from "./packets/set-remove-battle-from-
 import { SetAddBattleOnListPacket } from "./packets/set-add-battle-on-list";
 import { SetBattleEndedPacket } from "./packets/set-battle-ended";
 import { SetRemoveUserFromViewingTeamBattlePacket } from "./packets/set-remove-user-from-viewing-team-battle";
-import { OpenConfigPacket } from "./packets/open-config";
+import { SendRequestConfigDataPacket } from "./packets/send-request-config-data";
 import { SetSocialNetworkPanelCCPacket } from "./packets/set-social-network-panel-cc";
 import { SetNotificationEnabledPacket } from "./packets/set-notification-enabled";
 import { SendOpenFriendsPacket } from "./packets/send-open-friends";
@@ -330,7 +330,7 @@ export class Network {
         this.registerPacket(Protocol.SET_INVITE_ENABLED, SetInviteEnabledPacket)
         this.registerPacket(Protocol.SET_AUTH_RESOURCES, SetAuthResourcesPacket)
 
-        this.registerPacket(Protocol.SET_CAPTCHA_LOCATION, SetCaptchaLocationPacket)
+        this.registerPacket(Protocol.SEND_REQUEST_CAPTCHA, SendRequestCaptchaPacket)
         this.registerPacket(Protocol.SET_CAPTCHA_LOCATION_2, SetCaptchaLocation2Packet)
 
         this.registerPacket(Protocol.SET_CAPTCHA_DATA, SetCaptchaDataPacket)
@@ -424,7 +424,7 @@ export class Network {
 
         this.registerPacket(Protocol.SET_VIEWING_BATTLE, SetViewingBattlePacket)
         this.registerPacket(Protocol.SET_USER_ONLINE, SetUserOnlinePacket)
-        this.registerPacket(Protocol.USER_RANK_DATA, UserRankDataPacket)
+        this.registerPacket(Protocol.SET_USER_RANK, SetUserRankPacket)
         this.registerPacket(Protocol.SET_USER_PREMIUM_DATA, SetUserPremiumDataPacket)
         this.registerPacket(Protocol.SET_ADD_USER_ON_TEAM_BATTLE_COUNTER, SetAddUserOnTeamBattleCounterPacket)
         this.registerPacket(Protocol.SET_REMOVE_VIEWING_BATTLE_USER_KILLS, SetViewingBattleUserKillsPacket)
@@ -439,7 +439,7 @@ export class Network {
 
         this.registerPacket(Protocol.SEND_CHAT_MESSAGE, SendChatMessagePacket)
 
-        this.registerPacket(Protocol.OPEN_CONFIG, OpenConfigPacket)
+        this.registerPacket(Protocol.SEND_REQUEST_CONFIG_DATA, SendRequestConfigDataPacket)
         this.registerPacket(Protocol.SEND_OPEN_FRIENDS, SendOpenFriendsPacket)
 
         this.registerPacket(Protocol.SET_SOCIAL_NETWORK_PANEL_CC, SetSocialNetworkPanelCCPacket)
@@ -658,13 +658,13 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);
 
         // GENERATE REGISTER HERE
-		this.registerPacket(Protocol.VALIDATE_FRIEND, ValidateFriendPacket);
-		this.registerPacket(Protocol.SET_ALREADY_SENT_FRIEND_REQUEST_POPUP, SetAlreadySentFriendRequestPopupPacket);
-		this.registerPacket(Protocol.SET_REMOVE_FRIEND, SetRemoveFriendPacket);
-		this.registerPacket(Protocol.SEND_REMOVE_FRIEND, SendRemoveFriendPacket);
-		this.registerPacket(Protocol.SET_REMOVE_FRIEND_REQUEST, SetRemoveFriendRequestPacket);
-		this.registerPacket(Protocol.SEND_REFUSE_FRIEND_REQUEST, SendRefuseFriendRequestPacket);
-		this.registerPacket(Protocol.SEND_REFUSE_ALL_FRIEND_REQUESTS, SendRefuseAllFriendRequestsPacket);
+        this.registerPacket(Protocol.VALIDATE_FRIEND, ValidateFriendPacket);
+        this.registerPacket(Protocol.SET_ALREADY_SENT_FRIEND_REQUEST_POPUP, SetAlreadySentFriendRequestPopupPacket);
+        this.registerPacket(Protocol.SET_REMOVE_FRIEND, SetRemoveFriendPacket);
+        this.registerPacket(Protocol.SEND_REMOVE_FRIEND, SendRemoveFriendPacket);
+        this.registerPacket(Protocol.SET_REMOVE_FRIEND_REQUEST, SetRemoveFriendRequestPacket);
+        this.registerPacket(Protocol.SEND_REFUSE_FRIEND_REQUEST, SendRefuseFriendRequestPacket);
+        this.registerPacket(Protocol.SEND_REFUSE_ALL_FRIEND_REQUESTS, SendRefuseAllFriendRequestsPacket);
         this.registerPacket(Protocol.SEND_PREVIEW_PAINTING, SendPreviewPaintingPacket);
         this.registerPacket(Protocol.SEND_BUY_GARAGE_ITEM, SendBuyGarageItemPacket);
         this.registerPacket(Protocol.SEND_INVITE_CODE, SendInviteCodePacket);

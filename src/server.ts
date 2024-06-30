@@ -18,6 +18,7 @@ import { Client } from './game/client';
 import { SimplePacket } from './network/packets/simple-packet';
 import { GarageManager } from './managers/garage';
 import { LocaleManager } from './managers/locale';
+import { CaptchaManager } from './managers/captcha';
 
 export class Server {
 
@@ -39,6 +40,7 @@ export class Server {
     private mapsManager: MapsManager;
     private garageManager: GarageManager;
     private localeManager: LocaleManager;
+    private captchaManager: CaptchaManager;
 
     private whitelisted: boolean = false;
 
@@ -69,6 +71,7 @@ export class Server {
         this.battleManager = new BattlesManager(this);
 
         this.garageManager = new GarageManager(this);
+        this.captchaManager = new CaptchaManager(this);
 
         this.network = new Network();
     }
@@ -132,6 +135,7 @@ export class Server {
     public getMapsManager() { return this.mapsManager }
     public getGarageManager(): GarageManager { return this.garageManager }
     public getLocaleManager() { return this.localeManager }
+    public getCaptchaManager(): CaptchaManager { return this.captchaManager }
 
     public isWhitelisted() { return this.whitelisted }
 

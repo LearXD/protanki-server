@@ -2,10 +2,10 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class OpenConfigPacket extends Packet {
+export class SendRequestConfigDataPacket extends Packet {
 
     constructor(bytes: ByteArray) {
-        super(Protocol.OPEN_CONFIG, bytes)
+        super(Protocol.SEND_REQUEST_CONFIG_DATA, bytes)
     }
 
     public decode() {

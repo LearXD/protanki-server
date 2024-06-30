@@ -9,6 +9,11 @@ export enum AssetType {
     DATA = 'data'
 }
 
+export enum ReadType {
+    JSON = 'utf-8',
+    BUFFER = 'binary'
+}
+
 export class AssetsManager {
 
     constructor(
@@ -19,15 +24,15 @@ export class AssetsManager {
         return path.resolve(this.path, type, _path)
     }
 
-    public getData(_path: string) {
-        return this.getAsset(AssetType.DATA, _path);
+    public getData(_path: string, readType: ReadType = ReadType.JSON) {
+        return this.getAsset(AssetType.DATA, _path, readType);
     }
 
     public getResource(file: string): IResource[] {
         return this.getAsset(AssetType.RESOURCES, file);
     }
 
-    public getAsset(type: AssetType, _path: string) {
+    public getAsset(type: AssetType, _path: string, readType: ReadType = ReadType.JSON) {
         const dir = this.getPath(type, _path)
 
         if (!fs.existsSync(dir)) {
@@ -36,7 +41,14 @@ export class AssetsManager {
         }
 
         try {
-            return JSON.parse(fs.readFileSync(dir, 'utf-8'));
+            switch (readType) {
+                case ReadType.JSON:
+                    return JSON.parse(fs.readFileSync(dir, 'utf-8'));
+                case ReadType.BUFFER:
+                    return fs.readFileSync(dir);
+                default:
+                    return null;
+            }
         } catch (error) {
             if (error instanceof Error) {
                 Logger.error('ASSET-MANAGER', error.message)

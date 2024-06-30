@@ -82,7 +82,7 @@ export class FriendsManager {
     public handleAddFriend(client: Client, query: string) {
         // TODO: Implement this
 
-        if (query === 'LearXD') {
+        if (query === 'TheUnknown') {
             const setAlreadySentFriendRequestPopupPacket = new SetAlreadySentFriendRequestPopupPacket(new ByteArray());
             setAlreadySentFriendRequestPopupPacket.userId = query;
             client.sendPacket(setAlreadySentFriendRequestPopupPacket);
@@ -103,7 +103,7 @@ export class FriendsManager {
 
     public handleFindUser(client: Client, query: string) {
         // TODO: Implement this
-        if (query === 'LearXD') {
+        if (query === 'TheUnknown') {
             const setUserFoundOnFriendsListPacket = new SetUserFoundOnFriendsListPacket(new ByteArray());
             client.sendPacket(setUserFoundOnFriendsListPacket);
             return;

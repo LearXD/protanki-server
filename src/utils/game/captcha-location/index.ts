@@ -23,3 +23,6 @@ export class CaptchaLocation {
         CaptchaLocation.EMAIL_CHANGE_HASH
     ]
 }
+
+export type OnlyStringKeys<T> = T extends string ? T : never
+export type CaptchaLocationType = OnlyStringKeys<typeof CaptchaLocation[keyof typeof CaptchaLocation]>

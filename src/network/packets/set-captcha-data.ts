@@ -1,10 +1,11 @@
+import { CaptchaLocation } from "../../utils/game/captcha-location";
 import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
 export class SetCaptchaDataPacket extends Packet {
 
-    public type: number;
+    public type: string;
     public data: number[]
 
     constructor(bytes: ByteArray) {
@@ -14,7 +15,7 @@ export class SetCaptchaDataPacket extends Packet {
     public decode() {
         const bytes = this.cloneBytes();
 
-        this.type = bytes.readInt();
+        this.type = CaptchaLocation.ALL[bytes.readInt()];
 
         const size = bytes.readInt();
         this.data = new Array(size);
@@ -32,7 +33,7 @@ export class SetCaptchaDataPacket extends Packet {
     public encode() {
         const bytes = new ByteArray();
 
-        bytes.writeInt(this.type);
+        bytes.writeInt(CaptchaLocation.ALL.indexOf(this.type));
         bytes.writeInt(this.data.length);
         this.data.forEach(byte => bytes.writeByte(byte));
 

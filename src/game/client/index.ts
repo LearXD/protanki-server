@@ -39,6 +39,9 @@ import { SendRefuseAllFriendRequestsPacket } from "../../network/packets/send-re
 import { SendRefuseFriendRequestPacket } from "../../network/packets/send-refuse-friend-request";
 import { SendRemoveFriendPacket } from "../../network/packets/send-remove-friend";
 import { ValidateFriendPacket } from "../../network/packets/validate-friend";
+import { SendRequestUserDataPacket } from "../../network/packets/send-request-user-data";
+import { SendRequestConfigDataPacket } from "../../network/packets/send-request-config-data";
+import { SendRequestCaptchaPacket } from "../../network/packets/send-request-captcha";
 
 const IGNORE_PACKETS = [
     1484572481, // Pong
@@ -213,6 +216,12 @@ export class Client {
             }
         }
 
+        if (packet instanceof SendRequestCaptchaPacket) {
+            this.getServer()
+                .getCaptchaManager()
+                .handleRequestCaptcha(this, packet.type);
+        }
+
         if (packet instanceof SEND_LANGUAGE) {
             Logger.log(this.getIdentifier(), `Language set to '${packet.language}'`)
             this.language = packet.language;
@@ -317,6 +326,18 @@ export class Client {
             this.getServer()
                 .getFriendsManager()
                 .handleRefuseFriendRequest(this, packet.userId);
+        }
+
+        if (packet instanceof SendRequestUserDataPacket) {
+            this.getServer()
+                .getUserDataManager()
+                .handleRequestUserData(this, packet.userId);
+        }
+
+        if (packet instanceof SendRequestConfigDataPacket) {
+            this.getServer()
+                .getUserDataManager()
+                .handleSendConfigData(this);
         }
 
     }
