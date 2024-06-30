@@ -1,28 +1,26 @@
-import { CaptchaLocation } from "../../utils/game/captcha-location";
 import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetCaptchaLocationPacket extends Packet {
+export class SendEmailCodePacket extends Packet {
 
-    public type: string;
+    public code: string
 
     constructor(bytes: ByteArray) {
-        super(Protocol.SET_CAPTCHA_LOCATION, bytes)
+        super(Protocol.SEND_EMAIL_CODE, bytes)
     }
 
     public decode() {
         const bytes = this.cloneBytes();
-        this.type = CaptchaLocation.ALL[bytes.readInt()];
-
+        this.code = bytes.readString();
         return {
-            type: this.type
+            code: this.code
         }
     }
 
     public encode() {
         const bytes = new ByteArray();
-        bytes.writeInt(CaptchaLocation.ALL.indexOf(this.type));
+        bytes.writeString(this.code);
         return bytes;
     }
 }

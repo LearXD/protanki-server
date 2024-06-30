@@ -95,6 +95,7 @@ export class Server {
             const time = Date.now() - start;
             this.sendMessage(`[SERVER] Servidor iniciado em ${time} ms`)
             Logger.info(Server.IDENTIFIER, `Server started on port ${port} (${time}ms)`);
+            Logger.debug(Server.IDENTIFIER, `Memory usage: ${this.getMemoryUsage()} MB`);
         })
     }
 
@@ -124,12 +125,12 @@ export class Server {
     public getTipsManager() { return this.tipsManager }
     public getAssetsManager() { return this.assetsManager }
     public getResourcesManager() { return this.resourcesManager }
-    public getUserDataManager() { return this.userDataManager }
+    public getUserDataManager(): UserDataManager { return this.userDataManager }
     public getFriendsManager() { return this.friendsManager }
     public getChatManager() { return this.chatManager }
     public getBattlesManager() { return this.battleManager }
     public getMapsManager() { return this.mapsManager }
-    public getGarageManager() { return this.garageManager }
+    public getGarageManager(): GarageManager { return this.garageManager }
     public getLocaleManager() { return this.localeManager }
 
     public isWhitelisted() { return this.whitelisted }
@@ -139,4 +140,8 @@ export class Server {
     }
 
     public getNetwork() { return this.network }
+
+    public getMemoryUsage() {
+        return Math.round(process.memoryUsage().heapUsed / 1024 / 1024 * 100) / 100;
+    }
 }

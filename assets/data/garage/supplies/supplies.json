@@ -1,0 +1,122 @@
+[
+    {
+        "id": "health",
+        "name": "Kit de Reparação",
+        "description": "Restaura gradualmente a «saúde» a uma taxa de 30 HP/s. Cura até a cura completa ou até que todos os HPs sejam dados. A quantidade de HPs no kit médico é igual à «saúde» total do tanque. Próximo uso dentro de 30 segundos após ativação prévia do medkit. Um item obrigatório em um campo de guerra. Um conjunto de itens médicos bem equilibrados, embalados em uma caixa, ajuda a permanecer vivo em situações muito perigosas. A própria caixa pode desempenhar o papel de porta de compostagem.",
+        "isInventory": true,
+        "index": 7600,
+        "next_price": 150,
+        "next_rank": 3,
+        "type": 4,
+        "baseItemId": 716565,
+        "previewResourceId": 716565,
+        "rank": 3,
+        "category": "inventory",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 150,
+        "remainingTimeInSec": -1
+    },
+    {
+        "id": "armor",
+        "name": "Blindagem Dupla",
+        "description": "Dobra a proteção para um minuto.\n\nUm conjunto de placas de kevlar avançadas, montadas em slots padrão. Sendo colocadas de maneira correta, elas podem absorver até 50% da energia cinética e térmica do impacto, fornecendo blindagem dupla.\n\nOs dispositivos funcionam pelo período de um minuto.",
+        "isInventory": true,
+        "index": 7650,
+        "next_price": 50,
+        "next_rank": 4,
+        "type": 4,
+        "baseItemId": 824172,
+        "previewResourceId": 824172,
+        "rank": 4,
+        "category": "inventory",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 50,
+        "remainingTimeInSec": -1
+    },
+    {
+        "id": "double_damage",
+        "name": "Destruição Dupla",
+        "description": "Dobra as características do canhão para um minuto.\n\nUm dispositivo único - pequeno cluth de metal montado em um barril do destilado superior de suporte da torre com a ajuda de dois parafusos (20) e um parafuso de trava. Ele acelera várias vezes o projétil de ant nutture, plasma ou nanopeso de impulso, criando o dobro de potência para qualquer disparo. e se torna inútil.",
+        "isInventory": true,
+        "index": 7700,
+        "next_price": 50,
+        "next_rank": 4,
+        "type": 4,
+        "baseItemId": 71622,
+        "previewResourceId": 71622,
+        "rank": 4,
+        "category": "inventory",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 50,
+        "remainingTimeInSec": -1
+    },
+    {
+        "id": "n2o",
+        "name": "Aumento de velocidade",
+        "description": "Aumenta a velocidade por um minuto.\n\nO óxido de nitrogênio deve estar em todos os tanques. Primeiro, é um combustível maravilhoso para aceleração. Segundo, o óxido de nitrogênio também conhecido como gás hilariante pode ser usado para narcose e até mesmo por diversão. Se você conhecer você deveria saber - ele apagou o N20.",
+        "isInventory": true,
+        "index": 7750,
+        "next_price": 50,
+        "next_rank": 4,
+        "type": 4,
+        "baseItemId": 153186,
+        "previewResourceId": 153186,
+        "rank": 4,
+        "category": "inventory",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 50,
+        "remainingTimeInSec": -1
+    },
+    {
+        "id": "mine",
+        "name": "Mina",
+        "description": "Sinaliza os inimigos.\n\nA mina que desativou se seu dono foi morto, deixou a batalha terminada. Em batalhas de equipe, as minas não reagem aos aliados.\n\nA mina é amiga, camarada e irmã de um tanqueiro experiente. Para ganhar a retaguarda do inimigo e minar seu cajado, proteja os camaradas durante a retirada, bloqueie as aproximações da base - tudo isso é possível devido ao dispositivo mortal imperceptível.",
+        "isInventory": true,
+        "index": 7800,
+        "next_price": 50,
+        "next_rank": 5,
+        "type": 4,
+        "baseItemId": 504645,
+        "previewResourceId": 504645,
+        "rank": 5,
+        "category": "inventory",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 50,
+        "remainingTimeInSec": -1
+    }
+]

@@ -1,0 +1,2751 @@
+[
+    {
+        "id": "green",
+        "name": "Verde",
+        "description": "Um tributo à tradição do tanque clássico, esta cor simples, tão amada por designers de todo o mundo, tornou-se uma tinta padrão para modelos de fábrica.",
+        "isInventory": false,
+        "index": 1100,
+        "next_price": 0,
+        "next_rank": 1,
+        "type": 3,
+        "baseItemId": 388967,
+        "previewResourceId": 388967,
+        "rank": 1,
+        "category": "paint",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719579247,
+            "timeToStartInSeconds": -1719579247
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 0,
+        "remainingTimeInSec": -1,
+        "coloring": 966681
+    },
+    {
+        "id": "holiday",
+        "name": "Feriado",
+        "description": "Uma tinta única e «inteligente» que pode mudar sua aparência dependendo da ocasião. Em um dia normal, é simplesmente uma textura quadriculada em preto e branco. Mas quando chega um feriado, sua aparência muda drasticamente.",
+        "isInventory": false,
+        "index": 1200,
+        "next_price": 0,
+        "next_rank": 1,
+        "type": 3,
+        "baseItemId": 971083,
+        "previewResourceId": 971083,
+        "rank": 1,
+        "category": "paint",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719579247,
+            "timeToStartInSeconds": -1719579247
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 0,
+        "remainingTimeInSec": -1,
+        "coloring": 423333
+    },
+    {
+        "id": "red",
+        "name": "Vermelha",
+        "description": "A cor vermelha - a personificação da raiva e da coragem. Também tem a aplicação prática de poder esconder qualquer vestígio de sangue inimigo.",
+        "isInventory": false,
+        "index": 2850,
+        "next_price": 100,
+        "next_rank": 1,
+        "type": 3,
+        "baseItemId": 471061,
+        "previewResourceId": 471061,
+        "rank": 1,
+        "category": "paint",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 100,
+        "remainingTimeInSec": -1,
+        "coloring": 529101
+    },
+    {
+        "id": "blue",
+        "name": "Azul",
+        "description": "Esta pintura foi adicionada à lista oficial em memória de um projeto fracassado - o desenvolvimento de um tanque anfíbio codinome «Catfish». Os designers estavam planejando dar ao <Catfish> a capacidade de se mover sob as águas de rios rasos, permitindo que ele tomar posição atrás das linhas inimigas. A cor azul seria perfeita para camuflagem.",
+        "isInventory": false,
+        "index": 2900,
+        "next_price": 100,
+        "next_rank": 1,
+        "type": 3,
+        "baseItemId": 350240,
+        "previewResourceId": 350240,
+        "rank": 1,
+        "category": "paint",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 100,
+        "remainingTimeInSec": -1,
+        "coloring": 98644
+    },
+    {
+        "id": "black",
+        "name": "Preta",
+        "description": "Esta cor tornou-se o padrão não oficial para a divisão de tanques sabotadores, cuja principal tarefa é penetrar no território inimigo durante a noite. Dentro dos círculos militares, essas divisões de elite foram apelidadas de «Os pontos negros da morte».",
+        "isInventory": false,
+        "index": 2950,
+        "next_price": 100,
+        "next_rank": 1,
+        "type": 3,
+        "baseItemId": 468704,
+        "previewResourceId": 468704,
+        "rank": 1,
+        "category": "paint",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 100,
+        "remainingTimeInSec": -1,
+        "coloring": 976299
+    },
+    {
+        "id": "white",
+        "name": "Branca",
+        "description": "Esta tinta foi desenvolvida especificamente para operações terrestres em países com clima frio. Em áreas com neve, pode reduzir significativamente a probabilidade de detecção. Para aumentar as vendas, alguns fabricantes incluíram na embalagem um casaco quente e botas.",
+        "isInventory": false,
+        "index": 3000,
+        "next_price": 100,
+        "next_rank": 1,
+        "type": 3,
+        "baseItemId": 912977,
+        "previewResourceId": 912977,
+        "rank": 1,
+        "category": "paint",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 100,
+        "remainingTimeInSec": -1,
+        "coloring": 996274
+    },
+    {
+        "id": "orange",
+        "name": "Laranja",
+        "description": "Originalmente, não havia planos para incluir essa cor na lista oficial, pois não tinha nenhum valor prático, exceto talvez uma camuflagem decente em áreas desérticas. No entanto, psicólogos do exército provaram que esse tom específico de laranja tem um efeito terapêutico positivo. em tanques em estado de choque.",
+        "isInventory": false,
+        "index": 3050,
+        "next_price": 100,
+        "next_rank": 1,
+        "type": 3,
+        "baseItemId": 456516,
+        "previewResourceId": 456516,
+        "rank": 1,
+        "category": "paint",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 100,
+        "remainingTimeInSec": -1,
+        "coloring": 104412
+    },
+    {
+        "id": "flora",
+        "name": "Flora",
+        "description": "Esta é uma das duas tintas projetadas especificamente para operações terrestres em um clima de latitude média. De acordo com relatórios da organização independente «True Camouflage», um tanque usando essa combinação específica de amarelo, verde e marrom tem menos probabilidade de ser detectado em tais regiões.",
+        "isInventory": false,
+        "index": 3100,
+        "next_price": 500,
+        "next_rank": 2,
+        "type": 3,
+        "baseItemId": 95646,
+        "previewResourceId": 95646,
+        "rank": 2,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "SMOKY_RESISTANCE",
+                "value": "10",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 500,
+        "remainingTimeInSec": -1,
+        "coloring": 817810
+    },
+    {
+        "id": "marine",
+        "name": "Marinha",
+        "description": "Devido à sua alta resistência ao contato prolongado com água salgada, os navios-tanque inteligentes usam essa cor para pintar seus tanques por dentro, usando-o como um grande barril para salgar pepinos durante o inverno.",
+        "isInventory": false,
+        "index": 3150,
+        "next_price": 500,
+        "next_rank": 2,
+        "type": 3,
+        "baseItemId": 682329,
+        "previewResourceId": 682329,
+        "rank": 2,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "FIREBIRD_RESISTANCE",
+                "value": "10",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 500,
+        "remainingTimeInSec": -1,
+        "coloring": 662824
+    },
+    {
+        "id": "swamp",
+        "name": "Pântano",
+        "description": "Esta pintura foi criada depois que um líder de batalhão de tanques acidentalmente adormeceu e levou seus companheiros para um pântano, onde uma operação secreta para treinar sapos sabotadores estava sendo conduzida.",
+        "isInventory": false,
+        "index": 3200,
+        "next_price": 900,
+        "next_rank": 3,
+        "type": 3,
+        "baseItemId": 300293,
+        "previewResourceId": 300293,
+        "rank": 3,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "TWINS_RESISTANCE",
+                "value": "10",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 900,
+        "remainingTimeInSec": -1,
+        "coloring": 172172
+    },
+    {
+        "id": "forester",
+        "name": "Florestal",
+        "description": "Esta é uma das duas tintas projetadas especificamente para operações terrestres em um clima de latitude média. De acordo com relatórios da organização independente «True Camouflage», é menos provável que um tanque usando essa combinação específica de verde claro e escuro seja detectado em tal regiões.",
+        "isInventory": false,
+        "index": 3250,
+        "next_price": 1350,
+        "next_rank": 4,
+        "type": 3,
+        "baseItemId": 769778,
+        "previewResourceId": 769778,
+        "rank": 4,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "RAILGUN_RESISTANCE",
+                "value": "12",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1350,
+        "remainingTimeInSec": -1,
+        "coloring": 554337
+    },
+    {
+        "id": "magma",
+        "name": "Magma",
+        "description": "O revestimento é usado por tanques lança-chamas para simular um fluxo de lava ao invadir áreas fortemente fortificadas. Esta tática induz facilmente um terror primordial nas fileiras da força defensora.",
+        "isInventory": false,
+        "index": 3300,
+        "next_price": 1350,
+        "next_rank": 4,
+        "type": 3,
+        "baseItemId": 123601,
+        "previewResourceId": 123601,
+        "rank": 4,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "SHOTGUN_RESISTANCE",
+                "value": "12",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1350,
+        "remainingTimeInSec": -1,
+        "coloring": 412159
+    },
+    {
+        "id": "safari",
+        "name": "Safari",
+        "description": "Projetado por quem ama a emoção do safári, esta pintura mascara o tanque como uma zebra inócua, o que o torna perfeito para caçar predadores africanos, bem como petroleiros ingênuos.",
+        "isInventory": false,
+        "index": 3350,
+        "next_price": 1750,
+        "next_rank": 5,
+        "type": 3,
+        "baseItemId": 981027,
+        "previewResourceId": 981027,
+        "rank": 5,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "ISIS_RESISTANCE",
+                "value": "15",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1750,
+        "remainingTimeInSec": -1,
+        "coloring": 258487
+    },
+    {
+        "id": "invader",
+        "name": "Invader",
+        "description": "Essa pintura foi desenvolvida em colaboração com uma comunidade de especialistas na era dos consoles de jogos de oito bits. Ela usa um exército de alienígenas de oito bits para mascarar o seu tanque e o marcará como um verdadeiro conhecedor de videogames.",
+        "isInventory": false,
+        "index": 3400,
+        "next_price": 1750,
+        "next_rank": 5,
+        "type": 3,
+        "baseItemId": 453050,
+        "previewResourceId": 453050,
+        "rank": 5,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "MACHINE_GUN_RESISTANCE",
+                "value": "15",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1750,
+        "remainingTimeInSec": -1,
+        "coloring": 668153
+    },
+    {
+        "id": "metallic",
+        "name": "Metálica",
+        "description": "Existe o equívoco de que esta tinta se destina a substituir o envernizamento de superfícies. Na realidade, a natureza reflexiva desta tinta destina-se a interferir com dispositivos de rastreamento e radar.",
+        "isInventory": false,
+        "index": 3450,
+        "next_price": 2100,
+        "next_rank": 6,
+        "type": 3,
+        "baseItemId": 246572,
+        "previewResourceId": 246572,
+        "rank": 6,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "THUNDER_RESISTANCE",
+                "value": "18",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 2100,
+        "remainingTimeInSec": -1,
+        "coloring": 542023
+    },
+    {
+        "id": "lava",
+        "name": "Lava",
+        "description": "Uma cor experimental, testada pela primeira vez durante o conflito local na África Oriental. De acordo com psicólogos militares, esse padrão específico semelhante a um fogo divino desencadeará uma sensação de pânico nos inimigos.",
+        "isInventory": false,
+        "index": 3500,
+        "next_price": 2100,
+        "next_rank": 6,
+        "type": 3,
+        "baseItemId": 201158,
+        "previewResourceId": 201158,
+        "rank": 6,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "FREEZE_RESISTANCE",
+                "value": "18",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 2100,
+        "remainingTimeInSec": -1,
+        "coloring": 498645
+    },
+    {
+        "id": "dragon",
+        "name": "Dragão",
+        "description": "A inspiração para o protótipo desta complexa criação foi a escama do dragão. Cada escama é desenhada à mão em uma peça reforçada de armadura de placas de titânio.",
+        "isInventory": false,
+        "index": 3550,
+        "next_price": 2500,
+        "next_rank": 7,
+        "type": 3,
+        "baseItemId": 107643,
+        "previewResourceId": 107643,
+        "rank": 7,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "RICOCHET_RESISTANCE",
+                "value": "22",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 2500,
+        "remainingTimeInSec": -1,
+        "coloring": 192378
+    },
+    {
+        "id": "lead",
+        "name": "Chumbo",
+        "description": "O chumbo é conhecido há muito tempo por sua proteção contra a radiação. Essa tinta com infusão de chumbo aproveita essas propriedades.",
+        "isInventory": false,
+        "index": 3600,
+        "next_price": 3000,
+        "next_rank": 8,
+        "type": 3,
+        "baseItemId": 829177,
+        "previewResourceId": 829177,
+        "rank": 8,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "SHAFT_RESISTANCE",
+                "value": "25",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 3000,
+        "remainingTimeInSec": -1,
+        "coloring": 560996
+    },
+    {
+        "id": "mary",
+        "name": "Mary",
+        "description": "Coberta com manchas vermelhas sangrentas, esta tinta foi feita para infligir horror ao inimigo. No entanto, os tanqueiros altamente experientes provavelmente perceberão que o que parece sangue é na verdade suco de tomate. Não é de admirar que a tinta seja chamada «Mary».",
+        "isInventory": false,
+        "index": 3650,
+        "next_price": 6500,
+        "next_rank": 9,
+        "type": 3,
+        "baseItemId": 564917,
+        "previewResourceId": 564917,
+        "rank": 9,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "FREEZE_RESISTANCE",
+                "value": "15",
+                "subproperties": null
+            },
+            {
+                "property": "TWINS_RESISTANCE",
+                "value": "8",
+                "subproperties": null
+            },
+            {
+                "property": "SMOKY_RESISTANCE",
+                "value": "8",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 6500,
+        "remainingTimeInSec": -1,
+        "coloring": 523797
+    },
+    {
+        "id": "storm",
+        "name": "Tempestade",
+        "description": "Um disfarce perfeito para operações noturnas secretas, esta tinta torna o tanque praticamente invisível ao entardecer.",
+        "isInventory": false,
+        "index": 3700,
+        "next_price": 6500,
+        "next_rank": 9,
+        "type": 3,
+        "baseItemId": 364130,
+        "previewResourceId": 364130,
+        "rank": 9,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "FIREBIRD_RESISTANCE",
+                "value": "17",
+                "subproperties": null
+            },
+            {
+                "property": "FREEZE_RESISTANCE",
+                "value": "7",
+                "subproperties": null
+            },
+            {
+                "property": "SHOTGUN_RESISTANCE",
+                "value": "6",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 6500,
+        "remainingTimeInSec": -1,
+        "coloring": 265602
+    },
+    {
+        "id": "carbon",
+        "name": "Carbono",
+        "description": "Uma combinação de fibra de carbono de alta tecnologia e tinta de alta resistência. Inclui uma substância especial destinada a interromper os sistemas de mira inimigos, embora isso seja proibido pela Diretoria de Inspeção de Movimento de Tanques.",
+        "isInventory": false,
+        "index": 3750,
+        "next_price": 6500,
+        "next_rank": 9,
+        "type": 3,
+        "baseItemId": 865963,
+        "previewResourceId": 865963,
+        "rank": 9,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "TWINS_RESISTANCE",
+                "value": "6",
+                "subproperties": null
+            },
+            {
+                "property": "SMOKY_RESISTANCE",
+                "value": "18",
+                "subproperties": null
+            },
+            {
+                "property": "SHAFT_RESISTANCE",
+                "value": "6",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 6500,
+        "remainingTimeInSec": -1,
+        "coloring": 739386
+    },
+    {
+        "id": "roger",
+        "name": "Caveira",
+        "description": "O temível motivo de caveira e ossos popularizado pelos piratas sedentos de sangue dos sete mares.",
+        "isInventory": false,
+        "index": 3800,
+        "next_price": 12500,
+        "next_rank": 10,
+        "type": 3,
+        "baseItemId": 968399,
+        "previewResourceId": 968399,
+        "rank": 10,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "FIREBIRD_RESISTANCE",
+                "value": "8",
+                "subproperties": null
+            },
+            {
+                "property": "TWINS_RESISTANCE",
+                "value": "16",
+                "subproperties": null
+            },
+            {
+                "property": "SHOTGUN_RESISTANCE",
+                "value": "10",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 12500,
+        "remainingTimeInSec": -1,
+        "coloring": 929509
+    },
+    {
+        "id": "fracture",
+        "name": "Fratura",
+        "description": "Uma camuflagem experimental desenvolvida para combate em climas tropicais.",
+        "isInventory": false,
+        "index": 3850,
+        "next_price": 12500,
+        "next_rank": 10,
+        "type": 3,
+        "baseItemId": 956462,
+        "previewResourceId": 956462,
+        "rank": 10,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "MACHINE_GUN_RESISTANCE",
+                "value": "10",
+                "subproperties": null
+            },
+            {
+                "property": "SMOKY_RESISTANCE",
+                "value": "8",
+                "subproperties": null
+            },
+            {
+                "property": "RAILGUN_RESISTANCE",
+                "value": "16",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 12500,
+        "remainingTimeInSec": -1,
+        "coloring": 691309
+    },
+    {
+        "id": "vortex",
+        "name": "Vortex",
+        "description": "Lamentavelmente, os detalhes sobre a inspiração por trás dessa tinta são escassos. O designer simplesmente desapareceu um dia enquanto passeava tranquilamente à beira-mar. Os teóricos culpam os monstros marinhos.",
+        "isInventory": false,
+        "index": 3900,
+        "next_price": 12500,
+        "next_rank": 10,
+        "type": 3,
+        "baseItemId": 158798,
+        "previewResourceId": 158798,
+        "rank": 10,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "MACHINE_GUN_RESISTANCE",
+                "value": "13",
+                "subproperties": null
+            },
+            {
+                "property": "RICOCHET_RESISTANCE",
+                "value": "13",
+                "subproperties": null
+            },
+            {
+                "property": "THUNDER_RESISTANCE",
+                "value": "8",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 12500,
+        "remainingTimeInSec": -1,
+        "coloring": 195030
+    },
+    {
+        "id": "chainmail",
+        "name": "Ringmaiden",
+        "description": "A cobertura única, estilizada e inspirada no correio em cadeia foi projetada para recriar as batalhas medievais em tanques. De acordo com a idéia do autor, as máquinas de aço com armadura de cavaleiro deveriam lutar por sua honra e pelo coração de uma bela garota tanque. Estamos absolutamente certos de que ninguém, ao criar esta tinta, jamais questionou se existiam tanques na Idade Média.",
+        "isInventory": false,
+        "index": 3950,
+        "next_price": 18500,
+        "next_rank": 11,
+        "type": 3,
+        "baseItemId": 123600,
+        "previewResourceId": 123600,
+        "rank": 11,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "SHOTGUN_RESISTANCE",
+                "value": "22",
+                "subproperties": null
+            },
+            {
+                "property": "ISIS_RESISTANCE",
+                "value": "11",
+                "subproperties": null
+            },
+            {
+                "property": "RAILGUN_RESISTANCE",
+                "value": "5",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 18500,
+        "remainingTimeInSec": -1,
+        "coloring": 412158
+    },
+    {
+        "id": "corrosion",
+        "name": "Corrosão",
+        "description": "Para o petroleiro que quer ir além do uso de balas e se aventurar no reino da guerra química movida a tétano, a tinta «Corrosion» é a companhia perfeita.",
+        "isInventory": false,
+        "index": 4000,
+        "next_price": 18500,
+        "next_rank": 11,
+        "type": 3,
+        "baseItemId": 92554,
+        "previewResourceId": 92554,
+        "rank": 11,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "RAILGUN_RESISTANCE",
+                "value": "10",
+                "subproperties": null
+            },
+            {
+                "property": "THUNDER_RESISTANCE",
+                "value": "15",
+                "subproperties": null
+            },
+            {
+                "property": "SHAFT_RESISTANCE",
+                "value": "15",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 18500,
+        "remainingTimeInSec": -1,
+        "coloring": 967180
+    },
+    {
+        "id": "tundra",
+        "name": "Tundra",
+        "description": "Dá ao seu tanque um visual intimidador e endurecido pela batalha. Ninguém ousará mexer com você.",
+        "isInventory": false,
+        "index": 4050,
+        "next_price": 18500,
+        "next_rank": 11,
+        "type": 3,
+        "baseItemId": 985440,
+        "previewResourceId": 985440,
+        "rank": 11,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "SMOKY_RESISTANCE",
+                "value": "11",
+                "subproperties": null
+            },
+            {
+                "property": "RAILGUN_RESISTANCE",
+                "value": "27",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 18500,
+        "remainingTimeInSec": -1,
+        "coloring": 689436
+    },
+    {
+        "id": "alien",
+        "name": "Alienígena",
+        "description": "Há rumores de que esta camuflagem é uma réplica da cobertura de uma nave alienígena que foi derrubada no século passado pelas forças de «AVISO: Esta informação é confidencial — Mais investigações sobre o assunto serão recebidas com força mortal.»",
+        "isInventory": false,
+        "index": 4100,
+        "next_price": 24500,
+        "next_rank": 12,
+        "type": 3,
+        "baseItemId": 254675,
+        "previewResourceId": 254675,
+        "rank": 12,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "ISIS_RESISTANCE",
+                "value": "25",
+                "subproperties": null
+            },
+            {
+                "property": "FREEZE_RESISTANCE",
+                "value": "9",
+                "subproperties": null
+            },
+            {
+                "property": "THUNDER_RESISTANCE",
+                "value": "9",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 24500,
+        "remainingTimeInSec": -1,
+        "coloring": 931624
+    },
+    {
+        "id": "swash",
+        "name": "Marinho",
+        "description": "A fórmula da capa «Marinho» foi roubada de um laboratório secreto de codinome «Aqua», especializado em experimentos genéticos em peixes. Graças às suas propriedades especiais de reflexão de calor, esta tinta dá ao ar dentro do tanque um frescor refrescante à beira-mar.",
+        "isInventory": false,
+        "index": 4150,
+        "next_price": 24500,
+        "next_rank": 12,
+        "type": 3,
+        "baseItemId": 344971,
+        "previewResourceId": 344971,
+        "rank": 12,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "ISIS_RESISTANCE",
+                "value": "10",
+                "subproperties": null
+            },
+            {
+                "property": "FIREBIRD_RESISTANCE",
+                "value": "18",
+                "subproperties": null
+            },
+            {
+                "property": "TWINS_RESISTANCE",
+                "value": "11",
+                "subproperties": null
+            },
+            {
+                "property": "SMOKY_RESISTANCE",
+                "value": "5",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 24500,
+        "remainingTimeInSec": -1,
+        "coloring": 48688
+    },
+    {
+        "id": "pixel",
+        "name": "Pixel",
+        "description": "Camuflagem florestal feita com tecnologia experimental de pixels. Irrita ainda mais os entusiastas de alta resolução do que os pixels quebrados na tela.",
+        "isInventory": false,
+        "index": 4200,
+        "next_price": 30500,
+        "next_rank": 13,
+        "type": 3,
+        "baseItemId": 123604,
+        "previewResourceId": 123604,
+        "rank": 13,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "SHOTGUN_RESISTANCE",
+                "value": "30",
+                "subproperties": null
+            },
+            {
+                "property": "SMOKY_RESISTANCE",
+                "value": "16",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 30500,
+        "remainingTimeInSec": -1,
+        "coloring": 412162
+    },
+    {
+        "id": "guerrilla",
+        "name": "Guerrilha",
+        "description": "Essa tinta é montada a partir de uma variedade de materiais de sucata, fornecendo a cobertura perfeita para o petroleiro guerrilheiro que deseja tirar proveito do elemento surpresa.",
+        "isInventory": false,
+        "index": 4250,
+        "next_price": 30500,
+        "next_rank": 13,
+        "type": 3,
+        "baseItemId": 128957,
+        "previewResourceId": 128957,
+        "rank": 13,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "SHOTGUN_RESISTANCE",
+                "value": "12",
+                "subproperties": null
+            },
+            {
+                "property": "MACHINE_GUN_RESISTANCE",
+                "value": "26",
+                "subproperties": null
+            },
+            {
+                "property": "SHAFT_RESISTANCE",
+                "value": "8",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 30500,
+        "remainingTimeInSec": -1,
+        "coloring": 793823
+    },
+    {
+        "id": "cedar",
+        "name": "Cedro",
+        "description": "Esta tinta é composta de flocos de pinha triturados. É ecologicamente correta e vem com dois sacos de pinhões descascados a cada segunda lata de tinta comprada.",
+        "isInventory": false,
+        "index": 4300,
+        "next_price": 30500,
+        "next_rank": 13,
+        "type": 3,
+        "baseItemId": 5343,
+        "previewResourceId": 5343,
+        "rank": 13,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "ISIS_RESISTANCE",
+                "value": "8",
+                "subproperties": null
+            },
+            {
+                "property": "THUNDER_RESISTANCE",
+                "value": "30",
+                "subproperties": null
+            },
+            {
+                "property": "SMOKY_RESISTANCE",
+                "value": "8",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 30500,
+        "remainingTimeInSec": -1,
+        "coloring": 438964
+    },
+    {
+        "id": "in_love",
+        "name": "Apaixonado",
+        "description": "Projetado para os sofisticados e românticos, esta pintura irá satisfazer seu desejo por atributos militares esteticamente agradáveis. Também lhe renderá alguns segundos valiosos ao fascinar seu inimigo com a aparência extravagante de seu tanque, coberto de corações vermelhos.",
+        "isInventory": false,
+        "index": 4350,
+        "next_price": 30500,
+        "next_rank": 13,
+        "type": 3,
+        "baseItemId": 277983,
+        "previewResourceId": 277983,
+        "rank": 13,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "ISIS_RESISTANCE",
+                "value": "13",
+                "subproperties": null
+            },
+            {
+                "property": "FREEZE_RESISTANCE",
+                "value": "24",
+                "subproperties": null
+            },
+            {
+                "property": "RICOCHET_RESISTANCE",
+                "value": "10",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 30500,
+        "remainingTimeInSec": -1,
+        "coloring": 493495
+    },
+    {
+        "id": "desert",
+        "name": "Deserto",
+        "description": "Uma tinta especial ideal para operações no deserto. É criada pela pulverização de pó cristalino extraído dos dentes de um verme da areia. Para manter sua textura única, esta tinta não deve ser lavada.",
+        "isInventory": false,
+        "index": 4400,
+        "next_price": 36500,
+        "next_rank": 14,
+        "type": 3,
+        "baseItemId": 112041,
+        "previewResourceId": 112041,
+        "rank": 14,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "TWINS_RESISTANCE",
+                "value": "8",
+                "subproperties": null
+            },
+            {
+                "property": "RICOCHET_RESISTANCE",
+                "value": "26",
+                "subproperties": null
+            },
+            {
+                "property": "SMOKY_RESISTANCE",
+                "value": "8",
+                "subproperties": null
+            },
+            {
+                "property": "SHOTGUN_RESISTANCE",
+                "value": "10",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 36500,
+        "remainingTimeInSec": -1,
+        "coloring": 82151
+    },
+    {
+        "id": "dirty",
+        "name": "Lama",
+        "description": "Esta foi originalmente concebida como a terceira tinta projetada para operações terrestres em um clima de latitude média. No entanto, os militares decidiram mais tarde não incluí-la no pacote padrão, após repetidas tentativas de funcionários de limpeza para remover a textura de lama pintada da tampa.",
+        "isInventory": false,
+        "index": 4450,
+        "next_price": 42500,
+        "next_rank": 15,
+        "type": 3,
+        "baseItemId": 201886,
+        "previewResourceId": 201886,
+        "rank": 15,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "RAILGUN_RESISTANCE",
+                "value": "24",
+                "subproperties": null
+            },
+            {
+                "property": "SHAFT_RESISTANCE",
+                "value": "32",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 42500,
+        "remainingTimeInSec": -1,
+        "coloring": 386784
+    },
+    {
+        "id": "jaguar",
+        "name": "Jaguar",
+        "description": "Este sistema de proteção com o codinome «Jaguar» tem textura irregular do nobre predador, além de proteger seu tanque de todos os tipos de armas.",
+        "isInventory": false,
+        "index": 4500,
+        "next_price": 42500,
+        "next_rank": 15,
+        "type": 3,
+        "baseItemId": 46357,
+        "previewResourceId": 46357,
+        "rank": 15,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "FIREBIRD_RESISTANCE",
+                "value": "17",
+                "subproperties": null
+            },
+            {
+                "property": "FREEZE_RESISTANCE",
+                "value": "30",
+                "subproperties": null
+            },
+            {
+                "property": "THUNDER_RESISTANCE",
+                "value": "10",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 42500,
+        "remainingTimeInSec": -1,
+        "coloring": 952497
+    },
+    {
+        "id": "savanna",
+        "name": "Savâna",
+        "description": "Perfeito para se esconder entre folhagens espessas, como ambientes de selva. Mas cuidado... os gorilas são conhecidos por usar folhas para fins de «limpeza».",
+        "isInventory": false,
+        "index": 4550,
+        "next_price": 50500,
+        "next_rank": 16,
+        "type": 3,
+        "baseItemId": 388701,
+        "previewResourceId": 388701,
+        "rank": 16,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "RICOCHET_RESISTANCE",
+                "value": "15",
+                "subproperties": null
+            },
+            {
+                "property": "SMOKY_RESISTANCE",
+                "value": "30",
+                "subproperties": null
+            },
+            {
+                "property": "RAILGUN_RESISTANCE",
+                "value": "16",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 50500,
+        "remainingTimeInSec": -1,
+        "coloring": 299478
+    },
+    {
+        "id": "loam",
+        "name": "Argila",
+        "description": "Ninguém presta muita atenção em veículos sujos. A tinta «Argila» usa esse elemento psicológico para a vantagem do seu tanque, disfarçando-o como uma máquina suja. E quando seu inimigo vira as costas para você, é quando você ataca!",
+        "isInventory": false,
+        "index": 4600,
+        "next_price": 50500,
+        "next_rank": 16,
+        "type": 3,
+        "baseItemId": 600886,
+        "previewResourceId": 600886,
+        "rank": 16,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "FIREBIRD_RESISTANCE",
+                "value": "30",
+                "subproperties": null
+            },
+            {
+                "property": "FREEZE_RESISTANCE",
+                "value": "11",
+                "subproperties": null
+            },
+            {
+                "property": "RICOCHET_RESISTANCE",
+                "value": "11",
+                "subproperties": null
+            },
+            {
+                "property": "THUNDER_RESISTANCE",
+                "value": "11",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 50500,
+        "remainingTimeInSec": -1,
+        "coloring": 53082
+    },
+    {
+        "id": "sakura",
+        "name": "Sakura",
+        "description": "A pintura de desfile da divisão de tanques samurai. Ela traz harmonia interior e tranquilidade infinita. Nem mesmo as sirenes podem perturbar o estado de espírito do petroleiro cujo tanque está usando essa pintura.",
+        "isInventory": false,
+        "index": 4650,
+        "next_price": 50500,
+        "next_rank": 16,
+        "type": 3,
+        "baseItemId": 31726,
+        "previewResourceId": 31726,
+        "rank": 16,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "SHOTGUN_RESISTANCE",
+                "value": "25",
+                "subproperties": null
+            },
+            {
+                "property": "MACHINE_GUN_RESISTANCE",
+                "value": "12",
+                "subproperties": null
+            },
+            {
+                "property": "ISIS_RESISTANCE",
+                "value": "25",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 50500,
+        "remainingTimeInSec": -1,
+        "coloring": 746494
+    },
+    {
+        "id": "urban",
+        "name": "Urbana",
+        "description": "A melhor tinta para a batalha em ambientes urbanos. Funciona especialmente bem com arbustos de beira de estrada.",
+        "isInventory": false,
+        "index": 4700,
+        "next_price": 63500,
+        "next_rank": 17,
+        "type": 3,
+        "baseItemId": 739321,
+        "previewResourceId": 739321,
+        "rank": 17,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "ISIS_RESISTANCE",
+                "value": "15",
+                "subproperties": null
+            },
+            {
+                "property": "FIREBIRD_RESISTANCE",
+                "value": "10",
+                "subproperties": null
+            },
+            {
+                "property": "TWINS_RESISTANCE",
+                "value": "32",
+                "subproperties": null
+            },
+            {
+                "property": "RICOCHET_RESISTANCE",
+                "value": "10",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 63500,
+        "remainingTimeInSec": -1,
+        "coloring": 868766
+    },
+    {
+        "id": "atom",
+        "name": "Átomo",
+        "description": "Um revestimento de proteção para tanques de cobertura em centros de pesquisa nuclear. O revestimento é tão de alta tecnologia que pode resistir a um impacto direto de uma carga nuclear, mas apenas ao custo de vaporizar instantaneamente o tanque sob o revestimento.",
+        "isInventory": false,
+        "index": 4750,
+        "next_price": 76600,
+        "next_rank": 18,
+        "type": 3,
+        "baseItemId": 123599,
+        "previewResourceId": 123599,
+        "rank": 18,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "SHOTGUN_RESISTANCE",
+                "value": "33",
+                "subproperties": null
+            },
+            {
+                "property": "FIREBIRD_RESISTANCE",
+                "value": "18",
+                "subproperties": null
+            },
+            {
+                "property": "FREEZE_RESISTANCE",
+                "value": "11",
+                "subproperties": null
+            },
+            {
+                "property": "TWINS_RESISTANCE",
+                "value": "11",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 76600,
+        "remainingTimeInSec": -1,
+        "coloring": 412157
+    },
+    {
+        "id": "digital",
+        "name": "Digital",
+        "description": "Além de ter propriedades de camuflagem excepcionais, esta tinta é extremamente durável e contém nanobots especiais para limpeza automática da pintura em combate.",
+        "isInventory": false,
+        "index": 4800,
+        "next_price": 76600,
+        "next_rank": 18,
+        "type": 3,
+        "baseItemId": 332230,
+        "previewResourceId": 332230,
+        "rank": 18,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "SMOKY_RESISTANCE",
+                "value": "24",
+                "subproperties": null
+            },
+            {
+                "property": "RAILGUN_RESISTANCE",
+                "value": "35",
+                "subproperties": null
+            },
+            {
+                "property": "SHAFT_RESISTANCE",
+                "value": "14",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 76600,
+        "remainingTimeInSec": -1,
+        "coloring": 444408
+    },
+    {
+        "id": "hohloma",
+        "name": "Hohloma",
+        "description": "Uma criação cuja beleza lembra a habilidade dos artesãos russos, trabalhando em pequenas oficinas com paciência e dedicação.",
+        "isInventory": false,
+        "index": 4850,
+        "next_price": 76600,
+        "next_rank": 18,
+        "type": 3,
+        "baseItemId": 327089,
+        "previewResourceId": 327089,
+        "rank": 18,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "FREEZE_RESISTANCE",
+                "value": "22",
+                "subproperties": null
+            },
+            {
+                "property": "RICOCHET_RESISTANCE",
+                "value": "30",
+                "subproperties": null
+            },
+            {
+                "property": "SMOKY_RESISTANCE",
+                "value": "22",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 76600,
+        "remainingTimeInSec": -1,
+        "coloring": 140028
+    },
+    {
+        "id": "rhino",
+        "name": "Rhino",
+        "description": "Essa capa reconhece o fato de que um verdadeiro petroleiro não precisa de cores ou padrões extravagantes. O importante é a resistência do casco.",
+        "isInventory": false,
+        "index": 4900,
+        "next_price": 90000,
+        "next_rank": 19,
+        "type": 3,
+        "baseItemId": 884072,
+        "previewResourceId": 884072,
+        "rank": 19,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "SHOTGUN_RESISTANCE",
+                "value": "30",
+                "subproperties": null
+            },
+            {
+                "property": "MACHINE_GUN_RESISTANCE",
+                "value": "30",
+                "subproperties": null
+            },
+            {
+                "property": "FIREBIRD_RESISTANCE",
+                "value": "18",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 90000,
+        "remainingTimeInSec": -1,
+        "coloring": 191292
+    },
+    {
+        "id": "electra",
+        "name": "Electra",
+        "description": "Uma pintura incrivelmente bonita que captura a elegância de um arco de eletricidade voando pelo ar.",
+        "isInventory": false,
+        "index": 4950,
+        "next_price": 90000,
+        "next_rank": 19,
+        "type": 3,
+        "baseItemId": 964904,
+        "previewResourceId": 964904,
+        "rank": 19,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "ISIS_RESISTANCE",
+                "value": "38",
+                "subproperties": null
+            },
+            {
+                "property": "TWINS_RESISTANCE",
+                "value": "20",
+                "subproperties": null
+            },
+            {
+                "property": "SMOKY_RESISTANCE",
+                "value": "20",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 90000,
+        "remainingTimeInSec": -1,
+        "coloring": 858789
+    },
+    {
+        "id": "cherry",
+        "name": "Cereja",
+        "description": "Uma camuflagem altamente especializada para tanques florestais encarregados de proteger bosques de mogno raro contra caçadores ilegais.",
+        "isInventory": false,
+        "index": 5000,
+        "next_price": 103000,
+        "next_rank": 20,
+        "type": 3,
+        "baseItemId": 777883,
+        "previewResourceId": 777883,
+        "rank": 20,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "MACHINE_GUN_RESISTANCE",
+                "value": "22",
+                "subproperties": null
+            },
+            {
+                "property": "TWINS_RESISTANCE",
+                "value": "34",
+                "subproperties": null
+            },
+            {
+                "property": "THUNDER_RESISTANCE",
+                "value": "28",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 103000,
+        "remainingTimeInSec": -1,
+        "coloring": 391574
+    },
+    {
+        "id": "blacksmith",
+        "name": "Ferreiro",
+        "description": "Um tributo aos mestres artesãos que moldam o aço em obras de arte mortais no calor abrasador da forja.",
+        "isInventory": false,
+        "index": 5050,
+        "next_price": 103000,
+        "next_rank": 20,
+        "type": 3,
+        "baseItemId": 514005,
+        "previewResourceId": 514005,
+        "rank": 20,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "MACHINE_GUN_RESISTANCE",
+                "value": "40",
+                "subproperties": null
+            },
+            {
+                "property": "RAILGUN_RESISTANCE",
+                "value": "18",
+                "subproperties": null
+            },
+            {
+                "property": "SHAFT_RESISTANCE",
+                "value": "26",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 103000,
+        "remainingTimeInSec": -1,
+        "coloring": 785190
+    },
+    {
+        "id": "rustle",
+        "name": "Farfalha",
+        "description": "As folhas de outono podem farfalhar sob os rastros do seu tanque, mas seus oponentes ainda não poderão detectá-lo graças à mistura única de tons desta tinta.",
+        "isInventory": false,
+        "index": 5100,
+        "next_price": 103000,
+        "next_rank": 20,
+        "type": 3,
+        "baseItemId": 49564,
+        "previewResourceId": 49564,
+        "rank": 20,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "ISIS_RESISTANCE",
+                "value": "15",
+                "subproperties": null
+            },
+            {
+                "property": "FREEZE_RESISTANCE",
+                "value": "30",
+                "subproperties": null
+            },
+            {
+                "property": "THUNDER_RESISTANCE",
+                "value": "40",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 103000,
+        "remainingTimeInSec": -1,
+        "coloring": 60284
+    },
+    {
+        "id": "python",
+        "name": "Píton",
+        "description": "Esta tinta é uma réplica exata da pele de uma píton gigante. Ela também replica as propriedades de extrema elasticidade da cobra, bem como sua textura escamosa.",
+        "isInventory": false,
+        "index": 5150,
+        "next_price": 103000,
+        "next_rank": 20,
+        "type": 3,
+        "baseItemId": 167323,
+        "previewResourceId": 167323,
+        "rank": 20,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "FREEZE_RESISTANCE",
+                "value": "44",
+                "subproperties": null
+            },
+            {
+                "property": "SHAFT_RESISTANCE",
+                "value": "40",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 103000,
+        "remainingTimeInSec": -1,
+        "coloring": 704601
+    },
+    {
+        "id": "sandstone",
+        "name": "Arenito",
+        "description": "A tinta combina as propriedades de mascaramento da areia, com a pedra temperada pelo vento. O conjunto «Sandstone» vem com calção de banho ou biquíni de escolha, óculos escuros e guarda-sol.",
+        "isInventory": false,
+        "index": 5200,
+        "next_price": 116000,
+        "next_rank": 21,
+        "type": 3,
+        "baseItemId": 379571,
+        "previewResourceId": 379571,
+        "rank": 21,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "TWINS_RESISTANCE",
+                "value": "12",
+                "subproperties": null
+            },
+            {
+                "property": "THUNDER_RESISTANCE",
+                "value": "22",
+                "subproperties": null
+            },
+            {
+                "property": "RAILGUN_RESISTANCE",
+                "value": "34",
+                "subproperties": null
+            },
+            {
+                "property": "SHAFT_RESISTANCE",
+                "value": "22",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 116000,
+        "remainingTimeInSec": -1,
+        "coloring": 519187
+    },
+    {
+        "id": "spark",
+        "name": "Faísca",
+        "description": "Luzes de fadas, luzes de palco, música das esferas - esta pintura pode ser descrita com muitas palavras, mas nenhuma delas pode descrevê-la completamente. A pintura «Spark» é escolhida por aqueles tanqueiros para quem o tanque não é apenas uma batalha máquina, mas também um meio de expressão.",
+        "isInventory": false,
+        "index": 5250,
+        "next_price": 116000,
+        "next_rank": 21,
+        "type": 3,
+        "baseItemId": 184125,
+        "previewResourceId": 184125,
+        "rank": 21,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "FIREBIRD_RESISTANCE",
+                "value": "30",
+                "subproperties": null
+            },
+            {
+                "property": "TWINS_RESISTANCE",
+                "value": "18",
+                "subproperties": null
+            },
+            {
+                "property": "RICOCHET_RESISTANCE",
+                "value": "42",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 116000,
+        "remainingTimeInSec": -1,
+        "coloring": 378667
+    },
+    {
+        "id": "winter",
+        "name": "Inverno",
+        "description": "Esta tinta foi desenvolvida especialmente para batalhas em terrenos cobertos de neve. Originalmente, pretendia incluir uma pá de neve, mas o departamento financeiro não aprovou o custo extra.",
+        "isInventory": false,
+        "index": 5300,
+        "next_price": 129000,
+        "next_rank": 22,
+        "type": 3,
+        "baseItemId": 791701,
+        "previewResourceId": 791701,
+        "rank": 22,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "FIREBIRD_RESISTANCE",
+                "value": "12",
+                "subproperties": null
+            },
+            {
+                "property": "THUNDER_RESISTANCE",
+                "value": "26",
+                "subproperties": null
+            },
+            {
+                "property": "RAILGUN_RESISTANCE",
+                "value": "12",
+                "subproperties": null
+            },
+            {
+                "property": "SHAFT_RESISTANCE",
+                "value": "45",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 129000,
+        "remainingTimeInSec": -1,
+        "coloring": 285466
+    },
+    {
+        "id": "needle",
+        "name": "Agulha",
+        "description": "Usando abeto de áreas sustentáveis, a tinta «Needle» é preparada usando 25 metros quadrados de abeto, cortado e triturado em agulhas de madeira em miniatura e unidas usando um tipo especial de resina.",
+        "isInventory": false,
+        "index": 5350,
+        "next_price": 180000,
+        "next_rank": 24,
+        "type": 3,
+        "baseItemId": 648950,
+        "previewResourceId": 648950,
+        "rank": 24,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "RICOCHET_RESISTANCE",
+                "value": "22",
+                "subproperties": null
+            },
+            {
+                "property": "SMOKY_RESISTANCE",
+                "value": "50",
+                "subproperties": null
+            },
+            {
+                "property": "SHAFT_RESISTANCE",
+                "value": "28",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 180000,
+        "remainingTimeInSec": -1,
+        "coloring": 216783
+    },
+    {
+        "id": "zeus",
+        "name": "Zeus",
+        "description": "Formada em homenagem ao deus grego conhecido por seu amor por raios, esta pintura sinalizará aos seus inimigos que você é uma força que não deve ser tomada de ânimo leve.",
+        "isInventory": false,
+        "index": 5400,
+        "next_price": 180000,
+        "next_rank": 24,
+        "type": 3,
+        "baseItemId": 123565,
+        "previewResourceId": 123565,
+        "rank": 24,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "FIREBIRD_RESISTANCE",
+                "value": "50",
+                "subproperties": null
+            },
+            {
+                "property": "FREEZE_RESISTANCE",
+                "value": "25",
+                "subproperties": null
+            },
+            {
+                "property": "SMOKY_RESISTANCE",
+                "value": "25",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 180000,
+        "remainingTimeInSec": -1,
+        "coloring": 412123
+    },
+    {
+        "id": "hive",
+        "name": "Colmeia",
+        "description": "Originalmente planejada como uma tinta com propriedades ofensivas ativas, a «Hive» deveria ser enriquecida com abelhas especiais antitanque. No entanto, esse plano foi abandonado devido aos inúmeros protestos de organizações que defendem os animais. Como resultado, a tinta agora só mantém sua cor e textura.",
+        "isInventory": false,
+        "index": 5450,
+        "next_price": 192000,
+        "next_rank": 25,
+        "type": 3,
+        "baseItemId": 920490,
+        "previewResourceId": 920490,
+        "rank": 25,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "MACHINE_GUN_RESISTANCE",
+                "value": "42",
+                "subproperties": null
+            },
+            {
+                "property": "FREEZE_RESISTANCE",
+                "value": "26",
+                "subproperties": null
+            },
+            {
+                "property": "RICOCHET_RESISTANCE",
+                "value": "32",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 192000,
+        "remainingTimeInSec": -1,
+        "coloring": 682233
+    },
+    {
+        "id": "rock",
+        "name": "Rocha",
+        "description": "As placas blindadas chamadas «The Rock» são extraídas de enormes formações rochosas, usando uma tecnologia egípcia antiga. Estacas secas são marteladas na rocha, depois encharcadas com água até incharem, quebrando a rocha em blocos lisos de pedra. Esta camuflagem é a definição de «feito à mão».",
+        "isInventory": false,
+        "index": 5500,
+        "next_price": 192000,
+        "next_rank": 25,
+        "type": 3,
+        "baseItemId": 669820,
+        "previewResourceId": 669820,
+        "rank": 25,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "ISIS_RESISTANCE",
+                "value": "28",
+                "subproperties": null
+            },
+            {
+                "property": "FREEZE_RESISTANCE",
+                "value": "12",
+                "subproperties": null
+            },
+            {
+                "property": "TWINS_RESISTANCE",
+                "value": "50",
+                "subproperties": null
+            },
+            {
+                "property": "SHOTGUN_RESISTANCE",
+                "value": "10",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 192000,
+        "remainingTimeInSec": -1,
+        "coloring": 473605
+    },
+    {
+        "id": "mars",
+        "name": "Marte",
+        "description": "Diz-se que este revestimento estava sendo desenvolvido para uma divisão espacial para garantir a rápida liberação de Marte dos invasores alienígenas. A tinta foi colocada à venda somente para levantar fundos para transferir uma divisão de tanques para Marte.",
+        "isInventory": false,
+        "index": 5550,
+        "next_price": 204000,
+        "next_rank": 26,
+        "type": 3,
+        "baseItemId": 123602,
+        "previewResourceId": 123602,
+        "rank": 26,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "SHOTGUN_RESISTANCE",
+                "value": "50",
+                "subproperties": null
+            },
+            {
+                "property": "FIREBIRD_RESISTANCE",
+                "value": "30",
+                "subproperties": null
+            },
+            {
+                "property": "ISIS_RESISTANCE",
+                "value": "20",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 204000,
+        "remainingTimeInSec": -1,
+        "coloring": 412160
+    },
+    {
+        "id": "prodigi",
+        "name": "Pródigo",
+        "description": "Uma pintura digital aprimorada com um padrão que se destina a distrair e desorientar seu inimigo, tornando-o mais propenso a errar ao atirar em você.",
+        "isInventory": false,
+        "index": 5600,
+        "next_price": 204000,
+        "next_rank": 26,
+        "type": 3,
+        "baseItemId": 645131,
+        "previewResourceId": 645131,
+        "rank": 26,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "FIREBIRD_RESISTANCE",
+                "value": "7",
+                "subproperties": null
+            },
+            {
+                "property": "THUNDER_RESISTANCE",
+                "value": "23",
+                "subproperties": null
+            },
+            {
+                "property": "RAILGUN_RESISTANCE",
+                "value": "50",
+                "subproperties": null
+            },
+            {
+                "property": "SHAFT_RESISTANCE",
+                "value": "20",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 204000,
+        "remainingTimeInSec": -1,
+        "coloring": 78411
+    },
+    {
+        "id": "graffiti",
+        "name": "Grafites",
+        "description": "Uma abordagem interessante para a camuflagem urbana. Fingindo ser uma vítima de hooligans de rua, seu tanque se funde perfeitamente com as áreas residenciais das selvas de concreto.",
+        "isInventory": false,
+        "index": 5650,
+        "next_price": 216000,
+        "next_rank": 27,
+        "type": 3,
+        "baseItemId": 14270,
+        "previewResourceId": 14270,
+        "rank": 27,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "MACHINE_GUN_RESISTANCE",
+                "value": "50",
+                "subproperties": null
+            },
+            {
+                "property": "TWINS_RESISTANCE",
+                "value": "25",
+                "subproperties": null
+            },
+            {
+                "property": "SHAFT_RESISTANCE",
+                "value": "25",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 216000,
+        "remainingTimeInSec": -1,
+        "coloring": 691362
+    },
+    {
+        "id": "irbis",
+        "name": "Irbis",
+        "description": "Um dos felinos mais misteriosos, o Irbis também é conhecido como o «leopardo-das-neves». Após uma série de expedições de alto risco e quinze acidentes, nossos pesquisadores conseguiram conter um leopardo-das-neves por tempo suficiente para copiar sua pelagem e criar o «Irbis» pintar.",
+        "isInventory": false,
+        "index": 5700,
+        "next_price": 216000,
+        "next_rank": 27,
+        "type": 3,
+        "baseItemId": 494974,
+        "previewResourceId": 494974,
+        "rank": 27,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "ISIS_RESISTANCE",
+                "value": "50",
+                "subproperties": null
+            },
+            {
+                "property": "FREEZE_RESISTANCE",
+                "value": "27",
+                "subproperties": null
+            },
+            {
+                "property": "RICOCHET_RESISTANCE",
+                "value": "23",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 216000,
+        "remainingTimeInSec": -1,
+        "coloring": 931954
+    },
+    {
+        "id": "emerald",
+        "name": "Esmeralda",
+        "description": "Os pesquisadores do laboratório de tintas «Style and Grill» trabalham há muito tempo em uma tinta que retenha o tom verde clássico de um tanque, ao mesmo tempo em que enfatiza o alto status de seu proprietário. O resultado é a tinta «Emerald», que parece ser iluminado por dentro.",
+        "isInventory": false,
+        "index": 5750,
+        "next_price": 228000,
+        "next_rank": 28,
+        "type": 3,
+        "baseItemId": 16227,
+        "previewResourceId": 16227,
+        "rank": 28,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "TWINS_RESISTANCE",
+                "value": "35",
+                "subproperties": null
+            },
+            {
+                "property": "THUNDER_RESISTANCE",
+                "value": "50",
+                "subproperties": null
+            },
+            {
+                "property": "RAILGUN_RESISTANCE",
+                "value": "15",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 228000,
+        "remainingTimeInSec": -1,
+        "coloring": 448000
+    },
+    {
+        "id": "inferno",
+        "name": "Inferno",
+        "description": "A tinta «Inferno» é entregue por meios obscuros ao mercado negro das oficinas de sopro de vidro da China. Segundo os próprios produtores, sua aparência desafiadora simboliza força, coragem, sorte e longevidade. Uma tinta excelente para um atacante feroz.",
+        "isInventory": false,
+        "index": 5800,
+        "next_price": 228000,
+        "next_rank": 28,
+        "type": 3,
+        "baseItemId": 186119,
+        "previewResourceId": 186119,
+        "rank": 28,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "FIREBIRD_RESISTANCE",
+                "value": "36",
+                "subproperties": null
+            },
+            {
+                "property": "FREEZE_RESISTANCE",
+                "value": "50",
+                "subproperties": null
+            },
+            {
+                "property": "TWINS_RESISTANCE",
+                "value": "14",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 228000,
+        "remainingTimeInSec": -1,
+        "coloring": 200304
+    },
+    {
+        "id": "nano",
+        "name": "Nano",
+        "description": "Uma camada espessa de nanoporonal é colocada no tanque a partir de uma lata pequena com uma escova ainda menor. O processo é longo, mas o resultado é agradável aos olhos. Do ponto de vista militar, esta é uma das mais dignas tentativas de adaptar a nanotecnologia aos tanques.",
+        "isInventory": false,
+        "index": 5850,
+        "next_price": 240000,
+        "next_rank": 29,
+        "type": 3,
+        "baseItemId": 123603,
+        "previewResourceId": 123603,
+        "rank": 29,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "SHOTGUN_RESISTANCE",
+                "value": "35",
+                "subproperties": null
+            },
+            {
+                "property": "RICOCHET_RESISTANCE",
+                "value": "32",
+                "subproperties": null
+            },
+            {
+                "property": "SMOKY_RESISTANCE",
+                "value": "22",
+                "subproperties": null
+            },
+            {
+                "property": "FIREBIRD_RESISTANCE",
+                "value": "11",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 240000,
+        "remainingTimeInSec": -1,
+        "coloring": 412161
+    },
+    {
+        "id": "raccoon",
+        "name": "Guaxinim",
+        "description": "Essa pintura é um dos três itens obrigatórios para todos os membros do Worldwide Raccoon Club. O paletó e a gravata só são concedidos depois que o iniciado atinge o status de «Guaxinim Fofo». O negócio é sério.",
+        "isInventory": false,
+        "index": 5900,
+        "next_price": 240000,
+        "next_rank": 29,
+        "type": 3,
+        "baseItemId": 182293,
+        "previewResourceId": 182293,
+        "rank": 29,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "SHOTGUN_RESISTANCE",
+                "value": "33",
+                "subproperties": null
+            },
+            {
+                "property": "MACHINE_GUN_RESISTANCE",
+                "value": "27",
+                "subproperties": null
+            },
+            {
+                "property": "ISIS_RESISTANCE",
+                "value": "19",
+                "subproperties": null
+            },
+            {
+                "property": "RAILGUN_RESISTANCE",
+                "value": "21",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 240000,
+        "remainingTimeInSec": -1,
+        "coloring": 16022
+    },
+    {
+        "id": "clay",
+        "name": "Barro",
+        "description": "Esta tinta foi projetada para operações de sabotagem no pântano. Os tanques que usavam essa tinta estavam tão bem camuflados que nem as sanguessugas os notaram.",
+        "isInventory": false,
+        "index": 5950,
+        "next_price": 240000,
+        "next_rank": 29,
+        "type": 3,
+        "baseItemId": 700822,
+        "previewResourceId": 700822,
+        "rank": 29,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "RICOCHET_RESISTANCE",
+                "value": "50",
+                "subproperties": null
+            },
+            {
+                "property": "THUNDER_RESISTANCE",
+                "value": "20",
+                "subproperties": null
+            },
+            {
+                "property": "RAILGUN_RESISTANCE",
+                "value": "30",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 240000,
+        "remainingTimeInSec": -1,
+        "coloring": 141405
+    },
+    {
+        "id": "taiga",
+        "name": "Taiga",
+        "description": "A pintura de camuflagem «Taiga» mascara o tanque tão bem na vegetação densa, que você provavelmente poderia se aproximar de um alce com seu tanque.",
+        "isInventory": false,
+        "index": 6000,
+        "next_price": 240000,
+        "next_rank": 29,
+        "type": 3,
+        "baseItemId": 184733,
+        "previewResourceId": 184733,
+        "rank": 29,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "ISIS_RESISTANCE",
+                "value": "35",
+                "subproperties": null
+            },
+            {
+                "property": "FIREBIRD_RESISTANCE",
+                "value": "24",
+                "subproperties": null
+            },
+            {
+                "property": "TWINS_RESISTANCE",
+                "value": "17",
+                "subproperties": null
+            },
+            {
+                "property": "RICOCHET_RESISTANCE",
+                "value": "24",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 240000,
+        "remainingTimeInSec": -1,
+        "coloring": 32379
+    },
+    {
+        "id": "tiger",
+        "name": "Tigre",
+        "description": "Este revestimento não só parece uma pele de tigre, mas também torna seu tanque macio e fofo ao toque. Olhando para seu tanque neste revestimento, você pode treinar seu olho de tigre, o que lhe permitirá imobilizar os adversários assustados.",
+        "isInventory": false,
+        "index": 6050,
+        "next_price": 250000,
+        "next_rank": 30,
+        "type": 3,
+        "baseItemId": 123605,
+        "previewResourceId": 123605,
+        "rank": 30,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "SHOTGUN_RESISTANCE",
+                "value": "47",
+                "subproperties": null
+            },
+            {
+                "property": "SMOKY_RESISTANCE",
+                "value": "35",
+                "subproperties": null
+            },
+            {
+                "property": "RAILGUN_RESISTANCE",
+                "value": "18",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 250000,
+        "remainingTimeInSec": -1,
+        "coloring": 412163
+    },
+    {
+        "id": "jade",
+        "name": "Jade",
+        "description": "Um spray de um raro jade marrom. Bonito, perfeito para camuflagem e ecologicamente correto.",
+        "isInventory": false,
+        "index": 6100,
+        "next_price": 250000,
+        "next_rank": 30,
+        "type": 3,
+        "baseItemId": 866855,
+        "previewResourceId": 866855,
+        "rank": 30,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "THUNDER_RESISTANCE",
+                "value": "11",
+                "subproperties": null
+            },
+            {
+                "property": "SMOKY_RESISTANCE",
+                "value": "24",
+                "subproperties": null
+            },
+            {
+                "property": "SHAFT_RESISTANCE",
+                "value": "50",
+                "subproperties": null
+            },
+            {
+                "property": "SHOTGUN_RESISTANCE",
+                "value": "15",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 250000,
+        "remainingTimeInSec": -1,
+        "coloring": 746058
+    },
+    {
+        "id": "picasso",
+        "name": "Picasso",
+        "description": "Picasso recebeu o nome de Pablo Picasso, o famoso artista cubista. Finos fragmentos poligonais da armadura formam um padrão abstrato verdadeiramente único, que difunde até os golpes mais poderosos. Esta pintura é a escolha dos verdadeiros críticos de arte!",
+        "isInventory": false,
+        "index": 6150,
+        "next_price": 250000,
+        "next_rank": 30,
+        "type": 3,
+        "baseItemId": 337676,
+        "previewResourceId": 337676,
+        "rank": 30,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "FREEZE_RESISTANCE",
+                "value": "20",
+                "subproperties": null
+            },
+            {
+                "property": "THUNDER_RESISTANCE",
+                "value": "20",
+                "subproperties": null
+            },
+            {
+                "property": "RAILGUN_RESISTANCE",
+                "value": "27",
+                "subproperties": null
+            },
+            {
+                "property": "SHAFT_RESISTANCE",
+                "value": "33",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 250000,
+        "remainingTimeInSec": -1,
+        "coloring": 906593
+    },
+    {
+        "id": "lumberjack",
+        "name": "Lenhador",
+        "description": "A camisa de um lenhador representa força e resistência às dificuldades do trabalho manual. Essa tinta se baseia nesse padrão para imbuir os mesmos valores no tanque que a veste.",
+        "isInventory": false,
+        "index": 6200,
+        "next_price": 250000,
+        "next_rank": 30,
+        "type": 3,
+        "baseItemId": 732108,
+        "previewResourceId": 732108,
+        "rank": 30,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "MACHINE_GUN_RESISTANCE",
+                "value": "10",
+                "subproperties": null
+            },
+            {
+                "property": "ISIS_RESISTANCE",
+                "value": "30",
+                "subproperties": null
+            },
+            {
+                "property": "FIREBIRD_RESISTANCE",
+                "value": "30",
+                "subproperties": null
+            },
+            {
+                "property": "FREEZE_RESISTANCE",
+                "value": "30",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 250000,
+        "remainingTimeInSec": -1,
+        "coloring": 499532
+    },
+    {
+        "id": "africa",
+        "name": "Africa",
+        "description": "Essa tinta apresenta padrões tradicionais africanos usados pelos xamãs africanos, que acreditam que ela pode proteger os tanques contra danos.",
+        "isInventory": false,
+        "index": 6250,
+        "next_price": 250000,
+        "next_rank": 30,
+        "type": 3,
+        "baseItemId": 677240,
+        "previewResourceId": 677240,
+        "rank": 30,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "SHOTGUN_RESISTANCE",
+                "value": "20",
+                "subproperties": null
+            },
+            {
+                "property": "MACHINE_GUN_RESISTANCE",
+                "value": "30",
+                "subproperties": null
+            },
+            {
+                "property": "TWINS_RESISTANCE",
+                "value": "25",
+                "subproperties": null
+            },
+            {
+                "property": "THUNDER_RESISTANCE",
+                "value": "25",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 250000,
+        "remainingTimeInSec": -1,
+        "coloring": 790154
+    }
+]

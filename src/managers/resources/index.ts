@@ -10,6 +10,21 @@ export enum ResourceType {
     GARAGE = 'garage',
 }
 
+export interface IResource {
+    idhigh: string
+    idlow: number
+    versionhigh: string
+    versionlow: number
+    lazy: boolean
+    alpha?: boolean
+    type: number
+    weight?: number
+    height?: number
+    numFrames?: number
+    fps?: number
+    fileNames?: string[]
+}
+
 export class ResourcesManager {
 
     private resources: Map<string, any[]> = new Map();
@@ -23,20 +38,21 @@ export class ResourcesManager {
     public init() {
         const assetsManager = this.server.getAssetsManager();
 
-        this.resources.set(
-            ResourceType.LOBBY,
-            assetsManager.getResource('lobby.json').resources
+        this.registerResources(
+            ResourceType.LOBBY, assetsManager.getResource('lobby.json')
         );
+        this.registerResources(
+            ResourceType.AUTH, assetsManager.getResource('auth.json')
+        );
+        this.registerResources(
+            ResourceType.GARAGE, assetsManager.getResource('garage.json')
+        );
+    }
 
-        this.resources.set(
-            ResourceType.AUTH,
-            assetsManager.getResource('auth.json').resources
-        );
+    public getResources() { return this.resources }
 
-        this.resources.set(
-            ResourceType.GARAGE,
-            assetsManager.getResource('garage.json').resources
-        );
+    public registerResources(resource: ResourceType, data: IResource[]) {
+        this.resources.set(resource, data);
     }
 
     public sendResources(client: Client, resource: ResourceType) {
@@ -53,7 +69,4 @@ export class ResourcesManager {
         });
     }
 
-    public getResources() {
-        return this.resources;
-    }
 }

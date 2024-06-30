@@ -1,0 +1,234 @@
+[
+    {
+        "id": "dictator",
+        "name": "Ditador",
+        "description": "Devido ao sistema de defesa ativo aprimorado e ao uso dos mais novos materiais compostos, esta blindagem absorve efetivamente a energia de um impacto de quase qualquer arma de calibre. Com o Dictator, você pode lutar na linha de frente de qualquer batalha. Sendo um dos cascos mais rápidos e protegidos no jogo, o Ditador é grande, o que o torna um alvo fácil.",
+        "isInventory": false,
+        "index": 850,
+        "next_price": 16550,
+        "next_rank": 11,
+        "type": 2,
+        "baseItemId": 904690,
+        "previewResourceId": 904690,
+        "rank": 4,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "188",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "7.00",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "89",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "2410",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "10.9",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 400,
+        "remainingTimeInSec": -1,
+        "modificationID": 0,
+        "object3ds": 931026
+    },
+    {
+        "id": "dictator",
+        "name": "Ditador",
+        "description": "Devido ao sistema de defesa ativo aprimorado e ao uso dos mais novos materiais compostos, esta blindagem absorve efetivamente a energia de um impacto de quase qualquer arma de calibre. Com o Dictator, você pode lutar na linha de frente de qualquer batalha. Sendo um dos cascos mais rápidos e protegidos no jogo, o Ditador é grande, o que o torna um alvo fácil.",
+        "isInventory": false,
+        "index": 850,
+        "next_price": 78550,
+        "next_rank": 18,
+        "type": 2,
+        "baseItemId": 904690,
+        "previewResourceId": 486892,
+        "rank": 11,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "243",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "7.30",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "103.3",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "2722",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "12.3",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 16550,
+        "remainingTimeInSec": -1,
+        "modificationID": 1,
+        "object3ds": 6338
+    },
+    {
+        "id": "dictator",
+        "name": "Ditador",
+        "description": "Devido ao sistema de defesa ativo aprimorado e ao uso dos mais novos materiais compostos, esta blindagem absorve efetivamente a energia de um impacto de quase qualquer arma de calibre. Com o Dictator, você pode lutar na linha de frente de qualquer batalha. Sendo um dos cascos mais rápidos e protegidos no jogo, o Ditador é grande, o que o torna um alvo fácil.",
+        "isInventory": false,
+        "index": 850,
+        "next_price": 201200,
+        "next_rank": 26,
+        "type": 2,
+        "baseItemId": 904690,
+        "previewResourceId": 55428,
+        "rank": 18,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "298",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "7.70",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "117.7",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "3033",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "13.8",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 78550,
+        "remainingTimeInSec": -1,
+        "modificationID": 2,
+        "object3ds": 890676
+    },
+    {
+        "id": "dictator",
+        "name": "Ditador",
+        "description": "Devido ao sistema de defesa ativo aprimorado e ao uso dos mais novos materiais compostos, esta blindagem absorve efetivamente a energia de um impacto de quase qualquer arma de calibre. Com o Dictator, você pode lutar na linha de frente de qualquer batalha. Sendo um dos cascos mais rápidos e protegidos no jogo, o Ditador é grande, o que o torna um alvo fácil.",
+        "isInventory": false,
+        "index": 850,
+        "next_price": 201200,
+        "next_rank": 26,
+        "type": 2,
+        "baseItemId": 904690,
+        "previewResourceId": 64819,
+        "rank": 26,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "345",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "8.00",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "130",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "3300",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "15",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 201200,
+        "remainingTimeInSec": -1,
+        "modificationID": 3,
+        "object3ds": 802804
+    }
+]

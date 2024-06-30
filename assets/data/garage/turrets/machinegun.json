@@ -1,0 +1,282 @@
+[
+    {
+        "id": "machinegun",
+        "name": "Vulcão",
+        "description": "Um canhão de disparo rápido, perfeito para combates de médio e longo alcance. Ele tem um sistema de controle exclusivo que impede que o sistema de mira seja derrubado mesmo sob fogo inimigo pesado. Lembre-se de que o disparo prolongado pode causar superaquecimento e danificar seu tanque!",
+        "isInventory": false,
+        "index": 550,
+        "next_price": 22850,
+        "next_rank": 11,
+        "type": 1,
+        "baseItemId": 412753,
+        "previewResourceId": 412753,
+        "rank": 4,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "DAMAGE_PER_SECOND",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_PER_PERIOD",
+                        "value": "33",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "IMPACT_FORCE",
+                "value": "66",
+                "subproperties": null
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "4.92",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "86.4",
+                "subproperties": null
+            },
+            {
+                "property": "SHOT_RANGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_MIN_DAMAGE_RADIUS",
+                        "value": "149.6",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1250,
+        "remainingTimeInSec": -1,
+        "modificationID": 0,
+        "object3ds": 412752
+    },
+    {
+        "id": "machinegun",
+        "name": "Vulcão",
+        "description": "Um canhão de disparo rápido, perfeito para combates de médio e longo alcance. Ele tem um sistema de controle exclusivo que impede que o sistema de mira seja derrubado mesmo sob fogo inimigo pesado. Lembre-se de que o disparo prolongado pode causar superaquecimento e danificar seu tanque!",
+        "isInventory": false,
+        "index": 550,
+        "next_price": 88100,
+        "next_rank": 18,
+        "type": 1,
+        "baseItemId": 412753,
+        "previewResourceId": 412755,
+        "rank": 11,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "DAMAGE_PER_SECOND",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_PER_PERIOD",
+                        "value": "42",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "IMPACT_FORCE",
+                "value": "95",
+                "subproperties": null
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "5.65",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "100.3",
+                "subproperties": null
+            },
+            {
+                "property": "SHOT_RANGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_MIN_DAMAGE_RADIUS",
+                        "value": "169",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 22850,
+        "remainingTimeInSec": -1,
+        "modificationID": 1,
+        "object3ds": 412754
+    },
+    {
+        "id": "machinegun",
+        "name": "Vulcão",
+        "description": "Um canhão de disparo rápido, perfeito para combates de médio e longo alcance. Ele tem um sistema de controle exclusivo que impede que o sistema de mira seja derrubado mesmo sob fogo inimigo pesado. Lembre-se de que o disparo prolongado pode causar superaquecimento e danificar seu tanque!",
+        "isInventory": false,
+        "index": 550,
+        "next_price": 231800,
+        "next_rank": 26,
+        "type": 1,
+        "baseItemId": 412753,
+        "previewResourceId": 412757,
+        "rank": 18,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "DAMAGE_PER_SECOND",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_PER_PERIOD",
+                        "value": "51",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "IMPACT_FORCE",
+                "value": "121",
+                "subproperties": null
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "6.38",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "114.2",
+                "subproperties": null
+            },
+            {
+                "property": "SHOT_RANGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_MIN_DAMAGE_RADIUS",
+                        "value": "188.4",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 88100,
+        "remainingTimeInSec": -1,
+        "modificationID": 2,
+        "object3ds": 412756
+    },
+    {
+        "id": "machinegun",
+        "name": "Vulcão",
+        "description": "Um canhão de disparo rápido, perfeito para combates de médio e longo alcance. Ele tem um sistema de controle exclusivo que impede que o sistema de mira seja derrubado mesmo sob fogo inimigo pesado. Lembre-se de que o disparo prolongado pode causar superaquecimento e danificar seu tanque!",
+        "isInventory": false,
+        "index": 550,
+        "next_price": 231800,
+        "next_rank": 26,
+        "type": 1,
+        "baseItemId": 412753,
+        "previewResourceId": 412759,
+        "rank": 26,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "DAMAGE_PER_SECOND",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_PER_PERIOD",
+                        "value": "60",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "IMPACT_FORCE",
+                "value": "139",
+                "subproperties": null
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "7.00",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "126",
+                "subproperties": null
+            },
+            {
+                "property": "SHOT_RANGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_MIN_DAMAGE_RADIUS",
+                        "value": "205",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 231800,
+        "remainingTimeInSec": -1,
+        "modificationID": 3,
+        "object3ds": 412758
+    }
+]

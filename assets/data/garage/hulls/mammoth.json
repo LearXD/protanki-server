@@ -1,0 +1,234 @@
+[
+    {
+        "id": "mammoth",
+        "name": "Mamute",
+        "description": "Este não é um tanque - é uma fortaleza sobre trilhos. Mamute é o carro-chefe entre outras carrocerias. Extremamente pesado, reforçado com superconcreto este casco é lento, o que não impede o Mamute de lutar com sucesso contra vários tanques inimigos.",
+        "isInventory": false,
+        "index": 1000,
+        "next_price": 25450,
+        "next_rank": 13,
+        "type": 2,
+        "baseItemId": 542698,
+        "previewResourceId": 542698,
+        "rank": 6,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "268",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "4.40",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "54",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "4262",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "11.3",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 600,
+        "remainingTimeInSec": -1,
+        "modificationID": 0,
+        "object3ds": 139472
+    },
+    {
+        "id": "mammoth",
+        "name": "Mamute",
+        "description": "Este não é um tanque - é uma fortaleza sobre trilhos. Mamute é o carro-chefe entre outras carrocerias. Extremamente pesado, reforçado com superconcreto este casco é lento, o que não impede o Mamute de lutar com sucesso contra vários tanques inimigos.",
+        "isInventory": false,
+        "index": 1000,
+        "next_price": 94650,
+        "next_rank": 20,
+        "type": 2,
+        "baseItemId": 542698,
+        "previewResourceId": 906451,
+        "rank": 13,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "339",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "4.60",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "64.1",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "4743",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "12.7",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 25450,
+        "remainingTimeInSec": -1,
+        "modificationID": 1,
+        "object3ds": 219122
+    },
+    {
+        "id": "mammoth",
+        "name": "Mamute",
+        "description": "Este não é um tanque - é uma fortaleza sobre trilhos. Mamute é o carro-chefe entre outras carrocerias. Extremamente pesado, reforçado com superconcreto este casco é lento, o que não impede o Mamute de lutar com sucesso contra vários tanques inimigos.",
+        "isInventory": false,
+        "index": 1000,
+        "next_price": 229900,
+        "next_rank": 28,
+        "type": 2,
+        "baseItemId": 542698,
+        "previewResourceId": 905090,
+        "rank": 20,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "409",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "4.90",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "74.2",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "5225",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "14.2",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 94650,
+        "remainingTimeInSec": -1,
+        "modificationID": 2,
+        "object3ds": 550964
+    },
+    {
+        "id": "mammoth",
+        "name": "Mamute",
+        "description": "Este não é um tanque - é uma fortaleza sobre trilhos. Mamute é o carro-chefe entre outras carrocerias. Extremamente pesado, reforçado com superconcreto este casco é lento, o que não impede o Mamute de lutar com sucesso contra vários tanques inimigos.",
+        "isInventory": false,
+        "index": 1000,
+        "next_price": 229900,
+        "next_rank": 28,
+        "type": 2,
+        "baseItemId": 542698,
+        "previewResourceId": 385917,
+        "rank": 28,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "450",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "5.00",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "80",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "5500",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "15",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 229900,
+        "remainingTimeInSec": -1,
+        "modificationID": 3,
+        "object3ds": 165165
+    }
+]

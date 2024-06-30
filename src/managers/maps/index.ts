@@ -42,7 +42,7 @@ export class MapsManager {
 
     public init() {
         this.properties = this.server.getAssetsManager()
-            .getData<IBattleAsset>('maps.json');
+            .getData('maps.json');
     }
 
     public getMaps() {

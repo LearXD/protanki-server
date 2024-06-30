@@ -1,0 +1,278 @@
+[
+    {
+        "id": "railgun_xt",
+        "name": "Canhão-elétrico",
+        "description": "Se armas de calibre médio não são suficientes para sua auto-expressão, esta arma é certa para você. Arma de grande calibre com enorme velocidade de boca e projéteis usando urânio empobrecido. Projéteis cinéticos extremamente poderosos e precisos podem atravessar o tanque do inimigo ou acerte vários alvos na linha de fogo com um único tiro. Uma escolha ideal para guerra de trincheiras de longo alcance e sniping. Lembre-se de que leva muito tempo para recarregar a arma e garantir que seus oponentes não tirem vantagem disso.",
+        "isInventory": false,
+        "index": 250,
+        "next_price": 17600,
+        "next_rank": 10,
+        "type": 1,
+        "baseItemId": 882260,
+        "previewResourceId": 882260,
+        "rank": 3,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_FROM",
+                        "value": "68",
+                        "subproperties": null
+                    },
+                    {
+                        "property": "DAMAGE_TO",
+                        "value": "106",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "IMPACT_FORCE",
+                "value": "369",
+                "subproperties": null
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "5.85",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "56.2",
+                "subproperties": null
+            },
+            {
+                "property": "WEAPON_WEAKENING_COEFF",
+                "value": "35.36",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 800,
+        "remainingTimeInSec": -1,
+        "modificationID": 0,
+        "object3ds": 906686
+    },
+    {
+        "id": "railgun_xt",
+        "name": "Canhão-elétrico",
+        "description": "Se armas de calibre médio não são suficientes para sua auto-expressão, esta arma é certa para você. Arma de grande calibre com enorme velocidade de boca e projéteis usando urânio empobrecido. Projéteis cinéticos extremamente poderosos e precisos podem atravessar o tanque do inimigo ou acerte vários alvos na linha de fogo com um único tiro. Uma escolha ideal para guerra de trincheiras de longo alcance e sniping. Lembre-se de que leva muito tempo para recarregar a arma e garantir que seus oponentes não tirem vantagem disso.",
+        "isInventory": false,
+        "index": 250,
+        "next_price": 79200,
+        "next_rank": 17,
+        "type": 1,
+        "baseItemId": 882260,
+        "previewResourceId": 603366,
+        "rank": 10,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_FROM",
+                        "value": "90",
+                        "subproperties": null
+                    },
+                    {
+                        "property": "DAMAGE_TO",
+                        "value": "137",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "IMPACT_FORCE",
+                "value": "479",
+                "subproperties": null
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "5.38",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "70",
+                "subproperties": null
+            },
+            {
+                "property": "WEAPON_WEAKENING_COEFF",
+                "value": "56.90",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 17600,
+        "remainingTimeInSec": -1,
+        "modificationID": 1,
+        "object3ds": 369991
+    },
+    {
+        "id": "railgun_xt",
+        "name": "Canhão-elétrico",
+        "description": "Se armas de calibre médio não são suficientes para sua auto-expressão, esta arma é certa para você. Arma de grande calibre com enorme velocidade de boca e projéteis usando urânio empobrecido. Projéteis cinéticos extremamente poderosos e precisos podem atravessar o tanque do inimigo ou acerte vários alvos na linha de fogo com um único tiro. Uma escolha ideal para guerra de trincheiras de longo alcance e sniping. Lembre-se de que leva muito tempo para recarregar a arma e garantir que seus oponentes não tirem vantagem disso.",
+        "isInventory": false,
+        "index": 250,
+        "next_price": 199300,
+        "next_rank": 25,
+        "type": 1,
+        "baseItemId": 882260,
+        "previewResourceId": 762221,
+        "rank": 17,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_FROM",
+                        "value": "111",
+                        "subproperties": null
+                    },
+                    {
+                        "property": "DAMAGE_TO",
+                        "value": "168",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "IMPACT_FORCE",
+                "value": "589",
+                "subproperties": null
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "4.91",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "78.5",
+                "subproperties": null
+            },
+            {
+                "property": "WEAPON_WEAKENING_COEFF",
+                "value": "78.45",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 79200,
+        "remainingTimeInSec": -1,
+        "modificationID": 2,
+        "object3ds": 73853
+    },
+    {
+        "id": "railgun_xt",
+        "name": "Canhão-elétrico",
+        "description": "Se armas de calibre médio não são suficientes para sua auto-expressão, esta arma é certa para você. Arma de grande calibre com enorme velocidade de boca e projéteis usando urânio empobrecido. Projéteis cinéticos extremamente poderosos e precisos podem atravessar o tanque do inimigo ou acerte vários alvos na linha de fogo com um único tiro. Uma escolha ideal para guerra de trincheiras de longo alcance e sniping. Lembre-se de que leva muito tempo para recarregar a arma e garantir que seus oponentes não tirem vantagem disso.",
+        "isInventory": false,
+        "index": 250,
+        "next_price": 199300,
+        "next_rank": 25,
+        "type": 1,
+        "baseItemId": 882260,
+        "previewResourceId": 387779,
+        "rank": 25,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_FROM",
+                        "value": "133",
+                        "subproperties": null
+                    },
+                    {
+                        "property": "DAMAGE_TO",
+                        "value": "199",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "IMPACT_FORCE",
+                "value": "700",
+                "subproperties": null
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "4.44",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "97.4",
+                "subproperties": null
+            },
+            {
+                "property": "WEAPON_WEAKENING_COEFF",
+                "value": "100.00",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 199300,
+        "remainingTimeInSec": -1,
+        "modificationID": 3,
+        "object3ds": 839340
+    }
+]

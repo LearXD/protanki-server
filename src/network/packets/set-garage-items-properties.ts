@@ -2,52 +2,60 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-interface Property {
-    property: string;
-    value: string | null;
-    subproperties: Property[] | null;
+export interface IKitItem {
+    count: number
+    id: string
 }
 
-interface Discount {
-    percent: number;
-    timeLeftInSeconds: number;
-    timeToStartInSeconds: number;
+export interface IKit {
+    image: number
+    discountInPercent: number
+    kitItems: IKitItem[]
 }
 
-export interface Item {
-    id: string;
-    name: string;
-    description: string;
-    isInventory: boolean;
-    index: number;
-    next_price: number;
-    next_rank: number;
-    type: number;
-    baseItemId: number;
-    previewResourceId: number;
-    rank: number;
-    category: string;
-    properties: Property[];
-    discount: Discount;
-    grouped: boolean;
-    isForRent: boolean;
-    price: number;
-    remainingTimeInSec: number;
-    modificationID: number;
-    object3d: number
+export interface IDiscount {
+    percent: number
+    timeLeftInSeconds: number
+    timeToStartInSeconds: number
 }
 
-export interface ItemsProperties {
-    items: Item[];
-    delayMountArmorInSec: number,
-    delayMountWeaponInSec: number,
-    delayMountColorInSec: number
+export interface IProperty {
+    property: string
+    value: string
+    subproperties: IProperty[]
+}
+
+export interface IItem {
+    id: string
+    name: string
+    description: string
+    isInventory: boolean
+    index: number
+    next_price: number
+    next_rank: number
+    type: number
+    baseItemId: number
+    previewResourceId: number
+    rank: number
+    category: string
+    properts: IProperty
+    discount: IDiscount
+    grouped: boolean
+    isForRent: boolean
+    price: number
+    remainingTimeInSec: number
+    modificationID?: number
+    object3ds?: number
+    coloring?: number
+    kit?: IKit
 }
 
 export class SetGarageItemsPropertiesPacket extends Packet {
 
-    public items: ItemsProperties;
-    // public items: string;
+    public items: IItem[]
+    delayMountArmorInSec: number
+    delayMountWeaponInSec: number
+    delayMountColorInSec: number
 
     constructor(bytes: ByteArray) {
         super(Protocol.SET_GARAGE_ITEMS_PROPERTIES, bytes)
@@ -55,10 +63,15 @@ export class SetGarageItemsPropertiesPacket extends Packet {
 
     public decode() {
         const bytes = this.cloneBytes();
-        const items = bytes.readString();
+        const json = bytes.readString();
 
         try {
-            this.items = JSON.parse(items);
+            const parsed = JSON.parse(json);
+            this.items = parsed.items;
+
+            this.delayMountArmorInSec = parsed.delayMountArmorInSec;
+            this.delayMountWeaponInSec = parsed.delayMountWeaponInSec;
+            this.delayMountColorInSec = parsed.delayMountColorInSec;
         } catch (e) {
             console.error(e);
         }
@@ -71,11 +84,12 @@ export class SetGarageItemsPropertiesPacket extends Packet {
     public encode() {
         const bytes = new ByteArray();
 
-        try {
-            bytes.writeString(JSON.stringify(this.items));
-        } catch (e) {
-            console.error(e);
-        }
+        bytes.writeString(JSON.stringify({
+            items: this.items,
+            delayMountArmorInSec: this.delayMountArmorInSec,
+            delayMountWeaponInSec: this.delayMountWeaponInSec,
+            delayMountColorInSec: this.delayMountColorInSec
+        }));
 
         return bytes;
     }

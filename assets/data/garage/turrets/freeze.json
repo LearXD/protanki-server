@@ -1,0 +1,262 @@
+[
+    {
+        "id": "freeze",
+        "name": "Lança-gelo",
+        "description": "A ideia do sistema de armas Freeze nasceu em uma aldeia russa desolada. Usando uma velha geladeira quebrada «Sever» e um aspirador de pó «Buran», o inventor local fez o «atirador de gelo». Um engenheiro profissional que estava pescando perto da aldeia notou isso a invenção e a trouxe para o Instituto de Pesquisa Zhukov. Lá, o desajeitado \"atirador de gelo\" tornou-se a formidável arma de congelamento. Ela inunda o inimigo com a composição química baseada em freon. As vítimas sofrem danos e todos os seus movimentos e processos se tornam mais lentos. Embora um fluxo de fogo pode descongelar o alvo.",
+        "isInventory": false,
+        "index": 450,
+        "next_price": 28100,
+        "next_rank": 12,
+        "type": 1,
+        "baseItemId": 262762,
+        "previewResourceId": 262762,
+        "rank": 5,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "DAMAGE_PER_SECOND",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_PER_PERIOD",
+                        "value": "48",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "13.48",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "125.1",
+                "subproperties": null
+            },
+            {
+                "property": "SHOT_RANGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_MIN_DAMAGE_RADIUS",
+                        "value": "24.8",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1450,
+        "remainingTimeInSec": -1,
+        "modificationID": 0,
+        "object3ds": 791739
+    },
+    {
+        "id": "freeze",
+        "name": "Lança-gelo",
+        "description": "A ideia do sistema de armas Freeze nasceu em uma aldeia russa desolada. Usando uma velha geladeira quebrada «Sever» e um aspirador de pó «Buran», o inventor local fez o «atirador de gelo». Um engenheiro profissional que estava pescando perto da aldeia notou isso a invenção e a trouxe para o Instituto de Pesquisa Zhukov. Lá, o desajeitado \"atirador de gelo\" tornou-se a formidável arma de congelamento. Ela inunda o inimigo com a composição química baseada em freon. As vítimas sofrem danos e todos os seus movimentos e processos se tornam mais lentos. Embora um fluxo de fogo pode descongelar o alvo.",
+        "isInventory": false,
+        "index": 450,
+        "next_price": 97000,
+        "next_rank": 19,
+        "type": 1,
+        "baseItemId": 262762,
+        "previewResourceId": 581830,
+        "rank": 12,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "DAMAGE_PER_SECOND",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_PER_PERIOD",
+                        "value": "60",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "12.57",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "151.2",
+                "subproperties": null
+            },
+            {
+                "property": "SHOT_RANGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_MIN_DAMAGE_RADIUS",
+                        "value": "26.7",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 28100,
+        "remainingTimeInSec": -1,
+        "modificationID": 1,
+        "object3ds": 679592
+    },
+    {
+        "id": "freeze",
+        "name": "Lança-gelo",
+        "description": "A ideia do sistema de armas Freeze nasceu em uma aldeia russa desolada. Usando uma velha geladeira quebrada «Sever» e um aspirador de pó «Buran», o inventor local fez o «atirador de gelo». Um engenheiro profissional que estava pescando perto da aldeia notou isso a invenção e a trouxe para o Instituto de Pesquisa Zhukov. Lá, o desajeitado \"atirador de gelo\" tornou-se a formidável arma de congelamento. Ela inunda o inimigo com a composição química baseada em freon. As vítimas sofrem danos e todos os seus movimentos e processos se tornam mais lentos. Embora um fluxo de fogo pode descongelar o alvo.",
+        "isInventory": false,
+        "index": 450,
+        "next_price": 253300,
+        "next_rank": 27,
+        "type": 1,
+        "baseItemId": 262762,
+        "previewResourceId": 926940,
+        "rank": 19,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "DAMAGE_PER_SECOND",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_PER_PERIOD",
+                        "value": "72",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "11.65",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "177.3",
+                "subproperties": null
+            },
+            {
+                "property": "SHOT_RANGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_MIN_DAMAGE_RADIUS",
+                        "value": "28.6",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 97000,
+        "remainingTimeInSec": -1,
+        "modificationID": 2,
+        "object3ds": 115070
+    },
+    {
+        "id": "freeze",
+        "name": "Lança-gelo",
+        "description": "A ideia do sistema de armas Freeze nasceu em uma aldeia russa desolada. Usando uma velha geladeira quebrada «Sever» e um aspirador de pó «Buran», o inventor local fez o «atirador de gelo». Um engenheiro profissional que estava pescando perto da aldeia notou isso a invenção e a trouxe para o Instituto de Pesquisa Zhukov. Lá, o desajeitado \"atirador de gelo\" tornou-se a formidável arma de congelamento. Ela inunda o inimigo com a composição química baseada em freon. As vítimas sofrem danos e todos os seus movimentos e processos se tornam mais lentos. Embora um fluxo de fogo pode descongelar o alvo.",
+        "isInventory": false,
+        "index": 450,
+        "next_price": 253300,
+        "next_rank": 27,
+        "type": 1,
+        "baseItemId": 262762,
+        "previewResourceId": 918917,
+        "rank": 27,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "DAMAGE_PER_SECOND",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_PER_PERIOD",
+                        "value": "80",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "11.00",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "196",
+                "subproperties": null
+            },
+            {
+                "property": "SHOT_RANGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_MIN_DAMAGE_RADIUS",
+                        "value": "30",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 253300,
+        "remainingTimeInSec": -1,
+        "modificationID": 3,
+        "object3ds": 388185
+    }
+]

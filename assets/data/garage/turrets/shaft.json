@@ -1,0 +1,302 @@
+[
+    {
+        "id": "shaft",
+        "name": "Shaft",
+        "description": "A arma Shaft foi projetada por cientistas que deram suas enormes possibilidades. Ela pode fazer café, entregar pizzas, pagar contas, mas sua principal característica é o modo sniper, que permite que você fique um passo à frente de seus oponentes. Tenha uma oportunidade única para lutar a longas e curtas distâncias, pois você pode disparar do Shaft sem usar sua mira de atirador.",
+        "isInventory": false,
+        "index": 600,
+        "next_price": 38600,
+        "next_rank": 14,
+        "type": 1,
+        "baseItemId": 507813,
+        "previewResourceId": 507813,
+        "rank": 7,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "AIMING_MODE_DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "SHAFT_AIMING_MODE_MAX_DAMAGE",
+                        "value": "187",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_FROM",
+                        "value": "55",
+                        "subproperties": null
+                    },
+                    {
+                        "property": "DAMAGE_TO",
+                        "value": "68",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "IMPACT_FORCE",
+                "value": "199",
+                "subproperties": null
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "3.59",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "75",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1900,
+        "remainingTimeInSec": -1,
+        "modificationID": 0,
+        "object3ds": 740019
+    },
+    {
+        "id": "shaft",
+        "name": "Shaft",
+        "description": "A arma Shaft foi projetada por cientistas que deram suas enormes possibilidades. Ela pode fazer café, entregar pizzas, pagar contas, mas sua principal característica é o modo sniper, que permite que você fique um passo à frente de seus oponentes. Tenha uma oportunidade única para lutar a longas e curtas distâncias, pois você pode disparar do Shaft sem usar sua mira de atirador.",
+        "isInventory": false,
+        "index": 600,
+        "next_price": 114800,
+        "next_rank": 21,
+        "type": 1,
+        "baseItemId": 507813,
+        "previewResourceId": 581114,
+        "rank": 14,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "AIMING_MODE_DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "SHAFT_AIMING_MODE_MAX_DAMAGE",
+                        "value": "235",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_FROM",
+                        "value": "69",
+                        "subproperties": null
+                    },
+                    {
+                        "property": "DAMAGE_TO",
+                        "value": "83",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "IMPACT_FORCE",
+                "value": "253",
+                "subproperties": null
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "3.35",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "91.1",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 38600,
+        "remainingTimeInSec": -1,
+        "modificationID": 1,
+        "object3ds": 431730
+    },
+    {
+        "id": "shaft",
+        "name": "Shaft",
+        "description": "A arma Shaft foi projetada por cientistas que deram suas enormes possibilidades. Ela pode fazer café, entregar pizzas, pagar contas, mas sua principal característica é o modo sniper, que permite que você fique um passo à frente de seus oponentes. Tenha uma oportunidade única para lutar a longas e curtas distâncias, pois você pode disparar do Shaft sem usar sua mira de atirador.",
+        "isInventory": false,
+        "index": 600,
+        "next_price": 275000,
+        "next_rank": 29,
+        "type": 1,
+        "baseItemId": 507813,
+        "previewResourceId": 810956,
+        "rank": 21,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "AIMING_MODE_DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "SHAFT_AIMING_MODE_MAX_DAMAGE",
+                        "value": "282",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_FROM",
+                        "value": "84",
+                        "subproperties": null
+                    },
+                    {
+                        "property": "DAMAGE_TO",
+                        "value": "99",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "IMPACT_FORCE",
+                "value": "307",
+                "subproperties": null
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "3.10",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "107.2",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 114800,
+        "remainingTimeInSec": -1,
+        "modificationID": 2,
+        "object3ds": 65798
+    },
+    {
+        "id": "shaft",
+        "name": "Shaft",
+        "description": "A arma Shaft foi projetada por cientistas que deram suas enormes possibilidades. Ela pode fazer café, entregar pizzas, pagar contas, mas sua principal característica é o modo sniper, que permite que você fique um passo à frente de seus oponentes. Tenha uma oportunidade única para lutar a longas e curtas distâncias, pois você pode disparar do Shaft sem usar sua mira de atirador.",
+        "isInventory": false,
+        "index": 600,
+        "next_price": 275000,
+        "next_rank": 29,
+        "type": 1,
+        "baseItemId": 507813,
+        "previewResourceId": 772221,
+        "rank": 29,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "AIMING_MODE_DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "SHAFT_AIMING_MODE_MAX_DAMAGE",
+                        "value": "302",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_FROM",
+                        "value": "90",
+                        "subproperties": null
+                    },
+                    {
+                        "property": "DAMAGE_TO",
+                        "value": "106",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "IMPACT_FORCE",
+                "value": "330",
+                "subproperties": null
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "3.00",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "114.1",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 275000,
+        "remainingTimeInSec": -1,
+        "modificationID": 3,
+        "object3ds": 933781
+    }
+]

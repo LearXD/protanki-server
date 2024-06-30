@@ -1,0 +1,234 @@
+[
+    {
+        "id": "hunter",
+        "name": "Caçador",
+        "description": "Caçador é a carroceria mais versátil do jogo. Graças ao equilíbrio entre placas de armadura de aço reforçadas e baixo consumo de energia, esta armadura é para todos os fins. É boa para todos, de velocistas a atiradores. Sendo tão versátil, você nunca fique sem emprego em um campo de guerra.",
+        "isInventory": false,
+        "index": 800,
+        "next_price": 3200,
+        "next_rank": 8,
+        "type": 2,
+        "baseItemId": 826132,
+        "previewResourceId": 826132,
+        "rank": 1,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "144",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "8.00",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "75.8",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "1965",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "9.6",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 0,
+        "remainingTimeInSec": -1,
+        "modificationID": 0,
+        "object3ds": 227169
+    },
+    {
+        "id": "hunter",
+        "name": "Caçador",
+        "description": "Caçador é a carroceria mais versátil do jogo. Graças ao equilíbrio entre placas de armadura de aço reforçadas e baixo consumo de energia, esta armadura é para todos os fins. É boa para todos, de velocistas a atiradores. Sendo tão versátil, você nunca fique sem emprego em um campo de guerra.",
+        "isInventory": false,
+        "index": 800,
+        "next_price": 54400,
+        "next_rank": 15,
+        "type": 2,
+        "baseItemId": 826132,
+        "previewResourceId": 289133,
+        "rank": 8,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "187",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "8.60",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "95.3",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "2280",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "11",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 3200,
+        "remainingTimeInSec": -1,
+        "modificationID": 1,
+        "object3ds": 377977
+    },
+    {
+        "id": "hunter",
+        "name": "Caçador",
+        "description": "Caçador é a carroceria mais versátil do jogo. Graças ao equilíbrio entre placas de armadura de aço reforçadas e baixo consumo de energia, esta armadura é para todos os fins. É boa para todos, de velocistas a atiradores. Sendo tão versátil, você nunca fique sem emprego em um campo de guerra.",
+        "isInventory": false,
+        "index": 800,
+        "next_price": 158300,
+        "next_rank": 23,
+        "type": 2,
+        "baseItemId": 826132,
+        "previewResourceId": 271579,
+        "rank": 15,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "230",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "9.20",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "114.9",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "2595",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "12.3",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 54400,
+        "remainingTimeInSec": -1,
+        "modificationID": 2,
+        "object3ds": 271004
+    },
+    {
+        "id": "hunter",
+        "name": "Caçador",
+        "description": "Caçador é a carroceria mais versátil do jogo. Graças ao equilíbrio entre placas de armadura de aço reforçadas e baixo consumo de energia, esta armadura é para todos os fins. É boa para todos, de velocistas a atiradores. Sendo tão versátil, você nunca fique sem emprego em um campo de guerra.",
+        "isInventory": false,
+        "index": 800,
+        "next_price": 158300,
+        "next_rank": 23,
+        "type": 2,
+        "baseItemId": 826132,
+        "previewResourceId": 630759,
+        "rank": 23,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "285",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "10.00",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "140",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "3000",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "14",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 158300,
+        "remainingTimeInSec": -1,
+        "modificationID": 3,
+        "object3ds": 257012
+    }
+]

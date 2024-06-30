@@ -14,7 +14,13 @@ export class TipsManager {
     constructor(
         private readonly server: Server
     ) {
-        this.resources = (this.server.getAssetsManager().getResource('tips.json')).resources
+        this.init();
+    }
+
+    public init() {
+        this.resources = this.server
+            .getAssetsManager()
+            .getResource('tips.json')
     }
 
     public getResources() {

@@ -1,10 +1,11 @@
+import { CaptchaLocation } from "../../utils/game/captcha-location";
 import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
 export class SetCaptchaResponsePacket extends Packet {
 
-    public type: number;
+    public type: string;
     public response: string
 
     constructor(bytes: ByteArray) {
@@ -14,7 +15,7 @@ export class SetCaptchaResponsePacket extends Packet {
     public decode() {
         const bytes = this.cloneBytes();
 
-        this.type = bytes.readInt();
+        this.type = CaptchaLocation.ALL[bytes.readInt()];
         this.response = bytes.readString();
 
         return {
@@ -26,7 +27,7 @@ export class SetCaptchaResponsePacket extends Packet {
     public encode() {
         const bytes = new ByteArray();
 
-        bytes.writeInt(this.type);
+        bytes.writeInt(CaptchaLocation.ALL.indexOf(this.type));
         bytes.writeString(this.response);
 
         return bytes;

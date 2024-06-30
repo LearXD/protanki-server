@@ -1,0 +1,5882 @@
+[
+    {
+        "id": "inventory_100",
+        "name": "«Suprimentos 100»",
+        "description": "",
+        "isInventory": true,
+        "index": 10500,
+        "next_price": 0,
+        "next_rank": 6,
+        "type": 6,
+        "baseItemId": 417664,
+        "previewResourceId": 417664,
+        "rank": 6,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 17500,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 800215,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 100,
+                    "id": "health_m0"
+                },
+                {
+                    "count": 100,
+                    "id": "armor_m0"
+                },
+                {
+                    "count": 100,
+                    "id": "double_damage_m0"
+                },
+                {
+                    "count": 100,
+                    "id": "n2o_m0"
+                },
+                {
+                    "count": 100,
+                    "id": "mine_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "inventory_200",
+        "name": "«Suprimentos 200»",
+        "description": "",
+        "isInventory": true,
+        "index": 10550,
+        "next_price": 0,
+        "next_rank": 7,
+        "type": 6,
+        "baseItemId": 390894,
+        "previewResourceId": 390894,
+        "rank": 7,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 35000,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 617155,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 200,
+                    "id": "health_m0"
+                },
+                {
+                    "count": 200,
+                    "id": "armor_m0"
+                },
+                {
+                    "count": 200,
+                    "id": "double_damage_m0"
+                },
+                {
+                    "count": 200,
+                    "id": "n2o_m0"
+                },
+                {
+                    "count": 200,
+                    "id": "mine_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "inventory_300",
+        "name": "«Suprimentos 300»",
+        "description": "",
+        "isInventory": true,
+        "index": 10600,
+        "next_price": 0,
+        "next_rank": 8,
+        "type": 6,
+        "baseItemId": 922189,
+        "previewResourceId": 922189,
+        "rank": 8,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 52500,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 348039,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 300,
+                    "id": "health_m0"
+                },
+                {
+                    "count": 300,
+                    "id": "armor_m0"
+                },
+                {
+                    "count": 300,
+                    "id": "double_damage_m0"
+                },
+                {
+                    "count": 300,
+                    "id": "n2o_m0"
+                },
+                {
+                    "count": 300,
+                    "id": "mine_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "inventory_400",
+        "name": "«Suprimentos 400»",
+        "description": "",
+        "isInventory": true,
+        "index": 10650,
+        "next_price": 0,
+        "next_rank": 10,
+        "type": 6,
+        "baseItemId": 783992,
+        "previewResourceId": 783992,
+        "rank": 10,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 63000,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 662139,
+            "discountInPercent": 55,
+            "kitItems": [
+                {
+                    "count": 400,
+                    "id": "health_m0"
+                },
+                {
+                    "count": 400,
+                    "id": "armor_m0"
+                },
+                {
+                    "count": 400,
+                    "id": "double_damage_m0"
+                },
+                {
+                    "count": 400,
+                    "id": "n2o_m0"
+                },
+                {
+                    "count": 400,
+                    "id": "mine_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "inventory_500",
+        "name": "«Suprimentos 500»",
+        "description": "",
+        "isInventory": true,
+        "index": 10700,
+        "next_price": 0,
+        "next_rank": 12,
+        "type": 6,
+        "baseItemId": 922542,
+        "previewResourceId": 922542,
+        "rank": 12,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 78750,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 227538,
+            "discountInPercent": 55,
+            "kitItems": [
+                {
+                    "count": 500,
+                    "id": "health_m0"
+                },
+                {
+                    "count": 500,
+                    "id": "armor_m0"
+                },
+                {
+                    "count": 500,
+                    "id": "double_damage_m0"
+                },
+                {
+                    "count": 500,
+                    "id": "n2o_m0"
+                },
+                {
+                    "count": 500,
+                    "id": "mine_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "inventory_600",
+        "name": "«Suprimentos 600»",
+        "description": "",
+        "isInventory": true,
+        "index": 10750,
+        "next_price": 0,
+        "next_rank": 14,
+        "type": 6,
+        "baseItemId": 892482,
+        "previewResourceId": 892482,
+        "rank": 14,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 84000,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 389934,
+            "discountInPercent": 60,
+            "kitItems": [
+                {
+                    "count": 600,
+                    "id": "health_m0"
+                },
+                {
+                    "count": 600,
+                    "id": "armor_m0"
+                },
+                {
+                    "count": 600,
+                    "id": "double_damage_m0"
+                },
+                {
+                    "count": 600,
+                    "id": "n2o_m0"
+                },
+                {
+                    "count": 600,
+                    "id": "mine_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "inventory_700",
+        "name": "«Suprimentos 700»",
+        "description": "",
+        "isInventory": true,
+        "index": 10800,
+        "next_price": 0,
+        "next_rank": 16,
+        "type": 6,
+        "baseItemId": 184586,
+        "previewResourceId": 184586,
+        "rank": 16,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 98000,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 387176,
+            "discountInPercent": 60,
+            "kitItems": [
+                {
+                    "count": 700,
+                    "id": "health_m0"
+                },
+                {
+                    "count": 700,
+                    "id": "armor_m0"
+                },
+                {
+                    "count": 700,
+                    "id": "double_damage_m0"
+                },
+                {
+                    "count": 700,
+                    "id": "n2o_m0"
+                },
+                {
+                    "count": 700,
+                    "id": "mine_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "inventory_800",
+        "name": "«Suprimentos 800»",
+        "description": "",
+        "isInventory": true,
+        "index": 10850,
+        "next_price": 0,
+        "next_rank": 18,
+        "type": 6,
+        "baseItemId": 419174,
+        "previewResourceId": 419174,
+        "rank": 18,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 98000,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 239194,
+            "discountInPercent": 65,
+            "kitItems": [
+                {
+                    "count": 800,
+                    "id": "health_m0"
+                },
+                {
+                    "count": 800,
+                    "id": "armor_m0"
+                },
+                {
+                    "count": 800,
+                    "id": "double_damage_m0"
+                },
+                {
+                    "count": 800,
+                    "id": "n2o_m0"
+                },
+                {
+                    "count": 800,
+                    "id": "mine_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "inventory_900",
+        "name": "«Suprimentos 900»",
+        "description": "",
+        "isInventory": true,
+        "index": 10900,
+        "next_price": 0,
+        "next_rank": 20,
+        "type": 6,
+        "baseItemId": 252605,
+        "previewResourceId": 252605,
+        "rank": 20,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 110250,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 864803,
+            "discountInPercent": 65,
+            "kitItems": [
+                {
+                    "count": 900,
+                    "id": "health_m0"
+                },
+                {
+                    "count": 900,
+                    "id": "armor_m0"
+                },
+                {
+                    "count": 900,
+                    "id": "double_damage_m0"
+                },
+                {
+                    "count": 900,
+                    "id": "n2o_m0"
+                },
+                {
+                    "count": 900,
+                    "id": "mine_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "inventory_1000",
+        "name": "«Suprimentos 1000»",
+        "description": "",
+        "isInventory": true,
+        "index": 10950,
+        "next_price": 0,
+        "next_rank": 22,
+        "type": 6,
+        "baseItemId": 752370,
+        "previewResourceId": 752370,
+        "rank": 22,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 105000,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 397117,
+            "discountInPercent": 70,
+            "kitItems": [
+                {
+                    "count": 1000,
+                    "id": "health_m0"
+                },
+                {
+                    "count": 1000,
+                    "id": "armor_m0"
+                },
+                {
+                    "count": 1000,
+                    "id": "double_damage_m0"
+                },
+                {
+                    "count": 1000,
+                    "id": "n2o_m0"
+                },
+                {
+                    "count": 1000,
+                    "id": "mine_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "inventory_1100",
+        "name": "«Suprimentos 1100»",
+        "description": "",
+        "isInventory": true,
+        "index": 11000,
+        "next_price": 0,
+        "next_rank": 24,
+        "type": 6,
+        "baseItemId": 188269,
+        "previewResourceId": 188269,
+        "rank": 24,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 115500,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 910731,
+            "discountInPercent": 70,
+            "kitItems": [
+                {
+                    "count": 1100,
+                    "id": "health_m0"
+                },
+                {
+                    "count": 1100,
+                    "id": "armor_m0"
+                },
+                {
+                    "count": 1100,
+                    "id": "double_damage_m0"
+                },
+                {
+                    "count": 1100,
+                    "id": "n2o_m0"
+                },
+                {
+                    "count": 1100,
+                    "id": "mine_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "inventory_1200",
+        "name": "«Suprimentos 1200»",
+        "description": "",
+        "isInventory": true,
+        "index": 11050,
+        "next_price": 0,
+        "next_rank": 26,
+        "type": 6,
+        "baseItemId": 566195,
+        "previewResourceId": 566195,
+        "rank": 26,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 105000,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 100096,
+            "discountInPercent": 75,
+            "kitItems": [
+                {
+                    "count": 1200,
+                    "id": "health_m0"
+                },
+                {
+                    "count": 1200,
+                    "id": "armor_m0"
+                },
+                {
+                    "count": 1200,
+                    "id": "double_damage_m0"
+                },
+                {
+                    "count": 1200,
+                    "id": "n2o_m0"
+                },
+                {
+                    "count": 1200,
+                    "id": "mine_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "inventory_1300",
+        "name": "«Suprimentos 1300»",
+        "description": "",
+        "isInventory": true,
+        "index": 11100,
+        "next_price": 0,
+        "next_rank": 28,
+        "type": 6,
+        "baseItemId": 355510,
+        "previewResourceId": 355510,
+        "rank": 28,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 113750,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 674687,
+            "discountInPercent": 75,
+            "kitItems": [
+                {
+                    "count": 1300,
+                    "id": "health_m0"
+                },
+                {
+                    "count": 1300,
+                    "id": "armor_m0"
+                },
+                {
+                    "count": 1300,
+                    "id": "double_damage_m0"
+                },
+                {
+                    "count": 1300,
+                    "id": "n2o_m0"
+                },
+                {
+                    "count": 1300,
+                    "id": "mine_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "inventory_1500",
+        "name": "«Suprimentos 1500»",
+        "description": "",
+        "isInventory": true,
+        "index": 11150,
+        "next_price": 0,
+        "next_rank": 30,
+        "type": 6,
+        "baseItemId": 30158,
+        "previewResourceId": 30158,
+        "rank": 30,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 105000,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 727483,
+            "discountInPercent": 80,
+            "kitItems": [
+                {
+                    "count": 1500,
+                    "id": "health_m0"
+                },
+                {
+                    "count": 1500,
+                    "id": "armor_m0"
+                },
+                {
+                    "count": 1500,
+                    "id": "double_damage_m0"
+                },
+                {
+                    "count": 1500,
+                    "id": "n2o_m0"
+                },
+                {
+                    "count": 1500,
+                    "id": "mine_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "saboteur",
+        "name": "«Sabotador»",
+        "description": "",
+        "isInventory": true,
+        "index": 11200,
+        "next_price": 0,
+        "next_rank": 2,
+        "type": 6,
+        "baseItemId": 607771,
+        "previewResourceId": 607771,
+        "rank": 2,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 425,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 665987,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "wasp_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "flamethrower_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "flora_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "stormtrooper",
+        "name": "«Stormtrooper»",
+        "description": "",
+        "isInventory": true,
+        "index": 11250,
+        "next_price": 0,
+        "next_rank": 2,
+        "type": 6,
+        "baseItemId": 985260,
+        "previewResourceId": 985260,
+        "rank": 2,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 575,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 208023,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hornet_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "flamethrower_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "marine_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "brick",
+        "name": "«Tijolo»",
+        "description": "",
+        "isInventory": true,
+        "index": 11300,
+        "next_price": 0,
+        "next_rank": 2,
+        "type": 6,
+        "baseItemId": 437288,
+        "previewResourceId": 437288,
+        "rank": 2,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 775,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 555871,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "titan_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "twins_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "swamp_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "almighty",
+        "name": "«Poderoso»",
+        "description": "",
+        "isInventory": true,
+        "index": 11350,
+        "next_price": 0,
+        "next_rank": 2,
+        "type": 6,
+        "baseItemId": 291770,
+        "previewResourceId": 291770,
+        "rank": 2,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 945,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 641622,
+            "discountInPercent": 55,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "dictator_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "twins_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "magma_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "cadet",
+        "name": "«Cadete»",
+        "description": "",
+        "isInventory": true,
+        "index": 11400,
+        "next_price": 0,
+        "next_rank": 2,
+        "type": 6,
+        "baseItemId": 326095,
+        "previewResourceId": 326095,
+        "rank": 2,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1325,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 617677,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hornet_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "railgun_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "forester_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "decree",
+        "name": "«Decreto»",
+        "description": "",
+        "isInventory": true,
+        "index": 11450,
+        "next_price": 0,
+        "next_rank": 2,
+        "type": 6,
+        "baseItemId": 29164,
+        "previewResourceId": 29164,
+        "rank": 2,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 850,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 634,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "dictator_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "railgun_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "flora_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "universal_soldier",
+        "name": "«Soldado Universal»",
+        "description": "",
+        "isInventory": true,
+        "index": 11500,
+        "next_price": 0,
+        "next_rank": 2,
+        "type": 6,
+        "baseItemId": 836341,
+        "previewResourceId": 836341,
+        "rank": 2,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1325,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 465714,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hornet_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "shotgun_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "magma_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "nidavellir",
+        "name": "«Niðavellir»",
+        "description": "",
+        "isInventory": true,
+        "index": 11550,
+        "next_price": 0,
+        "next_rank": 2,
+        "type": 6,
+        "baseItemId": 365453,
+        "previewResourceId": 365453,
+        "rank": 2,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1280,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 660123,
+            "discountInPercent": 60,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "titan_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "shotgun_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "metallic_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "zenyatta",
+        "name": "«Zenyatta»",
+        "description": "",
+        "isInventory": true,
+        "index": 11600,
+        "next_price": 0,
+        "next_rank": 2,
+        "type": 6,
+        "baseItemId": 690369,
+        "previewResourceId": 690369,
+        "rank": 2,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1530,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 870461,
+            "discountInPercent": 55,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "dictator_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "isida_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "safari_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "military_doctor",
+        "name": "«Médico militar»",
+        "description": "",
+        "isInventory": true,
+        "index": 11650,
+        "next_price": 0,
+        "next_rank": 2,
+        "type": 6,
+        "baseItemId": 339033,
+        "previewResourceId": 339033,
+        "rank": 2,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1125,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 301526,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hornet_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "isida_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "marine_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "geyser",
+        "name": "«Geyser»",
+        "description": "",
+        "isInventory": true,
+        "index": 11700,
+        "next_price": 0,
+        "next_rank": 2,
+        "type": 6,
+        "baseItemId": 897186,
+        "previewResourceId": 897186,
+        "rank": 2,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1275,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 713226,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "dictator_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "machinegun_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "swamp_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "yin_yang",
+        "name": "«Yin yang»",
+        "description": "",
+        "isInventory": true,
+        "index": 11750,
+        "next_price": 0,
+        "next_rank": 2,
+        "type": 6,
+        "baseItemId": 458866,
+        "previewResourceId": 458866,
+        "rank": 2,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1620,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 212942,
+            "discountInPercent": 60,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hornet_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "freeze_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "lava_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "krakatau",
+        "name": "«Krakatoa»",
+        "description": "",
+        "isInventory": true,
+        "index": 11800,
+        "next_price": 0,
+        "next_rank": 3,
+        "type": 6,
+        "baseItemId": 882814,
+        "previewResourceId": 882814,
+        "rank": 3,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1440,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 47742,
+            "discountInPercent": 60,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "mammoth_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "machinegun_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "invader_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "varan",
+        "name": "«Varan»",
+        "description": "",
+        "isInventory": true,
+        "index": 11850,
+        "next_price": 0,
+        "next_rank": 3,
+        "type": 6,
+        "baseItemId": 360591,
+        "previewResourceId": 360591,
+        "rank": 3,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1820,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 420434,
+            "discountInPercent": 60,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "mammoth_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "thunder_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "dragon_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "visitor",
+        "name": "«Alienígena»",
+        "description": "",
+        "isInventory": true,
+        "index": 11900,
+        "next_price": 0,
+        "next_rank": 3,
+        "type": 6,
+        "baseItemId": 35179,
+        "previewResourceId": 35179,
+        "rank": 3,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1732,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 890583,
+            "discountInPercent": 55,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "dictator_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "ricochet_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "invader_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "bomber",
+        "name": "«Bombista»",
+        "description": "",
+        "isInventory": true,
+        "index": 11950,
+        "next_price": 0,
+        "next_rank": 4,
+        "type": 6,
+        "baseItemId": 71573,
+        "previewResourceId": 71573,
+        "rank": 4,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1700,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 458537,
+            "discountInPercent": 60,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "viking_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "thunder_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "metallic_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "berserk",
+        "name": "«Berserk»",
+        "description": "",
+        "isInventory": true,
+        "index": 12000,
+        "next_price": 0,
+        "next_rank": 4,
+        "type": 6,
+        "baseItemId": 207518,
+        "previewResourceId": 207518,
+        "rank": 4,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1755,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 614127,
+            "discountInPercent": 55,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "viking_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "freeze_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "safari_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "commando",
+        "name": "«Comando»",
+        "description": "",
+        "isInventory": true,
+        "index": 12050,
+        "next_price": 0,
+        "next_rank": 4,
+        "type": 6,
+        "baseItemId": 620162,
+        "previewResourceId": 620162,
+        "rank": 4,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1960,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 357931,
+            "discountInPercent": 60,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "viking_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "ricochet_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "dragon_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "invisible",
+        "name": "«Invisível»",
+        "description": "",
+        "isInventory": true,
+        "index": 12100,
+        "next_price": 0,
+        "next_rank": 4,
+        "type": 6,
+        "baseItemId": 499713,
+        "previewResourceId": 499713,
+        "rank": 4,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1875,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 289779,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hornet_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "shaft_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "forester_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "bunker",
+        "name": "«Bunker»",
+        "description": "",
+        "isInventory": true,
+        "index": 12150,
+        "next_price": 0,
+        "next_rank": 4,
+        "type": 6,
+        "baseItemId": 304476,
+        "previewResourceId": 304476,
+        "rank": 4,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 2200,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 546461,
+            "discountInPercent": 60,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "mammoth_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "shaft_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "lead_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "supplier",
+        "name": "«O fornecedor»",
+        "description": "",
+        "isInventory": true,
+        "index": 12200,
+        "next_price": 0,
+        "next_rank": 4,
+        "type": 6,
+        "baseItemId": 392652,
+        "previewResourceId": 392652,
+        "rank": 4,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 4440,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 120574,
+            "discountInPercent": 60,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "flamethrower_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "twins_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "railgun_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "shotgun_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "isida_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "machinegun_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "thunder_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "freeze_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "ricochet_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "shaft_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "collector",
+        "name": "«Colecionador»",
+        "description": "",
+        "isInventory": true,
+        "index": 12250,
+        "next_price": 0,
+        "next_rank": 4,
+        "type": 6,
+        "baseItemId": 76601,
+        "previewResourceId": 76601,
+        "rank": 4,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1350,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 390004,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "wasp_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "titan_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "dictator_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "hornet_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "mammoth_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "viking_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "full",
+        "name": "«Full»",
+        "description": "",
+        "isInventory": true,
+        "index": 12300,
+        "next_price": 0,
+        "next_rank": 4,
+        "type": 6,
+        "baseItemId": 700174,
+        "previewResourceId": 700174,
+        "rank": 4,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 4830,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 957718,
+            "discountInPercent": 65,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "flamethrower_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "twins_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "railgun_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "shotgun_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "isida_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "machinegun_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "thunder_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "freeze_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "ricochet_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "shaft_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "wasp_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "titan_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "dictator_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "hornet_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "mammoth_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "viking_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "siberian",
+        "name": "«Siberiano»",
+        "description": "",
+        "isInventory": true,
+        "index": 12350,
+        "next_price": 0,
+        "next_rank": 5,
+        "type": 6,
+        "baseItemId": 846169,
+        "previewResourceId": 846169,
+        "rank": 5,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 3375,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 660670,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hunter_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "freeze_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "lava_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "pirate",
+        "name": "«Pirata»",
+        "description": "",
+        "isInventory": true,
+        "index": 12400,
+        "next_price": 0,
+        "next_rank": 6,
+        "type": 6,
+        "baseItemId": 482389,
+        "previewResourceId": 482389,
+        "rank": 6,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 14025,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 817162,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hunter_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "twins_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "roger_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "firefly",
+        "name": "«Vaga-Lume»",
+        "description": "",
+        "isInventory": true,
+        "index": 12450,
+        "next_price": 0,
+        "next_rank": 6,
+        "type": 6,
+        "baseItemId": 743352,
+        "previewResourceId": 743352,
+        "rank": 6,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 10625,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 890775,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "wasp_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "flamethrower_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "carbon_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "savage",
+        "name": "«Selvagem»",
+        "description": "",
+        "isInventory": true,
+        "index": 12500,
+        "next_price": 0,
+        "next_rank": 6,
+        "type": 6,
+        "baseItemId": 431685,
+        "previewResourceId": 431685,
+        "rank": 6,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 8050,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 66990,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "wasp_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "smoky_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "magma_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "lizard",
+        "name": "«Lagarto»",
+        "description": "",
+        "isInventory": true,
+        "index": 12550,
+        "next_price": 0,
+        "next_rank": 7,
+        "type": 6,
+        "baseItemId": 587952,
+        "previewResourceId": 587952,
+        "rank": 7,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 7335,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 243557,
+            "discountInPercent": 55,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "titan_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "ricochet_m0"
+                },
+                {
+                    "count": 1,
+                    "id": "dragon_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "keeper",
+        "name": "«Guardador»",
+        "description": "",
+        "isInventory": true,
+        "index": 12600,
+        "next_price": 0,
+        "next_rank": 7,
+        "type": 6,
+        "baseItemId": 482387,
+        "previewResourceId": 482387,
+        "rank": 7,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 18850,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 817161,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "titan_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "smoky_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "chainmail_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "tsunami",
+        "name": "«Tsunami»",
+        "description": "",
+        "isInventory": true,
+        "index": 12650,
+        "next_price": 0,
+        "next_rank": 7,
+        "type": 6,
+        "baseItemId": 482390,
+        "previewResourceId": 482390,
+        "rank": 7,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 24390,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 817163,
+            "discountInPercent": 55,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "titan_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "shotgun_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "swash_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "mjolnir",
+        "name": "«Mjollnir»",
+        "description": "",
+        "isInventory": true,
+        "index": 12700,
+        "next_price": 0,
+        "next_rank": 7,
+        "type": 6,
+        "baseItemId": 482391,
+        "previewResourceId": 482391,
+        "rank": 7,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 12285,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 817164,
+            "discountInPercent": 55,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hunter_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "shotgun_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "storm_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "vampire",
+        "name": "«Vampiro»",
+        "description": "",
+        "isInventory": true,
+        "index": 12750,
+        "next_price": 0,
+        "next_rank": 8,
+        "type": 6,
+        "baseItemId": 348673,
+        "previewResourceId": 348673,
+        "rank": 8,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 18500,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 89108,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "wasp_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "isida_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "mary_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "hero",
+        "name": "«Herói»",
+        "description": "",
+        "isInventory": true,
+        "index": 12800,
+        "next_price": 0,
+        "next_rank": 8,
+        "type": 6,
+        "baseItemId": 486103,
+        "previewResourceId": 486103,
+        "rank": 8,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 35557,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 384066,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "dictator_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "railgun_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "pixel_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "anvil",
+        "name": "«Bigorna»",
+        "description": "",
+        "isInventory": true,
+        "index": 12850,
+        "next_price": 0,
+        "next_rank": 8,
+        "type": 6,
+        "baseItemId": 909820,
+        "previewResourceId": 909820,
+        "rank": 8,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 25657,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 758840,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "dictator_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "shotgun_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "vortex_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "reaper",
+        "name": "«Reaper»",
+        "description": "",
+        "isInventory": true,
+        "index": 12900,
+        "next_price": 0,
+        "next_rank": 8,
+        "type": 6,
+        "baseItemId": 483584,
+        "previewResourceId": 483584,
+        "rank": 8,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 35997,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 222070,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "titan_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "machinegun_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "guerrilla_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "exterminator",
+        "name": "«Exterminador»",
+        "description": "",
+        "isInventory": true,
+        "index": 12950,
+        "next_price": 0,
+        "next_rank": 8,
+        "type": 6,
+        "baseItemId": 699460,
+        "previewResourceId": 699460,
+        "rank": 8,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 31845,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 640939,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "dictator_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "machinegun_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "corrosion_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "bulldog",
+        "name": "«Bulldog»",
+        "description": "",
+        "isInventory": true,
+        "index": 13000,
+        "next_price": 0,
+        "next_rank": 9,
+        "type": 6,
+        "baseItemId": 482393,
+        "previewResourceId": 482393,
+        "rank": 9,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 34705,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 817166,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hornet_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "shotgun_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "alien_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "gunslinger",
+        "name": "«Pistoleiro»",
+        "description": "",
+        "isInventory": true,
+        "index": 13050,
+        "next_price": 0,
+        "next_rank": 9,
+        "type": 6,
+        "baseItemId": 149964,
+        "previewResourceId": 149964,
+        "rank": 9,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 37550,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 239833,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hornet_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "railgun_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "desert_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "blizzard",
+        "name": "«Nevasca»",
+        "description": "",
+        "isInventory": true,
+        "index": 13100,
+        "next_price": 0,
+        "next_rank": 9,
+        "type": 6,
+        "baseItemId": 494235,
+        "previewResourceId": 494235,
+        "rank": 9,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 30580,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 527428,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hornet_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "freeze_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "storm_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "buffalo",
+        "name": "«Búfalo»",
+        "description": "",
+        "isInventory": true,
+        "index": 13150,
+        "next_price": 0,
+        "next_rank": 10,
+        "type": 6,
+        "baseItemId": 702421,
+        "previewResourceId": 702421,
+        "rank": 10,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 40040,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 759852,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "mammoth_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "isida_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "alien_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "die_hard",
+        "name": "«Die Hard»",
+        "description": "",
+        "isInventory": true,
+        "index": 13200,
+        "next_price": 0,
+        "next_rank": 10,
+        "type": 6,
+        "baseItemId": 482392,
+        "previewResourceId": 482392,
+        "rank": 10,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 49115,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 817165,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "mammoth_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "ricochet_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "cedar_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "matrix",
+        "name": "«Matriz»",
+        "description": "",
+        "isInventory": true,
+        "index": 13250,
+        "next_price": 0,
+        "next_rank": 11,
+        "type": 6,
+        "baseItemId": 482394,
+        "previewResourceId": 482394,
+        "rank": 11,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 53100,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 817167,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "viking_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "thunder_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "pixel_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "cupid",
+        "name": "«Cupido»",
+        "description": "",
+        "isInventory": true,
+        "index": 13300,
+        "next_price": 0,
+        "next_rank": 11,
+        "type": 6,
+        "baseItemId": 254380,
+        "previewResourceId": 254380,
+        "rank": 11,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 53100,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 852231,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "viking_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "freeze_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "in_love_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "knight",
+        "name": "«Cavaleiro»",
+        "description": "",
+        "isInventory": true,
+        "index": 13350,
+        "next_price": 0,
+        "next_rank": 11,
+        "type": 6,
+        "baseItemId": 482395,
+        "previewResourceId": 482395,
+        "rank": 11,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 49050,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 817168,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "viking_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "ricochet_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "chainmail_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "piranha",
+        "name": "«Piranha»",
+        "description": "",
+        "isInventory": true,
+        "index": 13400,
+        "next_price": 0,
+        "next_rank": 11,
+        "type": 6,
+        "baseItemId": 533887,
+        "previewResourceId": 533887,
+        "rank": 11,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 42955,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 965911,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hornet_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "shaft_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "corrosion_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "striker",
+        "name": "«Grevista»",
+        "description": "",
+        "isInventory": true,
+        "index": 13450,
+        "next_price": 0,
+        "next_rank": 13,
+        "type": 6,
+        "baseItemId": 677607,
+        "previewResourceId": 677607,
+        "rank": 13,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 63690,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 478398,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "viking_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "smoky_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "swash_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "hooligan",
+        "name": "«Hooligan»",
+        "description": "",
+        "isInventory": true,
+        "index": 13500,
+        "next_price": 0,
+        "next_rank": 13,
+        "type": 6,
+        "baseItemId": 703411,
+        "previewResourceId": 703411,
+        "rank": 13,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 79500,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 248829,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hornet_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "smoky_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "hohloma_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "fujiyama",
+        "name": "«Fujiyama»",
+        "description": "",
+        "isInventory": true,
+        "index": 13550,
+        "next_price": 0,
+        "next_rank": 13,
+        "type": 6,
+        "baseItemId": 631691,
+        "previewResourceId": 631691,
+        "rank": 13,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 57487,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 656433,
+            "discountInPercent": 55,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hunter_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "machinegun_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "sakura_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "predator",
+        "name": "«Predador»",
+        "description": "",
+        "isInventory": true,
+        "index": 13600,
+        "next_price": 0,
+        "next_rank": 13,
+        "type": 6,
+        "baseItemId": 841306,
+        "previewResourceId": 841306,
+        "rank": 13,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 45450,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 480054,
+            "discountInPercent": 55,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hunter_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "thunder_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "corrosion_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "firewall",
+        "name": "«GuardaFogo»",
+        "description": "",
+        "isInventory": true,
+        "index": 13650,
+        "next_price": 0,
+        "next_rank": 13,
+        "type": 6,
+        "baseItemId": 525234,
+        "previewResourceId": 525234,
+        "rank": 13,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 115440,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 643659,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hunter_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "flamethrower_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "hohloma_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "aborigine",
+        "name": "«Aborígine»",
+        "description": "",
+        "isInventory": true,
+        "index": 13700,
+        "next_price": 0,
+        "next_rank": 13,
+        "type": 6,
+        "baseItemId": 511823,
+        "previewResourceId": 511823,
+        "rank": 13,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 94980,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 687486,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hunter_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "smoky_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "jaguar_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "corsair",
+        "name": "«Corsário»",
+        "description": "",
+        "isInventory": true,
+        "index": 13750,
+        "next_price": 0,
+        "next_rank": 14,
+        "type": 6,
+        "baseItemId": 195900,
+        "previewResourceId": 195900,
+        "rank": 14,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 98220,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 475042,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "viking_m1"
+                },
+                {
+                    "count": 1,
+                    "id": "twins_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "urban_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "firebolt",
+        "name": "«Relâmpago»",
+        "description": "",
+        "isInventory": true,
+        "index": 13800,
+        "next_price": 0,
+        "next_rank": 14,
+        "type": 6,
+        "baseItemId": 765374,
+        "previewResourceId": 765374,
+        "rank": 14,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 124767,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 360111,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "wasp_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "flamethrower_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "rustle_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "mosquito",
+        "name": "«Mosquito»",
+        "description": "",
+        "isInventory": true,
+        "index": 13850,
+        "next_price": 0,
+        "next_rank": 15,
+        "type": 6,
+        "baseItemId": 333579,
+        "previewResourceId": 333579,
+        "rank": 15,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 115290,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 652351,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "wasp_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "railgun_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "savanna_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "pitbull",
+        "name": "«Pitbull»",
+        "description": "",
+        "isInventory": true,
+        "index": 13900,
+        "next_price": 0,
+        "next_rank": 15,
+        "type": 6,
+        "baseItemId": 482396,
+        "previewResourceId": 482396,
+        "rank": 15,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 126120,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 817169,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hunter_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "shotgun_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "atom_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "atlas",
+        "name": "«Atlas»",
+        "description": "",
+        "isInventory": true,
+        "index": 13950,
+        "next_price": 0,
+        "next_rank": 15,
+        "type": 6,
+        "baseItemId": 428601,
+        "previewResourceId": 428601,
+        "rank": 15,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 109440,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 416096,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "titan_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "smoky_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "loam_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "ram",
+        "name": "«Carneiro»",
+        "description": "",
+        "isInventory": true,
+        "index": 14000,
+        "next_price": 0,
+        "next_rank": 15,
+        "type": 6,
+        "baseItemId": 671068,
+        "previewResourceId": 671068,
+        "rank": 15,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 138480,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 846623,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "titan_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "twins_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "rhino_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "osaka",
+        "name": "«Osaka»",
+        "description": "",
+        "isInventory": true,
+        "index": 14050,
+        "next_price": 0,
+        "next_rank": 16,
+        "type": 6,
+        "baseItemId": 962041,
+        "previewResourceId": 962041,
+        "rank": 16,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 106150,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 531101,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hunter_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "isida_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "sakura_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "voltage",
+        "name": "«Voltagem»",
+        "description": "",
+        "isInventory": true,
+        "index": 14100,
+        "next_price": 0,
+        "next_rank": 16,
+        "type": 6,
+        "baseItemId": 803390,
+        "previewResourceId": 803390,
+        "rank": 16,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 136262,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 401654,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "dictator_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "railgun_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "electra_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "jam",
+        "name": "«Jam»",
+        "description": "",
+        "isInventory": true,
+        "index": 14150,
+        "next_price": 0,
+        "next_rank": 16,
+        "type": 6,
+        "baseItemId": 141147,
+        "previewResourceId": 141147,
+        "rank": 16,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 151110,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 275793,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "dictator_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "twins_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "cherry_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "anaconda",
+        "name": "«Anaconda»",
+        "description": "",
+        "isInventory": true,
+        "index": 14200,
+        "next_price": 0,
+        "next_rank": 16,
+        "type": 6,
+        "baseItemId": 548068,
+        "previewResourceId": 548068,
+        "rank": 16,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 161790,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 352509,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "dictator_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "machinegun_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "python_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "stinger",
+        "name": "«Ferrão»",
+        "description": "",
+        "isInventory": true,
+        "index": 14250,
+        "next_price": 0,
+        "next_rank": 17,
+        "type": 6,
+        "baseItemId": 310874,
+        "previewResourceId": 310874,
+        "rank": 17,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 150780,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 133241,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hornet_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "isida_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "digital_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "tornado",
+        "name": "«Tornado»",
+        "description": "",
+        "isInventory": true,
+        "index": 14300,
+        "next_price": 0,
+        "next_rank": 17,
+        "type": 6,
+        "baseItemId": 33331,
+        "previewResourceId": 33331,
+        "rank": 17,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 169080,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 34073,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hornet_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "railgun_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "spark_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "firework",
+        "name": "«Fogos de artifício»",
+        "description": "",
+        "isInventory": true,
+        "index": 14350,
+        "next_price": 0,
+        "next_rank": 17,
+        "type": 6,
+        "baseItemId": 482398,
+        "previewResourceId": 482398,
+        "rank": 17,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 154990,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 817171,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hornet_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "shotgun_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "spark_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "simoom",
+        "name": "«Furacão»",
+        "description": "",
+        "isInventory": true,
+        "index": 14400,
+        "next_price": 0,
+        "next_rank": 17,
+        "type": 6,
+        "baseItemId": 353894,
+        "previewResourceId": 353894,
+        "rank": 17,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 160352,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 686233,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "dictator_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "thunder_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "sandstone_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "guard",
+        "name": "«Guarda»",
+        "description": "",
+        "isInventory": true,
+        "index": 14450,
+        "next_price": 0,
+        "next_rank": 17,
+        "type": 6,
+        "baseItemId": 175184,
+        "previewResourceId": 175184,
+        "rank": 17,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 138600,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 353567,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "titan_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "thunder_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "urban_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "avalanche",
+        "name": "«Avalanche»",
+        "description": "",
+        "isInventory": true,
+        "index": 14500,
+        "next_price": 0,
+        "next_rank": 17,
+        "type": 6,
+        "baseItemId": 977110,
+        "previewResourceId": 977110,
+        "rank": 17,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 171930,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 195617,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hornet_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "freeze_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "winter_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "boar",
+        "name": "«Javali»",
+        "description": "",
+        "isInventory": true,
+        "index": 14550,
+        "next_price": 0,
+        "next_rank": 18,
+        "type": 6,
+        "baseItemId": 855481,
+        "previewResourceId": 855481,
+        "rank": 18,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 180270,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 395966,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "dictator_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "ricochet_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "spark_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "fortress",
+        "name": "«Fortaleza»",
+        "description": "",
+        "isInventory": true,
+        "index": 14600,
+        "next_price": 0,
+        "next_rank": 18,
+        "type": 6,
+        "baseItemId": 19784,
+        "previewResourceId": 19784,
+        "rank": 18,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 176790,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 811482,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "mammoth_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "thunder_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "rustle_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "goalkeeper",
+        "name": "«Guarda-redes»",
+        "description": "",
+        "isInventory": true,
+        "index": 14650,
+        "next_price": 0,
+        "next_rank": 18,
+        "type": 6,
+        "baseItemId": 482399,
+        "previewResourceId": 482399,
+        "rank": 18,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 150630,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 817172,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "mammoth_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "ricochet_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "savanna_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "terminator",
+        "name": "«Terminator»",
+        "description": "",
+        "isInventory": true,
+        "index": 14700,
+        "next_price": 0,
+        "next_rank": 18,
+        "type": 6,
+        "baseItemId": 89851,
+        "previewResourceId": 89851,
+        "rank": 18,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 171450,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 111909,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "mammoth_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "machinegun_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "blacksmith_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "vesuvius",
+        "name": "«Vesúvio»",
+        "description": "",
+        "isInventory": true,
+        "index": 14750,
+        "next_price": 0,
+        "next_rank": 19,
+        "type": 6,
+        "baseItemId": 34479,
+        "previewResourceId": 34479,
+        "rank": 19,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 176280,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 302884,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "viking_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "machinegun_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "cherry_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "annihilator",
+        "name": "«Aniquilador»",
+        "description": "",
+        "isInventory": true,
+        "index": 14800,
+        "next_price": 0,
+        "next_rank": 19,
+        "type": 6,
+        "baseItemId": 758173,
+        "previewResourceId": 758173,
+        "rank": 19,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 165780,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 268558,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "viking_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "thunder_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "atom_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "cyclops",
+        "name": "«Ciclope»",
+        "description": "",
+        "isInventory": true,
+        "index": 14850,
+        "next_price": 0,
+        "next_rank": 19,
+        "type": 6,
+        "baseItemId": 807884,
+        "previewResourceId": 807884,
+        "rank": 19,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 187470,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 208105,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "mammoth_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "shaft_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "blacksmith_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "dj",
+        "name": "«Dj»",
+        "description": "",
+        "isInventory": true,
+        "index": 14900,
+        "next_price": 0,
+        "next_rank": 19,
+        "type": 6,
+        "baseItemId": 482400,
+        "previewResourceId": 482400,
+        "rank": 19,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 173820,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 817173,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "viking_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "freeze_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "electra_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "ice",
+        "name": "«Gelo»",
+        "description": "",
+        "isInventory": true,
+        "index": 14950,
+        "next_price": 0,
+        "next_rank": 19,
+        "type": 6,
+        "baseItemId": 482401,
+        "previewResourceId": 482401,
+        "rank": 19,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 170995,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 817174,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "viking_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "shotgun_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "winter_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "juggler",
+        "name": "«Malabarista»",
+        "description": "",
+        "isInventory": true,
+        "index": 15000,
+        "next_price": 0,
+        "next_rank": 21,
+        "type": 6,
+        "baseItemId": 524803,
+        "previewResourceId": 524803,
+        "rank": 21,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 222100,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 187107,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hunter_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "ricochet_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "needle_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "chiropractor",
+        "name": "«Quiroprata»",
+        "description": "",
+        "isInventory": true,
+        "index": 15050,
+        "next_price": 0,
+        "next_rank": 21,
+        "type": 6,
+        "baseItemId": 521658,
+        "previewResourceId": 521658,
+        "rank": 21,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 214005,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 20255,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hunter_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "shaft_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "sandstone_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "northerner",
+        "name": "«Nortenho»",
+        "description": "",
+        "isInventory": true,
+        "index": 15100,
+        "next_price": 0,
+        "next_rank": 21,
+        "type": 6,
+        "baseItemId": 739955,
+        "previewResourceId": 739955,
+        "rank": 21,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 331240,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 15895,
+            "discountInPercent": 35,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "viking_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "smoky_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "clay_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "turtle",
+        "name": "«Neve»",
+        "description": "",
+        "isInventory": true,
+        "index": 15150,
+        "next_price": 0,
+        "next_rank": 21,
+        "type": 6,
+        "baseItemId": 672648,
+        "previewResourceId": 672648,
+        "rank": 21,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 303120,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 654396,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hunter_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "smoky_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "needle_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "prometheus",
+        "name": "«Prometheus»",
+        "description": "",
+        "isInventory": true,
+        "index": 15200,
+        "next_price": 0,
+        "next_rank": 21,
+        "type": 6,
+        "baseItemId": 288940,
+        "previewResourceId": 288940,
+        "rank": 21,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 309600,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 288506,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hunter_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "flamethrower_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "zeus_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "minotaur",
+        "name": "«Minotauro»",
+        "description": "",
+        "isInventory": true,
+        "index": 15250,
+        "next_price": 0,
+        "next_rank": 22,
+        "type": 6,
+        "baseItemId": 969240,
+        "previewResourceId": 969240,
+        "rank": 22,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 209660,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 489242,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "viking_m2"
+                },
+                {
+                    "count": 1,
+                    "id": "twins_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "rhino_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "ghost",
+        "name": "«Fantasma»",
+        "description": "",
+        "isInventory": true,
+        "index": 15300,
+        "next_price": 0,
+        "next_rank": 22,
+        "type": 6,
+        "baseItemId": 390649,
+        "previewResourceId": 390649,
+        "rank": 22,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 347700,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 126433,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "wasp_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "smoky_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "nano_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "vandal",
+        "name": "«Vândalo»",
+        "description": "",
+        "isInventory": true,
+        "index": 15350,
+        "next_price": 0,
+        "next_rank": 22,
+        "type": 6,
+        "baseItemId": 393067,
+        "previewResourceId": 393067,
+        "rank": 22,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 337680,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 997998,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hunter_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "twins_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "graffiti_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "pyromancer",
+        "name": "«Pyromancer»",
+        "description": "",
+        "isInventory": true,
+        "index": 15400,
+        "next_price": 0,
+        "next_rank": 23,
+        "type": 6,
+        "baseItemId": 482402,
+        "previewResourceId": 482402,
+        "rank": 23,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 355620,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 817175,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "titan_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "flamethrower_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "inferno_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "cardinal",
+        "name": "«Cardeal»",
+        "description": "",
+        "isInventory": true,
+        "index": 15450,
+        "next_price": 0,
+        "next_rank": 23,
+        "type": 6,
+        "baseItemId": 426788,
+        "previewResourceId": 426788,
+        "rank": 23,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 375300,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 673110,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "titan_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "twins_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "picasso_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "guardian",
+        "name": "«Guardião»",
+        "description": "",
+        "isInventory": true,
+        "index": 15500,
+        "next_price": 0,
+        "next_rank": 23,
+        "type": 6,
+        "baseItemId": 583689,
+        "previewResourceId": 583689,
+        "rank": 23,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 356340,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 150010,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "titan_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "smoky_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "nano_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "touche",
+        "name": "«Touché»",
+        "description": "",
+        "isInventory": true,
+        "index": 15550,
+        "next_price": 0,
+        "next_rank": 23,
+        "type": 6,
+        "baseItemId": 297237,
+        "previewResourceId": 297237,
+        "rank": 23,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 374335,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 650392,
+            "discountInPercent": 35,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "wasp_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "railgun_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "prodigi_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "nomad",
+        "name": "«Nômade»",
+        "description": "",
+        "isInventory": true,
+        "index": 15600,
+        "next_price": 0,
+        "next_rank": 23,
+        "type": 6,
+        "baseItemId": 95492,
+        "previewResourceId": 95492,
+        "rank": 23,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 388440,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 634104,
+            "discountInPercent": 35,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hunter_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "railgun_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "raccoon_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "ant",
+        "name": "«Formiga»",
+        "description": "",
+        "isInventory": true,
+        "index": 15650,
+        "next_price": 0,
+        "next_rank": 24,
+        "type": 6,
+        "baseItemId": 131017,
+        "previewResourceId": 131017,
+        "rank": 24,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 365760,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 542199,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "wasp_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "isida_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "irbis_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "academician",
+        "name": "«Acadêmico»",
+        "description": "",
+        "isInventory": true,
+        "index": 15700,
+        "next_price": 0,
+        "next_rank": 24,
+        "type": 6,
+        "baseItemId": 511824,
+        "previewResourceId": 511824,
+        "rank": 24,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 390780,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 687487,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "dictator_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "shotgun_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "nano_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "thunderer",
+        "name": "«Thunderer»",
+        "description": "",
+        "isInventory": true,
+        "index": 15750,
+        "next_price": 0,
+        "next_rank": 24,
+        "type": 6,
+        "baseItemId": 327750,
+        "previewResourceId": 327750,
+        "rank": 24,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 367800,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 66059,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "dictator_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "machinegun_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "zeus_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "huntsman",
+        "name": "«Penhasco»",
+        "description": "",
+        "isInventory": true,
+        "index": 15800,
+        "next_price": 0,
+        "next_rank": 25,
+        "type": 6,
+        "baseItemId": 884861,
+        "previewResourceId": 884861,
+        "rank": 25,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 315920,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 408662,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hornet_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "smoky_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "rock_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "giraffe",
+        "name": "«Girafa»",
+        "description": "",
+        "isInventory": true,
+        "index": 15850,
+        "next_price": 0,
+        "next_rank": 25,
+        "type": 6,
+        "baseItemId": 320464,
+        "previewResourceId": 320464,
+        "rank": 25,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 416220,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 882589,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "dictator_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "thunder_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "africa_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "man_o_war",
+        "name": "«Guerreiro»",
+        "description": "",
+        "isInventory": true,
+        "index": 15900,
+        "next_price": 0,
+        "next_rank": 25,
+        "type": 6,
+        "baseItemId": 855523,
+        "previewResourceId": 855523,
+        "rank": 25,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 397200,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 796471,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hornet_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "thunder_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "mars_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "bumblebee",
+        "name": "«Bumblebee»",
+        "description": "",
+        "isInventory": true,
+        "index": 15950,
+        "next_price": 0,
+        "next_rank": 25,
+        "type": 6,
+        "baseItemId": 460432,
+        "previewResourceId": 460432,
+        "rank": 25,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 339680,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 627108,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hornet_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "shotgun_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "hive_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "legend",
+        "name": "«Lenda»",
+        "description": "",
+        "isInventory": true,
+        "index": 16000,
+        "next_price": 0,
+        "next_rank": 25,
+        "type": 6,
+        "baseItemId": 396547,
+        "previewResourceId": 396547,
+        "rank": 25,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 402220,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 100527,
+            "discountInPercent": 35,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hornet_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "railgun_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "prodigi_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "healer",
+        "name": "«Curandeiro»",
+        "description": "",
+        "isInventory": true,
+        "index": 16050,
+        "next_price": 0,
+        "next_rank": 25,
+        "type": 6,
+        "baseItemId": 834458,
+        "previewResourceId": 834458,
+        "rank": 25,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 391500,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 499689,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hornet_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "isida_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "irbis_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "boreas",
+        "name": "«Boreas»",
+        "description": "",
+        "isInventory": true,
+        "index": 16100,
+        "next_price": 0,
+        "next_rank": 25,
+        "type": 6,
+        "baseItemId": 900943,
+        "previewResourceId": 900943,
+        "rank": 25,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 399540,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 528275,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "wasp_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "freeze_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "taiga_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "bulldozer",
+        "name": "«Escavadeira»",
+        "description": "",
+        "isInventory": true,
+        "index": 16150,
+        "next_price": 0,
+        "next_rank": 26,
+        "type": 6,
+        "baseItemId": 658830,
+        "previewResourceId": 658830,
+        "rank": 26,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 350200,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 891798,
+            "discountInPercent": 50,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "mammoth_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "thunder_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "emerald_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "redneck",
+        "name": "«Camponês»",
+        "description": "",
+        "isInventory": true,
+        "index": 16200,
+        "next_price": 0,
+        "next_rank": 26,
+        "type": 6,
+        "baseItemId": 234018,
+        "previewResourceId": 234018,
+        "rank": 26,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 403500,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 322006,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hunter_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "ricochet_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "lumberjack_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "maestro",
+        "name": "«Maestro»",
+        "description": "",
+        "isInventory": true,
+        "index": 16250,
+        "next_price": 0,
+        "next_rank": 26,
+        "type": 6,
+        "baseItemId": 135239,
+        "previewResourceId": 135239,
+        "rank": 26,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 429240,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 254796,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "dictator_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "ricochet_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "picasso_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "giant",
+        "name": "«Gigante»",
+        "description": "",
+        "isInventory": true,
+        "index": 16300,
+        "next_price": 0,
+        "next_rank": 26,
+        "type": 6,
+        "baseItemId": 749551,
+        "previewResourceId": 749551,
+        "rank": 26,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 461565,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 136056,
+            "discountInPercent": 35,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "mammoth_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "ricochet_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "graffiti_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "rock_climber",
+        "name": "«Alpinista»",
+        "description": "",
+        "isInventory": true,
+        "index": 16350,
+        "next_price": 0,
+        "next_rank": 26,
+        "type": 6,
+        "baseItemId": 405746,
+        "previewResourceId": 405746,
+        "rank": 26,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 385920,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 171873,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "titan_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "ricochet_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "rock_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "eyjafjallajokull",
+        "name": "«Eyjafjallajökull»",
+        "description": "",
+        "isInventory": true,
+        "index": 16400,
+        "next_price": 0,
+        "next_rank": 26,
+        "type": 6,
+        "baseItemId": 363634,
+        "previewResourceId": 363634,
+        "rank": 26,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 427020,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 502893,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "mammoth_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "machinegun_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "africa_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "destroyer",
+        "name": "«Destruidor»",
+        "description": "",
+        "isInventory": true,
+        "index": 16450,
+        "next_price": 0,
+        "next_rank": 26,
+        "type": 6,
+        "baseItemId": 490205,
+        "previewResourceId": 490205,
+        "rank": 26,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 401040,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 215066,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "mammoth_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "twins_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "lumberjack_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "centaur",
+        "name": "«Centauro»",
+        "description": "",
+        "isInventory": true,
+        "index": 16500,
+        "next_price": 0,
+        "next_rank": 27,
+        "type": 6,
+        "baseItemId": 660966,
+        "previewResourceId": 660966,
+        "rank": 27,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 381975,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 842400,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "hornet_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "shaft_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "mars_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "jackhammer",
+        "name": "«Martelo de demolição»",
+        "description": "",
+        "isInventory": true,
+        "index": 16550,
+        "next_price": 0,
+        "next_rank": 27,
+        "type": 6,
+        "baseItemId": 482403,
+        "previewResourceId": 482403,
+        "rank": 27,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 422580,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 817176,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "viking_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "shotgun_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "tiger_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "stonecutter",
+        "name": "«Pedreiro»",
+        "description": "",
+        "isInventory": true,
+        "index": 16600,
+        "next_price": 0,
+        "next_rank": 27,
+        "type": 6,
+        "baseItemId": 482404,
+        "previewResourceId": 482404,
+        "rank": 27,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 416100,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 817177,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "viking_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "railgun_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "jade_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "sniper",
+        "name": "«Sniper»",
+        "description": "",
+        "isInventory": true,
+        "index": 16650,
+        "next_price": 0,
+        "next_rank": 27,
+        "type": 6,
+        "baseItemId": 289461,
+        "previewResourceId": 289461,
+        "rank": 27,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 493480,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 915892,
+            "discountInPercent": 35,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "viking_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "shaft_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "clay_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "fridge",
+        "name": "«Geladeira»",
+        "description": "",
+        "isInventory": true,
+        "index": 16700,
+        "next_price": 0,
+        "next_rank": 27,
+        "type": 6,
+        "baseItemId": 231086,
+        "previewResourceId": 231086,
+        "rank": 27,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 413700,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 544173,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "viking_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "freeze_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "hive_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "medic",
+        "name": "«Paramédico»",
+        "description": "",
+        "isInventory": true,
+        "index": 16750,
+        "next_price": 0,
+        "next_rank": 27,
+        "type": 6,
+        "baseItemId": 84693,
+        "previewResourceId": 84693,
+        "rank": 27,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 429120,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 138495,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "viking_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "isida_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "picasso_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "raiden",
+        "name": "«Raiden»",
+        "description": "",
+        "isInventory": true,
+        "index": 16800,
+        "next_price": 0,
+        "next_rank": 27,
+        "type": 6,
+        "baseItemId": 714942,
+        "previewResourceId": 714942,
+        "rank": 27,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 428820,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 802465,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "viking_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "thunder_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "emerald_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "paladin",
+        "name": "«Paladino»",
+        "description": "",
+        "isInventory": true,
+        "index": 16850,
+        "next_price": 0,
+        "next_rank": 27,
+        "type": 6,
+        "baseItemId": 25966,
+        "previewResourceId": 25966,
+        "rank": 27,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 351505,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 114450,
+            "discountInPercent": 45,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "viking_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "smoky_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "inferno_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    },
+    {
+        "id": "master_of_the_taiga",
+        "name": "«Milícia»",
+        "description": "",
+        "isInventory": true,
+        "index": 16900,
+        "next_price": 0,
+        "next_rank": 27,
+        "type": 6,
+        "baseItemId": 80128,
+        "previewResourceId": 80128,
+        "rank": 27,
+        "category": "kit",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 403620,
+        "remainingTimeInSec": -1,
+        "kit": {
+            "image": 156904,
+            "discountInPercent": 40,
+            "kitItems": [
+                {
+                    "count": 1,
+                    "id": "viking_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "twins_m3"
+                },
+                {
+                    "count": 1,
+                    "id": "taiga_m0"
+                }
+            ],
+            "isTimeless": true,
+            "timeLeftInSeconds": 0
+        }
+    }
+]

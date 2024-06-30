@@ -12,6 +12,15 @@ export class UserDataManager {
         private readonly server: Server
     ) { }
 
+    public handleAuthenticated(client: Client) {
+        this.sendPremiumData(client);
+
+        this.server.getLocaleManager()
+            .sendLocaleConfig(client)
+
+        this.sendUserProperty(client);
+    }
+
     public getUserData(client: Client): UserData {
         const user = UserData.findByUsername(client.getUsername());
         if (!user) {
@@ -20,13 +29,8 @@ export class UserDataManager {
         return user;
     }
 
-    public getPremiumData(client: Client) {
-        return this.getUserData(client)
-            .getPremiumData();
-    }
-
     public sendPremiumLeftTime(client: Client) {
-        const data = this.getPremiumData(client);
+        const data = this.getUserData(client).getPremiumData();
 
         const setPremiumLeftTimePacket = new SetPremiumLeftTimePacket(new ByteArray());
         setPremiumLeftTimePacket.leftTimeInSeconds = data.leftTime;
@@ -35,7 +39,7 @@ export class UserDataManager {
     }
 
     public sendPremiumData(client: Client) {
-        const data = this.getPremiumData(client);
+        const data = this.getUserData(client).getPremiumData();
 
         const setPremiumDataPacket = new SetPremiumDataPacket(new ByteArray())
         setPremiumDataPacket.needShowNotificationCompletionPremium = data.showReminder
@@ -59,8 +63,8 @@ export class UserDataManager {
 
         setUserPropertyPacket.crystals = data.getCrystals();
         setUserPropertyPacket.currentRankScore = 1000;
-        setUserPropertyPacket.durationCrystalAbonement = data.getGarage().durationCrystalAbonement;
-        setUserPropertyPacket.hasDoubleCrystal = data.getGarage().hasDoubleCrystal;
+        setUserPropertyPacket.durationCrystalAbonement = data.getData().durationCrystalAbonement;
+        setUserPropertyPacket.hasDoubleCrystal = data.getData().hasDoubleCrystal;
         setUserPropertyPacket.nextRankScore = 100000
         setUserPropertyPacket.place = data.getRating().place;
         setUserPropertyPacket.rank = data.getRank().rank;
@@ -71,12 +75,5 @@ export class UserDataManager {
         setUserPropertyPacket.userProfileUrl = 'http://ratings.generaltanks.com/pt_br/user/';
 
         client.sendPacket(setUserPropertyPacket);
-    }
-
-    public handleAuthenticated(client: Client) {
-        this.sendPremiumData(client);
-        this.server.getLocaleManager()
-            .sendLocaleConfig(client)
-        this.sendUserProperty(client);
     }
 }

@@ -29,6 +29,7 @@ import { SetViewingBattlePacket } from "../../network/packets/set-viewing-battle
 import { Battle } from "../battle";
 import { SendOpenGaragePacket } from "../../network/packets/send-open-garage";
 import { SendOpenBattlesListPacket } from "../../network/packets/send-open-battles-list";
+import { SendEquipItemPacket } from "../../network/packets/send-equip-item";
 
 const IGNORE_PACKETS = [
     1484572481, // Pong
@@ -247,7 +248,12 @@ export class Client {
             this.getServer()
                 .getBattlesManager()
                 .handleOpenBattlesList(this);
+        }
 
+        if (packet instanceof SendEquipItemPacket) {
+            this.getServer()
+                .getGarageManager()
+                .handleEquipItem(this, packet.item);
         }
 
     }

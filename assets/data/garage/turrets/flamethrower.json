@@ -1,0 +1,306 @@
+[
+    {
+        "id": "flamethrower",
+        "name": "Lança-chamas",
+        "description": "Quando as batalhas acontecem de perto, não há arma melhor do que um pássaro de fogo. Esta é uma arma de aniquilação em massa que pode e vai derreter qualquer tanque e sua tripulação em pouco tempo. É altamente eficaz em espaços confinados contra movimentos lentos Firebird é relativamente lento quando se trata de recarregar, mas você também pode atirar com uma arma parcialmente recarregada.",
+        "isInventory": false,
+        "index": 150,
+        "next_price": 7100,
+        "next_rank": 8,
+        "type": 1,
+        "baseItemId": 43761,
+        "previewResourceId": 43761,
+        "rank": 1,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "DAMAGE_PER_SECOND",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_PER_PERIOD",
+                        "value": "41",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "12.00",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "95.3",
+                "subproperties": null
+            },
+            {
+                "property": "SHOT_RANGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_MIN_DAMAGE_RADIUS",
+                        "value": "23.7",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "FIRE_DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "FLAME_TEMPERATURE_LIMIT",
+                        "value": "9.4",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 150,
+        "remainingTimeInSec": -1,
+        "modificationID": 0,
+        "object3ds": 521900
+    },
+    {
+        "id": "flamethrower",
+        "name": "Lança-chamas",
+        "description": "Quando as batalhas acontecem de perto, não há arma melhor do que um pássaro de fogo. Esta é uma arma de aniquilação em massa que pode e vai derreter qualquer tanque e sua tripulação em pouco tempo. É altamente eficaz em espaços confinados contra movimentos lentos Firebird é relativamente lento quando se trata de recarregar, mas você também pode atirar com uma arma parcialmente recarregada.",
+        "isInventory": false,
+        "index": 150,
+        "next_price": 61400,
+        "next_rank": 15,
+        "type": 1,
+        "baseItemId": 43761,
+        "previewResourceId": 608063,
+        "rank": 8,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "DAMAGE_PER_SECOND",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_PER_PERIOD",
+                        "value": "50",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "11.39",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "116.9",
+                "subproperties": null
+            },
+            {
+                "property": "SHOT_RANGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_MIN_DAMAGE_RADIUS",
+                        "value": "25.6",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "FIRE_DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "FLAME_TEMPERATURE_LIMIT",
+                        "value": "15.9",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 7100,
+        "remainingTimeInSec": -1,
+        "modificationID": 1,
+        "object3ds": 18283
+    },
+    {
+        "id": "flamethrower",
+        "name": "Lança-chamas",
+        "description": "Quando as batalhas acontecem de perto, não há arma melhor do que um pássaro de fogo. Esta é uma arma de aniquilação em massa que pode e vai derreter qualquer tanque e sua tripulação em pouco tempo. É altamente eficaz em espaços confinados contra movimentos lentos Firebird é relativamente lento quando se trata de recarregar, mas você também pode atirar com uma arma parcialmente recarregada.",
+        "isInventory": false,
+        "index": 150,
+        "next_price": 177700,
+        "next_rank": 23,
+        "type": 1,
+        "baseItemId": 43761,
+        "previewResourceId": 508353,
+        "rank": 15,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "DAMAGE_PER_SECOND",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_PER_PERIOD",
+                        "value": "60",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "10.78",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "138.4",
+                "subproperties": null
+            },
+            {
+                "property": "SHOT_RANGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_MIN_DAMAGE_RADIUS",
+                        "value": "27.5",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "FIRE_DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "FLAME_TEMPERATURE_LIMIT",
+                        "value": "22.8",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 61400,
+        "remainingTimeInSec": -1,
+        "modificationID": 2,
+        "object3ds": 456708
+    },
+    {
+        "id": "flamethrower",
+        "name": "Lança-chamas",
+        "description": "Quando as batalhas acontecem de perto, não há arma melhor do que um pássaro de fogo. Esta é uma arma de aniquilação em massa que pode e vai derreter qualquer tanque e sua tripulação em pouco tempo. É altamente eficaz em espaços confinados contra movimentos lentos Firebird é relativamente lento quando se trata de recarregar, mas você também pode atirar com uma arma parcialmente recarregada.",
+        "isInventory": false,
+        "index": 150,
+        "next_price": 177700,
+        "next_rank": 23,
+        "type": 1,
+        "baseItemId": 43761,
+        "previewResourceId": 553103,
+        "rank": 23,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "DAMAGE_PER_SECOND",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_PER_PERIOD",
+                        "value": "72",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "10.00",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "166.2",
+                "subproperties": null
+            },
+            {
+                "property": "SHOT_RANGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_MIN_DAMAGE_RADIUS",
+                        "value": "30",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "FIRE_DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "FLAME_TEMPERATURE_LIMIT",
+                        "value": "31.2",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 177700,
+        "remainingTimeInSec": -1,
+        "modificationID": 3,
+        "object3ds": 758687
+    }
+]

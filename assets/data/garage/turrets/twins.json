@@ -1,0 +1,278 @@
+[
+    {
+        "id": "twins",
+        "name": "Gêmeos",
+        "description": "Esta arma de plasma de dois canos de disparo rápido derreterá o inimigo em segundos. Levando em conta o fato de que, ao atingir outros tanques com Twins, você derruba a mira, a arma é ideal quando se trata de tiroteio dinâmico a distâncias médias.",
+        "isInventory": false,
+        "index": 200,
+        "next_price": 12350,
+        "next_rank": 9,
+        "type": 1,
+        "baseItemId": 103660,
+        "previewResourceId": 103660,
+        "rank": 2,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_FROM",
+                        "value": "8.8",
+                        "subproperties": null
+                    },
+                    {
+                        "property": "DAMAGE_TO",
+                        "value": "10.5",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "IMPACT_FORCE",
+                "value": "97",
+                "subproperties": null
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "89.6",
+                "subproperties": null
+            },
+            {
+                "property": "SHOT_RANGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_MIN_DAMAGE_RADIUS",
+                        "value": "60.7",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "WEAPON_MIN_DAMAGE_PERCENT",
+                "value": "5.8",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 350,
+        "remainingTimeInSec": -1,
+        "modificationID": 0,
+        "object3ds": 495014
+    },
+    {
+        "id": "twins",
+        "name": "Gêmeos",
+        "description": "Esta arma de plasma de dois canos de disparo rápido derreterá o inimigo em segundos. Levando em conta o fato de que, ao atingir outros tanques com Twins, você derruba a mira, a arma é ideal quando se trata de tiroteio dinâmico a distâncias médias.",
+        "isInventory": false,
+        "index": 200,
+        "next_price": 70300,
+        "next_rank": 16,
+        "type": 1,
+        "baseItemId": 103660,
+        "previewResourceId": 686147,
+        "rank": 9,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_FROM",
+                        "value": "11.4",
+                        "subproperties": null
+                    },
+                    {
+                        "property": "DAMAGE_TO",
+                        "value": "13.9",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "IMPACT_FORCE",
+                "value": "117",
+                "subproperties": null
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "103.9",
+                "subproperties": null
+            },
+            {
+                "property": "SHOT_RANGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_MIN_DAMAGE_RADIUS",
+                        "value": "65.2",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "WEAPON_MIN_DAMAGE_PERCENT",
+                "value": "10.3",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 12350,
+        "remainingTimeInSec": -1,
+        "modificationID": 1,
+        "object3ds": 132033
+    },
+    {
+        "id": "twins",
+        "name": "Gêmeos",
+        "description": "Esta arma de plasma de dois canos de disparo rápido derreterá o inimigo em segundos. Levando em conta o fato de que, ao atingir outros tanques com Twins, você derruba a mira, a arma é ideal quando se trata de tiroteio dinâmico a distâncias médias.",
+        "isInventory": false,
+        "index": 200,
+        "next_price": 188500,
+        "next_rank": 24,
+        "type": 1,
+        "baseItemId": 103660,
+        "previewResourceId": 595904,
+        "rank": 16,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_FROM",
+                        "value": "14",
+                        "subproperties": null
+                    },
+                    {
+                        "property": "DAMAGE_TO",
+                        "value": "17.2",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "IMPACT_FORCE",
+                "value": "137",
+                "subproperties": null
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "118.3",
+                "subproperties": null
+            },
+            {
+                "property": "SHOT_RANGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_MIN_DAMAGE_RADIUS",
+                        "value": "69.8",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "WEAPON_MIN_DAMAGE_PERCENT",
+                "value": "14.8",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 70300,
+        "remainingTimeInSec": -1,
+        "modificationID": 2,
+        "object3ds": 875465
+    },
+    {
+        "id": "twins",
+        "name": "Gêmeos",
+        "description": "Esta arma de plasma de dois canos de disparo rápido derreterá o inimigo em segundos. Levando em conta o fato de que, ao atingir outros tanques com Twins, você derruba a mira, a arma é ideal quando se trata de tiroteio dinâmico a distâncias médias.",
+        "isInventory": false,
+        "index": 200,
+        "next_price": 188500,
+        "next_rank": 24,
+        "type": 1,
+        "baseItemId": 103660,
+        "previewResourceId": 705554,
+        "rank": 24,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_FROM",
+                        "value": "17",
+                        "subproperties": null
+                    },
+                    {
+                        "property": "DAMAGE_TO",
+                        "value": "21",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "IMPACT_FORCE",
+                "value": "160",
+                "subproperties": null
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "134.7",
+                "subproperties": null
+            },
+            {
+                "property": "SHOT_RANGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_MIN_DAMAGE_RADIUS",
+                        "value": "75",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "WEAPON_MIN_DAMAGE_PERCENT",
+                "value": "20",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 188500,
+        "remainingTimeInSec": -1,
+        "modificationID": 3,
+        "object3ds": 499715
+    }
+]

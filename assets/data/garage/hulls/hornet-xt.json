@@ -1,0 +1,234 @@
+[
+    {
+        "id": "hornet_xt",
+        "name": "Zangão",
+        "description": "Esta carrocería compacta utilização de materiais compósitos de última geração, o que o torna leve, rápido e garante alta capacidade de sobrevivência mesmo após um golpe direto. Zangão é perfeito para ataques rápidos.",
+        "isInventory": false,
+        "index": 750,
+        "next_price": 21000,
+        "next_rank": 12,
+        "type": 2,
+        "baseItemId": 209093,
+        "previewResourceId": 209093,
+        "rank": 5,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "122",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "10.00",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "90.8",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "1616",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "10.4",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 500,
+        "remainingTimeInSec": -1,
+        "modificationID": 0,
+        "object3ds": 916625
+    },
+    {
+        "id": "hornet_xt",
+        "name": "Zangão",
+        "description": "Esta carrocería compacta utilização de materiais compósitos de última geração, o que o torna leve, rápido e garante alta capacidade de sobrevivência mesmo após um golpe direto. Zangão é perfeito para ataques rápidos.",
+        "isInventory": false,
+        "index": 750,
+        "next_price": 86600,
+        "next_rank": 19,
+        "type": 2,
+        "baseItemId": 209093,
+        "previewResourceId": 930954,
+        "rank": 12,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "154",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "10.70",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "105.2",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "1905",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "11.7",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 21000,
+        "remainingTimeInSec": -1,
+        "modificationID": 1,
+        "object3ds": 682349
+    },
+    {
+        "id": "hornet_xt",
+        "name": "Zangão",
+        "description": "Esta carrocería compacta utilização de materiais compósitos de última geração, o que o torna leve, rápido e garante alta capacidade de sobrevivência mesmo após um golpe direto. Zangão é perfeito para ataques rápidos.",
+        "isInventory": false,
+        "index": 750,
+        "next_price": 215500,
+        "next_rank": 27,
+        "type": 2,
+        "baseItemId": 209093,
+        "previewResourceId": 725126,
+        "rank": 19,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "187",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "11.50",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "119.7",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "2194",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "13.1",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 86600,
+        "remainingTimeInSec": -1,
+        "modificationID": 2,
+        "object3ds": 46050
+    },
+    {
+        "id": "hornet_xt",
+        "name": "Zangão",
+        "description": "Esta carrocería compacta utilização de materiais compósitos de última geração, o que o torna leve, rápido e garante alta capacidade de sobrevivência mesmo após um golpe direto. Zangão é perfeito para ataques rápidos.",
+        "isInventory": false,
+        "index": 750,
+        "next_price": 215500,
+        "next_rank": 27,
+        "type": 2,
+        "baseItemId": 209093,
+        "previewResourceId": 72508,
+        "rank": 27,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "210",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "12.00",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "130",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "2400",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "14",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 215500,
+        "remainingTimeInSec": -1,
+        "modificationID": 3,
+        "object3ds": 907344
+    }
+]

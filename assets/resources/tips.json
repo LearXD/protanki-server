@@ -1,394 +1,392 @@
-{
-    "resources": [
-        {
-            "idhigh": "0",
-            "idlow": 1395295,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395296,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395297,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395298,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395299,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395300,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395301,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395302,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395303,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395304,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395305,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395306,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395307,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395308,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395309,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395310,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395311,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395312,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395313,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395314,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395315,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395316,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395317,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395318,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395319,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        },
-        {
-            "idhigh": "0",
-            "idlow": 1395320,
-            "versionhigh": "0",
-            "versionlow": 3,
-            "lazy": false,
-            "fileNames": [
-                "ru.jpg",
-                "en.jpg",
-                "ua.jpg",
-                "pt_br.jpg"
-            ],
-            "alpha": false,
-            "type": 13
-        }
-    ]
-}
+[
+    {
+        "idhigh": "0",
+        "idlow": 1395295,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395296,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395297,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395298,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395299,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395300,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395301,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395302,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395303,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395304,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395305,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395306,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395307,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395308,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395309,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395310,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395311,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395312,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395313,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395314,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395315,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395316,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395317,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395318,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395319,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    },
+    {
+        "idhigh": "0",
+        "idlow": 1395320,
+        "versionhigh": "0",
+        "versionlow": 3,
+        "lazy": false,
+        "fileNames": [
+            "ru.jpg",
+            "en.jpg",
+            "ua.jpg",
+            "pt_br.jpg"
+        ],
+        "alpha": false,
+        "type": 13
+    }
+]

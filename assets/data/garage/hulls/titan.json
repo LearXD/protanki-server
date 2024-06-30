@@ -1,0 +1,234 @@
+[
+    {
+        "id": "titan",
+        "name": "Titã",
+        "description": "Placas de armadura de liga Titan combinadas com geometria especial tornam esta carroceria altamente eficaz mesmo contra armas de grande calibre. Com o Titan, você pode mergulhar no meio de uma batalha sem qualquer hesitação. Observe que, devido à baixa velocidade, esta carroceria não é adequado para ataques rápidos atrás das linhas inimigas.",
+        "isInventory": false,
+        "index": 950,
+        "next_price": 12100,
+        "next_rank": 10,
+        "type": 2,
+        "baseItemId": 882375,
+        "previewResourceId": 882375,
+        "rank": 3,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "224",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "5.30",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "55.7",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "3571",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "11.7",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 300,
+        "remainingTimeInSec": -1,
+        "modificationID": 0,
+        "object3ds": 819540
+    },
+    {
+        "id": "titan",
+        "name": "Titã",
+        "description": "Placas de armadura de liga Titan combinadas com geometria especial tornam esta carroceria altamente eficaz mesmo contra armas de grande calibre. Com o Titan, você pode mergulhar no meio de uma batalha sem qualquer hesitação. Observe que, devido à baixa velocidade, esta carroceria não é adequado para ataques rápidos atrás das linhas inimigas.",
+        "isInventory": false,
+        "index": 950,
+        "next_price": 70500,
+        "next_rank": 17,
+        "type": 2,
+        "baseItemId": 882375,
+        "previewResourceId": 511249,
+        "rank": 10,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "289",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "5.50",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "67.1",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "4047",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "13.1",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 12100,
+        "remainingTimeInSec": -1,
+        "modificationID": 1,
+        "object3ds": 385322
+    },
+    {
+        "id": "titan",
+        "name": "Titã",
+        "description": "Placas de armadura de liga Titan combinadas com geometria especial tornam esta carroceria altamente eficaz mesmo contra armas de grande calibre. Com o Titan, você pode mergulhar no meio de uma batalha sem qualquer hesitação. Observe que, devido à baixa velocidade, esta carroceria não é adequado para ataques rápidos atrás das linhas inimigas.",
+        "isInventory": false,
+        "index": 950,
+        "next_price": 187000,
+        "next_rank": 25,
+        "type": 2,
+        "baseItemId": 882375,
+        "previewResourceId": 372034,
+        "rank": 17,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "355",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "5.80",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "78.6",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "4524",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "14.6",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 70500,
+        "remainingTimeInSec": -1,
+        "modificationID": 2,
+        "object3ds": 175994
+    },
+    {
+        "id": "titan",
+        "name": "Titã",
+        "description": "Placas de armadura de liga Titan combinadas com geometria especial tornam esta carroceria altamente eficaz mesmo contra armas de grande calibre. Com o Titan, você pode mergulhar no meio de uma batalha sem qualquer hesitação. Observe que, devido à baixa velocidade, esta carroceria não é adequado para ataques rápidos atrás das linhas inimigas.",
+        "isInventory": false,
+        "index": 950,
+        "next_price": 187000,
+        "next_rank": 25,
+        "type": 2,
+        "baseItemId": 882375,
+        "previewResourceId": 185908,
+        "rank": 25,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "420",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "6.00",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "90",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "5000",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "16",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 187000,
+        "remainingTimeInSec": -1,
+        "modificationID": 3,
+        "object3ds": 142350
+    }
+]

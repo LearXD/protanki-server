@@ -1,0 +1,98 @@
+[
+    {
+        "id": "1000_scores",
+        "name": "1000 experiência",
+        "description": "Ao ganhar 1000 pontos de experiência, você está se aproximando do seu próximo rank. Ao comprar vários milhares de pontos de experiência de uma só vez, você pode subir significativamente na carreira e, assim, obter acesso a novas armas, cascos e pinturas.\n\nAtenção! \"1000 experiência\" é usado automaticamente imediatamente após a compra.\n\n<a href = \"https://wiki.pro-tanki.com/br/Patentes\"><u>Tabela de classificação</u></a>",
+        "isInventory": true,
+        "index": 7550,
+        "next_price": 2000,
+        "next_rank": 11,
+        "type": 4,
+        "baseItemId": 613847,
+        "previewResourceId": 613847,
+        "rank": 11,
+        "category": "inventory",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 2000,
+        "remainingTimeInSec": -1
+    },
+    {
+        "id": "rename",
+        "name": "Renomear",
+        "description": "Este passe permite que você renomeie sua conta. Ative-o clicando em «Usar» e seguindo as instruções.\n\nUsado: 0 de 4",
+        "isInventory": true,
+        "index": 7950,
+        "next_price": 100000,
+        "next_rank": 1,
+        "type": 5,
+        "baseItemId": 643246,
+        "previewResourceId": 643246,
+        "rank": 1,
+        "category": "special",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 100000,
+        "remainingTimeInSec": -1
+    },
+    {
+        "id": "up_score",
+        "name": "Passe Multiplicador de Pontos",
+        "description": "Aumenta em 30% o XP recebido.\n\nDura 1 mês.\n\nAtenção, a assinatura não dá vantagem em batalhas de equipe!",
+        "isInventory": true,
+        "index": 8000,
+        "next_price": 12500,
+        "next_rank": 1,
+        "type": 5,
+        "baseItemId": 272402,
+        "previewResourceId": 272402,
+        "rank": 1,
+        "category": "special",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 12500,
+        "remainingTimeInSec": 2592000
+    },
+    {
+        "id": "pro_battle",
+        "name": "Passe de Batalha PRO",
+        "description": "A duração é de 1 mês. Permite que você crie suas próprias batalhas e escolha suas configurações, além de participar de «Batalhas PRO» um número ilimitado de vezes dentro de 31 dias a partir da data da compra.\n\nPágina da assinatura em N.",
+        "isInventory": true,
+        "index": 8200,
+        "next_price": 500,
+        "next_rank": 1,
+        "type": 5,
+        "baseItemId": 906431,
+        "previewResourceId": 906431,
+        "rank": 1,
+        "category": "special",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 500,
+        "remainingTimeInSec": 2592000
+    }
+]

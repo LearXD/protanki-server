@@ -1,0 +1,234 @@
+[
+    {
+        "id": "wasp",
+        "name": "Vespa",
+        "description": "Leve, econômico, fácil de operar — Vespa é uma carroceria perfeito para iniciantes. Vespa atualizado pode atingir uma alta velocidade, que em combinação com tamanho pequeno dá liberdade de ação no campo de batalha. Devido ao baixo peso, Vespa pode ser facilmente enrolado pelo tiro de um inimigo.",
+        "isInventory": false,
+        "index": 700,
+        "next_price": 7650,
+        "next_rank": 9,
+        "type": 2,
+        "baseItemId": 629496,
+        "previewResourceId": 629496,
+        "rank": 2,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "94",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "10.80",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "93.9",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "1376",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "9.4",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 200,
+        "remainingTimeInSec": -1,
+        "modificationID": 0,
+        "object3ds": 160287
+    },
+    {
+        "id": "wasp",
+        "name": "Vespa",
+        "description": "Leve, econômico, fácil de operar — Vespa é uma carroceria perfeito para iniciantes. Vespa atualizado pode atingir uma alta velocidade, que em combinação com tamanho pequeno dá liberdade de ação no campo de batalha. Devido ao baixo peso, Vespa pode ser facilmente enrolado pelo tiro de um inimigo.",
+        "isInventory": false,
+        "index": 700,
+        "next_price": 62450,
+        "next_rank": 16,
+        "type": 2,
+        "baseItemId": 629496,
+        "previewResourceId": 265425,
+        "rank": 9,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "121",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "11.50",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "111.7",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "1638",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "10.6",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 7650,
+        "remainingTimeInSec": -1,
+        "modificationID": 1,
+        "object3ds": 557817
+    },
+    {
+        "id": "wasp",
+        "name": "Vespa",
+        "description": "Leve, econômico, fácil de operar — Vespa é uma carroceria perfeito para iniciantes. Vespa atualizado pode atingir uma alta velocidade, que em combinação com tamanho pequeno dá liberdade de ação no campo de batalha. Devido ao baixo peso, Vespa pode ser facilmente enrolado pelo tiro de um inimigo.",
+        "isInventory": false,
+        "index": 700,
+        "next_price": 172600,
+        "next_rank": 24,
+        "type": 2,
+        "baseItemId": 629496,
+        "previewResourceId": 67263,
+        "rank": 16,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "149",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "12.20",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "129.6",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "1901",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "11.7",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 62450,
+        "remainingTimeInSec": -1,
+        "modificationID": 2,
+        "object3ds": 653204
+    },
+    {
+        "id": "wasp",
+        "name": "Vespa",
+        "description": "Leve, econômico, fácil de operar — Vespa é uma carroceria perfeito para iniciantes. Vespa atualizado pode atingir uma alta velocidade, que em combinação com tamanho pequeno dá liberdade de ação no campo de batalha. Devido ao baixo peso, Vespa pode ser facilmente enrolado pelo tiro de um inimigo.",
+        "isInventory": false,
+        "index": 700,
+        "next_price": 172600,
+        "next_rank": 24,
+        "type": 2,
+        "baseItemId": 629496,
+        "previewResourceId": 923853,
+        "rank": 24,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "180",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "13.00",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "150",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "2200",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "13",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 172600,
+        "remainingTimeInSec": -1,
+        "modificationID": 3,
+        "object3ds": 20647
+    }
+]

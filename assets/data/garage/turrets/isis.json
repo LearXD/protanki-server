@@ -1,0 +1,282 @@
+[
+    {
+        "id": "isida",
+        "name": "Isida",
+        "description": "A ideia desta arma única surgiu nos tempos da guerra fria, mas só ganhou vida com o desenvolvimento da física quântica e das nanotecnologias. O coração desta máquina-maravilha é gerador de nanorrobôs capazes de reproduzir ou destruir a estrutura de qualquer material não biológico. A arma é equipada com emissor de impulso que permite transportar nanomassa no canal magnético a uma distância de cerca de vinte metros. Material molecular, derivado quando nanorrobôs estão funcionando no modo de destruição de alvos, é usado para fixar o próprio chassi do atirador . Assim, Isida causa dano a inimigos e cura aliados, o que a torna inestimável em batalhas de equipe.",
+        "isInventory": false,
+        "index": 300,
+        "next_price": 22850,
+        "next_rank": 11,
+        "type": 1,
+        "baseItemId": 896849,
+        "previewResourceId": 896849,
+        "rank": 4,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "ISIS_HEALING_PER_SECOND",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "ISIS_HEALING_PER_PERIOD",
+                        "value": "22",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "ISIS_DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_PER_PERIOD",
+                        "value": "40",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "ISIS_SELF_HEALING_PERCENT",
+                "value": "35.97",
+                "subproperties": null
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "11.11",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "91.7",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1250,
+        "remainingTimeInSec": -1,
+        "modificationID": 0,
+        "object3ds": 638066
+    },
+    {
+        "id": "isida",
+        "name": "Isida",
+        "description": "A ideia desta arma única surgiu nos tempos da guerra fria, mas só ganhou vida com o desenvolvimento da física quântica e das nanotecnologias. O coração desta máquina-maravilha é gerador de nanorrobôs capazes de reproduzir ou destruir a estrutura de qualquer material não biológico. A arma é equipada com emissor de impulso que permite transportar nanomassa no canal magnético a uma distância de cerca de vinte metros. Material molecular, derivado quando nanorrobôs estão funcionando no modo de destruição de alvos, é usado para fixar o próprio chassi do atirador . Assim, Isida causa dano a inimigos e cura aliados, o que a torna inestimável em batalhas de equipe.",
+        "isInventory": false,
+        "index": 300,
+        "next_price": 88100,
+        "next_rank": 18,
+        "type": 1,
+        "baseItemId": 896849,
+        "previewResourceId": 216993,
+        "rank": 11,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "ISIS_HEALING_PER_SECOND",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "ISIS_HEALING_PER_PERIOD",
+                        "value": "28",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "ISIS_DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_PER_PERIOD",
+                        "value": "50",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "ISIS_SELF_HEALING_PERCENT",
+                "value": "40.88",
+                "subproperties": null
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "10.37",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "106.7",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 22850,
+        "remainingTimeInSec": -1,
+        "modificationID": 1,
+        "object3ds": 332851
+    },
+    {
+        "id": "isida",
+        "name": "Isida",
+        "description": "A ideia desta arma única surgiu nos tempos da guerra fria, mas só ganhou vida com o desenvolvimento da física quântica e das nanotecnologias. O coração desta máquina-maravilha é gerador de nanorrobôs capazes de reproduzir ou destruir a estrutura de qualquer material não biológico. A arma é equipada com emissor de impulso que permite transportar nanomassa no canal magnético a uma distância de cerca de vinte metros. Material molecular, derivado quando nanorrobôs estão funcionando no modo de destruição de alvos, é usado para fixar o próprio chassi do atirador . Assim, Isida causa dano a inimigos e cura aliados, o que a torna inestimável em batalhas de equipe.",
+        "isInventory": false,
+        "index": 300,
+        "next_price": 221000,
+        "next_rank": 26,
+        "type": 1,
+        "baseItemId": 896849,
+        "previewResourceId": 807842,
+        "rank": 18,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "ISIS_HEALING_PER_SECOND",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "ISIS_HEALING_PER_PERIOD",
+                        "value": "33",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "ISIS_DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_PER_PERIOD",
+                        "value": "61",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "ISIS_SELF_HEALING_PERCENT",
+                "value": "45.79",
+                "subproperties": null
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "9.63",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "121.8",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 88100,
+        "remainingTimeInSec": -1,
+        "modificationID": 2,
+        "object3ds": 77397
+    },
+    {
+        "id": "isida",
+        "name": "Isida",
+        "description": "A ideia desta arma única surgiu nos tempos da guerra fria, mas só ganhou vida com o desenvolvimento da física quântica e das nanotecnologias. O coração desta máquina-maravilha é gerador de nanorrobôs capazes de reproduzir ou destruir a estrutura de qualquer material não biológico. A arma é equipada com emissor de impulso que permite transportar nanomassa no canal magnético a uma distância de cerca de vinte metros. Material molecular, derivado quando nanorrobôs estão funcionando no modo de destruição de alvos, é usado para fixar o próprio chassi do atirador . Assim, Isida causa dano a inimigos e cura aliados, o que a torna inestimável em batalhas de equipe.",
+        "isInventory": false,
+        "index": 300,
+        "next_price": 221000,
+        "next_rank": 26,
+        "type": 1,
+        "baseItemId": 896849,
+        "previewResourceId": 677721,
+        "rank": 26,
+        "category": "weapon",
+        "properts": [
+            {
+                "property": "ISIS_HEALING_PER_SECOND",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "ISIS_HEALING_PER_PERIOD",
+                        "value": "38",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "ISIS_DAMAGE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "DAMAGE_PER_PERIOD",
+                        "value": "70",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "ISIS_SELF_HEALING_PERCENT",
+                "value": "50.00",
+                "subproperties": null
+            },
+            {
+                "property": "WEAPON_CHARGE_RATE",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "WEAPON_RELOAD_TIME",
+                        "value": "9.00",
+                        "subproperties": null
+                    }
+                ]
+            },
+            {
+                "property": "TURRET_TURN_SPEED",
+                "value": "134.7",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 221000,
+        "remainingTimeInSec": -1,
+        "modificationID": 3,
+        "object3ds": 999935
+    }
+]

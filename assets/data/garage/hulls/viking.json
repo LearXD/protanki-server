@@ -1,0 +1,234 @@
+[
+    {
+        "id": "viking",
+        "name": "Viking",
+        "description": "Esta blindagem incorpora todas as tecnologias militares modernas. A blindagem reforçada e o motor «Tipo 2» fazem do Viking uma das carrocerias mais versáteis. Ataque o inimigo ou cubra seus companheiros de equipe – esta carroceria provará ser bom e confiável em qualquer situação.",
+        "isInventory": false,
+        "index": 900,
+        "next_price": 29900,
+        "next_rank": 14,
+        "type": 2,
+        "baseItemId": 730749,
+        "previewResourceId": 730749,
+        "rank": 7,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "195",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "7.80",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "80.6",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "2235",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "11.5",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 700,
+        "remainingTimeInSec": -1,
+        "modificationID": 0,
+        "object3ds": 513347
+    },
+    {
+        "id": "viking",
+        "name": "Viking",
+        "description": "Esta blindagem incorpora todas as tecnologias militares modernas. A blindagem reforçada e o motor «Tipo 2» fazem do Viking uma das carrocerias mais versáteis. Ataque o inimigo ou cubra seus companheiros de equipe – esta carroceria provará ser bom e confiável em qualquer situação.",
+        "isInventory": false,
+        "index": 900,
+        "next_price": 102700,
+        "next_rank": 21,
+        "type": 2,
+        "baseItemId": 730749,
+        "previewResourceId": 500013,
+        "rank": 14,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "244",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "8.30",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "92.7",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "2550",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "12.6",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 29900,
+        "remainingTimeInSec": -1,
+        "modificationID": 1,
+        "object3ds": 347843
+    },
+    {
+        "id": "viking",
+        "name": "Viking",
+        "description": "Esta blindagem incorpora todas as tecnologias militares modernas. A blindagem reforçada e o motor «Tipo 2» fazem do Viking uma das carrocerias mais versáteis. Ataque o inimigo ou cubra seus companheiros de equipe – esta carroceria provará ser bom e confiável em qualquer situação.",
+        "isInventory": false,
+        "index": 900,
+        "next_price": 244200,
+        "next_rank": 29,
+        "type": 2,
+        "baseItemId": 730749,
+        "previewResourceId": 914016,
+        "rank": 21,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "294",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "8.80",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "104.8",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "2865",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "14.4",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 102700,
+        "remainingTimeInSec": -1,
+        "modificationID": 2,
+        "object3ds": 153457
+    },
+    {
+        "id": "viking",
+        "name": "Viking",
+        "description": "Esta blindagem incorpora todas as tecnologias militares modernas. A blindagem reforçada e o motor «Tipo 2» fazem do Viking uma das carrocerias mais versáteis. Ataque o inimigo ou cubra seus companheiros de equipe – esta carroceria provará ser bom e confiável em qualquer situação.",
+        "isInventory": false,
+        "index": 900,
+        "next_price": 244200,
+        "next_rank": 29,
+        "type": 2,
+        "baseItemId": 730749,
+        "previewResourceId": 832320,
+        "rank": 29,
+        "category": "armor",
+        "properts": [
+            {
+                "property": "HULL_ARMOR",
+                "value": "315",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_SPEED",
+                "value": "9.00",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_TURN_SPEED",
+                "value": "110",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_MASS",
+                "value": "3000",
+                "subproperties": null
+            },
+            {
+                "property": "HULL_POWER",
+                "value": null,
+                "subproperties": [
+                    {
+                        "property": "HULL_ACCELERATION",
+                        "value": "15",
+                        "subproperties": null
+                    }
+                ]
+            }
+        ],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1719597239,
+            "timeToStartInSeconds": -1719597239
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 244200,
+        "remainingTimeInSec": -1,
+        "modificationID": 3,
+        "object3ds": 937522
+    }
+]

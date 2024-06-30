@@ -164,7 +164,7 @@ import { SetGarageItemsPropertiesPacket } from "./packets/set-garage-items-prope
 import { SendEquipItemPacket } from "./packets/send-equip-item";
 import { SetRemoveGarageItemPacket } from "./packets/set-remove-garage-item";
 import { SetGarageCategoryPacket } from "./packets/set-garage-category";
-import { SendBuyGarageItem2Packet } from "./packets/send-buy-garage-item-2";
+import { SendBuyGarageKitPacket } from "./packets/send-buy-garage-kit";
 import { SendResumePacket } from "./packets/send-resume";
 import { SendRequestRespawnPacket } from "./packets/send-request-respawn";
 import { SetTankChangedEquipmentPacket } from "./packets/set-tank-changed-equipment";
@@ -179,6 +179,16 @@ import { SetRemoveViewingBattlePacket } from "./packets/set-remove-viewing-battl
 import { SetCaptchaLocation2Packet } from "./packets/set-captcha-location-2";
 
 // GENERATE IMPORT HERE
+import { SendPreviewPaintingPacket } from "./packets/send-preview-painting";
+import { SendBuyGarageItemPacket } from "./packets/send-buy-garage-item";
+import { SendInviteCodePacket } from "./packets/send-invite-code";
+import { SetSuccessDialogPacket } from "./packets/set-success-dialog";
+import { SendChangePasswordPacket } from "./packets/send-change-password";
+import { SetChangePasswordScreenPacket } from "./packets/set-change-password-screen";
+import { SendEmailCodePacket } from "./packets/send-email-code";
+import { SetEmailCodeScreenPacket } from "./packets/set-email-code-screen";
+import { SendVerifyEmailPacket } from "./packets/send-verify-email";
+import { SendSuccessfulPurchasePacket } from "./packets/send-successful-purchase";
 import { SetSomeShaftShooterPacket } from "./packets/set-some-shaft-shooter";
 import { SendShaftLocalSpotPacket } from "./packets/send-shaft-local-spot";
 import { SetSomeRailgunShooterPacket } from "./packets/set-some-railgun-shooter";
@@ -514,7 +524,7 @@ export class Network {
         this.registerPacket(Protocol.SET_EQUIP_GARAGE_ITEM, SetEquipGarageItemPacket)
         this.registerPacket(Protocol.SET_GARAGE_ITEMS_PROPERTIES, SetGarageItemsPropertiesPacket)
         this.registerPacket(Protocol.SEND_EQUIP_ITEM, SendEquipItemPacket)
-        this.registerPacket(Protocol.SEND_EQUIP_ITEM_2, SendBuyGarageItem2Packet)
+        this.registerPacket(Protocol.SEND_BUY_GARAGE_KIT, SendBuyGarageKitPacket)
         this.registerPacket(Protocol.SET_REMOVE_GARAGE_ITEM, SetRemoveGarageItemPacket)
         this.registerPacket(Protocol.SET_GARAGE_CATEGORY, SetGarageCategoryPacket)
 
@@ -639,6 +649,18 @@ export class Network {
         this.registerPacket(Protocol.SET_SOME_PACKET_ON_JOIN_BATTLE_3, SetSomePacketOnJoinBattle3Packet);
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_AND_CHAT, SetRemoveBattlesAndChatPacket);
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);
+
+        // GENERATE REGISTER HERE
+        this.registerPacket(Protocol.SEND_PREVIEW_PAINTING, SendPreviewPaintingPacket);
+        this.registerPacket(Protocol.SEND_BUY_GARAGE_ITEM, SendBuyGarageItemPacket);
+        this.registerPacket(Protocol.SEND_INVITE_CODE, SendInviteCodePacket);
+        this.registerPacket(Protocol.SET_SUCCESS_DIALOG, SetSuccessDialogPacket);
+        this.registerPacket(Protocol.SEND_CHANGE_PASSWORD, SendChangePasswordPacket);
+        this.registerPacket(Protocol.SET_CHANGE_PASSWORD_SCREEN, SetChangePasswordScreenPacket);
+        this.registerPacket(Protocol.SEND_EMAIL_CODE, SendEmailCodePacket);
+        this.registerPacket(Protocol.SET_EMAIL_CODE_SCREEN, SetEmailCodeScreenPacket);
+        this.registerPacket(Protocol.SEND_VERIFY_EMAIL, SendVerifyEmailPacket);
+        this.registerPacket(Protocol.SEND_SUCCESSFUL_PURCHASE, SendSuccessfulPurchasePacket);
 
         Logger.info('NETWORK', `${this.packetPool.size} packets registered`)
     }
