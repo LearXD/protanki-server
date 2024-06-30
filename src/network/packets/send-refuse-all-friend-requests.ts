@@ -2,14 +2,18 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class OpenFriendsPacket extends Packet {
+export class SendRefuseAllFriendRequestsPacket extends Packet {
+
 
     constructor(bytes: ByteArray) {
-        super(Protocol.OPEN_FRIENDS, bytes)
+        super(Protocol.SEND_REFUSE_ALL_FRIEND_REQUESTS, bytes)
     }
 
     public decode() {
-        return {}
+        const bytes = this.cloneBytes();
+        return {
+
+        }
     }
 
     public encode() {

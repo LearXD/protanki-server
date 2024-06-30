@@ -126,7 +126,7 @@ export class Server {
     public getAssetsManager() { return this.assetsManager }
     public getResourcesManager() { return this.resourcesManager }
     public getUserDataManager(): UserDataManager { return this.userDataManager }
-    public getFriendsManager() { return this.friendsManager }
+    public getFriendsManager(): FriendsManager { return this.friendsManager }
     public getChatManager() { return this.chatManager }
     public getBattlesManager() { return this.battleManager }
     public getMapsManager() { return this.mapsManager }

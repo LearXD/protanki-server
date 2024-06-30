@@ -104,7 +104,7 @@ export class GarageManager {
         this.addGarageItem(this.getGarageData(GarageItemType.HULL, 'mammoth.json'));
         this.addGarageItem(this.getGarageData(GarageItemType.HULL, 'hornet-xt.json'));
 
-
+        // OTHERS
         this.addGarageItem(this.getGarageData(GarageItemType.PAINT, 'paintings.json'));
         this.addGarageItem(this.getGarageData(GarageItemType.SUPPLY, 'supplies.json'));
         this.addGarageItem(this.getGarageData(GarageItemType.SPECIAL, 'gifts.json'));

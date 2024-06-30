@@ -30,6 +30,15 @@ import { Battle } from "../battle";
 import { SendOpenGaragePacket } from "../../network/packets/send-open-garage";
 import { SendOpenBattlesListPacket } from "../../network/packets/send-open-battles-list";
 import { SendEquipItemPacket } from "../../network/packets/send-equip-item";
+import { SendOpenFriendsPacket } from "../../network/packets/send-open-friends";
+import { SendFindUserOnFriendsListPacket } from "../../network/packets/send-find-user-on-friends-list";
+import { SendFriendRequestPacket } from "../../network/packets/send-friend-request";
+import { ValidateFriendRequestPacket } from "../../network/packets/validate-friend-request";
+import { SendAcceptFriendRequestPacket } from "../../network/packets/send-accept-friend-request";
+import { SendRefuseAllFriendRequestsPacket } from "../../network/packets/send-refuse-all-friend-requests";
+import { SendRefuseFriendRequestPacket } from "../../network/packets/send-refuse-friend-request";
+import { SendRemoveFriendPacket } from "../../network/packets/send-remove-friend";
+import { ValidateFriendPacket } from "../../network/packets/validate-friend";
 
 const IGNORE_PACKETS = [
     1484572481, // Pong
@@ -254,6 +263,60 @@ export class Client {
             this.getServer()
                 .getGarageManager()
                 .handleEquipItem(this, packet.item);
+        }
+
+        if (packet instanceof SendOpenFriendsPacket) {
+            this.getServer()
+                .getFriendsManager()
+                .handleOpenFriends(this);
+        }
+
+        if (packet instanceof SendFindUserOnFriendsListPacket) {
+            this.getServer()
+                .getFriendsManager()
+                .handleFindUser(this, packet.userId);
+        }
+
+        if (packet instanceof SendFriendRequestPacket) {
+            this.getServer()
+                .getFriendsManager()
+                .handleAddFriend(this, packet.userId);
+        }
+
+        if (packet instanceof SendRemoveFriendPacket) {
+            this.getServer()
+                .getFriendsManager()
+                .handleRemoveFriend(this, packet.userId);
+        }
+
+        if (packet instanceof ValidateFriendPacket) {
+            this.getServer()
+                .getFriendsManager()
+                .handleValidateFriend(this, packet.userId);
+        }
+
+        if (packet instanceof ValidateFriendRequestPacket) {
+            this.getServer()
+                .getFriendsManager()
+                .handleValidateFriendRequest(this, packet.user);
+        }
+
+        if (packet instanceof SendAcceptFriendRequestPacket) {
+            this.getServer()
+                .getFriendsManager()
+                .handleAcceptFriendRequest(this, packet.user);
+        }
+
+        if (packet instanceof SendRefuseAllFriendRequestsPacket) {
+            this.getServer()
+                .getFriendsManager()
+                .handleRefuseAllFriendRequests(this);
+        }
+
+        if (packet instanceof SendRefuseFriendRequestPacket) {
+            this.getServer()
+                .getFriendsManager()
+                .handleRefuseFriendRequest(this, packet.userId);
         }
 
     }

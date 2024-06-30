@@ -2,19 +2,17 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class FindUserOnFriendsListPacket extends Packet {
+export class SetRemoveFriendRequestPacket extends Packet {
 
     public userId: string;
 
     constructor(bytes: ByteArray) {
-        super(Protocol.FIND_USER_ON_FRIENDS_LIST, bytes)
+        super(Protocol.SET_REMOVE_FRIEND_REQUEST, bytes)
     }
 
     public decode() {
         const bytes = this.cloneBytes();
-
         this.userId = bytes.readString();
-
         return {
             userId: this.userId
         }

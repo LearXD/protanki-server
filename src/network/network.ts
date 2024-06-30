@@ -65,12 +65,12 @@ import { SetRemoveUserFromViewingTeamBattlePacket } from "./packets/set-remove-u
 import { OpenConfigPacket } from "./packets/open-config";
 import { SetSocialNetworkPanelCCPacket } from "./packets/set-social-network-panel-cc";
 import { SetNotificationEnabledPacket } from "./packets/set-notification-enabled";
-import { OpenFriendsPacket } from "./packets/open-friends";
-import { FindUserOnFriendsListPacket } from "./packets/find-user-on-friend-list";
-import { FindUserOnFriendListNotFoundPacket } from "./packets/find-user-on-friends-list-not-found";
-import { FindUserOnFriendListFoundPacket } from "./packets/find-user-on-friends-list-found";
+import { SendOpenFriendsPacket } from "./packets/send-open-friends";
+import { SendFindUserOnFriendsListPacket } from "./packets/send-find-user-on-friends-list";
+import { SetUserNotFoundOnFriendsListPacket } from "./packets/set-user-not-found-on-friends-list";
+import { SetUserFoundOnFriendsListPacket } from "./packets/set-user-found-on-friends-list";
 import { SendFriendRequestPacket } from "./packets/send-friend-request";
-import { SentFriendRequestPacket } from "./packets/sent-friend-request";
+import { SetAddSentFriendRequestPacket } from "./packets/set-add-sent-friend-request";
 import { RemoveFriendRequestPacket } from "./packets/remove-friend-request";
 import { RemovedFriendRequestPacket } from "./packets/removed-friend-request";
 import { SendJoinOnBattlePacket } from "./packets/send-join-on-battle";
@@ -179,6 +179,13 @@ import { SetRemoveViewingBattlePacket } from "./packets/set-remove-viewing-battl
 import { SetCaptchaLocation2Packet } from "./packets/set-captcha-location-2";
 
 // GENERATE IMPORT HERE
+import { ValidateFriendPacket } from "./packets/validate-friend";
+import { SetAlreadySentFriendRequestPopupPacket } from "./packets/set-already-sent-friend-request-popup";
+import { SetRemoveFriendPacket } from "./packets/set-remove-friend";
+import { SendRemoveFriendPacket } from "./packets/send-remove-friend";
+import { SetRemoveFriendRequestPacket } from "./packets/set-remove-friend-request";
+import { SendRefuseFriendRequestPacket } from "./packets/send-refuse-friend-request";
+import { SendRefuseAllFriendRequestsPacket } from "./packets/send-refuse-all-friend-requests";
 import { SendPreviewPaintingPacket } from "./packets/send-preview-painting";
 import { SendBuyGarageItemPacket } from "./packets/send-buy-garage-item";
 import { SendInviteCodePacket } from "./packets/send-invite-code";
@@ -254,8 +261,8 @@ import { SendTwinsFirstShotPacket } from "./packets/send-twins-first-shot";
 import { SetHammerShotPacket } from "./packets/set-hammer-shot";
 import { SendHammerShotPacket } from "./packets/send-hammer-shot";
 import { SendOpenBattlesListPacket } from "./packets/send-open-battles-list";
-import { SetFriendRequestPacket } from "./packets/set-friend-request";
-import { SetSendFriendRequestPacket } from "./packets/set-send-friend-request";
+import { SetAddFriendRequestPacket } from "./packets/set-add-friend-request";
+import { ValidateFriendRequestPacket } from "./packets/validate-friend-request";
 import { SendOpenLinkPacket } from "./packets/send-open-link";
 import { SendAcceptFriendRequestPacket } from "./packets/send-accept-friend-request";
 import { SetAddFriendPacket } from "./packets/set-add-friend";
@@ -384,12 +391,12 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_USER_PLAYING, SetRemoveUserPlayingPacket)
         this.registerPacket(Protocol.SET_BATTLE_USER_LEFT_NOTIFICATION, SetBattleUserLeftNotificationPacket)
 
-        this.registerPacket(Protocol.FIND_USER_ON_FRIENDS_LIST, FindUserOnFriendsListPacket)
-        this.registerPacket(Protocol.FIND_USER_ON_FRIEND_LIST_NOT_FOUND, FindUserOnFriendListNotFoundPacket)
-        this.registerPacket(Protocol.FIND_USER_ON_FRIEND_LIST_FOUND, FindUserOnFriendListFoundPacket)
+        this.registerPacket(Protocol.SEND_FIND_USER_ON_FRIENDS_LIST, SendFindUserOnFriendsListPacket)
+        this.registerPacket(Protocol.SET_USER_NOT_FOUND_ON_FRIENDS_LIST, SetUserNotFoundOnFriendsListPacket)
+        this.registerPacket(Protocol.SET_USER_FOUND_ON_FRIENDS_LIST, SetUserFoundOnFriendsListPacket)
 
         this.registerPacket(Protocol.SEND_FRIEND_REQUEST, SendFriendRequestPacket)
-        this.registerPacket(Protocol.SENT_FRIEND_REQUEST, SentFriendRequestPacket)
+        this.registerPacket(Protocol.SET_ADD_SENT_FRIEND_REQUEST, SetAddSentFriendRequestPacket)
 
         this.registerPacket(Protocol.REMOVE_FRIEND_REQUEST, RemoveFriendRequestPacket)
         this.registerPacket(Protocol.REMOVED_FRIEND_REQUEST, RemovedFriendRequestPacket)
@@ -433,7 +440,7 @@ export class Network {
         this.registerPacket(Protocol.SEND_CHAT_MESSAGE, SendChatMessagePacket)
 
         this.registerPacket(Protocol.OPEN_CONFIG, OpenConfigPacket)
-        this.registerPacket(Protocol.OPEN_FRIENDS, OpenFriendsPacket)
+        this.registerPacket(Protocol.SEND_OPEN_FRIENDS, SendOpenFriendsPacket)
 
         this.registerPacket(Protocol.SET_SOCIAL_NETWORK_PANEL_CC, SetSocialNetworkPanelCCPacket)
         this.registerPacket(Protocol.SET_NOTIFICATION_ENABLED, SetNotificationEnabledPacket)
@@ -611,8 +618,8 @@ export class Network {
         this.registerPacket(Protocol.SET_HAMMER_SHOT, SetHammerShotPacket);
         this.registerPacket(Protocol.SEND_HAMMER_SHOT, SendHammerShotPacket);
         this.registerPacket(Protocol.SEND_OPEN_BATTLES_LIST, SendOpenBattlesListPacket);
-        this.registerPacket(Protocol.SET_FRIEND_REQUEST, SetFriendRequestPacket);
-        this.registerPacket(Protocol.SET_SEND_FRIEND_REQUEST, SetSendFriendRequestPacket);
+        this.registerPacket(Protocol.SET_ADD_FRIEND_REQUEST, SetAddFriendRequestPacket);
+        this.registerPacket(Protocol.VALIDATE_FRIEND_REQUEST, ValidateFriendRequestPacket);
         this.registerPacket(Protocol.SEND_OPEN_LINK, SendOpenLinkPacket);
         this.registerPacket(Protocol.SEND_ACCEPT_FRIEND_REQUEST, SendAcceptFriendRequestPacket);
         this.registerPacket(Protocol.SET_ADD_FRIEND, SetAddFriendPacket);
@@ -651,6 +658,13 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);
 
         // GENERATE REGISTER HERE
+		this.registerPacket(Protocol.VALIDATE_FRIEND, ValidateFriendPacket);
+		this.registerPacket(Protocol.SET_ALREADY_SENT_FRIEND_REQUEST_POPUP, SetAlreadySentFriendRequestPopupPacket);
+		this.registerPacket(Protocol.SET_REMOVE_FRIEND, SetRemoveFriendPacket);
+		this.registerPacket(Protocol.SEND_REMOVE_FRIEND, SendRemoveFriendPacket);
+		this.registerPacket(Protocol.SET_REMOVE_FRIEND_REQUEST, SetRemoveFriendRequestPacket);
+		this.registerPacket(Protocol.SEND_REFUSE_FRIEND_REQUEST, SendRefuseFriendRequestPacket);
+		this.registerPacket(Protocol.SEND_REFUSE_ALL_FRIEND_REQUESTS, SendRefuseAllFriendRequestsPacket);
         this.registerPacket(Protocol.SEND_PREVIEW_PAINTING, SendPreviewPaintingPacket);
         this.registerPacket(Protocol.SEND_BUY_GARAGE_ITEM, SendBuyGarageItemPacket);
         this.registerPacket(Protocol.SEND_INVITE_CODE, SendInviteCodePacket);

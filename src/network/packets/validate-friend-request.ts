@@ -2,27 +2,25 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SentFriendRequestPacket extends Packet {
+export class ValidateFriendRequestPacket extends Packet {
 
-    public userId: string;
+    public user: string;
 
     constructor(bytes: ByteArray) {
-        super(Protocol.SENT_FRIEND_REQUEST, bytes)
+        super(Protocol.VALIDATE_FRIEND_REQUEST, bytes)
     }
 
     public decode() {
         const bytes = this.cloneBytes();
-
-        this.userId = bytes.readString();
-
+        this.user = bytes.readString();
         return {
-            userId: this.userId
+            user: this.user
         }
     }
 
     public encode() {
         const bytes = new ByteArray();
-        bytes.writeString(this.userId);
+        bytes.writeString(this.user);
         return bytes;
     }
 }
