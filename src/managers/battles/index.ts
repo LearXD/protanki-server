@@ -10,6 +10,9 @@ import { SendCreateBattlePacket } from '../../network/packets/send-create-battle
 import { SetAddBattleOnListPacket } from '../../network/packets/set-add-battle-on-list';
 import { SetRemoveBattlesScreenPacket } from '../../network/packets/set-remove-battles-screen';
 import { LayoutState } from '../../utils/game/layout-state';
+import path from "path";
+import { SetTurretsDataPacket } from "../../network/packets/set-turrets-data";
+import { SetBonusesDataPacket } from "../../network/packets/set-bonuses-data";
 
 export class BattlesManager {
 
@@ -22,6 +25,69 @@ export class BattlesManager {
     ) {
         this.createBattle('For Newbies', 'map_sandbox')
         this.createBattle('For Newbies 2', 'map_noise')
+    }
+
+    public getData(_path: string) {
+        return this.server
+            .getAssetsManager()
+            .getData(path.join('battle', _path))
+    }
+
+    public createBattle(
+        name: string,
+        mapName: string,
+        config?: IBattleData
+    ) {
+        const map = this.server.getMapsManager().getMap(mapName)
+
+        if (!map) {
+            throw new Error('Map not found');
+        }
+
+        // TODO: Validate limits
+        const battle = new Battle(name, map, config);
+
+        const sendBattleCreated = new SetAddBattleOnListPacket(new ByteArray());
+        sendBattleCreated.data = battle.toBattleListItem();
+        this.server.broadcastPacket(sendBattleCreated);
+
+        this.addBattle(battle);
+        Logger.debug(`Created battle ${battle.getId()} with name ${name} and map ${mapName}`)
+
+        return battle;
+    }
+
+    public sendRemoveBattlesScreen(client: Client) {
+        const setRemoveBattlesScreenPacket = new SetRemoveBattlesScreenPacket(new ByteArray());
+        client.sendPacket(setRemoveBattlesScreenPacket);
+    }
+
+    public addBattle(battle: Battle) {
+        this.battles.push(battle);
+    }
+
+    public getBattle(battleId: string) {
+        const battle = this.battles.find(battle => battle.getId() == battleId)
+
+        if (!battle) {
+            throw new Error('Battle not found');
+        }
+
+        return battle;
+    }
+
+    public sendBattles(client: Client) {
+        this.server.getMapsManager()
+            .sendMapsData(client);
+
+        const setBattleListPacket = new SetBattleListPacket(new ByteArray());
+        setBattleListPacket.battles = this.battles.map(battle => battle.toBattleListItem());
+        client.sendPacket(setBattleListPacket);
+
+        if (this.battles.length > 0) {
+            const [battle] = this.battles;
+            battle.addViewer(client);
+        }
     }
 
     public handleCreateBattle(client: Client, packet: SendCreateBattlePacket) {
@@ -68,60 +134,28 @@ export class BattlesManager {
         }
     }
 
-    public createBattle(
-        name: string,
-        mapName: string,
-        config?: IBattleData
-    ) {
-        const map = this.server.getMapsManager().getMap(mapName)
+    public handleJoinBattle(client: Client, team: string) {
+        client.setLayoutState(LayoutState.BATTLE)
 
-        if (!map) {
-            throw new Error('Map not found');
-        }
+        this.sendRemoveBattlesScreen(client);
 
-        // TODO: Validate limits
-        const battle = new Battle(name, map, config);
+        this.server.getChatManager()
+            .sendRemoveChatScreen(client);
 
-        const sendBattleCreated = new SetAddBattleOnListPacket(new ByteArray());
-        sendBattleCreated.data = battle.toBattleListItem();
-        this.server.broadcastPacket(sendBattleCreated);
+        client.sendLatency(0, 0)
 
-        this.addBattle(battle);
-        Logger.debug(`Created battle ${battle.getId()} with name ${name} and map ${mapName}`)
+        const turrets = this.getData('turrets.json')
+        const setTurretsDataPacket = new SetTurretsDataPacket(new ByteArray());
+        setTurretsDataPacket.turrets = turrets;
+        client.sendPacket(setTurretsDataPacket);
 
-        return battle;
-    }
+        client.sendTime(0, 0);
 
-    public removeBattleScreen(client: Client) {
-        const setRemoveBattlesScreenPacket = new SetRemoveBattlesScreenPacket(new ByteArray());
-        client.sendPacket(setRemoveBattlesScreenPacket);
-    }
+        const bonuses = this.getData('bonuses.json')
+        const setBonusesDataPacket = new SetBonusesDataPacket(new ByteArray());
+        setBonusesDataPacket.data = bonuses;
+        client.sendPacket(setBonusesDataPacket);
 
-    public addBattle(battle: Battle) {
-        this.battles.push(battle);
-    }
-
-    public getBattle(battleId: string) {
-        const battle = this.battles.find(battle => battle.getId() == battleId)
-
-        if (!battle) {
-            throw new Error('Battle not found');
-        }
-
-        return battle;
-    }
-
-    public sendBattles(client: Client) {
-        this.server.getMapsManager()
-            .sendMapsData(client);
-
-        const setBattleListPacket = new SetBattleListPacket(new ByteArray());
-        setBattleListPacket.battles = this.battles.map(battle => battle.toBattleListItem());
-        client.sendPacket(setBattleListPacket);
-
-        if (this.battles.length > 0) {
-            const [battle] = this.battles;
-            battle.addViewer(client);
-        }
+        this.server.getUserDataManager().sendSupplies(client);
     }
 }

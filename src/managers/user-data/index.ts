@@ -5,6 +5,7 @@ import { SetOpenConfigPacket } from "../../network/packets/set-open-config";
 import { SetPremiumDataPacket } from "../../network/packets/set-premium-data";
 import { SetPremiumLeftTimePacket } from "../../network/packets/set-premium-left-time";
 import { SetSocialNetworkPanelCCPacket } from "../../network/packets/set-social-network-panel-cc";
+import { SetSuppliesPacket } from "../../network/packets/set-supplies";
 import { SetUserOnlinePacket } from "../../network/packets/set-user-online";
 import { SetUserPremiumDataPacket } from "../../network/packets/set-user-premium-data";
 import { SetUserPropertyPacket } from "../../network/packets/set-user-property";
@@ -83,6 +84,24 @@ export class UserDataManager {
         client.sendPacket(setUserPropertyPacket);
     }
 
+    public sendSupplies(client: Client) {
+        const supplies = this.getUserData(client).getSupplies();
+        const setSuppliesPacket = new SetSuppliesPacket(new ByteArray());
+
+        let slotId = 1;
+        for (const [supply, count] of Object.entries(supplies)) {
+            setSuppliesPacket.supplies.push({
+                count,
+                id: supply,
+                itemEffectTime: 0,
+                itemRestSec: 0,
+                slotId: slotId++
+            });
+        }
+
+        client.sendPacket(setSuppliesPacket);
+    }
+
     public handleRequestUserData(client: Client, query: string) {
         const setUserOnlinePacket = new SetUserOnlinePacket(new ByteArray());
         setUserOnlinePacket.online = false;
@@ -122,5 +141,13 @@ export class UserDataManager {
     public handleOpenConfig(client: Client) {
         const setOpenConfigPacket = new SetOpenConfigPacket(new ByteArray());
         client.sendPacket(setOpenConfigPacket);
+    }
+
+    public handleSetShowNotifications(client: Client, enabled: boolean) {
+        // TODO: Implement
+    }
+
+    public handleSetShowDamageIndicator(client: Client, enabled: boolean) {
+        // TODO: Implement
     }
 }

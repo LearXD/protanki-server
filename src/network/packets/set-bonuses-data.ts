@@ -2,9 +2,36 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
+export interface IBonus {
+    id: string;
+    resourceId: number;
+    lifeTimeMs: number;
+    lighting: {
+        attenuationBegin: number;
+        attenuationEnd: number;
+        color: number;
+        intensity: number;
+    }
+}
+
+export interface IData {
+    bonuses: IBonus[];
+    cordResource: number;
+    parachuteInnerResource: number;
+    parachuteResource: number;
+    pickupSoundResource: number;
+}
+
+
 export class SetBonusesDataPacket extends Packet {
 
-    public bonuses: string | object;
+    public data: IData = {
+        bonuses: [],
+        cordResource: 0,
+        parachuteInnerResource: 0,
+        parachuteResource: 0,
+        pickupSoundResource: 0
+    };
 
     constructor(bytes: ByteArray) {
         super(Protocol.SET_BONUSES_DATA, bytes)
@@ -12,27 +39,38 @@ export class SetBonusesDataPacket extends Packet {
 
     public decode() {
         const bytes = this.cloneBytes();
-        this.bonuses = bytes.readString();
+        const json = bytes.readString();
 
         try {
-            this.bonuses = JSON.parse(this.bonuses);
+            const data = JSON.parse(json);
+            this.data.bonuses = data.bonuses;
+            this.data.cordResource = data.cordResource;
+            this.data.parachuteInnerResource = data.parachuteInnerResource;
+            this.data.parachuteResource = data.parachuteResource;
+            this.data.pickupSoundResource = data.pickupSoundResource
         } catch (e) {
             console.error(e);
         }
 
         return {
-            bonuses: this.bonuses
+            data: this.data
         }
     }
 
     public encode() {
         const bytes = new ByteArray();
 
-        if (typeof this.bonuses === 'object') {
-            this.bonuses = JSON.stringify(this.bonuses);
+        try {
+            bytes.writeString(JSON.stringify({
+                bonuses: this.data.bonuses,
+                cordResource: this.data.cordResource,
+                parachuteInnerResource: this.data.parachuteInnerResource,
+                parachuteResource: this.data.parachuteResource,
+                pickupSoundResource: this.data.pickupSoundResource
+            }));
+        } catch (e) {
+            console.error(e);
         }
-
-        bytes.writeString(this.bonuses);
 
         return bytes;
     }

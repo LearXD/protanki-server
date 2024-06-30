@@ -1,10 +1,43 @@
+import { BattleModes } from "../../utils/game/battle-mode";
+import { EquipmentConstraintsModes } from "../../utils/game/equipment-constraints-mode";
 import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
+export interface IViewingData {
+    battleMode: BattleModes,
+    itemId: string,
+    scoreLimit: number,
+    timeLimitInSec: number,
+    preview: number,
+    maxPeopleCount: number,
+    name: string,
+    proBattle: boolean,
+    minRank: number,
+    maxRank: number,
+    roundStarted: boolean,
+    spectator: boolean,
+    withoutBonuses: boolean,
+    withoutCrystals: boolean,
+    withoutSupplies: boolean,
+    proBattleEnterPrice: number,
+    timeLeftInSec: number,
+    userPaidNoSuppliesBattle: boolean,
+    proBattleTimeLeftInSec: number,
+    parkourMode: boolean,
+    equipmentConstraintsMode: EquipmentConstraintsModes,
+    reArmorEnabled: boolean,
+    usersBlue: string[],
+    usersRed: string[],
+    scoreRed: number,
+    scoreBlue: number,
+    autoBalance: boolean,
+    friendlyFire: boolean,
+}
+
 export class SetViewingBattleDataPacket extends Packet {
 
-    public data: string | object;
+    public data: IViewingData;
 
     constructor(bytes: ByteArray) {
         super(Protocol.SET_REMOVE_VIEWING_BATTLE_DATA, bytes)
@@ -12,10 +45,10 @@ export class SetViewingBattleDataPacket extends Packet {
 
     public decode() {
         const bytes = this.cloneBytes();
-        this.data = bytes.readString();
+        const json = bytes.readString();
 
         try {
-            this.data = JSON.parse(this.data);
+            this.data = JSON.parse(json);
         } catch (e) {
             console.error(e);
         }
@@ -27,13 +60,7 @@ export class SetViewingBattleDataPacket extends Packet {
 
     public encode() {
         const bytes = new ByteArray();
-
-        if (typeof this.data === 'object') {
-            this.data = JSON.stringify(this.data);
-        }
-
-        bytes.writeString(this.data);
-
+        bytes.writeString(JSON.stringify(this.data));
         return bytes;
     }
 }

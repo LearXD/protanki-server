@@ -76,14 +76,14 @@ import { RemovedFriendRequestPacket } from "./packets/removed-friend-request";
 import { SendJoinOnBattlePacket } from "./packets/send-join-on-battle";
 import { SetTurretsDataPacket } from "./packets/set-turrets-data";
 import { SetLatencyPacket } from "./packets/set-latency";
-import { SendTimePacket } from "./packets/send-time";
+import { SetTimePacket } from "./packets/set-time";
 import { SetBonusesDataPacket } from "./packets/set-bonuses-data";
 import { SetBattleDataPacket } from "./packets/set-battle-data";
 import { SetBattleStatisticsCCPacket } from "./packets/set-battle-statistics-cc";
 import { SetBattleStatisticsDMCCPacket } from "./packets/set-battle-statistics-dm-cc";
 import { SetBattleMineCCPacket } from "./packets/set-battle-mine-cc";
 import { SetUserTankResourcesDataPacket } from "./packets/set-user-tank-resources-data";
-import { SetDrugsDataPacket } from "./packets/set-drugs-data";
+import { SetSuppliesPacket } from "./packets/set-supplies";
 import { SetBattleUserStatusPacket } from "./packets/set-battle-user-status";
 import { SetBattleUsersEffectsPacket } from "./packets/set-battle-users-effects";
 import { SetBattleSpawnedBoxesPacket } from "./packets/set-battle-spawned-boxes";
@@ -300,7 +300,7 @@ import { SomeJsonRankUpPacket } from "./packets/some-json-rank-up";
 import { SetSomePacketOnJoinBattle5Packet } from "./packets/set-some-packet-on-join-battle-5";
 import { SetSomePacketOnJoinBattle4Packet } from "./packets/set-some-packet-on-join-battle-4";
 import { SetSomePacketOnJoinBattle3Packet } from "./packets/set-some-packet-on-join-battle-3";
-import { SetRemoveBattlesAndChatPacket } from "./packets/set-remove-battles-and-chat";
+import { SetRemoveChatPacket } from "./packets/set-remove-chat";
 import { SetRemoveBattlesScreenPacket } from "./packets/set-remove-battles-screen";
 import { SendIsisShotPositionPacket } from "./packets/send-isis-shot-position";
 import { SendStartIsisShotPacket } from "./packets/send-start-isis-shot";
@@ -421,7 +421,7 @@ export class Network {
         this.registerPacket(Protocol.SET_BONUSES_DATA, SetBonusesDataPacket)
         this.registerPacket(Protocol.SET_BATTLE_DATA, SetBattleDataPacket)
         this.registerPacket(Protocol.SET_USER_TANK_RESOURCES_DATA, SetUserTankResourcesDataPacket)
-        this.registerPacket(Protocol.SET_DRUGS_DATA, SetDrugsDataPacket)
+        this.registerPacket(Protocol.SET_SUPPLIES, SetSuppliesPacket)
         this.registerPacket(Protocol.SET_BATTLE_USERS_EFFECTS, SetBattleUsersEffectsPacket)
         this.registerPacket(Protocol.SET_BATTLE_SPAWNED_BOXES, SetBattleSpawnedBoxesPacket)
 
@@ -502,7 +502,7 @@ export class Network {
 
         this.registerPacket(Protocol.SEND_JOIN_ON_BATTLE, SendJoinOnBattlePacket)
         this.registerPacket(Protocol.SET_LATENCY, SetLatencyPacket)
-        this.registerPacket(Protocol.SEND_TIME, SendTimePacket)
+        this.registerPacket(Protocol.SET_TIME, SetTimePacket)
         this.registerPacket(Protocol.KICK, KickPacket)
         this.registerPacket(Protocol.PING, PingPacket)
         this.registerPacket(Protocol.PONG, PongPacket)
@@ -657,13 +657,13 @@ export class Network {
         this.registerPacket(Protocol.SET_SOME_PACKET_ON_JOIN_BATTLE_5, SetSomePacketOnJoinBattle5Packet);
         this.registerPacket(Protocol.SET_SOME_PACKET_ON_JOIN_BATTLE_4, SetSomePacketOnJoinBattle4Packet);
         this.registerPacket(Protocol.SET_SOME_PACKET_ON_JOIN_BATTLE_3, SetSomePacketOnJoinBattle3Packet);
-        this.registerPacket(Protocol.SET_REMOVE_BATTLES_AND_CHAT, SetRemoveBattlesAndChatPacket);
+        this.registerPacket(Protocol.SET_REMOVE_CHAT, SetRemoveChatPacket);
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);
 
         // GENERATE REGISTER HERE
-		this.registerPacket(Protocol.SEND_SHOW_NOTIFICATIONS, SendShowNotificationsPacket);
-		this.registerPacket(Protocol.SET_OPEN_CONFIG, SetOpenConfigPacket);
-		this.registerPacket(Protocol.SEND_OPEN_CONFIG, SendOpenConfigPacket);
+        this.registerPacket(Protocol.SEND_SHOW_NOTIFICATIONS, SendShowNotificationsPacket);
+        this.registerPacket(Protocol.SET_OPEN_CONFIG, SetOpenConfigPacket);
+        this.registerPacket(Protocol.SEND_OPEN_CONFIG, SendOpenConfigPacket);
         this.registerPacket(Protocol.VALIDATE_FRIEND, ValidateFriendPacket);
         this.registerPacket(Protocol.SET_ALREADY_SENT_FRIEND_REQUEST_POPUP, SetAlreadySentFriendRequestPopupPacket);
         this.registerPacket(Protocol.SET_REMOVE_FRIEND, SetRemoveFriendPacket);

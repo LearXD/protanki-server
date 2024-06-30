@@ -100,7 +100,7 @@ export class Protocol {
     /** CHAT */
     static SEND_CHAT_MESSAGE = 705454610;
     static SET_CHAT_COST = 744948472;
-    static SET_REMOVE_BATTLES_AND_CHAT = -920985123;
+    static SET_REMOVE_CHAT = -920985123;
     static SET_CHAT_INIT_PARAMS = 178154988;
     static SET_SOME_UID = 1993050216 // TODO: see what is this
     static SET_CHAT_MESSAGES = -1263520410;
@@ -327,7 +327,7 @@ export class Protocol {
 
 
     /** DRUGS */
-    static SET_DRUGS_DATA = -137249251;
+    static SET_SUPPLIES = -137249251;
     static SET_DRUG_QUANTITY = -502907094;
     // -1981777467
     static SEND_USE_DRUG = -2102525054;
@@ -435,7 +435,7 @@ export class Protocol {
 
     /** TIME & LATENCY */
     static SET_LATENCY = 34068208;
-    static SEND_TIME = 2074243318;
+    static SET_TIME = 2074243318;
 
 
     /** KICK */
@@ -601,9 +601,9 @@ export class Protocol {
     // -511004908 (ENVIAR CODIGO PROMOCIONAL)
 
     // GENERATE HERE
-	static SEND_SHOW_NOTIFICATIONS = 1312986424;
-	static SET_OPEN_CONFIG = 600420685;
-	static SEND_OPEN_CONFIG = -1507635228;
+    static SEND_SHOW_NOTIFICATIONS = 1312986424;
+    static SET_OPEN_CONFIG = 600420685;
+    static SEND_OPEN_CONFIG = -1507635228;
     static VALIDATE_FRIEND = 1286861380;
     static SET_ALREADY_SENT_FRIEND_REQUEST_POPUP = 2064692768;
     static SET_REMOVE_FRIEND = 1716773193;

@@ -17,7 +17,7 @@ export class CaptchaManager {
         const data = this.server
             .getAssetsManager()
             .getData(
-                path.join('captcha', 'captcha.jpg'), ReadType.BUFFER
+                path.join('captcha', 'image.jpg'), ReadType.BUFFER
             );
 
         this.sendCaptchaData(client, { type: location, data });
@@ -27,6 +27,7 @@ export class CaptchaManager {
         const setCaptchaDataPacket = new SetCaptchaDataPacket(new ByteArray());
         setCaptchaDataPacket.type = data.type;
         setCaptchaDataPacket.data = CaptchaUtils.encode(data.data);
+
         client.sendPacket(setCaptchaDataPacket);
     }
 }

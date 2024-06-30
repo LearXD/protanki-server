@@ -5,6 +5,7 @@ import { SendChatMessagePacket } from "../../network/packets/send-chat-message";
 import { SetChatCostPacket } from "../../network/packets/set-chat-cost";
 import { SetChatInitParamsPacket } from "../../network/packets/set-chat-init-params";
 import { SetChatMessagesPacket } from "../../network/packets/set-chat-messages";
+import { SetRemoveChatPacket } from "../../network/packets/set-remove-chat";
 import { Server } from "../../server";
 import { ByteArray } from "../../utils/network/byte-array";
 
@@ -80,6 +81,12 @@ export class ChatManager {
         setChatCostPacket.enterCost = 880
 
         client.sendPacket(setChatCostPacket);
+    }
+
+    public sendRemoveChatScreen(client: Client) {
+        const packet = new SetRemoveChatPacket(new ByteArray());
+        client.sendPacket(packet);
+
     }
 
     public handleClientSendMessage(client: Client, text: string, target?: string) {

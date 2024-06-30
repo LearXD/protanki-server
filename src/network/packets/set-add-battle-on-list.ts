@@ -2,9 +2,27 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
+export interface IBattle {
+    battleId: string;
+    battleMode: string;
+    map: string;
+    maxPeople: number;
+    name: string;
+    privateBattle: boolean;
+    proBattle: boolean;
+    minRank: number;
+    maxRank: number;
+    preview: number;
+    parkourMode: boolean;
+    equipmentConstraintsMode: string;
+    suspicionLevel: string;
+    usersBlue: string[];
+    usersRed: string[];
+}
+
 export class SetAddBattleOnListPacket extends Packet {
 
-    public data: string | object;
+    public data: IBattle;
 
     constructor(bytes: ByteArray) {
         super(Protocol.SET_ADD_BATTLE_ON_LIST, bytes)
@@ -12,10 +30,10 @@ export class SetAddBattleOnListPacket extends Packet {
 
     public decode() {
         const bytes = this.cloneBytes();
-        this.data = bytes.readString();
+        const json = bytes.readString();
 
         try {
-            this.data = JSON.parse(this.data);
+            this.data = JSON.parse(json);
         } catch (e) {
             console.error(e);
         }
@@ -27,13 +45,7 @@ export class SetAddBattleOnListPacket extends Packet {
 
     public encode() {
         const bytes = new ByteArray();
-
-        if (typeof this.data === 'object') {
-            this.data = JSON.stringify(this.data);
-        }
-
-        bytes.writeString(this.data);
-
+        bytes.writeString(JSON.stringify(this.data));
         return bytes;
     }
 }

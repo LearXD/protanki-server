@@ -2,28 +2,20 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-interface SpecialEntity {
-    chargingTimeMsec: number;
-    weakeningCoeff: number;
-}
-
-interface Weapon {
-    auto_aiming_down: number;
-    auto_aiming_up: number;
-    num_rays_down: number;
-    num_rays_up: number;
-    reload: number;
+export interface ISupply {
     id: string;
-    has_wwd: boolean;
-    special_entity: SpecialEntity;
+    count: number;
+    slotId: number;
+    itemEffectTime: number;
+    itemRestSec: number;
 }
 
-export class SetTurretsDataPacket extends Packet {
+export class SetSuppliesPacket extends Packet {
 
-    public turrets: Weapon[]
+    public supplies: ISupply[];
 
     constructor(bytes: ByteArray) {
-        super(Protocol.SET_TURRETS_DATA, bytes)
+        super(Protocol.SET_SUPPLIES, bytes)
     }
 
     public decode() {
@@ -31,23 +23,27 @@ export class SetTurretsDataPacket extends Packet {
         const json = bytes.readString();
 
         try {
-            this.turrets = JSON.parse(json).weapons;
+            this.supplies = JSON.parse(json).items;
         } catch (e) {
             console.error(e);
         }
 
         return {
-            turrets: this.turrets
+            supplies: this.supplies
         }
     }
 
     public encode() {
         const bytes = new ByteArray();
+
         try {
-            bytes.writeString(JSON.stringify({ weapons: this.turrets }));
+            bytes.writeString(JSON.stringify({
+                items: this.supplies
+            }));
         } catch (e) {
             console.error(e);
         }
+
         return bytes;
     }
 }

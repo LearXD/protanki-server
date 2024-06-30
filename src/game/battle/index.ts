@@ -10,7 +10,6 @@ import { EquipmentConstraintsMode, EquipmentConstraintsModes } from "../../utils
 import { ByteArray } from "../../utils/network/byte-array"
 import { Client } from "../client"
 
-
 export interface IBattleData {
     autoBalance: boolean,
     battleMode: BattleModes,
@@ -145,6 +144,7 @@ export class Battle {
             autoBalance: this.data.autoBalance,
             friendlyFire: this.data.friendlyFire,
         }
+
         client.sendPacket(setViewingBattleDataPacket);
     }
 

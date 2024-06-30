@@ -35,7 +35,12 @@ export class SetCaptchaDataPacket extends Packet {
 
         bytes.writeInt(CaptchaLocation.ALL.indexOf(this.type));
         bytes.writeInt(this.data.length);
-        this.data.forEach(byte => bytes.writeByte(byte));
+
+        // TODO: improve this
+        for (const byte of this.data) {
+            bytes.writeByte(byte)
+        }
+
 
         return bytes;
     }

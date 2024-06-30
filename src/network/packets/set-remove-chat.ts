@@ -2,10 +2,10 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetRemoveBattlesAndChatPacket extends Packet {
+export class SetRemoveChatPacket extends Packet {
 
     constructor(bytes: ByteArray) {
-        super(Protocol.SET_REMOVE_BATTLES_AND_CHAT, bytes)
+        super(Protocol.SET_REMOVE_CHAT, bytes)
     }
 
     public decode() {

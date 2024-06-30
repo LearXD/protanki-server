@@ -43,6 +43,11 @@ import { SendRequestUserDataPacket } from "../../network/packets/send-request-us
 import { SendRequestConfigDataPacket } from "../../network/packets/send-request-config-data";
 import { SendRequestCaptchaPacket } from "../../network/packets/send-request-captcha";
 import { SendOpenConfigPacket } from "../../network/packets/send-open-config";
+import { SendShowDamageIndicatorPacket } from "../../network/packets/send-show-damage-indicator";
+import { SendShowNotificationsPacket } from "../../network/packets/send-show-notifications";
+import { SendJoinOnBattlePacket } from "../../network/packets/send-join-on-battle";
+import { SetLatencyPacket } from "../../network/packets/set-latency";
+import { SetTimePacket } from "../../network/packets/set-time";
 
 const IGNORE_PACKETS = [
     1484572481, // Pong
@@ -167,6 +172,20 @@ export class Client {
         return this.socket.remoteAddress + ':' + this.socket.remotePort;
     }
 
+    public sendLatency(serverTime: number, clientPing: number) {
+        const setLatencyPacket = new SetLatencyPacket(new ByteArray());
+        setLatencyPacket.serverSessionTime = serverTime;
+        setLatencyPacket.clientPing = clientPing;
+        this.sendPacket(setLatencyPacket);
+    }
+
+    public sendTime(serverTime: number, clientTime: number) {
+        const setTimePacket = new SetTimePacket(new ByteArray());
+        setTimePacket.serverSessionTime = serverTime;
+        setTimePacket.clientSessionTime = clientTime;
+        this.sendPacket(setTimePacket);
+    }
+
     public setLayoutState(state: LayoutStateType) {
 
         if (this.getLayoutState() === state) return;
@@ -180,7 +199,7 @@ export class Client {
             case LayoutState.BATTLE_SELECT:
                 this.getServer()
                     .getBattlesManager()
-                    .removeBattleScreen(this);
+                    .sendRemoveBattlesScreen(this);
         }
 
         this.layoutState = state;
@@ -345,6 +364,24 @@ export class Client {
             this.getServer()
                 .getUserDataManager()
                 .handleOpenConfig(this);
+        }
+
+        if (packet instanceof SendShowDamageIndicatorPacket) {
+            this.getServer()
+                .getUserDataManager()
+                .handleSetShowDamageIndicator(this, packet.enabled);
+        }
+
+        if (packet instanceof SendShowNotificationsPacket) {
+            this.getServer()
+                .getUserDataManager()
+                .handleSetShowNotifications(this, packet.enabled);
+        }
+
+        if (packet instanceof SendJoinOnBattlePacket) {
+            this.getServer()
+                .getBattlesManager()
+                .handleJoinBattle(this, packet.team);
         }
 
     }

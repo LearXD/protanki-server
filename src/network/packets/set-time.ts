@@ -2,14 +2,14 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SendTimePacket extends Packet {
+export class SetTimePacket extends Packet {
 
     public clientSessionTime: number;
 
     public serverSessionTime: number;
 
     constructor(bytes: ByteArray) {
-        super(Protocol.SEND_TIME, bytes)
+        super(Protocol.SET_TIME, bytes)
     }
 
     public decode() {
