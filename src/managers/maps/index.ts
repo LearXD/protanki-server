@@ -1,4 +1,5 @@
 
+import path from "path";
 import { Client } from "../../game/client";
 import { SetMapsDataPacket } from "../../network/packets/set-maps-data";
 import { Server } from "../../server";
@@ -45,6 +46,24 @@ export class MapsManager {
             .getData('maps.json');
     }
 
+    public getMapResource(map: string, theme: string, resource: string) {
+        console.log(path.join(map, theme, 'resources', resource))
+        return this.getData(
+            path.join(map, theme, 'resources', resource)
+        );
+    }
+
+    public getMapData(map: string, theme: string) {
+        return this.getData(
+            path.join(map, theme, 'data.json')
+        );
+    }
+
+    public getData(_path: string) {
+        return this.server.getAssetsManager()
+            .getData(path.join('maps', _path));
+    }
+
     public getMaps() {
         return this.properties.maps;
     }
@@ -57,9 +76,9 @@ export class MapsManager {
         return this.properties;
     }
 
-    public getMap(name: string) {
+    public getMap(name: string, theme: string = 'SUMMER') {
         return this.getMaps()
-            .find(map => map.mapId === name);
+            .find(map => (map.mapId === name && map.theme === theme));
     }
 
     public getBattleLimits(battleMode: string) {

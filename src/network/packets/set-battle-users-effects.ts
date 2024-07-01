@@ -4,7 +4,7 @@ import { Packet } from "./packet";
 
 export class SetBattleUsersEffectsPacket extends Packet {
 
-    public effects: string | object;
+    public effects: any[];
 
     constructor(bytes: ByteArray) {
         super(Protocol.SET_BATTLE_USERS_EFFECTS, bytes)
@@ -12,10 +12,10 @@ export class SetBattleUsersEffectsPacket extends Packet {
 
     public decode() {
         const bytes = this.cloneBytes();
-        this.effects = bytes.readString();
+        const json = bytes.readString();
 
         try {
-            this.effects = JSON.parse(this.effects);
+            this.effects = JSON.parse(json).effects;
         } catch (e) {
             console.error(e);
         }
@@ -27,13 +27,7 @@ export class SetBattleUsersEffectsPacket extends Packet {
 
     public encode() {
         const bytes = new ByteArray();
-
-        if (typeof this.effects === 'object') {
-            this.effects = JSON.stringify(this.effects);
-        }
-
-        bytes.writeString(this.effects);
-
+        bytes.writeString(JSON.stringify({ effects: this.effects }));
         return bytes;
     }
 }

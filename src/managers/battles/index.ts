@@ -1,18 +1,18 @@
+import path from "path";
+
 import { Battle, IBattleData } from "../../game/battle";
 import { Client } from "../../game/client";
 import { SetBattleListPacket } from "../../network/packets/set-battle-list";
 import { Server } from "../../server";
-import { BattleMode, BattleModes } from "../../utils/game/battle-mode";
-import { EquipmentConstraintsMode, EquipmentConstraintsModes } from "../../utils/game/equipment-constraints-mode";
+import { BattleModes } from "../../utils/game/battle-mode";
+import { EquipmentConstraintsModes } from "../../utils/game/equipment-constraints-mode";
 import { ByteArray } from "../../utils/network/byte-array";
 import { Logger } from '../../utils/logger';
 import { SendCreateBattlePacket } from '../../network/packets/send-create-battle';
 import { SetAddBattleOnListPacket } from '../../network/packets/set-add-battle-on-list';
 import { SetRemoveBattlesScreenPacket } from '../../network/packets/set-remove-battles-screen';
 import { LayoutState } from '../../utils/game/layout-state';
-import path from "path";
-import { SetTurretsDataPacket } from "../../network/packets/set-turrets-data";
-import { SetBonusesDataPacket } from "../../network/packets/set-bonuses-data";
+
 
 export class BattlesManager {
 
@@ -47,12 +47,8 @@ export class BattlesManager {
         // TODO: Validate limits
         const battle = new Battle(name, map, config);
 
-        const sendBattleCreated = new SetAddBattleOnListPacket(new ByteArray());
-        sendBattleCreated.data = battle.toBattleListItem();
-        this.server.broadcastPacket(sendBattleCreated);
-
         this.addBattle(battle);
-        Logger.debug(`Created battle ${battle.getId()} with name ${name} and map ${mapName}`)
+        Logger.debug(`Created battle ${battle.getBattleId()} with name ${name} and map ${mapName}`)
 
         return battle;
     }
@@ -64,10 +60,14 @@ export class BattlesManager {
 
     public addBattle(battle: Battle) {
         this.battles.push(battle);
+
+        const sendBattleCreated = new SetAddBattleOnListPacket(new ByteArray());
+        sendBattleCreated.data = battle.toBattleListItem();
+        this.server.broadcastPacket(sendBattleCreated);
     }
 
     public getBattle(battleId: string) {
-        const battle = this.battles.find(battle => battle.getId() == battleId)
+        const battle = this.battles.find(battle => battle.getBattleId() == battleId)
 
         if (!battle) {
             throw new Error('Battle not found');
@@ -86,7 +86,7 @@ export class BattlesManager {
 
         if (this.battles.length > 0) {
             const [battle] = this.battles;
-            battle.addViewer(client);
+            battle.getViewersManager().addViewer(client);
         }
     }
 
@@ -106,13 +106,12 @@ export class BattlesManager {
             proBattle: packet.proBattle,
             rankRange: packet.rankRange,
             reArmorEnabled: packet.reArmorEnabled,
-            theme: packet.theme,
             withoutBonuses: packet.withoutBonuses,
             withoutCrystals: packet.withoutCrystals,
             withoutSupplies: packet.withoutSupplies
         });
 
-        battle.addViewer(client);
+        battle.getViewersManager().addViewer(client);
     }
 
     public handleOpenBattlesList(client: Client) {
@@ -125,8 +124,8 @@ export class BattlesManager {
     public handleViewBattle(client: Client, battleId: string) {
         try {
             const battle = this.getBattle(battleId);
-            if (client.getViewingBattle().getId() != battleId) {
-                battle.addViewer(client);
+            if (client.getViewingBattle().getBattleId() != battleId) {
+                battle.getViewersManager().addViewer(client);
             }
         } catch (error) {
             if (error instanceof Error)
@@ -136,26 +135,7 @@ export class BattlesManager {
 
     public handleJoinBattle(client: Client, team: string) {
         client.setLayoutState(LayoutState.BATTLE)
-
-        this.sendRemoveBattlesScreen(client);
-
-        this.server.getChatManager()
-            .sendRemoveChatScreen(client);
-
-        client.sendLatency(0, 0)
-
-        const turrets = this.getData('turrets.json')
-        const setTurretsDataPacket = new SetTurretsDataPacket(new ByteArray());
-        setTurretsDataPacket.turrets = turrets;
-        client.sendPacket(setTurretsDataPacket);
-
-        client.sendTime(0, 0);
-
-        const bonuses = this.getData('bonuses.json')
-        const setBonusesDataPacket = new SetBonusesDataPacket(new ByteArray());
-        setBonusesDataPacket.data = bonuses;
-        client.sendPacket(setBonusesDataPacket);
-
-        this.server.getUserDataManager().sendSupplies(client);
+        const battle = client.getViewingBattle();
+        battle.handleClientJoin(client);
     }
 }

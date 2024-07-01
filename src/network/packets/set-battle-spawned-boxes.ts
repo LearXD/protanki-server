@@ -13,7 +13,7 @@ export interface IBox {
 
 export class SetBattleSpawnedBoxesPacket extends Packet {
 
-    public boxes: string | IBox[];
+    public boxes: IBox[];
 
     constructor(bytes: ByteArray) {
         super(Protocol.SET_BATTLE_SPAWNED_BOXES, bytes)
@@ -21,10 +21,10 @@ export class SetBattleSpawnedBoxesPacket extends Packet {
 
     public decode() {
         const bytes = this.cloneBytes();
-        this.boxes = bytes.readString();
+        const json = bytes.readString();
 
         try {
-            this.boxes = JSON.parse(this.boxes);
+            this.boxes = JSON.parse(json);
         } catch (e) {
             console.error(e);
         }
@@ -36,13 +36,7 @@ export class SetBattleSpawnedBoxesPacket extends Packet {
 
     public encode() {
         const bytes = new ByteArray();
-
-        if (typeof this.boxes === 'object') {
-            this.boxes = JSON.stringify(this.boxes);
-        }
-
-        bytes.writeString(this.boxes);
-
+        bytes.writeString(JSON.stringify(this.boxes));
         return bytes;
     }
 }

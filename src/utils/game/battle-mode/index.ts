@@ -14,4 +14,5 @@ export class BattleMode {
     ]
 }
 
-export type BattleModes = 'DM' | 'TDM' | 'CTF' | 'CP' | 'AS'
+export type OnlyStringKeys<T> = T extends string ? T : never
+export type BattleModes = OnlyStringKeys<typeof BattleMode[keyof typeof BattleMode]>

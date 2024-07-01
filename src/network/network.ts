@@ -299,7 +299,7 @@ import { SetBattleTimePacket } from "./packets/set-battle-time";
 import { SomeJsonRankUpPacket } from "./packets/some-json-rank-up";
 import { SetSomePacketOnJoinBattle5Packet } from "./packets/set-some-packet-on-join-battle-5";
 import { SetSomePacketOnJoinBattle4Packet } from "./packets/set-some-packet-on-join-battle-4";
-import { SetSomePacketOnJoinBattle3Packet } from "./packets/set-some-packet-on-join-battle-3";
+import { SetBattleChatEnabledPacket } from "./packets/set-battle-chat-enabled";
 import { SetRemoveChatPacket } from "./packets/set-remove-chat";
 import { SetRemoveBattlesScreenPacket } from "./packets/set-remove-battles-screen";
 import { SendIsisShotPositionPacket } from "./packets/send-isis-shot-position";
@@ -656,7 +656,7 @@ export class Network {
         this.registerPacket(Protocol.SOME_JSON_RANK_UP, SomeJsonRankUpPacket);
         this.registerPacket(Protocol.SET_SOME_PACKET_ON_JOIN_BATTLE_5, SetSomePacketOnJoinBattle5Packet);
         this.registerPacket(Protocol.SET_SOME_PACKET_ON_JOIN_BATTLE_4, SetSomePacketOnJoinBattle4Packet);
-        this.registerPacket(Protocol.SET_SOME_PACKET_ON_JOIN_BATTLE_3, SetSomePacketOnJoinBattle3Packet);
+        this.registerPacket(Protocol.SET_BATTLE_CHAT_ENABLED, SetBattleChatEnabledPacket);
         this.registerPacket(Protocol.SET_REMOVE_CHAT, SetRemoveChatPacket);
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);
 

@@ -2,18 +2,14 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetSomePacketOnJoinBattle3Packet extends Packet {
-
+export class SetBattleChatEnabledPacket extends Packet {
 
     constructor(bytes: ByteArray) {
-        super(Protocol.SET_SOME_PACKET_ON_JOIN_BATTLE_3, bytes)
+        super(Protocol.SET_BATTLE_CHAT_ENABLED, bytes)
     }
 
     public decode() {
-        const bytes = this.cloneBytes();
-        return {
-
-        }
+        return {}
     }
 
     public encode() {

@@ -190,7 +190,7 @@ export class ByteArray {
     }
 
     writeStringArray(strings: string[] | null) {
-        if (strings === null || strings.length === 0) {
+        if (strings === null) {
             return this.writeBoolean(true);
         }
 

@@ -8,4 +8,5 @@ export class Vector3d {
             Math.pow(this.z - vector.z, 2)
         )
     }
+
 }

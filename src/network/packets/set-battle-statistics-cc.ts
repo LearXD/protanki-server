@@ -11,7 +11,7 @@ export class SetBattleStatisticsCCPacket extends Packet {
     public fund: number;
 
     public battleLimits: { scoreLimit: number, timeLimitInSec: number };
-    public map: string;
+    public mapName: string;
     public maxPeopleCount: number;
     public parkourMode: boolean;
     public int_1: number;
@@ -34,7 +34,7 @@ export class SetBattleStatisticsCCPacket extends Packet {
             scoreLimit: bytes.readInt(),
             timeLimitInSec: bytes.readInt()
         };
-        this.map = bytes.readString();
+        this.mapName = bytes.readString();
         this.maxPeopleCount = bytes.readInt();
         this.parkourMode = bytes.readBoolean();
         this.int_1 = bytes.readInt();
@@ -47,7 +47,7 @@ export class SetBattleStatisticsCCPacket extends Packet {
             equipmentConstraintsMode: this.equipmentConstraintsMode,
             fund: this.fund,
             battleLimits: this.battleLimits,
-            map: this.map,
+            mapName: this.mapName,
             maxPeopleCount: this.maxPeopleCount,
             parkourMode: this.parkourMode,
             int_1: this.int_1,
@@ -60,12 +60,12 @@ export class SetBattleStatisticsCCPacket extends Packet {
     public encode() {
         const bytes = new ByteArray();
 
-        bytes.writeString(this.mode);
+        bytes.writeInt(BattleMode.ALL.indexOf(this.mode));
         bytes.writeInt(EquipmentConstraintsMode.ALL.indexOf(this.equipmentConstraintsMode));
         bytes.writeInt(this.fund);
         bytes.writeInt(this.battleLimits.scoreLimit);
         bytes.writeInt(this.battleLimits.timeLimitInSec);
-        bytes.writeString(this.map);
+        bytes.writeString(this.mapName);
         bytes.writeInt(this.maxPeopleCount);
         bytes.writeBoolean(this.parkourMode);
         bytes.writeInt(this.int_1);

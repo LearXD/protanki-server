@@ -87,18 +87,16 @@ export class UserDataManager {
     public sendSupplies(client: Client) {
         const supplies = this.getUserData(client).getSupplies();
         const setSuppliesPacket = new SetSuppliesPacket(new ByteArray());
-
-        let slotId = 1;
-        for (const [supply, count] of Object.entries(supplies)) {
-            setSuppliesPacket.supplies.push({
-                count,
-                id: supply,
-                itemEffectTime: 0,
-                itemRestSec: 0,
-                slotId: slotId++
-            });
-        }
-
+        setSuppliesPacket.supplies = Object.entries(supplies)
+            .map(([supply, count], i) => {
+                return {
+                    count,
+                    id: supply,
+                    itemEffectTime: 0,
+                    itemRestSec: 0,
+                    slotId: i + 1
+                }
+            })
         client.sendPacket(setSuppliesPacket);
     }
 

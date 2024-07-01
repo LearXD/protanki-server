@@ -12,7 +12,7 @@ export interface ISupply {
 
 export class SetSuppliesPacket extends Packet {
 
-    public supplies: ISupply[];
+    public supplies: ISupply[] = [];
 
     constructor(bytes: ByteArray) {
         super(Protocol.SET_SUPPLIES, bytes)

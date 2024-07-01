@@ -17,7 +17,6 @@ import { SendLoginPacket } from "../../network/packets/send-login";
 import { SetCryptKeysPacket } from "../../network/packets/set-crypt-keys";
 import { SetCaptchaLocationsPacket } from "../../network/packets/set-captcha-locations";
 import { CaptchaLocation } from "../../utils/game/captcha-location";
-import { ResolveFullLoadedPacket } from "../../network/packets/resolve-full-loaded";
 import { SetGameLoadedPacket } from "../../network/packets/set-game-loaded";
 import { SetLayoutStatePacket } from "../../network/packets/set-layout-state";
 import { LayoutState, LayoutStateType } from "../../utils/game/layout-state";
@@ -47,7 +46,14 @@ import { SendShowDamageIndicatorPacket } from "../../network/packets/send-show-d
 import { SendShowNotificationsPacket } from "../../network/packets/send-show-notifications";
 import { SendJoinOnBattlePacket } from "../../network/packets/send-join-on-battle";
 import { SetLatencyPacket } from "../../network/packets/set-latency";
-import { SetTimePacket } from "../../network/packets/set-time";
+import { SendResumePacket } from "../../network/packets/send-resume";
+import { SetTankSpeedPacket } from "../../network/packets/set-tank-speed";
+import { SetMoveCameraPacket } from "../../network/packets/set-move-camera";
+import { SendRequestRespawnPacket } from "../../network/packets/send-request-respawn";
+import { SetTankHealthPacket } from "../../network/packets/set-tank-health";
+import { SetSpawnTankPacket } from "../../network/packets/set-spawn-tank";
+import { Team } from "../../utils/game/team";
+import { SetTankVisiblePacket } from "../../network/packets/set-tank-visible";
 
 const IGNORE_PACKETS = [
     1484572481, // Pong
@@ -141,7 +147,7 @@ export class Client {
 
     public getUsername() { return this.username }
     public getPosition(): Vector3d { return this.position }
-    public getViewingBattle() { return this.viewingBattle }
+    public getViewingBattle(): Battle { return this.viewingBattle }
     public getPing() { return this.lastPong - this.lastPing }
 
     public getLoadedResources() { return this.loadedResources }
@@ -172,6 +178,56 @@ export class Client {
         return this.socket.remoteAddress + ':' + this.socket.remotePort;
     }
 
+    public setTankSpeed(
+        maxSpeed: number,
+        maxTurnSpeed: number,
+        maxTurretRotationSpeed: number,
+        acceleration: number,
+    ) {
+        const setTankSpeedPacket = new SetTankSpeedPacket(new ByteArray());
+        setTankSpeedPacket.tankId = this.getUsername();
+        setTankSpeedPacket.maxSpeed = maxSpeed;
+        setTankSpeedPacket.maxTurnSpeed = maxTurnSpeed;
+        setTankSpeedPacket.maxTurretRotationSpeed = maxTurretRotationSpeed;
+        setTankSpeedPacket.acceleration = acceleration;
+        setTankSpeedPacket.specificationId = 1;
+        this.sendPacket(setTankSpeedPacket);
+    }
+
+    public spawn() {
+        this.setTankSpeed(8.600000381469727, 1.6632988452911377, 1.8149678707122803, 10.970000267028809)
+
+        const setMoveCameraPacket = new SetMoveCameraPacket(new ByteArray());
+        setMoveCameraPacket.position = new Vector3d(-4669.8310546875, -1442.4090576171875, 200)
+        setMoveCameraPacket.orientation = new Vector3d(0, 0, -1.5709999799728394);
+        this.sendPacket(setMoveCameraPacket);
+    }
+
+    public setHealth(health: number) {
+        const setTankHealthPacket = new SetTankHealthPacket(new ByteArray());
+        setTankHealthPacket.tankId = this.getUsername();
+        setTankHealthPacket.health = health;
+        this.sendPacket(setTankHealthPacket);
+    }
+
+    public respawn() {
+        this.setHealth(10000);
+
+        const setSpawnTankPacket = new SetSpawnTankPacket(new ByteArray());
+        setSpawnTankPacket.tankId = this.getUsername();
+        setSpawnTankPacket.team = Team.NONE;
+        setSpawnTankPacket.position = new Vector3d(-4669.8310546875, -1442.4090576171875, 200);
+        setSpawnTankPacket.orientation = new Vector3d(0, 0, -1.5709999799728394);
+        setSpawnTankPacket.health = 10000;
+        setSpawnTankPacket.incarnationId = 1;
+
+        this.sendPacket(setSpawnTankPacket);
+
+        const setTankVisiblePacket = new SetTankVisiblePacket(new ByteArray());
+        setTankVisiblePacket.tankId = this.getUsername();
+        this.sendPacket(setTankVisiblePacket);
+    }
+
     public sendLatency(serverTime: number, clientPing: number) {
         const setLatencyPacket = new SetLatencyPacket(new ByteArray());
         setLatencyPacket.serverSessionTime = serverTime;
@@ -180,10 +236,10 @@ export class Client {
     }
 
     public sendTime(serverTime: number, clientTime: number) {
-        const setTimePacket = new SetTimePacket(new ByteArray());
-        setTimePacket.serverSessionTime = serverTime;
-        setTimePacket.clientSessionTime = clientTime;
-        this.sendPacket(setTimePacket);
+        // const setTimePacket = new SetTimePacket(new ByteArray());
+        // setTimePacket.serverSessionTime = serverTime;
+        // setTimePacket.clientSessionTime = clientTime;
+        // this.sendPacket(setTimePacket);
     }
 
     public setLayoutState(state: LayoutStateType) {
@@ -200,6 +256,13 @@ export class Client {
                 this.getServer()
                     .getBattlesManager()
                     .sendRemoveBattlesScreen(this);
+        }
+
+        switch (state) {
+            case LayoutState.BATTLE:
+                this.getServer().getChatManager()
+                    .sendRemoveChatScreen(this);
+                break;
         }
 
         this.layoutState = state;
@@ -384,6 +447,14 @@ export class Client {
                 .handleJoinBattle(this, packet.team);
         }
 
+        if (packet instanceof SendResumePacket) {
+            this.spawn();
+        }
+
+        if (packet instanceof SendRequestRespawnPacket) {
+            this.respawn();
+        }
+
     }
 
     public sendPacket(packet: SimplePacket, encrypt: boolean = true) {
@@ -427,13 +498,10 @@ export class Client {
             const realLength = length - Packet.HEADER_SIZE;
 
             if (this.bufferPool.length() < realLength) {
-                // console.log(`[${this.getIdentifier()}] Packet ${pid} not complete yet [${this.receivedBufferPool.length()} / ${realLength}]`)
-
                 this.bufferPool = new ByteArray()
                     .writeInt(length)
                     .writeInt(pid)
                     .write(this.bufferPool.buffer);
-
                 break;
             }
 

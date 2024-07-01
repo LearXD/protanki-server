@@ -131,7 +131,7 @@ export class Server {
     public getUserDataManager(): UserDataManager { return this.userDataManager }
     public getFriendsManager(): FriendsManager { return this.friendsManager }
     public getChatManager() { return this.chatManager }
-    public getBattlesManager() { return this.battleManager }
+    public getBattlesManager(): BattlesManager { return this.battleManager }
     public getMapsManager() { return this.mapsManager }
     public getGarageManager(): GarageManager { return this.garageManager }
     public getLocaleManager() { return this.localeManager }
