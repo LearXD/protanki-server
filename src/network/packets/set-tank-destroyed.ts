@@ -8,7 +8,7 @@ export class SetTankDestroyedPacket extends Packet {
     public killerId: string;
     public respawnDelay: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_TANK_DESTROYED, bytes)
     }
 

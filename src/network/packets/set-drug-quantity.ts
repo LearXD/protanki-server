@@ -7,7 +7,7 @@ export class SetDrugQuantityPacket extends Packet {
     public itemId: string;
     public quantity: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_DRUG_QUANTITY, bytes)
     }
 

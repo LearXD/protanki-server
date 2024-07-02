@@ -10,7 +10,7 @@ export class SetUserRankUpDialogPacket extends Packet {
     public nextRankScore: number
     public bonusCrystals: number
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_USER_RANK_UP_DIALOG, bytes)
     }
 

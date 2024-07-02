@@ -5,7 +5,7 @@ import { Packet } from "./packet";
 export class SendOpenShaftAimPacket extends Packet {
 
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_OPEN_SHAFT_AIM, bytes)
     }
 

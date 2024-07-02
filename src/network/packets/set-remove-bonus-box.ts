@@ -6,7 +6,7 @@ export class SetRemoveBonusBoxPacket extends Packet {
 
     public bonusId: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_REMOVE_BONUS_BOX, bytes)
     }
 

@@ -8,7 +8,7 @@ export class SetLoadResourcesPacket extends Packet {
     public resources: any[];
     public callbackId: number = 0
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_LOAD_RESOURCES, bytes)
     }
 

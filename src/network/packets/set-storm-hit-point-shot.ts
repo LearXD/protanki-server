@@ -8,7 +8,7 @@ export class SetStormHitPointShotPacket extends Packet {
     public shooter: string;
     public hitPoint: Vector3d;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_STORM_HIT_POINT_SHOT, bytes)
     }
 

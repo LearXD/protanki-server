@@ -8,7 +8,7 @@ export class SendLoginPacket extends Packet {
     public password: string;
     public remember: boolean;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_LOGIN, bytes)
     }
 

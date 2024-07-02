@@ -14,7 +14,7 @@ export class SetAddUserInfoOnViewingTeamBattlePacket extends Packet {
 
     public team: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_ADD_USER_INFO_ON_VIEWING_TEAM_BATTLE, bytes)
     }
 

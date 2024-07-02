@@ -6,7 +6,7 @@ export class SetRemoveGarageItemPacket extends Packet {
 
     public item: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_REMOVE_GARAGE_ITEM, bytes)
     }
 

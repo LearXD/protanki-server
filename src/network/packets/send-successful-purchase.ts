@@ -9,7 +9,7 @@ export class SendSuccessfulPurchasePacket extends Packet {
     public bonusCrystals: number
     public image: number
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_SUCCESSFUL_PURCHASE, bytes)
     }
 

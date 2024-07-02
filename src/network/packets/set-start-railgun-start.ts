@@ -6,7 +6,7 @@ export class SetStartRailgunShotPacket extends Packet {
 
     public shooter: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_START_RAILGUN_SHOT, bytes)
     }
 

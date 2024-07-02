@@ -6,7 +6,7 @@ export class SetCrystalsPacket extends Packet {
 
     public crystals: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_CRYSTALS, bytes)
     }
 

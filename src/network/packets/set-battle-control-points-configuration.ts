@@ -49,7 +49,7 @@ export class SetBattleControlPointsConfigurationPacket extends Packet {
         sound_10: number
     }
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_CONTROL_POINTS_CONFIGURATION, bytes)
     }
 

@@ -4,7 +4,7 @@ import { Packet } from "./packet";
 
 export class SendRequestRespawnPacket extends Packet {
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_REQUEST_RESPAWN, bytes)
     }
 

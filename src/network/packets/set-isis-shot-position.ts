@@ -17,7 +17,7 @@ export class SetIsisShotPositionPacket extends Packet {
     public state: string;
     public target: ITarget;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_ISIS_SHOT_POSITION, bytes)
     }
 

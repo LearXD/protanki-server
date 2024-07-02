@@ -6,7 +6,7 @@ export class SendCollectBonusBoxPacket extends Packet {
 
     public bonusId: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_COLLECT_BONUS_BOX, bytes)
     }
 

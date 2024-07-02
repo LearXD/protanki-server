@@ -13,7 +13,7 @@ export class SetDamageIndicatorsPacket extends Packet {
 
     public indicators: IIndicator[];
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_DAMAGE_INDICATORS, bytes)
     }
 

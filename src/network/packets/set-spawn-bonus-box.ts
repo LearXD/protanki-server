@@ -9,7 +9,7 @@ export class SetSpawnBonusBoxPacket extends Packet {
     public position: Vector3d;
     public int_1: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_SPAWN_BONUS_BOX, bytes)
     }
 

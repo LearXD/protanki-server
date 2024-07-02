@@ -42,7 +42,7 @@ export class SetUserTankResourcesDataPacket extends Packet {
 
     public data: IUserTankResourcesData;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_USER_TANK_RESOURCES_DATA, bytes)
     }
 

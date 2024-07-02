@@ -23,7 +23,7 @@ export class SetChatMessagesPacket extends Packet {
 
     public messages: IMessage[] = [];
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_CHAT_MESSAGES, bytes)
     }
 

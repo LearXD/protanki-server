@@ -9,7 +9,7 @@ export class SetFlagDroppedPacket extends Packet {
     public position: Vector3d;
     public team: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_FLAG_DROPPED, bytes)
     }
 

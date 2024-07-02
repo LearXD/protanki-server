@@ -6,7 +6,7 @@ export class SetAlreadySentFriendRequestPopupPacket extends Packet {
 
     public userId: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_ALREADY_SENT_FRIEND_REQUEST_POPUP, bytes)
     }
 

@@ -6,7 +6,7 @@ export class SendPreviewPaintingPacket extends Packet {
 
     public item: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_PREVIEW_PAINTING, bytes)
     }
 

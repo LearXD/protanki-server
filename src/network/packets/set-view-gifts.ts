@@ -5,7 +5,7 @@ import { Packet } from "./packet";
 export class SetViewGiftsPacket extends Packet {
 
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_VIEW_GIFTS, bytes)
     }
 

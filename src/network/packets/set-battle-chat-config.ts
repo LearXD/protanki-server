@@ -17,7 +17,7 @@ export class SetBattleChatConfigPacket extends Packet {
     public userId: string;
     public users: IUser[];
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_CHAT_CONFIG, bytes)
     }
 

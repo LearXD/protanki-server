@@ -57,7 +57,7 @@ export class SetGarageItemsPropertiesPacket extends Packet {
     delayMountWeaponInSec: number
     delayMountColorInSec: number
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_GARAGE_ITEMS_PROPERTIES, bytes)
     }
 

@@ -6,7 +6,7 @@ export class SendEmailCodePacket extends Packet {
 
     public code: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_EMAIL_CODE, bytes)
     }
 

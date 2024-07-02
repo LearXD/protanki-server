@@ -6,7 +6,7 @@ export class SetEmailPacket extends Packet {
 
     public email: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_EMAIL, bytes)
     }
 

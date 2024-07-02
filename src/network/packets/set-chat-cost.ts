@@ -7,7 +7,7 @@ export class SetChatCostPacket extends Packet {
     public symbolCost: number;
     public enterCost: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_CHAT_COST, bytes)
     }
 

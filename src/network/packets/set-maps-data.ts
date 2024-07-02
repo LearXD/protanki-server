@@ -32,7 +32,7 @@ export class SetMapsDataPacket extends Packet {
 
     public data: IMapData
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_MAPS_DATA, bytes)
     }
 

@@ -7,7 +7,7 @@ export class SendJoinOnBattlePacket extends Packet {
 
     public team: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_JOIN_ON_BATTLE, bytes)
     }
 

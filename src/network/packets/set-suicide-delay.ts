@@ -6,7 +6,7 @@ export class SetSuicideDelayPacket extends Packet {
 
     public delay: number
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_SUICIDE_DELAY, bytes)
     }
 

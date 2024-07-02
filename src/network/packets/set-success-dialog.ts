@@ -7,7 +7,7 @@ export class SetSuccessDialogPacket extends Packet {
     public success: boolean
     public error: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_SUCCESS_DIALOG, bytes)
     }
 

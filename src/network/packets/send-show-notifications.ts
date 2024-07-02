@@ -6,7 +6,7 @@ export class SendShowNotificationsPacket extends Packet {
 
     public enabled: boolean;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_SHOW_NOTIFICATIONS, bytes)
     }
 

@@ -6,7 +6,7 @@ export class SetStormVoidShotPacket extends Packet {
 
     public shooter: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_STORM_VOID_SHOT, bytes)
     }
 

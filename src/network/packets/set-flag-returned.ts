@@ -8,7 +8,7 @@ export class SetFlagReturnedPacket extends Packet {
     public team: string;
     public tank: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_FLAG_RETURNED, bytes)
     }
 

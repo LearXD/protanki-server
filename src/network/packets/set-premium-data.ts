@@ -12,7 +12,7 @@ export class SetPremiumDataPacket extends Packet {
 
     public lifeTimeInSeconds: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_PREMIUM_DATA, bytes)
     }
 

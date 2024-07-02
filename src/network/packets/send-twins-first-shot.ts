@@ -9,7 +9,7 @@ export class SendTwinsFirstShotPacket extends Packet {
     public shotId: number;
     public target: Vector3d;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_TWINS_FIRST_SHOT, bytes)
     }
 

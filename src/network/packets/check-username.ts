@@ -6,7 +6,7 @@ export class CheckUsernamePacket extends Packet {
 
     public username: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.CHECK_USERNAME, bytes)
     }
 

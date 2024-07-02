@@ -4,7 +4,7 @@ import { Packet } from "./packet";
 
 export class SendAutoDestroyPacket extends Packet {
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_AUTO_DESTROY, bytes)
     }
 

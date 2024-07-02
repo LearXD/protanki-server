@@ -7,7 +7,7 @@ export class SetTankHealthPacket extends Packet {
     public tankId: string;
     public health: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_TANK_HEALTH, bytes)
     }
 

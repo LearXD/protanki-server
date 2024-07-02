@@ -22,7 +22,7 @@ export class SetTurretsDataPacket extends Packet {
 
     public turrets: Weapon[]
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_TURRETS_DATA, bytes)
     }
 

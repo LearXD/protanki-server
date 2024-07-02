@@ -13,7 +13,7 @@ export class SetSpawnTankPacket extends Packet {
     public health: number;
     public incarnationId: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_SPAWN_TANK, bytes)
     }
 

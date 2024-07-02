@@ -6,7 +6,7 @@ export class SetBattleNamePacket extends Packet {
 
     public battleName: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_NAME, bytes)
     }
 

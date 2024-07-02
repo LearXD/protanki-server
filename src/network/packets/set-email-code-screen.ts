@@ -5,7 +5,7 @@ import { Packet } from "./packet";
 export class SetEmailCodeScreenPacket extends Packet {
 
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_EMAIL_CODE_SCREEN, bytes)
     }
 

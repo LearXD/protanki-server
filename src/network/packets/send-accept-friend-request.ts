@@ -6,7 +6,7 @@ export class SendAcceptFriendRequestPacket extends Packet {
 
     public user: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_ACCEPT_FRIEND_REQUEST, bytes)
     }
 

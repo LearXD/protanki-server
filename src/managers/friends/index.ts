@@ -1,4 +1,4 @@
-import { Client } from "../../game/client";
+import { Player } from "../../game/player";
 import { SetAddFriendPacket } from "../../network/packets/set-add-friend";
 import { SetAddFriendRequestPacket } from "../../network/packets/set-add-friend-request";
 import { SetAddSentFriendRequestPacket } from "../../network/packets/set-add-sent-friend-request";
@@ -19,7 +19,7 @@ export class FriendsManager {
         private readonly server: Server
     ) { }
 
-    public getUserFriendsData(client: Client) {
+    public getUserFriendsData(client: Player) {
         return {
             friendsAccepted: [],
             friendsAcceptedNew: [],
@@ -29,7 +29,7 @@ export class FriendsManager {
         }
     }
 
-    public sendFriendsData(client: Client) {
+    public sendFriendsData(client: Player) {
         const data = this.getUserFriendsData(client);
 
         const setFriendsDataPacket = new SetFriendsDataPacket(new ByteArray());
@@ -42,44 +42,44 @@ export class FriendsManager {
         client.sendPacket(setFriendsDataPacket);
     }
 
-    public handleValidateFriend(client: Client, query: string) {
+    public handleValidateFriend(client: Player, query: string) {
         const validateFriendPacket = new ValidateFriendPacket(new ByteArray());
         validateFriendPacket.userId = query;
         client.sendPacket(validateFriendPacket);
     }
 
-    public handleRemoveFriend(client: Client, query: string) {
+    public handleRemoveFriend(client: Player, query: string) {
         // TODO: Implement this
         const setRemoveFriendPacket = new SetRemoveFriendPacket(new ByteArray());
         setRemoveFriendPacket.userId = query;
         client.sendPacket(setRemoveFriendPacket);
     }
 
-    public handleRefuseAllFriendRequests(client: Client) {
+    public handleRefuseAllFriendRequests(client: Player) {
     }
 
-    public handleRefuseFriendRequest(client: Client, query: string) {
+    public handleRefuseFriendRequest(client: Player, query: string) {
         // TODO: Implement this
         const setRemoveFriendRequestPacket = new SetRemoveFriendRequestPacket(new ByteArray());
         setRemoveFriendRequestPacket.userId = query;
         client.sendPacket(setRemoveFriendRequestPacket);
     }
 
-    public handleAcceptFriendRequest(client: Client, query: string) {
+    public handleAcceptFriendRequest(client: Player, query: string) {
         // TODO: Implement this
         const setAddFriendPacket = new SetAddFriendPacket(new ByteArray());
         setAddFriendPacket.user = query;
         client.sendPacket(setAddFriendPacket);
     }
 
-    public handleValidateFriendRequest(client: Client, query: string) {
+    public handleValidateFriendRequest(client: Player, query: string) {
         // TODO: Implement this
         const validateFriendRequestPacket = new ValidateFriendRequestPacket(new ByteArray());
         validateFriendRequestPacket.user = query;
         client.sendPacket(validateFriendRequestPacket);
     }
 
-    public handleAddFriend(client: Client, query: string) {
+    public handleAddFriend(client: Player, query: string) {
         // TODO: Implement this
 
         if (query === 'TheUnknown') {
@@ -101,7 +101,7 @@ export class FriendsManager {
         */
     }
 
-    public handleFindUser(client: Client, query: string) {
+    public handleFindUser(client: Player, query: string) {
         // TODO: Implement this
         if (query === 'TheUnknown') {
             const setUserFoundOnFriendsListPacket = new SetUserFoundOnFriendsListPacket(new ByteArray());
@@ -112,7 +112,7 @@ export class FriendsManager {
         client.sendPacket(setUserNotFoundOnFriendsListPacket);
     }
 
-    public handleOpenFriends(client: Client) {
+    public handleOpenFriends(client: Player) {
         const setOpenFriendsListPacket = new SetOpenFriendsListPacket(new ByteArray());
         client.sendPacket(setOpenFriendsListPacket);
     }

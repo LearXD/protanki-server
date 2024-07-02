@@ -9,7 +9,7 @@ export class SetAchievementMessagePacket extends Packet {
     public achievement: string
     public message: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_ACHIEVEMENT_MESSAGE, bytes)
     }
 

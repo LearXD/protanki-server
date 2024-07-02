@@ -5,7 +5,7 @@ import { Packet } from "./packet";
 export class SetWrongLoginHashPacket extends Packet {
 
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_WRONG_LOGIN_HASH, bytes)
     }
 

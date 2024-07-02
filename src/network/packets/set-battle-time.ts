@@ -6,7 +6,7 @@ export class SetBattleTimePacket extends Packet {
 
     public time: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_TIME, bytes)
     }
 

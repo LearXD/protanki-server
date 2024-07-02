@@ -4,7 +4,7 @@ import { Packet } from "./packet";
 
 export class IncorrectPasswordPacket extends Packet {
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.INCORRECT_PASSWORD, bytes)
     }
 

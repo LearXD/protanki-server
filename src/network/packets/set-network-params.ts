@@ -11,7 +11,7 @@ export class SetNetworkParamsPacket extends Packet {
 
     public socialParams: SocialParam[] = []
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_NETWORK_PARAMS, bytes)
     }
 

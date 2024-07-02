@@ -5,7 +5,7 @@ import { Packet } from "./packet";
 export class SendOpenConfigPacket extends Packet {
 
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_OPEN_CONFIG, bytes)
     }
 

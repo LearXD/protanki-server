@@ -4,7 +4,7 @@ import { Packet } from "./packet";
 
 export class SendShaftStopAimPacket extends Packet {
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_SHAFT_STOP_AIM, bytes)
     }
 

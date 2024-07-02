@@ -6,7 +6,7 @@ export class SetBattleInviteCCPacket extends Packet {
 
     public resourceId: number
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_INVITE_CC, bytes)
     }
 

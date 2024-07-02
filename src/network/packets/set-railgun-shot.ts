@@ -10,7 +10,7 @@ export class SetRailgunShotPacket extends Packet {
     public targets: string[];
     public targetHitPoints: Vector3d[] = null;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_RAILGUN_SHOT, bytes)
     }
 

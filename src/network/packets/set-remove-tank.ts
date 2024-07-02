@@ -6,7 +6,7 @@ export class SetRemoveTankPacket extends Packet {
 
     public tankId: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_REMOVE_TANK, bytes)
     }
 

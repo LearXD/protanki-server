@@ -27,7 +27,7 @@ export class SendCreateBattlePacket extends Packet {
     public withoutCrystals: boolean
     public withoutSupplies: boolean
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_CREATE_BATTLE, bytes)
     }
 

@@ -6,7 +6,7 @@ export class RemoveFriendRequestPacket extends Packet {
 
     public userId: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.REMOVE_FRIEND_REQUEST, bytes)
     }
 

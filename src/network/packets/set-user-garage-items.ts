@@ -56,7 +56,7 @@ export class SetUserGarageItemsPacket extends Packet {
     public items: IItem[]
     public garageBoxId: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_USER_GARAGE_ITEMS, bytes)
     }
 

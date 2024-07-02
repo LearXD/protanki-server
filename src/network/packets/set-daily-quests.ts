@@ -31,7 +31,7 @@ export class SetDailyQuestsPacket extends Packet {
     public quests: IQuest[]
     public weeklyQuestDescription: IWeeklyQuestDescription
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_DAILY_QUESTS, bytes)
     }
 

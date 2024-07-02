@@ -11,7 +11,7 @@ export class SendFlameTargetsShotPacket extends Packet {
     public targetsPositions: Vector3d[]
     public vectors_2: Vector3d[]
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_FLAME_TARGETS_SHOT, bytes)
     }
 

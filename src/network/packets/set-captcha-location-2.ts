@@ -6,7 +6,7 @@ export class SetCaptchaLocation2Packet extends Packet {
 
     public type: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_CAPTCHA_LOCATION_2, bytes)
     }
 

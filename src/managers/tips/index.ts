@@ -1,9 +1,10 @@
 import { Logger } from "../../utils/logger";
-import { Client } from "../../game/client";
+import { Player } from "../../game/player";
 import { Server } from "../../server";
 import { MathUtils } from "../../utils/math";
 import { SetTipResourcePacket } from "../../network/packets/set-tip-resource";
 import { ByteArray } from "../../utils/network/byte-array";
+import { Client } from "../../game/client";
 
 // TODO: Implement the logic fot not repeating the same tip
 export class TipsManager {
@@ -38,7 +39,7 @@ export class TipsManager {
         return resource;
     }
 
-    public async sendAllLoadingTips(client: Client) {
+    public async sendAllLoadingTips(client: Player) {
         await this.server.getResourcesManager()
             .sendLoadResources(client, this.getResources());
     }

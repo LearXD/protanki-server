@@ -5,7 +5,7 @@ import { Packet } from "./packet";
 export class SimplePacket extends Packet {
 
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SIMPLE, bytes)
     }
 

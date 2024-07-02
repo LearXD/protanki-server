@@ -7,7 +7,7 @@ export class SetEmailInfoPacket extends Packet {
     public email: string;
     public confirmed: boolean;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_EMAIL_INFO, bytes)
     }
 

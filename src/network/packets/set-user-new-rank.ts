@@ -7,7 +7,7 @@ export class SetUserNewRankPacket extends Packet {
     public userId: string
     public newRank: number
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_USER_NEW_RANK, bytes)
     }
 

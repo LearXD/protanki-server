@@ -5,7 +5,7 @@ import { Packet } from "./packet";
 export class SetDailyQuestAlertPacket extends Packet {
 
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_DAILY_QUEST_ALERT, bytes)
     }
 

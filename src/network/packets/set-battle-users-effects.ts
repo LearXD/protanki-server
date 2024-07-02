@@ -6,7 +6,7 @@ export class SetBattleUsersEffectsPacket extends Packet {
 
     public effects: any[];
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_USERS_EFFECTS, bytes)
     }
 

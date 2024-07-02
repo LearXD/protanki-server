@@ -9,7 +9,7 @@ export class Protocol {
     static SET_LOAD_RESOURCES = -1797047325
     static RESOLVE_CALLBACK = -82304134
     static RESOLVE_FULL_LOADED = -1282173466 // pelo contexto é isso
-    static SET_LANGUAGE = -1864333717
+    static SEND_LANGUAGE = -1864333717
 
     /** SEND_LOGIN */
     //-1179390022

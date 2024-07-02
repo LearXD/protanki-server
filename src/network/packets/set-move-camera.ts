@@ -8,7 +8,7 @@ export class SetMoveCameraPacket extends Packet {
     public position: Vector3d;
     public orientation: Vector3d;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_MOVE_CAMERA, bytes)
     }
 

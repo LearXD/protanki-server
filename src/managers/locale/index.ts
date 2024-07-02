@@ -1,4 +1,4 @@
-import { Client } from "../../game/client";
+import { Player } from "../../game/player";
 import { SetCountryLocaleNamePacket } from "../../network/packets/set-country-locale-name";
 import { Server } from "../../server";
 import { ByteArray } from "../../utils/network/byte-array";
@@ -8,7 +8,7 @@ export class LocaleManager {
         private readonly server: Server
     ) { }
 
-    public sendLocaleConfig(client: Client, locale: string = 'pt_BR') {
+    public sendLocaleConfig(client: Player, locale: string = 'pt_BR') {
         const setCountryLocaleName = new SetCountryLocaleNamePacket(new ByteArray());
 
         setCountryLocaleName.countries = [

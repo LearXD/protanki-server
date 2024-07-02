@@ -6,7 +6,7 @@ export class ResolveCallbackPacket extends Packet {
 
     public callbackId: number
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.RESOLVE_CALLBACK, bytes)
     }
 

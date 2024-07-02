@@ -14,7 +14,7 @@ export class SetSuppliesPacket extends Packet {
 
     public supplies: ISupply[] = [];
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_SUPPLIES, bytes)
     }
 

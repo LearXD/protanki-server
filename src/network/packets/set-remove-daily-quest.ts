@@ -6,7 +6,7 @@ export class SetRemoveDailyQuestPacket extends Packet {
 
     public questId: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_REMOVE_DAILY_QUEST, bytes)
     }
 

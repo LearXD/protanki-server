@@ -7,7 +7,7 @@ export class SetMoveShaftVerticalAxisPacket extends Packet {
     public shooter: string;
     public projectionOnVerticalAxis: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_MOVE_SHAFT_VERTICAL_AXIS, bytes)
     }
 

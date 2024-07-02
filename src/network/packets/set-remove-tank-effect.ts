@@ -7,7 +7,7 @@ export class SetRemoveTankEffectPacket extends Packet {
     public tankId: string;
     public effectId: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_REMOVE_TANK_EFFECT, bytes)
     }
 

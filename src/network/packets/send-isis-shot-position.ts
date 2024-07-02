@@ -11,7 +11,7 @@ export class SendIsisShotPositionPacket extends Packet {
     public destinationPosition: Vector3d;
     public targetPosition: Vector3d;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_ISIS_SHOT_POSITION, bytes)
     }
 

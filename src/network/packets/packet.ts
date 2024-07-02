@@ -10,7 +10,7 @@ export class Packet {
 
     constructor(
         public id: number,
-        public bytes: ByteArray
+        public bytes: ByteArray = new ByteArray()
     ) { }
 
     public toByteArray() {

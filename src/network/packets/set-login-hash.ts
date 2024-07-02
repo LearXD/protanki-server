@@ -6,7 +6,7 @@ export class SetLoginHashPacket extends Packet {
 
     public hash: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_LOGIN_HASH, bytes)
     }
 

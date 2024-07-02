@@ -9,7 +9,7 @@ export class SetAuthResourcesPacket extends Packet {
     public maxPasswordLength: number
     public minPasswordLength: number
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_AUTH_RESOURCES, bytes)
     }
 

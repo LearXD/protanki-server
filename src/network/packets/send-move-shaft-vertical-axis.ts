@@ -6,7 +6,7 @@ export class SendMoveShaftVerticalAxisPacket extends Packet {
 
     public projectionOnVerticalAxis: number
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_MOVE_SHAFT_VERTICAL_AXIS, bytes)
     }
 

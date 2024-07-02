@@ -7,7 +7,7 @@ export class SetEquipGarageItemPacket extends Packet {
     public itemId: string;
     public equipped: boolean;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_EQUIP_GARAGE_ITEM, bytes)
     }
 

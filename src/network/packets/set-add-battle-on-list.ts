@@ -24,7 +24,7 @@ export class SetAddBattleOnListPacket extends Packet {
 
     public data: IBattle;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_ADD_BATTLE_ON_LIST, bytes)
     }
 

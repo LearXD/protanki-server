@@ -12,7 +12,7 @@ export class SetNewsPacket extends Packet {
 
     public news: INew[]
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_NEWS, bytes)
     }
 

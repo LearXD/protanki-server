@@ -2,7 +2,7 @@ import { Battle } from "../..";
 import { SetBattleStatisticsCCPacket } from "../../../../network/packets/set-battle-statistics-cc";
 import { SetBattleUserStatusPacket } from "../../../../network/packets/set-battle-user-status";
 import { ByteArray } from "../../../../utils/network/byte-array";
-import { Client } from "../../../client";
+import { Player } from "../../../player";
 
 export class BattleStatisticsManager {
 
@@ -65,7 +65,7 @@ export class BattleStatisticsManager {
         return this.deaths.get(player) || 0
     }
 
-    public sendPlayerStatistics(client: Client) {
+    public sendPlayerStatistics(client: Player) {
         const setBattleUserStatusPacket = new SetBattleUserStatusPacket(new ByteArray())
         setBattleUserStatusPacket.deaths = this.getPlayerDeaths(client.getUsername())
         setBattleUserStatusPacket.kills = this.getPlayerKills(client.getUsername())
@@ -73,7 +73,7 @@ export class BattleStatisticsManager {
         setBattleUserStatusPacket.user = client.getUsername()
     }
 
-    public sendBattleStatistics(client: Client) {
+    public sendBattleStatistics(client: Player) {
         const setBattleStatisticsCCPacket = new SetBattleStatisticsCCPacket(new ByteArray());
         setBattleStatisticsCCPacket.mode = this.battle.getMode()
         setBattleStatisticsCCPacket.equipmentConstraintsMode = this.battle.getEquipmentConstraintsMode()

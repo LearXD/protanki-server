@@ -1,4 +1,4 @@
-import { Client } from "../../game/client";
+import { Player } from "../../game/player";
 import { UserData } from "../../game/user-data";
 import { SetNotificationEnabledPacket } from "../../network/packets/set-notification-enabled";
 import { SetOpenConfigPacket } from "../../network/packets/set-open-config";
@@ -19,7 +19,7 @@ export class UserDataManager {
         private readonly server: Server
     ) { }
 
-    public handleAuthenticated(client: Client) {
+    public handleAuthenticated(client: Player) {
         this.sendPremiumData(client);
 
         this.server.getLocaleManager()
@@ -28,7 +28,7 @@ export class UserDataManager {
         this.sendUserProperty(client);
     }
 
-    public getUserData(client: Client): UserData {
+    public getUserData(client: Player): UserData {
         const user = UserData.findByUsername(client.getUsername());
         if (!user) {
             throw new Error('User not found');
@@ -36,7 +36,7 @@ export class UserDataManager {
         return user;
     }
 
-    public sendPremiumLeftTime(client: Client) {
+    public sendPremiumLeftTime(client: Player) {
         const data = this.getUserData(client).getPremiumData();
 
         const setPremiumLeftTimePacket = new SetPremiumLeftTimePacket(new ByteArray());
@@ -45,7 +45,7 @@ export class UserDataManager {
         client.sendPacket(setPremiumLeftTimePacket);
     }
 
-    public sendPremiumData(client: Client) {
+    public sendPremiumData(client: Player) {
         const data = this.getUserData(client).getPremiumData();
 
         const setPremiumDataPacket = new SetPremiumDataPacket(new ByteArray())
@@ -63,7 +63,7 @@ export class UserDataManager {
         client.sendPacket(setPremiumDataPacket);
     }
 
-    public sendUserProperty(client: Client) {
+    public sendUserProperty(client: Player) {
         const data = this.getUserData(client);
 
         const setUserPropertyPacket = new SetUserPropertyPacket(new ByteArray());
@@ -84,7 +84,7 @@ export class UserDataManager {
         client.sendPacket(setUserPropertyPacket);
     }
 
-    public sendSupplies(client: Client) {
+    public sendSupplies(client: Player) {
         const supplies = this.getUserData(client).getSupplies();
         const setSuppliesPacket = new SetSuppliesPacket(new ByteArray());
         setSuppliesPacket.supplies = Object.entries(supplies)
@@ -100,7 +100,7 @@ export class UserDataManager {
         client.sendPacket(setSuppliesPacket);
     }
 
-    public handleRequestUserData(client: Client, query: string) {
+    public handleRequestUserData(client: Player, query: string) {
         const setUserOnlinePacket = new SetUserOnlinePacket(new ByteArray());
         setUserOnlinePacket.online = false;
         setUserOnlinePacket.serverNumber = 1;
@@ -118,7 +118,7 @@ export class UserDataManager {
         client.sendPacket(setUserPremiumPacket);
     }
 
-    public handleSendConfigData(client: Client) {
+    public handleSendConfigData(client: Player) {
         const setSocialNetworkPanelCCPacket = new SetSocialNetworkPanelCCPacket(new ByteArray());
         setSocialNetworkPanelCCPacket.passwordCreated = true;
         setSocialNetworkPanelCCPacket.socialNetworkParams = [
@@ -136,16 +136,16 @@ export class UserDataManager {
         client.sendPacket(setNotificationEnabledPacket);
     }
 
-    public handleOpenConfig(client: Client) {
+    public handleOpenConfig(client: Player) {
         const setOpenConfigPacket = new SetOpenConfigPacket(new ByteArray());
         client.sendPacket(setOpenConfigPacket);
     }
 
-    public handleSetShowNotifications(client: Client, enabled: boolean) {
+    public handleSetShowNotifications(client: Player, enabled: boolean) {
         // TODO: Implement
     }
 
-    public handleSetShowDamageIndicator(client: Client, enabled: boolean) {
+    public handleSetShowDamageIndicator(client: Player, enabled: boolean) {
         // TODO: Implement
     }
 }

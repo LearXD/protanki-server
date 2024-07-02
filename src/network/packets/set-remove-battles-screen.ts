@@ -5,7 +5,7 @@ import { Packet } from "./packet";
 export class SetRemoveBattlesScreenPacket extends Packet {
 
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_REMOVE_BATTLES_SCREEN, bytes)
     }
 

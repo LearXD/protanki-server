@@ -8,7 +8,7 @@ export class SetControlPointStatePacket extends Packet {
     public pointId: number
     public state: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_CONTROL_POINT_STATE, bytes)
     }
 

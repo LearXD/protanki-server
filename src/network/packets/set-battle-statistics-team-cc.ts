@@ -19,7 +19,7 @@ export class SetBattleStatisticsTeamCCPacket extends Packet {
     public blueUsers: IUser[]
     public redUsers: IUser[]
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_STATISTICS_TEAM_CC, bytes)
     }
 

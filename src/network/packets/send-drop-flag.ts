@@ -5,7 +5,7 @@ import { Packet } from "./packet";
 export class SendDropFlagPacket extends Packet {
 
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_DROP_FLAG, bytes)
     }
 

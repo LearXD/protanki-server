@@ -4,7 +4,7 @@ import { Packet } from "./packet";
 
 export class ResultCheckUsernamePacket extends Packet {
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.RESULT_CHECK_USERNAME, bytes)
     }
 

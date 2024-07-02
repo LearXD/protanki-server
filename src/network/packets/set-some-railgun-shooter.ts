@@ -6,7 +6,7 @@ export class SetSomeRailgunShooterPacket extends Packet {
 
     private shooter: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_SOME_RAILGUN_SHOOTER, bytes)
     }
 

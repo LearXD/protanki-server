@@ -6,7 +6,7 @@ export class SetRememberMePacket extends Packet {
 
     public rememberMe: boolean
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_REMEMBER_ME, bytes)
     }
 

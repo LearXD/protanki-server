@@ -6,7 +6,7 @@ export class SendChangeQuestPacket extends Packet {
 
     public questId: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_CHANGE_QUEST, bytes)
     }
 

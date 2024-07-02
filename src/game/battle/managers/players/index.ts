@@ -1,11 +1,11 @@
 import { Battle } from "../..";
 import { SetUserTankResourcesDataPacket } from "../../../../network/packets/set-user-tank-resources-data";
 import { ByteArray } from "../../../../utils/network/byte-array";
-import { Client } from "../../../client";
+import { Player } from "../../../player";
 
 export class BattlePlayersManager {
 
-    private players: Map<string, Client> = new Map();
+    private players: Map<string, Player> = new Map();
 
     public constructor(
         private readonly battle: Battle
@@ -19,7 +19,7 @@ export class BattlePlayersManager {
     public hasPlayer(username: string) { return this.players.has(username) }
     public getPlayer(username: string) { return this.players.get(username) }
 
-    public addPlayer(client: Client) {
+    public addPlayer(client: Player) {
         if (!this.hasPlayer(client.getUsername())) {
             this.players.set(client.getUsername(), client);
             return true;
@@ -35,7 +35,7 @@ export class BattlePlayersManager {
         return false;
     }
 
-    public sendPlayerData(client: Client) {
+    public sendPlayerData(client: Player) {
         const setUserTankResourcesDataPacket = new SetUserTankResourcesDataPacket(new ByteArray());
         setUserTankResourcesDataPacket.data = {
             battleId: this.battle.getBattleId(),

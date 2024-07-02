@@ -8,7 +8,7 @@ export class SetTankCapturingControlPointPacket extends Packet {
     public pointId: number
     public tankId: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_TANK_CAPTURING_CONTROL_POINT, bytes)
     }
 

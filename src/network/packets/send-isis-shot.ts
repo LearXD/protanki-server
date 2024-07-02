@@ -10,7 +10,7 @@ export class SendIsisShotPacket extends Packet {
     public type: number;
     public vector_1: Vector3d;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_ISIS_SHOT, bytes)
     }
 

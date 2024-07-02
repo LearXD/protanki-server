@@ -6,7 +6,7 @@ export class SetGarageCategoryPacket extends Packet {
 
     public category: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_GARAGE_CATEGORY, bytes)
     }
 

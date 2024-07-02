@@ -7,7 +7,7 @@ export class SetTeamStoppedCapturingControlPointPacketPacket extends Packet {
 
     public team: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_TEAM_STOPPED_CAPTURING_CONTROL_POINT_PACKET, bytes)
     }
 

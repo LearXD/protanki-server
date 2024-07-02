@@ -17,7 +17,7 @@ export class SetChatInitParamsPacket extends Packet {
     public showLinks: boolean
     public typingSpeedAntifloodEnabled: boolean
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_CHAT_INIT_PARAMS, bytes)
     }
 

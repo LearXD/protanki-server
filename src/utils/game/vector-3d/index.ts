@@ -1,4 +1,10 @@
-export class Vector3d {
+export interface IVector3d {
+    x: number,
+    y: number,
+    z: number
+}
+
+export class Vector3d implements IVector3d {
     constructor(public x: number, public z: number, public y: number) { }
 
     public distanceTo(vector: Vector3d): number {
@@ -8,5 +14,4 @@ export class Vector3d {
             Math.pow(this.z - vector.z, 2)
         )
     }
-
 }

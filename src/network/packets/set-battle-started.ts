@@ -6,7 +6,7 @@ export class SetBattleStartedPacket extends Packet {
 
     public battleId: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_STARTED, bytes)
     }
 

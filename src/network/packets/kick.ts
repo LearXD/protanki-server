@@ -6,7 +6,7 @@ export class KickPacket extends Packet {
 
     public reason: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.KICK, bytes)
     }
 

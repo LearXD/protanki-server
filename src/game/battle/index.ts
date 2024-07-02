@@ -1,5 +1,5 @@
 
-import { Client } from "../client"
+import { Player } from "../player"
 import { Logger } from "../../utils/logger"
 
 import { IMap } from "../../managers/maps"
@@ -154,7 +154,7 @@ export class Battle {
     }
 
 
-    public async handleClientJoin(client: Client) {
+    public async handleClientJoin(client: Player) {
 
         if (!this.getPlayersManager().addPlayer(client)) {
             return;

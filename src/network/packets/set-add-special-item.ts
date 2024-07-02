@@ -8,7 +8,7 @@ export class SetAddSpecialItemPacket extends Packet {
     public bottomText: string;
     public topText: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_ADD_SPECIAL_ITEM, bytes)
     }
 

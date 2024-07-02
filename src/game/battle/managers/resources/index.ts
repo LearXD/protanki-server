@@ -3,7 +3,7 @@ import { SetBattleDataPacket } from "../../../../network/packets/set-battle-data
 import { SetBonusesDataPacket } from "../../../../network/packets/set-bonuses-data";
 import { SetTurretsDataPacket } from "../../../../network/packets/set-turrets-data";
 import { ByteArray } from "../../../../utils/network/byte-array";
-import { Client } from "../../../client";
+import { Player } from "../../../player";
 
 export class BattleResourcesManager {
 
@@ -11,14 +11,14 @@ export class BattleResourcesManager {
         private readonly battle: Battle
     ) { }
 
-    public sendTurretsData(client: Client) {
+    public sendTurretsData(client: Player) {
         const turrets = client.getServer().getBattlesManager().getData('turrets.json')
         const setTurretsDataPacket = new SetTurretsDataPacket(new ByteArray());
         setTurretsDataPacket.turrets = turrets;
         client.sendPacket(setTurretsDataPacket);
     }
 
-    public sendBattleData(client: Client) {
+    public sendBattleData(client: Player) {
         const data = client.getServer().getMapsManager()
             .getMapData(this.battle.getMap().mapId, this.battle.getMap().theme)
 
@@ -44,7 +44,7 @@ export class BattleResourcesManager {
         client.sendPacket(setBattleDataPacket);
     }
 
-    public async sendObjectsResources(client: Client) {
+    public async sendObjectsResources(client: Player) {
         const objects = client.getServer().getMapsManager()
             .getMapResource(this.battle.getMap().mapId, this.battle.getMap().theme, 'objects.json')
 
@@ -52,7 +52,7 @@ export class BattleResourcesManager {
             .sendLoadResources(client, objects)
     }
 
-    public async sendSkyboxResource(client: Client) {
+    public async sendSkyboxResource(client: Player) {
         const skybox = client.getServer().getMapsManager()
             .getMapResource(this.battle.getMap().mapId, this.battle.getMap().theme, 'skybox.json')
 
@@ -60,7 +60,7 @@ export class BattleResourcesManager {
             .sendLoadResources(client, skybox)
     }
 
-    public async sendMapResources(client: Client) {
+    public async sendMapResources(client: Player) {
         const map = client.getServer().getMapsManager()
             .getMapResource(this.battle.getMap().mapId, this.battle.getMap().theme, 'map.json')
 

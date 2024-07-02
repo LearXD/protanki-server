@@ -13,7 +13,7 @@ export class SetMoveTankPacket extends Packet {
     public orientation: Vector3d;
     public position: Vector3d;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_MOVE_TANK, bytes)
     }
 

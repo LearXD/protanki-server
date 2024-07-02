@@ -2,11 +2,11 @@ import { BattleModeManager } from "..";
 import { SetBattleStatisticsDMCCPacket } from "../../../../../network/packets/set-battle-statistics-dm-cc";
 import { ChatModeratorLevel } from "../../../../../utils/game/chat-moderator-level";
 import { ByteArray } from "../../../../../utils/network/byte-array";
-import { Client } from "../../../../client";
+import { Player } from "../../../../player";
 
 export class BattleDeathMatchModeManager extends BattleModeManager {
 
-    public sendPlayerStatistics(client: Client): void {
+    public sendPlayerStatistics(client: Player): void {
         const setBattleStatisticsDMCCPacket = new SetBattleStatisticsDMCCPacket(new ByteArray());
         setBattleStatisticsDMCCPacket.users = this.getBattle().getPlayersManager()
             .getPlayers().map((player) => {

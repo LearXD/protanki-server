@@ -6,7 +6,7 @@ export class SetOkPopupPacket extends Packet {
 
     public battle: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_OK_POPUP, bytes)
     }
 

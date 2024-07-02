@@ -8,7 +8,7 @@ export class SetWinnerTeamPacket extends Packet {
     public winnerTeam: string
     public delivererTankId: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_WINNER_TEAM, bytes)
     }
 

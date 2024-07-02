@@ -6,7 +6,7 @@ export class SetInviteEnabledPacket extends Packet {
 
     public inviteEnabled: boolean
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_INVITE_ENABLED, bytes)
     }
 

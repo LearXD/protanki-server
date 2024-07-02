@@ -14,7 +14,7 @@ export class SetBattleRewardsPacket extends Packet {
     public rewards: any[]
     public timeToRestart: number
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_REWARDS, bytes)
     }
 

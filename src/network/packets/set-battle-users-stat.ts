@@ -13,7 +13,7 @@ export class SetBattleUsersStatPacket extends Packet {
 
     public stats: any[]
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_USERS_STAT, bytes)
     }
 

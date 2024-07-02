@@ -15,7 +15,7 @@ export class SetTeamBattleUserStatPacket extends Packet {
     public user: IUser
     public team: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_TEAM_BATTLE_USER_START, bytes)
     }
 

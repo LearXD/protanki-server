@@ -6,7 +6,7 @@ export class SendRedeemDailyQuestPacket extends Packet {
 
     public questId: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_REDEEM_DAILY_QUEST, bytes)
     }
 

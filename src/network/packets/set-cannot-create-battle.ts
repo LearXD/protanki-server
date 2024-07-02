@@ -5,7 +5,7 @@ import { Packet } from "./packet";
 export class SetCannotCreateBattlePacket extends Packet {
 
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_CANNOT_CREATE_BATTLE, bytes)
     }
 

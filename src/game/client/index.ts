@@ -1,288 +1,86 @@
 import net from "net";
 
-import { Logger } from "../../utils/logger";
-import { Packet } from "../../network/packets/packet";
+import { SetCryptKeysPacket } from "../../network/packets/set-crypt-keys";
 import { SimplePacket } from "../../network/packets/simple-packet";
-import { Server } from "../../server";
-import { Vector3d } from "../../utils/game/vector-3d";
 import { MathUtils } from "../../utils/math";
 import { ByteArray } from "../../utils/network/byte-array";
 import { XorDecoder, XorType } from "../../utils/network/decoder";
-import { ResolveCallbackPacket } from "../../network/packets/resolve-callback";
-import { SEND_LANGUAGE } from "../../network/packets/send-languague";
-import { PongPacket } from "../../network/packets/pong";
+import { Server } from "../../server";
+import { Logger } from "../../utils/logger";
 import { PingPacket } from "../../network/packets/ping";
-import { SendRequestLoadScreenPacketPacket } from "../../network/packets/send-request-load-screen";
-import { SendLoginPacket } from "../../network/packets/send-login";
-import { SetCryptKeysPacket } from "../../network/packets/set-crypt-keys";
-import { SetCaptchaLocationsPacket } from "../../network/packets/set-captcha-locations";
-import { CaptchaLocation } from "../../utils/game/captcha-location";
+import { ResolveCallbackPacket } from "../../network/packets/resolve-callback";
 import { SetGameLoadedPacket } from "../../network/packets/set-game-loaded";
-import { SetLayoutStatePacket } from "../../network/packets/set-layout-state";
-import { LayoutState, LayoutStateType } from "../../utils/game/layout-state";
-import { SetSubLayoutStatePacket } from "../../network/packets/set-sub-layout-state";
-import { ResourceType } from "../../managers/resources";
-import { SendChatMessagePacket } from "../../network/packets/send-chat-message";
-import { SendCreateBattlePacket } from "../../network/packets/send-create-battle";
-import { SetViewingBattlePacket } from "../../network/packets/set-viewing-battle";
-import { Battle } from "../battle";
-import { SendOpenGaragePacket } from "../../network/packets/send-open-garage";
-import { SendOpenBattlesListPacket } from "../../network/packets/send-open-battles-list";
-import { SendEquipItemPacket } from "../../network/packets/send-equip-item";
-import { SendOpenFriendsPacket } from "../../network/packets/send-open-friends";
-import { SendFindUserOnFriendsListPacket } from "../../network/packets/send-find-user-on-friends-list";
-import { SendFriendRequestPacket } from "../../network/packets/send-friend-request";
-import { ValidateFriendRequestPacket } from "../../network/packets/validate-friend-request";
-import { SendAcceptFriendRequestPacket } from "../../network/packets/send-accept-friend-request";
-import { SendRefuseAllFriendRequestsPacket } from "../../network/packets/send-refuse-all-friend-requests";
-import { SendRefuseFriendRequestPacket } from "../../network/packets/send-refuse-friend-request";
-import { SendRemoveFriendPacket } from "../../network/packets/send-remove-friend";
-import { ValidateFriendPacket } from "../../network/packets/validate-friend";
-import { SendRequestUserDataPacket } from "../../network/packets/send-request-user-data";
-import { SendRequestConfigDataPacket } from "../../network/packets/send-request-config-data";
-import { SendRequestCaptchaPacket } from "../../network/packets/send-request-captcha";
-import { SendOpenConfigPacket } from "../../network/packets/send-open-config";
-import { SendShowDamageIndicatorPacket } from "../../network/packets/send-show-damage-indicator";
-import { SendShowNotificationsPacket } from "../../network/packets/send-show-notifications";
-import { SendJoinOnBattlePacket } from "../../network/packets/send-join-on-battle";
-import { SetLatencyPacket } from "../../network/packets/set-latency";
-import { SendResumePacket } from "../../network/packets/send-resume";
-import { SetTankSpeedPacket } from "../../network/packets/set-tank-speed";
-import { SetMoveCameraPacket } from "../../network/packets/set-move-camera";
-import { SendRequestRespawnPacket } from "../../network/packets/send-request-respawn";
-import { SetTankHealthPacket } from "../../network/packets/set-tank-health";
-import { SetSpawnTankPacket } from "../../network/packets/set-spawn-tank";
-import { Team } from "../../utils/game/team";
-import { SetTankVisiblePacket } from "../../network/packets/set-tank-visible";
+import { SendLanguagePacket } from "../../network/packets/send-languague";
+import { SendRequestLoadScreenPacketPacket } from "../../network/packets/send-request-load-screen";
 
 const IGNORE_PACKETS = [
     1484572481, // Pong
     -555602629
 ]
 
-export class Client {
+export abstract class Client {
 
-    private updateInterval: NodeJS.Timeout;
+    private cryptoHandler: XorDecoder = new XorDecoder();
 
-    public username: string;
-
-    public language: string;
-    public position: Vector3d;
+    private username: string;
+    private language: string;
 
     private lastPing: number = 0;
     private lastPong: number = 0;
 
-    private viewingBattle: Battle;
+    private resourcesLoaded: number = 0;
+    private resourcesCallbackPool: Map<number, () => void> = new Map();
 
-    public layoutState: LayoutStateType;
-
-    public resourcesLoaded: number = 0;
-    public resourcesCallbackPool: Map<number, () => void> = new Map();
-
-    private encoder: XorDecoder;
-    private bufferPool: ByteArray = new ByteArray();
-    private loadedResources: { id: number, version: number }[];
-
-    public constructor(
+    constructor(
         private readonly socket: net.Socket,
         private readonly server: Server
     ) {
-        this.encoder = new XorDecoder();
-
-        const keys = Array.from({ length: 4 })
-            .map(() => MathUtils.randomInt(-128, 127));
-
-        this.encoder.setKeys(keys);
-        this.encoder.init(keys, XorType.SERVER);
-
-        this.updateInterval = setInterval(this.update.bind(this), 1000);
-
-        this.init();
-    }
-
-    public async init() {
-        Logger.debug(this.getIdentifier(), 'Initializing client');
-
-        const cryptPacket = new SetCryptKeysPacket(new ByteArray());
-        cryptPacket.keys = this.getEncoder().getKeys();
-        this.sendPacket(cryptPacket, false);
-
-        await this.getServer()
-            .getResourcesManager()
-            .sendResources(this, ResourceType.AUTH)
-
-        const captchaLocationsPacket = new SetCaptchaLocationsPacket(new ByteArray());
-        captchaLocationsPacket.locations = CaptchaLocation.LOCATIONS;
-        this.sendPacket(captchaLocationsPacket);
-
-        await this.getServer()
-            .getTipsManager()
-            .sendLoadingTip(this);
-
-        this.getServer()
-            .getAuthManager()
-            .sendAuthConfig(this);
-
-
-    }
-
-    public update() {
-        const packet = new PingPacket(new ByteArray());
-        this.lastPing = Date.now();
-        this.sendPacket(packet);
-    }
-
-    public close() {
-        this.getSocket().destroy();
-        clearInterval(this.updateInterval);
-    }
-
-    public getServer(): Server { return this.server }
-    public getSocket(): net.Socket { return this.socket; }
-
-    public getEncoder(): XorDecoder { return this.encoder }
-
-    public getLanguage() { return this.language }
-    public getLayoutState() { return this.layoutState }
-
-    public getUsername() { return this.username }
-    public getPosition(): Vector3d { return this.position }
-    public getViewingBattle(): Battle { return this.viewingBattle }
-    public getPing() { return this.lastPong - this.lastPing }
-
-    public getLoadedResources() { return this.loadedResources }
-
-    public isResourceLoaded(id: number, version: number) {
-        return this.loadedResources.some(
-            resource => resource.id === id && resource.version === version
-        );
-    }
-
-    public addLoadedResource(id: number, version: number) {
-        this.loadedResources.push({ id, version });
-    }
-
-    public setUsername(username: string) {
-        this.username = username;
-    }
-
-    public setPosition(position: Vector3d) {
-        this.position = position;
-    }
-
-    public setViewingBattle(battle: Battle) {
-        this.viewingBattle = battle;
+        this.sendCryptKeys();
     }
 
     public getIdentifier() {
         return this.socket.remoteAddress + ':' + this.socket.remotePort;
     }
 
-    public setTankSpeed(
-        maxSpeed: number,
-        maxTurnSpeed: number,
-        maxTurretRotationSpeed: number,
-        acceleration: number,
-    ) {
-        const setTankSpeedPacket = new SetTankSpeedPacket(new ByteArray());
-        setTankSpeedPacket.tankId = this.getUsername();
-        setTankSpeedPacket.maxSpeed = maxSpeed;
-        setTankSpeedPacket.maxTurnSpeed = maxTurnSpeed;
-        setTankSpeedPacket.maxTurretRotationSpeed = maxTurretRotationSpeed;
-        setTankSpeedPacket.acceleration = acceleration;
-        setTankSpeedPacket.specificationId = 1;
-        this.sendPacket(setTankSpeedPacket);
+    public getCryptoHandler(): XorDecoder { return this.cryptoHandler }
+    public sendCryptKeys() {
+        const keys = Array.from({ length: 4 })
+            .map(() => MathUtils.randomInt(-128, 127));
+
+        this.cryptoHandler.setKeys(keys);
+        this.cryptoHandler.init(keys, XorType.SERVER);
+
+        const cryptPacket = new SetCryptKeysPacket(new ByteArray());
+        cryptPacket.keys = this.getCryptoHandler().getKeys();
+        this.sendPacket(cryptPacket, false);
     }
 
-    public spawn() {
-        this.setTankSpeed(8.600000381469727, 1.6632988452911377, 1.8149678707122803, 10.970000267028809)
+    public getServer(): Server { return this.server }
+    public getSocket(): net.Socket { return this.socket }
 
-        const setMoveCameraPacket = new SetMoveCameraPacket(new ByteArray());
-        setMoveCameraPacket.position = new Vector3d(-4669.8310546875, -1442.4090576171875, 200)
-        setMoveCameraPacket.orientation = new Vector3d(0, 0, -1.5709999799728394);
-        this.sendPacket(setMoveCameraPacket);
+    public getUsername() { return this.username }
+    public setUsername(username: string) { this.username = username }
+
+    public getLanguage() { return this.language }
+    public setLanguage(language: string) { this.language = language }
+
+    public updateLastPong() { this.lastPong = Date.now() }
+
+    public getPing() { return this.lastPong - this.lastPing }
+    public sendPing() {
+        const packet = new PingPacket();
+        this.sendPacket(packet);
     }
 
-    public setHealth(health: number) {
-        const setTankHealthPacket = new SetTankHealthPacket(new ByteArray());
-        setTankHealthPacket.tankId = this.getUsername();
-        setTankHealthPacket.health = health;
-        this.sendPacket(setTankHealthPacket);
+    public addResourceLoading(callback: () => void) {
+        this.resourcesLoaded++;
+        this.resourcesCallbackPool.set(this.resourcesLoaded, callback);
+        return this.resourcesLoaded;
     }
 
-    public respawn() {
-        this.setHealth(10000);
-
-        const setSpawnTankPacket = new SetSpawnTankPacket(new ByteArray());
-        setSpawnTankPacket.tankId = this.getUsername();
-        setSpawnTankPacket.team = Team.NONE;
-        setSpawnTankPacket.position = new Vector3d(-4669.8310546875, -1442.4090576171875, 200);
-        setSpawnTankPacket.orientation = new Vector3d(0, 0, -1.5709999799728394);
-        setSpawnTankPacket.health = 10000;
-        setSpawnTankPacket.incarnationId = 1;
-
-        this.sendPacket(setSpawnTankPacket);
-
-        const setTankVisiblePacket = new SetTankVisiblePacket(new ByteArray());
-        setTankVisiblePacket.tankId = this.getUsername();
-        this.sendPacket(setTankVisiblePacket);
-    }
-
-    public sendLatency(serverTime: number, clientPing: number) {
-        const setLatencyPacket = new SetLatencyPacket(new ByteArray());
-        setLatencyPacket.serverSessionTime = serverTime;
-        setLatencyPacket.clientPing = clientPing;
-        this.sendPacket(setLatencyPacket);
-    }
-
-    public sendTime(serverTime: number, clientTime: number) {
-        // const setTimePacket = new SetTimePacket(new ByteArray());
-        // setTimePacket.serverSessionTime = serverTime;
-        // setTimePacket.clientSessionTime = clientTime;
-        // this.sendPacket(setTimePacket);
-    }
-
-    public setLayoutState(state: LayoutStateType) {
-
-        if (this.getLayoutState() === state) return;
-
-        switch (this.getLayoutState()) {
-            case LayoutState.GARAGE:
-                this.getServer()
-                    .getGarageManager()
-                    .removeGarageScreen(this);
-                break;
-            case LayoutState.BATTLE_SELECT:
-                this.getServer()
-                    .getBattlesManager()
-                    .sendRemoveBattlesScreen(this);
-        }
-
-        if (this.getLayoutState()) {
-            switch (state) {
-                case LayoutState.BATTLE_SELECT:
-                    this.server.getBattlesManager()
-                        .sendBattles(this);
-                    break;
-                case LayoutState.BATTLE:
-                    this.getServer().getChatManager()
-                        .sendRemoveChatScreen(this);
-                    break;
-            }
-        }
-
-        this.layoutState = state;
-
-        const setLayoutStatePacket = new SetLayoutStatePacket(new ByteArray());
-        setLayoutStatePacket.state = state;
-        this.sendPacket(setLayoutStatePacket);
-    }
-
-    public setSubLayoutState(principal: LayoutStateType, secondary: LayoutStateType) {
-        const setLayoutStatePacket = new SetSubLayoutStatePacket(new ByteArray());
-        setLayoutStatePacket.principal = principal;
-        setLayoutStatePacket.secondary = secondary;
-        this.sendPacket(setLayoutStatePacket);
+    public update() {
+        this.sendPing();
+        this.lastPing = Date.now();
     }
 
     public sendGameLoaded() {
@@ -290,13 +88,7 @@ export class Client {
         this.sendPacket(setGameLoadedPacket);
     }
 
-    private handlePacket(packet: SimplePacket) {
-        packet.decode();
-
-        if (packet instanceof PongPacket) {
-            this.lastPong = Date.now();
-        }
-
+    public handlePacket(packet: SimplePacket) {
         if (packet instanceof ResolveCallbackPacket) {
             if (this.resourcesCallbackPool.has(packet.callbackId)) {
                 this.resourcesCallbackPool.get(packet.callbackId)();
@@ -304,162 +96,15 @@ export class Client {
             }
         }
 
-        if (packet instanceof SendRequestCaptchaPacket) {
-            this.getServer()
-                .getCaptchaManager()
-                .handleRequestCaptcha(this, packet.type);
-        }
-
-        if (packet instanceof SEND_LANGUAGE) {
-            Logger.log(this.getIdentifier(), `Language set to '${packet.language}'`)
-            this.language = packet.language;
-        }
-
         if (packet instanceof SendRequestLoadScreenPacketPacket) {
-            this.getServer()
-                .getTipsManager()
+            this.getServer().getTipsManager()
                 .sendLoadingTip(this);
         }
 
-        if (packet instanceof SendLoginPacket) {
-            this.server.getAuthManager()
-                .handleLogin(this, packet.username, packet.password, packet.remember);
+        if (packet instanceof SendLanguagePacket) {
+            Logger.log(this.getIdentifier(), `Language set to '${packet.language}'`)
+            this.language = packet.language;
         }
-
-        if (packet instanceof SendChatMessagePacket) {
-            this.getServer()
-                .getChatManager()
-                .handleClientSendMessage(this, packet.text, packet.target);
-        }
-
-        if (packet instanceof SendCreateBattlePacket) {
-            this.getServer()
-                .getBattlesManager()
-                .handleCreateBattle(this, packet)
-        }
-
-        if (packet instanceof SetViewingBattlePacket) {
-            this.getServer()
-                .getBattlesManager()
-                .handleViewBattle(this, packet.battleId.trim())
-        }
-
-        if (packet instanceof SendOpenGaragePacket) {
-            this.getServer()
-                .getGarageManager()
-                .handleOpenGarage(this);
-        }
-
-        if (packet instanceof SendOpenBattlesListPacket) {
-            this.getServer()
-                .getBattlesManager()
-                .handleOpenBattlesList(this);
-        }
-
-        if (packet instanceof SendEquipItemPacket) {
-            this.getServer()
-                .getGarageManager()
-                .handleEquipItem(this, packet.item);
-        }
-
-        if (packet instanceof SendOpenFriendsPacket) {
-            this.getServer()
-                .getFriendsManager()
-                .handleOpenFriends(this);
-        }
-
-        if (packet instanceof SendFindUserOnFriendsListPacket) {
-            this.getServer()
-                .getFriendsManager()
-                .handleFindUser(this, packet.userId);
-        }
-
-        if (packet instanceof SendFriendRequestPacket) {
-            this.getServer()
-                .getFriendsManager()
-                .handleAddFriend(this, packet.userId);
-        }
-
-        if (packet instanceof SendRemoveFriendPacket) {
-            this.getServer()
-                .getFriendsManager()
-                .handleRemoveFriend(this, packet.userId);
-        }
-
-        if (packet instanceof ValidateFriendPacket) {
-            this.getServer()
-                .getFriendsManager()
-                .handleValidateFriend(this, packet.userId);
-        }
-
-        if (packet instanceof ValidateFriendRequestPacket) {
-            this.getServer()
-                .getFriendsManager()
-                .handleValidateFriendRequest(this, packet.user);
-        }
-
-        if (packet instanceof SendAcceptFriendRequestPacket) {
-            this.getServer()
-                .getFriendsManager()
-                .handleAcceptFriendRequest(this, packet.user);
-        }
-
-        if (packet instanceof SendRefuseAllFriendRequestsPacket) {
-            this.getServer()
-                .getFriendsManager()
-                .handleRefuseAllFriendRequests(this);
-        }
-
-        if (packet instanceof SendRefuseFriendRequestPacket) {
-            this.getServer()
-                .getFriendsManager()
-                .handleRefuseFriendRequest(this, packet.userId);
-        }
-
-        if (packet instanceof SendRequestUserDataPacket) {
-            this.getServer()
-                .getUserDataManager()
-                .handleRequestUserData(this, packet.userId);
-        }
-
-        if (packet instanceof SendRequestConfigDataPacket) {
-            this.getServer()
-                .getUserDataManager()
-                .handleSendConfigData(this);
-        }
-
-        if (packet instanceof SendOpenConfigPacket) {
-            this.getServer()
-                .getUserDataManager()
-                .handleOpenConfig(this);
-        }
-
-        if (packet instanceof SendShowDamageIndicatorPacket) {
-            this.getServer()
-                .getUserDataManager()
-                .handleSetShowDamageIndicator(this, packet.enabled);
-        }
-
-        if (packet instanceof SendShowNotificationsPacket) {
-            this.getServer()
-                .getUserDataManager()
-                .handleSetShowNotifications(this, packet.enabled);
-        }
-
-        if (packet instanceof SendJoinOnBattlePacket) {
-            this.getServer()
-                .getBattlesManager()
-                .handleJoinBattle(this, packet.team);
-        }
-
-        if (packet instanceof SendResumePacket) {
-            this.spawn();
-        }
-
-        if (packet instanceof SendRequestRespawnPacket) {
-            this.respawn();
-        }
-
     }
 
     public sendPacket(packet: SimplePacket, encrypt: boolean = true) {
@@ -468,7 +113,7 @@ export class Client {
         const buffer = packet.getBytes();
 
         if (buffer.length() && encrypt) {
-            packet.setBytes(this.getEncoder().encrypt(buffer));
+            packet.setBytes(this.getCryptoHandler().encrypt(buffer));
         }
 
         if (!IGNORE_PACKETS.includes(packet.getPacketId())) {
@@ -484,51 +129,4 @@ export class Client {
         }
     }
 
-    public handleData = (data: Buffer) => {
-        this.bufferPool.write(data)
-
-        if (this.bufferPool.length() < Packet.HEADER_SIZE) {
-            return;
-        }
-
-        while (true) {
-
-            if (this.bufferPool.length() === 0) {
-                break;
-            }
-
-            const length = this.bufferPool.readInt();
-            const pid = this.bufferPool.readInt();
-
-            const realLength = length - Packet.HEADER_SIZE;
-
-            if (this.bufferPool.length() < realLength) {
-                this.bufferPool = new ByteArray()
-                    .writeInt(length)
-                    .writeInt(pid)
-                    .write(this.bufferPool.buffer);
-                break;
-            }
-
-            const bytes = new ByteArray(this.bufferPool.readBytes(realLength));
-            const decoded = this.encoder.decrypt(bytes);
-
-            try {
-                const packetInstance = this.getServer().getNetwork().findPacket<typeof SimplePacket>(pid);
-
-                if (!IGNORE_PACKETS.includes(pid)) {
-                    Logger.log(this.getIdentifier(), `Packet ${packetInstance.name} (${pid}) receive - ${realLength} bytes`)
-                }
-
-                const packet = new packetInstance(decoded);
-                this.handlePacket(packet);
-            } catch (error) {
-                Logger.alert(this.getIdentifier(), `Packet Unknown (${pid}) receive - ${realLength} bytes`)
-                if (error instanceof Error) {
-                    Logger.error(this.getIdentifier(), error.message)
-                    console.error(error.stack)
-                }
-            }
-        }
-    }
-}
+} 

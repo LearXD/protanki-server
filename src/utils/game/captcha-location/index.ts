@@ -15,13 +15,6 @@ export class CaptchaLocation {
         CaptchaLocation.EMAIL_CHANGE_HASH,
         CaptchaLocation.ACCOUNT_SETTINGS_FORM
     ]
-
-    public static readonly LOCATIONS = [
-        CaptchaLocation.ACCOUNT_SETTINGS_FORM,
-        CaptchaLocation.REGISTER_FORM,
-        CaptchaLocation.RESTORE_PASSWORD_FORM,
-        CaptchaLocation.EMAIL_CHANGE_HASH
-    ]
 }
 
 export type OnlyStringKeys<T> = T extends string ? T : never

@@ -4,7 +4,7 @@ import { Packet } from "./packet";
 
 export class PingPacket extends Packet {
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.PING, bytes)
     }
 

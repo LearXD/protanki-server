@@ -8,7 +8,7 @@ export class SetTankFlagPacket extends Packet {
     public tankId: string
     public flagTeam: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_TANK_FLAG, bytes)
     }
 

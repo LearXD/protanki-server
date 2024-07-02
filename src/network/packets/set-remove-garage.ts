@@ -5,7 +5,7 @@ import { Packet } from "./packet";
 export class SetRemoveGaragePacket extends Packet {
 
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_REMOVE_GARAGE, bytes)
     }
 

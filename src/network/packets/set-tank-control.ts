@@ -12,7 +12,7 @@ export class SetTankControlPacket extends Packet {
     public tankId: string;
     public control: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_TANK_CONTROL, bytes)
     }
 

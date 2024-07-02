@@ -33,7 +33,7 @@ export class SetBonusesDataPacket extends Packet {
         pickupSoundResource: 0
     };
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BONUSES_DATA, bytes)
     }
 

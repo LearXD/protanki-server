@@ -6,7 +6,7 @@ export class SendRefuseFriendRequestPacket extends Packet {
 
     public userId: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_REFUSE_FRIEND_REQUEST, bytes)
     }
 

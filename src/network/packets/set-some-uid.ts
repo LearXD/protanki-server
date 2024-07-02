@@ -6,7 +6,7 @@ export class SetSomeUidPacket extends Packet {
 
     public uid: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_SOME_UID, bytes)
     }
 

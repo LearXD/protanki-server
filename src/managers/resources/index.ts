@@ -1,8 +1,9 @@
 import { Server } from "../../server";
 
-import { Client } from "../../game/client";
+import { Player } from "../../game/player";
 import { SetLoadResourcesPacket } from "../../network/packets/set-load-resources";
 import { ByteArray } from "../../utils/network/byte-array";
+import { Client } from "../../game/client";
 
 export enum ResourceType {
     LOBBY = 'lobby',
@@ -55,7 +56,7 @@ export class ResourcesManager {
         this.resources.set(resource, data);
     }
 
-    public sendResources(client: Client, resource: ResourceType) {
+    public sendResources(client: Player, resource: ResourceType) {
         return this.sendLoadResources(client, this.resources.get(resource));
     }
 
@@ -63,8 +64,7 @@ export class ResourcesManager {
         return new Promise((resolve) => {
             const setLoadResourcesPacket = new SetLoadResourcesPacket(new ByteArray());
             setLoadResourcesPacket.resources = resources;
-            setLoadResourcesPacket.callbackId = ++client.resourcesLoaded;
-            client.resourcesCallbackPool.set(client.resourcesLoaded, () => resolve(true));
+            setLoadResourcesPacket.callbackId = client.addResourceLoading(() => resolve(true));
             client.sendPacket(setLoadResourcesPacket);
         });
     }

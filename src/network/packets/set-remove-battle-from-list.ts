@@ -6,7 +6,7 @@ export class SetRemoveBattleFromListPacket extends Packet {
 
     public battle: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_REMOVE_BATTLE_FROM_LIST, bytes)
     }
 

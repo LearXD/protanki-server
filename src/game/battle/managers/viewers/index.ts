@@ -4,11 +4,11 @@ import { SetViewingBattlePacket } from "../../../../network/packets/set-viewing-
 import { SetViewingBattleDataPacket } from "../../../../network/packets/set-viewing-battle-data";
 import { BattleMode } from "../../../../utils/game/battle-mode";
 import { ByteArray } from "../../../../utils/network/byte-array";
-import { Client } from "../../../client";
+import { Player } from "../../../player";
 
 export class BattleViewersManager {
 
-    private viewers: Map<string, Client> = new Map();
+    private viewers: Map<string, Player> = new Map();
 
     public constructor(
         private readonly battle: Battle
@@ -25,7 +25,7 @@ export class BattleViewersManager {
         return this.getViewers().get(username);
     }
 
-    public addViewer(client: Client) {
+    public addViewer(client: Player) {
         if (!this.hasViewer(client.getUsername())) {
 
             const viewing = client.getViewingBattle();
@@ -64,7 +64,7 @@ export class BattleViewersManager {
         return false;
     }
 
-    public sendViewingBattleData(client: Client) {
+    public sendViewingBattleData(client: Player) {
         const setViewingBattleDataPacket = new SetViewingBattleDataPacket(new ByteArray());
         setViewingBattleDataPacket.data = {
             battleMode: this.battle.getMode(),

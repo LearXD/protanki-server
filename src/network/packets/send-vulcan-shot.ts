@@ -18,7 +18,7 @@ export class SendVulcanShotPacket extends Packet {
 
     public targets: ITargetPosition[];
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_VULCAN_SHOT, bytes)
     }
 

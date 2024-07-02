@@ -6,7 +6,7 @@ export class SetStopFreezeShotPacket extends Packet {
 
     public shooter: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_STOP_FREEZE_SHOT, bytes)
     }
 

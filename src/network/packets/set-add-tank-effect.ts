@@ -10,7 +10,7 @@ export class SetAddTankEffectPacket extends Packet {
     public activeAfterDeath: boolean;
     public effectLevel: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_ADD_TANK_EFFECT, bytes)
     }
 

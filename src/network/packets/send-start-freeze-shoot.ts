@@ -6,7 +6,7 @@ export class SendStartFreezeShootPacket extends Packet {
 
     public time: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_START_FREEZE_SHOOT, bytes)
     }
 

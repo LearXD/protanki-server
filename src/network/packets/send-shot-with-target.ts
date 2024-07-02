@@ -12,7 +12,7 @@ export class SendShotWithTargetPacket extends Packet {
     public hitPoint: Vector3d;
     public hitPointPosition: Vector3d;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_SHOT_WITH_TARGET, bytes)
     }
 

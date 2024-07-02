@@ -8,7 +8,7 @@ export class SetTeamScorePacket extends Packet {
     public team: string
     public score: number
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_TEAM_SCORE, bytes)
     }
 

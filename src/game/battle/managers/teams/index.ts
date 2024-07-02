@@ -1,5 +1,5 @@
 import { Battle } from "../..";
-import { Client } from "../../../client";
+import { Player } from "../../../player";
 
 export enum BattleTeam {
     RED = "red",
@@ -8,8 +8,8 @@ export enum BattleTeam {
 
 export class BattleTeamsManager {
 
-    private red: Map<string, Client> = new Map();
-    private blue: Map<string, Client> = new Map();
+    private red: Map<string, Player> = new Map();
+    private blue: Map<string, Player> = new Map();
 
     constructor(
         private readonly battle: Battle
@@ -17,7 +17,7 @@ export class BattleTeamsManager {
 
     private score = { red: 0, blue: 0 }
 
-    public addPlayer(client: Client, team: BattleTeam) {
+    public addPlayer(client: Player, team: BattleTeam) {
         if (team === BattleTeam.RED) {
             this.red.set(client.getUsername(), client);
             return true;

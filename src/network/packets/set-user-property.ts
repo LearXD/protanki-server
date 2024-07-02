@@ -17,7 +17,7 @@ export class SetUserPropertyPacket extends Packet {
     public uid: string
     public userProfileUrl: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_USER_PROPERTY, bytes)
     }
 

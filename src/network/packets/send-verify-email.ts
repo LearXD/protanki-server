@@ -6,7 +6,7 @@ export class SendVerifyEmailPacket extends Packet {
 
     public email: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_VERIFY_EMAIL, bytes)
     }
 

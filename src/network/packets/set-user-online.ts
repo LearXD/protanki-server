@@ -8,7 +8,7 @@ export class SetUserOnlinePacket extends Packet {
     public serverNumber: number;
     public user: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_USER_ONLINE, bytes)
     }
 

@@ -8,7 +8,7 @@ export class SetSubLayoutStatePacket extends Packet {
     public principal: string
     public secondary: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_SUB_LAYOUT_STATE, bytes)
     }
 

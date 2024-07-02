@@ -6,7 +6,7 @@ export class SendShotVoidPacket extends Packet {
 
     public time: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_SHOT_VOID, bytes)
     }
 

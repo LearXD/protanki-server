@@ -7,7 +7,7 @@ export class SendBattleInvitePacket extends Packet {
     public user: string;
     public battle: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_BATTLE_INVITE, bytes)
     }
 

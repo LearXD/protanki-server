@@ -7,7 +7,7 @@ export class SetUserPremiumDataPacket extends Packet {
     public premiumTimeLeftInSeconds: number
     public user: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_USER_PREMIUM_DATA, bytes)
     }
 

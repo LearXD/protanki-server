@@ -1,7 +1,7 @@
 import path from "path";
 
 import { Battle, IBattleData } from "../../game/battle";
-import { Client } from "../../game/client";
+import { Player } from "../../game/player";
 import { SetBattleListPacket } from "../../network/packets/set-battle-list";
 import { Server } from "../../server";
 import { BattleModes } from "../../utils/game/battle-mode";
@@ -53,7 +53,7 @@ export class BattlesManager {
         return battle;
     }
 
-    public sendRemoveBattlesScreen(client: Client) {
+    public sendRemoveBattlesScreen(client: Player) {
         const setRemoveBattlesScreenPacket = new SetRemoveBattlesScreenPacket(new ByteArray());
         client.sendPacket(setRemoveBattlesScreenPacket);
     }
@@ -76,7 +76,7 @@ export class BattlesManager {
         return battle;
     }
 
-    public sendBattles(client: Client) {
+    public sendBattles(client: Player) {
         this.server.getMapsManager()
             .sendMapsData(client);
 
@@ -91,7 +91,7 @@ export class BattlesManager {
         }
     }
 
-    public handleCreateBattle(client: Client, packet: SendCreateBattlePacket) {
+    public handleCreateBattle(client: Player, packet: SendCreateBattlePacket) {
         const battle = this.createBattle(
             packet.name,
             packet.mapId, {
@@ -115,13 +115,13 @@ export class BattlesManager {
         battle.getViewersManager().addViewer(client);
     }
 
-    public handleOpenBattlesList(client: Client) {
+    public handleOpenBattlesList(client: Player) {
         client.setLayoutState(LayoutState.BATTLE_SELECT)
         client.setSubLayoutState(LayoutState.BATTLE_SELECT, LayoutState.BATTLE_SELECT)
         this.sendBattles(client);
     }
 
-    public handleViewBattle(client: Client, battleId: string) {
+    public handleViewBattle(client: Player, battleId: string) {
         try {
             const battle = this.getBattle(battleId);
             if (client.getViewingBattle().getBattleId() != battleId) {
@@ -133,7 +133,7 @@ export class BattlesManager {
         }
     }
 
-    public handleJoinBattle(client: Client, team: string) {
+    public handleJoinBattle(client: Player, team: string) {
         client.setLayoutState(LayoutState.BATTLE)
         const battle = client.getViewingBattle();
         battle.handleClientJoin(client);

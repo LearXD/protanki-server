@@ -5,7 +5,7 @@ import { Packet } from "./packet";
 export class SetCloseConfigPacket extends Packet {
 
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_CLOSE_CONFIG, bytes)
     }
 

@@ -6,7 +6,7 @@ export class SendRequestUserDataPacket extends Packet {
 
     public userId: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_REQUEST_USER_DATA, bytes)
     }
 

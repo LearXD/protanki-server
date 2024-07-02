@@ -6,7 +6,7 @@ export class SendInviteCodePacket extends Packet {
 
     public code: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_INVITE_CODE, bytes)
     }
 

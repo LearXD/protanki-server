@@ -4,7 +4,7 @@ import { Packet } from "./packet";
 
 export class SetBattleChatEnabledPacket extends Packet {
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_CHAT_ENABLED, bytes)
     }
 

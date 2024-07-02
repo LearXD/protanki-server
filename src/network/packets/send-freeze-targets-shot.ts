@@ -11,7 +11,7 @@ export class SendFreezeTargetsShotPacket extends Packet {
     public vectors_1: Vector3d[]
     public vectors_2: Vector3d[];
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_FREEZE_TARGETS_SHOT, bytes)
     }
 

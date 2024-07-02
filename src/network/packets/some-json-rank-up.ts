@@ -6,7 +6,7 @@ export class SomeJsonRankUpPacket extends Packet {
 
     public json: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SOME_JSON_RANK_UP, bytes)
     }
 

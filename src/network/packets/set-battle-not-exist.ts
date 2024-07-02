@@ -6,7 +6,7 @@ export class SetBattleNotExistPacket extends Packet {
 
     public battleId: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_NOT_EXIST, bytes)
     }
 

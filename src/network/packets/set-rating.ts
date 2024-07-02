@@ -7,7 +7,7 @@ export class SetRattingPacket extends Packet {
     public rating: number;
     public place: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_RATTING, bytes)
     }
 

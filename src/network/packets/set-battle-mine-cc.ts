@@ -32,7 +32,7 @@ export class SetBattleMineCCPacket extends Packet {
     public imageResource4: number; //ResourceGetterCodec
 
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_MINE_CC, bytes)
     }
 

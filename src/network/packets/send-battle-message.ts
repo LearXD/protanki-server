@@ -7,7 +7,7 @@ export class SendBattleMessagePacket extends Packet {
     public message: string;
     public broadcast: boolean;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_BATTLE_MESSAGE, bytes)
     }
 

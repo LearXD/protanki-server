@@ -6,7 +6,7 @@ export class SetStartVulcanShotPacket extends Packet {
 
     public shooter: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_START_VULCAN_SHOT, bytes)
     }
 

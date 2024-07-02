@@ -11,7 +11,7 @@ export class SetSmokyTargetShotPacket extends Packet {
     public weakeningCoeff: number;
     public isCritical: boolean;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_SMOKY_TARGET_SHOT, bytes)
     }
 

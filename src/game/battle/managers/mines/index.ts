@@ -1,9 +1,9 @@
 import { SetBattleMineCCPacket } from "../../../../network/packets/set-battle-mine-cc";
 import { ByteArray } from "../../../../utils/network/byte-array";
-import { Client } from "../../../client";
+import { Player } from "../../../player";
 
 export class BattleMinesManager {
-    public sendMinesData(client: Client) {
+    public sendMinesData(client: Player) {
         const setBattleMineCCPacket = new SetBattleMineCCPacket(new ByteArray());
         setBattleMineCCPacket.soundResource = 389057
         setBattleMineCCPacket.int_1 = 1000

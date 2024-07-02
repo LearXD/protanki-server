@@ -6,7 +6,7 @@ export class SetViewingBattlePacket extends Packet {
 
     public battleId: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_VIEWING_BATTLE, bytes)
     }
 

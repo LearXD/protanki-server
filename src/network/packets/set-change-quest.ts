@@ -24,7 +24,7 @@ export class SetChangeQuestPacket extends Packet {
     public newQuest: IQuest
 
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_CHANGE_QUEST, bytes)
     }
 

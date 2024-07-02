@@ -1,6 +1,6 @@
 
 import path from "path";
-import { Client } from "../../game/client";
+import { Player } from "../../game/player";
 import { SetMapsDataPacket } from "../../network/packets/set-maps-data";
 import { Server } from "../../server";
 import { ByteArray } from "../../utils/network/byte-array";
@@ -84,7 +84,7 @@ export class MapsManager {
             .find(limits => limits.battleMode === battleMode);
     }
 
-    public sendMapsData(client: Client) {
+    public sendMapsData(client: Player) {
         const setMapsDataPacket = new SetMapsDataPacket(new ByteArray());
         setMapsDataPacket.data = this.properties;
         client.sendPacket(setMapsDataPacket);

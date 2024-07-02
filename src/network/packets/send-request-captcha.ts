@@ -7,7 +7,7 @@ export class SendRequestCaptchaPacket extends Packet {
 
     public type: CaptchaLocationType;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_REQUEST_CAPTCHA, bytes)
     }
 

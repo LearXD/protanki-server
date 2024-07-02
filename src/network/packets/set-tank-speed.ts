@@ -11,7 +11,7 @@ export class SetTankSpeedPacket extends Packet {
     public acceleration: number;
     public specificationId: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_TANK_SPEED, bytes)
     }
 

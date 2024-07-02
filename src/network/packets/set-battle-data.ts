@@ -25,7 +25,7 @@ export class SetBattleDataPacket extends Packet {
 
     public data: IBattleData;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_DATA, bytes)
     }
 

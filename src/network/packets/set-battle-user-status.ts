@@ -9,7 +9,7 @@ export class SetBattleUserStatusPacket extends Packet {
     public score: number;
     public user: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_USER_STATUS, bytes)
     }
 

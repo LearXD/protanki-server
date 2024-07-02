@@ -6,7 +6,7 @@ export class SetBattleSystemMessagePacket extends Packet {
 
     public message: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_SYSTEM_MESSAGE, bytes)
     }
 

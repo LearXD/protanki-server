@@ -8,7 +8,7 @@ export class SendShaftLocalSpotPacket extends Packet {
     public tank: string;
     public localSpotPosition: Vector3d;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_SHAFT_LOCAL_SPOT, bytes)
     }
 

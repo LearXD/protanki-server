@@ -6,7 +6,7 @@ export class SetGoldBoxTakenPacket extends Packet {
 
     public user: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_GOLD_BOX_TAKEN, bytes)
     }
 

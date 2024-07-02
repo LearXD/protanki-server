@@ -1,6 +1,6 @@
 import { IUser } from "../../../../network/packets/set-chat-messages";
 import { ChatModeratorLevel, ChatModeratorLevelType } from "../../../../utils/game/chat-moderator-level";
-import { Client } from "../../../client";
+import { Player } from "../../../player";
 
 export class User {
 
@@ -14,7 +14,7 @@ export class User {
 
     }
 
-    static fromClient(client: Client) {
+    static fromClient(client: Player) {
         return new User(
             ChatModeratorLevel.COMMUNITY_MANAGER,
             ' ',

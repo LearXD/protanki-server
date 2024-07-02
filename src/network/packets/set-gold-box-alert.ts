@@ -7,7 +7,7 @@ export class SetGoldBoxAlertPacket extends Packet {
     public text: string;
     public sound: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_GOLD_BOX_ALERT, bytes)
     }
 

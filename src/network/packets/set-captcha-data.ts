@@ -8,7 +8,7 @@ export class SetCaptchaDataPacket extends Packet {
     public type: string;
     public data: number[]
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_CAPTCHA_DATA, bytes)
     }
 

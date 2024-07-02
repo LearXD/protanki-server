@@ -6,7 +6,7 @@ export class ValidateFriendPacket extends Packet {
 
     public userId: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.VALIDATE_FRIEND, bytes)
     }
 

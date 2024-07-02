@@ -8,7 +8,7 @@ export class SetTimePacket extends Packet {
 
     public serverSessionTime: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_TIME, bytes)
     }
 

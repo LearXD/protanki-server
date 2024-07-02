@@ -5,7 +5,7 @@ import { Packet } from "./packet";
 export class SetOpenFriendsListPacket extends Packet {
 
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_OPEN_FRIENDS_LIST, bytes)
     }
 

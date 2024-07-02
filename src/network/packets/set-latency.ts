@@ -7,7 +7,7 @@ export class SetLatencyPacket extends Packet {
     public serverSessionTime: number;
     public clientPing: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_LATENCY, bytes)
     }
 

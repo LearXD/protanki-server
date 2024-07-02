@@ -9,7 +9,7 @@ export class SendTankTurretDirectionPacket extends Packet {
     public control: number;
     public incarnationId: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_TANK_TURRET_DIRECTION, bytes)
     }
 

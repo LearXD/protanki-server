@@ -8,7 +8,7 @@ export class SendRegisterPacket extends Packet {
     public password: string;
     public rememberMe: boolean;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_REGISTER, bytes)
     }
 

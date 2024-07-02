@@ -9,7 +9,7 @@ export class SetViewingBattleTeamScorePacket extends Packet {
     public team: string
     public score: number
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_VIEWING_BATTLE_TEAM_SCORE, bytes)
     }
 

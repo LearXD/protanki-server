@@ -8,7 +8,7 @@ export class SetBonusPacket extends Packet {
     public crystalBonusInPercent: number;
     public scoreBonusInPercent: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BONUS, bytes)
     }
 

@@ -27,7 +27,7 @@ export class SetCaptureTheFlagCCPacket extends Packet {
 
     public sounds: ISoundResources
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_CAPTURE_THE_FLAG_CC, bytes)
     }
 

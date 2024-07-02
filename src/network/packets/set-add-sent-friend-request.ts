@@ -6,7 +6,7 @@ export class SetAddSentFriendRequestPacket extends Packet {
 
     public userId: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_ADD_SENT_FRIEND_REQUEST, bytes)
     }
 

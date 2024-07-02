@@ -6,7 +6,7 @@ export class SetRemoveUserPlayingPacket extends Packet {
 
     public userId: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_REMOVE_USER_PLAYING, bytes)
     }
 

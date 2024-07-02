@@ -10,7 +10,7 @@ export class SetPlaceMinePacket extends Packet {
     public z: number;
     public userId: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_PLACE_MINE, bytes)
     }
 

@@ -1,6 +1,6 @@
 import path from 'path';
 
-import { Client } from "../../game/client";
+import { Player } from "../../game/player";
 import { SetEquipGarageItemPacket } from "../../network/packets/set-equip-garage-item";
 import { SetGarageItemsPropertiesPacket } from "../../network/packets/set-garage-items-properties";
 import { SetRemoveGaragePacket } from "../../network/packets/set-remove-garage";
@@ -127,7 +127,7 @@ export class GarageManager {
             .getData(path.join('garage', type, file));
     }
 
-    public async handleOpenGarage(client: Client) {
+    public async handleOpenGarage(client: Player) {
         client.setLayoutState(LayoutState.GARAGE);
 
         await this.server
@@ -203,14 +203,14 @@ export class GarageManager {
         client.setSubLayoutState(LayoutState.GARAGE, LayoutState.GARAGE);
     }
 
-    public handleEquipItem(client: Client, itemId: string) {
+    public handleEquipItem(client: Player, itemId: string) {
         const setEquipGarageItemPacket = new SetEquipGarageItemPacket(new ByteArray());
         setEquipGarageItemPacket.itemId = itemId;
         setEquipGarageItemPacket.equipped = true;
         client.sendPacket(setEquipGarageItemPacket);
     }
 
-    public sendEquippedItems(client: Client) {
+    public sendEquippedItems(client: Player) {
         const userData = this.server
             .getUserDataManager()
             .getUserData(client);
@@ -234,14 +234,14 @@ export class GarageManager {
         client.sendPacket(setEquipGarageItemPacket);
     }
 
-    public sendUserGarageItems(client: Client, items: IGarageItem[]) {
+    public sendUserGarageItems(client: Player, items: IGarageItem[]) {
         const setUserGarageItemsPacket = new SetUserGarageItemsPacket(new ByteArray());
         setUserGarageItemsPacket.items = items;
         setUserGarageItemsPacket.garageBoxId = 170001;
         client.sendPacket(setUserGarageItemsPacket);
     }
 
-    public sendGarageItems(client: Client, items: IGarageItem[]) {
+    public sendGarageItems(client: Player, items: IGarageItem[]) {
         const setGarageItemsPropertiesPacket = new SetGarageItemsPropertiesPacket(new ByteArray());
 
         setGarageItemsPropertiesPacket.items = items
@@ -252,7 +252,7 @@ export class GarageManager {
         client.sendPacket(setGarageItemsPropertiesPacket);
     }
 
-    public removeGarageScreen(client: Client) {
+    public removeGarageScreen(client: Player) {
         const setRemoveGaragePacket = new SetRemoveGaragePacket(new ByteArray());
         client.sendPacket(setRemoveGaragePacket);
     }

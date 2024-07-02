@@ -13,7 +13,7 @@ export class SendShaftAimShotPacket extends Packet {
     public vectors_1: Vector3d[]
     public vectors_2: Vector3d[]
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_SHAFT_AIM_SHOT, bytes)
     }
 

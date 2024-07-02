@@ -4,7 +4,7 @@ import { Packet } from "./packet";
 
 export class SendRequestConfigDataPacket extends Packet {
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_REQUEST_CONFIG_DATA, bytes)
     }
 

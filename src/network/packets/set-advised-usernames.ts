@@ -6,7 +6,7 @@ export class SetAdvisedUsernames extends Packet {
 
     public usernames: string[] = [];
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_ADVISED_USERNAMES, bytes)
     }
 

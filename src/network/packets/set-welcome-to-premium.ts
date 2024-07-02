@@ -6,7 +6,7 @@ export class SetWelcomeToPremiumPacket extends Packet {
 
     public show: boolean;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_WELCOME_TO_PREMIUM, bytes)
     }
 

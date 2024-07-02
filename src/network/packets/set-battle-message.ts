@@ -9,7 +9,7 @@ export class SetBattleMessagePacket extends Packet {
     public message: string;
     public team: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_MESSAGE, bytes)
     }
 

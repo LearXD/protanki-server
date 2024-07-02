@@ -16,7 +16,7 @@ export class SendMoveTankAndTurretPacket extends Packet {
 
     public turretDirection: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_MOVE_TANK_AND_TURRET, bytes)
     }
 

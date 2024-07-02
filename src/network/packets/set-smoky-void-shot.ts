@@ -6,7 +6,7 @@ export class SetSmokyVoidShotPacket extends Packet {
 
     public shooter: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_SMOKY_VOID_SHOT, bytes)
     }
 

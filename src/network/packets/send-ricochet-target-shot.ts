@@ -11,7 +11,7 @@ export class SendRicochetTargetShotPacket extends Packet {
     public vector_1: Vector3d;
     public vectors_1: Vector3d[];
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_RICOCHET_TARGET_SHOT, bytes)
     }
 

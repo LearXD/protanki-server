@@ -6,7 +6,7 @@ export class SetPremiumLeftTimePacket extends Packet {
 
     public leftTimeInSeconds: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_PREMIUM_LEFT_TIME, bytes)
     }
 

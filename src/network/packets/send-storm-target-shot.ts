@@ -12,7 +12,7 @@ export class SendStormTargetShotPacket extends Packet {
     public vector_1: Vector3d;
     public vector_2: Vector3d;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_STORM_TARGET_SHOT, bytes)
     }
 

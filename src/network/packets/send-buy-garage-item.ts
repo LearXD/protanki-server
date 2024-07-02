@@ -8,7 +8,7 @@ export class SendBuyGarageItemPacket extends Packet {
     public count: number
     public price: number
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_BUY_GARAGE_ITEM, bytes)
     }
 

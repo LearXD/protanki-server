@@ -6,7 +6,7 @@ export class SetBattleFundPacket extends Packet {
 
     public fund: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_FUND, bytes)
     }
 

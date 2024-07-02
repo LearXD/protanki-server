@@ -8,7 +8,7 @@ export class SetCountryLocaleNamePacket extends Packet {
     public defaultCountry: string;
     public boolean_1: boolean;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_COUNTRY_LOCALE_NAME, bytes)
     }
 

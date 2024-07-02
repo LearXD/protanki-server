@@ -6,7 +6,7 @@ export class SendFindUserOnFriendsListPacket extends Packet {
 
     public userId: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_FIND_USER_ON_FRIENDS_LIST, bytes)
     }
 

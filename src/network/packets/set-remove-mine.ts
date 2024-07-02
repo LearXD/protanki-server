@@ -6,7 +6,7 @@ export class SetRemoveMinePacket extends Packet {
 
     public mineId: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_REMOVE_MINE, bytes)
     }
 

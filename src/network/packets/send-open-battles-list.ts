@@ -5,7 +5,7 @@ import { Packet } from "./packet";
 export class SendOpenBattlesListPacket extends Packet {
 
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_OPEN_BATTLES_LIST, bytes)
     }
 

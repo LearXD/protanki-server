@@ -7,7 +7,7 @@ export class SetTankRespawnDelayPacket extends Packet {
     public tank: string
     public respawnDelay: number
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_TANK_RESPAWN_DELAY, bytes)
     }
 

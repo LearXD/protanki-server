@@ -8,7 +8,7 @@ export class SetUseDrugPacket extends Packet {
     public time: number;
     public decrease: boolean
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_USE_DRUG, bytes)
     }
 

@@ -8,7 +8,7 @@ export class SetViewingBattleUserScorePacket extends Packet {
     public user: string
     public score: number
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_VIEWING_BATTLE_USER_SCORE, bytes)
     }
 

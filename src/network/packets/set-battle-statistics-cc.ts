@@ -20,7 +20,7 @@ export class SetBattleStatisticsCCPacket extends Packet {
     public int_2: number;
 
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_STATISTICS_CC, bytes)
     }
 

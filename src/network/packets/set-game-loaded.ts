@@ -4,7 +4,7 @@ import { Packet } from "./packet";
 
 export class SetGameLoadedPacket extends Packet {
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_GAME_LOADED, bytes)
     }
 

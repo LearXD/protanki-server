@@ -6,7 +6,7 @@ export class SetBattleEndedPacket extends Packet {
 
     public battle: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_ENDED, bytes)
     }
 

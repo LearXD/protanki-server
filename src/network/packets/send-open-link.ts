@@ -6,7 +6,7 @@ export class SendOpenLinkPacket extends Packet {
 
     public link: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_OPEN_LINK, bytes)
     }
 

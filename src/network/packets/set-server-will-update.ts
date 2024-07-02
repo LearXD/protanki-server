@@ -6,7 +6,7 @@ export class SetServerWillUpdatePacket extends Packet {
 
     public seconds: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_SERVER_WILL_UPDATE, bytes)
     }
 

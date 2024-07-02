@@ -17,7 +17,7 @@ export class SendHammerShotPacket extends Packet {
     public direction: Vector3d;
     public targets: ITarget[]
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_HAMMER_SHOT, bytes)
     }
 

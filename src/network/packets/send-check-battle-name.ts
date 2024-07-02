@@ -6,7 +6,7 @@ export class SendCheckBattleNamePacket extends Packet {
 
     public battleName: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_CHECK_BATTLE_NAME, bytes)
     }
 

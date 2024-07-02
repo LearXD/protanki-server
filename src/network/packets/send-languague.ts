@@ -2,12 +2,12 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SEND_LANGUAGE extends Packet {
+export class SendLanguagePacket extends Packet {
 
     public language: string
 
-    constructor(bytes: ByteArray) {
-        super(Protocol.SET_LANGUAGE, bytes)
+    constructor(bytes?: ByteArray) {
+        super(Protocol.SEND_LANGUAGE, bytes)
     }
 
     public decode() {

@@ -7,7 +7,7 @@ export class SetRemoveUserFromViewingTeamBattlePacket extends Packet {
     public battleId: string;
     public userId: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_REMOVE_USER_FROM_VIEWING_TEAM_BATTLE, bytes)
     }
 

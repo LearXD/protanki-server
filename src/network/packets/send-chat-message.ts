@@ -7,7 +7,7 @@ export class SendChatMessagePacket extends Packet {
     public target: string
     public text: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_CHAT_MESSAGE, bytes)
     }
 

@@ -6,7 +6,7 @@ export class SetCryptKeysPacket extends Packet {
 
     public keys: number[] = [];
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_CRYPT_KEYS, bytes)
     }
 

@@ -1,4 +1,4 @@
-import { Client } from "../../game/client";
+import { Player } from "../../game/player";
 import { SetAuthResourcesPacket } from "../../network/packets/set-auth-resources";
 import { SetInviteEnabledPacket } from "../../network/packets/set-invite-enabled";
 import { Server } from "../../server";
@@ -32,7 +32,7 @@ export class AuthManager {
         }
     }
 
-    public sendUserEmail(client: Client) {
+    public sendUserEmail(client: Player) {
         const data = this.getUserEmailInfo();
 
         const setEmailInfoPacket = new SetEmailInfoPacket(new ByteArray());
@@ -42,7 +42,7 @@ export class AuthManager {
         client.sendPacket(setEmailInfoPacket);
     }
 
-    public sendAuthConfig(client: Client) {
+    public sendAuthConfig(client: Player) {
         const socialNetworksPacket = new SetNetworkParamsPacket(new ByteArray());
         socialNetworksPacket.socialParams = SocialNetwork.NETWORKS;
         client.sendPacket(socialNetworksPacket);
@@ -63,7 +63,7 @@ export class AuthManager {
         this.sendAuthScreen(client)
     }
 
-    private async handleClientAuthenticated(client: Client) {
+    private async handleClientAuthenticated(client: Player) {
         client.sendGameLoaded();
 
         client.setLayoutState(LayoutState.BATTLE_SELECT);
@@ -95,13 +95,13 @@ export class AuthManager {
         this.server.getChatManager().sendChatMessages(client);
     }
 
-    public sendAuthScreen(client: Client) {
+    public sendAuthScreen(client: Player) {
         const resolveFullLoadedPacket = new ResolveFullLoadedPacket(new ByteArray());
         client.sendPacket(resolveFullLoadedPacket);
     }
 
     public handleLogin(
-        client: Client,
+        client: Player,
         username: string,
         password: string,
         remember: boolean

@@ -13,7 +13,7 @@ export class SetSocialNetworkPanelCCPacket extends Packet {
     public passwordCreated: boolean;
     public socialNetworkParams: ISocialNetworkParams[]
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_SOCIAL_NETWORK_PANEL_CC, bytes)
     }
 

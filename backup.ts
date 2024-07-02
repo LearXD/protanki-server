@@ -8,7 +8,7 @@ import { SetViewingBattleDataPacket } from "../../network/packets/set-viewing-ba
 import { BattleMode, BattleModes } from "../../utils/game/battle-mode"
 import { EquipmentConstraintsMode, EquipmentConstraintsModes } from "../../utils/game/equipment-constraints-mode"
 import { ByteArray } from "../../utils/network/byte-array"
-import { Client } from "../client"
+import { Player } from "../client"
 import { SetTurretsDataPacket } from "../../network/packets/set-turrets-data"
 import { SetBonusesDataPacket } from "../../network/packets/set-bonuses-data"
 import { SetBattleDataPacket } from "../../network/packets/set-battle-data"
@@ -54,14 +54,14 @@ export class Battle {
     private id: string;
     private roundStarted: boolean = false
 
-    private players: Map<string, Client> = new Map()
+    private players: Map<string, Player> = new Map()
     private usersBlue: string[] = []
     private usersRed: string[] = []
 
     private scoreBlue: number = 0
     private scoreRed: number = 0
 
-    private viewers: Map<string, Client> = new Map()
+    private viewers: Map<string, Player> = new Map()
 
     constructor(
         private name: string,
@@ -100,11 +100,11 @@ export class Battle {
         return this.isStarted() ? this.data.timeLimitInSec : 60
     }
 
-    public hasClient(client: Client) {
+    public hasClient(client: Player) {
         return this.players.has(client.getIdentifier())
     }
 
-    public async sendData(client: Client) {
+    public async sendData(client: Player) {
         const data = client.getServer()
             .getMapsManager()
             .getMapData(this.map.mapId, this.map.theme)
@@ -118,7 +118,7 @@ export class Battle {
         client.sendPacket(setBattleDataPacket);
     }
 
-    public async sendResources(client: Client) {
+    public async sendResources(client: Player) {
         const objects = client.getServer()
             .getMapsManager()
             .getMapResource(
@@ -156,7 +156,7 @@ export class Battle {
             .sendLoadResources(client, map)
     }
 
-    public async addClient(client: Client) {
+    public async addClient(client: Player) {
         if (this.hasClient(client)) {
             return;
         }
@@ -299,7 +299,7 @@ export class Battle {
         client.setSubLayoutState(LayoutState.BATTLE, LayoutState.BATTLE)
     }
 
-    public addViewer(client: Client) {
+    public addViewer(client: Player) {
 
         if (client.getViewingBattle()) {
             client.getViewingBattle().removeViewer(client)
@@ -315,7 +315,7 @@ export class Battle {
         this.viewers.set(client.getIdentifier(), client);
     }
 
-    public removeViewer(client: Client) {
+    public removeViewer(client: Player) {
         if (this.viewers.has(client.getIdentifier())) {
             this.viewers.delete(client.getIdentifier());
 
@@ -327,7 +327,7 @@ export class Battle {
         }
     }
 
-    public sendViewingData(client: Client) {
+    public sendViewingData(client: Player) {
         const setViewingBattleDataPacket = new SetViewingBattleDataPacket(new ByteArray());
         setViewingBattleDataPacket.data = {
             battleMode: this.data.battleMode,

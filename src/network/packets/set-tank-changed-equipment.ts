@@ -6,7 +6,7 @@ export class SetTankChangedEquipmentPacket extends Packet {
 
     public tankId: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_TANK_CHANGED_EQUIPMENT, bytes)
     }
 

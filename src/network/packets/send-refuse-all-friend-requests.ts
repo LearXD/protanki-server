@@ -5,7 +5,7 @@ import { Packet } from "./packet";
 export class SendRefuseAllFriendRequestsPacket extends Packet {
 
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_REFUSE_ALL_FRIEND_REQUESTS, bytes)
     }
 

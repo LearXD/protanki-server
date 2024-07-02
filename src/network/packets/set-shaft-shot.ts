@@ -11,7 +11,7 @@ export class SetShaftShotPacket extends Packet {
     public targetHitPoints: Vector3d[] = null;
     public impactForce: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_SHAFT_SHOT, bytes)
     }
 

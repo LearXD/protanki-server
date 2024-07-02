@@ -24,7 +24,7 @@ export class SetBattleListPacket extends Packet {
 
     public battles: IBattleList[];
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_LIST, bytes)
     }
 

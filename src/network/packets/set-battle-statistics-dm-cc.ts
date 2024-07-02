@@ -17,7 +17,7 @@ export class SetBattleStatisticsDMCCPacket extends Packet {
 
     public users: any[]
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_STATISTICS_DM_CC, bytes)
     }
 

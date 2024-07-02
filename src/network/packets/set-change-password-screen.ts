@@ -6,7 +6,7 @@ export class SetChangePasswordScreenPacket extends Packet {
 
     public currentEmail: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_CHANGE_PASSWORD_SCREEN, bytes)
     }
 

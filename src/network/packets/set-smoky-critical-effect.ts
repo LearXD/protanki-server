@@ -6,7 +6,7 @@ export class SetSmokyCriticalEffectPacket extends Packet {
 
     public target: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_SMOKY_CRITICAL_EFFECT, bytes)
     }
 

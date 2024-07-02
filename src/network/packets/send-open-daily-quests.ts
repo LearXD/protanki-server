@@ -4,7 +4,7 @@ import { Packet } from "./packet";
 
 export class SendOpenDailyQuestsPacket extends Packet {
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_OPEN_DAILY_QUESTS, bytes)
     }
 

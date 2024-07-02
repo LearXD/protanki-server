@@ -4,7 +4,7 @@ import { Packet } from "./packet";
 
 export class ResolveFullLoadedPacket extends Packet {
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.RESOLVE_FULL_LOADED, bytes)
     }
 

@@ -5,7 +5,7 @@ import { Packet } from "./packet";
 export class SetSomePacketOnJoinBattle4Packet extends Packet {
 
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_SOME_PACKET_ON_JOIN_BATTLE_4, bytes)
     }
 

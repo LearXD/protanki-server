@@ -4,7 +4,7 @@ import { Packet } from "./packet";
 
 export class SendChangedEquipmentPacket extends Packet {
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_CHANGED_EQUIPMENT, bytes)
     }
 

@@ -7,7 +7,7 @@ export class SendSetLayoutStatePacket extends Packet {
 
     public layoutState: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_SET_LAYOUT_STATE, bytes)
     }
 

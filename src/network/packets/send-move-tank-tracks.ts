@@ -8,7 +8,7 @@ export class SendMoveTankTracksPacket extends Packet {
     public specificationId: number;
     public control: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_MOVE_TANK_TRACKS, bytes)
     }
 

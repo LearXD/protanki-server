@@ -1,6 +1,6 @@
 import { Message } from "../../game/chat/utils/message";
 import { User } from "../../game/chat/utils/user";
-import { Client } from "../../game/client";
+import { Player } from "../../game/player";
 import { SendChatMessagePacket } from "../../network/packets/send-chat-message";
 import { SetChatCostPacket } from "../../network/packets/set-chat-cost";
 import { SetChatInitParamsPacket } from "../../network/packets/set-chat-init-params";
@@ -30,7 +30,7 @@ export class ChatManager {
         this.messages = [];
     }
 
-    public getUserChatConfig(client: Client) {
+    public getUserChatConfig(client: Player) {
         return {
             admin: false,
             antiFloodEnabled: true,
@@ -52,13 +52,13 @@ export class ChatManager {
         this.server.getClientHandler().broadcast(packet);
     }
 
-    public sendChatMessages(client: Client) {
+    public sendChatMessages(client: Player) {
         const setChatMessagesPacket = new SetChatMessagesPacket(new ByteArray());
         setChatMessagesPacket.messages = this.messages.map(message => message.toObject());
         client.sendPacket(setChatMessagesPacket);
     }
 
-    public sendChatConfig(client: Client) {
+    public sendChatConfig(client: Player) {
         const data = this.getUserChatConfig(client);
 
         const setChatInitParamsPacket = new SetChatInitParamsPacket(new ByteArray());
@@ -83,13 +83,13 @@ export class ChatManager {
         client.sendPacket(setChatCostPacket);
     }
 
-    public sendRemoveChatScreen(client: Client) {
+    public sendRemoveChatScreen(client: Player) {
         const packet = new SetRemoveChatPacket(new ByteArray());
         client.sendPacket(packet);
 
     }
 
-    public handleClientSendMessage(client: Client, text: string, target?: string) {
+    public handleClientSendMessage(client: Player, text: string, target?: string) {
         return this.addMessage(new Message(text, User.fromClient(client), target ? User.fromClient(client) : null, false, false));
     }
 

@@ -14,7 +14,7 @@ import { FriendsManager } from './managers/friends';
 import { ChatManager } from './managers/chat';
 import { BattlesManager } from './managers/battles';
 import { MapsManager } from './managers/maps';
-import { Client } from './game/client';
+import { Player } from './game/player';
 import { SimplePacket } from './network/packets/simple-packet';
 import { GarageManager } from './managers/garage';
 import { LocaleManager } from './managers/locale';
@@ -112,7 +112,7 @@ export class Server {
         this.getChatManager().handleSendServerMessage(message, warning);
     }
 
-    public sendPacket(client: Client, packet: SimplePacket) {
+    public sendPacket(client: Player, packet: SimplePacket) {
         client.sendPacket(packet);
     }
 

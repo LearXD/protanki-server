@@ -11,7 +11,7 @@ export class SendRicochetShotPacket extends Packet {
     public shotDirectionY: number;
     public shotDirectionZ: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_RICOCHET_SHOT, bytes)
     }
 

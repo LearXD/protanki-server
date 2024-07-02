@@ -6,7 +6,7 @@ export class SetSomeShaftShooterPacket extends Packet {
 
     public shooter: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_SOME_SHAFT_SHOOTER, bytes)
     }
 

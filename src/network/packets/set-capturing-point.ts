@@ -8,7 +8,7 @@ export class SetCapturingPointPacket extends Packet {
     public progress: number;
     public speed: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_CAPTURING_POINT, bytes)
     }
 

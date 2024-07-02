@@ -19,7 +19,7 @@ export class SetUserIdUsersInfoTeamPacket extends Packet {
     public usersInfo: IUser[]
     public team: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_USER_ID_USERS_INFO_TEAM, bytes)
     }
 

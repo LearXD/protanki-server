@@ -7,7 +7,7 @@ export class SetTankTemperaturePacket extends Packet {
     public tankId: string;
     public temperature: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_TANK_TEMPERATURE, bytes)
     }
 

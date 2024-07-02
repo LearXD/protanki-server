@@ -6,7 +6,7 @@ export class SetKickMessagePacket extends Packet {
 
     public message: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_KICK_MESSAGE, bytes)
     }
 

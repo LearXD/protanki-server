@@ -6,7 +6,7 @@ export class SomeUserLeftPacket extends Packet {
 
     public userId: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SOME_USER_LEFT, bytes)
     }
 

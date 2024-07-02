@@ -6,7 +6,7 @@ export class SetScorePacket extends Packet {
 
     public score: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_SCORE, bytes)
     }
 

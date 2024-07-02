@@ -16,7 +16,7 @@ export class SetVulcanShotPacket extends Packet {
     public direction: Vector3d
     public targets: ITargetHit[];
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_VULCAN_SHOT, bytes)
     }
 

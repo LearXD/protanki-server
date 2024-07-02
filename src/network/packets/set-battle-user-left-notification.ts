@@ -6,7 +6,7 @@ export class SetBattleUserLeftNotificationPacket extends Packet {
 
     public userId: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_USER_LEFT_NOTIFICATION, bytes)
     }
 

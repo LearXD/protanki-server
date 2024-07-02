@@ -8,7 +8,7 @@ export class SetTankTurretAngleControlPacket extends Packet {
     public angle: number;
     public control: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_TANK_TURRET_ANGLE_CONTROL, bytes)
     }
 

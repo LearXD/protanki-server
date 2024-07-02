@@ -6,7 +6,7 @@ export class SetNotificationEnabledPacket extends Packet {
 
     public enabled: boolean;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_NOTIFICATION_ENABLED, bytes)
     }
 

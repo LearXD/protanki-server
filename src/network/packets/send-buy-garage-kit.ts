@@ -7,7 +7,7 @@ export class SendBuyGarageKitPacket extends Packet {
     public item: string
     public price: number
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_BUY_GARAGE_KIT, bytes)
     }
 

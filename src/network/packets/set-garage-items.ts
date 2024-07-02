@@ -21,7 +21,7 @@ export class SetGarageItemsPacket extends Packet {
 
     public items: GarageItem[]
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_GARAGE_ITEMS, bytes)
     }
 

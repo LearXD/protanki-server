@@ -14,7 +14,7 @@ export class SetBattleTeamUsersPacket extends Packet {
     public red: IStat[]
     public blue: IStat[]
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_TEAM_USERS, bytes)
     }
 

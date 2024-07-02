@@ -7,7 +7,7 @@ export class SendChangePasswordPacket extends Packet {
     public password: string
     public email: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_CHANGE_PASSWORD, bytes)
     }
 

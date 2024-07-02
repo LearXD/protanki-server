@@ -10,7 +10,7 @@ export class SetFriendsDataPacket extends Packet {
     public friendsIncomingNew: string[] = [];
     public friendsOutgoing: string[] = [];
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_FRIENDS_DATA, bytes)
     }
 

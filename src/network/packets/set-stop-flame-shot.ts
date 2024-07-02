@@ -6,7 +6,7 @@ export class SetStopFlameShotPacket extends Packet {
 
     public shooter: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_STOP_FLAME_SHOT, bytes)
     }
 

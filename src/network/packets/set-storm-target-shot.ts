@@ -9,7 +9,7 @@ export class SetStormTargetShotPacket extends Packet {
     public target: string;
     public relativeHitPoint: Vector3d;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_STORM_TARGET_SHOT, bytes)
     }
 

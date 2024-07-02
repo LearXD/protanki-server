@@ -9,7 +9,7 @@ export class SetAddUserOnTeamBattleCounterPacket extends Packet {
     public user: string
     public team: string
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_ADD_USER_ON_TEAM_BATTLE_COUNTER, bytes)
     }
 

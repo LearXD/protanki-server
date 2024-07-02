@@ -11,7 +11,7 @@ export class SetViewingBattleUserInfoPacket extends Packet {
     public suspicious: number;
     public user: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_REMOVE_VIEWING_BATTLE_USER_INFO, bytes)
     }
 

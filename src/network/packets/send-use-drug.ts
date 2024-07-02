@@ -6,7 +6,7 @@ export class SendUseDrugPacket extends Packet {
 
     public itemId: string;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SEND_USE_DRUG, bytes)
     }
 

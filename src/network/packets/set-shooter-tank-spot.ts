@@ -9,7 +9,7 @@ export class SetShooterTankSpotPacket extends Packet {
     public target: string;
     public position: Vector3d;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_SHOOTER_TANK_SPOT, bytes)
     }
 

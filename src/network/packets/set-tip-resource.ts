@@ -6,7 +6,7 @@ export class SetTipResourcePacket extends Packet {
 
     public resourceId: number;
 
-    constructor(bytes: ByteArray) {
+    constructor(bytes?: ByteArray) {
         super(Protocol.SET_TIP_RESOURCE, bytes)
     }
 
