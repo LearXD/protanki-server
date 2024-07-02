@@ -88,14 +88,11 @@ export class AuthManager {
         setAchievementCCPacket.achievements = ['FIRST_RANK_UP'];
         client.sendPacket(setAchievementCCPacket);
 
-        this.server.getBattlesManager()
-            .sendBattles(client);
+        this.server.getBattlesManager().sendBattles(client);
 
-        this.server.getChatManager()
-            .sendChatConfig(client);
+        this.server.getChatManager().sendChatConfig(client);
 
-        this.server.getChatManager()
-            .sendChatMessages(client);
+        this.server.getChatManager().sendChatMessages(client);
     }
 
     public sendAuthScreen(client: Client) {

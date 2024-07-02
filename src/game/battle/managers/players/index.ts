@@ -39,7 +39,7 @@ export class BattlePlayersManager {
         const setUserTankResourcesDataPacket = new SetUserTankResourcesDataPacket(new ByteArray());
         setUserTankResourcesDataPacket.data = {
             battleId: this.battle.getBattleId(),
-            colormap_id: 265602,
+            colormap_id: 790154,
             hull_id: 'hunter_m1',
             turret_id: 'shotgun_m1',
             team_type: 'NONE',
@@ -61,15 +61,15 @@ export class BattlePlayersManager {
             turnAcceleration: 2.4125685504632512,
             reverseTurnAcceleration: 4.031885009158302,
             mass: 2280,
-            power: 10.97,
+            power: 10.97 * 1000000,
             dampingCoeff: 1500,
             turret_turn_speed: 1.8149678891489032,
             health: 0,
             rank: 10,
             kickback: 2.3149,
             turretTurnAcceleration: 2.6148522853379044,
-            impact_force: 0.2932,
-            state_null: true
+            impact_force: 0.2932 * 100,
+            state_null: false
         }
         client.sendPacket(setUserTankResourcesDataPacket)
     }

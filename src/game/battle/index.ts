@@ -165,9 +165,10 @@ export class Battle {
         this.statisticsManager.initPlayer(client.getUsername())
 
         await this.resourcesManager.sendObjectsResources(client)
-        await this.resourcesManager.sendSkyboxResources(client)
+        await this.resourcesManager.sendSkyboxResource(client)
+        // return;
         await this.resourcesManager.sendMapResources(client)
-
+        // return;
         this.resourcesManager.sendTurretsData(client)
         this.boxesManager.sendBoxesData(client)
         this.resourcesManager.sendBattleData(client)
@@ -196,9 +197,7 @@ export class Battle {
 
         this.boxesManager.sendSpawnedBoxes(client)
 
-        client.setSubLayoutState(
-            LayoutState.BATTLE, LayoutState.BATTLE
-        )
+        client.setSubLayoutState(LayoutState.BATTLE, LayoutState.BATTLE)
     }
 
     public toBattleListItem(): IBattleList {

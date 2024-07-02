@@ -85,6 +85,7 @@ export class BattlesManager {
         client.sendPacket(setBattleListPacket);
 
         if (this.battles.length > 0) {
+
             const [battle] = this.battles;
             battle.getViewersManager().addViewer(client);
         }
@@ -117,7 +118,6 @@ export class BattlesManager {
     public handleOpenBattlesList(client: Client) {
         client.setLayoutState(LayoutState.BATTLE_SELECT)
         client.setSubLayoutState(LayoutState.BATTLE_SELECT, LayoutState.BATTLE_SELECT)
-
         this.sendBattles(client);
     }
 

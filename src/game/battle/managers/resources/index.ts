@@ -24,7 +24,7 @@ export class BattleResourcesManager {
 
         const setBattleDataPacket = new SetBattleDataPacket(new ByteArray());
         setBattleDataPacket.data = {
-            ...data,
+            kick_period_ms: 300000,
             map_id: this.battle.getMap().mapId,
             mapId: data.mapId,
             invisible_time: 3500,
@@ -52,7 +52,7 @@ export class BattleResourcesManager {
             .sendLoadResources(client, objects)
     }
 
-    public async sendSkyboxResources(client: Client) {
+    public async sendSkyboxResource(client: Client) {
         const skybox = client.getServer().getMapsManager()
             .getMapResource(this.battle.getMap().mapId, this.battle.getMap().theme, 'skybox.json')
 

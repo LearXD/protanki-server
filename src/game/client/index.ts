@@ -74,7 +74,7 @@ export class Client {
 
     private viewingBattle: Battle;
 
-    public layoutState: LayoutStateType = LayoutState.BATTLE_SELECT;
+    public layoutState: LayoutStateType;
 
     public resourcesLoaded: number = 0;
     public resourcesCallbackPool: Map<number, () => void> = new Map();
@@ -258,18 +258,23 @@ export class Client {
                     .sendRemoveBattlesScreen(this);
         }
 
-        switch (state) {
-            case LayoutState.BATTLE:
-                this.getServer().getChatManager()
-                    .sendRemoveChatScreen(this);
-                break;
+        if (this.getLayoutState()) {
+            switch (state) {
+                case LayoutState.BATTLE_SELECT:
+                    this.server.getBattlesManager()
+                        .sendBattles(this);
+                    break;
+                case LayoutState.BATTLE:
+                    this.getServer().getChatManager()
+                        .sendRemoveChatScreen(this);
+                    break;
+            }
         }
 
         this.layoutState = state;
 
         const setLayoutStatePacket = new SetLayoutStatePacket(new ByteArray());
         setLayoutStatePacket.state = state;
-
         this.sendPacket(setLayoutStatePacket);
     }
 

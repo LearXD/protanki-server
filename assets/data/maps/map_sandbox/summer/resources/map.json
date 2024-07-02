@@ -1,1 +1,10 @@
-[{"idhigh":"0","idlow":336728,"versionhigh":"0","versionlow":10,"lazy":false,"type":7}]
+[
+    {
+        "idhigh": "0",
+        "idlow": 336728,
+        "versionhigh": "0",
+        "versionlow": 10,
+        "lazy": false,
+        "type": 7
+    }
+]

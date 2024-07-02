@@ -1,0 +1,36 @@
+{
+    "magazineReloadSound": 223995,
+    "reloadSound": 223996,
+    "shotSound": 223997,
+    "explosionMarkTexture0": 756745,
+    "explosionMarkTexture1": 756746,
+    "explosionMarkTexture2": 756747,
+    "explosionMarkTexture3": 756748,
+    "smokeTexture": 756749,
+    "sparkleTexture": 756750,
+    "pelletTrailTexture": 756751,
+    "shotAlongTexture": 423332,
+    "shotAcrossTexture": 234233,
+    "lighting": [
+        {
+            "name": "shot",
+            "light": [
+                {
+                    "attenuationBegin": 50,
+                    "attenuationEnd": 700,
+                    "color": 16431616,
+                    "intensity": 1,
+                    "time": 0
+                },
+                {
+                    "attenuationBegin": 1,
+                    "attenuationEnd": 2,
+                    "color": 16431616,
+                    "intensity": 0,
+                    "time": 300
+                }
+            ]
+        }
+    ],
+    "bcsh": []
+}

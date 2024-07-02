@@ -42,12 +42,10 @@ export class MapsManager {
     }
 
     public init() {
-        this.properties = this.server.getAssetsManager()
-            .getData('maps.json');
+        this.properties = this.getData('maps.json');
     }
 
     public getMapResource(map: string, theme: string, resource: string) {
-        console.log(path.join(map, theme, 'resources', resource))
         return this.getData(
             path.join(map, theme, 'resources', resource)
         );
