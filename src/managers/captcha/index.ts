@@ -8,6 +8,7 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { CaptchaUtils } from "../../utils/game/captcha";
 import { ReadType } from "../assets";
 import { SetCaptchaLocationsPacket } from "../../network/packets/set-captcha-locations";
+import { Client } from "../../game/client";
 
 export class CaptchaManager {
 
@@ -28,7 +29,7 @@ export class CaptchaManager {
         client.sendPacket(captchaLocationsPacket);
     }
 
-    public handleRequestCaptcha(client: Player, location: CaptchaLocationType) {
+    public handleRequestCaptcha(client: Client, location: CaptchaLocationType) {
         const data = this.server
             .getAssetsManager()
             .getData(
@@ -38,7 +39,7 @@ export class CaptchaManager {
         this.sendCaptchaData(client, { type: location, data });
     }
 
-    public sendCaptchaData = (client: Player, data: { type: CaptchaLocationType, data: Buffer }) => {
+    public sendCaptchaData = (client: Client, data: { type: CaptchaLocationType, data: Buffer }) => {
         const setCaptchaDataPacket = new SetCaptchaDataPacket(new ByteArray());
         setCaptchaDataPacket.type = data.type;
         setCaptchaDataPacket.data = CaptchaUtils.encode(data.data);

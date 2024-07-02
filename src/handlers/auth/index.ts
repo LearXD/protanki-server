@@ -11,6 +11,8 @@ import { ResourceType } from "../../managers/resources";
 import { SetNetworkParamsPacket } from "../../network/packets/set-network-params";
 import { SocialNetwork } from "../../utils/game/social-network";
 import { ResolveFullLoadedPacket } from "../../network/packets/resolve-full-loaded";
+import { Client } from "../../game/client";
+import { SendLoginPacket } from "../../network/packets/send-login";
 
 export class AuthManager {
 
@@ -100,15 +102,11 @@ export class AuthManager {
         client.sendPacket(resolveFullLoadedPacket);
     }
 
-    public handleLogin(
-        client: Player,
-        username: string,
-        password: string,
-        remember: boolean
-    ) {
+    public handleLoginPacket(client: Player, packet: SendLoginPacket) {
         // const hash = bcrypt.hashSync(password, 10);
-        client.setUsername(username)
+        client.setUsername(packet.username)
         this.handleClientAuthenticated(client);
+        return true;
     }
 
 }

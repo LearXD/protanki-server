@@ -12,6 +12,10 @@ import { ResolveCallbackPacket } from "../../network/packets/resolve-callback";
 import { SetGameLoadedPacket } from "../../network/packets/set-game-loaded";
 import { SendLanguagePacket } from "../../network/packets/send-languague";
 import { SendRequestLoadScreenPacketPacket } from "../../network/packets/send-request-load-screen";
+import { PongPacket } from "../../network/packets/pong";
+import { SendRequestCaptchaPacket } from "../../network/packets/send-request-captcha";
+import { SendLoginPacket } from "../../network/packets/send-login";
+import { SendRequestUserDataPacket } from "../../network/packets/send-request-user-data";
 
 const IGNORE_PACKETS = [
     1484572481, // Pong
@@ -89,22 +93,46 @@ export abstract class Client {
     }
 
     public handlePacket(packet: SimplePacket) {
-        if (packet instanceof ResolveCallbackPacket) {
-            if (this.resourcesCallbackPool.has(packet.callbackId)) {
-                this.resourcesCallbackPool.get(packet.callbackId)();
-                this.resourcesCallbackPool.delete(packet.callbackId);
-            }
+
+        if (packet instanceof PongPacket) {
+            this.updateLastPong();
+            return true;
+        }
+
+
+        if (packet instanceof SendLanguagePacket) {
+            Logger.log(this.getIdentifier(), `Language set to '${packet.language}'`)
+            this.language = packet.language;
+            return true;
         }
 
         if (packet instanceof SendRequestLoadScreenPacketPacket) {
             this.getServer().getTipsManager()
                 .sendLoadingTip(this);
+            return true;
         }
 
-        if (packet instanceof SendLanguagePacket) {
-            Logger.log(this.getIdentifier(), `Language set to '${packet.language}'`)
-            this.language = packet.language;
+        if (packet instanceof ResolveCallbackPacket) {
+            if (this.resourcesCallbackPool.has(packet.callbackId)) {
+                this.resourcesCallbackPool.get(packet.callbackId)();
+                this.resourcesCallbackPool.delete(packet.callbackId);
+            }
+            return true;
         }
+
+        if (packet instanceof SendRequestCaptchaPacket) {
+            this.getServer().getCaptchaManager()
+                .handleRequestCaptcha(this, packet.type);
+            return true;
+        }
+
+        if (packet instanceof SendRequestUserDataPacket) {
+            this.getServer().getUserDataManager()
+                .handleRequestUserData(this, packet.userId);
+        }
+
+
+        return false;
     }
 
     public sendPacket(packet: SimplePacket, encrypt: boolean = true) {

@@ -1,3 +1,4 @@
+import { Client } from "../../game/client";
 import { Player } from "../../game/player";
 import { UserData } from "../../game/user-data";
 import { SetNotificationEnabledPacket } from "../../network/packets/set-notification-enabled";
@@ -100,7 +101,8 @@ export class UserDataManager {
         client.sendPacket(setSuppliesPacket);
     }
 
-    public handleRequestUserData(client: Player, query: string) {
+    public handleRequestUserData(client: Client, query: string) {
+        // TODO: Get data from database
         const setUserOnlinePacket = new SetUserOnlinePacket(new ByteArray());
         setUserOnlinePacket.online = false;
         setUserOnlinePacket.serverNumber = 1;

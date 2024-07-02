@@ -5,40 +5,18 @@ import { Packet } from "../../network/packets/packet";
 import { SimplePacket } from "../../network/packets/simple-packet";
 import { Server } from "../../server";
 import { ByteArray } from "../../utils/network/byte-array";
-import { SendLanguagePacket } from "../../network/packets/send-languague";
-import { PongPacket } from "../../network/packets/pong";
-import { SendRequestLoadScreenPacketPacket } from "../../network/packets/send-request-load-screen";
-import { SendLoginPacket } from "../../network/packets/send-login";
 import { SetLayoutStatePacket } from "../../network/packets/set-layout-state";
 import { LayoutState, LayoutStateType } from "../../utils/game/layout-state";
 import { SetSubLayoutStatePacket } from "../../network/packets/set-sub-layout-state";
 import { ResourceType } from "../../managers/resources";
-import { SendChatMessagePacket } from "../../network/packets/send-chat-message";
-import { SendCreateBattlePacket } from "../../network/packets/send-create-battle";
-import { SetViewingBattlePacket } from "../../network/packets/set-viewing-battle";
 import { Battle } from "../battle";
-import { SendOpenGaragePacket } from "../../network/packets/send-open-garage";
-import { SendOpenBattlesListPacket } from "../../network/packets/send-open-battles-list";
-import { SendEquipItemPacket } from "../../network/packets/send-equip-item";
-import { SendOpenFriendsPacket } from "../../network/packets/send-open-friends";
-import { SendFindUserOnFriendsListPacket } from "../../network/packets/send-find-user-on-friends-list";
-import { SendFriendRequestPacket } from "../../network/packets/send-friend-request";
-import { ValidateFriendRequestPacket } from "../../network/packets/validate-friend-request";
-import { SendAcceptFriendRequestPacket } from "../../network/packets/send-accept-friend-request";
-import { SendRefuseAllFriendRequestsPacket } from "../../network/packets/send-refuse-all-friend-requests";
-import { SendRefuseFriendRequestPacket } from "../../network/packets/send-refuse-friend-request";
-import { SendRemoveFriendPacket } from "../../network/packets/send-remove-friend";
-import { ValidateFriendPacket } from "../../network/packets/validate-friend";
-import { SendRequestUserDataPacket } from "../../network/packets/send-request-user-data";
-import { SendRequestConfigDataPacket } from "../../network/packets/send-request-config-data";
-import { SendRequestCaptchaPacket } from "../../network/packets/send-request-captcha";
-import { SendOpenConfigPacket } from "../../network/packets/send-open-config";
-import { SendShowDamageIndicatorPacket } from "../../network/packets/send-show-damage-indicator";
-import { SendShowNotificationsPacket } from "../../network/packets/send-show-notifications";
-import { SendJoinOnBattlePacket } from "../../network/packets/send-join-on-battle";
-import { SendResumePacket } from "../../network/packets/send-resume";
-import { SendRequestRespawnPacket } from "../../network/packets/send-request-respawn";
 import { Tank } from "../tank";
+import { PlayerFriendsManager } from "./managers/friends";
+import { PlayerGarageManager } from "./managers/garage";
+import { PlayerAuthManager } from "./managers/auth";
+import { PlayerChatManager } from "./managers/chat";
+import { PlayerBattlesManager } from "./managers/battles";
+import { PlayerConfigsManager } from "./managers/configs";
 
 const IGNORE_PACKETS = [
     1484572481, // Pong
@@ -55,8 +33,23 @@ export class Player extends Tank {
 
     private bufferPool: ByteArray = new ByteArray();
 
+    private friendsManager: PlayerFriendsManager;
+    private garageManager: PlayerGarageManager;
+    private authManager: PlayerAuthManager;
+    private chatManager: PlayerChatManager;
+    private battlesManager: PlayerBattlesManager;
+    private configsManager: PlayerConfigsManager;
+
     public constructor(socket: net.Socket, server: Server) {
         super(socket, server);
+
+        this.friendsManager = new PlayerFriendsManager(this);
+        this.garageManager = new PlayerGarageManager(this);
+        this.authManager = new PlayerAuthManager(this);
+        this.chatManager = new PlayerChatManager(this);
+        this.battlesManager = new PlayerBattlesManager(this);
+        this.configsManager = new PlayerConfigsManager(this);
+
         this.init();
     }
 
@@ -99,13 +92,11 @@ export class Player extends Tank {
 
         switch (this.getLayoutState()) {
             case LayoutState.GARAGE:
-                this.getServer()
-                    .getGarageManager()
+                this.getServer().getGarageManager()
                     .removeGarageScreen(this);
                 break;
             case LayoutState.BATTLE_SELECT:
-                this.getServer()
-                    .getBattlesManager()
+                this.getServer().getBattlesManager()
                     .sendRemoveBattlesScreen(this);
         }
 
@@ -136,161 +127,14 @@ export class Player extends Tank {
         this.sendPacket(setLayoutStatePacket);
     }
 
-    public handlePacket(packet: SimplePacket) {
-        super.handlePacket(packet);
-
-        if (packet instanceof PongPacket) {
-            this.updateLastPong();
-        }
-
-
-        if (packet instanceof SendRequestCaptchaPacket) {
-            this.getServer()
-                .getCaptchaManager()
-                .handleRequestCaptcha(this, packet.type);
-        }
-
-
-
-        if (packet instanceof SendLoginPacket) {
-            this.getServer().getAuthManager()
-                .handleLogin(this, packet.username, packet.password, packet.remember);
-        }
-
-        if (packet instanceof SendChatMessagePacket) {
-            this.getServer()
-                .getChatManager()
-                .handleClientSendMessage(this, packet.text, packet.target);
-        }
-
-        if (packet instanceof SendCreateBattlePacket) {
-            this.getServer()
-                .getBattlesManager()
-                .handleCreateBattle(this, packet)
-        }
-
-        if (packet instanceof SetViewingBattlePacket) {
-            this.getServer()
-                .getBattlesManager()
-                .handleViewBattle(this, packet.battleId.trim())
-        }
-
-        if (packet instanceof SendOpenGaragePacket) {
-            this.getServer()
-                .getGarageManager()
-                .handleOpenGarage(this);
-        }
-
-        if (packet instanceof SendOpenBattlesListPacket) {
-            this.getServer()
-                .getBattlesManager()
-                .handleOpenBattlesList(this);
-        }
-
-        if (packet instanceof SendEquipItemPacket) {
-            this.getServer()
-                .getGarageManager()
-                .handleEquipItem(this, packet.item);
-        }
-
-        if (packet instanceof SendOpenFriendsPacket) {
-            this.getServer()
-                .getFriendsManager()
-                .handleOpenFriends(this);
-        }
-
-        if (packet instanceof SendFindUserOnFriendsListPacket) {
-            this.getServer()
-                .getFriendsManager()
-                .handleFindUser(this, packet.userId);
-        }
-
-        if (packet instanceof SendFriendRequestPacket) {
-            this.getServer()
-                .getFriendsManager()
-                .handleAddFriend(this, packet.userId);
-        }
-
-        if (packet instanceof SendRemoveFriendPacket) {
-            this.getServer()
-                .getFriendsManager()
-                .handleRemoveFriend(this, packet.userId);
-        }
-
-        if (packet instanceof ValidateFriendPacket) {
-            this.getServer()
-                .getFriendsManager()
-                .handleValidateFriend(this, packet.userId);
-        }
-
-        if (packet instanceof ValidateFriendRequestPacket) {
-            this.getServer()
-                .getFriendsManager()
-                .handleValidateFriendRequest(this, packet.user);
-        }
-
-        if (packet instanceof SendAcceptFriendRequestPacket) {
-            this.getServer()
-                .getFriendsManager()
-                .handleAcceptFriendRequest(this, packet.user);
-        }
-
-        if (packet instanceof SendRefuseAllFriendRequestsPacket) {
-            this.getServer()
-                .getFriendsManager()
-                .handleRefuseAllFriendRequests(this);
-        }
-
-        if (packet instanceof SendRefuseFriendRequestPacket) {
-            this.getServer()
-                .getFriendsManager()
-                .handleRefuseFriendRequest(this, packet.userId);
-        }
-
-        if (packet instanceof SendRequestUserDataPacket) {
-            this.getServer()
-                .getUserDataManager()
-                .handleRequestUserData(this, packet.userId);
-        }
-
-        if (packet instanceof SendRequestConfigDataPacket) {
-            this.getServer()
-                .getUserDataManager()
-                .handleSendConfigData(this);
-        }
-
-        if (packet instanceof SendOpenConfigPacket) {
-            this.getServer()
-                .getUserDataManager()
-                .handleOpenConfig(this);
-        }
-
-        if (packet instanceof SendShowDamageIndicatorPacket) {
-            this.getServer()
-                .getUserDataManager()
-                .handleSetShowDamageIndicator(this, packet.enabled);
-        }
-
-        if (packet instanceof SendShowNotificationsPacket) {
-            this.getServer()
-                .getUserDataManager()
-                .handleSetShowNotifications(this, packet.enabled);
-        }
-
-        if (packet instanceof SendJoinOnBattlePacket) {
-            this.getServer()
-                .getBattlesManager()
-                .handleJoinBattle(this, packet.team);
-        }
-
-        if (packet instanceof SendResumePacket) {
-            this.spawn();
-        }
-
-        if (packet instanceof SendRequestRespawnPacket) {
-            this.respawn();
-        }
-
+    public handlePacket(packet: SimplePacket): boolean {
+        if (super.handlePacket(packet)) return
+        if (this.friendsManager.handlePacket(packet)) return
+        if (this.garageManager.handlePacket(packet)) return
+        if (this.authManager.handlePacket(packet)) return
+        if (this.chatManager.handlePacket(packet)) return
+        if (this.battlesManager.handlePacket(packet)) return
+        if (this.configsManager.handlePacket(packet)) return
     }
 
     public handleData = (data: Buffer) => {

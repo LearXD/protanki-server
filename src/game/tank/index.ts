@@ -12,6 +12,9 @@ import { Team } from "../../utils/game/team";
 import { Battle } from "../battle";
 import { SetTankVisiblePacket } from "../../network/packets/set-tank-visible";
 import { SetLatencyPacket } from "../../network/packets/set-latency";
+import { SimplePacket } from "../../network/packets/simple-packet";
+import { SendResumePacket } from "../../network/packets/send-resume";
+import { SendRequestRespawnPacket } from "../../network/packets/send-request-respawn";
 
 export abstract class Tank extends Client {
 
@@ -91,5 +94,22 @@ export abstract class Tank extends Client {
         setTankSpeedPacket.acceleration = acceleration;
         setTankSpeedPacket.specificationId = 1;
         this.sendPacket(setTankSpeedPacket);
+    }
+
+    public handlePacket(packet: SimplePacket): boolean {
+
+        if (super.handlePacket(packet)) return true;
+
+        if (packet instanceof SendResumePacket) {
+            this.spawn();
+            return true;
+        }
+
+        if (packet instanceof SendRequestRespawnPacket) {
+            this.respawn();
+            return true;
+        }
+
+        return false;
     }
 }

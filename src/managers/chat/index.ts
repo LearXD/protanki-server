@@ -1,7 +1,6 @@
 import { Message } from "../../game/chat/utils/message";
 import { User } from "../../game/chat/utils/user";
 import { Player } from "../../game/player";
-import { SendChatMessagePacket } from "../../network/packets/send-chat-message";
 import { SetChatCostPacket } from "../../network/packets/set-chat-cost";
 import { SetChatInitParamsPacket } from "../../network/packets/set-chat-init-params";
 import { SetChatMessagesPacket } from "../../network/packets/set-chat-messages";
@@ -20,6 +19,7 @@ export class ChatManager {
     public addMessage(message: Message) {
         this.messages.push(message);
         this.broadcastMessage(message);
+        return message;
     }
 
     public getMessages() {
@@ -90,7 +90,13 @@ export class ChatManager {
     }
 
     public handleClientSendMessage(client: Player, text: string, target?: string) {
-        return this.addMessage(new Message(text, User.fromClient(client), target ? User.fromClient(client) : null, false, false));
+        return this.addMessage(
+            new Message(
+                text,
+                User.fromClient(client),
+                target ? User.fromClient(client) : null
+            )
+        );
     }
 
     public handleSendServerMessage(text: string, warning: boolean = false) {
