@@ -47,12 +47,21 @@ export interface IGarageItem {
     count?: number
 }
 
-export enum GarageItemType {
-    HULL = 'hulls',
-    TURRET = 'turrets',
-    PAINT = 'paintings',
-    SPECIAL = 'specials',
-    SUPPLY = 'supplies',
-    KIT = 'kits',
+export enum GarageItemFolder {
+    HULL = "hulls",
+    TURRET = "turrets",
+    PAINT = "paintings",
+    SPECIAL = "specials",
+    SUPPLY = "supplies",
+    KIT = "kits"
+}
+
+export enum GarageItemCategory {
+    HULL = 'armor',
+    TURRET = 'weapon',
+    PAINT = 'paint',
+    SPECIAL = 'special',
+    SUPPLY = 'inventory',
+    KIT = 'kit',
     UNKNOWN = 'unknown'
 }
