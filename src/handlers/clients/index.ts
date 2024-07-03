@@ -15,6 +15,8 @@ export class ClientsHandler {
     ) { }
 
     public handleConnection = (socket: net.Socket) => {
+
+        console.log(this.clients.size);
         const client = new Player(socket, this.server);
 
         socket.on('data', client.handleData.bind(client));

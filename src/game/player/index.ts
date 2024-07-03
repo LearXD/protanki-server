@@ -17,6 +17,7 @@ import { PlayerAuthManager } from "./managers/auth";
 import { PlayerChatManager } from "./managers/chat";
 import { PlayerBattlesManager } from "./managers/battles";
 import { PlayerConfigsManager } from "./managers/configs";
+import { PlayerDataManager } from "./managers/data";
 
 const IGNORE_PACKETS = [
     1484572481, // Pong
@@ -33,6 +34,8 @@ export class Player extends Tank {
 
     private bufferPool: ByteArray = new ByteArray();
 
+    private dataManager: PlayerDataManager;
+
     private friendsManager: PlayerFriendsManager;
     private garageManager: PlayerGarageManager;
     private authManager: PlayerAuthManager;
@@ -43,6 +46,8 @@ export class Player extends Tank {
     public constructor(socket: net.Socket, server: Server) {
         super(socket, server);
 
+        this.dataManager = new PlayerDataManager(this);
+
         this.friendsManager = new PlayerFriendsManager(this);
         this.garageManager = new PlayerGarageManager(this);
         this.authManager = new PlayerAuthManager(this);
@@ -52,6 +57,15 @@ export class Player extends Tank {
 
         this.init();
     }
+
+    public getDataManager(): PlayerDataManager { return this.dataManager }
+
+    public getFriendsManager(): PlayerFriendsManager { return this.friendsManager }
+    public getGarageManager(): PlayerGarageManager { return this.garageManager }
+    public getAuthManager(): PlayerAuthManager { return this.authManager }
+    public getChatManager(): PlayerChatManager { return this.chatManager }
+    public getBattlesManager(): PlayerBattlesManager { return this.battlesManager }
+    public getConfigsManager(): PlayerConfigsManager { return this.configsManager }
 
     public async init() {
         Logger.debug(this.getIdentifier(), 'Initializing client');
@@ -88,31 +102,17 @@ export class Player extends Tank {
 
     public setLayoutState(state: LayoutStateType) {
 
-        if (this.getLayoutState() === state) return;
-
-        switch (this.getLayoutState()) {
+        switch (this.layoutState) {
             case LayoutState.GARAGE:
-                this.getServer().getGarageManager()
-                    .removeGarageScreen(this);
+                this.getServer().getGarageManager().removeGarageScreen(this)
                 break;
             case LayoutState.BATTLE_SELECT:
                 this.getServer().getBattlesManager()
                     .sendRemoveBattlesScreen(this);
+                break;
         }
 
-        if (this.getLayoutState()) {
-            switch (state) {
-                case LayoutState.BATTLE_SELECT:
-                    this.getServer().getBattlesManager()
-                        .sendBattles(this);
-                    break;
-                case LayoutState.BATTLE:
-                    this.getServer().getChatManager()
-                        .sendRemoveChatScreen(this);
-                    break;
-            }
-        }
-
+        Logger.info(this.getIdentifier(), `Layout state changed to ${state}`);
         this.layoutState = state;
 
         const setLayoutStatePacket = new SetLayoutStatePacket(new ByteArray());

@@ -145,7 +145,7 @@ export abstract class Client {
         }
 
         if (!IGNORE_PACKETS.includes(packet.getPacketId())) {
-            Logger.log(this.getIdentifier(), `Packet ${packet.constructor.name} (${packet.getPacketId()}) sent - ${buffer.length()} bytes`)
+            Logger.log(this.getIdentifier(), `Packet ${packet.constructor.name} (${packet.getPacketId()}) sent - ${packet.getBytes().length()} bytes`)
         }
 
         const data = packet.toByteArray().getBuffer()

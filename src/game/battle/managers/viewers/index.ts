@@ -26,42 +26,39 @@ export class BattleViewersManager {
     }
 
     public addViewer(client: Player) {
-        if (!this.hasViewer(client.getUsername())) {
+        // if (!this.hasViewer(client.getUsername())) {
 
-            const viewing = client.getViewingBattle();
-            if (viewing) {
-                viewing.getViewersManager()
-                    .removeViewer(client.getUsername());
-            }
+        // this.viewers.set(client.getUsername(), client);
 
-            const setViewingBattlePacket = new SetViewingBattlePacket(new ByteArray());
-            setViewingBattlePacket.battleId = this.battle.getBattleId();
-            client.sendPacket(setViewingBattlePacket);
-
-            client.setViewingBattle(this.battle);
-            this.sendViewingBattleData(client);
-
-            this.getViewers().set(client.getUsername(), client);
-            return true;
+        const viewing = client.getViewingBattle();
+        if (viewing) {
+            viewing.getViewersManager()
+                .removeViewer(client);
         }
-        return false;
+
+        const setViewingBattlePacket = new SetViewingBattlePacket(new ByteArray());
+        setViewingBattlePacket.battleId = this.battle.getBattleId();
+        client.sendPacket(setViewingBattlePacket);
+
+        client.setViewingBattle(this.battle);
+        this.sendViewingBattleData(client);
+
+        this.getViewers().set(client.getUsername(), client);
+        return true;
+        // }
+        // return false;
     }
 
-    public removeViewer(username: string) {
-        if (this.hasViewer(username)) {
-            const viewer = this.getViewer(username);
-
-            this.getViewers().delete(username);
-
-            const setRemoveViewingBattlePacket = new SetRemoveViewingBattlePacket(new ByteArray());
-            setRemoveViewingBattlePacket.battleId = this.battle.getBattleId();
-            viewer.sendPacket(setRemoveViewingBattlePacket);
-
-            viewer.setViewingBattle(null);
-
-            return true;
-        }
-        return false;
+    public removeViewer(viewer: Player) {
+        // if (this.hasViewer(username)) {
+        // this.getViewers().delete(viewer.getUsername());
+        const setRemoveViewingBattlePacket = new SetRemoveViewingBattlePacket(new ByteArray());
+        setRemoveViewingBattlePacket.battleId = this.battle.getBattleId();
+        viewer.sendPacket(setRemoveViewingBattlePacket);
+        viewer.setViewingBattle(null);
+        return true;
+        // }
+        // return false;
     }
 
     public sendViewingBattleData(client: Player) {

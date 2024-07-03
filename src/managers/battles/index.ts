@@ -77,40 +77,45 @@ export class BattlesManager {
     }
 
     public sendBattles(client: Player) {
-        this.server.getMapsManager()
-            .sendMapsData(client);
+        this.server.getMapsManager().sendMapsData(client);
 
         const setBattleListPacket = new SetBattleListPacket(new ByteArray());
         setBattleListPacket.battles = this.battles.map(battle => battle.toBattleListItem());
         client.sendPacket(setBattleListPacket);
 
-        if (this.battles.length > 0) {
-
-            const [battle] = this.battles;
-            battle.getViewersManager().addViewer(client);
+        if (client.getViewingBattle()) {
+            client.getViewingBattle().getViewersManager().addViewer(client);
         }
+
+        // if (this.battles.length > 0 && client.getViewingBattle() === null) {
+        //     const [battle] = this.battles;
+        //     battle.getViewersManager().addViewer(client);
+        // }
     }
 
     public handleCreateBattle(client: Player, packet: SendCreateBattlePacket) {
         const battle = this.createBattle(
             packet.name,
-            packet.mapId, {
-            autoBalance: packet.autoBalance,
-            battleMode: packet.battleMode as BattleModes,
-            equipmentConstraintsMode: packet.equipmentConstraintsMode as EquipmentConstraintsModes,
-            friendlyFire: packet.friendlyFire,
-            scoreLimit: packet.scoreLimit,
-            timeLimitInSec: packet.timeLimitInSec,
-            maxPeopleCount: packet.maxPeopleCount,
-            parkourMode: packet.parkourMode,
-            privateBattle: packet.privateBattle,
-            proBattle: packet.proBattle,
-            rankRange: packet.rankRange,
-            reArmorEnabled: packet.reArmorEnabled,
-            withoutBonuses: packet.withoutBonuses,
-            withoutCrystals: packet.withoutCrystals,
-            withoutSupplies: packet.withoutSupplies
-        });
+            packet.mapId,
+            {
+                autoBalance: packet.autoBalance,
+                battleMode: packet.battleMode as BattleModes,
+                equipmentConstraintsMode: packet.equipmentConstraintsMode as EquipmentConstraintsModes,
+                friendlyFire: packet.friendlyFire,
+                scoreLimit: packet.scoreLimit,
+                timeLimitInSec: packet.timeLimitInSec,
+                maxPeopleCount: packet.maxPeopleCount,
+                parkourMode: packet.parkourMode,
+                privateBattle: packet.privateBattle,
+                proBattle: packet.proBattle,
+                rankRange: packet.rankRange,
+                reArmorEnabled: packet.reArmorEnabled,
+                withoutBonuses: packet.withoutBonuses,
+                withoutCrystals: packet.withoutCrystals,
+                withoutSupplies: packet.withoutSupplies
+            }
+        );
+
 
         battle.getViewersManager().addViewer(client);
     }
@@ -124,7 +129,8 @@ export class BattlesManager {
     public handleViewBattle(client: Player, battleId: string) {
         try {
             const battle = this.getBattle(battleId);
-            if (client.getViewingBattle().getBattleId() != battleId) {
+            if (battle) {
+                Logger.info(`Player ${client.getIdentifier()} is viewing battle ${battleId}`)
                 battle.getViewersManager().addViewer(client);
             }
         } catch (error) {
@@ -135,6 +141,8 @@ export class BattlesManager {
 
     public handleJoinBattle(client: Player, team: string) {
         client.setLayoutState(LayoutState.BATTLE)
+        client.getServer().getChatManager()
+            .sendRemoveChatScreen(client);
         const battle = client.getViewingBattle();
         battle.handleClientJoin(client);
     }

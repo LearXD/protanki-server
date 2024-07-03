@@ -66,6 +66,9 @@ export class AuthManager {
     }
 
     private async handleClientAuthenticated(client: Player) {
+
+        client.getDataManager().load();
+
         client.sendGameLoaded();
 
         client.setLayoutState(LayoutState.BATTLE_SELECT);

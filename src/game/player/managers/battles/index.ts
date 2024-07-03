@@ -24,8 +24,7 @@ export class PlayerBattlesManager {
         }
 
         if (packet instanceof SetViewingBattlePacket) {
-            this.player.getServer().getBattlesManager()
-                .handleViewBattle(this.player, packet.battleId.trim())
+            this.player.getServer().getBattlesManager().handleViewBattle(this.player, packet.battleId.trim())
             return true;
         }
 

@@ -9,69 +9,17 @@ import { Server } from "../../server";
 import { LayoutState } from "../../utils/game/layout-state";
 import { ByteArray } from "../../utils/network/byte-array";
 import { ResourceType } from "../resources";
-
-export interface IKitItem {
-    count: number
-    id: string
-}
-
-export interface IKit {
-    image: number
-    discountInPercent: number
-    kitItems: IKitItem[]
-}
-
-export interface IDiscount {
-    percent: number
-    timeLeftInSeconds: number
-    timeToStartInSeconds: number
-}
-
-export interface IProperty {
-    property: string
-    value: string
-    subproperties: IProperty[]
-}
-
-export interface IGarageItem {
-    id: string
-    name: string
-    description: string
-    isInventory: boolean
-    index: number
-    next_price: number
-    next_rank: number
-    type: number
-    baseItemId: number
-    previewResourceId: number
-    rank: number
-    category: string
-    properts: IProperty
-    discount: IDiscount
-    grouped: boolean
-    isForRent: boolean
-    price: number
-    remainingTimeInSec: number
-    modificationID?: number
-    object3ds?: number
-    coloring?: number
-    kit?: IKit
-    count?: number
-}
-
-export enum GarageItemType {
-    HULL = 'hulls',
-    TURRET = 'turrets',
-    PAINT = 'paintings',
-    SPECIAL = 'specials',
-    SUPPLY = 'supplies',
-    KIT = 'kits'
-}
-
+import { Logger } from '../../utils/logger';
+import { GarageItemType, IGarageItem } from './types';
 
 export class GarageManager {
 
     public items: IGarageItem[] = [];
+
+    static parseItemName(itemId: string) {
+        const [name, level] = itemId.split('_m');
+        return { name, level: parseInt(level) }
+    }
 
     public constructor(
         private readonly server: Server
@@ -80,7 +28,8 @@ export class GarageManager {
     }
 
     public init() {
-        // TURRETS
+        Logger.info('Initializing garage items...');
+
         this.addGarageItem(this.getGarageData(GarageItemType.TURRET, 'smoky.json'));
         this.addGarageItem(this.getGarageData(GarageItemType.TURRET, 'flamethrower.json'));
         this.addGarageItem(this.getGarageData(GarageItemType.TURRET, 'freeze.json'));
@@ -93,8 +42,6 @@ export class GarageManager {
         this.addGarageItem(this.getGarageData(GarageItemType.TURRET, 'machinegun.json'));
         this.addGarageItem(this.getGarageData(GarageItemType.TURRET, 'shaft.json'));
         this.addGarageItem(this.getGarageData(GarageItemType.TURRET, 'railgun-xt.json'));
-
-        // HULLS
         this.addGarageItem(this.getGarageData(GarageItemType.HULL, 'hunter.json'));
         this.addGarageItem(this.getGarageData(GarageItemType.HULL, 'wasp.json'));
         this.addGarageItem(this.getGarageData(GarageItemType.HULL, 'hornet.json'));
@@ -103,133 +50,101 @@ export class GarageManager {
         this.addGarageItem(this.getGarageData(GarageItemType.HULL, 'titan.json'));
         this.addGarageItem(this.getGarageData(GarageItemType.HULL, 'mammoth.json'));
         this.addGarageItem(this.getGarageData(GarageItemType.HULL, 'hornet-xt.json'));
-
-        // OTHERS
         this.addGarageItem(this.getGarageData(GarageItemType.PAINT, 'paintings.json'));
         this.addGarageItem(this.getGarageData(GarageItemType.SUPPLY, 'supplies.json'));
         this.addGarageItem(this.getGarageData(GarageItemType.SPECIAL, 'gifts.json'));
         this.addGarageItem(this.getGarageData(GarageItemType.SPECIAL, 'special.json'));
 
         this.addGarageItem(this.getGarageData(GarageItemType.KIT, 'kits.json'));
+
+        Logger.info(`Initialized ${this.items.length} garage items`);
     }
 
     public addGarageItem(item: IGarageItem | IGarageItem[]) {
         if (Array.isArray(item)) {
-            this.items.push(...item);
+            this.items.push(...item)
             return;
         }
         this.items.push(item);
     }
 
     public getGarageData(type: GarageItemType, file: string) {
-        return this.server
-            .getAssetsManager()
+        return this.server.getAssetsManager()
             .getData(path.join('garage', type, file));
     }
 
-    public async handleOpenGarage(client: Player) {
-        client.setLayoutState(LayoutState.GARAGE);
+    public async handleOpenGarage(player: Player) {
 
-        await this.server
-            .getResourcesManager()
-            .sendResources(client, ResourceType.GARAGE);
+        player.setLayoutState(LayoutState.GARAGE);
 
-        const userData = this.server.getUserDataManager()
-            .getUserData(client)
+        await this.server.getResourcesManager()
+            .sendResources(player, ResourceType.GARAGE);
 
         const userItems: IGarageItem[] = []
         const garageItems: IGarageItem[] = []
 
-        const userTurrets = userData.getTurrets();
-        const userHulls = userData.getHulls();
-        const userPaintings = userData.getPaintings();
-        const userSupplies = userData.getSupplies();
+        const userSupplies = player.getDataManager().getSupplies();
+        const playerGarageItems = player.getDataManager().getGarageItems();
 
         for (const item of this.items) {
-
-            if (item.category === 'weapon') {
-                const has = userTurrets.some(
-                    (turret) => turret.name === item.id && turret.level === item.modificationID
-                )
-
-                if (has) {
-                    userItems.push(item);
-                    continue;
-                }
-            }
-
-            if (item.category === 'armor') {
-                const has = userHulls.some(
-                    (hull) => hull.name === item.id && hull.level === item.modificationID
-                )
-
-                if (has) {
-                    userItems.push(item)
-                    continue;
-                }
-            }
-
-            if (item.category === 'paint') {
-                const has = userPaintings.some(
-                    (painting) => painting.name === item.id
-                )
-
-                if (has) {
-                    userItems.push(item);
-                    continue;
-                }
-
-            }
-
             if (item.category === 'inventory') {
                 if (Object.keys(userSupplies).includes(item.id)) {
                     const supply = {
                         ...item,
                         count: userSupplies[item.id]
                     }
-                    console.log(supply)
                     userItems.push(supply);
                 }
+                continue;
+            }
+
+            const has = playerGarageItems.some((garageItem) => {
+                return garageItem.name === item.id && (Number.isInteger(item.modificationID) ? garageItem.level === item.modificationID : true)
+            })
+
+            if (has) {
+                userItems.push(item)
                 continue;
             }
 
             garageItems.push(item)
         }
 
-        this.sendUserGarageItems(client, userItems);
-        this.sendEquippedItems(client)
-        this.sendGarageItems(client, garageItems);
+        this.sendUserGarageItems(player, userItems);
 
-        client.setSubLayoutState(LayoutState.GARAGE, LayoutState.GARAGE);
+        this.sendEquippedItems(player)
+        this.sendGarageItems(player, garageItems);
+
+        player.setSubLayoutState(LayoutState.GARAGE, LayoutState.GARAGE);
     }
 
-    public handleEquipItem(client: Player, itemId: string) {
-        const setEquipGarageItemPacket = new SetEquipGarageItemPacket(new ByteArray());
-        setEquipGarageItemPacket.itemId = itemId;
-        setEquipGarageItemPacket.equipped = true;
-        client.sendPacket(setEquipGarageItemPacket);
+    public getItemCategory(itemId: string) {
+        const category = this.items.find(item => item.id === itemId)?.category;
+
+        switch (category) {
+            case 'armor': return GarageItemType.HULL;
+            case 'weapon': return GarageItemType.TURRET;
+            case 'paint': return GarageItemType.PAINT;
+            case 'inventory': return GarageItemType.SUPPLY;
+            case 'kit': return GarageItemType.KIT;
+            case 'special': return GarageItemType.SPECIAL;
+        }
+
+        return GarageItemType.UNKNOWN;
     }
 
     public sendEquippedItems(client: Player) {
-        const userData = this.server
-            .getUserDataManager()
-            .getUserData(client);
-
         const setEquipGarageItemPacket = new SetEquipGarageItemPacket(new ByteArray());
 
-        const equippedHull = userData.getHulls().find((hull) => hull.equipped);
-        const equippedTurret = userData.getTurrets().find((turret) => turret.equipped);
-        const equippedPainting = userData.getPaintings().find((painting) => painting.equipped);
-
-        setEquipGarageItemPacket.itemId = `${equippedHull.name}_m${equippedHull.level}`;
+        setEquipGarageItemPacket.itemId = client.getDataManager().getEquippedHull();
         setEquipGarageItemPacket.equipped = true;
         client.sendPacket(setEquipGarageItemPacket);
 
-        setEquipGarageItemPacket.itemId = `${equippedTurret.name}_m${equippedTurret.level}`;
+        setEquipGarageItemPacket.itemId = client.getDataManager().getEquippedTurret();
         setEquipGarageItemPacket.equipped = true;
         client.sendPacket(setEquipGarageItemPacket);
 
-        setEquipGarageItemPacket.itemId = `${equippedPainting.name}_m0`;
+        setEquipGarageItemPacket.itemId = client.getDataManager().getEquippedPainting();
         setEquipGarageItemPacket.equipped = true;
         client.sendPacket(setEquipGarageItemPacket);
     }
