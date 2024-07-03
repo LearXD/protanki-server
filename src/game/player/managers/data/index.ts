@@ -74,15 +74,78 @@ export class PlayerDataManager {
         }
     }
 
-    public setGarageItem(itemId: string) {
+    public upgradeItem(itemId: string) {
+        Logger.debug(`Upgrading item ${itemId} for player ${this.player.getUsername()}`);
         const item = GarageManager.parseItemName(itemId);
+        const category = this.player.getServer().getGarageManager().getItemCategory(itemId);
+        Logger.debug(`Item ${itemId} is from category ${category}`);
 
+        switch (category) {
+            case GarageItemType.TURRET:
+                console.log(item)
+                this.garage.turrets = this.garage.turrets.map(turret => {
+                    if (turret.name == item.name) {
+                        console.log(turret)
+                        return { name: turret.name, level: item.level + 1, equipped: turret.equipped }
+                    }
+                    return turret;
+                })
+                break;
+            case GarageItemType.HULL:
+                this.garage.hulls = this.garage.hulls.map(hull => {
+                    if (hull.name == item.name) {
+                        return { name: hull.name, level: item.level + 1, equipped: hull.equipped }
+                    }
+                    return hull;
+                })
+                break;
+        }
     }
 
-    public setEquipItem(itemName: string) {
-        const category = this.findInventoryItem(itemName);
+    public addItem(itemId: string) {
+        Logger.debug(`Adding item ${itemId} to player ${this.player.getUsername()}`);
 
-        if (category) {
+        const item = GarageManager.parseItemName(itemId);
+        if (this.hasItem(itemId)) {
+            return this.upgradeItem(itemId);
+        }
+        const category = this.player.getServer().getGarageManager().getItemCategory(itemId);
+        Logger.debug(`Item ${itemId} is from category ${category}`);
+
+        switch (category) {
+            case GarageItemType.TURRET:
+                this.garage.turrets = this.garage.turrets.map(turret => {
+                    if (turret.name == item.name) {
+                        return { name: turret.name, level: item.level, equipped: turret.equipped }
+                    }
+                    return turret;
+                })
+                break;
+            case GarageItemType.HULL:
+                this.garage.hulls = this.garage.hulls.map(hull => {
+                    if (hull.name == item.name) {
+                        return { name: hull.name, level: item.level, equipped: hull.equipped }
+                    }
+                    return hull;
+                })
+                break;
+            case GarageItemType.PAINT:
+                this.garage.paintings = this.garage.paintings.map(painting => {
+                    if (painting.name == item.name) {
+                        return { name: painting.name, level: 0, equipped: painting.equipped }
+                    }
+                    return painting;
+                })
+                break;
+        }
+
+        Logger.info(`Item ${itemId} added to player ${this.player.getUsername()}`);
+    }
+
+    public equipItem(itemName: string) {
+
+        if (this.hasItem(itemName)) {
+            const category = this.player.getServer().getGarageManager().getItemCategory(itemName);
             const item = GarageManager.parseItemName(itemName);
 
             switch (category) {
@@ -102,11 +165,13 @@ export class PlayerDataManager {
                     });
                     break;
             }
-
+            return true
         }
+        return false
     }
 
     public getEquippedTurret() {
+
         const turret = this.getTurrets()
             .find(turret => turret.equipped);
 
@@ -136,31 +201,10 @@ export class PlayerDataManager {
         return `${painting.name}_m0`;
     }
 
-    public findInventoryItem(itemId: string) {
+    public hasItem(itemId: string) {
         const item = GarageManager.parseItemName(itemId);
-
-        const turret = this.getTurrets()
+        return this.getGarageItems()
             .find(({ name, level }) => name == item.name && level == item.level);
-
-        if (turret) {
-            return GarageItemType.TURRET;
-        }
-
-        const hull = this.getHulls()
-            .find(({ name, level }) => name == item.name && level == item.level);
-
-        if (hull) {
-            return GarageItemType.HULL;
-        }
-
-        const painting = this.getHulls()
-            .find(({ name, level }) => name == item.name && level == item.level);
-
-        if (painting) {
-            return GarageItemType.PAINT;
-        }
-
-        return null;
     }
 
     public getAuthData(username: string) {

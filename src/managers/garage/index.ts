@@ -119,9 +119,12 @@ export class GarageManager {
     }
 
     public getItemCategory(itemId: string) {
-        const category = this.items.find(item => item.id === itemId)?.category;
+        const parsed = GarageManager.parseItemName(itemId);
+        const found = this.items.find((item) => {
+            return item.id === parsed.name && (item.modificationID ? item.modificationID === parsed.level : true)
+        })
 
-        switch (category) {
+        switch (found?.category) {
             case 'armor': return GarageItemType.HULL;
             case 'weapon': return GarageItemType.TURRET;
             case 'paint': return GarageItemType.PAINT;

@@ -4,7 +4,7 @@ import { PingPacket } from "./packets/ping";
 import { PongPacket } from "./packets/pong";
 import { SetCaptchaLocationsPacket } from "./packets/set-captcha-locations";
 import { SetTipResourcePacket } from "./packets/set-tip-resource";
-import { SendLanguagePacket } from "./packets/send-languague";
+import { SendLanguagePacket } from "./packets/send-language";
 import { SetNetworkParamsPacket } from "./packets/set-network-params";
 import { SimplePacket } from "./packets/simple-packet";
 import { SendRequestLoadScreenPacketPacket } from "./packets/send-request-load-screen";

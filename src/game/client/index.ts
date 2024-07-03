@@ -10,11 +10,10 @@ import { Logger } from "../../utils/logger";
 import { PingPacket } from "../../network/packets/ping";
 import { ResolveCallbackPacket } from "../../network/packets/resolve-callback";
 import { SetGameLoadedPacket } from "../../network/packets/set-game-loaded";
-import { SendLanguagePacket } from "../../network/packets/send-languague";
+import { SendLanguagePacket } from "../../network/packets/send-language";
 import { SendRequestLoadScreenPacketPacket } from "../../network/packets/send-request-load-screen";
 import { PongPacket } from "../../network/packets/pong";
 import { SendRequestCaptchaPacket } from "../../network/packets/send-request-captcha";
-import { SendLoginPacket } from "../../network/packets/send-login";
 import { SendRequestUserDataPacket } from "../../network/packets/send-request-user-data";
 
 const IGNORE_PACKETS = [

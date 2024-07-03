@@ -12,12 +12,12 @@ export class PlayerGarageManager {
 
 
     public handleEquipItem(client: Player, itemId: string) {
-        this.player.getDataManager().setEquipItem(itemId);
-
-        const setEquipGarageItemPacket = new SetEquipGarageItemPacket();
-        setEquipGarageItemPacket.itemId = itemId;
-        setEquipGarageItemPacket.equipped = true;
-        client.sendPacket(setEquipGarageItemPacket);
+        if (this.player.getDataManager().equipItem(itemId)) {
+            const setEquipGarageItemPacket = new SetEquipGarageItemPacket();
+            setEquipGarageItemPacket.itemId = itemId;
+            setEquipGarageItemPacket.equipped = true;
+            client.sendPacket(setEquipGarageItemPacket)
+        }
     }
 
     public handleBuyItem(client: Player, itemId: string, amount: number, price: number) {
@@ -26,7 +26,7 @@ export class PlayerGarageManager {
         }
 
         client.getDataManager().decreaseCrystals(price);
-        this.player.getDataManager().setGarageItem(itemId);
+        this.player.getDataManager().addItem(itemId);
     }
 
     public handlePacket(packet: SimplePacket) {
