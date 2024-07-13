@@ -26,6 +26,8 @@ import { BattleEffectsManager } from "./managers/effetcs"
 import { BattleStatisticsManager } from "./managers/statistics"
 import { BattleBoxesManager } from "./managers/boxes"
 import { BattleDeathMatchModeManager } from "./managers/mode/modes/death-match"
+import { SetRemoveBattleScreenPacket } from "../../network/packets/set-remove-battle-screen"
+import { SetUserLeftBattlePacket } from "../../network/packets/set-user-left-battle"
 
 export interface IBattleData {
     autoBalance: boolean,
@@ -156,19 +158,25 @@ export class Battle {
 
     public async handleClientJoin(client: Player) {
 
-        if (!this.getPlayersManager().addPlayer(client)) {
-            return;
+        if (this.getPlayersManager().hasPlayer(client.getUsername())) {
+            Logger.warn(`${client.getUsername()} already joined the battle ${this.getName()}`)
+            return
         }
 
-        Logger.info('BATTLE', `${client.getUsername()} joined the battle ${this.getName()}`)
+        this.getPlayersManager().addPlayer(client);
+
+        client.setBattle(this)
+        client.setLayoutState(LayoutState.BATTLE)
+
+        Logger.info(`${client.getUsername()} joined the battle ${this.getName()}`)
 
         this.statisticsManager.initPlayer(client.getUsername())
 
         await this.resourcesManager.sendObjectsResources(client)
         await this.resourcesManager.sendSkyboxResource(client)
-        // return;
+
         await this.resourcesManager.sendMapResources(client)
-        // return;
+
         this.resourcesManager.sendTurretsData(client)
         this.boxesManager.sendBoxesData(client)
         this.resourcesManager.sendBattleData(client)
@@ -198,6 +206,27 @@ export class Battle {
         this.boxesManager.sendSpawnedBoxes(client)
 
         client.setSubLayoutState(LayoutState.BATTLE, LayoutState.BATTLE)
+    }
+
+    public handleClientLeave(client: Player) {
+
+        if (!this.getPlayersManager().hasPlayer(client.getUsername())) {
+            Logger.warn(`${client.getUsername()} is not in the battle ${this.getName()}`)
+            return
+        }
+
+        const setUserLeftBattlePacket = new SetUserLeftBattlePacket()
+        setUserLeftBattlePacket.userId = client.getUsername()
+        client.sendPacket(setUserLeftBattlePacket)
+
+        const setRemoveBattleScreenPacket = new SetRemoveBattleScreenPacket()
+        client.sendPacket(setRemoveBattleScreenPacket)
+
+        client.getServer().getBattlesManager().sendBattleSelectScreen(client);
+        client.setLayoutState(LayoutState.BATTLE_SELECT)
+        client.setSubLayoutState(LayoutState.BATTLE_SELECT, LayoutState.BATTLE_SELECT)
+
+        this.getPlayersManager().removePlayer(client.getUsername())
     }
 
     public toBattleListItem(): IBattleList {

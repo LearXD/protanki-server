@@ -153,7 +153,7 @@ import { Logger } from "../utils/logger";
 import { SetGameLoadedPacket } from "./packets/set-game-loaded";
 import { SetRemoveTankEffectPacket } from "./packets/set-remove-tank-effect";
 import { SendShotVoidPacket } from "./packets/send-shot-void";
-import { SendSetLayoutStatePacket } from "./packets/send-set-layout-state";
+import { SendLayoutStatePacket } from "./packets/send-layout-state";
 import { SetRemoveBattleScreenPacket } from "./packets/set-remove-battle-screen";
 import { SendBattleMessagePacket } from "./packets/send-battle-message";
 import { SetBattleSystemMessagePacket } from "./packets/set-battle-system-message";
@@ -276,7 +276,7 @@ import { SetOkPopupPacket } from "./packets/set-ok-popup";
 import { SetServerWillUpdatePacket } from "./packets/set-server-will-update";
 import { SetTeamStoppedCapturingControlPointPacketPacket } from "./packets/set-team-stopped-capturing-control-point-packet";
 import { SendFlameTargetsShotPacket } from "./packets/send-flame-targets-shot";
-import { SomeUserLeftPacket } from "./packets/some-user-left";
+import { SetUserLeftBattlePacket } from "./packets/set-user-left-battle";
 import { SetDrugQuantityPacket } from "./packets/set-drug-quantity";
 import { SetCapturingPointPacket } from "./packets/set-capturing-point";
 import { SetTankRespawnDelayPacket } from "./packets/set-tank-respawn-delay";
@@ -316,7 +316,7 @@ export class Network {
 
     private registerPackets() {
 
-        Logger.info('NETWORK', 'Registering packets...')
+        Logger.info('Registering packets...')
 
         this.registerPacket(Protocol.SET_NETWORK_PARAMS, SetNetworkParamsPacket)
         this.registerPacket(Protocol.SET_CAPTCHA_LOCATIONS, SetCaptchaLocationsPacket)
@@ -525,7 +525,7 @@ export class Network {
         this.registerPacket(Protocol.SET_DESTROY_TANK, SetDestroyTankPacket)
 
         this.registerPacket(Protocol.SET_GAME_LOADED, SetGameLoadedPacket)
-        this.registerPacket(Protocol.SEND_SET_LAYOUT_STATE, SendSetLayoutStatePacket)
+        this.registerPacket(Protocol.SEND_LAYOUT_STATE, SendLayoutStatePacket)
         this.registerPacket(Protocol.SET_REMOVE_BATTLE_SCREEN, SetRemoveBattleScreenPacket)
         this.registerPacket(Protocol.SEND_BATTLE_MESSAGE, SendBattleMessagePacket)
         this.registerPacket(Protocol.SET_BATTLE_SYSTEM_MESSAGE, SetBattleSystemMessagePacket)
@@ -633,7 +633,7 @@ export class Network {
         this.registerPacket(Protocol.SET_SERVER_WILL_UPDATE, SetServerWillUpdatePacket);
         this.registerPacket(Protocol.SET_TEAM_STOPPED_CAPTURING_CONTROL_POINT_PACKET, SetTeamStoppedCapturingControlPointPacketPacket);
         this.registerPacket(Protocol.SEND_FLAME_TARGETS_SHOT, SendFlameTargetsShotPacket);
-        this.registerPacket(Protocol.SOME_USER_LEFT, SomeUserLeftPacket);
+        this.registerPacket(Protocol.SET_USER_LEFT_BATTLE, SetUserLeftBattlePacket);
         this.registerPacket(Protocol.SET_DRUG_QUANTITY, SetDrugQuantityPacket);
         this.registerPacket(Protocol.SET_CAPTURING_POINT, SetCapturingPointPacket);
         this.registerPacket(Protocol.SET_TANK_RESPAWN_DELAY, SetTankRespawnDelayPacket);
@@ -682,7 +682,7 @@ export class Network {
         this.registerPacket(Protocol.SEND_VERIFY_EMAIL, SendVerifyEmailPacket);
         this.registerPacket(Protocol.SEND_SUCCESSFUL_PURCHASE, SendSuccessfulPurchasePacket);
 
-        Logger.info('NETWORK', `${this.packetPool.size} packets registered`)
+        Logger.info(`${this.packetPool.size} packets registered`)
     }
 
     private registerPacket<P = SimplePacket>(id: number, packet: P) {

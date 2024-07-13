@@ -3,27 +3,27 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SendSetLayoutStatePacket extends Packet {
+export class SendLayoutStatePacket extends Packet {
 
-    public layoutState: string;
+    public state: string;
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SEND_SET_LAYOUT_STATE, bytes)
+        super(Protocol.SEND_LAYOUT_STATE, bytes)
     }
 
     public decode() {
         const bytes = this.cloneBytes();
 
-        this.layoutState = LayoutState.STATES[bytes.readInt()];
+        this.state = LayoutState.STATES[bytes.readInt()];
 
         return {
-            layoutState: this.layoutState
+            state: this.state
         }
     }
 
     public encode() {
         const bytes = new ByteArray();
-        bytes.writeInt(LayoutState.STATES.indexOf(this.layoutState));
+        bytes.writeInt(LayoutState.STATES.indexOf(this.state));
         return bytes;
     }
 }

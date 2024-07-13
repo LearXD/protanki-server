@@ -73,8 +73,7 @@ export class AuthManager {
 
         client.setLayoutState(LayoutState.BATTLE_SELECT);
 
-        this.server.getUserDataManager()
-            .handleAuthenticated(client);
+        this.server.getUserDataManager().handleAuthenticated(client);
 
         this.sendUserEmail(client);
 
@@ -83,8 +82,7 @@ export class AuthManager {
         setBattleInviteCCPacket.resourceId = 106777
         client.sendPacket(setBattleInviteCCPacket);
 
-        this.server.getFriendsManager()
-            .sendFriendsData(client);
+        this.server.getFriendsManager().sendFriendsData(client);
 
         this.server.getResourcesManager().sendResources(client, ResourceType.LOBBY);
         client.setSubLayoutState(LayoutState.BATTLE_SELECT, LayoutState.BATTLE_SELECT)
@@ -93,11 +91,7 @@ export class AuthManager {
         setAchievementCCPacket.achievements = ['FIRST_RANK_UP'];
         client.sendPacket(setAchievementCCPacket);
 
-        this.server.getBattlesManager().sendBattles(client);
-
-        this.server.getChatManager().sendChatConfig(client);
-
-        this.server.getChatManager().sendChatMessages(client);
+        this.server.getBattlesManager().sendBattleSelectScreen(client);
     }
 
     public sendAuthScreen(client: Player) {

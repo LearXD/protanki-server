@@ -206,7 +206,7 @@ export class Protocol {
     static SET_BATTLE_TEAM_USERS = -1668779175;
     static SEND_TEAM_SCORE = 561771020; // ctf
     static SET_BATTLE_STATISTICS_TEAM_CC = -1233891872;
-    static SOME_USER_LEFT = 1411656080;
+    static SET_USER_LEFT_BATTLE = 1411656080;
     static SEND_TEAM_BATTLE_USER_START = -497293992;
 
 
@@ -459,7 +459,7 @@ export class Protocol {
 
 
     /** SEND LAYOUT */
-    static SEND_SET_LAYOUT_STATE = 377959142
+    static SEND_LAYOUT_STATE = 377959142
 
 
     /** OPEN GARAGE */

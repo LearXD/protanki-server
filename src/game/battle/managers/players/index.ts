@@ -20,19 +20,13 @@ export class BattlePlayersManager {
     public getPlayer(username: string) { return this.players.get(username) }
 
     public addPlayer(client: Player) {
-        if (!this.hasPlayer(client.getUsername())) {
-            this.players.set(client.getUsername(), client);
-            return true;
-        }
-        return false;
+        this.players.set(client.getUsername(), client)
     }
 
     public removePlayer(username: string) {
         if (this.hasPlayer(username)) {
             this.players.delete(username);
-            return true;
         }
-        return false;
     }
 
     public sendPlayerData(client: Player) {

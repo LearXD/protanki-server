@@ -18,6 +18,7 @@ import { PlayerChatManager } from "./managers/chat";
 import { PlayerBattlesManager } from "./managers/battles";
 import { PlayerConfigsManager } from "./managers/configs";
 import { PlayerDataManager } from "./managers/data";
+import { SendLayoutStatePacket } from "../../network/packets/send-layout-state";
 
 const IGNORE_PACKETS = [
     1484572481, // Pong
@@ -72,18 +73,13 @@ export class Player extends Tank {
 
         this.updateInterval = setInterval(this.update.bind(this), 1000);
 
-        await this.getServer().getResourcesManager()
-            .sendResources(this, ResourceType.AUTH)
+        await this.getServer().getResourcesManager().sendResources(this, ResourceType.AUTH)
 
-        this.getServer().getCaptchaManager()
-            .sendCaptchaLocations(this);
+        this.getServer().getCaptchaManager().sendCaptchaLocations(this);
 
-        await this.getServer().getTipsManager()
-            .sendLoadingTip(this);
+        await this.getServer().getTipsManager().sendLoadingTip(this);
 
-        this.getServer().getAuthManager()
-            .sendAuthConfig(this);
-
+        this.getServer().getAuthManager().sendAuthConfig(this);
     }
 
     public close() {
@@ -95,10 +91,10 @@ export class Player extends Tank {
         super.update();
     }
 
-    public getLayoutState() { return this.layoutState }
-
     public getViewingBattle(): Battle { return this.viewingBattle }
     public setViewingBattle(battle: Battle) { this.viewingBattle = battle }
+
+    public getLayoutState() { return this.layoutState }
 
     public setLayoutState(state: LayoutStateType) {
 
@@ -109,6 +105,12 @@ export class Player extends Tank {
             case LayoutState.BATTLE_SELECT:
                 this.getServer().getBattlesManager()
                     .sendRemoveBattlesScreen(this);
+                break;
+        }
+
+        switch (state) {
+            case LayoutState.BATTLE:
+                this.getServer().getChatManager().sendRemoveChatScreen(this);
                 break;
         }
 
@@ -128,13 +130,39 @@ export class Player extends Tank {
     }
 
     public handlePacket(packet: SimplePacket): boolean {
-        if (super.handlePacket(packet)) return
-        if (this.friendsManager.handlePacket(packet)) return
-        if (this.garageManager.handlePacket(packet)) return
-        if (this.authManager.handlePacket(packet)) return
-        if (this.chatManager.handlePacket(packet)) return
-        if (this.battlesManager.handlePacket(packet)) return
-        if (this.configsManager.handlePacket(packet)) return
+
+        if (packet instanceof SendLayoutStatePacket) {
+            Logger.debug(this.getIdentifier(), `Layout state changed to ${packet.state}`);
+            if (packet.state === LayoutState.BATTLE_SELECT) {
+                const battle = this.getBattle();
+                console.log(battle)
+                if (battle) {
+                    battle.handleClientLeave(this);
+                }
+            }
+            return
+        }
+
+        if (super.handlePacket(packet))
+            return
+
+        if (this.friendsManager.handlePacket(packet))
+            return
+
+        if (this.garageManager.handlePacket(packet))
+            return
+
+        if (this.authManager.handlePacket(packet))
+            return
+
+        if (this.chatManager.handlePacket(packet))
+            return
+
+        if (this.battlesManager.handlePacket(packet))
+            return
+
+        if (this.configsManager.handlePacket(packet))
+            return
     }
 
     public handleData = (data: Buffer) => {

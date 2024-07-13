@@ -31,9 +31,7 @@ export class ClientsHandler {
         this.clients.delete(client.getIdentifier());
     }
 
-    public getClients() {
-        return this.clients;
-    }
+    public getClients() { return this.clients }
 
     public getClient(identifier: string) {
         return this.clients.get(identifier);

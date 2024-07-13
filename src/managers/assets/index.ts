@@ -51,7 +51,7 @@ export class AssetsManager {
             }
         } catch (error) {
             if (error instanceof Error) {
-                Logger.error('ASSET-MANAGER', error.message)
+                Logger.error(error.message)
             }
             return null
         }

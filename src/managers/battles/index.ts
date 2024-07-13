@@ -13,7 +13,6 @@ import { SetAddBattleOnListPacket } from '../../network/packets/set-add-battle-o
 import { SetRemoveBattlesScreenPacket } from '../../network/packets/set-remove-battles-screen';
 import { LayoutState } from '../../utils/game/layout-state';
 
-
 export class BattlesManager {
 
     private battles: Battle[] = [];
@@ -28,8 +27,7 @@ export class BattlesManager {
     }
 
     public getData(_path: string) {
-        return this.server
-            .getAssetsManager()
+        return this.server.getAssetsManager()
             .getData(path.join('battle', _path))
     }
 
@@ -74,6 +72,12 @@ export class BattlesManager {
         }
 
         return battle;
+    }
+
+    public sendBattleSelectScreen(client: Player) {
+        this.sendBattles(client);
+        this.server.getChatManager().sendChatConfig(client);
+        this.server.getChatManager().sendChatMessages(client);
     }
 
     public sendBattles(client: Player) {
@@ -140,10 +144,9 @@ export class BattlesManager {
     }
 
     public handleJoinBattle(client: Player, team: string) {
-        client.setLayoutState(LayoutState.BATTLE)
-        client.getServer().getChatManager()
-            .sendRemoveChatScreen(client);
         const battle = client.getViewingBattle();
-        battle.handleClientJoin(client);
+        if (battle) {
+            battle.handleClientJoin(client);
+        }
     }
 }

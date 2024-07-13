@@ -22,8 +22,6 @@ import { CaptchaManager } from './managers/captcha';
 
 export class Server {
 
-    private static readonly IDENTIFIER = 'SERVER';
-
     private server: net.Server;
     private network: Network;
 
@@ -54,6 +52,8 @@ export class Server {
     public init() {
         this.registerListeners();
 
+        this.network = new Network();
+
         this.clientsHandler = new ClientsHandler(this);
 
         this.assetsManager = new AssetsManager(path.resolve('./assets'));
@@ -72,8 +72,6 @@ export class Server {
 
         this.garageManager = new GarageManager(this);
         this.captchaManager = new CaptchaManager(this);
-
-        this.network = new Network();
     }
 
     public static getInstance() {
@@ -82,30 +80,27 @@ export class Server {
 
     public registerListeners = () => {
         this.server.on('connection', (socket) => this.clientsHandler.handleConnection(socket));
-        this.server.on('error', (error) => {
-            Logger.error(Server.IDENTIFIER, error.message)
-            this.close();
-        });
+        this.server.on('error', (error) => Logger.error(error.message));
     }
 
     public start = (port: number) => {
         const start = Date.now();
-        Logger.info(Server.IDENTIFIER, 'Starting server...');
+        Logger.info('Starting server...');
 
         this.init();
 
         this.server.listen(port, () => {
             const time = Date.now() - start;
             this.sendMessage(`[SERVER] Servidor iniciado em ${time} ms`)
-            Logger.info(Server.IDENTIFIER, `Server started on port ${port} (${time}ms)`);
-            Logger.debug(Server.IDENTIFIER, `Memory usage: ${this.getMemoryUsage()} MB`);
+            Logger.info(`Server started on port ${port} (${time}ms)`);
+            Logger.debug(`Memory usage: ${this.getMemoryUsage()} MB`);
         })
     }
 
     public close = () => {
-        Logger.info(Server.IDENTIFIER, 'Closing server...');
+        Logger.info('Closing server...');
         this.server.close();
-        Logger.info(Server.IDENTIFIER, 'Server closed');
+        Logger.info('Server closed');
     }
 
     public sendMessage = (message: string, warning: boolean = false) => {
@@ -113,29 +108,13 @@ export class Server {
     }
 
     public sendPacket(client: Player, packet: SimplePacket) {
-        client.sendPacket(packet);
+        return client.sendPacket(packet);
     }
 
     public broadcastPacket(packet: SimplePacket) {
-        this.clientsHandler.getClients().forEach((client) => {
-            this.sendPacket(client, packet);
-        });
+        return this.clientsHandler.getClients()
+            .forEach((client) => this.sendPacket(client, packet));
     }
-
-    public getClientHandler() { return this.clientsHandler }
-    public getAuthManager() { return this.authManager }
-
-    public getTipsManager() { return this.tipsManager }
-    public getAssetsManager() { return this.assetsManager }
-    public getResourcesManager() { return this.resourcesManager }
-    public getUserDataManager(): UserDataManager { return this.userDataManager }
-    public getFriendsManager(): FriendsManager { return this.friendsManager }
-    public getChatManager() { return this.chatManager }
-    public getBattlesManager(): BattlesManager { return this.battleManager }
-    public getMapsManager() { return this.mapsManager }
-    public getGarageManager(): GarageManager { return this.garageManager }
-    public getLocaleManager() { return this.localeManager }
-    public getCaptchaManager(): CaptchaManager { return this.captchaManager }
 
     public isWhitelisted() { return this.whitelisted }
 
@@ -148,4 +127,19 @@ export class Server {
     public getMemoryUsage() {
         return Math.round(process.memoryUsage().heapUsed / 1024 / 1024 * 100) / 100;
     }
+
+    public getClientHandler() { return this.clientsHandler }
+    public getAuthManager() { return this.authManager }
+
+    public getTipsManager(): TipsManager { return this.tipsManager }
+    public getAssetsManager(): AssetsManager { return this.assetsManager }
+    public getResourcesManager(): ResourcesManager { return this.resourcesManager }
+    public getUserDataManager(): UserDataManager { return this.userDataManager }
+    public getFriendsManager(): FriendsManager { return this.friendsManager }
+    public getChatManager(): ChatManager { return this.chatManager }
+    public getBattlesManager(): BattlesManager { return this.battleManager }
+    public getMapsManager(): MapsManager { return this.mapsManager }
+    public getGarageManager(): GarageManager { return this.garageManager }
+    public getLocaleManager(): LocaleManager { return this.localeManager }
+    public getCaptchaManager(): CaptchaManager { return this.captchaManager }
 }

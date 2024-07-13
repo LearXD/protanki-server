@@ -1,5 +1,5 @@
 import util from 'util'
-import Time from '../time'
+
 import chalk from 'chalk'
 
 enum Colors {
@@ -7,27 +7,32 @@ enum Colors {
     INFO = '#ADD8E6',
     ERROR = '#FF0000',
     ALERT = '#FFFF00',
-    DEBUG = '#D3D3D3',
+    DEBUG = '#ffa500',
     OK = '#00FF00'
 }
 
 export class Logger {
 
+    private static getTimestamp() {
+        return new Date().toLocaleTimeString()
+    }
+
     static getPrefix(
         prefix?: string
     ) {
-        return `[${Time.getNowTime()}]${prefix ? ` [${prefix}]` : ``}`
+        return `[${Logger.getTimestamp()}]${prefix ? ` [${prefix}]` : ``}`
     }
 
-    static show(prefix: string, color: string, ...args: any[]) {
+    static show(color: string, ...args: any[]) {
+        const stack = new Error().stack.split('\n')
+        let prefix = null;
 
-        if (args.length === 0) {
-            args.push(prefix)
-            prefix = "";
+        if (stack.length > 2) {
+            prefix = stack[3].split('at ')[1].split(' (')[0].split('.')[0].replace(/new\ /, '')
         }
 
         console.log(
-            chalk.hex(color)(this.getPrefix(prefix)),
+            chalk.hex(color)(this.getPrefix(args.length > 1 ? args[0] : prefix)),
             ...args.map((arg) => {
                 return typeof arg === 'string' ?
                     chalk.hex(color)(arg) :
@@ -36,31 +41,31 @@ export class Logger {
         )
     }
 
-    static log(prefix: string, ...args: any[]) {
-        this.show(prefix, Colors.LOG, ...args)
+    static log(...args: any[]) {
+        this.show(Colors.LOG, ...args)
     }
 
-    static error(prefix: string, ...args: any[]) {
-        this.show(prefix, Colors.ERROR, ...args)
+    static error(...args: any[]) {
+        this.show(Colors.ERROR, ...args)
     }
 
-    static warn(prefix: string, ...args: any[]) {
-        this.show(prefix, Colors.ALERT, ...args)
+    static warn(...args: any[]) {
+        this.show(Colors.ALERT, ...args)
     }
 
-    static info(prefix: string, ...args: any[]) {
-        this.show(prefix, Colors.INFO, ...args)
+    static info(...args: any[]) {
+        this.show(Colors.INFO, ...args)
     }
 
-    static alert(prefix: string, ...args: any[]) {
-        this.show(prefix, Colors.ALERT, ...args)
+    static alert(...args: any[]) {
+        this.show(Colors.ALERT, ...args)
     }
 
-    static debug(prefix: string, ...args: any[]) {
-        this.show(prefix, Colors.DEBUG, ...args)
+    static debug(...args: any[]) {
+        this.show(Colors.DEBUG, ...args)
     }
 
-    static ok(prefix: string, ...args: any[]) {
-        this.show(prefix, Colors.OK, ...args)
+    static ok(...args: any[]) {
+        this.show(Colors.OK, ...args)
     }
 }

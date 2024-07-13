@@ -2,12 +2,12 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SomeUserLeftPacket extends Packet {
+export class SetUserLeftBattlePacket extends Packet {
 
     public userId: string;
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SOME_USER_LEFT, bytes)
+        super(Protocol.SET_USER_LEFT_BATTLE, bytes)
     }
 
     public decode() {
