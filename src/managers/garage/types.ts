@@ -65,3 +65,27 @@ export enum GarageItemCategory {
     KIT = 'kit',
     UNKNOWN = 'unknown'
 }
+
+export interface ITurretProperties {
+    turret_turn_speed: number
+    kickback: number
+    turretTurnAcceleration: number
+    impact_force: number
+}
+
+export type ITurretSfx = { [key: string]: any }
+
+//{"maxSpeed":7,"maxTurnSpeed":1.5533430342749532,"acceleration":10.9,"reverseAcceleration":13.53,"sideAcceleration":10.53,"turnAcceleration":1.910786523672936,"reverseTurnAcceleration":3.8030723335692005,"mass":2410,"power":10.9,"dampingCoeff":2500}
+//{"maxSpeed":10,"maxTurnSpeed":1.584759014074073,"acceleration":10.41,"reverseAcceleration":17.77,"sideAcceleration":9.22,"turnAcceleration":2.864608986519448,"reverseTurnAcceleration":4.216192001874434,"mass":1616,"power":10.41,"dampingCoeff":1250}
+export interface IHullProperties {
+    maxSpeed: number
+    maxTurnSpeed: number
+    acceleration: number
+    reverseAcceleration: number
+    sideAcceleration: number
+    turnAcceleration: number
+    reverseTurnAcceleration: number
+    mass: number
+    power: number
+    dampingCoeff: number
+}

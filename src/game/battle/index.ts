@@ -2,7 +2,6 @@
 import { Player } from "../player"
 import { Logger } from "../../utils/logger"
 
-import { IMap } from "../../managers/maps"
 import { IBattleList } from "../../network/packets/set-battle-list"
 import { BattleMode, BattleModes } from "../../utils/game/battle-mode"
 import { EquipmentConstraintsMode, EquipmentConstraintsModes } from "../../utils/game/equipment-constraints-mode"
@@ -28,6 +27,8 @@ import { BattleBoxesManager } from "./managers/boxes"
 import { BattleDeathMatchModeManager } from "./managers/mode/modes/death-match"
 import { SetRemoveBattleScreenPacket } from "../../network/packets/set-remove-battle-screen"
 import { SetUserLeftBattlePacket } from "../../network/packets/set-user-left-battle"
+import { SimplePacket } from "../../network/packets/simple-packet"
+import { IMap } from "../../managers/maps/types"
 
 export interface IBattleData {
     autoBalance: boolean,
@@ -174,7 +175,6 @@ export class Battle {
 
         await this.resourcesManager.sendObjectsResources(client)
         await this.resourcesManager.sendSkyboxResource(client)
-
         await this.resourcesManager.sendMapResources(client)
 
         this.resourcesManager.sendTurretsData(client)
@@ -217,7 +217,7 @@ export class Battle {
 
         const setUserLeftBattlePacket = new SetUserLeftBattlePacket()
         setUserLeftBattlePacket.userId = client.getUsername()
-        client.sendPacket(setUserLeftBattlePacket)
+        this.broadcastPacket(setUserLeftBattlePacket)
 
         const setRemoveBattleScreenPacket = new SetRemoveBattleScreenPacket()
         client.sendPacket(setRemoveBattleScreenPacket)
@@ -227,6 +227,12 @@ export class Battle {
         client.setSubLayoutState(LayoutState.BATTLE_SELECT, LayoutState.BATTLE_SELECT)
 
         this.getPlayersManager().removePlayer(client.getUsername())
+    }
+
+    public broadcastPacket(packet: SimplePacket) {
+        for (const player of this.getPlayersManager().getPlayers()) {
+            player.sendPacket(packet)
+        }
     }
 
     public toBattleListItem(): IBattleList {
