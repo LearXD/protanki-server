@@ -17,3 +17,6 @@ export class Theme {
         Theme.WINTER_NIGHT
     ];
 }
+
+export type OnlyStringKeys<T> = T extends string ? T : never
+export type Themes = OnlyStringKeys<typeof Theme[keyof typeof Theme]>

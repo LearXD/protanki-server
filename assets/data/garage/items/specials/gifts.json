@@ -238,5 +238,77 @@
         "isForRent": false,
         "price": 100500,
         "remainingTimeInSec": -1
+    },
+    {
+        "id": "disco_ball",
+        "name": "Bola de discoteca",
+        "description": "Quem a desparafusou do teto?",
+        "isInventory": false,
+        "index": 17500,
+        "next_price": 1000,
+        "next_rank": 7,
+        "type": 7,
+        "baseItemId": 654649,
+        "previewResourceId": 654649,
+        "rank": 7,
+        "category": "special",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1720895998,
+            "timeToStartInSeconds": -1720895998
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 1000,
+        "remainingTimeInSec": -1
+    },
+    {
+        "id": "fireworks",
+        "name": "Fogos de artifício",
+        "description": "É melhor ver como o inimigo gasta cristais com ele.",
+        "isInventory": false,
+        "index": 17550,
+        "next_price": 3000,
+        "next_rank": 7,
+        "type": 7,
+        "baseItemId": 654647,
+        "previewResourceId": 654647,
+        "rank": 7,
+        "category": "special",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1720895998,
+            "timeToStartInSeconds": -1720895998
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 3000,
+        "remainingTimeInSec": -1
+    },
+    {
+        "id": "tank_on_balls",
+        "name": "Tanque voando para longe",
+        "description": "Há uma lenda de que é assim que os tanques saem da batalha.",
+        "isInventory": false,
+        "index": 17600,
+        "next_price": 2000,
+        "next_rank": 7,
+        "type": 7,
+        "baseItemId": 654645,
+        "previewResourceId": 654645,
+        "rank": 7,
+        "category": "special",
+        "properts": [],
+        "discount": {
+            "percent": 0,
+            "timeLeftInSeconds": -1720895998,
+            "timeToStartInSeconds": -1720895998
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 2000,
+        "remainingTimeInSec": -1
     }
 ]

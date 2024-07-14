@@ -8,8 +8,8 @@ export class SendRicochetTargetShotPacket extends Packet {
     public time: number;
     public target: string;
     public shotId: number;
-    public vector_1: Vector3d;
-    public vectors_1: Vector3d[];
+    public targetPosition: Vector3d;
+    public hitPoints: Vector3d[];
 
     constructor(bytes?: ByteArray) {
         super(Protocol.SEND_RICOCHET_TARGET_SHOT, bytes)
@@ -21,15 +21,15 @@ export class SendRicochetTargetShotPacket extends Packet {
         this.time = bytes.readInt();
         this.target = bytes.readString();
         this.shotId = bytes.readInt();
-        this.vector_1 = bytes.readVector3d();
-        this.vectors_1 = bytes.readVector3dArray();
+        this.targetPosition = bytes.readVector3d();
+        this.hitPoints = bytes.readVector3dArray();
 
         return {
             time: this.time,
             target: this.target,
             shotId: this.shotId,
-            vector_1: this.vector_1,
-            vectors_1: this.vectors_1
+            targetPosition: this.targetPosition,
+            hitPoints: this.hitPoints
         }
     }
 
@@ -39,8 +39,8 @@ export class SendRicochetTargetShotPacket extends Packet {
         bytes.writeInt(this.time);
         bytes.writeString(this.target);
         bytes.writeInt(this.shotId);
-        bytes.writeVector3d(this.vector_1);
-        bytes.writeVector3dArray(this.vectors_1);
+        bytes.writeVector3d(this.targetPosition);
+        bytes.writeVector3dArray(this.hitPoints);
 
         return bytes;
     }

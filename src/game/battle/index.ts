@@ -21,7 +21,7 @@ import { BattleResourcesManager } from "./managers/resources"
 import { BattleModeManager } from "./managers/mode"
 
 import { BattleMinesManager } from "./managers/mines"
-import { BattleEffectsManager } from "./managers/effetcs"
+import { BattleEffectsManager } from "./managers/effects"
 import { BattleStatisticsManager } from "./managers/statistics"
 import { BattleBoxesManager } from "./managers/boxes"
 import { BattleDeathMatchModeManager } from "./managers/mode/modes/death-match"
@@ -29,6 +29,7 @@ import { SetRemoveBattleScreenPacket } from "../../network/packets/set-remove-ba
 import { SetUserLeftBattlePacket } from "../../network/packets/set-user-left-battle"
 import { SimplePacket } from "../../network/packets/simple-packet"
 import { IMap } from "../../managers/maps/types"
+import { Themes } from "../../utils/game/theme"
 
 export interface IBattleData {
     autoBalance: boolean,
@@ -46,6 +47,7 @@ export interface IBattleData {
         min: number
     },
     reArmorEnabled: boolean,
+    theme?: Themes,
     withoutBonuses: boolean,
     withoutCrystals: boolean,
     withoutSupplies: boolean
@@ -183,15 +185,15 @@ export class Battle {
 
         this.statisticsManager.sendBattleStatistics(client)
 
-        const setBattleChatEnabledPacket = new SetBattleChatEnabledPacket(new ByteArray());
+        const setBattleChatEnabledPacket = new SetBattleChatEnabledPacket();
         client.sendPacket(setBattleChatEnabledPacket);
 
-        const setSomePacketOnJoinBattle4Packet = new SetSomePacketOnJoinBattle4Packet(new ByteArray());
+        const setSomePacketOnJoinBattle4Packet = new SetSomePacketOnJoinBattle4Packet();
         client.sendPacket(setSomePacketOnJoinBattle4Packet);
 
         this.modeManager.sendPlayerStatistics(client)
 
-        const setSomePacketOnJoinBattle5Packet = new SetSomePacketOnJoinBattle5Packet(new ByteArray());
+        const setSomePacketOnJoinBattle5Packet = new SetSomePacketOnJoinBattle5Packet();
         client.sendPacket(setSomePacketOnJoinBattle5Packet);
 
         this.minesManager.sendMinesData(client);

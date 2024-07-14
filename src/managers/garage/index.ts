@@ -7,7 +7,6 @@ import { SetRemoveGaragePacket } from "../../network/packets/set-remove-garage";
 import { SetUserGarageItemsPacket } from "../../network/packets/set-user-garage-items";
 import { Server } from "../../server";
 import { LayoutState } from "../../utils/game/layout-state";
-import { ByteArray } from "../../utils/network/byte-array";
 import { ResourceType } from "../resources";
 import { Logger } from '../../utils/logger';
 import { GarageItemCategory, GarageItemFolder, IGarageItem, IHullProperties, ITurretProperties, ITurretSfx } from './types';
@@ -115,7 +114,7 @@ export class GarageManager {
     }
 
     public sendEquippedItems(client: Player) {
-        const setEquipGarageItemPacket = new SetEquipGarageItemPacket(new ByteArray());
+        const setEquipGarageItemPacket = new SetEquipGarageItemPacket();
 
         setEquipGarageItemPacket.itemId = client.getGarageManager().getEquippedHull();
         setEquipGarageItemPacket.equipped = true;
@@ -131,14 +130,14 @@ export class GarageManager {
     }
 
     public sendUserGarageItems(client: Player, items: IGarageItem[]) {
-        const setUserGarageItemsPacket = new SetUserGarageItemsPacket(new ByteArray());
+        const setUserGarageItemsPacket = new SetUserGarageItemsPacket();
         setUserGarageItemsPacket.items = items;
         setUserGarageItemsPacket.garageBoxId = 170001;
         client.sendPacket(setUserGarageItemsPacket);
     }
 
     public sendGarageItems(client: Player, items: IGarageItem[]) {
-        const setGarageItemsPropertiesPacket = new SetGarageItemsPropertiesPacket(new ByteArray());
+        const setGarageItemsPropertiesPacket = new SetGarageItemsPropertiesPacket();
 
         setGarageItemsPropertiesPacket.items = items
         setGarageItemsPropertiesPacket.delayMountArmorInSec = 0;
@@ -149,7 +148,7 @@ export class GarageManager {
     }
 
     public removeGarageScreen(client: Player) {
-        const setRemoveGaragePacket = new SetRemoveGaragePacket(new ByteArray());
+        const setRemoveGaragePacket = new SetRemoveGaragePacket();
         client.sendPacket(setRemoveGaragePacket);
     }
 

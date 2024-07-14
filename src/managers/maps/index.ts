@@ -6,6 +6,7 @@ import { Server } from "../../server";
 import { ByteArray } from "../../utils/network/byte-array";
 import { IBattleAsset } from "./types";
 import { Logger } from "../../utils/logger";
+import { Theme, Themes } from "../../utils/game/theme";
 
 export class MapsManager {
 
@@ -33,7 +34,7 @@ export class MapsManager {
         return this.server.getAssetsManager().getData(path.join('maps', _path));
     }
 
-    public getMap(name: string, theme: string = 'SUMMER') {
+    public getMap(name: string, theme: Themes = Theme.SUMMER) {
         return this.getMaps()
             .find(map => (map.mapId === name && map.theme === theme));
     }

@@ -12,6 +12,7 @@ import { SendCreateBattlePacket } from '../../network/packets/send-create-battle
 import { SetAddBattleOnListPacket } from '../../network/packets/set-add-battle-on-list';
 import { SetRemoveBattlesScreenPacket } from '../../network/packets/set-remove-battles-screen';
 import { LayoutState } from '../../utils/game/layout-state';
+import { Theme, Themes } from "../../utils/game/theme";
 
 export class BattlesManager {
 
@@ -36,13 +37,13 @@ export class BattlesManager {
         mapName: string,
         config?: IBattleData
     ) {
-        const map = this.server.getMapsManager().getMap(mapName)
+        const map = this.server.getMapsManager().getMap(mapName, config?.theme)
 
         if (!map) {
-            throw new Error('Map not found');
+            Logger.error(`Could not create battle ${name} because map ${mapName} was not found`)
+            return null;
         }
 
-        // TODO: Validate limits
         const battle = new Battle(name, map, config);
 
         this.addBattle(battle);
@@ -114,6 +115,7 @@ export class BattlesManager {
                 proBattle: packet.proBattle,
                 rankRange: packet.rankRange,
                 reArmorEnabled: packet.reArmorEnabled,
+                theme: packet.theme as Themes,
                 withoutBonuses: packet.withoutBonuses,
                 withoutCrystals: packet.withoutCrystals,
                 withoutSupplies: packet.withoutSupplies
@@ -134,7 +136,7 @@ export class BattlesManager {
         try {
             const battle = this.getBattle(battleId);
             if (battle) {
-                Logger.info(`Player ${client.getIdentifier()} is viewing battle ${battleId}`)
+                Logger.info(`Player ${client.getUsername()} is viewing battle ${battleId}`)
                 battle.getViewersManager().addViewer(client);
             }
         } catch (error) {

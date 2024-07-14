@@ -98,19 +98,27 @@ export class Player extends Tank {
 
     public setLayoutState(state: LayoutStateType) {
 
-        switch (this.layoutState) {
-            case LayoutState.GARAGE:
-                this.getServer().getGarageManager().removeGarageScreen(this)
-                break;
-            case LayoutState.BATTLE_SELECT:
-                this.getServer().getBattlesManager()
-                    .sendRemoveBattlesScreen(this);
-                break;
-        }
-
         switch (state) {
             case LayoutState.BATTLE:
                 this.getServer().getChatManager().sendRemoveChatScreen(this);
+
+                if (this.layoutState === LayoutState.BATTLE_SELECT) {
+                    this.getServer().getBattlesManager().sendRemoveBattlesScreen(this);
+                }
+
+                if (this.layoutState === LayoutState.GARAGE) {
+                    this.getServer().getGarageManager().removeGarageScreen(this);
+                }
+                break;
+            case LayoutState.BATTLE_SELECT:
+                if (this.layoutState === LayoutState.GARAGE) {
+                    this.getServer().getGarageManager().removeGarageScreen(this);
+                }
+                break;
+            case LayoutState.GARAGE:
+                if (this.layoutState === LayoutState.BATTLE_SELECT) {
+                    this.getServer().getBattlesManager().sendRemoveBattlesScreen(this);
+                }
                 break;
         }
 

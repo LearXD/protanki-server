@@ -8,7 +8,7 @@ export class SetViewingBattleUserInfoPacket extends Packet {
     public battle: string;
     public kills: number;
     public score: number;
-    public suspicious: number;
+    public suspicious: boolean;
     public user: string;
 
     constructor(bytes?: ByteArray) {
@@ -21,7 +21,7 @@ export class SetViewingBattleUserInfoPacket extends Packet {
         this.battle = bytes.readString();
         this.kills = bytes.readInt();
         this.score = bytes.readInt();
-        this.suspicious = bytes.readInt();
+        this.suspicious = bytes.readBoolean();
         this.user = bytes.readString();
 
         return {
@@ -39,7 +39,7 @@ export class SetViewingBattleUserInfoPacket extends Packet {
         bytes.writeString(this.battle);
         bytes.writeInt(this.kills);
         bytes.writeInt(this.score);
-        bytes.writeInt(this.suspicious);
+        bytes.writeBoolean(this.suspicious);
         bytes.writeString(this.user);
 
         return bytes;

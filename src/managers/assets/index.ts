@@ -46,14 +46,14 @@ export class AssetsManager {
                     return JSON.parse(fs.readFileSync(dir, 'utf-8'));
                 case ReadType.BUFFER:
                     return fs.readFileSync(dir);
-                default:
-                    return null;
             }
         } catch (error) {
             if (error instanceof Error) {
                 Logger.error(error.message)
             }
-            return null
+
         }
+
+        return null
     }
 }

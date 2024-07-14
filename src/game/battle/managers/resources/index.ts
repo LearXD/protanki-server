@@ -1,7 +1,7 @@
 import { Battle } from "../..";
 import { SetBattleDataPacket } from "../../../../network/packets/set-battle-data";
-import { SetBonusesDataPacket } from "../../../../network/packets/set-bonuses-data";
 import { SetTurretsDataPacket } from "../../../../network/packets/set-turrets-data";
+import { Logger } from "../../../../utils/logger";
 import { ByteArray } from "../../../../utils/network/byte-array";
 import { Player } from "../../../player";
 
@@ -13,7 +13,7 @@ export class BattleResourcesManager {
 
     public sendTurretsData(client: Player) {
         const turrets = client.getServer().getBattlesManager().getData('turrets.json')
-        const setTurretsDataPacket = new SetTurretsDataPacket(new ByteArray());
+        const setTurretsDataPacket = new SetTurretsDataPacket();
         setTurretsDataPacket.turrets = turrets;
         client.sendPacket(setTurretsDataPacket);
     }
@@ -22,7 +22,12 @@ export class BattleResourcesManager {
         const data = client.getServer().getMapsManager()
             .getMapData(this.battle.getMap().mapId, this.battle.getMap().theme)
 
-        const setBattleDataPacket = new SetBattleDataPacket(new ByteArray());
+        if (!data) {
+            Logger.error(`Map data not found for map ${this.battle.getMap().mapId} and theme ${this.battle.getMap().theme}`)
+            return;
+        }
+
+        const setBattleDataPacket = new SetBattleDataPacket();
         setBattleDataPacket.data = {
             kick_period_ms: 300000,
             map_id: this.battle.getMap().mapId,
