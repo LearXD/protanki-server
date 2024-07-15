@@ -100,7 +100,7 @@ export abstract class Client {
 
 
         if (packet instanceof SendLanguagePacket) {
-            Logger.log(this.getIdentifier(), `Language set to '${packet.language}'`)
+            Logger.log(`Language set to '${packet.language}'`)
             this.language = packet.language;
             return true;
         }
@@ -144,7 +144,7 @@ export abstract class Client {
         }
 
         if (!IGNORE_PACKETS.includes(packet.getPacketId())) {
-            Logger.log(this.getIdentifier(), `Packet ${packet.constructor.name} (${packet.getPacketId()}) sent - ${packet.getBytes().length()} bytes`)
+            Logger.log(`Packet ${packet.constructor.name} (${packet.getPacketId()}) sent - ${packet.getBytes().length()} bytes`)
         }
 
         const data = packet.toByteArray().getBuffer()

@@ -1,9 +1,11 @@
 import { Player } from "../..";
 import { GarageItemCategory } from "../../../../managers/garage/types";
 import { SendBuyGarageItemPacket } from "../../../../network/packets/send-buy-garage-item";
+import { SendBuyGarageKitPacket } from "../../../../network/packets/send-buy-garage-kit";
 import { SendEquipItemPacket } from "../../../../network/packets/send-equip-item";
 import { SendOpenGaragePacket } from "../../../../network/packets/send-open-garage";
 import { SetEquipGarageItemPacket } from "../../../../network/packets/set-equip-garage-item";
+import { SetSuppliesPacket } from "../../../../network/packets/set-supplies";
 import { SimplePacket } from "../../../../network/packets/simple-packet";
 import { Logger } from "../../../../utils/logger";
 import { IPlayerGarageData } from "./types";
@@ -46,11 +48,11 @@ export class PlayerGarageManager {
                 { name: 'wasp', level: 0, equipped: false },
             ],
             supplies: {
+                health: 100,
                 armor: 100,
                 double_damage: 100,
-                health: 100,
-                mine: 100,
-                n2o: 100
+                n2o: 100,
+                mine: 100
             }
         }
     }
@@ -65,8 +67,6 @@ export class PlayerGarageManager {
 
         const item = this.player.getServer().getGarageManager().getItem(itemId);
         const category = this.player.getServer().getGarageManager().getItemCategory(itemId);
-
-        Logger.debug(`Item ${itemId} is from category ${category}`);
 
         switch (category) {
             case GarageItemCategory.TURRET:
@@ -86,13 +86,16 @@ export class PlayerGarageManager {
         }
     }
 
-    public addItem(itemId: string) {
+    public addItem(itemId: string, quantity: number = 1) {
         Logger.debug(`Adding item ${itemId} to player ${this.player.getUsername()}`);
 
         const item = this.player.getServer().getGarageManager().getItem(itemId);
 
-        if (this.hasItem(itemId)) {
-            return this.upgradeItem(itemId);
+        const inventory = this.getInventoryItem(itemId);
+        if (inventory) {
+            if (inventory.level >= item.modificationID) {
+                return this.upgradeItem(itemId);
+            }
         }
 
         Logger.debug(`Item ${itemId} is from category ${item.category}`);
@@ -121,7 +124,7 @@ export class PlayerGarageManager {
     }
 
     public equipItem(itemName: string) {
-        if (this.hasItem(itemName)) {
+        if (this.getInventoryItem(itemName)) {
             const item = this.player.getServer().getGarageManager().getItem(itemName);
 
             switch (item.category) {
@@ -176,38 +179,72 @@ export class PlayerGarageManager {
         return `${painting.name}_m0`;
     }
 
-    public hasItem(itemId: string) {
+    public getInventoryItem(itemId: string) {
         const item = this.player.getServer().getGarageManager().getItem(itemId);
         const category = this.player.getServer().getGarageManager().getItemCategory(itemId);
 
         switch (category) {
             case GarageItemCategory.TURRET:
-                return this.items.turrets.some(turret => turret.name == item.id && turret.level == item.modificationID);
+                return this.items.turrets.find(turret => turret.name == item.id && turret.level == item.modificationID);
             case GarageItemCategory.HULL:
-                return this.items.hulls.some(hull => hull.name == item.id && hull.level == item.modificationID);
+                return this.items.hulls.find(hull => hull.name == item.id && hull.level == item.modificationID);
             case GarageItemCategory.PAINT:
-                return this.items.paintings.some(painting => painting.name == item.id);
+                return this.items.paintings.find(painting => painting.name == item.id);
         }
 
-        return false
+        return null
     }
 
-    public handleEquipItem(client: Player, itemId: string) {
+    public sendSupplies(client: Player) {
+        const setSuppliesPacket = new SetSuppliesPacket();
+        setSuppliesPacket.supplies = [
+            { count: this.items.supplies.health, id: 'health', itemEffectTime: 0, itemRestSec: 0, slotId: 1 },
+            { count: this.items.supplies.armor, id: 'armor', itemEffectTime: 0, itemRestSec: 0, slotId: 2 },
+            { count: this.items.supplies.double_damage, id: 'double_damage', itemEffectTime: 0, itemRestSec: 0, slotId: 3 },
+            { count: this.items.supplies.n2o, id: 'n2o', itemEffectTime: 0, itemRestSec: 0, slotId: 4 },
+            { count: this.items.supplies.mine, id: 'mine', itemEffectTime: 0, itemRestSec: 0, slotId: 5 }
+        ]
+
+        client.sendPacket(setSuppliesPacket);
+    }
+
+    public handleEquipItem(itemId: string) {
         if (this.equipItem(itemId)) {
             const setEquipGarageItemPacket = new SetEquipGarageItemPacket();
             setEquipGarageItemPacket.itemId = itemId;
             setEquipGarageItemPacket.equipped = true;
-            client.sendPacket(setEquipGarageItemPacket)
+            this.player.sendPacket(setEquipGarageItemPacket)
         }
     }
 
-    public handleBuyItem(client: Player, itemId: string, amount: number, price: number) {
-        if (client.getDataManager().getCrystals() < price) {
-            return;
+    public handleBuyKit(kitId: string, price: number) {
+        if (this.player.getDataManager().getCrystals() < price) {
+            return false;
         }
 
-        client.getDataManager().decreaseCrystals(price);
+        this.player.getDataManager().decreaseCrystals(price);
+        const kit = this.player.getServer().getGarageManager().getItem(kitId);
+
+        if (!kit) {
+            return false;
+        }
+
+        for (const item of kit.kit.kitItems) {
+            this.addItem(item.id, item.count);
+        }
+
+        return true;
+    }
+
+    public handleBuyItem(itemId: string, amount: number, price: number) {
+        if (this.player.getDataManager().getCrystals() < price) {
+            return false;
+        }
+
+        this.player.getDataManager().decreaseCrystals(price);
         this.addItem(itemId);
+
+        return true
     }
 
     public handlePacket(packet: SimplePacket) {
@@ -217,15 +254,20 @@ export class PlayerGarageManager {
         }
 
         if (packet instanceof SendEquipItemPacket) {
-            this.player.getGarageManager().handleEquipItem(this.player, packet.item);
+            this.player.getGarageManager().handleEquipItem(packet.item);
             return true
         }
 
         if (packet instanceof SendBuyGarageItemPacket) {
-            this.player.getGarageManager().handleBuyItem(
-                this.player, packet.item, packet.count, packet.price
-            );
-            return
+            this.player.getGarageManager()
+                .handleBuyItem(packet.item, packet.count, packet.price);
+            return true;
+        }
+
+        if (packet instanceof SendBuyGarageKitPacket) {
+            this.player.getGarageManager()
+                .handleBuyKit(packet.item, packet.price);
+            return true;
         }
 
         return false;

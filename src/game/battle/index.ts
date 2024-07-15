@@ -198,7 +198,7 @@ export class Battle {
 
         this.minesManager.sendMinesData(client);
 
-        client.getServer().getUserDataManager().sendSupplies(client);
+        client.getGarageManager().sendSupplies(client);
 
         this.playersManager.sendPlayerData(client)
 

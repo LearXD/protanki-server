@@ -57,7 +57,7 @@ export class Protocol {
     /** DO SEND_LOGIN */
     static SEND_LOGIN = -739684591;
     static SET_GAME_LOADED = -1923286328 // login success?
-    static INCORRECT_PASSWORD = 103812952;
+    static SET_INCORRECT_PASSWORD_POPUP = 103812952;
 
 
     /** EMAIL */

@@ -27,7 +27,7 @@ import { SetLayoutStatePacket } from "./packets/set-layout-state";
 import { SetPremiumDataPacket } from "./packets/set-premium-data";
 import { SetUserPropertyPacket } from "./packets/set-user-property";
 import { SendLoginPacket } from "./packets/send-login";
-import { IncorrectPasswordPacket } from "./packets/incorrect-password";
+import { SetIncorrectPasswordPopupPacket } from "./packets/incorrect-password";
 import { SetEmailInfoPacket } from "./packets/set-email-info";
 import { SetFriendsDataPacket } from "./packets/set-friends-data";
 import { SetSubLayoutStatePacket } from "./packets/set-sub-layout-state";
@@ -348,7 +348,7 @@ export class Network {
         this.registerPacket(Protocol.SEND_REGISTER, SendRegisterPacket)
 
         this.registerPacket(Protocol.SEND_LOGIN, SendLoginPacket)
-        this.registerPacket(Protocol.INCORRECT_PASSWORD, IncorrectPasswordPacket)
+        this.registerPacket(Protocol.SET_INCORRECT_PASSWORD_POPUP, SetIncorrectPasswordPopupPacket)
         this.registerPacket(Protocol.SET_EMAIL_INFO, SetEmailInfoPacket)
 
         this.registerPacket(Protocol.SET_LOGIN_HASH, SetLoginHashPacket)

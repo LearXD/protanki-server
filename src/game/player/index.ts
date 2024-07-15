@@ -143,7 +143,6 @@ export class Player extends Tank {
             Logger.debug(this.getIdentifier(), `Layout state changed to ${packet.state}`);
             if (packet.state === LayoutState.BATTLE_SELECT) {
                 const battle = this.getBattle();
-                console.log(battle)
                 if (battle) {
                     battle.handleClientLeave(this);
                 }
