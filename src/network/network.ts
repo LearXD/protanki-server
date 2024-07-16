@@ -27,7 +27,7 @@ import { SetLayoutStatePacket } from "./packets/set-layout-state";
 import { SetPremiumDataPacket } from "./packets/set-premium-data";
 import { SetUserPropertyPacket } from "./packets/set-user-property";
 import { SendLoginPacket } from "./packets/send-login";
-import { SetIncorrectPasswordPopupPacket } from "./packets/incorrect-password";
+import { IncorrectPasswordPacket } from "./packets/incorrect-password";
 import { SetEmailInfoPacket } from "./packets/set-email-info";
 import { SetFriendsDataPacket } from "./packets/set-friends-data";
 import { SetSubLayoutStatePacket } from "./packets/set-sub-layout-state";
@@ -179,6 +179,15 @@ import { SetRemoveViewingBattlePacket } from "./packets/set-remove-viewing-battl
 import { SetCaptchaLocation2Packet } from "./packets/set-captcha-location-2";
 
 // GENERATE IMPORT HERE
+import { SendHammerOverturnedShotPacket } from "./packets/send-hammer-overturned-shot";
+import { SetWeeklyQuestRewardPacket } from "./packets/set-weekly-quest-reward";
+import { SetBattleInvitePacket } from "./packets/set-battle-invite";
+import { SendRicochetOverturnedShotPacket } from "./packets/send-ricochet-overturned-shot";
+import { SendInviteFriendsEmailPacket } from "./packets/send-invite-friends-email";
+import { SetOpenInviteFriendsPacket } from "./packets/set-open-invite-friends";
+import { SendOpenInviteFriendsPacket } from "./packets/send-open-invite-friends";
+import { SetInviteFriendsPropertiesPacket } from "./packets/set-invite-friends-properties";
+import { SetInvalidEquipmentForBattlePacket } from "./packets/set-invalid-equipment-for-battle";
 import { SendShowNotificationsPacket } from "./packets/send-show-notifications";
 import { SetOpenConfigPacket } from "./packets/set-open-config";
 import { SendOpenConfigPacket } from "./packets/send-open-config";
@@ -348,7 +357,7 @@ export class Network {
         this.registerPacket(Protocol.SEND_REGISTER, SendRegisterPacket)
 
         this.registerPacket(Protocol.SEND_LOGIN, SendLoginPacket)
-        this.registerPacket(Protocol.SET_INCORRECT_PASSWORD_POPUP, SetIncorrectPasswordPopupPacket)
+        this.registerPacket(Protocol.INCORRECT_PASSWORD, IncorrectPasswordPacket)
         this.registerPacket(Protocol.SET_EMAIL_INFO, SetEmailInfoPacket)
 
         this.registerPacket(Protocol.SET_LOGIN_HASH, SetLoginHashPacket)
@@ -661,6 +670,15 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);
 
         // GENERATE REGISTER HERE
+		this.registerPacket(Protocol.SEND_HAMMER_OVERTURNED_SHOT, SendHammerOverturnedShotPacket);
+		this.registerPacket(Protocol.SET_WEEKLY_QUEST_REWARD, SetWeeklyQuestRewardPacket);
+		this.registerPacket(Protocol.SET_BATTLE_INVITE, SetBattleInvitePacket);
+		this.registerPacket(Protocol.SEND_RICOCHET_OVERTURNED_SHOT, SendRicochetOverturnedShotPacket);
+		this.registerPacket(Protocol.SEND_INVITE_FRIENDS_EMAIL, SendInviteFriendsEmailPacket);
+		this.registerPacket(Protocol.SET_OPEN_INVITE_FRIENDS, SetOpenInviteFriendsPacket);
+		this.registerPacket(Protocol.SEND_OPEN_INVITE_FRIENDS, SendOpenInviteFriendsPacket);
+		this.registerPacket(Protocol.SET_INVITE_FRIENDS_PROPERTIES, SetInviteFriendsPropertiesPacket);
+		this.registerPacket(Protocol.SET_INVALID_EQUIPMENT_FOR_BATTLE, SetInvalidEquipmentForBattlePacket);
         this.registerPacket(Protocol.SEND_SHOW_NOTIFICATIONS, SendShowNotificationsPacket);
         this.registerPacket(Protocol.SET_OPEN_CONFIG, SetOpenConfigPacket);
         this.registerPacket(Protocol.SEND_OPEN_CONFIG, SendOpenConfigPacket);

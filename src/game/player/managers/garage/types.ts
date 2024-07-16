@@ -19,7 +19,6 @@ export interface IGarageHull {
 export interface IGaragePainting {
     name: string;
     equipped: boolean
-    level: number
 }
 
 export interface IPlayerGarageData {

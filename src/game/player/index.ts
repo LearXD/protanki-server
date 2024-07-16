@@ -69,7 +69,7 @@ export class Player extends Tank {
     public getConfigsManager(): PlayerConfigsManager { return this.configsManager }
 
     public async init() {
-        Logger.debug(this.getIdentifier(), 'Initializing client');
+        Logger.debug('Initializing client');
 
         this.updateInterval = setInterval(this.update.bind(this), 1000);
 
@@ -122,7 +122,7 @@ export class Player extends Tank {
                 break;
         }
 
-        Logger.info(this.getIdentifier(), `Layout state changed to ${state}`);
+        Logger.info(`Layout state changed to ${state}`);
         this.layoutState = state;
 
         const setLayoutStatePacket = new SetLayoutStatePacket(new ByteArray());
@@ -139,8 +139,16 @@ export class Player extends Tank {
 
     public handlePacket(packet: SimplePacket): boolean {
 
+        if (super.handlePacket(packet)) return
+        if (this.friendsManager.handlePacket(packet)) return
+        if (this.garageManager.handlePacket(packet)) return
+        if (this.authManager.handlePacket(packet)) return
+        if (this.chatManager.handlePacket(packet)) return
+        if (this.battlesManager.handlePacket(packet)) return
+        if (this.configsManager.handlePacket(packet)) return
+
         if (packet instanceof SendLayoutStatePacket) {
-            Logger.debug(this.getIdentifier(), `Layout state changed to ${packet.state}`);
+            Logger.debug(`Layout state changed to ${packet.state}`);
             if (packet.state === LayoutState.BATTLE_SELECT) {
                 const battle = this.getBattle();
                 if (battle) {
@@ -150,26 +158,6 @@ export class Player extends Tank {
             return
         }
 
-        if (super.handlePacket(packet))
-            return
-
-        if (this.friendsManager.handlePacket(packet))
-            return
-
-        if (this.garageManager.handlePacket(packet))
-            return
-
-        if (this.authManager.handlePacket(packet))
-            return
-
-        if (this.chatManager.handlePacket(packet))
-            return
-
-        if (this.battlesManager.handlePacket(packet))
-            return
-
-        if (this.configsManager.handlePacket(packet))
-            return
     }
 
     public handleData = (data: Buffer) => {
@@ -205,16 +193,16 @@ export class Player extends Tank {
                 const packetInstance = this.getServer().getNetwork().findPacket<typeof SimplePacket>(pid);
 
                 if (!IGNORE_PACKETS.includes(pid)) {
-                    Logger.log(this.getIdentifier(), `Packet ${packetInstance.name} (${pid}) receive - ${realLength} bytes`)
+                    Logger.log(`Packet ${packetInstance.name} (${pid}) received - ${realLength} bytes`)
                 }
 
                 const packet = new packetInstance(decoded);
                 packet.decode();
                 this.handlePacket(packet);
             } catch (error) {
-                Logger.alert(this.getIdentifier(), `Packet Unknown (${pid}) receive - ${realLength} bytes`)
+                Logger.alert(`Packet Unknown (${pid}) received - ${realLength} bytes`)
                 if (error instanceof Error) {
-                    Logger.error(this.getIdentifier(), error.message)
+                    Logger.error(error.message)
                     console.error(error.stack)
                 }
             }
