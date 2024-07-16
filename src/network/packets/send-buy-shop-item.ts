@@ -5,7 +5,7 @@ import { Packet } from "./packet";
 export class SendBuyShopItemPacket extends Packet {
 
     public itemId: string;
-    public string_1: string;
+    public method: string;
 
     constructor(bytes?: ByteArray) {
         super(Protocol.SEND_BUY_SHOP_ITEM, bytes)
@@ -14,17 +14,17 @@ export class SendBuyShopItemPacket extends Packet {
     public decode() {
         const bytes = this.cloneBytes();
         this.itemId = bytes.readString();
-        this.string_1 = bytes.readString();
+        this.method = bytes.readString();
         return {
             itemId: this.itemId,
-            string_1: this.string_1
+            method: this.method
         }
     }
 
     public encode() {
         const bytes = new ByteArray();
         bytes.writeString(this.itemId);
-        bytes.writeString(this.string_1);
+        bytes.writeString(this.method);
         return bytes;
     }
 }

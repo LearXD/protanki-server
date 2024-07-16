@@ -173,7 +173,7 @@ import { SendStartFlameShotPacket } from "./packets/send-start-flame-shot";
 import { SendStopFlameShotPacket } from "./packets/send-stop-flame-shot";
 import { SetBattleStartedPacket } from "./packets/set-battle-started";
 import { SendCreateBattlePacket } from "./packets/send-create-battle";
-import { SetSomeUidPacket } from "./packets/set-some-uid";
+import { SetRemoveUserChatMessagesPacket } from "./packets/set-remove-user-chat-messages";
 import { SetAddUserInfoOnViewingTeamBattlePacket } from "./packets/set-add-user-info-on-viewing-team-battle";
 import { SetRemoveViewingBattlePacket } from "./packets/set-remove-viewing-battle";
 import { SetCaptchaLocation2Packet } from "./packets/set-captcha-location-2";
@@ -563,7 +563,7 @@ export class Network {
         this.registerPacket(Protocol.SEND_CHANGED_EQUIPMENT, SendChangedEquipmentPacket)
         this.registerPacket(Protocol.SET_BATTLE_STARTED, SetBattleStartedPacket)
         this.registerPacket(Protocol.SEND_CREATE_BATTLE, SendCreateBattlePacket)
-        this.registerPacket(Protocol.SET_SOME_UID, SetSomeUidPacket)
+        this.registerPacket(Protocol.SET_REMOVE_USER_CHAT_MESSAGES, SetRemoveUserChatMessagesPacket)
         this.registerPacket(Protocol.SET_ADD_USER_INFO_ON_VIEWING_TEAM_BATTLE, SetAddUserInfoOnViewingTeamBattlePacket)
         this.registerPacket(Protocol.SET_REMOVE_VIEWING_BATTLE, SetRemoveViewingBattlePacket)
 
@@ -680,8 +680,8 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);
 
         // GENERATE REGISTER HERE
-		this.registerPacket(Protocol.SET_SHOP_NAVIGATE_TO_URL, SetShopNavigateToUrlPacket);
-		this.registerPacket(Protocol.SET_SHOP_CORRECT_PROMOTIONAL_CODE, SetShopCorrectPromotionalCodePacket);
+        this.registerPacket(Protocol.SET_SHOP_NAVIGATE_TO_URL, SetShopNavigateToUrlPacket);
+        this.registerPacket(Protocol.SET_SHOP_CORRECT_PROMOTIONAL_CODE, SetShopCorrectPromotionalCodePacket);
         this.registerPacket(Protocol.SET_SHOP_INCORRECT_PROMOTIONAL_CODE, SetShopIncorrectPromotionalCodePacket);
         this.registerPacket(Protocol.SEND_SHOP_PROMOTIONAL_CODE, SendShopPromotionalCodePacket);
         this.registerPacket(Protocol.SEND_SHOP_LOCATION, SendShopLocationPacket);

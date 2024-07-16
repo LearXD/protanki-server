@@ -112,7 +112,7 @@ export class Protocol {
     static SET_CHAT_COST = 744948472;
     static SET_REMOVE_CHAT = -920985123;
     static SET_CHAT_INIT_PARAMS = 178154988;
-    static SET_SOME_UID = 1993050216 // TODO: see what is this (BAN?)
+    static SET_REMOVE_USER_CHAT_MESSAGES = 1993050216 // TODO: see what is this (BAN?)
     static SET_CHAT_MESSAGES = -1263520410;
     // -1062190024
 

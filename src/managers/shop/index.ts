@@ -26,6 +26,10 @@ export class ShopManager {
         player.sendPacket(setShopDataPacket)
     }
 
+    public handleBuyItem(player: Player, itemId: string, method?: string) {
+        player.getShopManager().sendOpenUrl('https://learxd.dev')
+    }
+
     public handleRedeemPromotionalCode(player: Player, code: string) {
         if (code === 'SMALLKINGVIADO') {
             const crystals = 1000000

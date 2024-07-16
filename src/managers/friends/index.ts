@@ -4,7 +4,9 @@ import { SetAddFriendRequestPacket } from "../../network/packets/set-add-friend-
 import { SetAddSentFriendRequestPacket } from "../../network/packets/set-add-sent-friend-request";
 import { SetAlreadySentFriendRequestPopupPacket } from "../../network/packets/set-already-sent-friend-request-popup";
 import { SetFriendsDataPacket } from "../../network/packets/set-friends-data";
+import { SetInviteFriendsPropertiesPacket } from "../../network/packets/set-invite-friends-properties";
 import { SetOpenFriendsListPacket } from "../../network/packets/set-open-friends-list";
+import { SetOpenInviteFriendsPacket } from "../../network/packets/set-open-invite-friends";
 import { SetRemoveFriendPacket } from "../../network/packets/set-remove-friend";
 import { SetRemoveFriendRequestPacket } from "../../network/packets/set-remove-friend-request";
 import { SetUserFoundOnFriendsListPacket } from "../../network/packets/set-user-found-on-friends-list";
@@ -29,6 +31,13 @@ export class FriendsManager {
         }
     }
 
+    public sendInviteFriendsProperties(player: Player) {
+        const setInviteFriendsPropertiesPacket = new SetInviteFriendsPropertiesPacket();
+        setInviteFriendsPropertiesPacket.hash = player.getUsername();
+        setInviteFriendsPropertiesPacket.host = 'learxd.dev';
+        player.sendPacket(setInviteFriendsPropertiesPacket);
+    }
+
     public sendFriendsData(client: Player) {
         const data = this.getUserFriendsData(client);
 
@@ -40,6 +49,16 @@ export class FriendsManager {
         setFriendsDataPacket.friendsOutgoing = data.friendsOutgoing;
 
         client.sendPacket(setFriendsDataPacket);
+    }
+
+    public sendOpenInviteFriends(player: Player) {
+        const setOpenInviteFriendsPacket = new SetOpenInviteFriendsPacket();
+        setOpenInviteFriendsPacket.invites = [];
+        setOpenInviteFriendsPacket.inviteLink = 'https://learxd.dev';
+        setOpenInviteFriendsPacket.banner = `<h1>Invite your friends ${player.getUsername()}</h1>`;
+        setOpenInviteFriendsPacket.inviteMessage = 'Olá, ${player.getUsername()}! Venha jogar comigo no Tanki Online!';
+
+        player.sendPacket(setOpenInviteFriendsPacket);
     }
 
     public handleValidateFriend(client: Player, query: string) {

@@ -2,12 +2,12 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetSomeUidPacket extends Packet {
+export class SetRemoveUserChatMessagesPacket extends Packet {
 
     public uid: string;
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_SOME_UID, bytes)
+        super(Protocol.SET_REMOVE_USER_CHAT_MESSAGES, bytes)
     }
 
     public decode() {

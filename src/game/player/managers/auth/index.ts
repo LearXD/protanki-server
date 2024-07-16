@@ -60,6 +60,7 @@ export class PlayerAuthManager {
         setAchievementCCPacket.achievements = ['FIRST_RANK_UP'];
         this.player.sendPacket(setAchievementCCPacket);
 
+        this.player.getServer().getFriendsManager().sendInviteFriendsProperties(this.player)
         this.player.getServer().getBattlesManager().sendBattleSelectScreen(this.player);
     }
 
