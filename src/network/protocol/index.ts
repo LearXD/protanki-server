@@ -184,20 +184,11 @@ export class Protocol {
     static SET_BATTLE_SYSTEM_MESSAGE = 606668848
     static SET_BATTLE_CHAT_ENABLED = -643105296;
 
-
-    /** COUNTRY */
-    // static SEND_SET_DEFAULT_COUNTRY = 921004371
-    // static SEND_OPEN_SHOP = -296048697
-    // 1870342869
-    // static SET_SELECT_DEFAULT_COUNTRY = 1961542160
-    static SET_COUNTRY_LOCALE_NAME = -1232334539;
-
-
-    /** ???? */
+    /** CONFIG */
     static SET_NOTIFICATION_ENABLED = 1447082276;
     static SEND_SHOW_DAMAGE_INDICATOR = -731115522;
     static SET_CLOSE_CONFIG = -1302674105;
-    static SEND_REQUEST_CONFIG_DATA = 850220815; // nao tenho certeza
+    static SEND_REQUEST_CONFIG_DATA = 850220815;
 
 
     /** BATTLE FUND & STATS */
@@ -533,7 +524,7 @@ export class Protocol {
 
 
     /** ??? */
-    static SET_KICK_MESSAGE = -322235316;
+    static SET_POPUP_MESSAGE = -322235316;
 
 
     /** VULCAN SHOT  */
@@ -616,12 +607,24 @@ export class Protocol {
 
 
     /** SHOP */
-    // -1850050333 (CODIGO INVALIDO)
-    // 880756819 (clicou para comprar algo)
-    // -1859441081
-    // -1455955413 (foi pra loja externa???)
-    // static SET_SHOP_DATA = 1863710730
-    // -511004908 (ENVIAR CODIGO PROMOCIONAL)
+    // 1859441081
+    // -511004908
+    static SEND_BUY_SHOP_ITEM = 880756819;
+    static SET_SHOP_DATA = 1863710730;
+    // -1455955413
+    // -1850050333
+
+
+    /** SEND_REQUEST_SHOP_DATA  */
+    static SEND_REQUEST_SHOP_DATA = 1153801756;
+
+
+    /** OPEN SHOP & REGION */
+    // static SET_SELECT_DEFAULT_COUNTRY = 1961542160
+    static SEND_OPEN_SHOP = -296048697
+    static SET_OPEN_SHOP = 1870342869;
+    static SET_COUNTRY_LOCALE_NAME = -1232334539;
+    static SEND_SHOP_LOCATION = 921004371;
 
 
     /** SEND_SUCCESSFUL_PURCHASE */
@@ -640,6 +643,4 @@ export class Protocol {
     // GENERATE HERE
 
 
-    // TODO: implementar esses packets
-    // static SET_SHOP = 1153801756
 }

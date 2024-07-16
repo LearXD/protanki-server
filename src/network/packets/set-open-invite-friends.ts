@@ -22,6 +22,7 @@ export class SetOpenInviteFriendsPacket extends Packet {
         const bytes = this.cloneBytes();
 
         const invitesLength = bytes.readInt();
+        this.invites = [];
         for (let i = 0; i < invitesLength; i++) {
             this.invites.push({
                 income: bytes.readInt(),

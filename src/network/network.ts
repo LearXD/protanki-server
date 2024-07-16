@@ -179,6 +179,12 @@ import { SetRemoveViewingBattlePacket } from "./packets/set-remove-viewing-battl
 import { SetCaptchaLocation2Packet } from "./packets/set-captcha-location-2";
 
 // GENERATE IMPORT HERE
+import { SendShopLocationPacket } from "./packets/send-shop-location";
+import { SendBuyShopItemPacket } from "./packets/send-buy-shop-item";
+import { SetShopDataPacket } from "./packets/set-shop-data";
+import { SendRequestShopDataPacket } from "./packets/send-request-shop-data";
+import { SetOpenShopPacket } from "./packets/set-open-shop";
+import { SendOpenShopPacket } from "./packets/send-open-shop";
 import { SendHammerOverturnedShotPacket } from "./packets/send-hammer-overturned-shot";
 import { SetWeeklyQuestRewardPacket } from "./packets/set-weekly-quest-reward";
 import { SetBattleInvitePacket } from "./packets/set-battle-invite";
@@ -225,7 +231,7 @@ import { SendRedeemDailyQuestPacket } from "./packets/send-redeem-daily-quest";
 import { SetCannotCreateBattlePacket } from "./packets/set-cannot-create-battle";
 import { SetWrongLoginHashPacket } from "./packets/set-wrong-login-hash";
 import { SendTwinsSecondShotPacket } from "./packets/send-twins-second-shot";
-import { SetKickMessagePacket } from "./packets/set-kick-message";
+import { SetPopupMessagePacket } from "./packets/set-popup-message";
 import { SetViewGiftsPacket } from "./packets/set-view-gifts";
 import { SetGiftReceivedPacket } from "./packets/set-gift-received";
 import { SetChangeQuestPacket } from "./packets/set-change-quest";
@@ -579,7 +585,7 @@ export class Network {
         this.registerPacket(Protocol.SET_CANNOT_CREATE_BATTLE, SetCannotCreateBattlePacket);
         this.registerPacket(Protocol.SET_WRONG_LOGIN_HASH, SetWrongLoginHashPacket);
         this.registerPacket(Protocol.SEND_TWINS_SECOND_SHOT, SendTwinsSecondShotPacket);
-        this.registerPacket(Protocol.SET_KICK_MESSAGE, SetKickMessagePacket);
+        this.registerPacket(Protocol.SET_POPUP_MESSAGE, SetPopupMessagePacket);
         this.registerPacket(Protocol.SET_VIEW_GIFTS, SetViewGiftsPacket);
         this.registerPacket(Protocol.SET_GIFT_RECEIVED, SetGiftReceivedPacket);
         this.registerPacket(Protocol.SET_CHANGE_QUEST, SetChangeQuestPacket);
@@ -670,15 +676,21 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);
 
         // GENERATE REGISTER HERE
-		this.registerPacket(Protocol.SEND_HAMMER_OVERTURNED_SHOT, SendHammerOverturnedShotPacket);
-		this.registerPacket(Protocol.SET_WEEKLY_QUEST_REWARD, SetWeeklyQuestRewardPacket);
-		this.registerPacket(Protocol.SET_BATTLE_INVITE, SetBattleInvitePacket);
-		this.registerPacket(Protocol.SEND_RICOCHET_OVERTURNED_SHOT, SendRicochetOverturnedShotPacket);
-		this.registerPacket(Protocol.SEND_INVITE_FRIENDS_EMAIL, SendInviteFriendsEmailPacket);
-		this.registerPacket(Protocol.SET_OPEN_INVITE_FRIENDS, SetOpenInviteFriendsPacket);
-		this.registerPacket(Protocol.SEND_OPEN_INVITE_FRIENDS, SendOpenInviteFriendsPacket);
-		this.registerPacket(Protocol.SET_INVITE_FRIENDS_PROPERTIES, SetInviteFriendsPropertiesPacket);
-		this.registerPacket(Protocol.SET_INVALID_EQUIPMENT_FOR_BATTLE, SetInvalidEquipmentForBattlePacket);
+        this.registerPacket(Protocol.SEND_SHOP_LOCATION, SendShopLocationPacket);
+        this.registerPacket(Protocol.SEND_BUY_SHOP_ITEM, SendBuyShopItemPacket);
+        this.registerPacket(Protocol.SET_SHOP_DATA, SetShopDataPacket);
+        this.registerPacket(Protocol.SEND_REQUEST_SHOP_DATA, SendRequestShopDataPacket);
+        this.registerPacket(Protocol.SET_OPEN_SHOP, SetOpenShopPacket);
+        this.registerPacket(Protocol.SEND_OPEN_SHOP, SendOpenShopPacket);
+        this.registerPacket(Protocol.SEND_HAMMER_OVERTURNED_SHOT, SendHammerOverturnedShotPacket);
+        this.registerPacket(Protocol.SET_WEEKLY_QUEST_REWARD, SetWeeklyQuestRewardPacket);
+        this.registerPacket(Protocol.SET_BATTLE_INVITE, SetBattleInvitePacket);
+        this.registerPacket(Protocol.SEND_RICOCHET_OVERTURNED_SHOT, SendRicochetOverturnedShotPacket);
+        this.registerPacket(Protocol.SEND_INVITE_FRIENDS_EMAIL, SendInviteFriendsEmailPacket);
+        this.registerPacket(Protocol.SET_OPEN_INVITE_FRIENDS, SetOpenInviteFriendsPacket);
+        this.registerPacket(Protocol.SEND_OPEN_INVITE_FRIENDS, SendOpenInviteFriendsPacket);
+        this.registerPacket(Protocol.SET_INVITE_FRIENDS_PROPERTIES, SetInviteFriendsPropertiesPacket);
+        this.registerPacket(Protocol.SET_INVALID_EQUIPMENT_FOR_BATTLE, SetInvalidEquipmentForBattlePacket);
         this.registerPacket(Protocol.SEND_SHOW_NOTIFICATIONS, SendShowNotificationsPacket);
         this.registerPacket(Protocol.SET_OPEN_CONFIG, SetOpenConfigPacket);
         this.registerPacket(Protocol.SEND_OPEN_CONFIG, SendOpenConfigPacket);
