@@ -63,6 +63,7 @@ export class PlayerDataManager {
     public increaseCrystals(amount: number) { this.data.crystals += amount }
 
     public setCrystals(amount: number) { this.data.crystals = amount }
+    public hasDoubleCrystal() { return this.data.hasDoubleCrystal }
 
     public getRank() { return this.data.rank }
     public getScore() { return this.data.score }

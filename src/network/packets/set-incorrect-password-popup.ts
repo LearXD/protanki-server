@@ -2,10 +2,10 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class IncorrectPasswordPacket extends Packet {
+export class SetIncorrectPasswordPopupPacket extends Packet {
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.INCORRECT_PASSWORD, bytes)
+        super(Protocol.SET_INCORRECT_PASSWORD_POPUP, bytes)
     }
 
     public decode() {

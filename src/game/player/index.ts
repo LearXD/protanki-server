@@ -19,6 +19,7 @@ import { PlayerBattlesManager } from "./managers/battles";
 import { PlayerConfigsManager } from "./managers/configs";
 import { PlayerDataManager } from "./managers/data";
 import { SendLayoutStatePacket } from "../../network/packets/send-layout-state";
+import { PlayerShopManager } from "./managers/shop";
 
 const IGNORE_PACKETS = [
     1484572481, // Pong
@@ -43,6 +44,7 @@ export class Player extends Tank {
     private chatManager: PlayerChatManager;
     private battlesManager: PlayerBattlesManager;
     private configsManager: PlayerConfigsManager;
+    private shopManager: PlayerShopManager;
 
     public constructor(socket: net.Socket, server: Server) {
         super(socket, server);
@@ -55,6 +57,7 @@ export class Player extends Tank {
         this.chatManager = new PlayerChatManager(this);
         this.battlesManager = new PlayerBattlesManager(this);
         this.configsManager = new PlayerConfigsManager(this);
+        this.shopManager = new PlayerShopManager(this);
 
         this.init();
     }
@@ -146,6 +149,7 @@ export class Player extends Tank {
         if (this.chatManager.handlePacket(packet)) return
         if (this.battlesManager.handlePacket(packet)) return
         if (this.configsManager.handlePacket(packet)) return
+        if (this.shopManager.handlePacket(packet)) return
 
         if (packet instanceof SendLayoutStatePacket) {
             Logger.debug(`Layout state changed to ${packet.state}`);

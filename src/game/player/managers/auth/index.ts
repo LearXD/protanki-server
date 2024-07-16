@@ -1,6 +1,6 @@
 import { Player } from "../..";
 import { ResourceType } from "../../../../managers/resources";
-import { SetIncorrectPasswordPopupPacket } from "../../../../network/packets/incorrect-password";
+import { SetIncorrectPasswordPopupPacket } from "../../../../network/packets/set-incorrect-password-popup";
 import { Packet } from "../../../../network/packets/packet";
 import { SendLoginPacket } from "../../../../network/packets/send-login";
 import { SetAchievementCCPacket } from "../../../../network/packets/set-achievement-cc";

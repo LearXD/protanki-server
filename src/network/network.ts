@@ -27,7 +27,7 @@ import { SetLayoutStatePacket } from "./packets/set-layout-state";
 import { SetPremiumDataPacket } from "./packets/set-premium-data";
 import { SetUserPropertyPacket } from "./packets/set-user-property";
 import { SendLoginPacket } from "./packets/send-login";
-import { IncorrectPasswordPacket } from "./packets/incorrect-password";
+import { SetIncorrectPasswordPopupPacket } from "./packets/set-incorrect-password-popup";
 import { SetEmailInfoPacket } from "./packets/set-email-info";
 import { SetFriendsDataPacket } from "./packets/set-friends-data";
 import { SetSubLayoutStatePacket } from "./packets/set-sub-layout-state";
@@ -179,6 +179,8 @@ import { SetRemoveViewingBattlePacket } from "./packets/set-remove-viewing-battl
 import { SetCaptchaLocation2Packet } from "./packets/set-captcha-location-2";
 
 // GENERATE IMPORT HERE
+import { SetShopIncorrectPromotionalCodePacket } from "./packets/set-shop-incorrect-promotional-code";
+import { SendShopPromotionalCodePacket } from "./packets/send-shop-promotional-code";
 import { SendShopLocationPacket } from "./packets/send-shop-location";
 import { SendBuyShopItemPacket } from "./packets/send-buy-shop-item";
 import { SetShopDataPacket } from "./packets/set-shop-data";
@@ -363,7 +365,7 @@ export class Network {
         this.registerPacket(Protocol.SEND_REGISTER, SendRegisterPacket)
 
         this.registerPacket(Protocol.SEND_LOGIN, SendLoginPacket)
-        this.registerPacket(Protocol.INCORRECT_PASSWORD, IncorrectPasswordPacket)
+        this.registerPacket(Protocol.SET_INCORRECT_PASSWORD_POPUP, SetIncorrectPasswordPopupPacket)
         this.registerPacket(Protocol.SET_EMAIL_INFO, SetEmailInfoPacket)
 
         this.registerPacket(Protocol.SET_LOGIN_HASH, SetLoginHashPacket)
@@ -676,6 +678,8 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);
 
         // GENERATE REGISTER HERE
+		this.registerPacket(Protocol.SET_SHOP_INCORRECT_PROMOTIONAL_CODE, SetShopIncorrectPromotionalCodePacket);
+		this.registerPacket(Protocol.SEND_SHOP_PROMOTIONAL_CODE, SendShopPromotionalCodePacket);
         this.registerPacket(Protocol.SEND_SHOP_LOCATION, SendShopLocationPacket);
         this.registerPacket(Protocol.SEND_BUY_SHOP_ITEM, SendBuyShopItemPacket);
         this.registerPacket(Protocol.SET_SHOP_DATA, SetShopDataPacket);

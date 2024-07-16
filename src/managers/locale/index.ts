@@ -15,7 +15,7 @@ export class LocaleManager {
             { code: 'BR', countryName: 'Brasil' }
         ]
         setCountryLocaleName.defaultCountry = 'BR';
-        setCountryLocaleName.boolean_1 = false;
+        setCountryLocaleName.boolean_1 = true;
 
         client.sendPacket(setCountryLocaleName);
     }

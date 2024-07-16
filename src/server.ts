@@ -19,6 +19,7 @@ import { SimplePacket } from './network/packets/simple-packet';
 import { GarageManager } from './managers/garage';
 import { LocaleManager } from './managers/locale';
 import { CaptchaManager } from './managers/captcha';
+import { ShopManager } from './managers/shop';
 
 export class Server {
 
@@ -39,6 +40,7 @@ export class Server {
     private garageManager: GarageManager;
     private localeManager: LocaleManager;
     private captchaManager: CaptchaManager;
+    private shopManager: ShopManager;
 
     private whitelisted: boolean = false;
 
@@ -72,6 +74,8 @@ export class Server {
 
         this.garageManager = new GarageManager(this);
         this.captchaManager = new CaptchaManager(this);
+
+        this.shopManager = new ShopManager(this);
     }
 
     public static getInstance() {
@@ -142,4 +146,5 @@ export class Server {
     public getGarageManager(): GarageManager { return this.garageManager }
     public getLocaleManager(): LocaleManager { return this.localeManager }
     public getCaptchaManager(): CaptchaManager { return this.captchaManager }
+    public getShopManager(): ShopManager { return this.shopManager }
 }

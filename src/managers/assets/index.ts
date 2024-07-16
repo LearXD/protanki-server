@@ -24,8 +24,8 @@ export class AssetsManager {
         return path.resolve(this.path, type, _path)
     }
 
-    public getData(_path: string, readType: ReadType = ReadType.JSON) {
-        return this.getAsset(AssetType.DATA, _path, readType);
+    public getData<R = any>(_path: string, readType: ReadType = ReadType.JSON) {
+        return this.getAsset(AssetType.DATA, _path, readType) as R;
     }
 
     public getResource(file: string): IResource[] {

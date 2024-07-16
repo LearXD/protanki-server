@@ -29,11 +29,13 @@ export class BattleViewersManager {
         // if (!this.hasViewer(client.getUsername())) {
 
         // this.viewers.set(client.getUsername(), client);
-
         const viewing = client.getViewingBattle();
         if (viewing) {
-            viewing.getViewersManager()
-                .removeViewer(client);
+            if (viewing.getBattleId() === this.battle.getBattleId()) {
+                return false;
+            }
+
+            viewing.getViewersManager().removeViewer(client);
         }
 
         const setViewingBattlePacket = new SetViewingBattlePacket(new ByteArray());
