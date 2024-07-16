@@ -1,4 +1,5 @@
 import { Player } from "../..";
+import { SetCrystalsPacket } from "../../../../network/packets/set-crystals";
 import { SetPremiumDataPacket } from "../../../../network/packets/set-premium-data";
 import { SetPremiumLeftTimePacket } from "../../../../network/packets/set-premium-left-time";
 import { SetUserPropertyPacket } from "../../../../network/packets/set-user-property";
@@ -23,7 +24,7 @@ export class PlayerDataManager {
         }
 
         this.data = {
-            crystals: 100000000,
+            crystals: 1000,
             hasDoubleCrystal: false,
             durationCrystalAbonement: 48602763,
             rank: 30,
@@ -67,6 +68,12 @@ export class PlayerDataManager {
 
     public getRank() { return this.data.rank }
     public getScore() { return this.data.score }
+
+    public sendCrystals() {
+        const setCrystals = new SetCrystalsPacket();
+        setCrystals.crystals = this.data.crystals;
+        this.player.sendPacket(setCrystals);
+    }
 
     public sendPremiumData() {
         const setPremiumDataPacket = new SetPremiumDataPacket()

@@ -179,6 +179,8 @@ import { SetRemoveViewingBattlePacket } from "./packets/set-remove-viewing-battl
 import { SetCaptchaLocation2Packet } from "./packets/set-captcha-location-2";
 
 // GENERATE IMPORT HERE
+import { SetShopNavigateToUrlPacket } from "./packets/set-shop-navigate-to-url";
+import { SetShopCorrectPromotionalCodePacket } from "./packets/set-shop-correct-promotional-code";
 import { SetShopIncorrectPromotionalCodePacket } from "./packets/set-shop-incorrect-promotional-code";
 import { SendShopPromotionalCodePacket } from "./packets/send-shop-promotional-code";
 import { SendShopLocationPacket } from "./packets/send-shop-location";
@@ -215,7 +217,7 @@ import { SetChangePasswordScreenPacket } from "./packets/set-change-password-scr
 import { SendEmailCodePacket } from "./packets/send-email-code";
 import { SetEmailCodeScreenPacket } from "./packets/set-email-code-screen";
 import { SendVerifyEmailPacket } from "./packets/send-verify-email";
-import { SendSuccessfulPurchasePacket } from "./packets/send-successful-purchase";
+import { SetSuccessfulPurchasePacket } from "./packets/set-successful-purchase";
 import { SetSomeShaftShooterPacket } from "./packets/set-some-shaft-shooter";
 import { SendShaftLocalSpotPacket } from "./packets/send-shaft-local-spot";
 import { SetSomeRailgunShooterPacket } from "./packets/set-some-railgun-shooter";
@@ -678,8 +680,10 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);
 
         // GENERATE REGISTER HERE
-		this.registerPacket(Protocol.SET_SHOP_INCORRECT_PROMOTIONAL_CODE, SetShopIncorrectPromotionalCodePacket);
-		this.registerPacket(Protocol.SEND_SHOP_PROMOTIONAL_CODE, SendShopPromotionalCodePacket);
+		this.registerPacket(Protocol.SET_SHOP_NAVIGATE_TO_URL, SetShopNavigateToUrlPacket);
+		this.registerPacket(Protocol.SET_SHOP_CORRECT_PROMOTIONAL_CODE, SetShopCorrectPromotionalCodePacket);
+        this.registerPacket(Protocol.SET_SHOP_INCORRECT_PROMOTIONAL_CODE, SetShopIncorrectPromotionalCodePacket);
+        this.registerPacket(Protocol.SEND_SHOP_PROMOTIONAL_CODE, SendShopPromotionalCodePacket);
         this.registerPacket(Protocol.SEND_SHOP_LOCATION, SendShopLocationPacket);
         this.registerPacket(Protocol.SEND_BUY_SHOP_ITEM, SendBuyShopItemPacket);
         this.registerPacket(Protocol.SET_SHOP_DATA, SetShopDataPacket);
@@ -714,7 +718,7 @@ export class Network {
         this.registerPacket(Protocol.SEND_EMAIL_CODE, SendEmailCodePacket);
         this.registerPacket(Protocol.SET_EMAIL_CODE_SCREEN, SetEmailCodeScreenPacket);
         this.registerPacket(Protocol.SEND_VERIFY_EMAIL, SendVerifyEmailPacket);
-        this.registerPacket(Protocol.SEND_SUCCESSFUL_PURCHASE, SendSuccessfulPurchasePacket);
+        this.registerPacket(Protocol.SET_SUCCESSFUL_PURCHASE, SetSuccessfulPurchasePacket);
 
         Logger.info(`${this.packetPool.size} packets registered`)
     }

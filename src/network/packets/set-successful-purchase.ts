@@ -2,7 +2,7 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SendSuccessfulPurchasePacket extends Packet {
+export class SetSuccessfulPurchasePacket extends Packet {
 
     public donation: number
     public packageBonusCrystals: number
@@ -10,7 +10,7 @@ export class SendSuccessfulPurchasePacket extends Packet {
     public image: number
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SEND_SUCCESSFUL_PURCHASE, bytes)
+        super(Protocol.SET_SUCCESSFUL_PURCHASE, bytes)
     }
 
     public decode() {

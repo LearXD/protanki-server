@@ -70,6 +70,7 @@ export class Player extends Tank {
     public getChatManager(): PlayerChatManager { return this.chatManager }
     public getBattlesManager(): PlayerBattlesManager { return this.battlesManager }
     public getConfigsManager(): PlayerConfigsManager { return this.configsManager }
+    public getShopManager(): PlayerShopManager { return this.shopManager }
 
     public async init() {
         Logger.debug('Initializing client');

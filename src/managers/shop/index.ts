@@ -25,4 +25,19 @@ export class ShopManager {
         setShopDataPacket.data = data
         player.sendPacket(setShopDataPacket)
     }
+
+    public handleRedeemPromotionalCode(player: Player, code: string) {
+        if (code === 'SMALLKINGVIADO') {
+            const crystals = 1000000
+            const bonus = 500000
+            player.getDataManager().increaseCrystals(crystals + bonus)
+            player.getDataManager().sendCrystals();
+            player.getShopManager().sendSuccessfulPurchase(crystals, bonus)
+            player.getShopManager().sendCorrectPromotionalCode()
+            Logger.info(`Player ${player.getUsername()} redeemed promotional code ${code} - Crystals: ${player.getDataManager().getCrystals()}`)
+            return;
+        }
+
+        player.getShopManager().sendIncorrectPromotionalCode()
+    }
 }
