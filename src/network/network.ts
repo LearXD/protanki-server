@@ -168,7 +168,7 @@ import { SendBuyGarageKitPacket } from "./packets/send-buy-garage-kit";
 import { SendResumePacket } from "./packets/send-resume";
 import { SendRequestRespawnPacket } from "./packets/send-request-respawn";
 import { SetTankChangedEquipmentPacket } from "./packets/set-tank-changed-equipment";
-import { SendChangedEquipmentPacket } from "./packets/send-changed-equipment";
+import { SendRequestSetTankVisiblePacket } from "./packets/send-request-set-tank-visible";
 import { SendStartFlameShotPacket } from "./packets/send-start-flame-shot";
 import { SendStopFlameShotPacket } from "./packets/send-stop-flame-shot";
 import { SetBattleStartedPacket } from "./packets/set-battle-started";
@@ -179,6 +179,7 @@ import { SetRemoveViewingBattlePacket } from "./packets/set-remove-viewing-battl
 import { SetCaptchaLocation2Packet } from "./packets/set-captcha-location-2";
 
 // GENERATE IMPORT HERE
+import { SendBuyChangeDailyQuestPacket } from "./packets/send-buy-change-daily-quest";
 import { SetShopNavigateToUrlPacket } from "./packets/set-shop-navigate-to-url";
 import { SetShopCorrectPromotionalCodePacket } from "./packets/set-shop-correct-promotional-code";
 import { SetShopIncorrectPromotionalCodePacket } from "./packets/set-shop-incorrect-promotional-code";
@@ -238,8 +239,8 @@ import { SendTwinsSecondShotPacket } from "./packets/send-twins-second-shot";
 import { SetPopupMessagePacket } from "./packets/set-popup-message";
 import { SetViewGiftsPacket } from "./packets/set-view-gifts";
 import { SetGiftReceivedPacket } from "./packets/set-gift-received";
-import { SetChangeQuestPacket } from "./packets/set-change-quest";
-import { SendChangeQuestPacket } from "./packets/send-change-quest";
+import { SetChangeDailyQuestPacket } from "./packets/set-change-daily-quest";
+import { SendChangeDailyQuestPacket } from "./packets/send-change-daily-quest";
 import { SetDailyQuestsPacket } from "./packets/set-daily-quests";
 import { SendOpenDailyQuestsPacket } from "./packets/send-open-daily-quests";
 import { SetUseDrugPacket } from "./packets/set-use-drug";
@@ -560,7 +561,7 @@ export class Network {
         this.registerPacket(Protocol.SEND_RESUME, SendResumePacket)
         this.registerPacket(Protocol.SEND_REQUEST_RESPAWN, SendRequestRespawnPacket)
         this.registerPacket(Protocol.SET_TANK_CHANGED_EQUIPMENT, SetTankChangedEquipmentPacket)
-        this.registerPacket(Protocol.SEND_CHANGED_EQUIPMENT, SendChangedEquipmentPacket)
+        this.registerPacket(Protocol.SEND_REQUEST_SET_TANK_VISIBLE, SendRequestSetTankVisiblePacket)
         this.registerPacket(Protocol.SET_BATTLE_STARTED, SetBattleStartedPacket)
         this.registerPacket(Protocol.SEND_CREATE_BATTLE, SendCreateBattlePacket)
         this.registerPacket(Protocol.SET_REMOVE_USER_CHAT_MESSAGES, SetRemoveUserChatMessagesPacket)
@@ -592,8 +593,8 @@ export class Network {
         this.registerPacket(Protocol.SET_POPUP_MESSAGE, SetPopupMessagePacket);
         this.registerPacket(Protocol.SET_VIEW_GIFTS, SetViewGiftsPacket);
         this.registerPacket(Protocol.SET_GIFT_RECEIVED, SetGiftReceivedPacket);
-        this.registerPacket(Protocol.SET_CHANGE_QUEST, SetChangeQuestPacket);
-        this.registerPacket(Protocol.SEND_CHANGE_QUEST, SendChangeQuestPacket);
+        this.registerPacket(Protocol.SET_CHANGE_DAILY_QUEST, SetChangeDailyQuestPacket);
+        this.registerPacket(Protocol.SEND_CHANGE_DAILY_QUEST, SendChangeDailyQuestPacket);
         this.registerPacket(Protocol.SET_DAILY_QUESTS, SetDailyQuestsPacket);
         this.registerPacket(Protocol.SEND_OPEN_DAILY_QUESTS, SendOpenDailyQuestsPacket);
         this.registerPacket(Protocol.SET_USE_DRUG, SetUseDrugPacket);
@@ -680,6 +681,7 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);
 
         // GENERATE REGISTER HERE
+		this.registerPacket(Protocol.SEND_BUY_CHANGE_DAILY_QUEST, SendBuyChangeDailyQuestPacket);
         this.registerPacket(Protocol.SET_SHOP_NAVIGATE_TO_URL, SetShopNavigateToUrlPacket);
         this.registerPacket(Protocol.SET_SHOP_CORRECT_PROMOTIONAL_CODE, SetShopCorrectPromotionalCodePacket);
         this.registerPacket(Protocol.SET_SHOP_INCORRECT_PROMOTIONAL_CODE, SetShopIncorrectPromotionalCodePacket);

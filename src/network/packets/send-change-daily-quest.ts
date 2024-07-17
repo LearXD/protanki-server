@@ -2,25 +2,25 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SendOpenLinkPacket extends Packet {
+export class SendChangeDailyQuestPacket extends Packet {
 
-    public battleId: string;
+    public questId: number;
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SEND_OPEN_LINK, bytes)
+        super(Protocol.SEND_CHANGE_DAILY_QUEST, bytes)
     }
 
     public decode() {
         const bytes = this.cloneBytes();
-        this.battleId = bytes.readString();
+        this.questId = bytes.readInt();
         return {
-            battleId: this.battleId
+            questId: this.questId
         }
     }
 
     public encode() {
         const bytes = new ByteArray();
-        bytes.writeString(this.battleId);
+        bytes.writeInt(this.questId);
         return bytes;
     }
 }

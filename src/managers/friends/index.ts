@@ -56,7 +56,7 @@ export class FriendsManager {
         setOpenInviteFriendsPacket.invites = [];
         setOpenInviteFriendsPacket.inviteLink = 'https://learxd.dev';
         setOpenInviteFriendsPacket.banner = `<h1>Invite your friends ${player.getUsername()}</h1>`;
-        setOpenInviteFriendsPacket.inviteMessage = 'Olá, ${player.getUsername()}! Venha jogar comigo no Tanki Online!';
+        setOpenInviteFriendsPacket.inviteMessage = `Olá, ${player.getUsername()}! Venha jogar comigo no Tanki Online!`;
 
         player.sendPacket(setOpenInviteFriendsPacket);
     }

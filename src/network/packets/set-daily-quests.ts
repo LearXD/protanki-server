@@ -8,22 +8,22 @@ export interface IPrize {
 }
 
 export interface IQuest {
-    boolean_1: boolean
+    freeChange: boolean
     description: string
     maxProgress: number
     image: number
     prizes: IPrize[]
     progress: number
     questId: number
-    int_2: number
+    changePrice: number
 }
 
 export interface IWeeklyQuestDescription {
-    int_1: number
-    int_2: number
-    boolean_1: boolean
-    resource_1: number
-    resource_2: number
+    level: number
+    progress: number
+    canIncreaseProgressToday: boolean
+    leftIcon: number
+    rightIcon: number
 }
 
 export class SetDailyQuestsPacket extends Packet {
@@ -43,7 +43,7 @@ export class SetDailyQuestsPacket extends Packet {
 
         for (let i = 0; i < questCount; i++) {
             this.quests[i] = {
-                boolean_1: bytes.readBoolean(),
+                freeChange: bytes.readBoolean(),
                 description: bytes.readString(),
                 maxProgress: bytes.readInt(),
                 image: bytes.readInt(),
@@ -54,16 +54,16 @@ export class SetDailyQuestsPacket extends Packet {
                     })),
                 progress: bytes.readInt(),
                 questId: bytes.readInt(),
-                int_2: bytes.readInt()
+                changePrice: bytes.readInt()
             }
         }
 
         this.weeklyQuestDescription = {
-            int_1: bytes.readInt(),
-            int_2: bytes.readInt(),
-            boolean_1: bytes.readBoolean(),
-            resource_1: bytes.readInt(),
-            resource_2: bytes.readInt()
+            level: bytes.readInt(),
+            progress: bytes.readInt(),
+            canIncreaseProgressToday: bytes.readBoolean(),
+            leftIcon: bytes.readInt(),
+            rightIcon: bytes.readInt()
         }
 
         return {
@@ -77,7 +77,7 @@ export class SetDailyQuestsPacket extends Packet {
         bytes.writeInt(this.quests.length);
 
         this.quests.forEach((quest) => {
-            bytes.writeBoolean(quest.boolean_1);
+            bytes.writeBoolean(quest.freeChange);
             bytes.writeString(quest.description);
             bytes.writeInt(quest.maxProgress);
             bytes.writeInt(quest.image);
@@ -90,15 +90,15 @@ export class SetDailyQuestsPacket extends Packet {
 
             bytes.writeInt(quest.progress);
             bytes.writeInt(quest.questId);
-            bytes.writeInt(quest.int_2);
+            bytes.writeInt(quest.changePrice);
 
         })
 
-        bytes.writeInt(this.weeklyQuestDescription.int_1);
-        bytes.writeInt(this.weeklyQuestDescription.int_2);
-        bytes.writeBoolean(this.weeklyQuestDescription.boolean_1);
-        bytes.writeInt(this.weeklyQuestDescription.resource_1);
-        bytes.writeInt(this.weeklyQuestDescription.resource_2);
+        bytes.writeInt(this.weeklyQuestDescription.level);
+        bytes.writeInt(this.weeklyQuestDescription.progress);
+        bytes.writeBoolean(this.weeklyQuestDescription.canIncreaseProgressToday);
+        bytes.writeInt(this.weeklyQuestDescription.leftIcon);
+        bytes.writeInt(this.weeklyQuestDescription.rightIcon);
         return bytes;
     }
 }

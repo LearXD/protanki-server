@@ -15,11 +15,14 @@ import { SetLatencyPacket } from "../../network/packets/set-latency";
 import { SimplePacket } from "../../network/packets/simple-packet";
 import { SendResumePacket } from "../../network/packets/send-resume";
 import { SendRequestRespawnPacket } from "../../network/packets/send-request-respawn";
+import { SendRequestSetTankVisiblePacket } from "../../network/packets/send-request-set-tank-visible";
 
 export abstract class Tank extends Client {
 
     private health: number = 0;
     private position: Vector3d = new Vector3d(0, 0, 0);
+
+    private visible: boolean = false;
 
     private battle: Battle;
 
@@ -29,6 +32,18 @@ export abstract class Tank extends Client {
 
     public getPosition(): Vector3d { return this.position }
     public setPosition(position: Vector3d) { this.position = position }
+
+    public isVisible() { return this.visible }
+
+    public setVisible(visible: boolean) {
+        this.visible = visible
+
+        if (visible) {
+            const setTankVisiblePacket = new SetTankVisiblePacket(new ByteArray());
+            setTankVisiblePacket.tankId = this.getUsername();
+            this.sendPacket(setTankVisiblePacket);
+        }
+    }
 
     public spawn() {
         this.setTankSpeed(8.600000381469727, 1.6632988452911377, 1.8149678707122803, 10.970000267028809)
@@ -74,10 +89,6 @@ export abstract class Tank extends Client {
         setSpawnTankPacket.incarnationId = 1;
 
         this.sendPacket(setSpawnTankPacket);
-
-        const setTankVisiblePacket = new SetTankVisiblePacket(new ByteArray());
-        setTankVisiblePacket.tankId = this.getUsername();
-        this.sendPacket(setTankVisiblePacket);
     }
 
     public setTankSpeed(
@@ -102,6 +113,11 @@ export abstract class Tank extends Client {
 
         if (packet instanceof SendResumePacket) {
             this.spawn();
+            return true;
+        }
+
+        if (packet instanceof SendRequestSetTankVisiblePacket) {
+            this.setVisible(true);
             return true;
         }
 

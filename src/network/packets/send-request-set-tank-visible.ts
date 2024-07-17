@@ -2,25 +2,19 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SendChangeQuestPacket extends Packet {
-
-    public questId: number;
+export class SendRequestSetTankVisiblePacket extends Packet {
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SEND_CHANGE_QUEST, bytes)
+        super(Protocol.SEND_REQUEST_SET_TANK_VISIBLE, bytes)
     }
 
     public decode() {
         const bytes = this.cloneBytes();
-        this.questId = bytes.readInt();
-        return {
-            questId: this.questId
-        }
+        return {}
     }
 
     public encode() {
         const bytes = new ByteArray();
-        bytes.writeInt(this.questId);
         return bytes;
     }
 }

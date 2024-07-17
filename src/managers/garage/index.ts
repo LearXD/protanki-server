@@ -49,8 +49,11 @@ export class GarageManager {
         this.addItems(this.getItemData(GarageItemFolder.HULL, 'titan.json'));
         this.addItems(this.getItemData(GarageItemFolder.HULL, 'mammoth.json'));
         this.addItems(this.getItemData(GarageItemFolder.HULL, 'hornet-xt.json'));
+
         this.addItems(this.getItemData(GarageItemFolder.PAINT, 'paintings.json'));
+
         this.addItems(this.getItemData(GarageItemFolder.SUPPLY, 'supplies.json'));
+
         this.addItems(this.getItemData(GarageItemFolder.SPECIAL, 'gifts.json'));
         this.addItems(this.getItemData(GarageItemFolder.SPECIAL, 'special.json'));
 

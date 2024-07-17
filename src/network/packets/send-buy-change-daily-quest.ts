@@ -2,19 +2,25 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SendChangedEquipmentPacket extends Packet {
+export class SendBuyChangeDailyQuestPacket extends Packet {
+
+    public questId: number;
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SEND_CHANGED_EQUIPMENT, bytes)
+        super(Protocol.SEND_BUY_CHANGE_DAILY_QUEST, bytes)
     }
 
     public decode() {
         const bytes = this.cloneBytes();
-        return {}
+        this.questId = bytes.readInt();
+        return {
+            questId: this.questId
+        }
     }
 
     public encode() {
         const bytes = new ByteArray();
+        bytes.writeInt(this.questId);
         return bytes;
     }
 }

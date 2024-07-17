@@ -13,6 +13,7 @@ import { SetAddBattleOnListPacket } from '../../network/packets/set-add-battle-o
 import { SetRemoveBattlesScreenPacket } from '../../network/packets/set-remove-battles-screen';
 import { LayoutState } from '../../utils/game/layout-state';
 import { Theme, Themes } from "../../utils/game/theme";
+import { SetBattleNotExistPacket } from "../../network/packets/set-battle-not-exist";
 
 export class BattlesManager {
 
@@ -66,13 +67,7 @@ export class BattlesManager {
     }
 
     public getBattle(battleId: string) {
-        const battle = this.battles.find(battle => battle.getBattleId() == battleId)
-
-        if (!battle) {
-            throw new Error('Battle not found');
-        }
-
-        return battle;
+        return this.battles.find(battle => battle.getBattleId() == battleId)
     }
 
     public sendBattleSelectScreen(client: Player) {
@@ -132,17 +127,19 @@ export class BattlesManager {
         this.sendBattles(client);
     }
 
-    public handleViewBattle(client: Player, battleId: string) {
-        try {
-            const battle = this.getBattle(battleId);
-            if (battle) {
-                Logger.info(`Player ${client.getUsername()} is viewing battle ${battleId}`)
-                battle.getViewersManager().addViewer(client);
-            }
-        } catch (error) {
-            if (error instanceof Error)
-                Logger.error(error.message)
+    public handleViewBattle(player: Player, battleId: string) {
+        const battle = this.getBattle(battleId);
+
+        if (!battle) {
+            const setBattleNotExistPacket = new SetBattleNotExistPacket()
+            setBattleNotExistPacket.battleId = battleId;
+            player.sendPacket(setBattleNotExistPacket);
+            return;
         }
+
+        Logger.info(`Player ${player.getUsername()} is viewing battle ${battleId}`)
+        battle.getViewersManager().addViewer(player);
+
     }
 
     public handleJoinBattle(client: Player, team: string) {

@@ -20,6 +20,7 @@ import { PlayerConfigsManager } from "./managers/configs";
 import { PlayerDataManager } from "./managers/data";
 import { SendLayoutStatePacket } from "../../network/packets/send-layout-state";
 import { PlayerShopManager } from "./managers/shop";
+import { PlayerDailyQuestsManager } from "./managers/daily-quests";
 
 const IGNORE_PACKETS = [
     1484572481, // Pong
@@ -45,6 +46,7 @@ export class Player extends Tank {
     private battlesManager: PlayerBattlesManager;
     private configsManager: PlayerConfigsManager;
     private shopManager: PlayerShopManager;
+    private dailyQuestsManager: PlayerDailyQuestsManager;
 
     public constructor(socket: net.Socket, server: Server) {
         super(socket, server);
@@ -58,6 +60,7 @@ export class Player extends Tank {
         this.battlesManager = new PlayerBattlesManager(this);
         this.configsManager = new PlayerConfigsManager(this);
         this.shopManager = new PlayerShopManager(this);
+        this.dailyQuestsManager = new PlayerDailyQuestsManager(this);
 
         this.init();
     }
@@ -71,6 +74,7 @@ export class Player extends Tank {
     public getBattlesManager(): PlayerBattlesManager { return this.battlesManager }
     public getConfigsManager(): PlayerConfigsManager { return this.configsManager }
     public getShopManager(): PlayerShopManager { return this.shopManager }
+    public getDailyQuestsManager(): PlayerDailyQuestsManager { return this.dailyQuestsManager }
 
     public async init() {
         Logger.debug('Initializing client');
@@ -151,6 +155,7 @@ export class Player extends Tank {
         if (this.battlesManager.handlePacket(packet)) return
         if (this.configsManager.handlePacket(packet)) return
         if (this.shopManager.handlePacket(packet)) return
+        if (this.dailyQuestsManager.handlePacket(packet)) return
 
         if (packet instanceof SendLayoutStatePacket) {
             Logger.debug(`Layout state changed to ${packet.state}`);
