@@ -224,10 +224,7 @@ export class Battle {
         const setRemoveBattleScreenPacket = new SetRemoveBattleScreenPacket()
         client.sendPacket(setRemoveBattleScreenPacket)
 
-        client.getServer().getBattlesManager().sendBattleSelectScreen(client);
-        client.setLayoutState(LayoutState.BATTLE_SELECT)
-        client.setSubLayoutState(LayoutState.BATTLE_SELECT, LayoutState.BATTLE_SELECT)
-
+        client.setBattle(null)
         this.getPlayersManager().removePlayer(client.getUsername())
     }
 

@@ -5,8 +5,10 @@ import { SendBuyGarageKitPacket } from "../../../../network/packets/send-buy-gar
 import { SendEquipItemPacket } from "../../../../network/packets/send-equip-item";
 import { SendOpenGaragePacket } from "../../../../network/packets/send-open-garage";
 import { SetEquipGarageItemPacket } from "../../../../network/packets/set-equip-garage-item";
+import { SetRemoveGaragePacket } from "../../../../network/packets/set-remove-garage";
 import { SetSuppliesPacket } from "../../../../network/packets/set-supplies";
 import { SimplePacket } from "../../../../network/packets/simple-packet";
+import { LayoutState } from "../../../../utils/game/layout-state";
 import { Logger } from "../../../../utils/logger";
 import { IGarageHull, IGarageTurret, IPlayerGarageData } from "./types";
 
@@ -213,6 +215,11 @@ export class PlayerGarageManager {
         return null
     }
 
+    public removeGarageScreen() {
+        const setRemoveGaragePacket = new SetRemoveGaragePacket();
+        this.player.sendPacket(setRemoveGaragePacket);
+    }
+
     public sendSupplies(client: Player) {
         const setSuppliesPacket = new SetSuppliesPacket();
         setSuppliesPacket.supplies = [
@@ -267,6 +274,20 @@ export class PlayerGarageManager {
 
     public handlePacket(packet: SimplePacket) {
         if (packet instanceof SendOpenGaragePacket) {
+            const battle = this.player.getBattle();
+            if (battle) {
+                if (this.player.getLayoutState() === LayoutState.BATTLE) {
+                    this.player.getServer().getGarageManager().handleOpenGarage(this.player);
+                    return true;
+                }
+
+                if (this.player.getLayoutState() === LayoutState.GARAGE) {
+                    this.player.setLayoutState(LayoutState.BATTLE);
+                    this.player.setSubLayoutState(LayoutState.BATTLE, LayoutState.BATTLE);
+                    return true;
+                }
+                return true;
+            }
             this.player.getServer().getGarageManager().handleOpenGarage(this.player);
             return true
         }

@@ -31,10 +31,6 @@ export class BattleViewersManager {
         // this.viewers.set(client.getUsername(), client);
         const viewing = client.getViewingBattle();
         if (viewing) {
-            if (viewing.getBattleId() === this.battle.getBattleId()) {
-                return false;
-            }
-
             viewing.getViewersManager().removeViewer(client);
         }
 

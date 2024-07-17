@@ -104,45 +104,89 @@ export class Player extends Tank {
 
     public getLayoutState() { return this.layoutState }
 
-    public setLayoutState(state: LayoutStateType) {
-
+    public handleChangeLayoutState(state: LayoutStateType, oldState: LayoutStateType) {
         switch (state) {
             case LayoutState.BATTLE:
                 this.getServer().getChatManager().sendRemoveChatScreen(this);
 
-                if (this.layoutState === LayoutState.BATTLE_SELECT) {
-                    this.getServer().getBattlesManager().sendRemoveBattlesScreen(this);
+                if (oldState === LayoutState.BATTLE_SELECT) {
+                    this.battlesManager.sendRemoveBattlesScreen();
                 }
 
-                if (this.layoutState === LayoutState.GARAGE) {
-                    this.getServer().getGarageManager().removeGarageScreen(this);
+                if (oldState === LayoutState.GARAGE) {
+                    this.garageManager.removeGarageScreen();
                 }
                 break;
             case LayoutState.BATTLE_SELECT:
-                if (this.layoutState === LayoutState.GARAGE) {
-                    this.getServer().getGarageManager().removeGarageScreen(this);
+                if (oldState === LayoutState.GARAGE) {
+                    this.garageManager.removeGarageScreen();
                 }
                 break;
             case LayoutState.GARAGE:
-                if (this.layoutState === LayoutState.BATTLE_SELECT) {
-                    this.getServer().getBattlesManager().sendRemoveBattlesScreen(this);
+                if (oldState === LayoutState.BATTLE_SELECT) {
+                    this.battlesManager.sendRemoveBattlesScreen();
                 }
                 break;
         }
+    }
+
+    public setLayoutState(state: LayoutStateType) {
+
+        if (this.layoutState === state) {
+            return;
+        }
 
         Logger.info(`Layout state changed to ${state}`);
+        const oldState = this.layoutState;
         this.layoutState = state;
 
-        const setLayoutStatePacket = new SetLayoutStatePacket(new ByteArray());
+        const setLayoutStatePacket = new SetLayoutStatePacket();
         setLayoutStatePacket.state = state;
         this.sendPacket(setLayoutStatePacket);
+
+        this.handleChangeLayoutState(state, oldState);
     }
 
     public setSubLayoutState(principal: LayoutStateType, secondary: LayoutStateType) {
-        const setLayoutStatePacket = new SetSubLayoutStatePacket(new ByteArray());
+        const setLayoutStatePacket = new SetSubLayoutStatePacket();
         setLayoutStatePacket.principal = principal;
         setLayoutStatePacket.secondary = secondary;
         this.sendPacket(setLayoutStatePacket);
+    }
+
+    public handleClientSetLayoutState(state: LayoutStateType) {
+
+        switch (state) {
+            case LayoutState.BATTLE_SELECT: {
+                const battle = this.getBattle();
+                if (battle) {
+                    battle.handleClientLeave(this)
+                }
+
+                if (this.layoutState === LayoutState.BATTLE_SELECT) {
+                    this.getServer().getChatManager().sendChat(this);
+                    this.setSubLayoutState(LayoutState.BATTLE_SELECT, LayoutState.BATTLE_SELECT);
+                    return
+                }
+
+                this.getServer().getBattlesManager().sendBattleSelectScreen(this)
+                this.setLayoutState(LayoutState.BATTLE_SELECT);
+                this.setSubLayoutState(LayoutState.BATTLE_SELECT, LayoutState.BATTLE_SELECT);
+
+                break;
+            }
+            case LayoutState.GARAGE: {
+                const battle = this.getBattle();
+                if (battle) {
+                    battle.handleClientLeave(this)
+                }
+
+                this.battlesManager.sendRemoveBattlesScreen();
+                this.getServer().getChatManager().sendChat(this);
+                this.getServer().getGarageManager().handleOpenGarage(this);
+                break;
+            }
+        }
     }
 
     public handlePacket(packet: SimplePacket): boolean {
@@ -158,13 +202,7 @@ export class Player extends Tank {
         if (this.dailyQuestsManager.handlePacket(packet)) return
 
         if (packet instanceof SendLayoutStatePacket) {
-            Logger.debug(`Layout state changed to ${packet.state}`);
-            if (packet.state === LayoutState.BATTLE_SELECT) {
-                const battle = this.getBattle();
-                if (battle) {
-                    battle.handleClientLeave(this);
-                }
-            }
+            this.handleClientSetLayoutState(packet.state as LayoutStateType)
             return
         }
 

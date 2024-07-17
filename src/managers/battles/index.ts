@@ -53,10 +53,6 @@ export class BattlesManager {
         return battle;
     }
 
-    public sendRemoveBattlesScreen(client: Player) {
-        const setRemoveBattlesScreenPacket = new SetRemoveBattlesScreenPacket(new ByteArray());
-        client.sendPacket(setRemoveBattlesScreenPacket);
-    }
 
     public addBattle(battle: Battle) {
         this.battles.push(battle);
@@ -86,11 +82,6 @@ export class BattlesManager {
         if (client.getViewingBattle()) {
             client.getViewingBattle().getViewersManager().addViewer(client);
         }
-
-        // if (this.battles.length > 0 && client.getViewingBattle() === null) {
-        //     const [battle] = this.battles;
-        //     battle.getViewersManager().addViewer(client);
-        // }
     }
 
     public handleCreateBattle(client: Player, packet: SendCreateBattlePacket) {
@@ -123,8 +114,8 @@ export class BattlesManager {
 
     public handleOpenBattlesList(client: Player) {
         client.setLayoutState(LayoutState.BATTLE_SELECT)
-        client.setSubLayoutState(LayoutState.BATTLE_SELECT, LayoutState.BATTLE_SELECT)
         this.sendBattles(client);
+        client.setSubLayoutState(client.isInBattle() ? LayoutState.BATTLE : LayoutState.BATTLE_SELECT, LayoutState.BATTLE_SELECT)
     }
 
     public handleViewBattle(player: Player, battleId: string) {

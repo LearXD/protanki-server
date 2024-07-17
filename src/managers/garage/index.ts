@@ -150,17 +150,13 @@ export class GarageManager {
         client.sendPacket(setGarageItemsPropertiesPacket);
     }
 
-    public removeGarageScreen(client: Player) {
-        const setRemoveGaragePacket = new SetRemoveGaragePacket();
-        client.sendPacket(setRemoveGaragePacket);
-    }
-
     public async handleOpenGarage(player: Player) {
 
         player.setLayoutState(LayoutState.GARAGE);
 
-        await this.server.getResourcesManager()
-            .sendResources(player, ResourceType.GARAGE);
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+
+        await this.server.getResourcesManager().sendResources(player, ResourceType.GARAGE);
 
         const userItems: IGarageItem[] = []
         const garageItems: IGarageItem[] = []
@@ -217,6 +213,7 @@ export class GarageManager {
         this.sendEquippedItems(player)
         this.sendGarageItems(player, garageItems);
 
-        player.setSubLayoutState(LayoutState.GARAGE, LayoutState.GARAGE);
+
+        player.setSubLayoutState(player.getBattle() ? LayoutState.BATTLE : LayoutState.GARAGE, LayoutState.GARAGE);
     }
 }

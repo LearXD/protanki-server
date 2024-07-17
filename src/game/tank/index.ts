@@ -16,8 +16,14 @@ import { SimplePacket } from "../../network/packets/simple-packet";
 import { SendResumePacket } from "../../network/packets/send-resume";
 import { SendRequestRespawnPacket } from "../../network/packets/send-request-respawn";
 import { SendRequestSetTankVisiblePacket } from "../../network/packets/send-request-set-tank-visible";
+import { SendAutoDestroyPacket } from "../../network/packets/send-auto-destroy";
+import { SetDestroyTankPacket } from "../../network/packets/set-destroy-tank";
+import { SendUseDrugPacket } from "../../network/packets/send-use-drug";
+import { SetUseDrugPacket } from "../../network/packets/set-use-drug";
 
 export abstract class Tank extends Client {
+
+    private incarnation: number = 0;
 
     private health: number = 0;
     private position: Vector3d = new Vector3d(0, 0, 0);
@@ -46,10 +52,11 @@ export abstract class Tank extends Client {
     }
 
     public spawn() {
-        this.setTankSpeed(8.600000381469727, 1.6632988452911377, 1.8149678707122803, 10.970000267028809)
+        // this.setTankSpeed(8.600000381469727, 1.6632988452911377, 1.8149678707122803, 10.970000267028809)
         this.setCameraPosition(new Vector3d(-4669.8310546875, -1442.4090576171875, 200), new Vector3d(0, 0, -1.5709999799728394))
     }
 
+    public isInBattle() { return !!this.battle }
     public getBattle() { return this.battle }
     public setBattle(battle: Battle) { this.battle = battle }
 
@@ -80,15 +87,24 @@ export abstract class Tank extends Client {
     public respawn() {
         this.setHealth(10000);
 
+        this.incarnation++;
+
         const setSpawnTankPacket = new SetSpawnTankPacket(new ByteArray());
         setSpawnTankPacket.tankId = this.getUsername();
         setSpawnTankPacket.team = Team.NONE;
         setSpawnTankPacket.position = new Vector3d(-4669.8310546875, -1442.4090576171875, 200);
         setSpawnTankPacket.orientation = new Vector3d(0, 0, -1.5709999799728394);
         setSpawnTankPacket.health = 10000;
-        setSpawnTankPacket.incarnationId = 1;
+        setSpawnTankPacket.incarnationId = this.incarnation;
 
         this.sendPacket(setSpawnTankPacket);
+    }
+
+    public destroy() {
+        const setDestroyTankPacket = new SetDestroyTankPacket()
+        setDestroyTankPacket.tankId = this.getUsername()
+        setDestroyTankPacket.respawnDelay = 3000
+        this.sendPacket(setDestroyTankPacket)
     }
 
     public setTankSpeed(
@@ -124,6 +140,23 @@ export abstract class Tank extends Client {
         if (packet instanceof SendRequestRespawnPacket) {
             this.respawn();
             return true;
+        }
+
+        if (packet instanceof SendAutoDestroyPacket) {
+            this.destroy();
+            return true;
+        }
+
+        if (packet instanceof SendUseDrugPacket) {
+            console.log("Use drug", packet)
+            if (packet.itemId === "n2o") {
+                this.setTankSpeed(100, 2.6632988452911377, 2.8149678707122803, 20.970000267028809)
+                const setUseDrugPacket = new SetUseDrugPacket()
+                setUseDrugPacket.itemId = packet.itemId
+                setUseDrugPacket.time = 10
+                setUseDrugPacket.decrease = true
+                this.sendPacket(setUseDrugPacket)
+            }
         }
 
         return false;

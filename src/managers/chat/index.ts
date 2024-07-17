@@ -52,6 +52,11 @@ export class ChatManager {
         this.server.getClientHandler().broadcast(packet);
     }
 
+    public sendChat(player: Player) {
+        this.sendChatConfig(player);
+        this.sendChatMessages(player);
+    }
+
     public sendChatMessages(client: Player) {
         const setChatMessagesPacket = new SetChatMessagesPacket(new ByteArray());
         setChatMessagesPacket.messages = this.messages.map(message => message.toObject());
