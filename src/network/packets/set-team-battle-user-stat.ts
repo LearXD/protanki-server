@@ -16,7 +16,7 @@ export class SetTeamBattleUserStatPacket extends Packet {
     public team: string
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SEND_TEAM_BATTLE_USER_START, bytes)
+        super(Protocol.SET_TEAM_BATTLE_USER_STAT, bytes)
     }
 
     public decode() {

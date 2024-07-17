@@ -9,7 +9,7 @@ export class SetViewingBattleUserKillsPacket extends Packet {
     public kills: number
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_REMOVE_VIEWING_BATTLE_USER_KILLS, bytes)
+        super(Protocol.SET_VIEWING_BATTLE_USER_KILLS, bytes)
     }
 
     public decode() {

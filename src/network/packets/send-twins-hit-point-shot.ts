@@ -3,30 +3,27 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SendTwinsSecondShotPacket extends Packet {
+export class SendTwinsHitPointShotPacket extends Packet {
 
     public time: number;
-    public barrel: number;
     public shotId: number;
-    public shotDirection: Vector3d
+    public target: Vector3d;
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SEND_TWINS_SECOND_SHOT, bytes)
+        super(Protocol.SEND_TWINS_HIT_POINT_SHOT, bytes)
     }
 
     public decode() {
         const bytes = this.cloneBytes();
 
         this.time = bytes.readInt();
-        this.barrel = bytes.readByte();
         this.shotId = bytes.readInt();
-        this.shotDirection = bytes.readVector3d();
+        this.target = bytes.readVector3d();
 
         return {
             time: this.time,
-            barrel: this.barrel,
             shotId: this.shotId,
-            shotDirection: this.shotDirection
+            target: this.target
         }
     }
 
@@ -34,9 +31,8 @@ export class SendTwinsSecondShotPacket extends Packet {
         const bytes = new ByteArray();
 
         bytes.writeInt(this.time);
-        bytes.writeByte(this.barrel);
         bytes.writeInt(this.shotId);
-        bytes.writeVector3d(this.shotDirection);
+        bytes.writeVector3d(this.target);
 
         return bytes;
     }

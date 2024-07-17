@@ -40,7 +40,7 @@ export class SetViewingBattleDataPacket extends Packet {
     public data: IViewingData;
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_REMOVE_VIEWING_BATTLE_DATA, bytes)
+        super(Protocol.SET_VIEWING_BATTLE_DATA, bytes)
     }
 
     public decode() {

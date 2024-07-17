@@ -2,25 +2,27 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetStopShaftShotPacket extends Packet {
+export class SendSmokyVoidShotPacket extends Packet {
 
-    public shooter: string
+    public time: number;
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_STOP_SHAFT_SHOT, bytes)
+        super(Protocol.SEND_SMOKY_VOID_SHOT, bytes)
     }
 
     public decode() {
         const bytes = this.cloneBytes();
-        this.shooter = bytes.readString();
+
+        this.time = bytes.readInt();
+
         return {
-            shooter: this.shooter
+            time: this.time
         }
     }
 
     public encode() {
         const bytes = new ByteArray();
-        bytes.writeString(this.shooter);
+        bytes.writeInt(this.time);
         return bytes;
     }
 }

@@ -7,7 +7,7 @@ import { SetTipResourcePacket } from "./packets/set-tip-resource";
 import { SendLanguagePacket } from "./packets/send-language";
 import { SetNetworkParamsPacket } from "./packets/set-network-params";
 import { SimplePacket } from "./packets/simple-packet";
-import { SendRequestLoadScreenPacketPacket } from "./packets/send-request-load-screen";
+import { SendRequestLoadScreenPacket } from "./packets/send-request-load-screen";
 import { ResolveCallbackPacket } from "./packets/resolve-callback";
 import { SetAuthResourcesPacket } from "./packets/set-auth-resources";
 import { SetLoadResourcesPacket } from "./packets/set-load-resources";
@@ -16,7 +16,7 @@ import { ResolveFullLoadedPacket } from "./packets/resolve-full-loaded";
 import { SendRequestCaptchaPacket } from "./packets/send-request-captcha";
 import { SetCaptchaDataPacket } from "./packets/set-captcha-data";
 import { CheckUsernamePacket } from "./packets/check-username";
-import { SetAdvisedUsernames } from "./packets/set-advised-usernames";
+import { SetAdvisedUsernamesPacket } from "./packets/set-advised-usernames";
 import { ResultCheckUsernamePacket } from "./packets/result-check-username";
 import { SetRememberMePacket } from "./packets/set-remember-me";
 import { SetCaptchaResponsePacket } from "./packets/set-captcha-response";
@@ -111,7 +111,7 @@ import { SetDamageIndicatorsPacket } from "./packets/set-damage-indicators";
 import { SetSpawnBonusBoxPacket } from "./packets/set-spawn-bonus-box";
 import { SendMoveTankTracksPacket } from "./packets/send-move-tank-tracks";
 import { SetStopFlameShotPacket } from "./packets/set-stop-flame-shot";
-import { SetRattingPacket } from "./packets/set-rating";
+import { SetRattingPacket } from "./packets/set-ratting";
 import { KickPacket } from "./packets/kick";
 import { SetCrystalsPacket } from "./packets/set-crystals";
 import { SetRemoveBonusBoxPacket } from "./packets/set-remove-bonus-box";
@@ -121,8 +121,8 @@ import { SetBattleChatConfigPacket } from "./packets/set-battle-chat-config";
 import { SetBattleUserLeftNotificationPacket } from "./packets/set-battle-user-left-notification";
 import { SetRemoveTankPacket } from "./packets/set-remove-tank";
 import { SetAddTankEffectPacket } from "./packets/set-add-tank-effect";
-import { SetBonusBoxCollectedPacket } from "./packets/set-some-bonus-id";
-import { SendSmokyHitPointShotPacket } from "./packets/send-smoky-hit-point";
+import { SetBonusBoxCollectedPacket } from "./packets/set-bonus-box-collected";
+import { SendSmokyHitPointShotPacket } from "./packets/send-smoky-hit-point-shot";
 import { SetSmokyCriticalEffectPacket } from "./packets/set-smoky-critical-effect";
 import { SetViewingBattleTeamScorePacket } from "./packets/set-viewing-battle-team-score";
 import { SetScorePacket } from "./packets/set-score";
@@ -137,7 +137,7 @@ import { SetBattleStatisticsTeamCCPacket } from "./packets/set-battle-statistics
 import { SetTeamBattleUserStatPacket } from "./packets/set-team-battle-user-stat";
 import { SetWinnerTeamPacket } from "./packets/set-winner-team";
 import { SetTeamScorePacket } from "./packets/set-team-score";
-import { SetStartRailgunShotPacket } from "./packets/set-start-railgun-start";
+import { SetStartRailgunShotPacket } from "./packets/set-start-railgun-shot";
 import { SetRailgunShotPacket } from "./packets/set-railgun-shot";
 import { SetTankFlagPacket } from "./packets/set-tank-flag";
 import { SetUserIdUsersInfoTeamPacket } from "./packets/set-user-id-users-info-team";
@@ -152,7 +152,7 @@ import { SetDestroyTankPacket } from "./packets/set-destroy-tank";
 import { Logger } from "../utils/logger";
 import { SetGameLoadedPacket } from "./packets/set-game-loaded";
 import { SetRemoveTankEffectPacket } from "./packets/set-remove-tank-effect";
-import { SendShotVoidPacket } from "./packets/send-shot-void";
+import { SendSmokyVoidShotPacket } from "./packets/send-smoky-void-shot";
 import { SendLayoutStatePacket } from "./packets/send-layout-state";
 import { SetRemoveBattleScreenPacket } from "./packets/set-remove-battle-screen";
 import { SendBattleMessagePacket } from "./packets/send-battle-message";
@@ -179,6 +179,7 @@ import { SetRemoveViewingBattlePacket } from "./packets/set-remove-viewing-battl
 import { SetCaptchaLocation2Packet } from "./packets/set-captcha-location-2";
 
 // GENERATE IMPORT HERE
+import { SendSpectateBattlePacket } from "./packets/send-spectate-battle";
 import { SendBuyChangeDailyQuestPacket } from "./packets/send-buy-change-daily-quest";
 import { SetShopNavigateToUrlPacket } from "./packets/set-shop-navigate-to-url";
 import { SetShopCorrectPromotionalCodePacket } from "./packets/set-shop-correct-promotional-code";
@@ -235,7 +236,7 @@ import { SetRemoveDailyQuestPacket } from "./packets/set-remove-daily-quest";
 import { SendRedeemDailyQuestPacket } from "./packets/send-redeem-daily-quest";
 import { SetCannotCreateBattlePacket } from "./packets/set-cannot-create-battle";
 import { SetWrongLoginHashPacket } from "./packets/set-wrong-login-hash";
-import { SendTwinsSecondShotPacket } from "./packets/send-twins-second-shot";
+import { SendTwinsShotPacket } from "./packets/send-twins-shot";
 import { SetPopupMessagePacket } from "./packets/set-popup-message";
 import { SetViewGiftsPacket } from "./packets/set-view-gifts";
 import { SetGiftReceivedPacket } from "./packets/set-gift-received";
@@ -247,7 +248,7 @@ import { SetUseDrugPacket } from "./packets/set-use-drug";
 import { SendUseDrugPacket } from "./packets/send-use-drug";
 import { SetExplodeMinePacket } from "./packets/set-explode-mine";
 import { SetPlaceMinePacket } from "./packets/set-place-mine";
-import { SetStopShaftShotPacketPacket } from "./packets/set-stop-shaft-shot";
+import { SetStopShaftShotPacket } from "./packets/set-stop-shaft-shot";
 import { SendOpenShaftAimPacket } from "./packets/send-open-shaft-aim";
 import { SendMoveShaftVerticalAxisPacket } from "./packets/send-move-shaft-vertical-axis";
 import { SendShaftAimShotPacket } from "./packets/send-shaft-aim-shot";
@@ -280,7 +281,7 @@ import { SendStopIsisShotPacket } from "./packets/send-stop-isis-shot";
 import { SendIsisShotPacket } from "./packets/send-isis-shot";
 import { SendRailgunShotPacket } from "./packets/send-railgun-shot";
 import { SendStartRailgunShotPacket } from "./packets/send-start-railgun-shot";
-import { SendTwinsFirstShotPacket } from "./packets/send-twins-first-shot";
+import { SendTwinsHitPointShotPacket } from "./packets/send-twins-hit-point-shot";
 import { SetHammerShotPacket } from "./packets/set-hammer-shot";
 import { SendHammerShotPacket } from "./packets/send-hammer-shot";
 import { SendOpenBattlesListPacket } from "./packets/send-open-battles-list";
@@ -342,7 +343,7 @@ export class Network {
         this.registerPacket(Protocol.SET_CAPTCHA_LOCATIONS, SetCaptchaLocationsPacket)
 
         this.registerPacket(Protocol.SET_TIP_RESOURCE, SetTipResourcePacket)
-        this.registerPacket(Protocol.SEND_REQUEST_LOAD_SCREEN, SendRequestLoadScreenPacketPacket)
+        this.registerPacket(Protocol.SEND_REQUEST_LOAD_SCREEN, SendRequestLoadScreenPacket)
 
         this.registerPacket(Protocol.SEND_LANGUAGE, SendLanguagePacket)
 
@@ -361,7 +362,7 @@ export class Network {
 
         this.registerPacket(Protocol.CHECK_USERNAME, CheckUsernamePacket)
         this.registerPacket(Protocol.RESULT_CHECK_USERNAME, ResultCheckUsernamePacket)
-        this.registerPacket(Protocol.SET_ADVISED_USERNAMES, SetAdvisedUsernames)
+        this.registerPacket(Protocol.SET_ADVISED_USERNAMES, SetAdvisedUsernamesPacket)
 
         this.registerPacket(Protocol.SET_REMEMBER_ME, SetRememberMePacket)
 
@@ -392,10 +393,10 @@ export class Network {
         this.registerPacket(Protocol.SET_BATTLE_STATISTICS_DM_CC, SetBattleStatisticsDMCCPacket)
         this.registerPacket(Protocol.SET_CAPTURE_THE_FLAG_CC, SetCaptureTheFlagCCPacket)
         this.registerPacket(Protocol.SET_BATTLE_STATISTICS_TEAM_CC, SetBattleStatisticsTeamCCPacket)
-        this.registerPacket(Protocol.SEND_TEAM_BATTLE_USER_START, SetTeamBattleUserStatPacket)
+        this.registerPacket(Protocol.SET_TEAM_BATTLE_USER_STAT, SetTeamBattleUserStatPacket)
 
         this.registerPacket(Protocol.SET_WINNER_TEAM, SetWinnerTeamPacket)
-        this.registerPacket(Protocol.SEND_TEAM_SCORE, SetTeamScorePacket)
+        this.registerPacket(Protocol.SET_TEAM_SCORE, SetTeamScorePacket)
 
         this.registerPacket(Protocol.SET_BATTLE_MINE_CC, SetBattleMineCCPacket)
         this.registerPacket(Protocol.SET_BATTLE_MESSAGE, SetBattleMessagePacket)
@@ -430,12 +431,12 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_USER_FROM_VIEWING_TEAM_BATTLE, SetRemoveUserFromViewingTeamBattlePacket)
         this.registerPacket(Protocol.SET_RATTING, SetRattingPacket)
 
-        this.registerPacket(Protocol.SET_REMOVE_VIEWING_BATTLE_USER_INFO, SetViewingBattleUserInfoPacket)
+        this.registerPacket(Protocol.SET_VIEWING_BATTLE_USER_INFO, SetViewingBattleUserInfoPacket)
 
         this.registerPacket(Protocol.SET_MAPS_DATA, SetMapsDataPacket)
         this.registerPacket(Protocol.SET_BATTLE_LIST, SetBattleListPacket)
 
-        this.registerPacket(Protocol.SET_REMOVE_VIEWING_BATTLE_DATA, SetViewingBattleDataPacket)
+        this.registerPacket(Protocol.SET_VIEWING_BATTLE_DATA, SetViewingBattleDataPacket)
         this.registerPacket(Protocol.SET_ADD_BATTLE_ON_LIST, SetAddBattleOnListPacket)
         this.registerPacket(Protocol.SET_TURRETS_DATA, SetTurretsDataPacket)
         this.registerPacket(Protocol.SET_BONUSES_DATA, SetBonusesDataPacket)
@@ -450,7 +451,7 @@ export class Network {
         this.registerPacket(Protocol.SET_USER_RANK, SetUserRankPacket)
         this.registerPacket(Protocol.SET_USER_PREMIUM_DATA, SetUserPremiumDataPacket)
         this.registerPacket(Protocol.SET_ADD_USER_ON_TEAM_BATTLE_COUNTER, SetAddUserOnTeamBattleCounterPacket)
-        this.registerPacket(Protocol.SET_REMOVE_VIEWING_BATTLE_USER_KILLS, SetViewingBattleUserKillsPacket)
+        this.registerPacket(Protocol.SET_VIEWING_BATTLE_USER_KILLS, SetViewingBattleUserKillsPacket)
 
         this.registerPacket(Protocol.SET_SCORE, SetScorePacket)
         this.registerPacket(Protocol.SET_VIEWING_BATTLE_USER_SCORE, SetViewingBattleUserScorePacket)
@@ -485,7 +486,7 @@ export class Network {
         this.registerPacket(Protocol.SET_MOVE_CAMERA, SetMoveCameraPacket)
 
         this.registerPacket(Protocol.SET_TWINS_SHOT, SetTwinsShotPacket)
-        this.registerPacket(Protocol.SEND_SHOT_VOID, SendShotVoidPacket)
+        this.registerPacket(Protocol.SEND_SMOKY_VOID_SHOT, SendSmokyVoidShotPacket)
 
         this.registerPacket(Protocol.SET_SMOKY_HIT_POINT, SetSmokyHitPointPacket)
         this.registerPacket(Protocol.SEND_SMOKY_HIT_POINT_SHOT, SendSmokyHitPointShotPacket)
@@ -589,7 +590,7 @@ export class Network {
         this.registerPacket(Protocol.SEND_REDEEM_DAILY_QUEST, SendRedeemDailyQuestPacket);
         this.registerPacket(Protocol.SET_CANNOT_CREATE_BATTLE, SetCannotCreateBattlePacket);
         this.registerPacket(Protocol.SET_WRONG_LOGIN_HASH, SetWrongLoginHashPacket);
-        this.registerPacket(Protocol.SEND_TWINS_SECOND_SHOT, SendTwinsSecondShotPacket);
+        this.registerPacket(Protocol.SEND_TWINS_SHOT, SendTwinsShotPacket);
         this.registerPacket(Protocol.SET_POPUP_MESSAGE, SetPopupMessagePacket);
         this.registerPacket(Protocol.SET_VIEW_GIFTS, SetViewGiftsPacket);
         this.registerPacket(Protocol.SET_GIFT_RECEIVED, SetGiftReceivedPacket);
@@ -602,7 +603,7 @@ export class Network {
         this.registerPacket(Protocol.SET_EXPLODE_MINE, SetExplodeMinePacket);
         this.registerPacket(Protocol.SET_REMOVE_MINE, SetRemoveMinePacket);
         this.registerPacket(Protocol.SET_PLACE_MINE, SetPlaceMinePacket);
-        this.registerPacket(Protocol.SET_STOP_SHAFT_SHOT, SetStopShaftShotPacketPacket);
+        this.registerPacket(Protocol.SET_STOP_SHAFT_SHOT, SetStopShaftShotPacket);
         this.registerPacket(Protocol.SEND_OPEN_SHAFT_AIM, SendOpenShaftAimPacket);
         this.registerPacket(Protocol.SEND_MOVE_SHAFT_VERTICAL_AXIS, SendMoveShaftVerticalAxisPacket);
         this.registerPacket(Protocol.SEND_SHAFT_AIM_SHOT, SendShaftAimShotPacket);
@@ -637,7 +638,7 @@ export class Network {
         this.registerPacket(Protocol.SEND_ISIS_SHOT_POSITION, SendIsisShotPositionPacket);
         this.registerPacket(Protocol.SEND_RAILGUN_SHOT, SendRailgunShotPacket);
         this.registerPacket(Protocol.SEND_START_RAILGUN_SHOT, SendStartRailgunShotPacket);
-        this.registerPacket(Protocol.SEND_TWINS_FIRST_SHOT, SendTwinsFirstShotPacket);
+        this.registerPacket(Protocol.SEND_TWINS_HIT_POINT_SHOT, SendTwinsHitPointShotPacket);
         this.registerPacket(Protocol.SET_HAMMER_SHOT, SetHammerShotPacket);
         this.registerPacket(Protocol.SEND_HAMMER_SHOT, SendHammerShotPacket);
         this.registerPacket(Protocol.SEND_OPEN_BATTLES_LIST, SendOpenBattlesListPacket);
@@ -665,7 +666,7 @@ export class Network {
         this.registerPacket(Protocol.SET_CONTROL_POINT_STATE, SetControlPointStatePacket);
         this.registerPacket(Protocol.SET_TANK_STOP_CAPTURING_CONTROL_POINT, SetTankStopCapturingControlPointPacket);
         this.registerPacket(Protocol.SET_TANK_CAPTURING_CONTROL_POINT, SetTankCapturingControlPointPacket);
-        this.registerPacket(Protocol.SEND_TEAM_STARTED_CAPTURING_CONTROL_POINT, SetTeamStartedCapturingControlPointPacket);
+        this.registerPacket(Protocol.SET_TEAM_STARTED_CAPTURING_CONTROL_POINT, SetTeamStartedCapturingControlPointPacket);
         this.registerPacket(Protocol.SET_BATTLE_CONTROL_POINTS_CONFIGURATION, SetBattleControlPointsConfigurationPacket);
         this.registerPacket(Protocol.SET_BATTLE_TEAM_USERS, SetBattleTeamUsersPacket);
         this.registerPacket(Protocol.SET_FLAG_RETURNED, SetFlagReturnedPacket);
@@ -681,7 +682,8 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);
 
         // GENERATE REGISTER HERE
-		this.registerPacket(Protocol.SEND_BUY_CHANGE_DAILY_QUEST, SendBuyChangeDailyQuestPacket);
+		this.registerPacket(Protocol.SEND_SPECTATE_BATTLE, SendSpectateBattlePacket);
+        this.registerPacket(Protocol.SEND_BUY_CHANGE_DAILY_QUEST, SendBuyChangeDailyQuestPacket);
         this.registerPacket(Protocol.SET_SHOP_NAVIGATE_TO_URL, SetShopNavigateToUrlPacket);
         this.registerPacket(Protocol.SET_SHOP_CORRECT_PROMOTIONAL_CODE, SetShopCorrectPromotionalCodePacket);
         this.registerPacket(Protocol.SET_SHOP_INCORRECT_PROMOTIONAL_CODE, SetShopIncorrectPromotionalCodePacket);

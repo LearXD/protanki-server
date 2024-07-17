@@ -2,7 +2,7 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetAdvisedUsernames extends Packet {
+export class SetAdvisedUsernamesPacket extends Packet {
 
     public usernames: string[] = [];
 

@@ -11,7 +11,7 @@ import { PingPacket } from "../../network/packets/ping";
 import { ResolveCallbackPacket } from "../../network/packets/resolve-callback";
 import { SetGameLoadedPacket } from "../../network/packets/set-game-loaded";
 import { SendLanguagePacket } from "../../network/packets/send-language";
-import { SendRequestLoadScreenPacketPacket } from "../../network/packets/send-request-load-screen";
+import { SendRequestLoadScreenPacket } from "../../network/packets/send-request-load-screen";
 import { PongPacket } from "../../network/packets/pong";
 import { SendRequestCaptchaPacket } from "../../network/packets/send-request-captcha";
 import { SendRequestUserDataPacket } from "../../network/packets/send-request-user-data";
@@ -105,7 +105,7 @@ export abstract class Client {
             return true;
         }
 
-        if (packet instanceof SendRequestLoadScreenPacketPacket) {
+        if (packet instanceof SendRequestLoadScreenPacket) {
             this.getServer().getTipsManager()
                 .sendLoadingTip(this);
             return true;

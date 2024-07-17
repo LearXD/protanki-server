@@ -8,7 +8,7 @@ export class SetTeamStartedCapturingControlPointPacket extends Packet {
     public team: string
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SEND_TEAM_STARTED_CAPTURING_CONTROL_POINT, bytes)
+        super(Protocol.SET_TEAM_STARTED_CAPTURING_CONTROL_POINT, bytes)
     }
 
     public decode() {

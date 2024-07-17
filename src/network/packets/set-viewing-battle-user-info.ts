@@ -12,7 +12,7 @@ export class SetViewingBattleUserInfoPacket extends Packet {
     public user: string;
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_REMOVE_VIEWING_BATTLE_USER_INFO, bytes)
+        super(Protocol.SET_VIEWING_BATTLE_USER_INFO, bytes)
     }
 
     public decode() {
