@@ -25,6 +25,37 @@
         "coloring": 966681
     },
     {
+        "id": "premium",
+        "name": "Pintura premium",
+        "description": "A tinta especial com design único é uma excelente escolha para quem quer alcançar o máximo no jogo a qualquer custo.",
+        "isInventory": false,
+        "index": 1150,
+        "next_price": 0,
+        "next_rank": 1,
+        "type": 3,
+        "baseItemId": 910936,
+        "previewResourceId": 910936,
+        "rank": 1,
+        "category": "paint",
+        "properts": [
+            {
+                "property": "ALL_RESISTANCE",
+                "value": "15",
+                "subproperties": null
+            }
+        ],
+        "discount": {
+            "percent": 50,
+            "timeLeftInSeconds": 294935,
+            "timeToStartInSeconds": -327864
+        },
+        "grouped": false,
+        "isForRent": false,
+        "price": 0,
+        "remainingTimeInSec": -1,
+        "coloring": 703442
+    },
+    {
         "id": "holiday",
         "name": "Feriado",
         "description": "Uma tinta única e «inteligente» que pode mudar sua aparência dependendo da ocasião. Em um dia normal, é simplesmente uma textura quadriculada em preto e branco. Mas quando chega um feriado, sua aparência muda drasticamente.",

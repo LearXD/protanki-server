@@ -20,6 +20,8 @@ import { GarageManager } from './managers/garage';
 import { LocaleManager } from './managers/locale';
 import { CaptchaManager } from './managers/captcha';
 import { ShopManager } from './managers/shop';
+import { PlayersManager } from './managers/players';
+import { Client } from './game/client';
 
 export class Server {
 
@@ -27,19 +29,24 @@ export class Server {
     private network: Network;
 
     private clientsHandler: ClientsHandler;
+    private playersManager: PlayersManager;
+
     private authManager: AuthManager;
+    private captchaManager: CaptchaManager;
 
     private assetsManager: AssetsManager;
     private tipsManager: TipsManager;
     private resourcesManager: ResourcesManager
+    private localeManager: LocaleManager;
+
     private userDataManager: UserDataManager;
     private friendsManager: FriendsManager;
+
     private chatManager: ChatManager;
     private battleManager: BattlesManager;
     private mapsManager: MapsManager;
     private garageManager: GarageManager;
-    private localeManager: LocaleManager;
-    private captchaManager: CaptchaManager;
+
     private shopManager: ShopManager;
 
     private whitelisted: boolean = false;
@@ -57,6 +64,7 @@ export class Server {
         this.network = new Network();
 
         this.clientsHandler = new ClientsHandler(this);
+        this.playersManager = new PlayersManager(this);
 
         this.assetsManager = new AssetsManager();
         this.resourcesManager = new ResourcesManager(this);
@@ -81,6 +89,7 @@ export class Server {
     public getNetwork() { return this.network }
 
     public getClientHandler() { return this.clientsHandler }
+    public getPlayersManager() { return this.playersManager }
     public getAuthManager() { return this.authManager }
 
     public getLocaleManager(): LocaleManager { return this.localeManager }
@@ -130,12 +139,18 @@ export class Server {
         this.getChatManager().sendServerMessage(message, warning);
     }
 
-    public sendPacket(client: Player, packet: SimplePacket) {
+    public sendPacket(client: Client, packet: SimplePacket) {
         return client.sendPacket(packet);
     }
 
-    public broadcastPacket(packet: SimplePacket) {
-        return this.clientsHandler.getClients()
+    public broadcastPacket(packet: SimplePacket, clients: boolean = false) {
+
+        if (clients) {
+            return this.clientsHandler.getClients()
+                .forEach((client) => this.sendPacket(client, packet));
+        }
+
+        return this.playersManager.getPlayers()
             .forEach((client) => this.sendPacket(client, packet));
     }
 

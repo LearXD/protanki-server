@@ -59,14 +59,12 @@ export class PlayerFriendsManager {
     }
 
     public sendFriendsData() {
-        const data = this.getUserFriendsData();
-
         const setFriendsDataPacket = new SetFriendsDataPacket();
-        setFriendsDataPacket.friendsAccepted = data.friendsAccepted;
-        setFriendsDataPacket.friendsAcceptedNew = data.friendsAcceptedNew;
-        setFriendsDataPacket.friendsIncoming = data.friendsIncoming;
-        setFriendsDataPacket.friendsIncomingNew = data.friendsIncomingNew;
-        setFriendsDataPacket.friendsOutgoing = data.friendsOutgoing;
+        setFriendsDataPacket.friendsAccepted = this.friendsAccepted;
+        setFriendsDataPacket.friendsAcceptedNew = this.friendsAcceptedNew;
+        setFriendsDataPacket.friendsIncoming = this.friendsIncoming;
+        setFriendsDataPacket.friendsIncomingNew = this.friendsIncomingNew;
+        setFriendsDataPacket.friendsOutgoing = this.friendsOutgoing;
 
         this.player.sendPacket(setFriendsDataPacket);
     }
@@ -153,7 +151,7 @@ export class PlayerFriendsManager {
 
     public handlePacket(packet: SimplePacket) {
         if (packet instanceof SendOpenFriendsPacket) {
-            this.sendFriendsData();
+            this.sendOpenFriendsList();
             return true;
         }
 

@@ -74,7 +74,7 @@ export class BattlePlayersManager {
             dampingCoeff: hullProperties.dampingCoeff,
             turret_turn_speed: turretProperties.turretTurnAcceleration,
             health: 0,
-            rank: client.getDataManager().getRank(),
+            rank: client.getData().getRank(),
             kickback: turretProperties.kickback,
             turretTurnAcceleration: turretProperties.turretTurnAcceleration,
             impact_force: turretProperties.impact_force,

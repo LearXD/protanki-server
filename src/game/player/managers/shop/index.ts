@@ -46,7 +46,7 @@ export class PlayerShopManager {
 
     public sendShopData() {
         const setShopDataPacket = new SetShopDataPacket()
-        setShopDataPacket.haveDoubleCrystals = this.player.getDataManager().hasDoubleCrystal();
+        setShopDataPacket.haveDoubleCrystals = this.player.getData().hasDoubleCrystal();
         setShopDataPacket.data = this.player.getServer().getShopManager().getShopProducts()
         this.player.sendPacket(setShopDataPacket)
     }
@@ -57,11 +57,11 @@ export class PlayerShopManager {
 
     public handleRedeemPromotionalCode(player: Player, code: string) {
         if (code === 'SMALLKINGVIADO') {
-            Logger.info(`Player ${player.getUsername()} redeemed promotional code ${code} - Crystals: ${player.getDataManager().getCrystals()}`)
+            Logger.info(`Player ${player.getUsername()} redeemed promotional code ${code} - Crystals: ${this.player.getData()}`)
 
             const crystals = 1000000
             const bonus = 500000
-            player.getDataManager().increaseCrystals(crystals + bonus)
+            this.player.getData().increaseCrystals(crystals + bonus)
             player.getDataManager().sendCrystals();
             player.getShopManager().sendSuccessfulPurchase(crystals, bonus)
             player.getShopManager().sendCorrectPromotionalCode()

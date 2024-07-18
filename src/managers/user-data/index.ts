@@ -1,5 +1,6 @@
 import { Client } from "../../game/client";
 import { Player } from "../../game/player";
+import { PlayerData } from "../../game/player/utils/data";
 import { SetNotificationEnabledPacket } from "../../network/packets/set-notification-enabled";
 import { SetOpenConfigPacket } from "../../network/packets/set-open-config";
 import { SetSocialNetworkPanelCCPacket } from "../../network/packets/set-social-network-panel-cc";
@@ -15,24 +16,44 @@ export class UserDataManager {
         private readonly server: Server
     ) { }
 
+    public findPlayerData(username: string) {
+        const player = this.server.getPlayersManager().getPlayer(username);
 
-    public handleRequestUserData(client: Client, query: string) {
-        // TODO: Get data from database
+        if (player) {
+            return player.getData();
+        }
+
+        return PlayerData.loadPlayerData(username);
+    }
+
+
+    public handleRequestUserData(client: Client, username: string) {
+        const data = this.findPlayerData(username);
+        const player = this.server.getPlayersManager().getPlayer(username)
+
         const setUserOnlinePacket = new SetUserOnlinePacket(new ByteArray());
-        setUserOnlinePacket.online = false;
+        setUserOnlinePacket.online = true;
         setUserOnlinePacket.serverNumber = 1;
-        setUserOnlinePacket.user = query;
+        setUserOnlinePacket.user = username;
         client.sendPacket(setUserOnlinePacket);
 
         const setUserRankPacket = new SetUserRankPacket(new ByteArray());
-        setUserRankPacket.rank = 30;
-        setUserRankPacket.user = query;
+        setUserRankPacket.rank = data.getRank();
+        setUserRankPacket.user = username;
         client.sendPacket(setUserRankPacket);
 
         const setUserPremiumPacket = new SetUserPremiumDataPacket(new ByteArray());
-        setUserPremiumPacket.premiumTimeLeftInSeconds = 1e9;
-        setUserPremiumPacket.user = query;
+        setUserPremiumPacket.premiumTimeLeftInSeconds = data.getPremiumData().leftTime;
+        setUserPremiumPacket.user = username;
         client.sendPacket(setUserPremiumPacket);
+
+        const premiumData = data.getPremiumData();
+        if (premiumData.enabled) {
+            const setPremiumDataPacket = new SetUserPremiumDataPacket(new ByteArray());
+            setPremiumDataPacket.premiumTimeLeftInSeconds = premiumData.leftTime;
+            setPremiumDataPacket.user = username;
+            client.sendPacket(setPremiumDataPacket);
+        }
     }
 
     public handleSendConfigData(client: Player) {

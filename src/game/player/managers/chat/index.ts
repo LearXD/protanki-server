@@ -5,6 +5,7 @@ import { SetChatInitParamsPacket } from "../../../../network/packets/set-chat-in
 import { IUser, SetChatMessagesPacket } from "../../../../network/packets/set-chat-messages";
 import { SetRemoveChatPacket } from "../../../../network/packets/set-remove-chat";
 import { SimplePacket } from "../../../../network/packets/simple-packet";
+import { Message } from "../../../chat/utils/message";
 
 export class PlayerChatManager {
 
@@ -14,9 +15,9 @@ export class PlayerChatManager {
 
     public getChatUser(): IUser {
         return {
-            chatModeratorLevel: this.player.getDataManager().getModeratorLevel(),
+            chatModeratorLevel: this.player.getData().getModeratorLevel(),
             ip: '',
-            rankIndex: this.player.getDataManager().getRank(),
+            rankIndex: this.player.getData().getRank(),
             userId: this.player.getUsername()
         }
     }
@@ -31,6 +32,16 @@ export class PlayerChatManager {
         this.player.sendPacket(packet);
     }
 
+    public sendMessage(text: string, warning: boolean = false) {
+        this.sendSetMessage(new Message(text, null, null, true, warning))
+    }
+
+    public sendSetMessage(message: Message) {
+        const packet = new SetChatMessagesPacket();
+        packet.messages = [message.toObject()];
+        this.player.sendPacket(packet);
+    }
+
     public sendChatMessages() {
         const setChatMessagesPacket = new SetChatMessagesPacket();
         setChatMessagesPacket.messages = this.player.getServer().getChatManager().getMessages()
@@ -42,17 +53,17 @@ export class PlayerChatManager {
     public sendChatConfig() {
         const setChatInitParamsPacket = new SetChatInitParamsPacket();
 
-        setChatInitParamsPacket.admin = this.player.getDataManager().isAdmin();
-        setChatInitParamsPacket.antiFloodEnabled = !this.player.getDataManager().isAdmin();
+        setChatInitParamsPacket.admin = this.player.getData().isAdmin();
+        setChatInitParamsPacket.antiFloodEnabled = !this.player.getData().isAdmin();
         setChatInitParamsPacket.bufferSize = 60;
         setChatInitParamsPacket.chatEnabled = true;
-        setChatInitParamsPacket.chatModeratorLevel = this.player.getDataManager().getModeratorLevel();
+        setChatInitParamsPacket.chatModeratorLevel = this.player.getData().getModeratorLevel();
         setChatInitParamsPacket.linksWhiteList = [];
         setChatInitParamsPacket.minChar = 60;
         setChatInitParamsPacket.minWord = 5;
         setChatInitParamsPacket.selfName = this.player.getUsername();
-        setChatInitParamsPacket.showLinks = this.player.getDataManager().isAdmin();
-        setChatInitParamsPacket.typingSpeedAntifloodEnabled = !this.player.getDataManager().isAdmin()
+        setChatInitParamsPacket.showLinks = this.player.getData().isAdmin();
+        setChatInitParamsPacket.typingSpeedAntifloodEnabled = !this.player.getData().isAdmin()
         this.player.sendPacket(setChatInitParamsPacket);
 
         const setChatCostPacket = new SetChatCostPacket();

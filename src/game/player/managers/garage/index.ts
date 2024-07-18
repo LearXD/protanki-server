@@ -5,6 +5,7 @@ import { SendBuyGarageItemPacket } from "../../../../network/packets/send-buy-ga
 import { SendBuyGarageKitPacket } from "../../../../network/packets/send-buy-garage-kit";
 import { SendEquipItemPacket } from "../../../../network/packets/send-equip-item";
 import { SendOpenGaragePacket } from "../../../../network/packets/send-open-garage";
+import { SendPreviewPaintingPacket } from "../../../../network/packets/send-preview-painting";
 import { SetEquipGarageItemPacket } from "../../../../network/packets/set-equip-garage-item";
 import { SetGarageItemsPropertiesPacket } from "../../../../network/packets/set-garage-items-properties";
 import { SetRemoveGaragePacket } from "../../../../network/packets/set-remove-garage";
@@ -236,20 +237,17 @@ export class PlayerGarageManager {
         client.sendPacket(setSuppliesPacket);
     }
 
-    public sendEquippedItems() {
+    public sendEquipItem(item: string) {
         const setEquipGarageItemPacket = new SetEquipGarageItemPacket();
-
-        setEquipGarageItemPacket.itemId = this.getEquippedHull();
+        setEquipGarageItemPacket.itemId = item;
         setEquipGarageItemPacket.equipped = true;
         this.player.sendPacket(setEquipGarageItemPacket);
+    }
 
-        setEquipGarageItemPacket.itemId = this.getEquippedTurret();
-        setEquipGarageItemPacket.equipped = true;
-        this.player.sendPacket(setEquipGarageItemPacket);
-
-        setEquipGarageItemPacket.itemId = this.getEquippedPainting();
-        setEquipGarageItemPacket.equipped = true;
-        this.player.sendPacket(setEquipGarageItemPacket);
+    public sendEquippedItems() {
+        this.sendEquipItem(this.getEquippedHull());
+        this.sendEquipItem(this.getEquippedTurret());
+        this.sendEquipItem(this.getEquippedPainting());
     }
 
     public sendUserGarageItems(items: IGarageItem[]) {
@@ -346,11 +344,11 @@ export class PlayerGarageManager {
     }
 
     public handleBuyKit(kitId: string, price: number) {
-        if (this.player.getDataManager().getCrystals() < price) {
+        if (this.player.getData().getCrystals() < price) {
             return false;
         }
 
-        this.player.getDataManager().decreaseCrystals(price);
+        this.player.getData().decreaseCrystals(price);
         const kit = this.player.getServer().getGarageManager().getItem(kitId);
 
         if (!kit) {
@@ -365,11 +363,11 @@ export class PlayerGarageManager {
     }
 
     public handleBuyItem(itemId: string, amount: number, price: number) {
-        if (this.player.getDataManager().getCrystals() < price) {
+        if (this.player.getData().getCrystals() < price) {
             return false;
         }
 
-        this.player.getDataManager().decreaseCrystals(price);
+        this.player.getData().decreaseCrystals(price);
         this.addItem(itemId, amount);
 
         return true
@@ -401,14 +399,20 @@ export class PlayerGarageManager {
         }
 
         if (packet instanceof SendBuyGarageItemPacket) {
-            this.player.getGarageManager()
-                .handleBuyItem(packet.item, packet.count, packet.price);
+            this.player.getGarageManager().handleBuyItem(packet.item, packet.count, packet.price);
             return true;
         }
 
         if (packet instanceof SendBuyGarageKitPacket) {
-            this.player.getGarageManager()
-                .handleBuyKit(packet.item, packet.price);
+            this.player.getGarageManager().handleBuyKit(packet.item, packet.price);
+            return true;
+        }
+
+        if (packet instanceof SendPreviewPaintingPacket) {
+            const item = this.player.getServer().getGarageManager().getItem(packet.item);
+            if (item && item.category === GarageItemCategory.PAINT) {
+                this.player.getGarageManager().sendEquipItem(packet.item);
+            }
             return true;
         }
 

@@ -7,7 +7,6 @@ import { SetNetworkParamsPacket } from "../../network/packets/set-network-params
 import { SocialNetwork } from "../../utils/game/social-network";
 import { ResolveFullLoadedPacket } from "../../network/packets/resolve-full-loaded";
 import { IAuthConfig } from "./types";
-import { IPlayerAuthData } from "../../game/player/managers/auth/types";
 
 export class AuthManager {
 
@@ -20,20 +19,6 @@ export class AuthManager {
 
         if (!this.config) {
             throw new Error('Auth config not found!')
-        }
-    }
-
-    public getPlayerData(username: string): IPlayerAuthData {
-
-        if (username !== 'TheUnknown') {
-            return null
-        }
-
-        return {
-            username: username,
-            password: '',
-            email: 'contato@learxd.dev',
-            emailConfirmed: true
         }
     }
 

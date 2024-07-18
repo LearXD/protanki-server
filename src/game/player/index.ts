@@ -1,10 +1,8 @@
 import net from "net";
 
 import { Logger } from "../../utils/logger";
-import { Packet } from "../../network/packets/packet";
 import { SimplePacket } from "../../network/packets/simple-packet";
 import { Server } from "../../server";
-import { ByteArray } from "../../utils/network/byte-array";
 import { SetLayoutStatePacket } from "../../network/packets/set-layout-state";
 import { LayoutState, LayoutStateType } from "../../utils/game/layout-state";
 import { SetSubLayoutStatePacket } from "../../network/packets/set-sub-layout-state";
@@ -21,25 +19,25 @@ import { PlayerDataManager } from "./managers/data";
 import { SendLayoutStatePacket } from "../../network/packets/send-layout-state";
 import { PlayerShopManager } from "./managers/shop";
 import { PlayerDailyQuestsManager } from "./managers/daily-quests";
-import { ChatModeratorLevel } from "../../utils/game/chat-moderator-level";
+import { Client } from "../client";
+import { PlayerData } from "./utils/data";
+import { PlayerPacketHandler } from "./handlers/packet";
 
-const IGNORE_PACKETS = [
-    1484572481, // Pong
-    -555602629
-]
-
-export class Player extends Tank {
+export class Player extends Client {
 
     private updateInterval: NodeJS.Timeout;
 
     private viewingBattle: Battle;
-
     public layoutState: LayoutStateType;
 
-    private bufferPool: ByteArray = new ByteArray();
+    private battle: Battle;
+    public tank: Tank;
+
+    private data: PlayerData;
+
+    private packetHandler: PlayerPacketHandler;
 
     private dataManager: PlayerDataManager;
-
     private friendsManager: PlayerFriendsManager;
     private garageManager: PlayerGarageManager;
     private authManager: PlayerAuthManager;
@@ -51,6 +49,10 @@ export class Player extends Tank {
 
     public constructor(socket: net.Socket, server: Server) {
         super(socket, server);
+
+        this.tank = new Tank(this);
+
+        this.packetHandler = new PlayerPacketHandler(this);
 
         this.dataManager = new PlayerDataManager(this);
 
@@ -65,17 +67,6 @@ export class Player extends Tank {
 
         this.init();
     }
-
-    public getDataManager(): PlayerDataManager { return this.dataManager }
-
-    public getFriendsManager(): PlayerFriendsManager { return this.friendsManager }
-    public getGarageManager(): PlayerGarageManager { return this.garageManager }
-    public getAuthManager(): PlayerAuthManager { return this.authManager }
-    public getChatManager(): PlayerChatManager { return this.chatManager }
-    public getBattlesManager(): PlayerBattlesManager { return this.battlesManager }
-    public getConfigsManager(): PlayerConfigsManager { return this.configsManager }
-    public getShopManager(): PlayerShopManager { return this.shopManager }
-    public getDailyQuestsManager(): PlayerDailyQuestsManager { return this.dailyQuestsManager }
 
     public async init() {
         Logger.debug('Initializing client');
@@ -96,12 +87,64 @@ export class Player extends Tank {
         clearInterval(this.updateInterval);
     }
 
-    public update() {
-        super.update();
+    public getUsername() { return this.getData().getUsername() }
+
+    public getData() { return this.data }
+
+    public isInBattle() { return !!this.battle }
+
+    public getBattle() { return this.battle }
+
+    public setBattle(battle: Battle) {
+        this.battle = battle
     }
 
     public getViewingBattle(): Battle { return this.viewingBattle }
     public setViewingBattle(battle: Battle) { this.viewingBattle = battle }
+
+    public getPacketHandler(): PlayerPacketHandler {
+        return this.packetHandler
+    }
+
+    public getDataManager(): PlayerDataManager {
+        return this.dataManager
+    }
+
+    public getFriendsManager(): PlayerFriendsManager {
+        return this.friendsManager
+    }
+
+    public getGarageManager(): PlayerGarageManager {
+        return this.garageManager
+    }
+
+    public getAuthManager(): PlayerAuthManager {
+        return this.authManager
+    }
+
+    public getChatManager(): PlayerChatManager {
+        return this.chatManager
+    }
+
+    public getBattlesManager(): PlayerBattlesManager {
+        return this.battlesManager
+    }
+
+    public getConfigsManager(): PlayerConfigsManager {
+        return this.configsManager
+    }
+
+    public getShopManager(): PlayerShopManager {
+        return this.shopManager
+    }
+
+    public getDailyQuestsManager(): PlayerDailyQuestsManager {
+        return this.dailyQuestsManager
+    }
+
+    public setData(data: PlayerData) {
+        this.data = data;
+    }
 
     public getLayoutState() { return this.layoutState }
 
@@ -192,69 +235,33 @@ export class Player extends Tank {
 
     public handlePacket(packet: SimplePacket): boolean {
 
-        if (super.handlePacket(packet)) return
-        if (this.friendsManager.handlePacket(packet)) return
-        if (this.garageManager.handlePacket(packet)) return
-        if (this.authManager.handlePacket(packet)) return
-        if (this.chatManager.handlePacket(packet)) return
-        if (this.battlesManager.handlePacket(packet)) return
-        if (this.configsManager.handlePacket(packet)) return
-        if (this.shopManager.handlePacket(packet)) return
-        if (this.dailyQuestsManager.handlePacket(packet)) return
+        super.handlePacket(packet)
+        this.authManager.handlePacket(packet)
 
-        if (packet instanceof SendLayoutStatePacket) {
-            this.handleClientSetLayoutState(packet.state as LayoutStateType)
-            return
-        }
-
-    }
-
-    public handleData = (data: Buffer) => {
-        this.bufferPool.write(data)
-
-        if (this.bufferPool.length() < Packet.HEADER_SIZE) {
+        if (!this.getAuthManager().isAuthenticated()) {
             return;
         }
 
-        while (true) {
+        this.friendsManager.handlePacket(packet)
+        this.garageManager.handlePacket(packet)
+        this.chatManager.handlePacket(packet)
+        this.battlesManager.handlePacket(packet)
+        this.configsManager.handlePacket(packet)
+        this.shopManager.handlePacket(packet)
+        this.dailyQuestsManager.handlePacket(packet)
 
-            if (this.bufferPool.length() === 0) {
-                break;
-            }
-
-            const length = this.bufferPool.readInt();
-            const pid = this.bufferPool.readInt();
-
-            const realLength = length - Packet.HEADER_SIZE;
-
-            if (this.bufferPool.length() < realLength) {
-                this.bufferPool = new ByteArray()
-                    .writeInt(length)
-                    .writeInt(pid)
-                    .write(this.bufferPool.buffer);
-                break;
-            }
-
-            const bytes = new ByteArray(this.bufferPool.readBytes(realLength));
-            const decoded = this.getCryptoHandler().decrypt(bytes);
-
-            try {
-                const packetInstance = this.getServer().getNetwork().findPacket<typeof SimplePacket>(pid);
-
-                if (!IGNORE_PACKETS.includes(pid)) {
-                    Logger.log(`Packet ${packetInstance.name} (${pid}) received - ${realLength} bytes`)
-                }
-
-                const packet = new packetInstance(decoded);
-                packet.decode();
-                this.handlePacket(packet);
-            } catch (error) {
-                Logger.alert(`Packet Unknown (${pid}) received - ${realLength} bytes`)
-                if (error instanceof Error) {
-                    Logger.error(error.message)
-                    console.error(error.stack)
-                }
-            }
+        if (this.tank) {
+            this.tank.handlePacket(packet)
         }
+
+        if (packet instanceof SendLayoutStatePacket) {
+            this.handleClientSetLayoutState(packet.state as LayoutStateType)
+        }
+
     }
+
+    public update() {
+        super.update();
+    }
+
 }

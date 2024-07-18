@@ -3,16 +3,14 @@ import { ResourceType } from "../../../../managers/resources";
 import { SetIncorrectPasswordPopupPacket } from "../../../../network/packets/set-incorrect-password-popup";
 import { Packet } from "../../../../network/packets/packet";
 import { SendLoginPacket } from "../../../../network/packets/send-login";
-import { SetAchievementsPacket } from "../../../../network/packets/set-achievements";
-import { SetBattleInviteCCPacket } from "../../../../network/packets/set-battle-invite-cc";
 import { SetEmailInfoPacket } from "../../../../network/packets/set-email-info";
 import { LayoutState } from "../../../../utils/game/layout-state";
-import { IPlayerAuthData } from "./types";
 import { SendRegisterCheckUsernamePacket } from "../../../../network/packets/send-register-check-username";
 import { SetRegisterUsernameAvailablePacket } from "../../../../network/packets/set-register-username-available";
 import { SetRegisterUsernameAlreadyUsedPacket } from "../../../../network/packets/set-register-username-already-used";
 import { SetAdvisedUsernamesPacket } from "../../../../network/packets/set-advised-usernames";
-import { Achievement } from "../../../../utils/game/achievement";
+import { IPlayerAuthData } from "../../utils/data/types";
+import { PlayerData } from "../../utils/data";
 
 export class PlayerAuthManager {
 
@@ -39,8 +37,8 @@ export class PlayerAuthManager {
     private async handleAuthenticated() {
         this.authenticated = true;
 
-        this.player.setUsername(this.data.username);
-        this.player.getDataManager().loadData();
+        this.player.getDataManager().loadData(this.data.username);
+        this.player.getServer().getPlayersManager().addPlayer(this.player);
 
         this.player.sendGameLoaded();
         this.player.setLayoutState(LayoutState.BATTLE_SELECT);
@@ -66,8 +64,7 @@ export class PlayerAuthManager {
     }
 
     public handleLoginPacket(packet: SendLoginPacket) {
-        const data = this.player.getServer().getAuthManager()
-            .getPlayerData(packet.username);
+        const data = PlayerData.loadAuthData(packet.username);
 
         if (!data) {
             this.sendIncorrectPasswordPopup();

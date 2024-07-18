@@ -15,17 +15,14 @@ import { SendRequestLoadScreenPacket } from "../../network/packets/send-request-
 import { PongPacket } from "../../network/packets/pong";
 import { SendRequestCaptchaPacket } from "../../network/packets/send-request-captcha";
 import { SendRequestUserDataPacket } from "../../network/packets/send-request-user-data";
+import { IGNORE_PACKETS } from "../player/handlers/packet";
 
-const IGNORE_PACKETS = [
-    1484572481, // Pong
-    -555602629
-]
+
 
 export abstract class Client {
 
     private cryptoHandler: XorDecoder = new XorDecoder();
 
-    private username: string;
     private language: string;
 
     private lastPing: number = 0;
@@ -60,9 +57,6 @@ export abstract class Client {
 
     public getServer(): Server { return this.server }
     public getSocket(): net.Socket { return this.socket }
-
-    public getUsername() { return this.username }
-    public setUsername(username: string) { this.username = username }
 
     public getLanguage() { return this.language }
     public setLanguage(language: string) { this.language = language }
@@ -126,8 +120,8 @@ export abstract class Client {
         }
 
         if (packet instanceof SendRequestUserDataPacket) {
-            this.getServer().getUserDataManager()
-                .handleRequestUserData(this, packet.userId);
+            this.getServer().getUserDataManager().handleRequestUserData(this, packet.userId);
+            return true;
         }
 
 

@@ -1,9 +1,5 @@
-import net from "net";
-
 import { SetTankSpeedPacket } from "../../network/packets/set-tank-speed";
 import { Vector3d } from "../../utils/game/vector-3d";
-import { Client } from "../client";
-import { Server } from "../../server";
 import { SetMoveCameraPacket } from "../../network/packets/set-move-camera";
 import { ByteArray } from "../../utils/network/byte-array";
 import { SetTankHealthPacket } from "../../network/packets/set-tank-health";
@@ -20,8 +16,9 @@ import { SendAutoDestroyPacket } from "../../network/packets/send-auto-destroy";
 import { SetDestroyTankPacket } from "../../network/packets/set-destroy-tank";
 import { SendUseDrugPacket } from "../../network/packets/send-use-drug";
 import { SetUseDrugPacket } from "../../network/packets/set-use-drug";
+import { Player } from "../player";
 
-export abstract class Tank extends Client {
+export class Tank {
 
     private incarnation: number = 0;
 
@@ -30,11 +27,9 @@ export abstract class Tank extends Client {
 
     private visible: boolean = false;
 
-    private battle: Battle;
-
-    public constructor(socket: net.Socket, server: Server) {
-        super(socket, server)
-    }
+    public constructor(
+        private readonly player: Player
+    ) { }
 
     public getPosition(): Vector3d { return this.position }
     public setPosition(position: Vector3d) { this.position = position }
@@ -46,8 +41,8 @@ export abstract class Tank extends Client {
 
         if (visible) {
             const setTankVisiblePacket = new SetTankVisiblePacket(new ByteArray());
-            setTankVisiblePacket.tankId = this.getUsername();
-            this.sendPacket(setTankVisiblePacket);
+            setTankVisiblePacket.tankId = this.player.getUsername();
+            this.player.sendPacket(setTankVisiblePacket);
         }
     }
 
@@ -56,15 +51,11 @@ export abstract class Tank extends Client {
         this.setCameraPosition(new Vector3d(-4669.8310546875, -1442.4090576171875, 200), new Vector3d(0, 0, -1.5709999799728394))
     }
 
-    public isInBattle() { return !!this.battle }
-    public getBattle() { return this.battle }
-    public setBattle(battle: Battle) { this.battle = battle }
-
     public setCameraPosition(position: Vector3d, orientation: Vector3d) {
         const setMoveCameraPacket = new SetMoveCameraPacket(new ByteArray());
         setMoveCameraPacket.position = position
         setMoveCameraPacket.orientation = orientation
-        this.sendPacket(setMoveCameraPacket);
+        this.player.sendPacket(setMoveCameraPacket);
     }
 
     public getHealth() { return this.health }
@@ -72,16 +63,16 @@ export abstract class Tank extends Client {
         this.health = health;
 
         const setTankHealthPacket = new SetTankHealthPacket(new ByteArray());
-        setTankHealthPacket.tankId = this.getUsername();
+        setTankHealthPacket.tankId = this.player.getUsername();
         setTankHealthPacket.health = health;
-        this.sendPacket(setTankHealthPacket);
+        this.player.sendPacket(setTankHealthPacket);
     }
 
     public sendLatency(serverTime: number) {
         const setLatencyPacket = new SetLatencyPacket(new ByteArray());
         setLatencyPacket.serverSessionTime = serverTime;
-        setLatencyPacket.clientPing = this.getPing();
-        this.sendPacket(setLatencyPacket);
+        setLatencyPacket.clientPing = this.player.getPing();
+        this.player.sendPacket(setLatencyPacket);
     }
 
     public respawn() {
@@ -90,21 +81,21 @@ export abstract class Tank extends Client {
         this.incarnation++;
 
         const setSpawnTankPacket = new SetSpawnTankPacket(new ByteArray());
-        setSpawnTankPacket.tankId = this.getUsername();
+        setSpawnTankPacket.tankId = this.player.getUsername();
         setSpawnTankPacket.team = Team.NONE;
         setSpawnTankPacket.position = new Vector3d(-4669.8310546875, -1442.4090576171875, 200);
         setSpawnTankPacket.orientation = new Vector3d(0, 0, -1.5709999799728394);
         setSpawnTankPacket.health = 10000;
         setSpawnTankPacket.incarnationId = this.incarnation;
 
-        this.sendPacket(setSpawnTankPacket);
+        this.player.sendPacket(setSpawnTankPacket);
     }
 
     public destroy() {
         const setDestroyTankPacket = new SetDestroyTankPacket()
-        setDestroyTankPacket.tankId = this.getUsername()
+        setDestroyTankPacket.tankId = this.player.getUsername()
         setDestroyTankPacket.respawnDelay = 3000
-        this.sendPacket(setDestroyTankPacket)
+        this.player.sendPacket(setDestroyTankPacket)
     }
 
     public setTankSpeed(
@@ -114,18 +105,16 @@ export abstract class Tank extends Client {
         acceleration: number,
     ) {
         const setTankSpeedPacket = new SetTankSpeedPacket(new ByteArray());
-        setTankSpeedPacket.tankId = this.getUsername();
+        setTankSpeedPacket.tankId = this.player.getUsername();
         setTankSpeedPacket.maxSpeed = maxSpeed;
         setTankSpeedPacket.maxTurnSpeed = maxTurnSpeed;
         setTankSpeedPacket.maxTurretRotationSpeed = maxTurretRotationSpeed;
         setTankSpeedPacket.acceleration = acceleration;
         setTankSpeedPacket.specificationId = 1;
-        this.sendPacket(setTankSpeedPacket);
+        this.player.sendPacket(setTankSpeedPacket);
     }
 
     public handlePacket(packet: SimplePacket): boolean {
-
-        if (super.handlePacket(packet)) return true;
 
         if (packet instanceof SendResumePacket) {
             this.spawn();
@@ -155,7 +144,7 @@ export abstract class Tank extends Client {
                 setUseDrugPacket.itemId = packet.itemId
                 setUseDrugPacket.time = 10
                 setUseDrugPacket.decrease = true
-                this.sendPacket(setUseDrugPacket)
+                this.player.sendPacket(setUseDrugPacket)
             }
         }
 
