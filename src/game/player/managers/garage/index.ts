@@ -14,63 +14,26 @@ import { SetUserGarageItemsPacket } from "../../../../network/packets/set-user-g
 import { SimplePacket } from "../../../../network/packets/simple-packet";
 import { LayoutState } from "../../../../utils/game/layout-state";
 import { Logger } from "../../../../utils/logger";
-import { IGarageHull, IGarageTurret, IPlayerGarageData } from "./types";
+import { IGarageHull, IGarageTurret, IPlayerGarageData } from "../../utils/data/types";
 
 export class PlayerGarageManager {
-
-    private items: IPlayerGarageData
 
     constructor(
         private readonly player: Player
     ) {
-
-        this.items = {
-            paintings: [
-                { name: 'green', equipped: false },
-                { name: 'africa', equipped: true },
-            ],
-            turrets: [
-                { name: 'flamethrower', level: -1, equipped: false },
-                { name: 'freeze', level: -1, equipped: false },
-                { name: 'isida', level: -1, equipped: false },
-                { name: 'machinegun', level: -1, equipped: false },
-                { name: 'railgun', level: 3, equipped: true },
-                { name: 'railgun_xt', level: -1, equipped: false },
-                { name: 'ricochet', level: -1, equipped: false },
-                { name: 'shaft', level: -1, equipped: false },
-                { name: 'shotgun', level: -1, equipped: false },
-                { name: 'smoky', level: -1, equipped: false },
-                { name: 'thunder', level: -1, equipped: false },
-                { name: 'twins', level: -1, equipped: false },
-            ],
-            hulls: [
-                { name: 'dictator', level: -1, equipped: false },
-                { name: 'hornet', level: 3, equipped: true },
-                { name: 'hornet_xt', level: -1, equipped: false },
-                { name: 'hunter', level: -1, equipped: false },
-                { name: 'mammoth', level: -1, equipped: false },
-                { name: 'titan', level: -1, equipped: false },
-                { name: 'viking', level: -1, equipped: false },
-                { name: 'wasp', level: -1, equipped: false },
-            ],
-            supplies: {
-                health: 100,
-                armor: 100,
-                double_damage: 100,
-                n2o: 100,
-                mine: 100
-            }
-        }
     }
 
-    public getTurrets() { return this.items.turrets }
-    public getHulls() { return this.items.hulls }
-    public getPaintings() { return this.items.paintings }
-    public getSupplies() { return this.items.supplies }
+    public getGarageItems() {
+        return this.player.getData().getGarageData();
+    }
+
+    public getTurrets() { return this.getGarageItems().turrets }
+    public getHulls() { return this.getGarageItems().hulls }
+    public getPaintings() { return this.getGarageItems().paintings }
+    public getSupplies() { return this.getGarageItems().supplies }
 
     public getEquippedTurret() {
-        const turret = this.items.turrets
-            .find(turret => turret.equipped);
+        const turret = this.getTurrets().find(turret => turret.equipped);
 
         if (!turret) {
             throw new Error('No turret equipped');
@@ -79,8 +42,7 @@ export class PlayerGarageManager {
     }
 
     public getEquippedHull() {
-        const hull = this.items.hulls
-            .find(hull => hull.equipped);
+        const hull = this.getHulls().find(hull => hull.equipped);
 
         if (!hull) {
             throw new Error('No hull equipped');
@@ -89,8 +51,7 @@ export class PlayerGarageManager {
     }
 
     public getEquippedPainting() {
-        const painting = this.items.paintings
-            .find(painting => painting.equipped);
+        const painting = this.getPaintings().find(painting => painting.equipped);
 
         if (!painting) {
             throw new Error('No painting equipped');
@@ -112,14 +73,14 @@ export class PlayerGarageManager {
 
         switch (category) {
             case GarageItemCategory.TURRET:
-                this.items.turrets.forEach(turret => {
+                this.getTurrets().forEach(turret => {
                     if (turret.name == item.id) {
                         turret.level = level
                     }
                 })
                 break;
             case GarageItemCategory.HULL:
-                this.items.hulls.forEach(hull => {
+                this.getHulls().forEach(hull => {
                     if (hull.name == item.id) {
                         hull.level = level
                     }
@@ -139,7 +100,7 @@ export class PlayerGarageManager {
                     return this.upgradeItem(itemId, inventory.level + 1);
                 }
 
-                this.items.turrets.forEach(turret => {
+                this.getTurrets().forEach(turret => {
                     if (turret.name == item.id) {
                         turret.level = item.modificationID;
                     }
@@ -153,7 +114,7 @@ export class PlayerGarageManager {
                     return this.upgradeItem(itemId, inventory.level + 1);
                 }
 
-                this.items.hulls.forEach(hull => {
+                this.getHulls().forEach(hull => {
                     if (hull.name == item.id) {
                         hull.level = item.modificationID;
                     }
@@ -161,11 +122,11 @@ export class PlayerGarageManager {
                 break;
             }
             case GarageItemCategory.SUPPLY: {
-                this.items.supplies[item.id] += quantity
+                this.getSupplies()[item.id] += quantity
                 break;
             }
             case GarageItemCategory.PAINT:
-                this.items.paintings.push({ name: item.id, equipped: false });
+                this.getPaintings().push({ name: item.id, equipped: false });
                 break;
 
         }
@@ -179,17 +140,17 @@ export class PlayerGarageManager {
 
             switch (item.category) {
                 case GarageItemCategory.TURRET:
-                    this.items.turrets.forEach(
+                    this.getTurrets().forEach(
                         turret => { turret.equipped = turret.name == item.id && turret.level == item.modificationID }
                     );
                     break;
                 case GarageItemCategory.HULL:
-                    this.items.hulls.forEach(
+                    this.getHulls().forEach(
                         hull => { hull.equipped = hull.name == item.id && hull.level == item.modificationID }
                     );
                     break;
                 case GarageItemCategory.PAINT:
-                    this.items.paintings.forEach(
+                    this.getPaintings().forEach(
                         painting => { painting.equipped = painting.name == item.id }
                     );
                     break;
@@ -206,13 +167,13 @@ export class PlayerGarageManager {
 
         switch (item.category) {
             case GarageItemCategory.TURRET:
-                return this.items.turrets
+                return this.getTurrets()
                     .find(turret => turret.name == item.id && turret.level == item.modificationID) as R;
             case GarageItemCategory.HULL:
-                return this.items.hulls
+                return this.getHulls()
                     .find(hull => hull.name == item.id && hull.level == item.modificationID) as R;
             case GarageItemCategory.PAINT:
-                return this.items.paintings
+                return this.getPaintings()
                     .find(painting => painting.name == item.id) as R;
         }
 
@@ -227,11 +188,11 @@ export class PlayerGarageManager {
     public sendSupplies(client: Player) {
         const setSuppliesPacket = new SetSuppliesPacket();
         setSuppliesPacket.supplies = [
-            { count: this.items.supplies.health, id: 'health', itemEffectTime: 0, itemRestSec: 0, slotId: 1 },
-            { count: this.items.supplies.armor, id: 'armor', itemEffectTime: 0, itemRestSec: 0, slotId: 2 },
-            { count: this.items.supplies.double_damage, id: 'double_damage', itemEffectTime: 0, itemRestSec: 0, slotId: 3 },
-            { count: this.items.supplies.n2o, id: 'n2o', itemEffectTime: 0, itemRestSec: 0, slotId: 4 },
-            { count: this.items.supplies.mine, id: 'mine', itemEffectTime: 0, itemRestSec: 0, slotId: 5 }
+            { count: this.getSupplies().health, id: 'health', itemEffectTime: 0, itemRestSec: 0, slotId: 1 },
+            { count: this.getSupplies().armor, id: 'armor', itemEffectTime: 0, itemRestSec: 0, slotId: 2 },
+            { count: this.getSupplies().double_damage, id: 'double_damage', itemEffectTime: 0, itemRestSec: 0, slotId: 3 },
+            { count: this.getSupplies().n2o, id: 'n2o', itemEffectTime: 0, itemRestSec: 0, slotId: 4 },
+            { count: this.getSupplies().mine, id: 'mine', itemEffectTime: 0, itemRestSec: 0, slotId: 5 }
         ]
 
         client.sendPacket(setSuppliesPacket);
@@ -385,6 +346,12 @@ export class PlayerGarageManager {
                 if (this.player.getLayoutState() === LayoutState.GARAGE) {
                     this.player.setLayoutState(LayoutState.BATTLE);
                     this.player.setSubLayoutState(LayoutState.BATTLE, LayoutState.BATTLE);
+                    return true;
+                }
+
+                if (this.player.getLayoutState() === LayoutState.BATTLE_SELECT) {
+                    this.player.getBattlesManager().sendRemoveBattlesScreen();
+                    this.sendOpenGarage();
                     return true;
                 }
                 return true;

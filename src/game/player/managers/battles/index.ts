@@ -138,6 +138,13 @@ export class PlayerBattlesManager {
                     this.player.setSubLayoutState(LayoutState.BATTLE, LayoutState.BATTLE);
                     return true;
                 }
+
+                if (this.player.getLayoutState() === LayoutState.GARAGE) {
+                    this.player.getGarageManager().removeGarageScreen();
+                    this.handleOpenBattlesList()
+                    return true;
+                }
+
                 return true;
             }
 

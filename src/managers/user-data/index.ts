@@ -23,7 +23,7 @@ export class UserDataManager {
             return player.getData();
         }
 
-        return PlayerData.loadPlayerData(username);
+        return PlayerData.findPlayerData(username);
     }
 
 

@@ -37,7 +37,7 @@ export class PlayerAuthManager {
     private async handleAuthenticated() {
         this.authenticated = true;
 
-        this.player.getDataManager().loadData(this.data.username);
+        this.player.getDataManager().load(this.data.username);
         this.player.getServer().getPlayersManager().addPlayer(this.player);
 
         this.player.sendGameLoaded();
@@ -64,7 +64,7 @@ export class PlayerAuthManager {
     }
 
     public handleLoginPacket(packet: SendLoginPacket) {
-        const data = PlayerData.loadAuthData(packet.username);
+        const data = PlayerData.findPlayerAuthData(packet.username);
 
         if (!data) {
             this.sendIncorrectPasswordPopup();

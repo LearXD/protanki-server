@@ -13,7 +13,7 @@ export class PlayerDataManager {
         private readonly player: Player
     ) { }
 
-    public loadData(username: string) {
+    public load(username: string) {
 
         Logger.info(`Loading data for player username`);
 
@@ -21,7 +21,7 @@ export class PlayerDataManager {
             throw new Error('Trying to load data for an unauthenticated player');
         }
 
-        this.player.setData(PlayerData.loadPlayerData(username));
+        this.player.setData(PlayerData.findPlayerData(username, true));
     }
 
     public sendCrystals() {
