@@ -3,11 +3,16 @@ import { ResourceType } from "../../../../managers/resources";
 import { SetIncorrectPasswordPopupPacket } from "../../../../network/packets/set-incorrect-password-popup";
 import { Packet } from "../../../../network/packets/packet";
 import { SendLoginPacket } from "../../../../network/packets/send-login";
-import { SetAchievementCCPacket } from "../../../../network/packets/set-achievement-cc";
+import { SetAchievementsPacket } from "../../../../network/packets/set-achievements";
 import { SetBattleInviteCCPacket } from "../../../../network/packets/set-battle-invite-cc";
 import { SetEmailInfoPacket } from "../../../../network/packets/set-email-info";
 import { LayoutState } from "../../../../utils/game/layout-state";
 import { IPlayerAuthData } from "./types";
+import { SendRegisterCheckUsernamePacket } from "../../../../network/packets/send-register-check-username";
+import { SetRegisterUsernameAvailablePacket } from "../../../../network/packets/set-register-username-available";
+import { SetRegisterUsernameAlreadyUsedPacket } from "../../../../network/packets/set-register-username-already-used";
+import { SetAdvisedUsernamesPacket } from "../../../../network/packets/set-advised-usernames";
+import { Achievement } from "../../../../utils/game/achievement";
 
 export class PlayerAuthManager {
 
@@ -42,26 +47,22 @@ export class PlayerAuthManager {
 
         this.player.getDataManager().sendPremiumData();
         this.player.getDataManager().sendUserProperty();
-        this.player.getServer().getLocaleManager().sendLocaleConfig(this.player)
 
         this.sendUserEmail();
 
-        // TODO: see this packet latter
-        const setBattleInviteCCPacket = new SetBattleInviteCCPacket();
-        setBattleInviteCCPacket.resourceId = 106777
-        this.player.sendPacket(setBattleInviteCCPacket);
+        this.player.getServer().getLocaleManager().sendLocaleConfig(this.player)
 
-        this.player.getServer().getFriendsManager().sendFriendsData(this.player);
+        this.player.getBattlesManager().sendBattleInviteSound();
+
+        this.player.getFriendsManager().sendFriendsData();
+        this.player.getFriendsManager().sendInviteFriendsProperties()
 
         this.player.getServer().getResourcesManager().sendResources(this.player, ResourceType.LOBBY);
         this.player.setSubLayoutState(LayoutState.BATTLE_SELECT, LayoutState.BATTLE_SELECT)
 
-        const setAchievementCCPacket = new SetAchievementCCPacket();
-        setAchievementCCPacket.achievements = ['FIRST_RANK_UP'];
-        this.player.sendPacket(setAchievementCCPacket);
+        this.player.getDataManager().sendAchievements();
 
-        this.player.getServer().getFriendsManager().sendInviteFriendsProperties(this.player)
-        this.player.getServer().getBattlesManager().sendBattleSelectScreen(this.player);
+        this.player.getBattlesManager().sendBattleSelectScreen();
     }
 
     public handleLoginPacket(packet: SendLoginPacket) {
@@ -84,6 +85,21 @@ export class PlayerAuthManager {
         if (packet instanceof SendLoginPacket) {
             this.handleLoginPacket(packet)
             return true
+        }
+
+        if (packet instanceof SendRegisterCheckUsernamePacket) {
+            if (packet.username === 'LearXD') {
+                this.player.sendPacket(new SetRegisterUsernameAvailablePacket())
+                return true
+            }
+
+            this.player.sendPacket(new SetRegisterUsernameAlreadyUsedPacket())
+
+            const setAdvisedUsernamesPacket = new SetAdvisedUsernamesPacket();
+            setAdvisedUsernamesPacket.usernames = ['LearXD', 'LearXD1', 'LearXD2', 'LearXD3', 'LearXD4']
+            this.player.sendPacket(setAdvisedUsernamesPacket)
+
+            return true;
         }
 
         return false;

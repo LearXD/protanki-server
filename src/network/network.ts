@@ -15,9 +15,9 @@ import { SetInviteEnabledPacket } from "./packets/set-invite-enabled";
 import { ResolveFullLoadedPacket } from "./packets/resolve-full-loaded";
 import { SendRequestCaptchaPacket } from "./packets/send-request-captcha";
 import { SetCaptchaDataPacket } from "./packets/set-captcha-data";
-import { CheckUsernamePacket } from "./packets/check-username";
+import { SendRegisterCheckUsernamePacket } from "./packets/send-register-check-username";
 import { SetAdvisedUsernamesPacket } from "./packets/set-advised-usernames";
-import { ResultCheckUsernamePacket } from "./packets/result-check-username";
+import { SetRegisterUsernameAvailablePacket } from "./packets/set-register-username-available";
 import { SetRememberMePacket } from "./packets/set-remember-me";
 import { SetCaptchaResponsePacket } from "./packets/set-captcha-response";
 import { SendRegisterPacket } from "./packets/send-register";
@@ -32,7 +32,7 @@ import { SetEmailInfoPacket } from "./packets/set-email-info";
 import { SetFriendsDataPacket } from "./packets/set-friends-data";
 import { SetSubLayoutStatePacket } from "./packets/set-sub-layout-state";
 import { SetChatInitParamsPacket } from "./packets/set-chat-init-params";
-import { SetAchievementCCPacket } from "./packets/set-achievement-cc";
+import { SetAchievementsPacket } from "./packets/set-achievements";
 import { SetBattleInviteCCPacket } from "./packets/set-battle-invite-cc";
 import { SetCountryLocaleNamePacket } from "./packets/set-country-locale-name";
 import { SendLoginHashPacket } from "./packets/send-login-hash";
@@ -179,6 +179,7 @@ import { SetRemoveViewingBattlePacket } from "./packets/set-remove-viewing-battl
 import { SetCaptchaLocation2Packet } from "./packets/set-captcha-location-2";
 
 // GENERATE IMPORT HERE
+import { SetRegisterUsernameAlreadyUsedPacket } from "./packets/set-register-username-already-used";
 import { SendSpectateBattlePacket } from "./packets/send-spectate-battle";
 import { SendBuyChangeDailyQuestPacket } from "./packets/send-buy-change-daily-quest";
 import { SetShopNavigateToUrlPacket } from "./packets/set-shop-navigate-to-url";
@@ -318,7 +319,7 @@ import { SendDropFlagPacket } from "./packets/send-drop-flag";
 import { SetBattleUsersStatPacket } from "./packets/set-battle-users-stat";
 import { SetBattleTimePacket } from "./packets/set-battle-time";
 import { SomeJsonRankUpPacket } from "./packets/some-json-rank-up";
-import { SetSomePacketOnJoinBattle5Packet } from "./packets/set-some-packet-on-join-battle-5";
+import { SetShowBattleNotificationsPacket } from "./packets/set-show-battle-notifications";
 import { SetSomePacketOnJoinBattle4Packet } from "./packets/set-some-packet-on-join-battle-4";
 import { SetBattleChatEnabledPacket } from "./packets/set-battle-chat-enabled";
 import { SetRemoveChatPacket } from "./packets/set-remove-chat";
@@ -360,8 +361,8 @@ export class Network {
         this.registerPacket(Protocol.SET_CAPTCHA_DATA, SetCaptchaDataPacket)
         this.registerPacket(Protocol.SET_CAPTCHA_RESPONSE, SetCaptchaResponsePacket)
 
-        this.registerPacket(Protocol.CHECK_USERNAME, CheckUsernamePacket)
-        this.registerPacket(Protocol.RESULT_CHECK_USERNAME, ResultCheckUsernamePacket)
+        this.registerPacket(Protocol.SEND_REGISTER_CHECK_USERNAME, SendRegisterCheckUsernamePacket)
+        this.registerPacket(Protocol.SET_REGISTER_USERNAME_AVAILABLE, SetRegisterUsernameAvailablePacket)
         this.registerPacket(Protocol.SET_ADVISED_USERNAMES, SetAdvisedUsernamesPacket)
 
         this.registerPacket(Protocol.SET_REMEMBER_ME, SetRememberMePacket)
@@ -384,7 +385,7 @@ export class Network {
         this.registerPacket(Protocol.SET_USER_PROPERTY, SetUserPropertyPacket)
         this.registerPacket(Protocol.SET_FRIENDS_DATA, SetFriendsDataPacket)
         this.registerPacket(Protocol.SET_CHAT_INIT_PARAMS, SetChatInitParamsPacket)
-        this.registerPacket(Protocol.SET_ACHIEVEMENT_CC, SetAchievementCCPacket)
+        this.registerPacket(Protocol.SET_ACHIEVEMENTS, SetAchievementsPacket)
 
         this.registerPacket(Protocol.SET_BATTLE_INVITE_CC, SetBattleInviteCCPacket)
         this.registerPacket(Protocol.SET_USER_BATTLE, SetUserBattlePacket)
@@ -675,14 +676,15 @@ export class Network {
         this.registerPacket(Protocol.SET_BATTLE_USERS_STAT, SetBattleUsersStatPacket);
         this.registerPacket(Protocol.SET_BATTLE_TIME, SetBattleTimePacket);
         this.registerPacket(Protocol.SOME_JSON_RANK_UP, SomeJsonRankUpPacket);
-        this.registerPacket(Protocol.SET_SOME_PACKET_ON_JOIN_BATTLE_5, SetSomePacketOnJoinBattle5Packet);
+        this.registerPacket(Protocol.SET_SHOW_BATTLE_NOTIFICATIONS, SetShowBattleNotificationsPacket);
         this.registerPacket(Protocol.SET_SOME_PACKET_ON_JOIN_BATTLE_4, SetSomePacketOnJoinBattle4Packet);
         this.registerPacket(Protocol.SET_BATTLE_CHAT_ENABLED, SetBattleChatEnabledPacket);
         this.registerPacket(Protocol.SET_REMOVE_CHAT, SetRemoveChatPacket);
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);
 
         // GENERATE REGISTER HERE
-		this.registerPacket(Protocol.SEND_SPECTATE_BATTLE, SendSpectateBattlePacket);
+        this.registerPacket(Protocol.SET_REGISTER_USERNAME_ALREADY_USED, SetRegisterUsernameAlreadyUsedPacket);
+        this.registerPacket(Protocol.SEND_SPECTATE_BATTLE, SendSpectateBattlePacket);
         this.registerPacket(Protocol.SEND_BUY_CHANGE_DAILY_QUEST, SendBuyChangeDailyQuestPacket);
         this.registerPacket(Protocol.SET_SHOP_NAVIGATE_TO_URL, SetShopNavigateToUrlPacket);
         this.registerPacket(Protocol.SET_SHOP_CORRECT_PROMOTIONAL_CODE, SetShopCorrectPromotionalCodePacket);

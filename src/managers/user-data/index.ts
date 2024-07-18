@@ -15,9 +15,6 @@ export class UserDataManager {
         private readonly server: Server
     ) { }
 
-    public handleAuthenticated(client: Player) {
-
-    }
 
     public handleRequestUserData(client: Client, query: string) {
         // TODO: Get data from database

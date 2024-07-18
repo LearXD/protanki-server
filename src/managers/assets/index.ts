@@ -3,26 +3,11 @@ import path from 'path';
 
 import { IResource } from '../resources';
 import { Logger } from '../../utils/logger';
-
-export enum AssetType {
-    RESOURCES = 'resources',
-    DATA = 'data'
-}
-
-export enum ReadType {
-    JSON = 'utf-8',
-    BUFFER = 'binary'
-}
+import { AssetType, ReadType } from './types';
 
 export class AssetsManager {
 
-    constructor(
-        private readonly path: string
-    ) { }
-
-    private getPath(type: AssetType, _path?: string) {
-        return path.resolve(this.path, type, _path)
-    }
+    private readonly path = path.resolve('assets')
 
     public getData<R = any>(_path: string, readType: ReadType = ReadType.JSON) {
         return this.getAsset(AssetType.DATA, _path, readType) as R;
@@ -33,7 +18,7 @@ export class AssetsManager {
     }
 
     public getAsset(type: AssetType, _path: string, readType: ReadType = ReadType.JSON) {
-        const dir = this.getPath(type, _path)
+        const dir = path.resolve(this.path, type, _path)
 
         if (!fs.existsSync(dir)) {
             Logger.error(`Asset ${dir} not found!`)

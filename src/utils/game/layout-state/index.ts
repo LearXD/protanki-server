@@ -14,4 +14,5 @@ export class LayoutState {
     ]
 }
 
-export type LayoutStateType = 'BATTLE_SELECT' | 'GARAGE' | 'PAYMENT' | 'BATTLE' | 'RELOAD_SPACE'
+export type OnlyStringKeys<T> = T extends string ? T : never
+export type LayoutStateType = OnlyStringKeys<typeof LayoutState[keyof typeof LayoutState]>

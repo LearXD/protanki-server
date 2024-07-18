@@ -15,4 +15,4 @@ export class BattleMode {
 }
 
 export type OnlyStringKeys<T> = T extends string ? T : never
-export type BattleModes = OnlyStringKeys<typeof BattleMode[keyof typeof BattleMode]>
+export type BattleModeType = OnlyStringKeys<typeof BattleMode[keyof typeof BattleMode]>

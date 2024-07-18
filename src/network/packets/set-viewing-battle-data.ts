@@ -1,11 +1,11 @@
-import { BattleModes } from "../../utils/game/battle-mode";
-import { EquipmentConstraintsModes } from "../../utils/game/equipment-constraints-mode";
+import { BattleModeType } from "../../utils/game/battle-mode";
+import { EquipmentConstraintsModeType } from "../../utils/game/equipment-constraints-mode";
 import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
 export interface IViewingData {
-    battleMode: BattleModes,
+    battleMode: BattleModeType,
     itemId: string,
     scoreLimit: number,
     timeLimitInSec: number,
@@ -25,7 +25,7 @@ export interface IViewingData {
     userPaidNoSuppliesBattle: boolean,
     proBattleTimeLeftInSec: number,
     parkourMode: boolean,
-    equipmentConstraintsMode: EquipmentConstraintsModes,
+    equipmentConstraintsMode: EquipmentConstraintsModeType,
     reArmorEnabled: boolean,
     usersBlue: string[],
     usersRed: string[],

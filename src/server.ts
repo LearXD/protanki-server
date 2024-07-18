@@ -58,7 +58,7 @@ export class Server {
 
         this.clientsHandler = new ClientsHandler(this);
 
-        this.assetsManager = new AssetsManager(path.resolve('./assets'));
+        this.assetsManager = new AssetsManager();
         this.resourcesManager = new ResourcesManager(this);
 
         this.authManager = new AuthManager(this);
@@ -78,9 +78,28 @@ export class Server {
         this.shopManager = new ShopManager(this);
     }
 
-    public static getInstance() {
-        return this.instance;
-    }
+    public getNetwork() { return this.network }
+
+    public getClientHandler() { return this.clientsHandler }
+    public getAuthManager() { return this.authManager }
+
+    public getLocaleManager(): LocaleManager { return this.localeManager }
+    public getTipsManager(): TipsManager { return this.tipsManager }
+    public getAssetsManager(): AssetsManager { return this.assetsManager }
+    public getResourcesManager(): ResourcesManager { return this.resourcesManager }
+
+    public getUserDataManager(): UserDataManager { return this.userDataManager }
+    public getFriendsManager(): FriendsManager { return this.friendsManager }
+
+    public getChatManager(): ChatManager { return this.chatManager }
+    public getGarageManager(): GarageManager { return this.garageManager }
+    public getBattlesManager(): BattlesManager { return this.battleManager }
+    public getMapsManager(): MapsManager { return this.mapsManager }
+
+    public getCaptchaManager(): CaptchaManager { return this.captchaManager }
+    public getShopManager(): ShopManager { return this.shopManager }
+
+    public static getInstance() { return this.instance }
 
     public registerListeners = () => {
         this.server.on('connection', (socket) => this.clientsHandler.handleConnection(socket));
@@ -108,7 +127,7 @@ export class Server {
     }
 
     public sendMessage = (message: string, warning: boolean = false) => {
-        this.getChatManager().handleSendServerMessage(message, warning);
+        this.getChatManager().sendServerMessage(message, warning);
     }
 
     public sendPacket(client: Player, packet: SimplePacket) {
@@ -126,25 +145,7 @@ export class Server {
         this.whitelisted = whitelisted;
     }
 
-    public getNetwork() { return this.network }
-
     public getMemoryUsage() {
         return Math.round(process.memoryUsage().heapUsed / 1024 / 1024 * 100) / 100;
     }
-
-    public getClientHandler() { return this.clientsHandler }
-    public getAuthManager() { return this.authManager }
-
-    public getTipsManager(): TipsManager { return this.tipsManager }
-    public getAssetsManager(): AssetsManager { return this.assetsManager }
-    public getResourcesManager(): ResourcesManager { return this.resourcesManager }
-    public getUserDataManager(): UserDataManager { return this.userDataManager }
-    public getFriendsManager(): FriendsManager { return this.friendsManager }
-    public getChatManager(): ChatManager { return this.chatManager }
-    public getBattlesManager(): BattlesManager { return this.battleManager }
-    public getMapsManager(): MapsManager { return this.mapsManager }
-    public getGarageManager(): GarageManager { return this.garageManager }
-    public getLocaleManager(): LocaleManager { return this.localeManager }
-    public getCaptchaManager(): CaptchaManager { return this.captchaManager }
-    public getShopManager(): ShopManager { return this.shopManager }
 }

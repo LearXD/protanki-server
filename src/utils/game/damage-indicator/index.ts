@@ -11,3 +11,6 @@ export class DamageIndicator {
         DamageIndicator.HEAL
     ]
 }
+
+export type OnlyStringKeys<T> = T extends string ? T : never
+export type DamageIndicatorType = OnlyStringKeys<typeof DamageIndicator[keyof typeof DamageIndicator]>

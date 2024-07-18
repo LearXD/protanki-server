@@ -21,6 +21,7 @@ import { PlayerDataManager } from "./managers/data";
 import { SendLayoutStatePacket } from "../../network/packets/send-layout-state";
 import { PlayerShopManager } from "./managers/shop";
 import { PlayerDailyQuestsManager } from "./managers/daily-quests";
+import { ChatModeratorLevel } from "../../utils/game/chat-moderator-level";
 
 const IGNORE_PACKETS = [
     1484572481, // Pong
@@ -107,7 +108,7 @@ export class Player extends Tank {
     public handleChangeLayoutState(state: LayoutStateType, oldState: LayoutStateType) {
         switch (state) {
             case LayoutState.BATTLE:
-                this.getServer().getChatManager().sendRemoveChatScreen(this);
+                this.getChatManager().sendRemoveChatScreen();
 
                 if (oldState === LayoutState.BATTLE_SELECT) {
                     this.battlesManager.sendRemoveBattlesScreen();
@@ -164,12 +165,12 @@ export class Player extends Tank {
                 }
 
                 if (this.layoutState === LayoutState.BATTLE_SELECT) {
-                    this.getServer().getChatManager().sendChat(this);
+                    this.getChatManager().sendChat();
                     this.setSubLayoutState(LayoutState.BATTLE_SELECT, LayoutState.BATTLE_SELECT);
                     return
                 }
 
-                this.getServer().getBattlesManager().sendBattleSelectScreen(this)
+                this.getBattlesManager().sendBattleSelectScreen()
                 this.setLayoutState(LayoutState.BATTLE_SELECT);
                 this.setSubLayoutState(LayoutState.BATTLE_SELECT, LayoutState.BATTLE_SELECT);
 
@@ -182,8 +183,8 @@ export class Player extends Tank {
                 }
 
                 this.battlesManager.sendRemoveBattlesScreen();
-                this.getServer().getChatManager().sendChat(this);
-                this.getServer().getGarageManager().handleOpenGarage(this);
+                this.getChatManager().sendChat();
+                this.getGarageManager().sendOpenGarage();
                 break;
             }
         }

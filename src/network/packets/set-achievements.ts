@@ -3,12 +3,12 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetAchievementCCPacket extends Packet {
+export class SetAchievementsPacket extends Packet {
 
     public achievements: string[]
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_ACHIEVEMENT_CC, bytes)
+        super(Protocol.SET_ACHIEVEMENTS, bytes)
     }
 
     public decode() {

@@ -21,3 +21,6 @@ export class ItemCategory {
         ItemCategory.GIVEN_PRESET
     ];
 }
+
+export type OnlyStringKeys<T> = T extends string ? T : never;
+export type ItemCategoryType = OnlyStringKeys<typeof ItemCategory[keyof typeof ItemCategory]>;

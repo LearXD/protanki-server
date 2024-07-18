@@ -17,3 +17,6 @@ export class ItemViewCategory {
         ItemViewCategory.GIVEN_PRESENTS
     ];
 }
+
+export type OnlyStringKeys<T> = T extends string ? T : never;
+export type ItemViewCategoryType = OnlyStringKeys<typeof ItemViewCategory[keyof typeof ItemViewCategory]>;

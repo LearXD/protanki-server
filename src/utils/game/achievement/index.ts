@@ -13,3 +13,6 @@ export class Achievement {
         Achievement.FIRST_DONATE
     ]
 }
+
+export type OnlyStringKeys<T> = T extends string ? T : never
+export type AchievementType = OnlyStringKeys<typeof Achievement[keyof typeof Achievement]>

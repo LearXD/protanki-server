@@ -1,5 +1,8 @@
+import { ChatModeratorLevelType } from "../../../../utils/game/chat-moderator-level"
+
 export interface IPlayerProfileData {
     crystals: number
+    moderatorLevel: ChatModeratorLevelType
     hasDoubleCrystal: boolean
     durationCrystalAbonement: number
     rank: number

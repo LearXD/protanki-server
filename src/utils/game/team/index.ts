@@ -9,3 +9,6 @@ export class Team {
         Team.NONE
     ];
 }
+
+export type OnlyStringKeys<T> = T extends string ? T : never
+export type TeamType = OnlyStringKeys<typeof Team[keyof typeof Team]>;

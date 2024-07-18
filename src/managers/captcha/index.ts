@@ -6,9 +6,9 @@ import { Server } from "../../server";
 import { CaptchaLocation, CaptchaLocationType } from "../../utils/game/captcha-location";
 import { ByteArray } from "../../utils/network/byte-array";
 import { CaptchaUtils } from "../../utils/game/captcha";
-import { ReadType } from "../assets";
 import { SetCaptchaLocationsPacket } from "../../network/packets/set-captcha-locations";
 import { Client } from "../../game/client";
+import { ReadType } from "../assets/types";
 
 export class CaptchaManager {
 
@@ -30,11 +30,9 @@ export class CaptchaManager {
     }
 
     public handleRequestCaptcha(client: Client, location: CaptchaLocationType) {
-        const data = this.server
-            .getAssetsManager()
-            .getData(
-                path.join('captcha', 'image.jpg'), ReadType.BUFFER
-            );
+        const data = this.server.getAssetsManager().getData(
+            path.join('captcha', 'image.jpg'), ReadType.BUFFER
+        );
 
         this.sendCaptchaData(client, { type: location, data });
     }

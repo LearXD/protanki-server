@@ -3,13 +3,12 @@ import { Player } from "../player"
 import { Logger } from "../../utils/logger"
 
 import { IBattleList } from "../../network/packets/set-battle-list"
-import { BattleMode, BattleModes } from "../../utils/game/battle-mode"
-import { EquipmentConstraintsMode, EquipmentConstraintsModes } from "../../utils/game/equipment-constraints-mode"
-import { ByteArray } from "../../utils/network/byte-array"
+import { BattleMode, BattleModeType } from "../../utils/game/battle-mode"
+import { EquipmentConstraintsMode, EquipmentConstraintsModeType } from "../../utils/game/equipment-constraints-mode"
 
 import { SetBattleChatEnabledPacket } from "../../network/packets/set-battle-chat-enabled"
 import { SetSomePacketOnJoinBattle4Packet } from "../../network/packets/set-some-packet-on-join-battle-4"
-import { SetSomePacketOnJoinBattle5Packet } from "../../network/packets/set-some-packet-on-join-battle-5"
+import { SetShowBattleNotificationsPacket } from "../../network/packets/set-show-battle-notifications"
 
 import { LayoutState } from "../../utils/game/layout-state"
 
@@ -33,8 +32,8 @@ import { Themes } from "../../utils/game/theme"
 
 export interface IBattleData {
     autoBalance: boolean,
-    battleMode: BattleModes,
-    equipmentConstraintsMode: EquipmentConstraintsModes,
+    battleMode: BattleModeType,
+    equipmentConstraintsMode: EquipmentConstraintsModeType,
     friendlyFire: boolean,
     scoreLimit: number,
     timeLimitInSec: number,
@@ -74,7 +73,7 @@ export class Battle {
     private boxesManager: BattleBoxesManager
 
     public static getManager(battle: Battle) {
-        switch (battle.getMode() as BattleModes) {
+        switch (battle.getMode() as BattleModeType) {
             case BattleMode.DM: {
                 return new BattleDeathMatchModeManager(battle)
             }
@@ -193,8 +192,8 @@ export class Battle {
 
         this.modeManager.sendPlayerStatistics(client)
 
-        const setSomePacketOnJoinBattle5Packet = new SetSomePacketOnJoinBattle5Packet();
-        client.sendPacket(setSomePacketOnJoinBattle5Packet);
+        const setShowBattleNotificationsPacket = new SetShowBattleNotificationsPacket();
+        client.sendPacket(setShowBattleNotificationsPacket);
 
         this.minesManager.sendMinesData(client);
 

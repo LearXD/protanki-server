@@ -1,0 +1,32 @@
+export class Rank {
+    static RECRUIT = 1;
+    static PRIVATE = 2;
+    static GEFREITER = 3;
+    static CORPORAL = 4;
+    static MASTER_CORPORAL = 5;
+    static SERGEANT = 6;
+    static STAFF_SERGEANT = 7;
+    static MASTER_SERGEANT = 8;
+    static FIRST_SERGEANT = 9;
+    static SERGEANT_MAJOR = 10;
+    static WARRANT_OFFICER_1 = 11;
+    static WARRANT_OFFICER_2 = 12;
+    static WARRANT_OFFICER_3 = 13;
+    static WARRANT_OFFICER_4 = 14;
+    static WARRANT_OFFICER_5 = 15;
+    static THIRD_LIEUTENANT = 16;
+    static SECOND_LIEUTENANT = 17;
+    static FIRST_LIEUTENANT = 18;
+    static CAPTAIN = 19;
+    static MAJOR = 20;
+    static LIEUTENANT_COLONEL = 21;
+    static COLONEL = 22;
+    static BRIGADIER = 23;
+    static MAJOR_GENERAL = 24;
+    static LIEUTENANT_GENERAL = 25;
+    static GENERAL = 26;
+    static MARSHAL = 27;
+    static FIELD_MARSHAL = 28;
+    static COMMANDER = 29;
+    static GENERALISSIMO = 30;
+}

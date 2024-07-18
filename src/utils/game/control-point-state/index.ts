@@ -9,3 +9,6 @@ export class ControlPointState {
         ControlPointState.NEUTRAL
     ];
 }
+
+export type OnlyStringKeys<T> = T extends string ? T : never
+export type ControlPointStateType = OnlyStringKeys<typeof ControlPointState[keyof typeof ControlPointState]>

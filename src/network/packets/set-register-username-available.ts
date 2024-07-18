@@ -2,10 +2,10 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class ResultCheckUsernamePacket extends Packet {
+export class SetRegisterUsernameAvailablePacket extends Packet {
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.RESULT_CHECK_USERNAME, bytes)
+        super(Protocol.SET_REGISTER_USERNAME_AVAILABLE, bytes)
     }
 
     public decode() {

@@ -1,13 +1,6 @@
 import path from 'path';
 
-import { Player } from "../../game/player";
-import { SetEquipGarageItemPacket } from "../../network/packets/set-equip-garage-item";
-import { SetGarageItemsPropertiesPacket } from "../../network/packets/set-garage-items-properties";
-import { SetRemoveGaragePacket } from "../../network/packets/set-remove-garage";
-import { SetUserGarageItemsPacket } from "../../network/packets/set-user-garage-items";
 import { Server } from "../../server";
-import { LayoutState } from "../../utils/game/layout-state";
-import { ResourceType } from "../resources";
 import { Logger } from '../../utils/logger';
 import { GarageItemCategory, GarageItemFolder, IGarageItem, IHullProperties, ITurretProperties, ITurretSfx } from './types';
 
@@ -72,6 +65,8 @@ export class GarageManager {
         this.items.set(`${item.id}_m${item.modificationID ?? 0}`, item);
     }
 
+    public getItems() { return this.items }
+
     public getItem(itemId: string) {
         return this.items.get(itemId);
     }
@@ -116,104 +111,4 @@ export class GarageManager {
         return GarageItemCategory.UNKNOWN;
     }
 
-    public sendEquippedItems(client: Player) {
-        const setEquipGarageItemPacket = new SetEquipGarageItemPacket();
-
-        setEquipGarageItemPacket.itemId = client.getGarageManager().getEquippedHull();
-        setEquipGarageItemPacket.equipped = true;
-        client.sendPacket(setEquipGarageItemPacket);
-
-        setEquipGarageItemPacket.itemId = client.getGarageManager().getEquippedTurret();
-        setEquipGarageItemPacket.equipped = true;
-        client.sendPacket(setEquipGarageItemPacket);
-
-        setEquipGarageItemPacket.itemId = client.getGarageManager().getEquippedPainting();
-        setEquipGarageItemPacket.equipped = true;
-        client.sendPacket(setEquipGarageItemPacket);
-    }
-
-    public sendUserGarageItems(client: Player, items: IGarageItem[]) {
-        const setUserGarageItemsPacket = new SetUserGarageItemsPacket();
-        setUserGarageItemsPacket.items = items;
-        setUserGarageItemsPacket.garageBoxId = 170001;
-        client.sendPacket(setUserGarageItemsPacket);
-    }
-
-    public sendGarageItems(client: Player, items: IGarageItem[]) {
-        const setGarageItemsPropertiesPacket = new SetGarageItemsPropertiesPacket();
-
-        setGarageItemsPropertiesPacket.items = items
-        setGarageItemsPropertiesPacket.delayMountArmorInSec = 0;
-        setGarageItemsPropertiesPacket.delayMountWeaponInSec = 0;
-        setGarageItemsPropertiesPacket.delayMountColorInSec = 0;
-
-        client.sendPacket(setGarageItemsPropertiesPacket);
-    }
-
-    public async handleOpenGarage(player: Player) {
-
-        player.setLayoutState(LayoutState.GARAGE);
-
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-
-        await this.server.getResourcesManager().sendResources(player, ResourceType.GARAGE);
-
-        const userItems: IGarageItem[] = []
-        const garageItems: IGarageItem[] = []
-
-        const supplies = player.getGarageManager().getSupplies();
-
-        const turrets = player.getGarageManager().getTurrets();
-        const hulls = player.getGarageManager().getHulls();
-        const paintings = player.getGarageManager().getPaintings();
-
-        for (const item of this.items.values()) {
-            const category = item.category;
-
-            if (category === GarageItemCategory.SUPPLY) {
-                const names = Object.keys(supplies);
-                if (names.includes(item.id)) {
-                    userItems.push({
-                        ...item,
-                        count: supplies[item.id]
-                    });
-                }
-                continue;
-            }
-
-            if (category === GarageItemCategory.HULL) {
-                const has = hulls.some((hull) => hull.name === item.id && hull.level === item.modificationID);
-                if (has) {
-                    userItems.push(item)
-                    continue;
-                }
-            }
-
-            if (category === GarageItemCategory.TURRET) {
-                const has = turrets.some((turret) => turret.name === item.id && turret.level === item.modificationID);
-                if (has) {
-                    userItems.push(item)
-                    continue;
-                }
-            }
-
-            if (category === GarageItemCategory.PAINT) {
-                const has = paintings.some((painting) => painting.name === item.id);
-                if (has) {
-                    userItems.push(item)
-                    continue;
-                }
-            }
-
-            garageItems.push(item)
-        }
-
-        this.sendUserGarageItems(player, userItems);
-
-        this.sendEquippedItems(player)
-        this.sendGarageItems(player, garageItems);
-
-
-        player.setSubLayoutState(player.getBattle() ? LayoutState.BATTLE : LayoutState.GARAGE, LayoutState.GARAGE);
-    }
 }

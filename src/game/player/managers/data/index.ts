@@ -1,8 +1,10 @@
 import { Player } from "../..";
+import { SetAchievementsPacket } from "../../../../network/packets/set-achievements";
 import { SetCrystalsPacket } from "../../../../network/packets/set-crystals";
 import { SetPremiumDataPacket } from "../../../../network/packets/set-premium-data";
 import { SetPremiumLeftTimePacket } from "../../../../network/packets/set-premium-left-time";
 import { SetUserPropertyPacket } from "../../../../network/packets/set-user-property";
+import { ChatModeratorLevel } from "../../../../utils/game/chat-moderator-level";
 import { Logger } from "../../../../utils/logger";
 
 import { IPlayerProfileData, IPremiumData } from "./types";
@@ -25,6 +27,7 @@ export class PlayerDataManager {
 
         this.data = {
             crystals: 1000,
+            moderatorLevel: ChatModeratorLevel.COMMUNITY_MANAGER,
             hasDoubleCrystal: false,
             durationCrystalAbonement: 48602763,
             rank: 30,
@@ -36,7 +39,6 @@ export class PlayerDataManager {
             }
         }
     }
-
 
     public getAuthData(username: string) {
         return { username: username, password: 'suasenha123' }
@@ -57,6 +59,12 @@ export class PlayerDataManager {
             lifeTime: lifeTime
         }
     }
+
+    public isAdmin() {
+        return this.data.moderatorLevel === ChatModeratorLevel.COMMUNITY_MANAGER
+    }
+
+    public getModeratorLevel() { return this.data.moderatorLevel }
 
     public getCrystals() { return this.data.crystals }
 
@@ -96,6 +104,18 @@ export class PlayerDataManager {
         setPremiumLeftTimePacket.leftTimeInSeconds = 0;
 
         this.player.sendPacket(setPremiumLeftTimePacket);
+    }
+
+    public sendAchievements() {
+        const setAchievementCCPacket = new SetAchievementsPacket();
+        setAchievementCCPacket.achievements = [
+            // Achievement.FIRST_RANK_UP,
+            // Achievement.FIRST_PURCHASE,
+            // Achievement.SET_EMAIL,
+            // Achievement.FIGHT_FIRST_BATTLE,
+            // Achievement.FIRST_DONATE
+        ];
+        this.player.sendPacket(setAchievementCCPacket);
     }
 
 

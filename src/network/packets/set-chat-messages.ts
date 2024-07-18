@@ -15,8 +15,7 @@ export interface IUser {
     chatModeratorLevel: string,
     ip: string,
     rankIndex: number,
-    userId: string,
-    a?: string,
+    userId: string
 }
 
 export class SetChatMessagesPacket extends Packet {

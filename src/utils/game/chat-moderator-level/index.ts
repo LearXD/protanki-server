@@ -15,4 +15,5 @@ export class ChatModeratorLevel {
     ]
 }
 
-export type ChatModeratorLevelType = "NONE" | "COMMUNITY_MANAGER" | "ADMINISTRATOR" | "MODERATOR" | "CANDIDATE"
+export type OnlyStringKeys<T> = T extends string ? T : never
+export type ChatModeratorLevelType = OnlyStringKeys<typeof ChatModeratorLevel[keyof typeof ChatModeratorLevel]>

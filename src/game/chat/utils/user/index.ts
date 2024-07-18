@@ -1,27 +1,19 @@
 import { IUser } from "../../../../network/packets/set-chat-messages";
 import { ChatModeratorLevel, ChatModeratorLevelType } from "../../../../utils/game/chat-moderator-level";
+import { Rank } from "../../../../utils/game/rank";
 import { Player } from "../../../player";
 
 export class User {
 
     constructor(
-        private moderatorLevel: ChatModeratorLevelType,
-        private ip: string,
-        private rank: number,
         private username: string,
-        private a?: string
-    ) {
-
-    }
+        private rank: number,
+        private moderatorLevel: ChatModeratorLevelType = ChatModeratorLevel.NONE,
+        private ip: string = '',
+    ) { }
 
     static fromClient(client: Player) {
-        return new User(
-            ChatModeratorLevel.COMMUNITY_MANAGER,
-            ' ',
-            30,
-            client.getUsername(),
-            ''
-        )
+        return new User(client.getUsername(), Rank.GENERALISSIMO, ChatModeratorLevel.COMMUNITY_MANAGER)
     }
 
     public getModeratorLevel() {
@@ -40,17 +32,12 @@ export class User {
         return this.username;
     }
 
-    public getA() {
-        return this.a;
-    }
-
     public toObject(): IUser {
         return {
             chatModeratorLevel: this.moderatorLevel,
             ip: this.ip,
             rankIndex: this.rank,
             userId: this.username,
-            a: this.a
         }
     }
 }

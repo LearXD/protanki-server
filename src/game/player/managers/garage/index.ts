@@ -1,12 +1,15 @@
 import { Player } from "../..";
-import { GarageItemCategory } from "../../../../managers/garage/types";
+import { GarageItemCategory, IGarageItem } from "../../../../managers/garage/types";
+import { ResourceType } from "../../../../managers/resources";
 import { SendBuyGarageItemPacket } from "../../../../network/packets/send-buy-garage-item";
 import { SendBuyGarageKitPacket } from "../../../../network/packets/send-buy-garage-kit";
 import { SendEquipItemPacket } from "../../../../network/packets/send-equip-item";
 import { SendOpenGaragePacket } from "../../../../network/packets/send-open-garage";
 import { SetEquipGarageItemPacket } from "../../../../network/packets/set-equip-garage-item";
+import { SetGarageItemsPropertiesPacket } from "../../../../network/packets/set-garage-items-properties";
 import { SetRemoveGaragePacket } from "../../../../network/packets/set-remove-garage";
 import { SetSuppliesPacket } from "../../../../network/packets/set-supplies";
+import { SetUserGarageItemsPacket } from "../../../../network/packets/set-user-garage-items";
 import { SimplePacket } from "../../../../network/packets/simple-packet";
 import { LayoutState } from "../../../../utils/game/layout-state";
 import { Logger } from "../../../../utils/logger";
@@ -23,31 +26,31 @@ export class PlayerGarageManager {
         this.items = {
             paintings: [
                 { name: 'green', equipped: false },
-                { name: 'flora', equipped: true },
+                { name: 'africa', equipped: true },
             ],
             turrets: [
-                { name: 'flamethrower', level: 0, equipped: false },
+                { name: 'flamethrower', level: -1, equipped: false },
                 { name: 'freeze', level: -1, equipped: false },
-                { name: 'isida', level: 0, equipped: false },
+                { name: 'isida', level: -1, equipped: false },
                 { name: 'machinegun', level: -1, equipped: false },
-                { name: 'railgun', level: 2, equipped: true },
+                { name: 'railgun', level: 3, equipped: true },
                 { name: 'railgun_xt', level: -1, equipped: false },
-                { name: 'ricochet', level: 0, equipped: false },
+                { name: 'ricochet', level: -1, equipped: false },
                 { name: 'shaft', level: -1, equipped: false },
                 { name: 'shotgun', level: -1, equipped: false },
-                { name: 'smoky', level: 0, equipped: false },
-                { name: 'thunder', level: 0, equipped: false },
+                { name: 'smoky', level: -1, equipped: false },
+                { name: 'thunder', level: -1, equipped: false },
                 { name: 'twins', level: -1, equipped: false },
             ],
             hulls: [
                 { name: 'dictator', level: -1, equipped: false },
-                { name: 'hornet', level: 1, equipped: true },
+                { name: 'hornet', level: 3, equipped: true },
                 { name: 'hornet_xt', level: -1, equipped: false },
-                { name: 'hunter', level: 0, equipped: false },
+                { name: 'hunter', level: -1, equipped: false },
                 { name: 'mammoth', level: -1, equipped: false },
                 { name: 'titan', level: -1, equipped: false },
-                { name: 'viking', level: 0, equipped: false },
-                { name: 'wasp', level: 0, equipped: false },
+                { name: 'viking', level: -1, equipped: false },
+                { name: 'wasp', level: -1, equipped: false },
             ],
             supplies: {
                 health: 100,
@@ -233,6 +236,106 @@ export class PlayerGarageManager {
         client.sendPacket(setSuppliesPacket);
     }
 
+    public sendEquippedItems() {
+        const setEquipGarageItemPacket = new SetEquipGarageItemPacket();
+
+        setEquipGarageItemPacket.itemId = this.getEquippedHull();
+        setEquipGarageItemPacket.equipped = true;
+        this.player.sendPacket(setEquipGarageItemPacket);
+
+        setEquipGarageItemPacket.itemId = this.getEquippedTurret();
+        setEquipGarageItemPacket.equipped = true;
+        this.player.sendPacket(setEquipGarageItemPacket);
+
+        setEquipGarageItemPacket.itemId = this.getEquippedPainting();
+        setEquipGarageItemPacket.equipped = true;
+        this.player.sendPacket(setEquipGarageItemPacket);
+    }
+
+    public sendUserGarageItems(items: IGarageItem[]) {
+        const setUserGarageItemsPacket = new SetUserGarageItemsPacket();
+        setUserGarageItemsPacket.items = items;
+        setUserGarageItemsPacket.garageBoxId = 170001;
+        this.player.sendPacket(setUserGarageItemsPacket);
+    }
+
+    public sendGarageItems(items: IGarageItem[]) {
+        const setGarageItemsPropertiesPacket = new SetGarageItemsPropertiesPacket();
+
+        setGarageItemsPropertiesPacket.items = items
+        setGarageItemsPropertiesPacket.delayMountArmorInSec = 0;
+        setGarageItemsPropertiesPacket.delayMountWeaponInSec = 0;
+        setGarageItemsPropertiesPacket.delayMountColorInSec = 0;
+
+        this.player.sendPacket(setGarageItemsPropertiesPacket);
+    }
+
+    public async sendOpenGarage() {
+
+        this.player.setLayoutState(LayoutState.GARAGE);
+
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+
+        await this.player.getServer().getResourcesManager().sendResources(this.player, ResourceType.GARAGE);
+
+        const userItems: IGarageItem[] = []
+        const garageItems: IGarageItem[] = []
+
+        const supplies = this.player.getGarageManager().getSupplies();
+
+        const turrets = this.player.getGarageManager().getTurrets();
+        const hulls = this.player.getGarageManager().getHulls();
+        const paintings = this.player.getGarageManager().getPaintings();
+
+        for (const item of this.player.getServer().getGarageManager().getItems().values()) {
+            const category = item.category;
+
+            if (category === GarageItemCategory.SUPPLY) {
+                const names = Object.keys(supplies);
+                if (names.includes(item.id)) {
+                    userItems.push({
+                        ...item,
+                        count: supplies[item.id]
+                    });
+                }
+                continue;
+            }
+
+            if (category === GarageItemCategory.HULL) {
+                const has = hulls.some((hull) => hull.name === item.id && hull.level === item.modificationID);
+                if (has) {
+                    userItems.push(item)
+                    continue;
+                }
+            }
+
+            if (category === GarageItemCategory.TURRET) {
+                const has = turrets.some((turret) => turret.name === item.id && turret.level === item.modificationID);
+                if (has) {
+                    userItems.push(item)
+                    continue;
+                }
+            }
+
+            if (category === GarageItemCategory.PAINT) {
+                const has = paintings.some((painting) => painting.name === item.id);
+                if (has) {
+                    userItems.push(item)
+                    continue;
+                }
+            }
+
+            garageItems.push(item)
+        }
+
+        this.sendUserGarageItems(userItems);
+
+        this.sendEquippedItems()
+        this.sendGarageItems(garageItems);
+
+        this.player.setSubLayoutState(this.player.getBattle() ? LayoutState.BATTLE : LayoutState.GARAGE, LayoutState.GARAGE);
+    }
+
     public handleEquipItem(itemId: string) {
         if (this.equipItem(itemId)) {
             const setEquipGarageItemPacket = new SetEquipGarageItemPacket();
@@ -277,7 +380,7 @@ export class PlayerGarageManager {
             const battle = this.player.getBattle();
             if (battle) {
                 if (this.player.getLayoutState() === LayoutState.BATTLE) {
-                    this.player.getServer().getGarageManager().handleOpenGarage(this.player);
+                    this.sendOpenGarage();
                     return true;
                 }
 
@@ -288,7 +391,7 @@ export class PlayerGarageManager {
                 }
                 return true;
             }
-            this.player.getServer().getGarageManager().handleOpenGarage(this.player);
+            this.sendOpenGarage();
             return true
         }
 

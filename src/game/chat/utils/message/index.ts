@@ -1,20 +1,22 @@
-import { IMessage } from "../../../../network/packets/set-chat-messages";
+import { IMessage, IUser } from "../../../../network/packets/set-chat-messages";
 import { User } from "../user";
 
 export class Message {
     constructor(
         private text: string,
-        private source: User = null,
-        private target: User = null,
+        private source: IUser = null,
+        private target: IUser = null,
         private system: boolean = false,
         private warning: boolean = false
-    ) { }
+    ) {
+
+    }
 
     public getSource() {
         return this.source;
     }
 
-    public setSource(source: User) {
+    public setSource(source: IUser) {
         this.source = source;
     }
 
@@ -30,7 +32,7 @@ export class Message {
         return this.target;
     }
 
-    public setTarget(target: User) {
+    public setTarget(target: IUser) {
         this.target = target;
     }
 
@@ -52,9 +54,9 @@ export class Message {
 
     public toObject(): IMessage {
         return {
-            sourceUserStatus: this.source ? this.source.toObject() : null,
+            sourceUserStatus: this.source,
             system: this.system,
-            targetUserStatus: this.target ? this.target.toObject() : null,
+            targetUserStatus: this.target,
             text: this.text,
             warning: this.warning
         }

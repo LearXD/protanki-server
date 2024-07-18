@@ -12,4 +12,5 @@ export class EquipmentConstraintsMode {
     ];
 }
 
-export type EquipmentConstraintsModes = 'NONE' | 'HORNET_RAILGUN' | 'WASP_RAILGUN' | 'HORNET_WASP_RAILGUN';
+export type OnlyStringKeys<T> = T extends string ? T : never;
+export type EquipmentConstraintsModeType = OnlyStringKeys<typeof EquipmentConstraintsMode[keyof typeof EquipmentConstraintsMode]>;
