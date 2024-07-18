@@ -11,15 +11,6 @@ export class PlayerData {
         private readonly username: string
     ) { }
 
-    public static findPlayerAuthData(username: string): IPlayerAuthData {
-        return {
-            username: username,
-            password: 'suasenha123',
-            email: 'contato@learxd.dev',
-            emailConfirmed: true
-        }
-    }
-
     public static findPlayerData(
         username: string,
         loadGarage: boolean = false
@@ -36,6 +27,15 @@ export class PlayerData {
         }
 
         return data;
+    }
+
+    public static findPlayerAuthData(username: string): IPlayerAuthData {
+        return {
+            username: username,
+            password: 'suasenha123',
+            email: 'contato@learxd.dev',
+            emailConfirmed: true
+        }
     }
 
     public loadProfile() {
@@ -140,6 +140,10 @@ export class PlayerData {
         return this.profileData.crystals
     }
 
+    public getCrytalAbonementDuration() {
+        return this.profileData.durationCrystalAbonement
+    }
+
     public decreaseCrystals(amount: number) {
         this.profileData.crystals -= amount
     }
@@ -172,7 +176,7 @@ export class PlayerData {
 
         return {
             enabled: leftTime > 0,
-            showReminder: false,
+            showReminder: true,
             showWelcome: leftTime > 0 && !data.notified,
             reminderTime: Date.now(),
             leftTime: leftTime > 0 ? leftTime : -1,

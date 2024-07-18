@@ -4,6 +4,7 @@ import { SetCrystalsPacket } from "../../../../network/packets/set-crystals";
 import { SetPremiumDataPacket } from "../../../../network/packets/set-premium-data";
 import { SetPremiumLeftTimePacket } from "../../../../network/packets/set-premium-left-time";
 import { SetUserPropertyPacket } from "../../../../network/packets/set-user-property";
+import { SetWelcomeToPremiumPacket } from "../../../../network/packets/set-welcome-to-premium";
 import { Logger } from "../../../../utils/logger";
 import { PlayerData } from "../../utils/data";
 
@@ -30,16 +31,27 @@ export class PlayerDataManager {
         this.player.sendPacket(setCrystals);
     }
 
+    public sendWelcomeToPremium(renew: boolean = false) {
+        const setWelcomeToPremiumPacket = new SetWelcomeToPremiumPacket();
+        setWelcomeToPremiumPacket.renew = renew;
+        this.player.sendPacket(setWelcomeToPremiumPacket);
+    }
+
     public sendPremiumData() {
         const data = this.player.getData().getPremiumData()
 
         const setPremiumDataPacket = new SetPremiumDataPacket()
         setPremiumDataPacket.needShowNotificationCompletionPremium = data.showReminder
         setPremiumDataPacket.needShowWelcomeAlert = data.showWelcome
-        setPremiumDataPacket.reminderCompletionPremiumTime = 10
+        setPremiumDataPacket.reminderCompletionPremiumTime = 0
         setPremiumDataPacket.wasShowAlertForFirstPurchasePremium = !data.showReminder
         setPremiumDataPacket.wasShowReminderCompletionPremium = !data.showWelcome
-        setPremiumDataPacket.lifeTimeInSeconds = data.leftTime
+        setPremiumDataPacket.lifeTimeInSeconds = data.lifeTime
+
+        if (data.showWelcome) {
+            // TODO: Verificar se o usuario realmente é novo ou renovacao
+            this.sendWelcomeToPremium();
+        }
 
         if (this.player.getData().getProfileData().premium.endAt > Date.now()) {
             this.sendPremiumLeftTime();
@@ -75,7 +87,7 @@ export class PlayerDataManager {
 
         setUserPropertyPacket.crystals = this.player.getData().getCrystals();
         setUserPropertyPacket.currentRankScore = 1000;
-        setUserPropertyPacket.durationCrystalAbonement = this.player.getData().getProfileData().durationCrystalAbonement;
+        setUserPropertyPacket.durationCrystalAbonement = this.player.getData().getCrytalAbonementDuration();
         setUserPropertyPacket.hasDoubleCrystal = this.player.getData().hasDoubleCrystal();
         setUserPropertyPacket.nextRankScore = 100000
         setUserPropertyPacket.place = 0;

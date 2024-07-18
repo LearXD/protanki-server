@@ -4,7 +4,7 @@ import { Packet } from "./packet";
 
 export class SetWelcomeToPremiumPacket extends Packet {
 
-    public show: boolean;
+    public renew: boolean;
 
     constructor(bytes?: ByteArray) {
         super(Protocol.SET_WELCOME_TO_PREMIUM, bytes)
@@ -12,15 +12,15 @@ export class SetWelcomeToPremiumPacket extends Packet {
 
     public decode() {
         const bytes = this.cloneBytes();
-        this.show = bytes.readBoolean();
+        this.renew = bytes.readBoolean();
         return {
-            show: this.show
+            renew: this.renew
         }
     }
 
     public encode() {
         const bytes = new ByteArray();
-        bytes.writeBoolean(this.show);
+        bytes.writeBoolean(this.renew);
         return bytes;
     }
 }
