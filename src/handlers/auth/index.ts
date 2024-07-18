@@ -2,7 +2,6 @@ import { Player } from "../../game/player";
 import { SetAuthResourcesPacket } from "../../network/packets/set-auth-resources";
 import { SetInviteEnabledPacket } from "../../network/packets/set-invite-enabled";
 import { Server } from "../../server";
-import { ByteArray } from "../../utils/network/byte-array";
 import { SetNetworkParamsPacket } from "../../network/packets/set-network-params";
 import { SocialNetwork } from "../../utils/game/social-network";
 import { ResolveFullLoadedPacket } from "../../network/packets/resolve-full-loaded";
@@ -23,15 +22,15 @@ export class AuthManager {
     }
 
     public sendAuthConfig(client: Player) {
-        const socialNetworksPacket = new SetNetworkParamsPacket(new ByteArray());
+        const socialNetworksPacket = new SetNetworkParamsPacket();
         socialNetworksPacket.socialParams = SocialNetwork.NETWORKS;
         client.sendPacket(socialNetworksPacket);
 
-        const setInviteEnabledPacket = new SetInviteEnabledPacket(new ByteArray());
+        const setInviteEnabledPacket = new SetInviteEnabledPacket();
         setInviteEnabledPacket.inviteEnabled = this.server.isWhitelisted();
         client.sendPacket(setInviteEnabledPacket);
 
-        const setAuthResourcesPacket = new SetAuthResourcesPacket(new ByteArray());
+        const setAuthResourcesPacket = new SetAuthResourcesPacket();
 
         setAuthResourcesPacket.bgResource = this.config.bgResource
         setAuthResourcesPacket.enableRequiredEmail = this.config.enableRequiredEmail
@@ -43,7 +42,7 @@ export class AuthManager {
     }
 
     public sendAuthScreen(client: Player) {
-        const resolveFullLoadedPacket = new ResolveFullLoadedPacket(new ByteArray());
+        const resolveFullLoadedPacket = new ResolveFullLoadedPacket();
         client.sendPacket(resolveFullLoadedPacket);
     }
 }

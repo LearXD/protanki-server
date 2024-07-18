@@ -2,7 +2,6 @@ import path from "path";
 
 import { Battle, IBattleData } from "../../game/battle";
 import { Server } from "../../server";
-import { ByteArray } from "../../utils/network/byte-array";
 import { Logger } from '../../utils/logger';
 import { SetAddBattleOnListPacket } from '../../network/packets/set-add-battle-on-list';
 
@@ -46,7 +45,7 @@ export class BattlesManager {
     public addBattle(battle: Battle) {
         this.battles.push(battle);
 
-        const sendBattleCreated = new SetAddBattleOnListPacket(new ByteArray());
+        const sendBattleCreated = new SetAddBattleOnListPacket();
         sendBattleCreated.data = battle.toBattleListItem();
         this.server.broadcastPacket(sendBattleCreated);
     }

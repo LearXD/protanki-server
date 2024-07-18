@@ -1,11 +1,9 @@
 import { SetTankSpeedPacket } from "../../network/packets/set-tank-speed";
 import { Vector3d } from "../../utils/game/vector-3d";
 import { SetMoveCameraPacket } from "../../network/packets/set-move-camera";
-import { ByteArray } from "../../utils/network/byte-array";
 import { SetTankHealthPacket } from "../../network/packets/set-tank-health";
 import { SetSpawnTankPacket } from "../../network/packets/set-spawn-tank";
 import { Team } from "../../utils/game/team";
-import { Battle } from "../battle";
 import { SetTankVisiblePacket } from "../../network/packets/set-tank-visible";
 import { SetLatencyPacket } from "../../network/packets/set-latency";
 import { SimplePacket } from "../../network/packets/simple-packet";
@@ -49,7 +47,7 @@ export class Tank {
         this.visible = visible
 
         if (visible) {
-            const setTankVisiblePacket = new SetTankVisiblePacket(new ByteArray());
+            const setTankVisiblePacket = new SetTankVisiblePacket();
             setTankVisiblePacket.tankId = this.player.getUsername();
             this.player.sendPacket(setTankVisiblePacket);
         }
@@ -61,7 +59,7 @@ export class Tank {
     }
 
     public setCameraPosition(position: Vector3d, orientation: Vector3d) {
-        const setMoveCameraPacket = new SetMoveCameraPacket(new ByteArray());
+        const setMoveCameraPacket = new SetMoveCameraPacket();
         setMoveCameraPacket.position = position
         setMoveCameraPacket.orientation = orientation
         this.player.sendPacket(setMoveCameraPacket);
@@ -72,7 +70,7 @@ export class Tank {
     }
 
     public setHealth(health: number) {
-        const setTankHealthPacket = new SetTankHealthPacket(new ByteArray());
+        const setTankHealthPacket = new SetTankHealthPacket();
         setTankHealthPacket.tankId = this.player.getUsername();
         setTankHealthPacket.health = health;
         this.player.sendPacket(setTankHealthPacket);
@@ -80,7 +78,7 @@ export class Tank {
     }
 
     public sendLatency(serverTime: number) {
-        const setLatencyPacket = new SetLatencyPacket(new ByteArray());
+        const setLatencyPacket = new SetLatencyPacket();
         setLatencyPacket.serverSessionTime = serverTime;
         setLatencyPacket.clientPing = this.player.getPing();
         this.player.sendPacket(setLatencyPacket);
@@ -110,7 +108,7 @@ export class Tank {
 
         this.setHealth(10000);
 
-        const setSpawnTankPacket = new SetSpawnTankPacket(new ByteArray());
+        const setSpawnTankPacket = new SetSpawnTankPacket();
         setSpawnTankPacket.tankId = this.player.getUsername();
         setSpawnTankPacket.team = Team.NONE;
         setSpawnTankPacket.position = new Vector3d(-4669.8310546875, -1442.4090576171875, 200);
@@ -148,7 +146,7 @@ export class Tank {
         maxTurretRotationSpeed: number,
         acceleration: number,
     ) {
-        const setTankSpeedPacket = new SetTankSpeedPacket(new ByteArray());
+        const setTankSpeedPacket = new SetTankSpeedPacket();
         setTankSpeedPacket.tankId = this.player.getUsername();
         setTankSpeedPacket.maxSpeed = maxSpeed;
         setTankSpeedPacket.maxTurnSpeed = maxTurnSpeed;

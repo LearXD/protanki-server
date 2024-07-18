@@ -1,7 +1,6 @@
 import { Player } from "../../game/player";
 import { SetCountryLocaleNamePacket } from "../../network/packets/set-country-locale-name";
 import { Server } from "../../server";
-import { ByteArray } from "../../utils/network/byte-array";
 
 export class LocaleManager {
     constructor(
@@ -9,7 +8,7 @@ export class LocaleManager {
     ) { }
 
     public sendLocaleConfig(client: Player, locale: string = 'pt_BR') {
-        const setCountryLocaleName = new SetCountryLocaleNamePacket(new ByteArray());
+        const setCountryLocaleName = new SetCountryLocaleNamePacket();
 
         setCountryLocaleName.countries = [
             { code: 'BR', countryName: 'Brasil' }

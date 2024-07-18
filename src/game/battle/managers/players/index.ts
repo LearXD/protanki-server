@@ -1,6 +1,5 @@
 import { Battle } from "../..";
 import { SetUserTankResourcesDataPacket } from "../../../../network/packets/set-user-tank-resources-data";
-import { ByteArray } from "../../../../utils/network/byte-array";
 import { Player } from "../../../player";
 
 export class BattlePlayersManager {
@@ -45,7 +44,7 @@ export class BattlePlayersManager {
         const painting = client.getGarageManager().getEquippedPainting();
         const paintingItem = client.getServer().getGarageManager().getItem(painting);
 
-        const setUserTankResourcesDataPacket = new SetUserTankResourcesDataPacket(new ByteArray());
+        const setUserTankResourcesDataPacket = new SetUserTankResourcesDataPacket();
         setUserTankResourcesDataPacket.data = {
             battleId: this.battle.getBattleId(),
             colormap_id: paintingItem.coloring,

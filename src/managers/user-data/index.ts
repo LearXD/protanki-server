@@ -8,7 +8,6 @@ import { SetUserOnlinePacket } from "../../network/packets/set-user-online";
 import { SetUserPremiumDataPacket } from "../../network/packets/set-user-premium-data";
 import { SetUserRankPacket } from "../../network/packets/set-user-rank";
 import { Server } from "../../server";
-import { ByteArray } from "../../utils/network/byte-array";
 
 export class UserDataManager {
 
@@ -31,25 +30,25 @@ export class UserDataManager {
         const data = this.findPlayerData(username);
         const player = this.server.getPlayersManager().getPlayer(username)
 
-        const setUserOnlinePacket = new SetUserOnlinePacket(new ByteArray());
+        const setUserOnlinePacket = new SetUserOnlinePacket();
         setUserOnlinePacket.online = true;
         setUserOnlinePacket.serverNumber = 1;
         setUserOnlinePacket.user = username;
         client.sendPacket(setUserOnlinePacket);
 
-        const setUserRankPacket = new SetUserRankPacket(new ByteArray());
+        const setUserRankPacket = new SetUserRankPacket();
         setUserRankPacket.rank = data.getRank();
         setUserRankPacket.user = username;
         client.sendPacket(setUserRankPacket);
 
-        const setUserPremiumPacket = new SetUserPremiumDataPacket(new ByteArray());
+        const setUserPremiumPacket = new SetUserPremiumDataPacket();
         setUserPremiumPacket.premiumTimeLeftInSeconds = data.getPremiumData().leftTime;
         setUserPremiumPacket.user = username;
         client.sendPacket(setUserPremiumPacket);
 
         const premiumData = data.getPremiumData();
         if (premiumData.enabled) {
-            const setPremiumDataPacket = new SetUserPremiumDataPacket(new ByteArray());
+            const setPremiumDataPacket = new SetUserPremiumDataPacket();
             setPremiumDataPacket.premiumTimeLeftInSeconds = premiumData.leftTime;
             setPremiumDataPacket.user = username;
             client.sendPacket(setPremiumDataPacket);
@@ -57,7 +56,7 @@ export class UserDataManager {
     }
 
     public handleSendConfigData(client: Player) {
-        const setSocialNetworkPanelCCPacket = new SetSocialNetworkPanelCCPacket(new ByteArray());
+        const setSocialNetworkPanelCCPacket = new SetSocialNetworkPanelCCPacket();
         setSocialNetworkPanelCCPacket.passwordCreated = true;
         setSocialNetworkPanelCCPacket.socialNetworkParams = [
             {
@@ -69,13 +68,13 @@ export class UserDataManager {
         ]
         client.sendPacket(setSocialNetworkPanelCCPacket);
 
-        const setNotificationEnabledPacket = new SetNotificationEnabledPacket(new ByteArray());
+        const setNotificationEnabledPacket = new SetNotificationEnabledPacket();
         setNotificationEnabledPacket.enabled = true;
         client.sendPacket(setNotificationEnabledPacket);
     }
 
     public handleOpenConfig(client: Player) {
-        const setOpenConfigPacket = new SetOpenConfigPacket(new ByteArray());
+        const setOpenConfigPacket = new SetOpenConfigPacket();
         client.sendPacket(setOpenConfigPacket);
     }
 

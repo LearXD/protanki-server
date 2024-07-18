@@ -1,7 +1,6 @@
 import { Battle } from "../..";
 import { SetBattleStatisticsCCPacket } from "../../../../network/packets/set-battle-statistics-cc";
 import { SetBattleUserStatusPacket } from "../../../../network/packets/set-battle-user-status";
-import { ByteArray } from "../../../../utils/network/byte-array";
 import { Player } from "../../../player";
 
 export class BattleStatisticsManager {
@@ -66,7 +65,7 @@ export class BattleStatisticsManager {
     }
 
     public sendPlayerStatistics(client: Player) {
-        const setBattleUserStatusPacket = new SetBattleUserStatusPacket(new ByteArray())
+        const setBattleUserStatusPacket = new SetBattleUserStatusPacket()
         setBattleUserStatusPacket.deaths = this.getPlayerDeaths(client.getUsername())
         setBattleUserStatusPacket.kills = this.getPlayerKills(client.getUsername())
         setBattleUserStatusPacket.score = this.getPlayerScore(client.getUsername())
@@ -74,7 +73,7 @@ export class BattleStatisticsManager {
     }
 
     public sendBattleStatistics(client: Player) {
-        const setBattleStatisticsCCPacket = new SetBattleStatisticsCCPacket(new ByteArray());
+        const setBattleStatisticsCCPacket = new SetBattleStatisticsCCPacket();
         setBattleStatisticsCCPacket.mode = this.battle.getMode()
         setBattleStatisticsCCPacket.equipmentConstraintsMode = this.battle.getEquipmentConstraintsMode()
         setBattleStatisticsCCPacket.fund = this.fund

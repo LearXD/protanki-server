@@ -1,5 +1,4 @@
 import net from 'net';
-import path from 'path';
 
 import { Logger } from './utils/logger';
 
@@ -14,7 +13,6 @@ import { FriendsManager } from './managers/friends';
 import { ChatManager } from './managers/chat';
 import { BattlesManager } from './managers/battles';
 import { MapsManager } from './managers/maps';
-import { Player } from './game/player';
 import { SimplePacket } from './network/packets/simple-packet';
 import { GarageManager } from './managers/garage';
 import { LocaleManager } from './managers/locale';

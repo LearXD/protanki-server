@@ -3,7 +3,6 @@ import { SetRemoveViewingBattlePacket } from "../../../../network/packets/set-re
 import { SetViewingBattlePacket } from "../../../../network/packets/set-viewing-battle";
 import { SetViewingBattleDataPacket } from "../../../../network/packets/set-viewing-battle-data";
 import { BattleMode } from "../../../../utils/game/battle-mode";
-import { ByteArray } from "../../../../utils/network/byte-array";
 import { Player } from "../../../player";
 
 export class BattleViewersManager {
@@ -34,7 +33,7 @@ export class BattleViewersManager {
             viewing.getViewersManager().removeViewer(client);
         }
 
-        const setViewingBattlePacket = new SetViewingBattlePacket(new ByteArray());
+        const setViewingBattlePacket = new SetViewingBattlePacket();
         setViewingBattlePacket.battleId = this.battle.getBattleId();
         client.sendPacket(setViewingBattlePacket);
 
@@ -50,7 +49,7 @@ export class BattleViewersManager {
     public removeViewer(viewer: Player) {
         // if (this.hasViewer(username)) {
         // this.getViewers().delete(viewer.getUsername());
-        const setRemoveViewingBattlePacket = new SetRemoveViewingBattlePacket(new ByteArray());
+        const setRemoveViewingBattlePacket = new SetRemoveViewingBattlePacket();
         setRemoveViewingBattlePacket.battleId = this.battle.getBattleId();
         viewer.sendPacket(setRemoveViewingBattlePacket);
         viewer.setViewingBattle(null);
@@ -60,7 +59,7 @@ export class BattleViewersManager {
     }
 
     public sendViewingBattleData(client: Player) {
-        const setViewingBattleDataPacket = new SetViewingBattleDataPacket(new ByteArray());
+        const setViewingBattleDataPacket = new SetViewingBattleDataPacket();
         setViewingBattleDataPacket.data = {
             battleMode: this.battle.getMode(),
             itemId: this.battle.getBattleId(),

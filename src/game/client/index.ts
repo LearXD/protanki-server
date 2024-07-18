@@ -50,7 +50,7 @@ export abstract class Client {
         this.cryptoHandler.setKeys(keys);
         this.cryptoHandler.init(keys, XorType.SERVER);
 
-        const cryptPacket = new SetCryptKeysPacket(new ByteArray());
+        const cryptPacket = new SetCryptKeysPacket();
         cryptPacket.keys = this.getCryptoHandler().getKeys();
         this.sendPacket(cryptPacket, false);
     }
@@ -81,7 +81,7 @@ export abstract class Client {
     }
 
     public sendGameLoaded() {
-        const setGameLoadedPacket = new SetGameLoadedPacket(new ByteArray());
+        const setGameLoadedPacket = new SetGameLoadedPacket();
         this.sendPacket(setGameLoadedPacket);
     }
 

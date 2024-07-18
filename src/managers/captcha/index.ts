@@ -4,7 +4,6 @@ import { Player } from "../../game/player";
 import { SetCaptchaDataPacket } from "../../network/packets/set-captcha-data";
 import { Server } from "../../server";
 import { CaptchaLocation, CaptchaLocationType } from "../../utils/game/captcha-location";
-import { ByteArray } from "../../utils/network/byte-array";
 import { CaptchaUtils } from "../../utils/game/captcha";
 import { SetCaptchaLocationsPacket } from "../../network/packets/set-captcha-locations";
 import { Client } from "../../game/client";
@@ -24,7 +23,7 @@ export class CaptchaManager {
     ) { }
 
     public sendCaptchaLocations(client: Player) {
-        const captchaLocationsPacket = new SetCaptchaLocationsPacket(new ByteArray());
+        const captchaLocationsPacket = new SetCaptchaLocationsPacket();
         captchaLocationsPacket.locations = this.LOCATIONS;
         client.sendPacket(captchaLocationsPacket);
     }
@@ -38,7 +37,7 @@ export class CaptchaManager {
     }
 
     public sendCaptchaData = (client: Client, data: { type: CaptchaLocationType, data: Buffer }) => {
-        const setCaptchaDataPacket = new SetCaptchaDataPacket(new ByteArray());
+        const setCaptchaDataPacket = new SetCaptchaDataPacket();
         setCaptchaDataPacket.type = data.type;
         setCaptchaDataPacket.data = CaptchaUtils.encode(data.data);
 

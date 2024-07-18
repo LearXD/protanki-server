@@ -2,7 +2,6 @@ import { Server } from "../../server";
 
 import { Player } from "../../game/player";
 import { SetLoadResourcesPacket } from "../../network/packets/set-load-resources";
-import { ByteArray } from "../../utils/network/byte-array";
 import { Client } from "../../game/client";
 
 export enum ResourceType {
@@ -62,7 +61,7 @@ export class ResourcesManager {
 
     public sendLoadResources(client: Client, resources: any[]) {
         return new Promise((resolve) => {
-            const setLoadResourcesPacket = new SetLoadResourcesPacket(new ByteArray());
+            const setLoadResourcesPacket = new SetLoadResourcesPacket();
             setLoadResourcesPacket.resources = resources;
             setLoadResourcesPacket.callbackId = client.addResourceLoading(() => resolve(true));
             client.sendPacket(setLoadResourcesPacket);

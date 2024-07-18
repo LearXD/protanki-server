@@ -3,7 +3,6 @@ import path from "path";
 import { Player } from "../../game/player";
 import { SetMapsDataPacket } from "../../network/packets/set-maps-data";
 import { Server } from "../../server";
-import { ByteArray } from "../../utils/network/byte-array";
 import { IBattleAsset } from "./types";
 import { Logger } from "../../utils/logger";
 import { Theme, Themes } from "../../utils/game/theme";
@@ -45,7 +44,7 @@ export class MapsManager {
     }
 
     public sendMapsData(client: Player) {
-        const setMapsDataPacket = new SetMapsDataPacket(new ByteArray());
+        const setMapsDataPacket = new SetMapsDataPacket();
         setMapsDataPacket.data = this.data;
         client.sendPacket(setMapsDataPacket);
     }

@@ -3,7 +3,6 @@ import { Player } from "../../game/player";
 import { Server } from "../../server";
 import { MathUtils } from "../../utils/math";
 import { SetTipResourcePacket } from "../../network/packets/set-tip-resource";
-import { ByteArray } from "../../utils/network/byte-array";
 import { Client } from "../../game/client";
 
 // TODO: Implement the logic fot not repeating the same tip
@@ -60,7 +59,7 @@ export class TipsManager {
     }
 
     public sendShowLoadingTip(client: Client, id: number) {
-        const setTipResourcePacket = new SetTipResourcePacket(new ByteArray());
+        const setTipResourcePacket = new SetTipResourcePacket();
         setTipResourcePacket.resourceId = id
         client.sendPacket(setTipResourcePacket);
     }
