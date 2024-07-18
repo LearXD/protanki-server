@@ -17,6 +17,10 @@ import { SetDestroyTankPacket } from "../../network/packets/set-destroy-tank";
 import { SendUseDrugPacket } from "../../network/packets/send-use-drug";
 import { SetUseDrugPacket } from "../../network/packets/set-use-drug";
 import { Player } from "../player";
+import { SetSuicideDelayPacket } from "../../network/packets/set-suicide-delay";
+import { SetTankChangedEquipmentPacket } from "../../network/packets/set-tank-changed-equipment";
+import { SetRemoveTankPacket } from "../../network/packets/set-remove-tank";
+import { SetTankRespawnDelayPacket } from "../../network/packets/set-tank-respawn-delay";
 
 export class Tank {
 
@@ -26,10 +30,15 @@ export class Tank {
     private position: Vector3d = new Vector3d(0, 0, 0);
 
     private visible: boolean = false;
+    public changedEquipment = false;
 
     public constructor(
         private readonly player: Player
     ) { }
+
+    public getBattle() {
+        return this.player.getBattle()
+    }
 
     public getPosition(): Vector3d { return this.position }
     public setPosition(position: Vector3d) { this.position = position }
@@ -58,14 +67,16 @@ export class Tank {
         this.player.sendPacket(setMoveCameraPacket);
     }
 
-    public getHealth() { return this.health }
-    public setHealth(health: number) {
-        this.health = health;
+    public getHealth() {
+        return this.health
+    }
 
+    public setHealth(health: number) {
         const setTankHealthPacket = new SetTankHealthPacket(new ByteArray());
         setTankHealthPacket.tankId = this.player.getUsername();
         setTankHealthPacket.health = health;
         this.player.sendPacket(setTankHealthPacket);
+        this.health = health;
     }
 
     public sendLatency(serverTime: number) {
@@ -75,10 +86,29 @@ export class Tank {
         this.player.sendPacket(setLatencyPacket);
     }
 
-    public respawn() {
-        this.setHealth(10000);
+    public sendRemove() {
+        const setRemoveTankPacket = new SetRemoveTankPacket();
+        setRemoveTankPacket.tankId = this.player.getUsername();
+        this.getBattle().broadcastPacket(setRemoveTankPacket);
+    }
 
+    public sendChangeEquipment() {
+        const setChangedEquipmentPacket = new SetTankChangedEquipmentPacket();
+        setChangedEquipmentPacket.tankId = this.player.getUsername();
+        this.getBattle().broadcastPacket(setChangedEquipmentPacket);
+    }
+
+    public respawn() {
         this.incarnation++;
+
+        if (this.changedEquipment) {
+            this.changedEquipment = false;
+            this.sendRemove();
+            this.getBattle().getPlayersManager().sendPlayerData(this.player);
+            this.sendChangeEquipment();
+        }
+
+        this.setHealth(10000);
 
         const setSpawnTankPacket = new SetSpawnTankPacket(new ByteArray());
         setSpawnTankPacket.tankId = this.player.getUsername();
@@ -96,6 +126,20 @@ export class Tank {
         setDestroyTankPacket.tankId = this.player.getUsername()
         setDestroyTankPacket.respawnDelay = 3000
         this.player.sendPacket(setDestroyTankPacket)
+    }
+
+    public sendRespawnDelay(delay: number) {
+        const setTankRespawnDelayPacket = new SetTankRespawnDelayPacket();
+        setTankRespawnDelayPacket.tank = this.player.getUsername();
+        setTankRespawnDelayPacket.respawnDelay = delay;
+        this.player.sendPacket(setTankRespawnDelayPacket);
+    }
+
+    public sendSuicide(delay: number = 3000, respawnDelay: number = 3000) {
+        const packet = new SetSuicideDelayPacket();
+        packet.delay = delay;
+        this.player.sendPacket(packet);
+        setTimeout(() => { this.sendRespawnDelay(respawnDelay) }, delay)
     }
 
     public setTankSpeed(

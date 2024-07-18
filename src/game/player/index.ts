@@ -87,20 +87,37 @@ export class Player extends Client {
         clearInterval(this.updateInterval);
     }
 
-    public getUsername() { return this.getData().getUsername() }
+    public getUsername() {
+        return this.getData().getUsername()
+    }
 
-    public getData() { return this.data }
+    public getData() {
+        return this.data
+    }
 
-    public isInBattle() { return !!this.battle }
+    public getTank() {
+        return this.tank
+    }
 
-    public getBattle() { return this.battle }
+    public isInBattle() {
+        return this.battle !== null
+    }
+
+    public getBattle() {
+        return this.battle
+    }
 
     public setBattle(battle: Battle) {
         this.battle = battle
     }
 
-    public getViewingBattle(): Battle { return this.viewingBattle }
-    public setViewingBattle(battle: Battle) { this.viewingBattle = battle }
+    public getViewingBattle(): Battle {
+        return this.viewingBattle
+    }
+
+    public setViewingBattle(battle: Battle) {
+        this.viewingBattle = battle
+    }
 
     public getPacketHandler(): PlayerPacketHandler {
         return this.packetHandler
@@ -158,7 +175,7 @@ export class Player extends Client {
                 }
 
                 if (oldState === LayoutState.GARAGE) {
-                    this.garageManager.removeGarageScreen();
+                    this.garageManager.closeGarage();
                 }
                 break;
             case LayoutState.BATTLE_SELECT:

@@ -27,10 +27,21 @@ export class PlayerGarageManager {
         return this.player.getData().getGarageData();
     }
 
-    public getTurrets() { return this.getGarageItems().turrets }
-    public getHulls() { return this.getGarageItems().hulls }
-    public getPaintings() { return this.getGarageItems().paintings }
-    public getSupplies() { return this.getGarageItems().supplies }
+    public getTurrets() {
+        return this.getGarageItems().turrets
+    }
+
+    public getHulls() {
+        return this.getGarageItems().hulls
+    }
+
+    public getPaintings() {
+        return this.getGarageItems().paintings
+    }
+
+    public getSupplies() {
+        return this.getGarageItems().supplies
+    }
 
     public getEquippedTurret() {
         const turret = this.getTurrets().find(turret => turret.equipped);
@@ -155,6 +166,12 @@ export class PlayerGarageManager {
                     );
                     break;
             }
+
+            if (this.player.isInBattle()) {
+                Logger.debug(`Player ${this.player.getUsername()} changed equipment`);
+                this.player.getTank().changedEquipment = true;
+            }
+
             return true
         }
         return false
@@ -178,6 +195,15 @@ export class PlayerGarageManager {
         }
 
         return null
+    }
+
+    public closeGarage() {
+        this.removeGarageScreen();
+
+        const battle = this.player.getBattle();
+        if (battle && this.player.tank.changedEquipment) {
+            this.player.getTank().sendSuicide()
+        }
     }
 
     public removeGarageScreen() {

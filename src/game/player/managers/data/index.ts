@@ -3,6 +3,7 @@ import { SetAchievementsPacket } from "../../../../network/packets/set-achieveme
 import { SetCrystalsPacket } from "../../../../network/packets/set-crystals";
 import { SetPremiumDataPacket } from "../../../../network/packets/set-premium-data";
 import { SetPremiumLeftTimePacket } from "../../../../network/packets/set-premium-left-time";
+import { SetScorePacket } from "../../../../network/packets/set-score";
 import { SetUserPropertyPacket } from "../../../../network/packets/set-user-property";
 import { SetWelcomeToPremiumPacket } from "../../../../network/packets/set-welcome-to-premium";
 import { Logger } from "../../../../utils/logger";
@@ -29,6 +30,12 @@ export class PlayerDataManager {
         const setCrystals = new SetCrystalsPacket();
         setCrystals.crystals = this.player.getData().getCrystals();
         this.player.sendPacket(setCrystals);
+    }
+
+    public sendScore() {
+        const packet = new SetScorePacket();
+        packet.score = this.player.getData().getScore();
+        this.player.sendPacket(packet);
     }
 
     public sendWelcomeToPremium(renew: boolean = false) {
@@ -96,7 +103,7 @@ export class PlayerDataManager {
         setUserPropertyPacket.score = this.player.getData().getScore();
         setUserPropertyPacket.serverNumber = 1;
         setUserPropertyPacket.uid = this.player.getUsername();
-        setUserPropertyPacket.userProfileUrl = '';
+        setUserPropertyPacket.userProfileUrl = 'awdawd';
 
         this.player.sendPacket(setUserPropertyPacket);
     }
