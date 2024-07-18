@@ -23,12 +23,19 @@ export class BattlePlayersManager {
         return this.players.get(username)
     }
 
-    public addPlayer(client: Player) {
-        this.players.set(client.getUsername(), client)
+    public addPlayer(player: Player) {
+        this.players.set(player.getUsername(), player)
+        this.battle.getStatisticsManager().addPlayer(player.getUsername())
+        player.setBattle(this.battle)
     }
 
     public removePlayer(username: string) {
-        this.players.delete(username);
+        const player = this.players.get(username)
+        if (player) {
+            this.players.delete(username);
+            this.battle.getStatisticsManager().removePlayer(username);
+            player.setBattle(null)
+        }
     }
 
     public sendPlayerData(client: Player) {

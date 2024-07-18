@@ -165,7 +165,7 @@ import { SendEquipItemPacket } from "./packets/send-equip-item";
 import { SetRemoveGarageItemPacket } from "./packets/set-remove-garage-item";
 import { SetGarageCategoryPacket } from "./packets/set-garage-category";
 import { SendBuyGarageKitPacket } from "./packets/send-buy-garage-kit";
-import { SendResumePacket } from "./packets/send-resume";
+import { SendRequestSpawnPositionPacket } from "./packets/send-request-spawn-position";
 import { SendRequestRespawnPacket } from "./packets/send-request-respawn";
 import { SetTankChangedEquipmentPacket } from "./packets/set-tank-changed-equipment";
 import { SendRequestSetTankVisiblePacket } from "./packets/send-request-set-tank-visible";
@@ -560,7 +560,7 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_GARAGE_ITEM, SetRemoveGarageItemPacket)
         this.registerPacket(Protocol.SET_GARAGE_CATEGORY, SetGarageCategoryPacket)
 
-        this.registerPacket(Protocol.SEND_RESUME, SendResumePacket)
+        this.registerPacket(Protocol.SEND_REQUEST_SPAWN_POSITION, SendRequestSpawnPositionPacket)
         this.registerPacket(Protocol.SEND_REQUEST_RESPAWN, SendRequestRespawnPacket)
         this.registerPacket(Protocol.SET_TANK_CHANGED_EQUIPMENT, SetTankChangedEquipmentPacket)
         this.registerPacket(Protocol.SEND_REQUEST_SET_TANK_VISIBLE, SendRequestSetTankVisiblePacket)

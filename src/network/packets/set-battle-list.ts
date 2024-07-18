@@ -1,23 +1,27 @@
+import { BattleModeType } from "../../utils/game/battle-mode";
+import { EquipmentConstraintsMode } from "../../utils/game/equipment-constraints-mode";
+import { SuspiciousLevel } from "../../utils/game/suspicious-level";
 import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
 export interface IBattleList {
-    battleId: string;
-    battleMode: string;
-    map: string;
-    maxPeople: number;
-    name: string;
-    privateBattle: boolean;
-    proBattle: boolean;
-    minRank: number;
-    maxRank: number;
-    preview: number;
-    parkourMode: boolean;
-    equipmentConstraintsMode: string;
-    suspicionLevel: string;
-    usersBlue: string[];
-    usersRed: string[];
+    battleId: string
+    battleMode: BattleModeType
+    map: string
+    maxPeople: number
+    name: string
+    privateBattle: boolean
+    proBattle: boolean
+    minRank: number
+    maxRank: number
+    preview: number
+    parkourMode: boolean
+    equipmentConstraintsMode: EquipmentConstraintsMode
+    suspicionLevel: SuspiciousLevel
+    usersBlue?: []
+    usersRed?: []
+    users?: []
 }
 
 export class SetBattleListPacket extends Packet {

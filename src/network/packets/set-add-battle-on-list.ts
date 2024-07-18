@@ -1,28 +1,11 @@
 import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
-
-export interface IBattle {
-    battleId: string;
-    battleMode: string;
-    map: string;
-    maxPeople: number;
-    name: string;
-    privateBattle: boolean;
-    proBattle: boolean;
-    minRank: number;
-    maxRank: number;
-    preview: number;
-    parkourMode: boolean;
-    equipmentConstraintsMode: string;
-    suspicionLevel: string;
-    usersBlue: string[];
-    usersRed: string[];
-}
+import { IBattleList } from "./set-battle-list";
 
 export class SetAddBattleOnListPacket extends Packet {
 
-    public data: IBattle;
+    public data: IBattleList;
 
     constructor(bytes?: ByteArray) {
         super(Protocol.SET_ADD_BATTLE_ON_LIST, bytes)

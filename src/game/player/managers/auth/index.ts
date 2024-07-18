@@ -56,7 +56,7 @@ export class PlayerAuthManager {
         this.player.getFriendsManager().sendInviteFriendsProperties()
 
         this.player.getServer().getResourcesManager().sendResources(this.player, ResourceType.LOBBY);
-        this.player.setSubLayoutState(LayoutState.BATTLE_SELECT, LayoutState.BATTLE_SELECT)
+        this.player.setSubLayoutState(LayoutState.BATTLE_SELECT)
 
         this.player.getDataManager().sendAchievements();
 

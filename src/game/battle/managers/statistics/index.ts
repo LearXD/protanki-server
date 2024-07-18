@@ -16,7 +16,24 @@ export class BattleStatisticsManager {
         private readonly battle: Battle
     ) { }
 
-    public initPlayer(player: string) {
+    public reset() {
+        this.fund = 0
+        this.time = 0
+
+        for (const player of this.scores.keys()) {
+            this.scores.set(player, 0)
+        }
+
+        for (const player of this.kills.keys()) {
+            this.kills.set(player, 0)
+        }
+
+        for (const player of this.deaths.keys()) {
+            this.deaths.set(player, 0)
+        }
+    }
+
+    public addPlayer(player: string) {
         this.scores.set(player, 0)
         this.kills.set(player, 0)
         this.deaths.set(player, 0)
@@ -70,6 +87,7 @@ export class BattleStatisticsManager {
         setBattleUserStatusPacket.kills = this.getPlayerKills(client.getUsername())
         setBattleUserStatusPacket.score = this.getPlayerScore(client.getUsername())
         setBattleUserStatusPacket.user = client.getUsername()
+        client.sendPacket(setBattleUserStatusPacket)
     }
 
     public sendBattleStatistics(client: Player) {
@@ -88,6 +106,7 @@ export class BattleStatisticsManager {
         setBattleStatisticsCCPacket.spectator = false
         setBattleStatisticsCCPacket.strings_1 = null
         setBattleStatisticsCCPacket.int_2 = 0
+
         client.sendPacket(setBattleStatisticsCCPacket);
     }
 }

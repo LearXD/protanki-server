@@ -50,8 +50,6 @@ export class Player extends Client {
     public constructor(socket: net.Socket, server: Server) {
         super(socket, server);
 
-        this.tank = new Tank(this);
-
         this.packetHandler = new PlayerPacketHandler(this);
 
         this.dataManager = new PlayerDataManager(this);
@@ -65,20 +63,16 @@ export class Player extends Client {
         this.shopManager = new PlayerShopManager(this);
         this.dailyQuestsManager = new PlayerDailyQuestsManager(this);
 
+        this.updateInterval = setInterval(this.update.bind(this), 1000);
+
         this.init();
     }
 
     public async init() {
         Logger.debug('Initializing client');
-
-        this.updateInterval = setInterval(this.update.bind(this), 1000);
-
         await this.getServer().getResourcesManager().sendResources(this, ResourceType.AUTH)
-
-        this.getServer().getCaptchaManager().sendCaptchaLocations(this);
-
         await this.getServer().getTipsManager().sendLoadingTip(this);
-
+        this.getServer().getCaptchaManager().sendCaptchaLocations(this);
         this.getServer().getAuthManager().sendAuthConfig(this);
     }
 
@@ -89,6 +83,10 @@ export class Player extends Client {
 
     public getUsername() {
         return this.getData().getUsername()
+    }
+
+    public setData(data: PlayerData) {
+        this.data = data;
     }
 
     public getData() {
@@ -108,6 +106,7 @@ export class Player extends Client {
     }
 
     public setBattle(battle: Battle) {
+        this.tank = new Tank(this, battle)
         this.battle = battle
     }
 
@@ -159,11 +158,9 @@ export class Player extends Client {
         return this.dailyQuestsManager
     }
 
-    public setData(data: PlayerData) {
-        this.data = data;
+    public getLayoutState() {
+        return this.layoutState
     }
-
-    public getLayoutState() { return this.layoutState }
 
     public handleChangeLayoutState(state: LayoutStateType, oldState: LayoutStateType) {
         switch (state) {
@@ -208,9 +205,9 @@ export class Player extends Client {
         this.handleChangeLayoutState(state, oldState);
     }
 
-    public setSubLayoutState(principal: LayoutStateType, secondary: LayoutStateType) {
+    public setSubLayoutState(secondary: LayoutStateType) {
         const setLayoutStatePacket = new SetSubLayoutStatePacket();
-        setLayoutStatePacket.principal = principal;
+        setLayoutStatePacket.principal = this.isInBattle() ? LayoutState.BATTLE : this.layoutState;
         setLayoutStatePacket.secondary = secondary;
         this.sendPacket(setLayoutStatePacket);
     }
@@ -226,13 +223,14 @@ export class Player extends Client {
 
                 if (this.layoutState === LayoutState.BATTLE_SELECT) {
                     this.getChatManager().sendChat();
-                    this.setSubLayoutState(LayoutState.BATTLE_SELECT, LayoutState.BATTLE_SELECT);
+                    this.layoutState = LayoutState.BATTLE_SELECT;
+                    this.setSubLayoutState(LayoutState.BATTLE_SELECT);
                     return
                 }
 
                 this.getBattlesManager().sendBattleSelectScreen()
                 this.setLayoutState(LayoutState.BATTLE_SELECT);
-                this.setSubLayoutState(LayoutState.BATTLE_SELECT, LayoutState.BATTLE_SELECT);
+                this.setSubLayoutState(LayoutState.BATTLE_SELECT);
 
                 break;
             }

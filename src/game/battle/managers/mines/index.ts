@@ -1,12 +1,15 @@
-import { SetBattleMineCCPacket } from "../../../../network/packets/set-battle-mine-cc";
+import { IMine, SetBattleMineCCPacket } from "../../../../network/packets/set-battle-mine-cc";
 import { Player } from "../../../player";
 
 export class BattleMinesManager {
+
+    private mines: IMine[] = [];
+
     public sendMinesData(client: Player) {
         const setBattleMineCCPacket = new SetBattleMineCCPacket();
         setBattleMineCCPacket.soundResource = 389057
         setBattleMineCCPacket.int_1 = 1000
-        setBattleMineCCPacket.mines = []
+        setBattleMineCCPacket.mines = this.mines
         setBattleMineCCPacket.imageResource = 925137
         setBattleMineCCPacket.soundResource2 = 965887
         setBattleMineCCPacket.imageResource2 = 975465

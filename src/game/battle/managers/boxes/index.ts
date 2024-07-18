@@ -4,7 +4,7 @@ import { Player } from "../../../player";
 
 export class BattleBoxesManager {
 
-    public sendBoxesData(client: Player) {
+    public sendBoxes(client: Player) {
         const bonuses = client.getServer().getBattlesManager().getData('bonuses.json')
         const setBonusesDataPacket = new SetBonusesDataPacket();
         setBonusesDataPacket.data = bonuses;

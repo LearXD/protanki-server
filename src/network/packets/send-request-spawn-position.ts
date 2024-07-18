@@ -2,10 +2,10 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SendResumePacket extends Packet {
+export class SendRequestSpawnPositionPacket extends Packet {
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SEND_RESUME, bytes)
+        super(Protocol.SEND_REQUEST_SPAWN_POSITION, bytes)
     }
 
     public decode() {

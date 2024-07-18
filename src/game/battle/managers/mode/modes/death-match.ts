@@ -6,10 +6,11 @@ import { Player } from "../../../../player";
 export class BattleDeathMatchModeManager extends BattleModeManager {
 
     public sendPlayerStatistics(client: Player): void {
+        const statistics = this.getBattle().getStatisticsManager()
+
         const setBattleStatisticsDMCCPacket = new SetBattleStatisticsDMCCPacket();
         setBattleStatisticsDMCCPacket.users = this.getBattle().getPlayersManager()
             .getPlayers().map((player) => {
-                const statistics = this.getBattle().getStatisticsManager()
                 return {
                     chatModeratorLevel: ChatModeratorLevel.NONE,
                     deaths: statistics.getPlayerDeaths(player.getUsername()),

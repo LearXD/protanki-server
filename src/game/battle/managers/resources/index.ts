@@ -1,8 +1,8 @@
 import { Battle } from "../..";
 import { SetBattleDataPacket } from "../../../../network/packets/set-battle-data";
+import { SetBattleMineCCPacket } from "../../../../network/packets/set-battle-mine-cc";
 import { SetTurretsDataPacket } from "../../../../network/packets/set-turrets-data";
 import { Logger } from "../../../../utils/logger";
-import { ByteArray } from "../../../../utils/network/byte-array";
 import { Player } from "../../../player";
 
 export class BattleResourcesManager {
@@ -10,13 +10,6 @@ export class BattleResourcesManager {
     public constructor(
         private readonly battle: Battle
     ) { }
-
-    public sendTurretsData(client: Player) {
-        const turrets = client.getServer().getBattlesManager().getData('turrets.json')
-        const setTurretsDataPacket = new SetTurretsDataPacket();
-        setTurretsDataPacket.turrets = turrets;
-        client.sendPacket(setTurretsDataPacket);
-    }
 
     public sendBattleData(client: Player) {
         const data = client.getServer().getMapsManager()
@@ -37,40 +30,70 @@ export class BattleResourcesManager {
             active: true,
             dustParticle: data.dustParticle,
             battleId: this.battle.getBattleId(),
-            minRank: this.battle.getData().rankRange.min,
-            maxRank: this.battle.getData().rankRange.max,
+            minRank: this.battle.getRankRange().min,
+            maxRank: this.battle.getRankRange().max,
             skybox: data.skybox,
             sound_id: data.sound_id,
             map_graphic_data: data.map_graphic_data,
-            reArmorEnabled: this.battle.getData().reArmorEnabled,
+            reArmorEnabled: this.battle.isReArmorEnabled(),
             bonusLightIntensity: data.bonusLightIntensity,
             lighting: data.lighting
         }
         client.sendPacket(setBattleDataPacket);
     }
 
-    public async sendObjectsResources(client: Player) {
-        const objects = client.getServer().getMapsManager()
+    public async sendResources(player: Player) {
+        await this.sendObjectsResources(player)
+        await this.sendSkyboxResource(player)
+        await this.sendMapResources(player)
+    }
+
+    public sendTurretsData(player: Player) {
+        const turrets = player.getServer().getBattlesManager().getData('turrets.json')
+
+        if (!turrets) {
+            throw new Error('Turrets data not found')
+        }
+
+        const setTurretsDataPacket = new SetTurretsDataPacket();
+        setTurretsDataPacket.turrets = turrets;
+        player.sendPacket(setTurretsDataPacket);
+    }
+
+    public async sendObjectsResources(player: Player) {
+        const objects = player.getServer().getMapsManager()
             .getMapResource(this.battle.getMap().mapId, this.battle.getMap().theme, 'objects.json')
 
-        return await client.getServer().getResourcesManager()
-            .sendLoadResources(client, objects)
+        if (!objects) {
+            throw new Error('Objects data not found')
+        }
+
+        return await player.getServer().getResourcesManager()
+            .sendLoadResources(player, objects)
     }
 
-    public async sendSkyboxResource(client: Player) {
-        const skybox = client.getServer().getMapsManager()
+    public async sendSkyboxResource(player: Player) {
+        const skybox = player.getServer().getMapsManager()
             .getMapResource(this.battle.getMap().mapId, this.battle.getMap().theme, 'skybox.json')
 
-        return await client.getServer().getResourcesManager()
-            .sendLoadResources(client, skybox)
+        if (!skybox) {
+            throw new Error('Skybox data not found')
+        }
+
+        return await player.getServer().getResourcesManager()
+            .sendLoadResources(player, skybox)
     }
 
-    public async sendMapResources(client: Player) {
-        const map = client.getServer().getMapsManager()
+    public async sendMapResources(player: Player) {
+        const map = player.getServer().getMapsManager()
             .getMapResource(this.battle.getMap().mapId, this.battle.getMap().theme, 'map.json')
 
-        return await client.getServer().getResourcesManager()
-            .sendLoadResources(client, map)
+        if (!map) {
+            throw new Error('Map data not found')
+        }
+
+        return await player.getServer().getResourcesManager()
+            .sendLoadResources(player, map)
     }
 
 }

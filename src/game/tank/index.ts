@@ -7,7 +7,7 @@ import { Team } from "../../utils/game/team";
 import { SetTankVisiblePacket } from "../../network/packets/set-tank-visible";
 import { SetLatencyPacket } from "../../network/packets/set-latency";
 import { SimplePacket } from "../../network/packets/simple-packet";
-import { SendResumePacket } from "../../network/packets/send-resume";
+import { SendRequestSpawnPositionPacket } from "../../network/packets/send-request-spawn-position";
 import { SendRequestRespawnPacket } from "../../network/packets/send-request-respawn";
 import { SendRequestSetTankVisiblePacket } from "../../network/packets/send-request-set-tank-visible";
 import { SendAutoDestroyPacket } from "../../network/packets/send-auto-destroy";
@@ -19,6 +19,7 @@ import { SetSuicideDelayPacket } from "../../network/packets/set-suicide-delay";
 import { SetTankChangedEquipmentPacket } from "../../network/packets/set-tank-changed-equipment";
 import { SetRemoveTankPacket } from "../../network/packets/set-remove-tank";
 import { SetTankRespawnDelayPacket } from "../../network/packets/set-tank-respawn-delay";
+import { Battle } from "../battle";
 
 export class Tank {
 
@@ -31,38 +32,34 @@ export class Tank {
     public changedEquipment = false;
 
     public constructor(
-        private readonly player: Player
+        private readonly player: Player,
+        private readonly battle: Battle
     ) { }
 
     public getBattle() {
-        return this.player.getBattle()
+        return this.getBattle()
     }
 
-    public getPosition(): Vector3d { return this.position }
-    public setPosition(position: Vector3d) { this.position = position }
+    public getPosition(): Vector3d {
+        return this.position
+    }
 
-    public isVisible() { return this.visible }
+    public setPosition(position: Vector3d) {
+        this.position = position
+    }
+
+    public isVisible() {
+        return this.visible
+    }
 
     public setVisible(visible: boolean) {
-        this.visible = visible
-
         if (visible) {
             const setTankVisiblePacket = new SetTankVisiblePacket();
             setTankVisiblePacket.tankId = this.player.getUsername();
             this.player.sendPacket(setTankVisiblePacket);
         }
-    }
 
-    public spawn() {
-        // this.setTankSpeed(8.600000381469727, 1.6632988452911377, 1.8149678707122803, 10.970000267028809)
-        this.setCameraPosition(new Vector3d(-4669.8310546875, -1442.4090576171875, 200), new Vector3d(0, 0, -1.5709999799728394))
-    }
-
-    public setCameraPosition(position: Vector3d, orientation: Vector3d) {
-        const setMoveCameraPacket = new SetMoveCameraPacket();
-        setMoveCameraPacket.position = position
-        setMoveCameraPacket.orientation = orientation
-        this.player.sendPacket(setMoveCameraPacket);
+        this.visible = visible
     }
 
     public getHealth() {
@@ -77,6 +74,20 @@ export class Tank {
         this.health = health;
     }
 
+
+    public prepareRespawn() {
+        // TODO: set spawn position
+        this.setCameraPosition(new Vector3d(-4669.8310546875, -1442.4090576171875, 200), new Vector3d(0, 0, -1.5709999799728394))
+    }
+
+    public setCameraPosition(position: Vector3d, orientation: Vector3d) {
+        const setMoveCameraPacket = new SetMoveCameraPacket();
+        setMoveCameraPacket.position = position
+        setMoveCameraPacket.orientation = orientation
+        this.player.sendPacket(setMoveCameraPacket);
+    }
+
+
     public sendLatency(serverTime: number) {
         const setLatencyPacket = new SetLatencyPacket();
         setLatencyPacket.serverSessionTime = serverTime;
@@ -84,25 +95,25 @@ export class Tank {
         this.player.sendPacket(setLatencyPacket);
     }
 
-    public sendRemove() {
+    public sendRemoveTank() {
         const setRemoveTankPacket = new SetRemoveTankPacket();
         setRemoveTankPacket.tankId = this.player.getUsername();
-        this.getBattle().broadcastPacket(setRemoveTankPacket);
+        this.battle.broadcastPacket(setRemoveTankPacket);
     }
 
     public sendChangeEquipment() {
         const setChangedEquipmentPacket = new SetTankChangedEquipmentPacket();
         setChangedEquipmentPacket.tankId = this.player.getUsername();
-        this.getBattle().broadcastPacket(setChangedEquipmentPacket);
+        this.battle.broadcastPacket(setChangedEquipmentPacket);
     }
 
-    public respawn() {
+    public spawn() {
         this.incarnation++;
 
         if (this.changedEquipment) {
             this.changedEquipment = false;
-            this.sendRemove();
-            this.getBattle().getPlayersManager().sendPlayerData(this.player);
+            this.sendRemoveTank();
+            this.battle.getPlayersManager().sendPlayerData(this.player);
             this.sendChangeEquipment();
         }
 
@@ -152,24 +163,24 @@ export class Tank {
         setTankSpeedPacket.maxTurnSpeed = maxTurnSpeed;
         setTankSpeedPacket.maxTurretRotationSpeed = maxTurretRotationSpeed;
         setTankSpeedPacket.acceleration = acceleration;
-        setTankSpeedPacket.specificationId = 1;
+        setTankSpeedPacket.specificationId = this.incarnation;
         this.player.sendPacket(setTankSpeedPacket);
     }
 
     public handlePacket(packet: SimplePacket): boolean {
 
-        if (packet instanceof SendResumePacket) {
+        if (packet instanceof SendRequestSpawnPositionPacket) {
+            this.prepareRespawn();
+            return true;
+        }
+
+        if (packet instanceof SendRequestRespawnPacket) {
             this.spawn();
             return true;
         }
 
         if (packet instanceof SendRequestSetTankVisiblePacket) {
             this.setVisible(true);
-            return true;
-        }
-
-        if (packet instanceof SendRequestRespawnPacket) {
-            this.respawn();
             return true;
         }
 

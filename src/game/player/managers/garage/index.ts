@@ -318,7 +318,7 @@ export class PlayerGarageManager {
         this.sendEquippedItems()
         this.sendGarageItems(garageItems);
 
-        this.player.setSubLayoutState(this.player.getBattle() ? LayoutState.BATTLE : LayoutState.GARAGE, LayoutState.GARAGE);
+        this.player.setSubLayoutState(LayoutState.GARAGE);
     }
 
     public handleEquipItem(itemId: string) {
@@ -371,7 +371,7 @@ export class PlayerGarageManager {
 
                 if (this.player.getLayoutState() === LayoutState.GARAGE) {
                     this.player.setLayoutState(LayoutState.BATTLE);
-                    this.player.setSubLayoutState(LayoutState.BATTLE, LayoutState.BATTLE);
+                    this.player.setSubLayoutState(LayoutState.BATTLE);
                     return true;
                 }
 

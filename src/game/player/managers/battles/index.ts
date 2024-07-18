@@ -12,7 +12,7 @@ import { SimplePacket } from "../../../../network/packets/simple-packet";
 import { BattleModeType } from "../../../../utils/game/battle-mode";
 import { EquipmentConstraintsModeType } from "../../../../utils/game/equipment-constraints-mode";
 import { LayoutState } from "../../../../utils/game/layout-state";
-import { Themes } from "../../../../utils/game/theme";
+import { ThemeType } from "../../../../utils/game/theme";
 import { Logger } from "../../../../utils/logger";
 
 export class PlayerBattlesManager {
@@ -59,7 +59,7 @@ export class PlayerBattlesManager {
     public handleOpenBattlesList() {
         this.player.setLayoutState(LayoutState.BATTLE_SELECT)
         this.sendBattles();
-        this.player.setSubLayoutState(this.player.isInBattle() ? LayoutState.BATTLE : LayoutState.BATTLE_SELECT, LayoutState.BATTLE_SELECT)
+        this.player.setSubLayoutState(LayoutState.BATTLE_SELECT)
     }
 
     public handleViewBattle(battleId: string) {
@@ -93,7 +93,7 @@ export class PlayerBattlesManager {
                 proBattle: packet.proBattle,
                 rankRange: packet.rankRange,
                 reArmorEnabled: packet.reArmorEnabled,
-                theme: packet.theme as Themes,
+                theme: packet.theme as ThemeType,
                 withoutBonuses: packet.withoutBonuses,
                 withoutCrystals: packet.withoutCrystals,
                 withoutSupplies: packet.withoutSupplies
@@ -135,7 +135,7 @@ export class PlayerBattlesManager {
                 if (this.player.getLayoutState() === LayoutState.BATTLE_SELECT) {
                     this.sendRemoveBattlesScreen();
                     this.player.setLayoutState(LayoutState.BATTLE);
-                    this.player.setSubLayoutState(LayoutState.BATTLE, LayoutState.BATTLE);
+                    this.player.setSubLayoutState(LayoutState.BATTLE);
                     return true;
                 }
 

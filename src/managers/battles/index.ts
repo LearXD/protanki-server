@@ -1,9 +1,10 @@
 import path from "path";
 
-import { Battle, IBattleData } from "../../game/battle";
+import { Battle } from "../../game/battle";
 import { Server } from "../../server";
 import { Logger } from '../../utils/logger';
 import { SetAddBattleOnListPacket } from '../../network/packets/set-add-battle-on-list';
+import { IBattleData } from "../../game/battle/types";
 
 export class BattlesManager {
 
