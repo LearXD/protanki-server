@@ -1,5 +1,5 @@
 {
-    "maxRangeLength": 8,
+    "maxRangeLength": 9,
     "battleCreationDisabled": false,
     "battleLimits": [
         {
@@ -66,6 +66,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_zone",
+            "mapName": "Zona",
+            "maxPeople": 12,
+            "preview": 756756,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_zone",
+            "mapName": "Zona",
+            "maxPeople": 12,
+            "preview": 756756,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_kolhoz",
             "mapName": "Kolhoz",
             "maxPeople": 24,
@@ -100,6 +134,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_kolhoz",
+            "mapName": "Kolhoz",
+            "maxPeople": 24,
+            "preview": 968259,
+            "maxRank": 30,
+            "minRank": 10,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_kolhoz",
+            "mapName": "Kolhoz",
+            "maxPeople": 24,
+            "preview": 968259,
+            "maxRank": 30,
+            "minRank": 10,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_atra",
             "mapName": "Atra",
             "maxPeople": 10,
@@ -128,6 +196,38 @@
                 "CTF"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_atra",
+            "mapName": "Atra",
+            "maxPeople": 10,
+            "preview": 1027145,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_atra",
+            "mapName": "Atra",
+            "maxPeople": 10,
+            "preview": 1027145,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": true,
@@ -166,6 +266,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_gravity",
+            "mapName": "Gravidade",
+            "maxPeople": 20,
+            "preview": 599909,
+            "maxRank": 30,
+            "minRank": 6,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_gravity",
+            "mapName": "Gravidade",
+            "maxPeople": 20,
+            "preview": 599909,
+            "maxRank": 30,
+            "minRank": 6,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 33.000004291534424,
             "mapId": "map_sandbox",
             "mapName": "Caixa de areia",
             "maxPeople": 8,
@@ -182,7 +316,7 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 0,
+            "additionalCrystalsPercent": 33.000004291534424,
             "mapId": "map_sandbox",
             "mapName": "Caixa de areia",
             "maxPeople": 8,
@@ -199,7 +333,7 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 0,
+            "additionalCrystalsPercent": 33.000004291534424,
             "mapId": "map_sandbox",
             "mapName": "Caixa de areia",
             "maxPeople": 8,
@@ -213,6 +347,40 @@
                 "CP"
             ],
             "theme": "SUMMER_NIGHT"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 33.000004291534424,
+            "mapId": "map_sandbox",
+            "mapName": "Caixa de areia",
+            "maxPeople": 8,
+            "preview": 980103,
+            "maxRank": 30,
+            "minRank": 1,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 33.000004291534424,
+            "mapId": "map_sandbox",
+            "mapName": "Caixa de areia",
+            "maxPeople": 8,
+            "preview": 980103,
+            "maxRank": 30,
+            "minRank": 1,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": true,
@@ -247,6 +415,57 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_garder",
+            "mapName": "Garder",
+            "maxPeople": 12,
+            "preview": 715421,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_garder",
+            "mapName": "Garder",
+            "maxPeople": 12,
+            "preview": 715421,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_beachfort",
+            "mapName": "Forte da Ilha",
+            "maxPeople": 24,
+            "preview": 972683,
+            "maxRank": 30,
+            "minRank": 4,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SUMMER"
         },
         {
             "enabled": true,
@@ -318,7 +537,41 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 33.000004291534424,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_industrial_zone",
+            "mapName": "Zona Industrial",
+            "maxPeople": 20,
+            "preview": 211077,
+            "maxRank": 30,
+            "minRank": 8,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_industrial_zone",
+            "mapName": "Zona Industrial",
+            "maxPeople": 20,
+            "preview": 211077,
+            "maxRank": 30,
+            "minRank": 8,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_combe",
             "mapName": "Combe",
             "maxPeople": 8,
@@ -335,7 +588,7 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 33.000004291534424,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_combe",
             "mapName": "Combe",
             "maxPeople": 8,
@@ -353,6 +606,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_combe",
+            "mapName": "Combe",
+            "maxPeople": 8,
+            "preview": 973141,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_combe",
+            "mapName": "Combe",
+            "maxPeople": 8,
+            "preview": 973141,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 33.000004291534424,
             "mapId": "map_novel",
             "mapName": "Romance",
             "maxPeople": 20,
@@ -369,7 +656,7 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 0,
+            "additionalCrystalsPercent": 33.000004291534424,
             "mapId": "map_novel",
             "mapName": "Romance",
             "maxPeople": 20,
@@ -383,6 +670,40 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 33.000004291534424,
+            "mapId": "map_novel",
+            "mapName": "Romance",
+            "maxPeople": 20,
+            "preview": 618249,
+            "maxRank": 30,
+            "minRank": 4,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 33.000004291534424,
+            "mapId": "map_novel",
+            "mapName": "Romance",
+            "maxPeople": 20,
+            "preview": 618249,
+            "maxRank": 30,
+            "minRank": 4,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": true,
@@ -421,6 +742,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_deathtrack",
+            "mapName": "Caminho da morte",
+            "maxPeople": 24,
+            "preview": 619397,
+            "maxRank": 30,
+            "minRank": 9,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_deathtrack",
+            "mapName": "Caminho da morte",
+            "maxPeople": 24,
+            "preview": 619397,
+            "maxRank": 30,
+            "minRank": 9,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_montecarlo",
             "mapName": "Monte Carlo",
             "maxPeople": 20,
@@ -451,6 +806,40 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_montecarlo",
+            "mapName": "Monte Carlo",
+            "maxPeople": 20,
+            "preview": 891872,
+            "maxRank": 30,
+            "minRank": 9,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_montecarlo",
+            "mapName": "Monte Carlo",
+            "maxPeople": 20,
+            "preview": 891872,
+            "maxRank": 30,
+            "minRank": 9,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": true,
@@ -489,6 +878,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_sandal",
+            "mapName": "Sandália",
+            "maxPeople": 12,
+            "preview": 178332,
+            "maxRank": 30,
+            "minRank": 1,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_sandal",
+            "mapName": "Sandália",
+            "maxPeople": 12,
+            "preview": 178332,
+            "maxRank": 30,
+            "minRank": 1,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_camp",
             "mapName": "Acampamento",
             "maxPeople": 12,
@@ -519,6 +942,40 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_camp",
+            "mapName": "Acampamento",
+            "maxPeople": 12,
+            "preview": 915443,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_camp",
+            "mapName": "Acampamento",
+            "maxPeople": 12,
+            "preview": 915443,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": true,
@@ -557,6 +1014,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_fortknox",
+            "mapName": "Fort Knox",
+            "maxPeople": 14,
+            "preview": 383310,
+            "maxRank": 30,
+            "minRank": 4,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_fortknox",
+            "mapName": "Fort Knox",
+            "maxPeople": 14,
+            "preview": 383310,
+            "maxRank": 30,
+            "minRank": 4,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_trains",
             "mapName": "Estação Ferroviária",
             "maxPeople": 14,
@@ -585,6 +1076,38 @@
                 "CTF"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_trains",
+            "mapName": "Estação Ferroviária",
+            "maxPeople": 14,
+            "preview": 842515,
+            "maxRank": 30,
+            "minRank": 5,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_trains",
+            "mapName": "Estação Ferroviária",
+            "maxPeople": 14,
+            "preview": 842515,
+            "maxRank": 30,
+            "minRank": 5,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": false,
@@ -651,6 +1174,38 @@
             "theme": "WINTER"
         },
         {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_canyon",
+            "mapName": "Canyon",
+            "maxPeople": 12,
+            "preview": 914863,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_canyon",
+            "mapName": "Canyon",
+            "maxPeople": 12,
+            "preview": 914863,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF"
+            ],
+            "theme": "SPACE"
+        },
+        {
             "enabled": false,
             "additionalCrystalsPercent": 0,
             "mapId": "map_ringnew",
@@ -678,8 +1233,7 @@
             "supportedModes": [
                 "DM",
                 "TDM",
-                "CTF",
-                "AS"
+                "CTF"
             ],
             "theme": "WINTER_NIGHT"
         },
@@ -718,6 +1272,40 @@
             "theme": "WINTER"
         },
         {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_solikamsk",
+            "mapName": "Solikamsk",
+            "maxPeople": 24,
+            "preview": 475454,
+            "maxRank": 30,
+            "minRank": 9,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_solikamsk",
+            "mapName": "Solikamsk",
+            "maxPeople": 24,
+            "preview": 475454,
+            "maxRank": 30,
+            "minRank": 9,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
             "enabled": false,
             "additionalCrystalsPercent": 0,
             "mapId": "map_legacy",
@@ -745,7 +1333,8 @@
             "supportedModes": [
                 "DM",
                 "TDM",
-                "CTF"
+                "CTF",
+                "AS"
             ],
             "theme": "SUMMER"
         },
@@ -761,7 +1350,8 @@
             "supportedModes": [
                 "DM",
                 "TDM",
-                "CTF"
+                "CTF",
+                "AS"
             ],
             "theme": "SPACE"
         },
@@ -819,6 +1409,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_wave",
+            "mapName": "Onda",
+            "maxPeople": 8,
+            "preview": 394469,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_wave",
+            "mapName": "Onda",
+            "maxPeople": 8,
+            "preview": 394469,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_rio",
             "mapName": "Rio",
             "maxPeople": 20,
@@ -849,6 +1473,40 @@
                 "CP"
             ],
             "theme": "SUMMER_NIGHT"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_rio",
+            "mapName": "Rio",
+            "maxPeople": 20,
+            "preview": 913744,
+            "maxRank": 30,
+            "minRank": 3,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_rio",
+            "mapName": "Rio",
+            "maxPeople": 20,
+            "preview": 913744,
+            "maxRank": 30,
+            "minRank": 3,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": false,
@@ -918,6 +1576,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_polygon",
+            "mapName": "Polígono",
+            "maxPeople": 16,
+            "preview": 339344,
+            "maxRank": 30,
+            "minRank": 5,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_polygon",
+            "mapName": "Polígono",
+            "maxPeople": 16,
+            "preview": 339344,
+            "maxRank": 30,
+            "minRank": 5,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_esplanade",
             "mapName": "Esplanada",
             "maxPeople": 24,
@@ -948,6 +1640,40 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_esplanade",
+            "mapName": "Esplanada",
+            "maxPeople": 24,
+            "preview": 897424,
+            "maxRank": 30,
+            "minRank": 5,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_esplanade",
+            "mapName": "Esplanada",
+            "maxPeople": 24,
+            "preview": 897424,
+            "maxRank": 30,
+            "minRank": 5,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": false,
@@ -1046,6 +1772,36 @@
             "theme": "WINTER"
         },
         {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_duel",
+            "mapName": "Duelo",
+            "maxPeople": 2,
+            "preview": 312018,
+            "maxRank": 30,
+            "minRank": 9,
+            "supportedModes": [
+                "DM",
+                "TDM"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_duel",
+            "mapName": "Duelo",
+            "maxPeople": 2,
+            "preview": 312018,
+            "maxRank": 30,
+            "minRank": 9,
+            "supportedModes": [
+                "DM",
+                "TDM"
+            ],
+            "theme": "SPACE"
+        },
+        {
             "enabled": false,
             "additionalCrystalsPercent": 0,
             "mapId": "map_cologne",
@@ -1114,6 +1870,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_cross",
+            "mapName": "Cruz",
+            "maxPeople": 14,
+            "preview": 220128,
+            "maxRank": 30,
+            "minRank": 2,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_cross",
+            "mapName": "Cruz",
+            "maxPeople": 14,
+            "preview": 220128,
+            "maxRank": 30,
+            "minRank": 2,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_dusseldorf",
             "mapName": "Dusseldorf",
             "maxPeople": 40,
@@ -1144,6 +1934,40 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_dusseldorf",
+            "mapName": "Dusseldorf",
+            "maxPeople": 40,
+            "preview": 745643,
+            "maxRank": 30,
+            "minRank": 10,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_dusseldorf",
+            "mapName": "Dusseldorf",
+            "maxPeople": 40,
+            "preview": 745643,
+            "maxRank": 30,
+            "minRank": 10,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": true,
@@ -1180,6 +2004,40 @@
             "theme": "WINTER"
         },
         {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_dualiti",
+            "mapName": "Duelidade",
+            "maxPeople": 6,
+            "preview": 918503,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_dualiti",
+            "mapName": "Duelidade",
+            "maxPeople": 6,
+            "preview": 918503,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
             "enabled": false,
             "additionalCrystalsPercent": 0,
             "mapId": "map_new_year_yorkshir",
@@ -1189,7 +2047,7 @@
             "maxRank": 30,
             "minRank": 3,
             "supportedModes": [
-                "AS"
+                "DM"
             ],
             "theme": "WINTER"
         },
@@ -1263,6 +2121,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_highway",
+            "mapName": "Autoestrada",
+            "maxPeople": 24,
+            "preview": 343938,
+            "maxRank": 30,
+            "minRank": 8,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_highway",
+            "mapName": "Autoestrada",
+            "maxPeople": 24,
+            "preview": 343938,
+            "maxRank": 30,
+            "minRank": 8,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_bridges",
             "mapName": "Pontes",
             "maxPeople": 20,
@@ -1297,6 +2189,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_bridges",
+            "mapName": "Pontes",
+            "maxPeople": 20,
+            "preview": 491900,
+            "maxRank": 30,
+            "minRank": 4,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_bridges",
+            "mapName": "Pontes",
+            "maxPeople": 20,
+            "preview": 491900,
+            "maxRank": 30,
+            "minRank": 4,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 33.000004291534424,
             "mapId": "map_magistral",
             "mapName": "Magistral",
             "maxPeople": 24,
@@ -1313,7 +2239,7 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 0,
+            "additionalCrystalsPercent": 33.000004291534424,
             "mapId": "map_magistral",
             "mapName": "Magistral",
             "maxPeople": 24,
@@ -1327,6 +2253,40 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 33.000004291534424,
+            "mapId": "map_magistral",
+            "mapName": "Magistral",
+            "maxPeople": 24,
+            "preview": 448058,
+            "maxRank": 30,
+            "minRank": 9,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 33.000004291534424,
+            "mapId": "map_magistral",
+            "mapName": "Magistral",
+            "maxPeople": 24,
+            "preview": 448058,
+            "maxRank": 30,
+            "minRank": 9,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": false,
@@ -1381,6 +2341,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_brest",
+            "mapName": "Brest",
+            "maxPeople": 24,
+            "preview": 940725,
+            "maxRank": 30,
+            "minRank": 6,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_brest",
+            "mapName": "Brest",
+            "maxPeople": 24,
+            "preview": 940725,
+            "maxRank": 30,
+            "minRank": 6,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_highland",
             "mapName": "Terras Altas",
             "maxPeople": 16,
@@ -1415,10 +2409,76 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_highland",
+            "mapName": "Terras Altas",
+            "maxPeople": 16,
+            "preview": 1098580,
+            "maxRank": 30,
+            "minRank": 3,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_highland",
+            "mapName": "Terras Altas",
+            "maxPeople": 16,
+            "preview": 1098580,
+            "maxRank": 30,
+            "minRank": 3,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_platform",
             "mapName": "Plataforma",
             "maxPeople": 10,
             "preview": 431795,
+            "maxRank": 30,
+            "minRank": 3,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_platform",
+            "mapName": "Plataforma",
+            "maxPeople": 10,
+            "preview": 207969,
+            "maxRank": 30,
+            "minRank": 3,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_platform",
+            "mapName": "Plataforma",
+            "maxPeople": 10,
+            "preview": 207969,
             "maxRank": 30,
             "minRank": 3,
             "supportedModes": [
@@ -1481,6 +2541,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_gubakha",
+            "mapName": "Gubakha",
+            "maxPeople": 20,
+            "preview": 417931,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_gubakha",
+            "mapName": "Gubakha",
+            "maxPeople": 20,
+            "preview": 417931,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_osa",
             "mapName": "Osa",
             "maxPeople": 24,
@@ -1511,6 +2605,40 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_osa",
+            "mapName": "Osa",
+            "maxPeople": 24,
+            "preview": 879258,
+            "maxRank": 30,
+            "minRank": 7,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_osa",
+            "mapName": "Osa",
+            "maxPeople": 24,
+            "preview": 879258,
+            "maxRank": 30,
+            "minRank": 7,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": true,
@@ -1549,6 +2677,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_scope",
+            "mapName": "Escopo",
+            "maxPeople": 20,
+            "preview": 311130,
+            "maxRank": 30,
+            "minRank": 9,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_scope",
+            "mapName": "Escopo",
+            "maxPeople": 20,
+            "preview": 311130,
+            "maxRank": 30,
+            "minRank": 9,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_island",
             "mapName": "Ilha",
             "maxPeople": 6,
@@ -1579,6 +2741,40 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_island",
+            "mapName": "Ilha",
+            "maxPeople": 6,
+            "preview": 451484,
+            "maxRank": 30,
+            "minRank": 9,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_island",
+            "mapName": "Ilha",
+            "maxPeople": 6,
+            "preview": 451484,
+            "maxRank": 30,
+            "minRank": 9,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": true,
@@ -1632,6 +2828,40 @@
             "theme": "SUMMER_NIGHT"
         },
         {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_stadium",
+            "mapName": "Estádio",
+            "maxPeople": 20,
+            "preview": 725738,
+            "maxRank": 30,
+            "minRank": 8,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_stadium",
+            "mapName": "Estádio",
+            "maxPeople": 20,
+            "preview": 725738,
+            "maxRank": 30,
+            "minRank": 8,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
             "enabled": false,
             "additionalCrystalsPercent": 0,
             "mapId": "map_ny_island",
@@ -1680,6 +2910,40 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_boombox",
+            "mapName": "Boombox",
+            "maxPeople": 8,
+            "preview": 1096793,
+            "maxRank": 30,
+            "minRank": 2,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_boombox",
+            "mapName": "Boombox",
+            "maxPeople": 8,
+            "preview": 1096793,
+            "maxRank": 30,
+            "minRank": 2,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": false,
@@ -1731,6 +2995,40 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_magadan",
+            "mapName": "Magadam",
+            "maxPeople": 8,
+            "preview": 820717,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_magadan",
+            "mapName": "Magadam",
+            "maxPeople": 8,
+            "preview": 820717,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": false,
@@ -1818,6 +3116,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_siege",
+            "mapName": "Cerco",
+            "maxPeople": 24,
+            "preview": 682497,
+            "maxRank": 30,
+            "minRank": 9,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_siege",
+            "mapName": "Cerco",
+            "maxPeople": 24,
+            "preview": 682497,
+            "maxRank": 30,
+            "minRank": 9,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_shortbridge",
             "mapName": "Ponte pequena",
             "maxPeople": 10,
@@ -1848,6 +3180,40 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_shortbridge",
+            "mapName": "Ponte pequena",
+            "maxPeople": 10,
+            "preview": 1098740,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_shortbridge",
+            "mapName": "Ponte pequena",
+            "maxPeople": 10,
+            "preview": 1098740,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": true,
@@ -1886,6 +3252,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_farm",
+            "mapName": "Fazenda",
+            "maxPeople": 8,
+            "preview": 979904,
+            "maxRank": 30,
+            "minRank": 3,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_farm",
+            "mapName": "Fazenda",
+            "maxPeople": 8,
+            "preview": 979904,
+            "maxRank": 30,
+            "minRank": 3,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_chornobyl",
             "mapName": "Chernobyl",
             "maxPeople": 24,
@@ -1920,6 +3320,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_chornobyl",
+            "mapName": "Chernobyl",
+            "maxPeople": 24,
+            "preview": 876863,
+            "maxRank": 30,
+            "minRank": 7,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_chornobyl",
+            "mapName": "Chernobyl",
+            "maxPeople": 24,
+            "preview": 876863,
+            "maxRank": 30,
+            "minRank": 7,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_kungur",
             "mapName": "Kungur",
             "maxPeople": 24,
@@ -1950,6 +3384,40 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_kungur",
+            "mapName": "Kungur",
+            "maxPeople": 24,
+            "preview": 654854,
+            "maxRank": 30,
+            "minRank": 4,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_kungur",
+            "mapName": "Kungur",
+            "maxPeople": 24,
+            "preview": 654854,
+            "maxRank": 30,
+            "minRank": 4,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": false,
@@ -2004,6 +3472,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_valley",
+            "mapName": "Vale",
+            "maxPeople": 10,
+            "preview": 705088,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_valley",
+            "mapName": "Vale",
+            "maxPeople": 10,
+            "preview": 705088,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_skirmish",
             "mapName": "Escaramuça",
             "maxPeople": 20,
@@ -2034,6 +3536,40 @@
                 "CP"
             ],
             "theme": "SUMMER_NIGHT"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_skirmish",
+            "mapName": "Escaramuça",
+            "maxPeople": 20,
+            "preview": 153284,
+            "maxRank": 30,
+            "minRank": 3,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_skirmish",
+            "mapName": "Escaramuça",
+            "maxPeople": 20,
+            "preview": 153284,
+            "maxRank": 30,
+            "minRank": 3,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": false,
@@ -2103,6 +3639,40 @@
             "theme": "WINTER"
         },
         {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_2042",
+            "mapName": "Ano 2042",
+            "maxPeople": 24,
+            "preview": 733373,
+            "maxRank": 30,
+            "minRank": 9,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_2042",
+            "mapName": "Ano 2042",
+            "maxPeople": 24,
+            "preview": 733373,
+            "maxRank": 30,
+            "minRank": 9,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
             "enabled": false,
             "additionalCrystalsPercent": 0,
             "mapId": "map_ny_boombox",
@@ -2153,6 +3723,38 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_arena",
+            "mapName": "Arena",
+            "maxPeople": 8,
+            "preview": 902198,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_arena",
+            "mapName": "Arena",
+            "maxPeople": 8,
+            "preview": 902198,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_pingpong",
             "mapName": "Ping-Pong",
             "maxPeople": 6,
@@ -2184,7 +3786,39 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 33.000004291534424,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_pingpong",
+            "mapName": "Ping-Pong",
+            "maxPeople": 6,
+            "preview": 597265,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_pingpong",
+            "mapName": "Ping-Pong",
+            "maxPeople": 6,
+            "preview": 597265,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_losttemple",
             "mapName": "Templo Perdido",
             "maxPeople": 32,
@@ -2201,7 +3835,7 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 33.000004291534424,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_losttemple",
             "mapName": "Templo Perdido",
             "maxPeople": 32,
@@ -2219,6 +3853,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_losttemple",
+            "mapName": "Templo Perdido",
+            "maxPeople": 32,
+            "preview": 967456,
+            "maxRank": 30,
+            "minRank": 10,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_losttemple",
+            "mapName": "Templo Perdido",
+            "maxPeople": 32,
+            "preview": 967456,
+            "maxRank": 30,
+            "minRank": 10,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_factory",
             "mapName": "Fábrica",
             "maxPeople": 16,
@@ -2231,6 +3899,38 @@
                 "CTF"
             ],
             "theme": "SUMMER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_factory",
+            "mapName": "Fábrica",
+            "maxPeople": 16,
+            "preview": 1089249,
+            "maxRank": 30,
+            "minRank": 4,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_factory",
+            "mapName": "Fábrica",
+            "maxPeople": 16,
+            "preview": 1089249,
+            "maxRank": 30,
+            "minRank": 4,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": true,
@@ -2303,6 +4003,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_iran",
+            "mapName": "Irã",
+            "maxPeople": 20,
+            "preview": 235169,
+            "maxRank": 30,
+            "minRank": 3,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_iran",
+            "mapName": "Irã",
+            "maxPeople": 20,
+            "preview": 235169,
+            "maxRank": 30,
+            "minRank": 3,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_courage",
             "mapName": "Coragem",
             "maxPeople": 16,
@@ -2337,6 +4071,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_courage",
+            "mapName": "Coragem",
+            "maxPeople": 16,
+            "preview": 993896,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_courage",
+            "mapName": "Coragem",
+            "maxPeople": 16,
+            "preview": 993896,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_pass",
             "mapName": "Pass",
             "maxPeople": 10,
@@ -2365,6 +4133,38 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_pass",
+            "mapName": "Pass",
+            "maxPeople": 10,
+            "preview": 361282,
+            "maxRank": 30,
+            "minRank": 2,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_pass",
+            "mapName": "Pass",
+            "maxPeople": 10,
+            "preview": 361282,
+            "maxRank": 30,
+            "minRank": 2,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": true,
@@ -2403,6 +4203,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_skylark",
+            "mapName": "Laverca",
+            "maxPeople": 24,
+            "preview": 879456,
+            "maxRank": 30,
+            "minRank": 8,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_skylark",
+            "mapName": "Laverca",
+            "maxPeople": 24,
+            "preview": 879456,
+            "maxRank": 30,
+            "minRank": 8,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_berlin",
             "mapName": "Berlim",
             "maxPeople": 36,
@@ -2433,6 +4267,40 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_berlin",
+            "mapName": "Berlim",
+            "maxPeople": 36,
+            "preview": 634634,
+            "maxRank": 30,
+            "minRank": 10,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_berlin",
+            "mapName": "Berlim",
+            "maxPeople": 36,
+            "preview": 634634,
+            "maxRank": 30,
+            "minRank": 10,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": true,
@@ -2471,6 +4339,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_desert",
+            "mapName": "Deserto",
+            "maxPeople": 24,
+            "preview": 974371,
+            "maxRank": 30,
+            "minRank": 7,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_desert",
+            "mapName": "Deserto",
+            "maxPeople": 24,
+            "preview": 974371,
+            "maxRank": 30,
+            "minRank": 7,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_tribute",
             "mapName": "Tributo",
             "maxPeople": 20,
@@ -2501,6 +4403,40 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_tribute",
+            "mapName": "Tributo",
+            "maxPeople": 20,
+            "preview": 492725,
+            "maxRank": 30,
+            "minRank": 3,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_tribute",
+            "mapName": "Tributo",
+            "maxPeople": 20,
+            "preview": 492725,
+            "maxRank": 30,
+            "minRank": 3,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": true,
@@ -2539,6 +4475,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_opposition",
+            "mapName": "Oposição",
+            "maxPeople": 20,
+            "preview": 195515,
+            "maxRank": 30,
+            "minRank": 9,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_opposition",
+            "mapName": "Oposição",
+            "maxPeople": 20,
+            "preview": 195515,
+            "maxRank": 30,
+            "minRank": 9,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_wolfenstein",
             "mapName": "Wolfenstein",
             "maxPeople": 24,
@@ -2569,6 +4539,40 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_wolfenstein",
+            "mapName": "Wolfenstein",
+            "maxPeople": 24,
+            "preview": 834486,
+            "maxRank": 30,
+            "minRank": 6,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_wolfenstein",
+            "mapName": "Wolfenstein",
+            "maxPeople": 24,
+            "preview": 834486,
+            "maxRank": 30,
+            "minRank": 6,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": true,
@@ -2637,6 +4641,40 @@
             "theme": "SUMMER_NIGHT"
         },
         {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_silence",
+            "mapName": "Silêncio",
+            "maxPeople": 20,
+            "preview": 278196,
+            "maxRank": 30,
+            "minRank": 7,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_silence",
+            "mapName": "Silêncio",
+            "maxPeople": 20,
+            "preview": 278196,
+            "maxRank": 30,
+            "minRank": 7,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
             "enabled": false,
             "additionalCrystalsPercent": 0,
             "mapId": "map_madness_old",
@@ -2684,6 +4722,40 @@
                 "CP"
             ],
             "theme": "SUMMER_NIGHT"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_future",
+            "mapName": "Futuro",
+            "maxPeople": 20,
+            "preview": 738910,
+            "maxRank": 30,
+            "minRank": 3,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_future",
+            "mapName": "Futuro",
+            "maxPeople": 20,
+            "preview": 738910,
+            "maxRank": 30,
+            "minRank": 3,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": true,
@@ -2739,6 +4811,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_aleksandrovsk",
+            "mapName": "Aleksandrovsk",
+            "maxPeople": 24,
+            "preview": 856658,
+            "maxRank": 30,
+            "minRank": 3,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_aleksandrovsk",
+            "mapName": "Aleksandrovsk",
+            "maxPeople": 24,
+            "preview": 856658,
+            "maxRank": 30,
+            "minRank": 3,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_bobruisk",
             "mapName": "Bobruisk",
             "maxPeople": 20,
@@ -2769,6 +4875,40 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_bobruisk",
+            "mapName": "Bobruisk",
+            "maxPeople": 20,
+            "preview": 854185,
+            "maxRank": 30,
+            "minRank": 5,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_bobruisk",
+            "mapName": "Bobruisk",
+            "maxPeople": 20,
+            "preview": 854185,
+            "maxRank": 30,
+            "minRank": 5,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": true,
@@ -2807,6 +4947,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_massacre",
+            "mapName": "Massacre",
+            "maxPeople": 20,
+            "preview": 688529,
+            "maxRank": 30,
+            "minRank": 8,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_massacre",
+            "mapName": "Massacre",
+            "maxPeople": 20,
+            "preview": 688529,
+            "maxRank": 30,
+            "minRank": 8,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_hill",
             "mapName": "Morro",
             "maxPeople": 8,
@@ -2835,6 +5009,38 @@
                 "CTF"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_hill",
+            "mapName": "Morro",
+            "maxPeople": 8,
+            "preview": 151308,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_hill",
+            "mapName": "Morro",
+            "maxPeople": 8,
+            "preview": 151308,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": true,
@@ -2873,6 +5079,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_rift",
+            "mapName": "Fenda",
+            "maxPeople": 12,
+            "preview": 719694,
+            "maxRank": 30,
+            "minRank": 7,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_rift",
+            "mapName": "Fenda",
+            "maxPeople": 12,
+            "preview": 719694,
+            "maxRank": 30,
+            "minRank": 7,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_edinburgh",
             "mapName": "Edinburgh",
             "maxPeople": 16,
@@ -2906,7 +5146,41 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 33.000004291534424,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_edinburgh",
+            "mapName": "Edinburgh",
+            "maxPeople": 16,
+            "preview": 688850,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_edinburgh",
+            "mapName": "Edinburgh",
+            "maxPeople": 16,
+            "preview": 688850,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_abyss",
             "mapName": "Abismo",
             "maxPeople": 20,
@@ -2922,7 +5196,7 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 33.000004291534424,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_abyss",
             "mapName": "Abismo",
             "maxPeople": 20,
@@ -2935,6 +5209,38 @@
                 "CTF"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_abyss",
+            "mapName": "Abismo",
+            "maxPeople": 20,
+            "preview": 479869,
+            "maxRank": 30,
+            "minRank": 8,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_abyss",
+            "mapName": "Abismo",
+            "maxPeople": 20,
+            "preview": 479869,
+            "maxRank": 30,
+            "minRank": 8,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": true,
@@ -2969,6 +5275,40 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_forest",
+            "mapName": "Floresta",
+            "maxPeople": 20,
+            "preview": 486666,
+            "maxRank": 30,
+            "minRank": 8,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_forest",
+            "mapName": "Floresta",
+            "maxPeople": 20,
+            "preview": 486666,
+            "maxRank": 30,
+            "minRank": 8,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": false,
@@ -3040,6 +5380,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_deck9",
+            "mapName": "Deck-9",
+            "maxPeople": 8,
+            "preview": 555363,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_deck9",
+            "mapName": "Deck-9",
+            "maxPeople": 8,
+            "preview": 555363,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_parma",
             "mapName": "Parma",
             "maxPeople": 20,
@@ -3070,6 +5444,40 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_parma",
+            "mapName": "Parma",
+            "maxPeople": 20,
+            "preview": 997694,
+            "maxRank": 30,
+            "minRank": 7,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_parma",
+            "mapName": "Parma",
+            "maxPeople": 20,
+            "preview": 997694,
+            "maxRank": 30,
+            "minRank": 7,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": true,
@@ -3108,6 +5516,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_subway",
+            "mapName": "Metrô",
+            "maxPeople": 20,
+            "preview": 1031659,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_subway",
+            "mapName": "Metrô",
+            "maxPeople": 20,
+            "preview": 1031659,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_station",
             "mapName": "Estação",
             "maxPeople": 16,
@@ -3138,6 +5580,40 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_station",
+            "mapName": "Estação",
+            "maxPeople": 16,
+            "preview": 875477,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_station",
+            "mapName": "Estação",
+            "maxPeople": 16,
+            "preview": 875477,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": true,
@@ -3193,6 +5669,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_barda",
+            "mapName": "Barda",
+            "maxPeople": 20,
+            "preview": 829149,
+            "maxRank": 30,
+            "minRank": 3,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_barda",
+            "mapName": "Barda",
+            "maxPeople": 20,
+            "preview": 829149,
+            "maxRank": 30,
+            "minRank": 3,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_redalert",
             "mapName": "Alerta Vermelha",
             "maxPeople": 20,
@@ -3223,6 +5733,40 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_redalert",
+            "mapName": "Alerta Vermelha",
+            "maxPeople": 20,
+            "preview": 273972,
+            "maxRank": 30,
+            "minRank": 5,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_redalert",
+            "mapName": "Alerta Vermelha",
+            "maxPeople": 20,
+            "preview": 273972,
+            "maxRank": 30,
+            "minRank": 5,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": false,
@@ -3277,6 +5821,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_molotov",
+            "mapName": "Molotov",
+            "maxPeople": 20,
+            "preview": 823533,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_molotov",
+            "mapName": "Molotov",
+            "maxPeople": 20,
+            "preview": 823533,
+            "maxRank": 30,
+            "minRank": 11,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_serpuhov",
             "mapName": "Serpuhov",
             "maxPeople": 20,
@@ -3311,6 +5889,40 @@
         {
             "enabled": true,
             "additionalCrystalsPercent": 0,
+            "mapId": "map_serpuhov",
+            "mapName": "Serpuhov",
+            "maxPeople": 20,
+            "preview": 967457,
+            "maxRank": 30,
+            "minRank": 1,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_serpuhov",
+            "mapName": "Serpuhov",
+            "maxPeople": 20,
+            "preview": 967457,
+            "maxRank": 30,
+            "minRank": 1,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_noise",
             "mapName": "Barulho",
             "maxPeople": 16,
@@ -3341,6 +5953,40 @@
                 "CP"
             ],
             "theme": "WINTER"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_noise",
+            "mapName": "Barulho",
+            "maxPeople": 16,
+            "preview": 730779,
+            "maxRank": 30,
+            "minRank": 9,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
+        },
+        {
+            "enabled": true,
+            "additionalCrystalsPercent": 0,
+            "mapId": "map_noise",
+            "mapName": "Barulho",
+            "maxPeople": 16,
+            "preview": 730779,
+            "maxRank": 30,
+            "minRank": 9,
+            "supportedModes": [
+                "DM",
+                "TDM",
+                "CTF",
+                "CP"
+            ],
+            "theme": "SPACE"
         },
         {
             "enabled": false,

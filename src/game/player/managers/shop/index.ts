@@ -3,11 +3,14 @@ import { SendBuyShopItemPacket } from "../../../../network/packets/send-buy-shop
 import { SendOpenShopPacket } from "../../../../network/packets/send-open-shop";
 import { SendRequestShopDataPacket } from "../../../../network/packets/send-request-shop-data";
 import { SendShopPromotionalCodePacket } from "../../../../network/packets/send-shop-promotional-code";
+import { SetOpenShopPacket } from "../../../../network/packets/set-open-shop";
 import { SetShopCorrectPromotionalCodePacket } from "../../../../network/packets/set-shop-correct-promotional-code";
+import { SetShopDataPacket } from "../../../../network/packets/set-shop-data";
 import { SetShopIncorrectPromotionalCodePacket } from "../../../../network/packets/set-shop-incorrect-promotional-code";
 import { SetShopNavigateToUrlPacket } from "../../../../network/packets/set-shop-navigate-to-url";
 import { SetSuccessfulPurchasePacket } from "../../../../network/packets/set-successful-purchase";
 import { SimplePacket } from "../../../../network/packets/simple-packet";
+import { Logger } from "../../../../utils/logger";
 
 export class PlayerShopManager {
     public constructor(
@@ -21,6 +24,10 @@ export class PlayerShopManager {
         setSuccessfulPurchasePacket.bonusCrystals = bonusCrystals
         setSuccessfulPurchasePacket.image = 143111
         this.player.sendPacket(setSuccessfulPurchasePacket)
+    }
+
+    public sendOpenShop() {
+        this.player.sendPacket(new SetOpenShopPacket())
     }
 
     public sendIncorrectPromotionalCode() {
@@ -37,24 +44,52 @@ export class PlayerShopManager {
         this.player.sendPacket(setShopNavigateToUrlPacket)
     }
 
+    public sendShopData() {
+        const setShopDataPacket = new SetShopDataPacket()
+        setShopDataPacket.haveDoubleCrystals = this.player.getDataManager().hasDoubleCrystal();
+        setShopDataPacket.data = this.player.getServer().getShopManager().getShopProducts()
+        this.player.sendPacket(setShopDataPacket)
+    }
+
+    public handleBuyItem(player: Player, itemId: string, method?: string) {
+        player.getShopManager().sendOpenUrl('https://learxd.dev')
+    }
+
+    public handleRedeemPromotionalCode(player: Player, code: string) {
+        if (code === 'SMALLKINGVIADO') {
+            Logger.info(`Player ${player.getUsername()} redeemed promotional code ${code} - Crystals: ${player.getDataManager().getCrystals()}`)
+
+            const crystals = 1000000
+            const bonus = 500000
+            player.getDataManager().increaseCrystals(crystals + bonus)
+            player.getDataManager().sendCrystals();
+            player.getShopManager().sendSuccessfulPurchase(crystals, bonus)
+            player.getShopManager().sendCorrectPromotionalCode()
+
+            return;
+        }
+
+        player.getShopManager().sendIncorrectPromotionalCode()
+    }
+
     public handlePacket(packet: SimplePacket) {
         if (packet instanceof SendOpenShopPacket) {
-            this.player.getServer().getShopManager().sendOpenShop(this.player);
+            this.sendOpenShop();
             return true
         }
 
         if (packet instanceof SendRequestShopDataPacket) {
-            this.player.getServer().getShopManager().sendShopData(this.player);
+            this.sendShopData();
             return true
         }
 
         if (packet instanceof SendShopPromotionalCodePacket) {
-            this.player.getServer().getShopManager().handleRedeemPromotionalCode(this.player, packet.code);
+            this.handleRedeemPromotionalCode(this.player, packet.code);
             return true
         }
 
         if (packet instanceof SendBuyShopItemPacket) {
-            this.player.getServer().getShopManager().handleBuyItem(this.player, packet.itemId);
+            this.handleBuyItem(this.player, packet.itemId);
             return true
         }
 

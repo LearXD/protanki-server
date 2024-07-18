@@ -19,9 +19,7 @@ export class TipsManager {
     }
 
     public init() {
-        this.resources = this.server
-            .getAssetsManager()
-            .getResource('tips.json')
+        this.resources = this.server.getAssetsManager().getResource('tips.json')
     }
 
     public getResources() {
