@@ -43,9 +43,7 @@ export class BattleResourcesManager {
     }
 
     public async sendResources(player: Player) {
-        await this.sendObjectsResources(player)
-        await this.sendSkyboxResource(player)
-        await this.sendMapResources(player)
+
     }
 
     public sendTurretsData(player: Player) {
@@ -63,6 +61,8 @@ export class BattleResourcesManager {
     public async sendObjectsResources(player: Player) {
         const objects = player.getServer().getMapsManager()
             .getMapResource(this.battle.getMap().mapId, this.battle.getMap().theme, 'objects.json')
+
+        console.log(objects)
 
         if (!objects) {
             throw new Error('Objects data not found')
@@ -87,6 +87,8 @@ export class BattleResourcesManager {
     public async sendMapResources(player: Player) {
         const map = player.getServer().getMapsManager()
             .getMapResource(this.battle.getMap().mapId, this.battle.getMap().theme, 'map.json')
+
+        console.log(map)
 
         if (!map) {
             throw new Error('Map data not found')

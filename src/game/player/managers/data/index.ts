@@ -48,21 +48,21 @@ export class PlayerDataManager {
         const data = this.player.getData().getPremiumData()
 
         const setPremiumDataPacket = new SetPremiumDataPacket()
-        setPremiumDataPacket.needShowNotificationCompletionPremium = data.showReminder
-        setPremiumDataPacket.needShowWelcomeAlert = data.showWelcome
-        setPremiumDataPacket.reminderCompletionPremiumTime = 0
-        setPremiumDataPacket.wasShowAlertForFirstPurchasePremium = !data.showReminder
-        setPremiumDataPacket.wasShowReminderCompletionPremium = !data.showWelcome
-        setPremiumDataPacket.lifeTimeInSeconds = data.lifeTime
+        setPremiumDataPacket.needShowNotificationCompletionPremium = false//data.showReminder
+        setPremiumDataPacket.needShowWelcomeAlert = false//data.showWelcome
+        setPremiumDataPacket.reminderCompletionPremiumTime = 1247525376
+        setPremiumDataPacket.wasShowAlertForFirstPurchasePremium = true//!data.showReminder
+        setPremiumDataPacket.wasShowReminderCompletionPremium = true//!data.showWelcome
+        setPremiumDataPacket.lifeTimeInSeconds = -1 //data.lifeTime
 
-        if (data.showWelcome) {
-            // TODO: Verificar se o usuario realmente é novo ou renovacao
-            this.sendWelcomeToPremium();
-        }
+        // if (data.showWelcome) {
+        //     // TODO: Verificar se o usuario realmente é novo ou renovacao
+        //     this.sendWelcomeToPremium();
+        // }
 
-        if (this.player.getData().getProfileData().premium.endAt > Date.now()) {
-            this.sendPremiumLeftTime();
-        }
+        // if (this.player.getData().getProfileData().premium.endAt > Date.now()) {
+        //     this.sendPremiumLeftTime();
+        // }
 
         this.player.sendPacket(setPremiumDataPacket);
     }
@@ -103,7 +103,7 @@ export class PlayerDataManager {
         setUserPropertyPacket.score = this.player.getData().getScore();
         setUserPropertyPacket.serverNumber = 1;
         setUserPropertyPacket.uid = this.player.getUsername();
-        setUserPropertyPacket.userProfileUrl = 'awdawd';
+        setUserPropertyPacket.userProfileUrl = 'http://ratings.generaltanks.com/pt_br/user/';
 
         this.player.sendPacket(setUserPropertyPacket);
     }

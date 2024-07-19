@@ -21,8 +21,8 @@ export class PlayerBattlesManager {
     ) { }
 
     public sendBattleSelectScreen() {
-        this.sendBattles();
         this.player.getChatManager().sendChat();
+        this.sendBattles();
     }
 
     public sendRemoveBattlesScreen() {

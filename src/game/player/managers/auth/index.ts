@@ -53,12 +53,12 @@ export class PlayerAuthManager {
         this.player.getBattlesManager().sendBattleInviteSound();
 
         this.player.getFriendsManager().sendFriendsData();
-        this.player.getFriendsManager().sendInviteFriendsProperties()
 
-        this.player.getServer().getResourcesManager().sendResources(this.player, ResourceType.LOBBY);
+        await this.player.getServer().getResourcesManager().sendResources(this.player, ResourceType.LOBBY);
         this.player.setSubLayoutState(LayoutState.BATTLE_SELECT)
 
         this.player.getDataManager().sendAchievements();
+        this.player.getFriendsManager().sendInviteFriendsProperties()
 
         this.player.getBattlesManager().sendBattleSelectScreen();
     }

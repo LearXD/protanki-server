@@ -65,6 +65,10 @@ export class BattleStatisticsManager {
         this.deaths.set(player, this.getPlayerDeaths(player) + 1)
     }
 
+    public getFund(): number {
+        return this.fund
+    }
+
     public addFund(fund: number) {
         this.fund += fund
     }
@@ -94,19 +98,18 @@ export class BattleStatisticsManager {
         const setBattleStatisticsCCPacket = new SetBattleStatisticsCCPacket();
         setBattleStatisticsCCPacket.mode = this.battle.getMode()
         setBattleStatisticsCCPacket.equipmentConstraintsMode = this.battle.getEquipmentConstraintsMode()
-        setBattleStatisticsCCPacket.fund = this.fund
+        setBattleStatisticsCCPacket.fund = this.getFund()
         setBattleStatisticsCCPacket.battleLimits = {
-            scoreLimit: this.battle.getData().scoreLimit,
-            timeLimitInSec: 0
+            scoreLimit: this.battle.getScoreLimit(),
+            timeLimitInSec: this.battle.getTimeLimitInSec()
         }
         setBattleStatisticsCCPacket.mapName = this.battle.getName();
-        setBattleStatisticsCCPacket.maxPeopleCount = this.battle.getPlayersManager().getMaxPlayers()
-        setBattleStatisticsCCPacket.parkourMode = this.battle.getData().parkourMode
-        setBattleStatisticsCCPacket.int_1 = 100 // scoreLimit?
+        setBattleStatisticsCCPacket.maxPeopleCount = this.battle.getMaxPeopleCount()
+        setBattleStatisticsCCPacket.parkourMode = this.battle.isParkourMode();
+        setBattleStatisticsCCPacket.int_1 = 4002 // scoreLimit?
         setBattleStatisticsCCPacket.spectator = false
-        setBattleStatisticsCCPacket.strings_1 = null
-        setBattleStatisticsCCPacket.int_2 = 0
-
+        setBattleStatisticsCCPacket.strings_1 = []
+        setBattleStatisticsCCPacket.int_2 = this.battle.getTimeLeft()
         client.sendPacket(setBattleStatisticsCCPacket);
     }
 }

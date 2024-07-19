@@ -28,7 +28,6 @@ export class UserDataManager {
 
     public handleRequestUserData(client: Client, username: string) {
         const data = this.findPlayerData(username);
-        const player = this.server.getPlayersManager().getPlayer(username)
 
         const setUserOnlinePacket = new SetUserOnlinePacket();
         setUserOnlinePacket.online = true;

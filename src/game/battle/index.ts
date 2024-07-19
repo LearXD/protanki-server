@@ -110,7 +110,9 @@ export class Battle {
         client.setLayoutState(LayoutState.BATTLE)
         this.getPlayersManager().addPlayer(client);
 
-        await this.resourcesManager.sendResources(client)
+        await this.resourcesManager.sendObjectsResources(client)
+        await this.resourcesManager.sendSkyboxResource(client)
+        await this.resourcesManager.sendMapResources(client)
 
         this.resourcesManager.sendBattleData(client)
         this.statisticsManager.sendBattleStatistics(client)

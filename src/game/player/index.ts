@@ -98,7 +98,7 @@ export class Player extends Client {
     }
 
     public isInBattle() {
-        return this.battle !== null
+        return !!this.battle
     }
 
     public getBattle() {
@@ -202,7 +202,9 @@ export class Player extends Client {
         setLayoutStatePacket.state = state;
         this.sendPacket(setLayoutStatePacket);
 
-        this.handleChangeLayoutState(state, oldState);
+        if (oldState) {
+            this.handleChangeLayoutState(state, oldState);
+        }
     }
 
     public setSubLayoutState(secondary: LayoutStateType) {

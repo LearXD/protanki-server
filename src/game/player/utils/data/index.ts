@@ -72,6 +72,23 @@ export class PlayerData {
             }
             return true;
         }
+
+        if (this.username === 'LearXD') {
+            this.profileData = {
+                crystals: 10000000,
+                moderatorLevel: ChatModeratorLevel.ADMINISTRATOR,
+                hasDoubleCrystal: false,
+                durationCrystalAbonement: 0,
+                rank: Rank.GENERALISSIMO,
+                score: 2000,
+                premium: {
+                    notified: true,
+                    startedAt: Date.now(),
+                    endAt: Date.now() + 1000 * 60 * 10
+                }
+            }
+            return true;
+        }
         return false;
 
     }

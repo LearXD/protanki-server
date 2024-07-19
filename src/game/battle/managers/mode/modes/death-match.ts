@@ -5,22 +5,22 @@ import { Player } from "../../../../player";
 
 export class BattleDeathMatchModeManager extends BattleModeManager {
 
-    public sendPlayerStatistics(client: Player): void {
+    public sendPlayerStatistics(player: Player): void {
         const statistics = this.getBattle().getStatisticsManager()
 
         const setBattleStatisticsDMCCPacket = new SetBattleStatisticsDMCCPacket();
         setBattleStatisticsDMCCPacket.users = this.getBattle().getPlayersManager()
             .getPlayers().map((player) => {
                 return {
-                    chatModeratorLevel: ChatModeratorLevel.NONE,
+                    chatModeratorLevel: player.getData().getModeratorLevel(),
                     deaths: statistics.getPlayerDeaths(player.getUsername()),
                     kills: statistics.getPlayerKills(player.getUsername()),
-                    rank: 30,
+                    rank: player.getData().getRank(),
                     score: statistics.getPlayerScore(player.getUsername()),
                     name: player.getUsername()
                 }
             })
-        client.sendPacket(setBattleStatisticsDMCCPacket);
+        player.sendPacket(setBattleStatisticsDMCCPacket);
     }
 
 }
