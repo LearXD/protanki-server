@@ -259,7 +259,7 @@ export class PlayerGarageManager {
 
         this.player.setLayoutState(LayoutState.GARAGE);
 
-        await new Promise((resolve) => setTimeout(resolve, 2000));
+        // await new Promise((resolve) => setTimeout(resolve, 2000));
 
         await this.player.getServer().getResourcesManager().sendResources(this.player, ResourceType.GARAGE);
 
