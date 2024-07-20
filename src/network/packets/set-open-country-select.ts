@@ -2,26 +2,25 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetCaptchaLocation2Packet extends Packet {
+export class SetOpenCountrySelectPacket extends Packet {
 
-    public type: number;
+    public defaultCountry: string
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_CAPTCHA_LOCATION_2, bytes)
+        super(Protocol.SET_OPEN_COUNTRY_SELECT, bytes)
     }
 
     public decode() {
         const bytes = this.cloneBytes();
-        this.type = bytes.readInt();
-
+        this.defaultCountry = bytes.readString();
         return {
-            type: this.type
+            defaultCountry: this.defaultCountry
         }
     }
 
     public encode() {
         const bytes = new ByteArray();
-        bytes.writeInt(this.type);
+        bytes.writeString(this.defaultCountry);
         return bytes;
     }
 }

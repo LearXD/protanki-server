@@ -176,9 +176,11 @@ import { SendCreateBattlePacket } from "./packets/send-create-battle";
 import { SetRemoveUserChatMessagesPacket } from "./packets/set-remove-user-chat-messages";
 import { SetAddUserInfoOnViewingTeamBattlePacket } from "./packets/set-add-user-info-on-viewing-team-battle";
 import { SetRemoveViewingBattlePacket } from "./packets/set-remove-viewing-battle";
-import { SetCaptchaLocation2Packet } from "./packets/set-captcha-location-2";
+import { SetCaptchaCorrectPacket } from "./packets/set-captcha-correct";
 
 // GENERATE IMPORT HERE
+import { SetOpenCountrySelectPacket } from "./packets/set-open-country-select";
+import { SetCaptchaIncorrectPacket } from "./packets/set-captcha-incorrect";
 import { SetRegisterUsernameAlreadyUsedPacket } from "./packets/set-register-username-already-used";
 import { SendSpectateBattlePacket } from "./packets/send-spectate-battle";
 import { SendBuyChangeDailyQuestPacket } from "./packets/send-buy-change-daily-quest";
@@ -356,7 +358,7 @@ export class Network {
         this.registerPacket(Protocol.SET_AUTH_RESOURCES, SetAuthResourcesPacket)
 
         this.registerPacket(Protocol.SEND_REQUEST_CAPTCHA, SendRequestCaptchaPacket)
-        this.registerPacket(Protocol.SET_CAPTCHA_LOCATION_2, SetCaptchaLocation2Packet)
+        this.registerPacket(Protocol.SET_CAPTCHA_CORRECT, SetCaptchaCorrectPacket)
 
         this.registerPacket(Protocol.SET_CAPTCHA_DATA, SetCaptchaDataPacket)
         this.registerPacket(Protocol.SET_CAPTCHA_RESPONSE, SetCaptchaResponsePacket)
@@ -683,6 +685,8 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);
 
         // GENERATE REGISTER HERE
+        this.registerPacket(Protocol.SET_OPEN_COUNTRY_SELECT, SetOpenCountrySelectPacket);
+        this.registerPacket(Protocol.SET_CAPTCHA_INCORRECT, SetCaptchaIncorrectPacket);
         this.registerPacket(Protocol.SET_REGISTER_USERNAME_ALREADY_USED, SetRegisterUsernameAlreadyUsedPacket);
         this.registerPacket(Protocol.SEND_SPECTATE_BATTLE, SendSpectateBattlePacket);
         this.registerPacket(Protocol.SEND_BUY_CHANGE_DAILY_QUEST, SendBuyChangeDailyQuestPacket);

@@ -32,11 +32,11 @@ export class Protocol {
 
     /** CAPTCHA */
     static SEND_REQUEST_CAPTCHA = -349828108
-    //-373510957
+    static SET_CAPTCHA_INCORRECT = -373510957;
     static SET_CAPTCHA_LOCATIONS = 321971701
     static SET_CAPTCHA_DATA = -1670408519
     static SET_CAPTCHA_RESPONSE = 1271163230
-    static SET_CAPTCHA_LOCATION_2 = -819536476 // remove?
+    static SET_CAPTCHA_CORRECT = -819536476 // remove?
 
 
     /** RESOURCE */
@@ -619,7 +619,7 @@ export class Protocol {
 
 
     /** OPEN SHOP & REGION */
-    // static SET_SELECT_DEFAULT_COUNTRY = 1961542160
+    static SET_OPEN_COUNTRY_SELECT = 1961542160;
     static SEND_OPEN_SHOP = -296048697
     static SET_OPEN_SHOP = 1870342869;
     static SET_COUNTRY_LOCALE_NAME = -1232334539;
@@ -640,4 +640,5 @@ export class Protocol {
 
 
     // GENERATE HERE
+
 }
