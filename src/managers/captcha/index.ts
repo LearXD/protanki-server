@@ -28,19 +28,15 @@ export class CaptchaManager {
         client.sendPacket(captchaLocationsPacket);
     }
 
-    public handleRequestCaptcha(client: Client, location: CaptchaLocationType) {
-        const data = this.server.getAssetsManager().getData(
-            path.join('captcha', 'image.jpg'), ReadType.BUFFER
-        );
+    public generateCaptcha() {
+        const data = this.server.getAssetsManager().getData<Buffer>
+            (path.join('captcha', 'image.jpg'), ReadType.BUFFER);
 
-        this.sendCaptchaData(client, { type: location, data });
+        return {
+            response: 'ABCDE',
+            data: data
+        }
     }
 
-    public sendCaptchaData = (client: Client, data: { type: CaptchaLocationType, data: Buffer }) => {
-        const setCaptchaDataPacket = new SetCaptchaDataPacket();
-        setCaptchaDataPacket.type = data.type;
-        setCaptchaDataPacket.data = CaptchaUtils.encode(data.data);
 
-        client.sendPacket(setCaptchaDataPacket);
-    }
 }

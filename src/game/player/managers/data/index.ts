@@ -6,6 +6,7 @@ import { SetPremiumLeftTimePacket } from "../../../../network/packets/set-premiu
 import { SetScorePacket } from "../../../../network/packets/set-score";
 import { SetUserPropertyPacket } from "../../../../network/packets/set-user-property";
 import { SetWelcomeToPremiumPacket } from "../../../../network/packets/set-welcome-to-premium";
+import { Achievement } from "../../../../utils/game/achievement";
 import { Logger } from "../../../../utils/logger";
 import { PlayerData } from "../../utils/data";
 
@@ -79,11 +80,11 @@ export class PlayerDataManager {
     public sendAchievements() {
         const setAchievementCCPacket = new SetAchievementsPacket();
         setAchievementCCPacket.achievements = [
-            // Achievement.FIRST_RANK_UP,
-            // Achievement.FIRST_PURCHASE,
-            // Achievement.SET_EMAIL,
-            // Achievement.FIGHT_FIRST_BATTLE,
-            // Achievement.FIRST_DONATE
+            Achievement.FIRST_RANK_UP,
+            Achievement.FIRST_PURCHASE,
+            Achievement.SET_EMAIL,
+            Achievement.FIGHT_FIRST_BATTLE,
+            Achievement.FIRST_DONATE
         ];
         this.player.sendPacket(setAchievementCCPacket);
     }

@@ -7,6 +7,57 @@ export class PlayerData {
     private profileData: IPlayerProfileData;
     private garageData: IPlayerGarageData;
 
+    private static profiles: { username: string, data: IPlayerProfileData }[] = [
+        {
+            username: 'PiuRap',
+            data: {
+                crystals: 2000,
+                moderatorLevel: ChatModeratorLevel.MODERATOR,
+                hasDoubleCrystal: true,
+                durationCrystalAbonement: 0,
+                rank: Rank.BRIGADIER,
+                score: 2000,
+                premium: {
+                    notified: false,
+                    startedAt: Date.now(),
+                    endAt: Date.now() + 1000 * 60 * 10
+                }
+            }
+        },
+        {
+            username: 'TheUnknown',
+            data: {
+                crystals: 1000,
+                moderatorLevel: ChatModeratorLevel.COMMUNITY_MANAGER,
+                hasDoubleCrystal: false,
+                durationCrystalAbonement: 48602763,
+                rank: Rank.GENERALISSIMO,
+                score: 2000,
+                premium: {
+                    notified: false,
+                    startedAt: Date.now(),
+                    endAt: Date.now()
+                }
+            }
+        },
+        // {
+        //     username: 'LearXD',
+        //     data: {
+        //         crystals: 10000000,
+        //         moderatorLevel: ChatModeratorLevel.ADMINISTRATOR,
+        //         hasDoubleCrystal: false,
+        //         durationCrystalAbonement: 0,
+        //         rank: Rank.GENERALISSIMO,
+        //         score: 2000,
+        //         premium: {
+        //             notified: true,
+        //             startedAt: Date.now(),
+        //             endAt: Date.now() + 1000 * 60 * 10
+        //         }
+        //     }
+        // }
+    ]
+
     public constructor(
         private readonly username: string
     ) { }
@@ -30,6 +81,10 @@ export class PlayerData {
     }
 
     public static findPlayerAuthData(username: string): IPlayerAuthData {
+        const exists = this.profiles.find(p => p.username === username);
+        if (!exists) {
+            return null;
+        }
         return {
             username: username,
             password: 'suasenha123',
@@ -38,59 +93,37 @@ export class PlayerData {
         }
     }
 
+    public static createPlayerData(username: string, password: string): IPlayerAuthData {
+        const data = new PlayerData(username);
+        data.profileData = {
+            crystals: 500,
+            moderatorLevel: ChatModeratorLevel.NONE,
+            hasDoubleCrystal: false,
+            durationCrystalAbonement: 0,
+            rank: Rank.RECRUIT,
+            score: 0,
+            premium: {
+                notified: false,
+                startedAt: Date.now(),
+                endAt: Date.now()
+            }
+        }
+        this.profiles.push({ username: username, data: data.profileData });
+        return {
+            username: username,
+            password: password,
+            email: null,
+            emailConfirmed: false
+        };
+    }
+
     public loadProfile() {
-        if (this.username === 'PiuRap') {
-            this.profileData = {
-                crystals: 2000,
-                moderatorLevel: ChatModeratorLevel.MODERATOR,
-                hasDoubleCrystal: true,
-                durationCrystalAbonement: 0,
-                rank: Rank.BRIGADIER,
-                score: 2000,
-                premium: {
-                    notified: false,
-                    startedAt: Date.now(),
-                    endAt: Date.now() + 1000 * 60 * 10
-                }
-            }
-            return true;
-        }
-
-        if (this.username === 'TheUnknown') {
-            this.profileData = {
-                crystals: 1000,
-                moderatorLevel: ChatModeratorLevel.COMMUNITY_MANAGER,
-                hasDoubleCrystal: false,
-                durationCrystalAbonement: 48602763,
-                rank: Rank.GENERALISSIMO,
-                score: 2000,
-                premium: {
-                    notified: false,
-                    startedAt: Date.now(),
-                    endAt: Date.now()
-                }
-            }
-            return true;
-        }
-
-        if (this.username === 'LearXD') {
-            this.profileData = {
-                crystals: 10000000,
-                moderatorLevel: ChatModeratorLevel.ADMINISTRATOR,
-                hasDoubleCrystal: false,
-                durationCrystalAbonement: 0,
-                rank: Rank.GENERALISSIMO,
-                score: 2000,
-                premium: {
-                    notified: true,
-                    startedAt: Date.now(),
-                    endAt: Date.now() + 1000 * 60 * 10
-                }
-            }
+        const data = PlayerData.profiles.find(p => p.username === this.username);
+        if (data) {
+            this.profileData = data.data;
             return true;
         }
         return false;
-
     }
 
     public loadGarage() {

@@ -19,7 +19,7 @@ import { SendRegisterCheckUsernamePacket } from "./packets/send-register-check-u
 import { SetAdvisedUsernamesPacket } from "./packets/set-advised-usernames";
 import { SetRegisterUsernameAvailablePacket } from "./packets/set-register-username-available";
 import { SetRememberMePacket } from "./packets/set-remember-me";
-import { SetCaptchaResponsePacket } from "./packets/set-captcha-response";
+import { SendCaptchaResponsePacket } from "./packets/send-captcha-response";
 import { SendRegisterPacket } from "./packets/send-register";
 import { SetLoginHashPacket } from "./packets/set-login-hash";
 import { SetBonusPacket } from "./packets/set-bonus";
@@ -361,7 +361,7 @@ export class Network {
         this.registerPacket(Protocol.SET_CAPTCHA_CORRECT, SetCaptchaCorrectPacket)
 
         this.registerPacket(Protocol.SET_CAPTCHA_DATA, SetCaptchaDataPacket)
-        this.registerPacket(Protocol.SET_CAPTCHA_RESPONSE, SetCaptchaResponsePacket)
+        this.registerPacket(Protocol.SEND_CAPTCHA_RESPONSE, SendCaptchaResponsePacket)
 
         this.registerPacket(Protocol.SEND_REGISTER_CHECK_USERNAME, SendRegisterCheckUsernamePacket)
         this.registerPacket(Protocol.SET_REGISTER_USERNAME_AVAILABLE, SetRegisterUsernameAvailablePacket)

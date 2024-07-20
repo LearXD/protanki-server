@@ -11,6 +11,7 @@ import { SetRegisterUsernameAlreadyUsedPacket } from "../../../../network/packet
 import { SetAdvisedUsernamesPacket } from "../../../../network/packets/set-advised-usernames";
 import { IPlayerAuthData } from "../../utils/data/types";
 import { PlayerData } from "../../utils/data";
+import { SendRegisterPacket } from "../../../../network/packets/send-register";
 
 export class PlayerAuthManager {
 
@@ -77,11 +78,26 @@ export class PlayerAuthManager {
         return true;
     }
 
+    public handleRegisterPacket(packet: SendRegisterPacket) {
+        const data = PlayerData.findPlayerAuthData(packet.username);
+
+        if (data) {
+            this.player.sendPacket(new SetRegisterUsernameAlreadyUsedPacket())
+            return;
+        }
+
+        this.data = PlayerData.createPlayerData(packet.username, packet.password);
+        this.handleAuthenticated();
+    }
+
     public handlePacket(packet: Packet) {
 
         if (packet instanceof SendLoginPacket) {
             this.handleLoginPacket(packet)
-            return true
+        }
+
+        if (packet instanceof SendRegisterPacket) {
+            this.handleRegisterPacket(packet)
         }
 
         if (packet instanceof SendRegisterCheckUsernamePacket) {
@@ -95,10 +111,6 @@ export class PlayerAuthManager {
             const setAdvisedUsernamesPacket = new SetAdvisedUsernamesPacket();
             setAdvisedUsernamesPacket.usernames = ['LearXD', 'LearXD1', 'LearXD2', 'LearXD3', 'LearXD4']
             this.player.sendPacket(setAdvisedUsernamesPacket)
-
-            return true;
         }
-
-        return false;
     }
 }

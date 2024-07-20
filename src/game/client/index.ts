@@ -16,6 +16,7 @@ import { PongPacket } from "../../network/packets/pong";
 import { SendRequestCaptchaPacket } from "../../network/packets/send-request-captcha";
 import { SendRequestUserDataPacket } from "../../network/packets/send-request-user-data";
 import { IGNORE_PACKETS } from "../player/handlers/packet";
+import { ClientCaptchaManager } from "./managers/captcha";
 
 
 
@@ -28,6 +29,8 @@ export abstract class Client {
     private lastPing: number = 0;
     private lastPong: number = 0;
 
+    private captchaManager: ClientCaptchaManager;
+
     private resourcesLoaded: number = 0;
     private resourcesCallbackPool: Map<number, () => void> = new Map();
 
@@ -35,6 +38,8 @@ export abstract class Client {
         private readonly socket: net.Socket,
         private readonly server: Server
     ) {
+        this.captchaManager = new ClientCaptchaManager(this);
+
         this.sendCryptKeys();
     }
 
@@ -69,6 +74,8 @@ export abstract class Client {
         this.sendPacket(packet);
     }
 
+    public getCaptchaManager() { return this.captchaManager }
+
     public addResourceLoading(callback: () => void) {
         this.resourcesLoaded++;
         this.resourcesCallbackPool.set(this.resourcesLoaded, callback);
@@ -87,11 +94,12 @@ export abstract class Client {
 
     public handlePacket(packet: SimplePacket) {
 
+        this.captchaManager.handlePacket(packet);
+
         if (packet instanceof PongPacket) {
             this.updateLastPong();
             return true;
         }
-
 
         if (packet instanceof SendLanguagePacket) {
             Logger.log(`Language set to '${packet.language}'`)
@@ -100,8 +108,7 @@ export abstract class Client {
         }
 
         if (packet instanceof SendRequestLoadScreenPacket) {
-            this.getServer().getTipsManager()
-                .sendLoadingTip(this);
+            this.getServer().getTipsManager().sendLoadingTip(this);
             return true;
         }
 
@@ -113,17 +120,10 @@ export abstract class Client {
             return true;
         }
 
-        if (packet instanceof SendRequestCaptchaPacket) {
-            this.getServer().getCaptchaManager()
-                .handleRequestCaptcha(this, packet.type);
-            return true;
-        }
-
         if (packet instanceof SendRequestUserDataPacket) {
             this.getServer().getUserDataManager().handleRequestUserData(this, packet.userId);
             return true;
         }
-
 
         return false;
     }
