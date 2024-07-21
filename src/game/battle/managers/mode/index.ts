@@ -1,5 +1,4 @@
 import { Battle } from "../..";
-import { Player } from "../../../player";
 
 export abstract class BattleModeManager {
     public constructor(
@@ -8,5 +7,5 @@ export abstract class BattleModeManager {
 
     public getBattle() { return this.battle }
 
-    public abstract sendPlayerStatistics(client: Player): void
+    public abstract sendPlayersStatistics(): void
 }

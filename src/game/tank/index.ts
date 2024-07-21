@@ -20,6 +20,7 @@ import { SetTankChangedEquipmentPacket } from "../../network/packets/set-tank-ch
 import { SetRemoveTankPacket } from "../../network/packets/set-remove-tank";
 import { SetTankRespawnDelayPacket } from "../../network/packets/set-tank-respawn-delay";
 import { Battle } from "../battle";
+import { IUserTankResourcesData } from "../../network/packets/set-user-tank-resources-data";
 
 export class Tank {
 
@@ -32,12 +33,24 @@ export class Tank {
     public changedEquipment = false;
 
     public constructor(
-        private readonly player: Player,
-        private readonly battle: Battle
+        public readonly player: Player,
+        public readonly battle: Battle
     ) { }
 
-    public getBattle() {
-        return this.getBattle()
+    public getIncarnationId() {
+        return this.incarnation
+    }
+
+    public getHealth() {
+        return this.health
+    }
+
+    public setHealth(health: number) {
+        this.health = health;
+        const setTankHealthPacket = new SetTankHealthPacket();
+        setTankHealthPacket.tankId = this.player.getUsername();
+        setTankHealthPacket.health = health;
+        this.battle.broadcastPacket(setTankHealthPacket);
     }
 
     public getPosition(): Vector3d {
@@ -53,31 +66,13 @@ export class Tank {
     }
 
     public setVisible(visible: boolean) {
+        this.visible = visible
+
         if (visible) {
             const setTankVisiblePacket = new SetTankVisiblePacket();
             setTankVisiblePacket.tankId = this.player.getUsername();
-            this.player.sendPacket(setTankVisiblePacket);
+            this.battle.broadcastPacket(setTankVisiblePacket);
         }
-
-        this.visible = visible
-    }
-
-    public getHealth() {
-        return this.health
-    }
-
-    public setHealth(health: number) {
-        const setTankHealthPacket = new SetTankHealthPacket();
-        setTankHealthPacket.tankId = this.player.getUsername();
-        setTankHealthPacket.health = health;
-        this.player.sendPacket(setTankHealthPacket);
-        this.health = health;
-    }
-
-
-    public prepareRespawn() {
-        // TODO: set spawn position
-        this.setCameraPosition(new Vector3d(-4669.8310546875, -1442.4090576171875, 200), new Vector3d(0, 0, -1.5709999799728394))
     }
 
     public setCameraPosition(position: Vector3d, orientation: Vector3d) {
@@ -86,7 +81,6 @@ export class Tank {
         setMoveCameraPacket.orientation = orientation
         this.player.sendPacket(setMoveCameraPacket);
     }
-
 
     public sendLatency(serverTime: number) {
         const setLatencyPacket = new SetLatencyPacket();
@@ -107,13 +101,18 @@ export class Tank {
         this.battle.broadcastPacket(setChangedEquipmentPacket);
     }
 
-    public spawn() {
+    public prepareRespawn() {
         this.incarnation++;
+        // TODO: set speed
+        this.setCameraPosition(new Vector3d(-4669.8310546875, -1442.4090576171875, 200), new Vector3d(0, 0, -1.5709999799728394))
+    }
+
+    public spawn() {
 
         if (this.changedEquipment) {
             this.changedEquipment = false;
             this.sendRemoveTank();
-            this.battle.getPlayersManager().sendPlayerData(this.player);
+            this.battle.getPlayersManager().broadcastTankData(this.getData());
             this.sendChangeEquipment();
         }
 
@@ -124,10 +123,10 @@ export class Tank {
         setSpawnTankPacket.team = Team.NONE;
         setSpawnTankPacket.position = new Vector3d(-4669.8310546875, -1442.4090576171875, 200);
         setSpawnTankPacket.orientation = new Vector3d(0, 0, -1.5709999799728394);
-        setSpawnTankPacket.health = 10000;
+        setSpawnTankPacket.health = this.health;
         setSpawnTankPacket.incarnationId = this.incarnation;
 
-        this.player.sendPacket(setSpawnTankPacket);
+        this.battle.broadcastPacket(setSpawnTankPacket);
     }
 
     public destroy() {
@@ -202,5 +201,46 @@ export class Tank {
         }
 
         return false;
+    }
+
+    public getData(): IUserTankResourcesData {
+        const turret = this.player.getGarageManager().getTurretResources()
+        const hull = this.player.getGarageManager().getHullResources()
+        const painting = this.player.getGarageManager().getPaintingResources()
+
+        return {
+            battleId: this.battle.getBattleId(),
+            colormap_id: painting.item.coloring,
+            hull_id: hull.hull,
+            turret_id: turret.turret,
+            team_type: 'NONE',
+            partsObject: '{"engineIdleSound":386284,"engineStartMovingSound":226985,"engineMovingSound":75329,"turretSound":242699}',
+            hullResource: hull.item.object3ds,
+            turretResource: turret.item.object3ds,
+            sfxData: JSON.stringify(turret.sfx),
+            position: { x: 0, y: 0, z: 0 },
+            orientation: { x: 0, y: 0, z: 0 },
+            incarnation: this.incarnation,
+            tank_id: this.player.getUsername(),
+            nickname: this.player.getUsername(),
+            state: 'suicide',
+            maxSpeed: hull.properties.maxSpeed,
+            maxTurnSpeed: hull.properties.maxTurnSpeed,
+            acceleration: hull.properties.acceleration,
+            reverseAcceleration: hull.properties.reverseAcceleration,
+            sideAcceleration: hull.properties.sideAcceleration,
+            turnAcceleration: hull.properties.turnAcceleration,
+            reverseTurnAcceleration: hull.properties.reverseTurnAcceleration,
+            mass: hull.properties.mass,
+            power: hull.properties.power,
+            dampingCoeff: hull.properties.dampingCoeff,
+            turret_turn_speed: turret.properties.turretTurnAcceleration,
+            health: 0,
+            rank: this.player.getData().getRank(),
+            kickback: turret.properties.kickback,
+            turretTurnAcceleration: turret.properties.turretTurnAcceleration,
+            impact_force: turret.properties.impact_force,
+            state_null: true
+        }
     }
 }

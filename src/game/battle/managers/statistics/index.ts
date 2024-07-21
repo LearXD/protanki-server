@@ -1,5 +1,8 @@
 import { Battle } from "../..";
-import { SetBattleStatisticsCCPacket } from "../../../../network/packets/set-battle-statistics-cc";
+import { SetBattleChatConfigPacket } from "../../../../network/packets/set-battle-chat-config";
+import { SetBattleFundPacket } from "../../../../network/packets/set-battle-fund";
+import { SetBattleRewardsPacket } from "../../../../network/packets/set-battle-rewards";
+import { SetBattleDataPacket } from "../../../../network/packets/set-battle-data";
 import { SetBattleUserStatusPacket } from "../../../../network/packets/set-battle-user-status";
 import { Player } from "../../../player";
 
@@ -73,6 +76,12 @@ export class BattleStatisticsManager {
         this.fund += fund
     }
 
+    public sendFund() {
+        const packet = new SetBattleFundPacket();
+        packet.fund = this.getFund();
+        this.battle.broadcastPacket(packet);
+    }
+
     public getPlayerScore(player: string): number {
         return this.scores.get(player) || 0
     }
@@ -85,31 +94,65 @@ export class BattleStatisticsManager {
         return this.deaths.get(player) || 0
     }
 
-    public sendPlayerStatistics(client: Player) {
+    public sendFinishRewards() {
+        const packet = new SetBattleRewardsPacket();
+        packet.rewards = this.battle.getPlayersManager().getPlayers()
+            .map(player => {
+                const username = player.getUsername()
+                return {
+                    user: username,
+                    score: this.getPlayerScore(username),
+                    kills: this.getPlayerKills(username),
+                    deaths: this.getPlayerDeaths(username)
+                }
+            })
+        packet.timeToRestart = 10;
+        this.battle.broadcastPacket(packet);
+    }
+
+    public broadcastPlayerStatistics(client: Player) {
         const setBattleUserStatusPacket = new SetBattleUserStatusPacket()
         setBattleUserStatusPacket.deaths = this.getPlayerDeaths(client.getUsername())
         setBattleUserStatusPacket.kills = this.getPlayerKills(client.getUsername())
         setBattleUserStatusPacket.score = this.getPlayerScore(client.getUsername())
         setBattleUserStatusPacket.user = client.getUsername()
-        client.sendPacket(setBattleUserStatusPacket)
+        this.battle.broadcastPacket(setBattleUserStatusPacket)
     }
 
-    public sendBattleStatistics(client: Player) {
-        const setBattleStatisticsCCPacket = new SetBattleStatisticsCCPacket();
-        setBattleStatisticsCCPacket.mode = this.battle.getMode()
-        setBattleStatisticsCCPacket.equipmentConstraintsMode = this.battle.getEquipmentConstraintsMode()
-        setBattleStatisticsCCPacket.fund = this.getFund()
-        setBattleStatisticsCCPacket.battleLimits = {
+    public sendBattleData(client: Player) {
+        const packet = new SetBattleDataPacket();
+        packet.mode = this.battle.getMode()
+        packet.equipmentConstraintsMode = this.battle.getEquipmentConstraintsMode()
+        packet.fund = this.getFund()
+        packet.battleLimits = {
             scoreLimit: this.battle.getScoreLimit(),
             timeLimitInSec: this.battle.getTimeLimitInSec()
         }
-        setBattleStatisticsCCPacket.mapName = this.battle.getName();
-        setBattleStatisticsCCPacket.maxPeopleCount = this.battle.getMaxPeopleCount()
-        setBattleStatisticsCCPacket.parkourMode = this.battle.isParkourMode();
-        setBattleStatisticsCCPacket.int_1 = 4002 // scoreLimit?
-        setBattleStatisticsCCPacket.spectator = false
-        setBattleStatisticsCCPacket.strings_1 = []
-        setBattleStatisticsCCPacket.int_2 = this.battle.getTimeLeft()
-        client.sendPacket(setBattleStatisticsCCPacket);
+        packet.mapName = this.battle.getName();
+        packet.maxPeopleCount = this.battle.getMaxPeopleCount()
+        packet.parkourMode = this.battle.isParkourMode();
+        packet.scoreLimit = 100 // scoreLimit?
+        packet.spectator = false
+        packet.strings_1 = []
+        packet.lastTime = this.battle.getTimeLeft()
+        client.sendPacket(packet);
+    }
+
+    public broadcastAddPlayerStatistics(player: Player) {
+        const packet = new SetBattleChatConfigPacket();
+        packet.userId = player.getUsername();
+        packet.users = this.battle.getPlayersManager().getPlayers()
+            .map(player => {
+                return {
+                    chatModeratorLevel: player.getData().getModeratorLevel(),
+                    deaths: this.getPlayerDeaths(player.getUsername()),
+                    kills: this.getPlayerKills(player.getUsername()),
+                    rank: player.getData().getRank(),
+                    score: this.getPlayerScore(player.getUsername()),
+                    name: player.getUsername()
+                }
+            })
+
+        this.battle.broadcastPacket(packet, [player.getUsername()]);
     }
 }

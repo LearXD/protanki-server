@@ -1,6 +1,5 @@
 import { Battle } from "../..";
-import { SetBattleDataPacket } from "../../../../network/packets/set-battle-data";
-import { SetBattleMineCCPacket } from "../../../../network/packets/set-battle-mine-cc";
+import { SetBattleMapPropertiesPacket } from "../../../../network/packets/set-battle-map-properties";
 import { SetTurretsDataPacket } from "../../../../network/packets/set-turrets-data";
 import { Logger } from "../../../../utils/logger";
 import { Player } from "../../../player";
@@ -11,7 +10,7 @@ export class BattleResourcesManager {
         private readonly battle: Battle
     ) { }
 
-    public sendBattleData(client: Player) {
+    public sendBattleMapProperties(client: Player) {
         const data = client.getServer().getMapsManager()
             .getMapData(this.battle.getMap().mapId, this.battle.getMap().theme)
 
@@ -20,8 +19,8 @@ export class BattleResourcesManager {
             return;
         }
 
-        const setBattleDataPacket = new SetBattleDataPacket();
-        setBattleDataPacket.data = {
+        const packet = new SetBattleMapPropertiesPacket();
+        packet.data = {
             kick_period_ms: 300000,
             map_id: this.battle.getMap().mapId,
             mapId: data.mapId,
@@ -39,11 +38,13 @@ export class BattleResourcesManager {
             bonusLightIntensity: data.bonusLightIntensity,
             lighting: data.lighting
         }
-        client.sendPacket(setBattleDataPacket);
+        client.sendPacket(packet);
     }
 
     public async sendResources(player: Player) {
-
+        await this.sendObjectsResources(player)
+        await this.sendSkyboxResource(player)
+        await this.sendMapResources(player)
     }
 
     public sendTurretsData(player: Player) {

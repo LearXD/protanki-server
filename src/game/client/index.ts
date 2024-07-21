@@ -13,23 +13,22 @@ import { SetGameLoadedPacket } from "../../network/packets/set-game-loaded";
 import { SendLanguagePacket } from "../../network/packets/send-language";
 import { SendRequestLoadScreenPacket } from "../../network/packets/send-request-load-screen";
 import { PongPacket } from "../../network/packets/pong";
-import { SendRequestCaptchaPacket } from "../../network/packets/send-request-captcha";
 import { SendRequestUserDataPacket } from "../../network/packets/send-request-user-data";
 import { IGNORE_PACKETS } from "../player/handlers/packet";
 import { ClientCaptchaManager } from "./managers/captcha";
-
-
 
 export abstract class Client {
 
     private cryptoHandler: XorDecoder = new XorDecoder();
 
-    private language: string;
+    public language: string;
 
     private lastPing: number = 0;
     private lastPong: number = 0;
 
     private captchaManager: ClientCaptchaManager;
+
+    public connected: boolean = true;
 
     private resourcesLoaded: number = 0;
     private resourcesCallbackPool: Map<number, () => void> = new Map();
@@ -47,7 +46,10 @@ export abstract class Client {
         return this.socket.remoteAddress + ':' + this.socket.remotePort;
     }
 
-    public getCryptoHandler(): XorDecoder { return this.cryptoHandler }
+    public getCryptoHandler(): XorDecoder {
+        return this.cryptoHandler
+    }
+
     public sendCryptKeys() {
         const keys = Array.from({ length: 4 })
             .map(() => MathUtils.randomInt(-128, 127));
@@ -63,12 +65,14 @@ export abstract class Client {
     public getServer(): Server { return this.server }
     public getSocket(): net.Socket { return this.socket }
 
-    public getLanguage() { return this.language }
-    public setLanguage(language: string) { this.language = language }
+    public updateLastPong() {
+        this.lastPong = Date.now()
+    }
 
-    public updateLastPong() { this.lastPong = Date.now() }
+    public getPing() {
+        return this.lastPong - this.lastPing
+    }
 
-    public getPing() { return this.lastPong - this.lastPing }
     public sendPing() {
         const packet = new PingPacket();
         this.sendPacket(packet);
@@ -129,6 +133,10 @@ export abstract class Client {
     }
 
     public sendPacket(packet: SimplePacket, encrypt: boolean = true) {
+
+        if (!this.connected) {
+            return;
+        }
 
         packet.setBytes(packet.encode());
         const buffer = packet.getBytes();

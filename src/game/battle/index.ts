@@ -6,7 +6,7 @@ import { BattleMode, BattleModeType } from "../../utils/game/battle-mode"
 import { EquipmentConstraintsMode } from "../../utils/game/equipment-constraints-mode"
 
 import { SetBattleChatEnabledPacket } from "../../network/packets/set-battle-chat-enabled"
-import { SetSomePacketOnJoinBattle4Packet } from "../../network/packets/set-some-packet-on-join-battle-4"
+import { SetLoadBattleObjectsPacket } from "../../network/packets/set-load-battle-objects"
 import { SetShowBattleNotificationsPacket } from "../../network/packets/set-show-battle-notifications"
 
 import { LayoutState } from "../../utils/game/layout-state"
@@ -30,17 +30,23 @@ import { IMap } from "../../managers/maps/types"
 import { IBattleData } from "./types"
 import { SuspiciousLevel } from "../../utils/game/suspicious-level"
 import { IBattleList } from "../../network/packets/set-battle-list"
+import { SetBattleTimePacket } from "../../network/packets/set-battle-time"
+import { Rank } from "../../utils/game/rank"
+import { BattleChatManager } from "./managers/chat"
 
 export class Battle {
 
     private battleId: string;
-    private roundStarted: boolean = false
+    private running: boolean = false
+
+    private time: number = 0
 
     private updateInterval: NodeJS.Timeout
 
     private playersManager: BattlePlayersManager
     private viewersManager: BattleViewersManager
     private teamsManager: BattleTeamsManager
+    private chatManager: BattleChatManager
 
     private modeManager: BattleModeManager
     private statisticsManager: BattleStatisticsManager
@@ -76,7 +82,7 @@ export class Battle {
             parkourMode: false,
             privateBattle: false,
             proBattle: false,
-            rankRange: { max: 30, min: 1 },
+            rankRange: { max: Rank.GENERALISSIMO, min: Rank.RECRUIT },
             reArmorEnabled: true,
             withoutBonuses: false,
             withoutCrystals: false,
@@ -84,10 +90,12 @@ export class Battle {
         },
     ) {
         this.battleId = BattleUtils.generateBattleId()
+        this.time = this.data.timeLimitInSec
 
         this.playersManager = new BattlePlayersManager(this)
         this.viewersManager = new BattleViewersManager(this)
         this.teamsManager = new BattleTeamsManager(this)
+        this.chatManager = new BattleChatManager(this)
 
         this.modeManager = Battle.getManager(this)
         this.statisticsManager = new BattleStatisticsManager(this)
@@ -100,88 +108,99 @@ export class Battle {
         this.updateInterval = setInterval(this.update.bind(this), 1000)
     }
 
-    public async handleClientJoin(client: Player) {
-
-        if (this.getPlayersManager().hasPlayer(client.getUsername())) {
-            Logger.warn(`${client.getUsername()} already joined the battle ${this.getName()}`)
-            return
-        }
-
-        client.setLayoutState(LayoutState.BATTLE)
-        this.getPlayersManager().addPlayer(client);
-
-        await this.resourcesManager.sendObjectsResources(client)
-        await this.resourcesManager.sendSkyboxResource(client)
-        await this.resourcesManager.sendMapResources(client)
-
-        this.resourcesManager.sendBattleData(client)
-        this.statisticsManager.sendBattleStatistics(client)
-        this.modeManager.sendPlayerStatistics(client)
-        this.statisticsManager.sendPlayerStatistics(client)
-
-        const setBattleChatEnabledPacket = new SetBattleChatEnabledPacket();
-        client.sendPacket(setBattleChatEnabledPacket);
-
-        const setSomePacketOnJoinBattle4Packet = new SetSomePacketOnJoinBattle4Packet();
-        client.sendPacket(setSomePacketOnJoinBattle4Packet);
-
-        const setShowBattleNotificationsPacket = new SetShowBattleNotificationsPacket();
-        client.sendPacket(setShowBattleNotificationsPacket);
-
-        this.resourcesManager.sendTurretsData(client)
-
-        this.boxesManager.sendBoxes(client)
-        this.minesManager.sendMinesData(client);
-        this.effectsManager.sendBattleEffects(client)
-        this.boxesManager.sendSpawnedBoxes(client)
-
-        client.getGarageManager().sendSupplies(client);
-
-        this.playersManager.sendPlayerData(client)
-        client.setSubLayoutState(LayoutState.BATTLE)
-
-        Logger.info(`${client.getUsername()} joined the battle ${this.getName()}`)
-    }
-
-    public handleClientLeave(client: Player) {
-
-        if (!this.getPlayersManager().hasPlayer(client.getUsername())) {
-            Logger.warn(`${client.getUsername()} is not in the battle ${this.getName()}`)
-            return
-        }
-
-        this.sendPlayerLeft(client)
-        this.sendRemoveBattleScreen(client)
-
-        this.getPlayersManager().removePlayer(client.getUsername())
-    }
-
     public start() {
-
+        this.running = true
     }
 
     public restart() {
-
+        this.time = this.getTimeLimitInSec()
     }
 
     public finish() {
-
+        this.running = false
     }
 
     public close() {
         clearInterval(this.updateInterval)
     }
 
+
+    public async handleClientJoin(player: Player) {
+
+        if (this.getPlayersManager().hasPlayer(player.getUsername())) {
+            Logger.warn(`${player.getUsername()} already joined the battle ${this.getName()}`)
+            return false;
+        }
+
+        /** ADD PLAYER */
+        player.setLayoutState(LayoutState.BATTLE)
+        this.getPlayersManager().addPlayer(player);
+
+        /** SEND DATA & RESOURCES */
+        await this.resourcesManager.sendResources(player)
+        this.resourcesManager.sendBattleMapProperties(player)
+
+        this.statisticsManager.broadcastAddPlayerStatistics(player)
+
+        this.statisticsManager.sendBattleData(player)
+        this.chatManager.sendEnableChat(player)
+
+        this.sendLoadBattleObjects(player)
+
+        this.modeManager.sendPlayersStatistics()
+
+        this.sendShowBattleNotifications(player)
+
+        this.resourcesManager.sendTurretsData(player)
+
+        this.minesManager.sendMinesData(player);
+
+        const playerTankData = player.getTank().getData()
+        this.playersManager.broadcastTankData(playerTankData)
+        this.playersManager.sendTanksData(player)
+
+        this.statisticsManager.broadcastPlayerStatistics(player)
+
+        this.boxesManager.sendData(player)
+        this.effectsManager.sendBattleEffects(player)
+
+        player.getGarageManager().sendSupplies(player);
+        player.setSubLayoutState(LayoutState.BATTLE)
+
+        Logger.info(`${player.getUsername()} joined the battle ${this.getName()}`)
+    }
+
+    public handleClientLeave(client: Player) {
+
+        if (!this.getPlayersManager().hasPlayer(client.getUsername())) {
+            Logger.warn(`${client.getUsername()} is not in the battle ${this.getName()}`)
+            return false
+        }
+
+        this.sendPlayerLeft(client)
+        this.sendRemoveBattleScreen(client)
+
+        this.getPlayersManager().removePlayer(client.getUsername())
+        Logger.info(`${client.getUsername()} left the battle ${this.getName()}`)
+
+    }
+
     public getBattleId() { return this.battleId }
     public getName() { return this.name }
     public getMap() { return this.map }
 
-    public isStarted() {
-        return this.roundStarted
+    public isRunning() {
+        return this.running
     }
 
     public getTimeLeft(): number {
-        return this.isStarted() ? this.data.timeLimitInSec : 60
+        return this.isRunning() ? this.time : this.data.timeLimitInSec
+    }
+
+    public sendTime() {
+        const packet = new SetBattleTimePacket();
+        packet.time = this.time;
+        this.broadcastPacket(packet)
     }
 
     public getData() { return this.data }
@@ -201,6 +220,62 @@ export class Battle {
     public isWithoutCrystals() { return this.data.withoutCrystals }
     public isWithoutSupplies() { return this.data.withoutSupplies }
 
+
+    public sendLoadBattleObjects(player: Player) {
+        player.sendPacket(new SetLoadBattleObjectsPacket())
+    }
+
+    public sendShowBattleNotifications(player: Player) {
+        player.sendPacket(new SetShowBattleNotificationsPacket())
+    }
+
+    public sendRemoveBattleScreen(player: Player) {
+        const setRemoveBattleScreenPacket = new SetRemoveBattleScreenPacket()
+        player.sendPacket(setRemoveBattleScreenPacket)
+    }
+
+    public sendPlayerLeft(player: Player) {
+        const setUserLeftBattlePacket = new SetUserLeftBattlePacket()
+        setUserLeftBattlePacket.userId = player.getUsername()
+        this.broadcastPacket(setUserLeftBattlePacket)
+    }
+
+    public toBattleListItem(): IBattleList {
+        return {
+            battleId: this.getBattleId(),
+            battleMode: this.data.battleMode,
+            map: this.map.mapId,
+            maxPeople: this.data.maxPeopleCount,
+            name: this.getName(),
+            privateBattle: this.isProBattle(),
+            proBattle: this.isProBattle(),
+            minRank: this.getRankRange().min,
+            maxRank: this.getRankRange().max,
+            preview: this.map.preview,
+            parkourMode: this.isParkourMode(),
+            equipmentConstraintsMode: this.getEquipmentConstraintsMode(),
+            suspicionLevel: SuspiciousLevel.NONE,
+            users: this.playersManager.getPlayers().map(player => player.getUsername())
+        }
+    }
+
+    public broadcastPacket(packet: SimplePacket, ignore: string[] = []) {
+        for (const player of this.getPlayersManager().getPlayers()) {
+            if (!ignore.includes(player.getUsername())) {
+                player.sendPacket(packet)
+            }
+        }
+    }
+
+    public update() {
+        if (this.isRunning()) {
+            this.time--;
+        }
+
+        for (const player of this.getPlayersManager().getPlayers()) {
+        }
+    }
+
     public getPlayersManager(): BattlePlayersManager {
         return this.playersManager
     }
@@ -210,6 +285,10 @@ export class Battle {
     }
     public getTeamsManager(): BattleTeamsManager {
         return this.teamsManager
+    }
+
+    public getChatManager(): BattleChatManager {
+        return this.chatManager
     }
 
     public getModeManager(): BattleModeManager {
@@ -234,47 +313,6 @@ export class Battle {
 
     public getBoxesManager(): BattleBoxesManager {
         return this.boxesManager
-    }
-
-    public sendRemoveBattleScreen(player: Player) {
-        const setRemoveBattleScreenPacket = new SetRemoveBattleScreenPacket()
-        player.sendPacket(setRemoveBattleScreenPacket)
-    }
-
-    public sendPlayerLeft(player: Player) {
-        const setUserLeftBattlePacket = new SetUserLeftBattlePacket()
-        setUserLeftBattlePacket.userId = player.getUsername()
-        this.broadcastPacket(setUserLeftBattlePacket)
-    }
-
-    public broadcastPacket(packet: SimplePacket) {
-        for (const player of this.getPlayersManager().getPlayers()) {
-            player.sendPacket(packet)
-        }
-    }
-
-    public toBattleListItem(): IBattleList {
-        return {
-            battleId: this.getBattleId(),
-            battleMode: this.data.battleMode,
-            map: this.map.mapId,
-            maxPeople: this.data.maxPeopleCount,
-            name: this.getName(),
-            privateBattle: this.isProBattle(),
-            proBattle: this.isProBattle(),
-            minRank: this.getRankRange().min,
-            maxRank: this.getRankRange().max,
-            preview: this.map.preview,
-            parkourMode: this.isParkourMode(),
-            equipmentConstraintsMode: this.getEquipmentConstraintsMode(),
-            suspicionLevel: SuspiciousLevel.NONE,
-            users: []
-        }
-    }
-
-    public update() {
-        for (const player of this.getPlayersManager().getPlayers()) {
-        }
     }
 
 }

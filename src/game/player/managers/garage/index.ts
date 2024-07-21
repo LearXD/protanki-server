@@ -11,6 +11,7 @@ import { SetGarageItemsPropertiesPacket } from "../../../../network/packets/set-
 import { SetRemoveGaragePacket } from "../../../../network/packets/set-remove-garage";
 import { SetSuppliesPacket } from "../../../../network/packets/set-supplies";
 import { SetUserGarageItemsPacket } from "../../../../network/packets/set-user-garage-items";
+import { IUserTankResourcesData } from "../../../../network/packets/set-user-tank-resources-data";
 import { SimplePacket } from "../../../../network/packets/simple-packet";
 import { LayoutState } from "../../../../utils/game/layout-state";
 import { Logger } from "../../../../utils/logger";
@@ -195,6 +196,39 @@ export class PlayerGarageManager {
         }
 
         return null
+    }
+
+    public getTurretResources() {
+        const turret = this.getEquippedTurret();
+
+        const item = this.player.getServer().getGarageManager().getItem(turret);
+        const properties = this.player.getServer().getGarageManager().getTurretProperties(turret);
+        const sfx = this.player.getServer().getGarageManager().getTurretSfx(turret);
+
+        if (!properties || !sfx) {
+            return null;
+        }
+
+        return { turret, sfx, properties, item }
+    }
+
+    public getHullResources() {
+        const hull = this.getEquippedHull();
+        const item = this.player.getServer().getGarageManager().getItem(hull);
+        const properties = this.player.getServer().getGarageManager().getHullProperties(hull);
+
+        if (!properties) {
+            return null;
+        }
+
+        return { hull, item, properties }
+    }
+
+    public getPaintingResources() {
+        const painting = this.getEquippedPainting();
+        const item = this.player.getServer().getGarageManager().getItem(painting);
+
+        return { painting, item }
     }
 
     public closeGarage() {

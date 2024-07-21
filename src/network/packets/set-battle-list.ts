@@ -19,9 +19,9 @@ export interface IBattleList {
     parkourMode: boolean
     equipmentConstraintsMode: EquipmentConstraintsMode
     suspicionLevel: SuspiciousLevel
-    usersBlue?: []
-    usersRed?: []
-    users?: []
+    usersBlue?: string[]
+    usersRed?: string[]
+    users?: string[]
 }
 
 export class SetBattleListPacket extends Packet {

@@ -78,8 +78,8 @@ import { SetTurretsDataPacket } from "./packets/set-turrets-data";
 import { SetLatencyPacket } from "./packets/set-latency";
 import { SetTimePacket } from "./packets/set-time";
 import { SetBonusesDataPacket } from "./packets/set-bonuses-data";
+import { SetBattleMapPropertiesPacket } from "./packets/set-battle-map-properties";
 import { SetBattleDataPacket } from "./packets/set-battle-data";
-import { SetBattleStatisticsCCPacket } from "./packets/set-battle-statistics-cc";
 import { SetBattleStatisticsDMCCPacket } from "./packets/set-battle-statistics-dm-cc";
 import { SetBattleMineCCPacket } from "./packets/set-battle-mine-cc";
 import { SetUserTankResourcesDataPacket } from "./packets/set-user-tank-resources-data";
@@ -322,7 +322,7 @@ import { SetBattleUsersStatPacket } from "./packets/set-battle-users-stat";
 import { SetBattleTimePacket } from "./packets/set-battle-time";
 import { SomeJsonRankUpPacket } from "./packets/some-json-rank-up";
 import { SetShowBattleNotificationsPacket } from "./packets/set-show-battle-notifications";
-import { SetSomePacketOnJoinBattle4Packet } from "./packets/set-some-packet-on-join-battle-4";
+import { SetLoadBattleObjectsPacket } from "./packets/set-load-battle-objects";
 import { SetBattleChatEnabledPacket } from "./packets/set-battle-chat-enabled";
 import { SetRemoveChatPacket } from "./packets/set-remove-chat";
 import { SetRemoveBattlesScreenPacket } from "./packets/set-remove-battles-screen";
@@ -392,7 +392,7 @@ export class Network {
         this.registerPacket(Protocol.SET_BATTLE_INVITE_CC, SetBattleInviteCCPacket)
         this.registerPacket(Protocol.SET_USER_BATTLE, SetUserBattlePacket)
 
-        this.registerPacket(Protocol.SET_BATTLE_STATISTICS_CC, SetBattleStatisticsCCPacket)
+        this.registerPacket(Protocol.SET_BATTLE_DATA, SetBattleDataPacket)
         this.registerPacket(Protocol.SET_BATTLE_STATISTICS_DM_CC, SetBattleStatisticsDMCCPacket)
         this.registerPacket(Protocol.SET_CAPTURE_THE_FLAG_CC, SetCaptureTheFlagCCPacket)
         this.registerPacket(Protocol.SET_BATTLE_STATISTICS_TEAM_CC, SetBattleStatisticsTeamCCPacket)
@@ -443,7 +443,7 @@ export class Network {
         this.registerPacket(Protocol.SET_ADD_BATTLE_ON_LIST, SetAddBattleOnListPacket)
         this.registerPacket(Protocol.SET_TURRETS_DATA, SetTurretsDataPacket)
         this.registerPacket(Protocol.SET_BONUSES_DATA, SetBonusesDataPacket)
-        this.registerPacket(Protocol.SET_BATTLE_DATA, SetBattleDataPacket)
+        this.registerPacket(Protocol.SET_BATTLE_MAP_PROPERTIES, SetBattleMapPropertiesPacket)
         this.registerPacket(Protocol.SET_USER_TANK_RESOURCES_DATA, SetUserTankResourcesDataPacket)
         this.registerPacket(Protocol.SET_SUPPLIES, SetSuppliesPacket)
         this.registerPacket(Protocol.SET_BATTLE_USERS_EFFECTS, SetBattleUsersEffectsPacket)
@@ -679,7 +679,7 @@ export class Network {
         this.registerPacket(Protocol.SET_BATTLE_TIME, SetBattleTimePacket);
         this.registerPacket(Protocol.SOME_JSON_RANK_UP, SomeJsonRankUpPacket);
         this.registerPacket(Protocol.SET_SHOW_BATTLE_NOTIFICATIONS, SetShowBattleNotificationsPacket);
-        this.registerPacket(Protocol.SET_SOME_PACKET_ON_JOIN_BATTLE_4, SetSomePacketOnJoinBattle4Packet);
+        this.registerPacket(Protocol.SET_LOAD_BATTLE_OBJECTS, SetLoadBattleObjectsPacket);
         this.registerPacket(Protocol.SET_BATTLE_CHAT_ENABLED, SetBattleChatEnabledPacket);
         this.registerPacket(Protocol.SET_REMOVE_CHAT, SetRemoveChatPacket);
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);

@@ -27,7 +27,7 @@ export class PlayerData {
         {
             username: 'TheUnknown',
             data: {
-                crystals: 1000,
+                crystals: 1e9,
                 moderatorLevel: ChatModeratorLevel.COMMUNITY_MANAGER,
                 hasDoubleCrystal: false,
                 durationCrystalAbonement: 48602763,

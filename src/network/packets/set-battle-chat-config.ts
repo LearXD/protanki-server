@@ -50,13 +50,13 @@ export class SetBattleChatConfigPacket extends Packet {
         const bytes = new ByteArray();
 
         bytes.writeString(this.userId);
-        bytes.writeShort(this.users.length);
+        bytes.writeInt(this.users.length);
 
         this.users.forEach((user: IUser) => {
             bytes.writeInt(ChatModeratorLevel.LEVELS.indexOf(user.chatModeratorLevel))
             bytes.writeInt(user.deaths);
             bytes.writeInt(user.kills);
-            bytes.writeInt(user.rank);
+            bytes.writeByte(user.rank);
             bytes.writeInt(user.score);
             bytes.writeString(user.name);
         });

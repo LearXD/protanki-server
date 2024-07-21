@@ -197,7 +197,7 @@ export class Protocol {
     // 446781737
     static SET_BATTLE_REWARDS = 560336625
     static SET_USER_NEW_RANK = 1262947513;
-    static SET_BATTLE_STATISTICS_CC = 522993449;
+    static SET_BATTLE_DATA = 522993449;
     static SET_BATTLE_TIME = 732434644;
 
 
@@ -318,7 +318,7 @@ export class Protocol {
     // 201628290
     static SET_BONUSES_DATA = 228171466;
     static SET_REMOVE_BATTLE_SCREEN = -985579124
-    static SET_BATTLE_DATA = -152638117;
+    static SET_BATTLE_MAP_PROPERTIES = -152638117;
     // -745598420
     static SEND_COLLECT_BONUS_BOX = -1047185003;
     static SET_BATTLE_SPAWNED_BOXES = 870278784;
@@ -602,7 +602,7 @@ export class Protocol {
 
     /** SOME JSON */
     static SOME_JSON_RANK_UP = -1709511848;
-    static SET_SOME_PACKET_ON_JOIN_BATTLE_4 = 930618015;
+    static SET_LOAD_BATTLE_OBJECTS = 930618015;
 
 
     /** SHOP */

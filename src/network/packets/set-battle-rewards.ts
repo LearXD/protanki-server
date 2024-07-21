@@ -44,6 +44,16 @@ export class SetBattleRewardsPacket extends Packet {
     public encode() {
         const bytes = new ByteArray();
 
+        bytes.writeInt(this.rewards.length);
+        this.rewards.forEach(reward => {
+            bytes.writeInt(reward.kills);
+            bytes.writeInt(reward.deaths);
+            bytes.writeInt(reward.reward);
+            bytes.writeString(reward.user);
+        });
+
+        bytes.writeInt(this.timeToRestart);
+
         return bytes;
     }
 }
