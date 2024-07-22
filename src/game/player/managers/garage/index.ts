@@ -10,8 +10,8 @@ import { SetEquipGarageItemPacket } from "../../../../network/packets/set-equip-
 import { SetGarageItemsPropertiesPacket } from "../../../../network/packets/set-garage-items-properties";
 import { SetRemoveGaragePacket } from "../../../../network/packets/set-remove-garage";
 import { SetSuppliesPacket } from "../../../../network/packets/set-supplies";
+import { SetUseSupplyPacket } from "../../../../network/packets/set-use-supply";
 import { SetUserGarageItemsPacket } from "../../../../network/packets/set-user-garage-items";
-import { IUserTankResourcesData } from "../../../../network/packets/set-user-tank-resources-data";
 import { SimplePacket } from "../../../../network/packets/simple-packet";
 import { LayoutState } from "../../../../utils/game/layout-state";
 import { Logger } from "../../../../utils/logger";
@@ -236,7 +236,7 @@ export class PlayerGarageManager {
 
         const battle = this.player.getBattle();
         if (battle && this.player.tank.changedEquipment) {
-            this.player.getTank().sendSuicide()
+            this.player.getTank().destroy()
         }
     }
 
@@ -251,11 +251,19 @@ export class PlayerGarageManager {
             { count: this.getSupplies().health, id: 'health', itemEffectTime: 0, itemRestSec: 0, slotId: 1 },
             { count: this.getSupplies().armor, id: 'armor', itemEffectTime: 0, itemRestSec: 0, slotId: 2 },
             { count: this.getSupplies().double_damage, id: 'double_damage', itemEffectTime: 0, itemRestSec: 0, slotId: 3 },
-            { count: this.getSupplies().n2o, id: 'n2o', itemEffectTime: 0, itemRestSec: 0, slotId: 4 },
+            { count: this.getSupplies().n2o, id: 'n2o', itemEffectTime: 30, itemRestSec: 30, slotId: 4 },
             { count: this.getSupplies().mine, id: 'mine', itemEffectTime: 0, itemRestSec: 0, slotId: 5 }
         ]
 
         client.sendPacket(setSuppliesPacket);
+    }
+
+    public sendUseSupply(itemId: string, time: number, decrease: boolean) {
+        const setUseSupplyPacket = new SetUseSupplyPacket();
+        setUseSupplyPacket.itemId = itemId;
+        setUseSupplyPacket.time = time;
+        setUseSupplyPacket.decrease = decrease;
+        this.player.sendPacket(setUseSupplyPacket);
     }
 
     public sendEquipItem(item: string) {

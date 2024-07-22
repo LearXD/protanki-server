@@ -1,5 +1,7 @@
 import { Battle } from "../..";
 import { IUserTankResourcesData, SetUserTankResourcesDataPacket } from "../../../../network/packets/set-user-tank-resources-data";
+import { Vector3d } from "../../../../utils/game/vector-3d";
+import { Logger } from "../../../../utils/logger";
 import { Player } from "../../../player";
 
 export class BattlePlayersManager {
@@ -42,14 +44,16 @@ export class BattlePlayersManager {
         for (const source of this.getPlayers()) {
             if (source.getUsername() !== player.getUsername()) {
                 const data = source.getTank().getData()
-                this.sendTankData(data, player)
+                this.sendTankData({ ...data, state_null: false }, player)
             }
         }
     }
 
     public broadcastTankData(data: IUserTankResourcesData) {
         for (const player of this.getPlayers()) {
-            this.sendTankData(data, player)
+            if (player.getUsername() !== data.tank_id) {
+                this.sendTankData({ ...data, state_null: false }, player)
+            }
         }
     }
 

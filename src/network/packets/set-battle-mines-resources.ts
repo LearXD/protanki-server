@@ -10,7 +10,7 @@ export interface IMine {
     position?: Vector3d;
 }
 
-export class SetBattleMineCCPacket extends Packet {
+export class SetBattleMinesResourcesPacket extends Packet {
 
     public soundResource: number; // ResourceGetterCodec
     public int_1: number; //IntCodec
@@ -33,7 +33,7 @@ export class SetBattleMineCCPacket extends Packet {
 
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_BATTLE_MINE_CC, bytes)
+        super(Protocol.SET_BATTLE_MINES_RESOURCES, bytes)
     }
 
     public decode() {

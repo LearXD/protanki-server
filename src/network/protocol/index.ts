@@ -225,7 +225,7 @@ export class Protocol {
     static SET_BATTLE_USER_LEFT_NOTIFICATION = -1689876764;
     static SET_BATTLE_USER_STATUS = 696140460;
     static SET_BATTLE_CHAT_CONFIG = 862913394
-    static SET_BATTLE_STATISTICS_DM_CC = -1959138292;
+    static SET_BATTLE_USERS_PROPERTIES = -1959138292;
     static SET_BATTLE_USERS_STAT = 1061006142;
 
 
@@ -285,7 +285,7 @@ export class Protocol {
     static SET_REMOVE_MINE = -624217047;
     static SET_EXPLODE_MINE = 1387974401;
     // -1200619383
-    static SET_BATTLE_MINE_CC = -226978906;
+    static SET_BATTLE_MINES_RESOURCES = -226978906;
 
 
     /** CREATE BATTLE */
@@ -330,8 +330,8 @@ export class Protocol {
     static SET_SUPPLIES = -137249251;
     static SET_DRUG_QUANTITY = -502907094;
     // -1981777467
-    static SEND_USE_DRUG = -2102525054;
-    static SET_USE_DRUG = 2032104949;
+    static SEND_USE_SUPPLY = -2102525054;
+    static SET_USE_SUPPLY = 2032104949;
 
 
     /**  */
@@ -454,7 +454,7 @@ export class Protocol {
 
 
     /** DESTROY */
-    static SET_DESTROY_TANK = 162656882
+    static SET_AUTO_DESTROY = 162656882
     static SEND_AUTO_DESTROY = 988664577;
 
 
@@ -491,7 +491,7 @@ export class Protocol {
 
     /* CHANGE EQUIPMENT */
     static SET_SUICIDE_DELAY = -911983090;
-    static SET_TANK_RESPAWN_DELAY = -173682854;
+    static SET_DESTROY_TANK = -173682854;
     static SET_TANK_CHANGED_EQUIPMENT = -1767633906
 
 

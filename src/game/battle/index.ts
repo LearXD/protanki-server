@@ -33,6 +33,7 @@ import { IBattleList } from "../../network/packets/set-battle-list"
 import { SetBattleTimePacket } from "../../network/packets/set-battle-time"
 import { Rank } from "../../utils/game/rank"
 import { BattleChatManager } from "./managers/chat"
+import { SetUserTankResourcesDataPacket } from "../../network/packets/set-user-tank-resources-data"
 
 export class Battle {
 
@@ -139,33 +140,41 @@ export class Battle {
         /** SEND DATA & RESOURCES */
         await this.resourcesManager.sendResources(player)
         this.resourcesManager.sendBattleMapProperties(player)
-
-        this.statisticsManager.broadcastAddPlayerStatistics(player)
-
-        this.statisticsManager.sendBattleData(player)
-        this.chatManager.sendEnableChat(player)
-
-        this.sendLoadBattleObjects(player)
-
-        this.modeManager.sendPlayersStatistics()
-
-        this.sendShowBattleNotifications(player)
-
         this.resourcesManager.sendTurretsData(player)
 
-        this.minesManager.sendMinesData(player);
-
-        const playerTankData = player.getTank().getData()
-        this.playersManager.broadcastTankData(playerTankData)
-        this.playersManager.sendTanksData(player)
-
+        /** SEND PROPERTIES & STATISTICS */
+        this.statisticsManager.sendAddUserProperties(player)
+        this.statisticsManager.sendBattleData(player)
+        this.statisticsManager.sendUserProperties()
         this.statisticsManager.broadcastPlayerStatistics(player)
 
-        this.boxesManager.sendData(player)
-        this.effectsManager.sendBattleEffects(player)
+        /** SEND CHAT */
+        this.chatManager.sendEnableChat(player)
 
+        /** SEND IMPORTANT PACKETS */
+        this.sendLoadBattleObjects(player)
+        this.sendShowBattleNotifications(player)
+
+        /** SEND IN-GAME PROPERTIES */
+        this.boxesManager.sendData(player)
+        this.minesManager.sendMines(player);
+
+        /** SEND TANKS DATA */
+        const tankData = player.getTank().getData();
+        this.playersManager.broadcastTankData(tankData)
+
+        this.playersManager.sendTanksData(player)
+        this.playersManager.sendTankData(tankData, player)
+
+        /** SEND BATTLE EFFECTS */
+        this.effectsManager.sendBattleEffects(player);
         player.getGarageManager().sendSupplies(player);
+
         player.setSubLayoutState(LayoutState.BATTLE)
+
+        if (!this.isRunning()) {
+            this.start()
+        }
 
         Logger.info(`${player.getUsername()} joined the battle ${this.getName()}`)
     }
@@ -267,15 +276,6 @@ export class Battle {
         }
     }
 
-    public update() {
-        if (this.isRunning()) {
-            this.time--;
-        }
-
-        for (const player of this.getPlayersManager().getPlayers()) {
-        }
-    }
-
     public getPlayersManager(): BattlePlayersManager {
         return this.playersManager
     }
@@ -313,6 +313,16 @@ export class Battle {
 
     public getBoxesManager(): BattleBoxesManager {
         return this.boxesManager
+    }
+
+    public update() {
+        if (this.isRunning()) {
+            this.time--;
+        }
+
+        for (const player of this.getPlayersManager().getPlayers()) {
+            player.sendLatency()
+        }
     }
 
 }

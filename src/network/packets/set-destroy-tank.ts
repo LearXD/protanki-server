@@ -4,8 +4,8 @@ import { Packet } from "./packet";
 
 export class SetDestroyTankPacket extends Packet {
 
-    public tankId: string;
-    public respawnDelay: number;
+    public tank: string
+    public respawnDelay: number
 
     constructor(bytes?: ByteArray) {
         super(Protocol.SET_DESTROY_TANK, bytes)
@@ -14,21 +14,19 @@ export class SetDestroyTankPacket extends Packet {
     public decode() {
         const bytes = this.cloneBytes();
 
-        this.tankId = bytes.readString();
+        this.tank = bytes.readString();
         this.respawnDelay = bytes.readInt();
 
         return {
-            tankId: this.tankId,
+            tank: this.tank,
             respawnDelay: this.respawnDelay
         }
     }
 
     public encode() {
         const bytes = new ByteArray();
-
-        bytes.writeString(this.tankId)
-        bytes.writeInt(this.respawnDelay)
-
+        bytes.writeString(this.tank);
+        bytes.writeInt(this.respawnDelay);
         return bytes;
     }
 }

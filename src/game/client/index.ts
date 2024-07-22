@@ -16,6 +16,7 @@ import { PongPacket } from "../../network/packets/pong";
 import { SendRequestUserDataPacket } from "../../network/packets/send-request-user-data";
 import { IGNORE_PACKETS } from "../player/handlers/packet";
 import { ClientCaptchaManager } from "./managers/captcha";
+import { SetLatencyPacket } from "../../network/packets/set-latency";
 
 export abstract class Client {
 
@@ -70,11 +71,19 @@ export abstract class Client {
     }
 
     public getPing() {
-        return this.lastPong - this.lastPing
+        const ping = this.lastPong - this.lastPing;
+        return ping < 0 ? 0 : ping;
     }
 
     public sendPing() {
         const packet = new PingPacket();
+        this.sendPacket(packet);
+    }
+
+    public sendLatency() {
+        const packet = new SetLatencyPacket();
+        packet.serverSessionTime = 0;
+        packet.clientPing = this.getPing();
         this.sendPacket(packet);
     }
 

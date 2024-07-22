@@ -14,4 +14,9 @@ export class Vector3d implements IVector3d {
             Math.pow(this.z - vector.z, 2)
         )
     }
+
+    public toObject(): IVector3d {
+        // TODO: why the z and y are swapped?
+        return { x: this.x, y: this.z, z: this.y }
+    }
 }

@@ -1,6 +1,5 @@
 import { ByteArray } from "../../utils/network/byte-array";
 import { ChatModeratorLevel } from "../../utils/game/chat-moderator-level";
-import { EquipmentConstraintsMode } from "../../utils/game/equipment-constraints-mode";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
@@ -13,12 +12,12 @@ export interface IUser {
     name: string;
 }
 
-export class SetBattleStatisticsDMCCPacket extends Packet {
+export class SetBattleUsersPropertiesPacket extends Packet {
 
-    public users: any[]
+    public users: IUser[]
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_BATTLE_STATISTICS_DM_CC, bytes)
+        super(Protocol.SET_BATTLE_USERS_PROPERTIES, bytes)
     }
 
     public decode() {

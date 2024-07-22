@@ -12,7 +12,7 @@ export interface IUser {
     name: string;
 }
 
-export class SetBattleChatConfigPacket extends Packet {
+export class SetBattleAddUserPropertiesPacket extends Packet {
 
     public userId: string;
     public users: IUser[];

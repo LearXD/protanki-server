@@ -2,14 +2,14 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetUseDrugPacket extends Packet {
+export class SetUseSupplyPacket extends Packet {
 
     public itemId: string;
     public time: number;
     public decrease: boolean
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_USE_DRUG, bytes)
+        super(Protocol.SET_USE_SUPPLY, bytes)
     }
 
     public decode() {

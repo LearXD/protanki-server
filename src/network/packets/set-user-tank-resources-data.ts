@@ -1,4 +1,4 @@
-import { Vector3d } from "../../utils/game/vector-3d";
+import { IVector3d, Vector3d } from "../../utils/game/vector-3d";
 import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
@@ -13,8 +13,8 @@ export interface IUserTankResourcesData {
     hullResource: number,
     turretResource: number,
     sfxData: string,
-    position: { x: number, y: number, z: number },
-    orientation: { x: number, y: number, z: number },
+    position: IVector3d,
+    orientation: IVector3d,
     incarnation: number,
     tank_id: string,
     nickname: string,

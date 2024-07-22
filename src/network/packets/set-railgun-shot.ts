@@ -20,16 +20,7 @@ export class SetRailgunShotPacket extends Packet {
         this.shooter = bytes.readString();
         this.staticHitPoint = bytes.readVector3d();
         this.targets = bytes.readStringArray();
-
-        if (!bytes.readBoolean()) {
-            const targetHitPointsLength = bytes.readInt();
-
-            this.targetHitPoints = new Array(targetHitPointsLength);
-
-            for (let i = 0; i < targetHitPointsLength; i++) {
-                this.targetHitPoints[i] = bytes.readVector3d();
-            }
-        }
+        this.targetHitPoints = bytes.readVector3dArray()
 
         return {
             shooter: this.shooter,
@@ -45,17 +36,7 @@ export class SetRailgunShotPacket extends Packet {
         bytes.writeString(this.shooter);
         bytes.writeVector3d(this.staticHitPoint);
         bytes.writeStringArray(this.targets);
-
-        if (this.targetHitPoints != null) {
-            bytes.writeInt(this.targetHitPoints.length);
-            bytes.writeBoolean(false);
-
-            for (const targetHitPoint of this.targetHitPoints) {
-                bytes.writeVector3d(targetHitPoint);
-            }
-        } else {
-            bytes.writeBoolean(true);
-        }
+        bytes.writeVector3dArray(this.targetHitPoints);
 
         return bytes;
     }

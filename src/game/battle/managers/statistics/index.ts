@@ -1,10 +1,11 @@
 import { Battle } from "../..";
-import { SetBattleChatConfigPacket } from "../../../../network/packets/set-battle-chat-config";
+import { SetBattleAddUserPropertiesPacket } from "../../../../network/packets/set-battle-chat-config";
 import { SetBattleFundPacket } from "../../../../network/packets/set-battle-fund";
 import { SetBattleRewardsPacket } from "../../../../network/packets/set-battle-rewards";
 import { SetBattleDataPacket } from "../../../../network/packets/set-battle-data";
 import { SetBattleUserStatusPacket } from "../../../../network/packets/set-battle-user-status";
 import { Player } from "../../../player";
+import { SetBattleUsersPropertiesPacket } from "../../../../network/packets/set-battle-users-properties";
 
 export class BattleStatisticsManager {
 
@@ -138,8 +139,27 @@ export class BattleStatisticsManager {
         client.sendPacket(packet);
     }
 
-    public broadcastAddPlayerStatistics(player: Player) {
-        const packet = new SetBattleChatConfigPacket();
+    public sendUserProperties() {
+        const statistics = this.battle.getStatisticsManager()
+
+        const packet = new SetBattleUsersPropertiesPacket();
+        packet.users = this.battle.getPlayersManager()
+            .getPlayers().map((player) => {
+                return {
+                    chatModeratorLevel: player.getData().getModeratorLevel(),
+                    deaths: statistics.getPlayerDeaths(player.getUsername()),
+                    kills: statistics.getPlayerKills(player.getUsername()),
+                    rank: player.getData().getRank(),
+                    score: statistics.getPlayerScore(player.getUsername()),
+                    name: player.getUsername()
+                }
+            })
+
+        this.battle.broadcastPacket(packet);
+    }
+
+    public sendAddUserProperties(player: Player) {
+        const packet = new SetBattleAddUserPropertiesPacket();
         packet.userId = player.getUsername();
         packet.users = this.battle.getPlayersManager().getPlayers()
             .map(player => {

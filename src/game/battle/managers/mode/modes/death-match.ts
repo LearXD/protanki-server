@@ -1,14 +1,13 @@
 import { BattleModeManager } from "..";
-import { Battle } from "../../..";
-import { SetBattleStatisticsDMCCPacket } from "../../../../../network/packets/set-battle-statistics-dm-cc";
+import { SetBattleUsersPropertiesPacket } from "../../../../../network/packets/set-battle-users-properties";
 
 export class BattleDeathMatchModeManager extends BattleModeManager {
 
-    public sendPlayersStatistics(): void {
+    public sendUserProperties(): void {
         const statistics = this.getBattle().getStatisticsManager()
 
-        const setBattleStatisticsDMCCPacket = new SetBattleStatisticsDMCCPacket();
-        setBattleStatisticsDMCCPacket.users = this.getBattle().getPlayersManager()
+        const packet = new SetBattleUsersPropertiesPacket();
+        packet.users = this.getBattle().getPlayersManager()
             .getPlayers().map((player) => {
                 return {
                     chatModeratorLevel: player.getData().getModeratorLevel(),
@@ -20,7 +19,7 @@ export class BattleDeathMatchModeManager extends BattleModeManager {
                 }
             })
 
-        this.getBattle().broadcastPacket(setBattleStatisticsDMCCPacket);
+        this.getBattle().broadcastPacket(packet);
     }
 
 }

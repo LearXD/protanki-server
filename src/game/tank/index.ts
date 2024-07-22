@@ -11,23 +11,40 @@ import { SendRequestSpawnPositionPacket } from "../../network/packets/send-reque
 import { SendRequestRespawnPacket } from "../../network/packets/send-request-respawn";
 import { SendRequestSetTankVisiblePacket } from "../../network/packets/send-request-set-tank-visible";
 import { SendAutoDestroyPacket } from "../../network/packets/send-auto-destroy";
-import { SetDestroyTankPacket } from "../../network/packets/set-destroy-tank";
-import { SendUseDrugPacket } from "../../network/packets/send-use-drug";
-import { SetUseDrugPacket } from "../../network/packets/set-use-drug";
+import { SetAutoDestroyPacket } from "../../network/packets/set-auto-destroy";
+import { SendUseSupplyPacket } from "../../network/packets/send-use-supply";
 import { Player } from "../player";
 import { SetSuicideDelayPacket } from "../../network/packets/set-suicide-delay";
 import { SetTankChangedEquipmentPacket } from "../../network/packets/set-tank-changed-equipment";
 import { SetRemoveTankPacket } from "../../network/packets/set-remove-tank";
-import { SetTankRespawnDelayPacket } from "../../network/packets/set-tank-respawn-delay";
+import { SetDestroyTankPacket } from "../../network/packets/set-destroy-tank";
 import { Battle } from "../battle";
 import { IUserTankResourcesData } from "../../network/packets/set-user-tank-resources-data";
+import { Supply } from "../../utils/game/supply";
+import { Turret } from "./utils/turret";
+import { Hull } from "./utils/hull";
+import { SendMoveTankTracksPacket } from "../../network/packets/send-move-tank-tracks";
+import { SendMoveTankPacket } from "../../network/packets/send-move-tank";
+import { SetMoveTankPacket } from "../../network/packets/set-move-tank";
+import { Logger } from "../../utils/logger";
+import { SetTankControlPacket } from "../../network/packets/set-tank-control";
+import { SendTankTurretDirectionPacket } from "../../network/packets/send-tank-turret-direction";
+import { SetTankTurretAngleControlPacket } from "../../network/packets/set-tank-turret-angle-control";
+import { SendMoveTankAndTurretPacket } from "../../network/packets/send-move-tank-and-turret";
+import { SetMoveTankAndTurretPacket } from "../../network/packets/set-move-tank-and-turret";
 
 export class Tank {
 
     private incarnation: number = 0;
+    private alive: boolean = false
 
     private health: number = 0;
+
     private position: Vector3d = new Vector3d(0, 0, 0);
+    private orientation: Vector3d = new Vector3d(0, 0, 0);
+
+    private turret: Turret
+    private hull: Hull
 
     private visible: boolean = false;
     public changedEquipment = false;
@@ -35,7 +52,17 @@ export class Tank {
     public constructor(
         public readonly player: Player,
         public readonly battle: Battle
-    ) { }
+    ) {
+        this.updateProperties()
+    }
+
+    public updateProperties() {
+        const turret = this.player.getGarageManager().getEquippedTurret();
+        this.setTurret(turret)
+
+        const hull = this.player.getGarageManager().getEquippedTurret();
+        this.setHull(hull)
+    }
 
     public getIncarnationId() {
         return this.incarnation
@@ -59,6 +86,26 @@ export class Tank {
 
     public setPosition(position: Vector3d) {
         this.position = position
+    }
+
+    public setTurret(turret: string) {
+
+        if (this.turret && this.turret.getName() === turret) {
+            return
+        }
+
+        const resources = this.player.getGarageManager().getTurretResources()
+        this.turret = new Turret(resources.item, resources.properties, resources.sfx)
+    }
+
+    public setHull(hull: string) {
+
+        if (this.hull && this.hull.getName() === hull) {
+            return
+        }
+
+        const resources = this.player.getGarageManager().getHullResources()
+        this.hull = new Hull(resources.item, resources.properties)
     }
 
     public isVisible() {
@@ -103,143 +150,213 @@ export class Tank {
 
     public prepareRespawn() {
         this.incarnation++;
-        // TODO: set speed
-        this.setCameraPosition(new Vector3d(-4669.8310546875, -1442.4090576171875, 200), new Vector3d(0, 0, -1.5709999799728394))
+
+        this.position = new Vector3d(-4669.8310546875, -1442.4090576171875, 200);
+        this.orientation = new Vector3d(0, 0, -1.5);
+        this.sendTankSpeed();
+
+        this.setCameraPosition(this.position, this.orientation)
     }
 
     public spawn() {
 
         if (this.changedEquipment) {
-            this.changedEquipment = false;
+            this.updateProperties();
+            const data = this.getData();
+
             this.sendRemoveTank();
-            this.battle.getPlayersManager().broadcastTankData(this.getData());
+            this.battle.getPlayersManager().sendTankData(data, this.player);
+            this.battle.getPlayersManager().broadcastTankData(data);
             this.sendChangeEquipment();
+
+            this.changedEquipment = false;
+
         }
 
+        this.alive = true;
         this.setHealth(10000);
 
         const setSpawnTankPacket = new SetSpawnTankPacket();
         setSpawnTankPacket.tankId = this.player.getUsername();
         setSpawnTankPacket.team = Team.NONE;
-        setSpawnTankPacket.position = new Vector3d(-4669.8310546875, -1442.4090576171875, 200);
-        setSpawnTankPacket.orientation = new Vector3d(0, 0, -1.5709999799728394);
+        setSpawnTankPacket.position = this.position;
+        setSpawnTankPacket.orientation = this.orientation;
         setSpawnTankPacket.health = this.health;
         setSpawnTankPacket.incarnationId = this.incarnation;
 
         this.battle.broadcastPacket(setSpawnTankPacket);
     }
 
-    public destroy() {
-        const setDestroyTankPacket = new SetDestroyTankPacket()
-        setDestroyTankPacket.tankId = this.player.getUsername()
-        setDestroyTankPacket.respawnDelay = 3000
-        this.player.sendPacket(setDestroyTankPacket)
+    public suicide() {
+        const packet = new SetAutoDestroyPacket()
+        packet.tankId = this.player.getUsername()
+        packet.respawnDelay = 3000
+        this.battle.broadcastPacket(packet)
+        this.handleDestroyed();
     }
 
     public sendRespawnDelay(delay: number) {
-        const setTankRespawnDelayPacket = new SetTankRespawnDelayPacket();
-        setTankRespawnDelayPacket.tank = this.player.getUsername();
-        setTankRespawnDelayPacket.respawnDelay = delay;
-        this.player.sendPacket(setTankRespawnDelayPacket);
+        const packet = new SetDestroyTankPacket();
+        packet.tank = this.player.getUsername();
+        packet.respawnDelay = delay;
+        this.battle.broadcastPacket(packet);
+        this.handleDestroyed();
     }
 
-    public sendSuicide(delay: number = 3000, respawnDelay: number = 3000) {
+    public destroy(delay: number = 3000, respawnDelay: number = 3000) {
         const packet = new SetSuicideDelayPacket();
         packet.delay = delay;
         this.player.sendPacket(packet);
         setTimeout(() => { this.sendRespawnDelay(respawnDelay) }, delay)
     }
 
-    public setTankSpeed(
-        maxSpeed: number,
-        maxTurnSpeed: number,
-        maxTurretRotationSpeed: number,
-        acceleration: number,
-    ) {
+    public sendTankSpeed(multiply: number = 1) {
         const setTankSpeedPacket = new SetTankSpeedPacket();
         setTankSpeedPacket.tankId = this.player.getUsername();
-        setTankSpeedPacket.maxSpeed = maxSpeed;
-        setTankSpeedPacket.maxTurnSpeed = maxTurnSpeed;
-        setTankSpeedPacket.maxTurretRotationSpeed = maxTurretRotationSpeed;
-        setTankSpeedPacket.acceleration = acceleration;
+        setTankSpeedPacket.maxSpeed = this.hull.properties.maxSpeed * multiply;
+        setTankSpeedPacket.maxTurnSpeed = this.hull.properties.maxTurnSpeed;
+        setTankSpeedPacket.maxTurretRotationSpeed = this.turret.properties.turret_turn_speed;
+        setTankSpeedPacket.acceleration = this.hull.properties.acceleration;
         setTankSpeedPacket.specificationId = this.incarnation;
         this.player.sendPacket(setTankSpeedPacket);
     }
 
-    public handlePacket(packet: SimplePacket): boolean {
+    public handleDestroyed() {
+        this.alive = false;
+        this.health = 0;
+    }
+
+    public handleUseSupply(item: string) {
+        switch (item) {
+            case Supply.N2O:
+                this.sendTankSpeed(2)
+                this.player.getGarageManager().sendUseSupply(Supply.N2O, 10, true)
+                break;
+        }
+    }
+
+    public handlePacket(packet: SimplePacket) {
 
         if (packet instanceof SendRequestSpawnPositionPacket) {
             this.prepareRespawn();
-            return true;
         }
 
         if (packet instanceof SendRequestRespawnPacket) {
             this.spawn();
-            return true;
         }
 
         if (packet instanceof SendRequestSetTankVisiblePacket) {
             this.setVisible(true);
-            return true;
         }
 
         if (packet instanceof SendAutoDestroyPacket) {
-            this.destroy();
-            return true;
+            this.suicide();
         }
 
-        if (packet instanceof SendUseDrugPacket) {
-            console.log("Use drug", packet)
-            if (packet.itemId === "n2o") {
-                this.setTankSpeed(100, 2.6632988452911377, 2.8149678707122803, 20.970000267028809)
-                const setUseDrugPacket = new SetUseDrugPacket()
-                setUseDrugPacket.itemId = packet.itemId
-                setUseDrugPacket.time = 10
-                setUseDrugPacket.decrease = true
-                this.player.sendPacket(setUseDrugPacket)
+        if (packet instanceof SendUseSupplyPacket) {
+            this.handleUseSupply(packet.itemId)
+        }
+
+        if (this.turret) {
+            this.turret.handlePacket(packet, this)
+        }
+
+        /** MOVEMENT PACKETS */
+
+        if (packet instanceof SendMoveTankTracksPacket) {
+            const pk = new SetTankControlPacket();
+            pk.tankId = this.player.getUsername();
+            pk.control = packet.control;
+
+            this.battle.broadcastPacket(pk, [this.player.getUsername()])
+
+        }
+
+        if (packet instanceof SendMoveTankPacket) {
+
+            if (packet.specificationId !== this.incarnation) {
+                Logger.warn("Invalid movement with different incarnation id");
+                return;
             }
+
+            const pk = new SetMoveTankPacket();
+
+            this.position = packet.position;
+            this.orientation = packet.orientation;
+
+            pk.tankId = this.player.getUsername()
+            pk.angularVelocity = packet.angularVelocity;
+            pk.control = packet.control;
+            pk.impulse = packet.impulse;
+            pk.orientation = packet.orientation;
+            pk.position = packet.position;
+
+            this.battle.broadcastPacket(pk, [this.player.getUsername()])
         }
 
-        return false;
+        if (packet instanceof SendTankTurretDirectionPacket) {
+            const pk = new SetTankTurretAngleControlPacket();
+
+            pk.tankId = this.player.getUsername();
+            pk.angle = packet.angle;
+            pk.control = packet.control;
+
+            this.battle.broadcastPacket(pk, [this.player.getUsername()])
+        }
+
+        if (packet instanceof SendMoveTankAndTurretPacket) {
+            const pk = new SetMoveTankAndTurretPacket();
+
+            this.position = packet.position;
+            this.orientation = packet.orientation;
+
+            pk.tankId = this.player.getUsername();
+            pk.angularVelocity = packet.angularVelocity;
+            pk.control = packet.control;
+            pk.impulse = packet.impulse;
+            pk.orientation = packet.orientation;
+            pk.position = packet.position;
+            pk.turretDirection = packet.turretDirection;
+
+            this.battle.broadcastPacket(pk, [this.player.getUsername()])
+        }
     }
 
     public getData(): IUserTankResourcesData {
-        const turret = this.player.getGarageManager().getTurretResources()
-        const hull = this.player.getGarageManager().getHullResources()
         const painting = this.player.getGarageManager().getPaintingResources()
 
         return {
             battleId: this.battle.getBattleId(),
             colormap_id: painting.item.coloring,
-            hull_id: hull.hull,
-            turret_id: turret.turret,
+            hull_id: this.hull.getName(),
+            turret_id: this.turret.getName(),
             team_type: 'NONE',
             partsObject: '{"engineIdleSound":386284,"engineStartMovingSound":226985,"engineMovingSound":75329,"turretSound":242699}',
-            hullResource: hull.item.object3ds,
-            turretResource: turret.item.object3ds,
-            sfxData: JSON.stringify(turret.sfx),
-            position: { x: 0, y: 0, z: 0 },
-            orientation: { x: 0, y: 0, z: 0 },
+            hullResource: this.hull.item.object3ds,
+            turretResource: this.turret.item.object3ds,
+            sfxData: JSON.stringify(this.turret.sfx),
+            position: this.position.toObject(),
+            orientation: this.orientation.toObject(),
             incarnation: this.incarnation,
             tank_id: this.player.getUsername(),
             nickname: this.player.getUsername(),
-            state: 'suicide',
-            maxSpeed: hull.properties.maxSpeed,
-            maxTurnSpeed: hull.properties.maxTurnSpeed,
-            acceleration: hull.properties.acceleration,
-            reverseAcceleration: hull.properties.reverseAcceleration,
-            sideAcceleration: hull.properties.sideAcceleration,
-            turnAcceleration: hull.properties.turnAcceleration,
-            reverseTurnAcceleration: hull.properties.reverseTurnAcceleration,
-            mass: hull.properties.mass,
-            power: hull.properties.power,
-            dampingCoeff: hull.properties.dampingCoeff,
-            turret_turn_speed: turret.properties.turretTurnAcceleration,
-            health: 0,
+            state: this.alive ? (this.visible ? 'active' : 'newcome') : 'suicide',
+            maxSpeed: this.hull.properties.maxSpeed,
+            maxTurnSpeed: this.hull.properties.maxTurnSpeed,
+            acceleration: this.hull.properties.acceleration,
+            reverseAcceleration: this.hull.properties.reverseAcceleration,
+            sideAcceleration: this.hull.properties.sideAcceleration,
+            turnAcceleration: this.hull.properties.turnAcceleration,
+            reverseTurnAcceleration: this.hull.properties.reverseTurnAcceleration,
+            mass: this.hull.properties.mass,
+            power: this.hull.properties.power,
+            dampingCoeff: this.hull.properties.dampingCoeff,
+            turret_turn_speed: this.turret.properties.turretTurnAcceleration,
+            health: this.alive ? this.health : 0,
             rank: this.player.getData().getRank(),
-            kickback: turret.properties.kickback,
-            turretTurnAcceleration: turret.properties.turretTurnAcceleration,
-            impact_force: turret.properties.impact_force,
+            kickback: this.turret.properties.kickback,
+            turretTurnAcceleration: this.turret.properties.turretTurnAcceleration,
+            impact_force: this.turret.properties.impact_force,
             state_null: true
         }
     }

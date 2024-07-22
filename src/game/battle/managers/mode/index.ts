@@ -7,5 +7,5 @@ export abstract class BattleModeManager {
 
     public getBattle() { return this.battle }
 
-    public abstract sendPlayersStatistics(): void
+    public abstract sendUserProperties(): void
 }

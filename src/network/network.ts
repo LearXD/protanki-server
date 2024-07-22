@@ -80,8 +80,8 @@ import { SetTimePacket } from "./packets/set-time";
 import { SetBonusesDataPacket } from "./packets/set-bonuses-data";
 import { SetBattleMapPropertiesPacket } from "./packets/set-battle-map-properties";
 import { SetBattleDataPacket } from "./packets/set-battle-data";
-import { SetBattleStatisticsDMCCPacket } from "./packets/set-battle-statistics-dm-cc";
-import { SetBattleMineCCPacket } from "./packets/set-battle-mine-cc";
+import { SetBattleUsersPropertiesPacket } from "./packets/set-battle-users-properties";
+import { SetBattleMinesResourcesPacket } from "./packets/set-battle-mines-resources";
 import { SetUserTankResourcesDataPacket } from "./packets/set-user-tank-resources-data";
 import { SetSuppliesPacket } from "./packets/set-supplies";
 import { SetBattleUserStatusPacket } from "./packets/set-battle-user-status";
@@ -117,7 +117,7 @@ import { SetCrystalsPacket } from "./packets/set-crystals";
 import { SetRemoveBonusBoxPacket } from "./packets/set-remove-bonus-box";
 import { SetBattleRewardsPacket } from "./packets/set-battle-rewards";
 import { SetAchievementMessagePacket } from "./packets/set-achievement-message";
-import { SetBattleChatConfigPacket } from "./packets/set-battle-chat-config";
+import { SetBattleAddUserPropertiesPacket } from "./packets/set-battle-chat-config";
 import { SetBattleUserLeftNotificationPacket } from "./packets/set-battle-user-left-notification";
 import { SetRemoveTankPacket } from "./packets/set-remove-tank";
 import { SetAddTankEffectPacket } from "./packets/set-add-tank-effect";
@@ -148,7 +148,7 @@ import { SetGarageItemsPacket } from "./packets/set-garage-items";
 import { SendCheckBattleNamePacket } from "./packets/send-check-battle-name";
 import { SetBattleNamePacket } from "./packets/set-battle-name";
 import { SendAutoDestroyPacket } from "./packets/send-auto-destroy";
-import { SetDestroyTankPacket } from "./packets/set-destroy-tank";
+import { SetAutoDestroyPacket } from "./packets/set-auto-destroy";
 import { Logger } from "../utils/logger";
 import { SetGameLoadedPacket } from "./packets/set-game-loaded";
 import { SetRemoveTankEffectPacket } from "./packets/set-remove-tank-effect";
@@ -247,8 +247,8 @@ import { SetChangeDailyQuestPacket } from "./packets/set-change-daily-quest";
 import { SendChangeDailyQuestPacket } from "./packets/send-change-daily-quest";
 import { SetDailyQuestsPacket } from "./packets/set-daily-quests";
 import { SendOpenDailyQuestsPacket } from "./packets/send-open-daily-quests";
-import { SetUseDrugPacket } from "./packets/set-use-drug";
-import { SendUseDrugPacket } from "./packets/send-use-drug";
+import { SetUseSupplyPacket } from "./packets/set-use-supply";
+import { SendUseSupplyPacket } from "./packets/send-use-supply";
 import { SetExplodeMinePacket } from "./packets/set-explode-mine";
 import { SetPlaceMinePacket } from "./packets/set-place-mine";
 import { SetStopShaftShotPacket } from "./packets/set-stop-shaft-shot";
@@ -303,7 +303,7 @@ import { SendFlameTargetsShotPacket } from "./packets/send-flame-targets-shot";
 import { SetUserLeftBattlePacket } from "./packets/set-user-left-battle";
 import { SetDrugQuantityPacket } from "./packets/set-drug-quantity";
 import { SetCapturingPointPacket } from "./packets/set-capturing-point";
-import { SetTankRespawnDelayPacket } from "./packets/set-tank-respawn-delay";
+import { SetDestroyTankPacket } from "./packets/set-destroy-tank";
 import { SetSuicideDelayPacket } from "./packets/set-suicide-delay";
 import { SetRemoveGaragePacket } from "./packets/set-remove-garage";
 import { SetOpenFriendsListPacket } from "./packets/set-open-friends-list";
@@ -393,7 +393,7 @@ export class Network {
         this.registerPacket(Protocol.SET_USER_BATTLE, SetUserBattlePacket)
 
         this.registerPacket(Protocol.SET_BATTLE_DATA, SetBattleDataPacket)
-        this.registerPacket(Protocol.SET_BATTLE_STATISTICS_DM_CC, SetBattleStatisticsDMCCPacket)
+        this.registerPacket(Protocol.SET_BATTLE_USERS_PROPERTIES, SetBattleUsersPropertiesPacket)
         this.registerPacket(Protocol.SET_CAPTURE_THE_FLAG_CC, SetCaptureTheFlagCCPacket)
         this.registerPacket(Protocol.SET_BATTLE_STATISTICS_TEAM_CC, SetBattleStatisticsTeamCCPacket)
         this.registerPacket(Protocol.SET_TEAM_BATTLE_USER_STAT, SetTeamBattleUserStatPacket)
@@ -401,7 +401,7 @@ export class Network {
         this.registerPacket(Protocol.SET_WINNER_TEAM, SetWinnerTeamPacket)
         this.registerPacket(Protocol.SET_TEAM_SCORE, SetTeamScorePacket)
 
-        this.registerPacket(Protocol.SET_BATTLE_MINE_CC, SetBattleMineCCPacket)
+        this.registerPacket(Protocol.SET_BATTLE_MINES_RESOURCES, SetBattleMinesResourcesPacket)
         this.registerPacket(Protocol.SET_BATTLE_MESSAGE, SetBattleMessagePacket)
         this.registerPacket(Protocol.SET_BATTLE_FUND, SetBattleFundPacket)
 
@@ -535,7 +535,7 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_BONUS_BOX, SetRemoveBonusBoxPacket)
         this.registerPacket(Protocol.SET_BATTLE_REWARDS, SetBattleRewardsPacket)
         this.registerPacket(Protocol.SET_ACHIEVEMENT_MESSAGE, SetAchievementMessagePacket)
-        this.registerPacket(Protocol.SET_BATTLE_CHAT_CONFIG, SetBattleChatConfigPacket)
+        this.registerPacket(Protocol.SET_BATTLE_CHAT_CONFIG, SetBattleAddUserPropertiesPacket)
         this.registerPacket(Protocol.SET_BONUS_BOX_COLLECTED, SetBonusBoxCollectedPacket)
         this.registerPacket(Protocol.SET_SMOKY_CRITICAL_EFFECT, SetSmokyCriticalEffectPacket)
 
@@ -546,7 +546,7 @@ export class Network {
         this.registerPacket(Protocol.SEND_CHECK_BATTLE_NAME, SendCheckBattleNamePacket)
         this.registerPacket(Protocol.SET_BATTLE_NAME, SetBattleNamePacket)
         this.registerPacket(Protocol.SEND_AUTO_DESTROY, SendAutoDestroyPacket)
-        this.registerPacket(Protocol.SET_DESTROY_TANK, SetDestroyTankPacket)
+        this.registerPacket(Protocol.SET_AUTO_DESTROY, SetAutoDestroyPacket)
 
         this.registerPacket(Protocol.SET_GAME_LOADED, SetGameLoadedPacket)
         this.registerPacket(Protocol.SEND_LAYOUT_STATE, SendLayoutStatePacket)
@@ -601,8 +601,8 @@ export class Network {
         this.registerPacket(Protocol.SEND_CHANGE_DAILY_QUEST, SendChangeDailyQuestPacket);
         this.registerPacket(Protocol.SET_DAILY_QUESTS, SetDailyQuestsPacket);
         this.registerPacket(Protocol.SEND_OPEN_DAILY_QUESTS, SendOpenDailyQuestsPacket);
-        this.registerPacket(Protocol.SET_USE_DRUG, SetUseDrugPacket);
-        this.registerPacket(Protocol.SEND_USE_DRUG, SendUseDrugPacket);
+        this.registerPacket(Protocol.SET_USE_SUPPLY, SetUseSupplyPacket);
+        this.registerPacket(Protocol.SEND_USE_SUPPLY, SendUseSupplyPacket);
         this.registerPacket(Protocol.SET_EXPLODE_MINE, SetExplodeMinePacket);
         this.registerPacket(Protocol.SET_REMOVE_MINE, SetRemoveMinePacket);
         this.registerPacket(Protocol.SET_PLACE_MINE, SetPlaceMinePacket);
@@ -660,7 +660,7 @@ export class Network {
         this.registerPacket(Protocol.SET_USER_LEFT_BATTLE, SetUserLeftBattlePacket);
         this.registerPacket(Protocol.SET_DRUG_QUANTITY, SetDrugQuantityPacket);
         this.registerPacket(Protocol.SET_CAPTURING_POINT, SetCapturingPointPacket);
-        this.registerPacket(Protocol.SET_TANK_RESPAWN_DELAY, SetTankRespawnDelayPacket);
+        this.registerPacket(Protocol.SET_DESTROY_TANK, SetDestroyTankPacket);
         this.registerPacket(Protocol.SET_SUICIDE_DELAY, SetSuicideDelayPacket);
         this.registerPacket(Protocol.SET_REMOVE_GARAGE, SetRemoveGaragePacket);
         this.registerPacket(Protocol.SET_OPEN_FRIENDS_LIST, SetOpenFriendsListPacket);
