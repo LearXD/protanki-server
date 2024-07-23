@@ -3,10 +3,10 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export interface ITargetHit {
+export interface ITarget {
     direction: Vector3d
-    vector_1: Vector3d
-    byte_1: number
+    hitPosition: Vector3d
+    count: number
     target: string
 }
 
@@ -14,7 +14,7 @@ export class SetHammerShotPacket extends Packet {
 
     public shooter: string;
     public direction: Vector3d;
-    public targets: ITargetHit[]
+    public targets: ITarget[]
 
     constructor(bytes?: ByteArray) {
         super(Protocol.SET_HAMMER_SHOT, bytes)
@@ -32,8 +32,8 @@ export class SetHammerShotPacket extends Packet {
         for (let i = 0; i < targetsLength; i++) {
             this.targets[i] = {
                 direction: bytes.readVector3d(),
-                vector_1: bytes.readVector3d(),
-                byte_1: bytes.readByte(),
+                hitPosition: bytes.readVector3d(),
+                count: bytes.readByte(),
                 target: bytes.readString()
             }
         }
@@ -54,8 +54,8 @@ export class SetHammerShotPacket extends Packet {
         bytes.writeInt(this.targets.length);
         this.targets.forEach(target => {
             bytes.writeVector3d(target.direction);
-            bytes.writeVector3d(target.vector_1);
-            bytes.writeByte(target.byte_1);
+            bytes.writeVector3d(target.hitPosition);
+            bytes.writeByte(target.count);
             bytes.writeString(target.target);
         })
 

@@ -1,3 +1,4 @@
+import { IsidaState, IsidaStateType } from "../../utils/game/isida-state";
 import { Vector3d } from "../../utils/game/vector-3d";
 import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
@@ -6,7 +7,7 @@ import { Packet } from "./packet";
 export class SendIsisShotPositionPacket extends Packet {
 
     public time: number;
-    public type: number;
+    public type: IsidaStateType;
 
     public destinationPosition: Vector3d;
     public targetPosition: Vector3d;
@@ -19,7 +20,7 @@ export class SendIsisShotPositionPacket extends Packet {
         const bytes = this.cloneBytes();
 
         this.time = bytes.readInt();
-        this.type = bytes.readShort();
+        this.type = IsidaState.STATES[bytes.readShort()] as IsidaStateType;
 
         this.destinationPosition = bytes.readVector3d();
         this.targetPosition = bytes.readVector3d();
@@ -36,7 +37,7 @@ export class SendIsisShotPositionPacket extends Packet {
         const bytes = new ByteArray();
 
         bytes.writeInt(this.time);
-        bytes.writeShort(this.type);
+        bytes.writeShort(IsidaState.STATES.indexOf(this.type));
         bytes.writeVector3d(this.destinationPosition);
         bytes.writeVector3d(this.targetPosition);
 

@@ -3,13 +3,13 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SendStormHitPointPacket extends Packet {
+export class SendStormHitPointShotPacket extends Packet {
 
     public time: number;
     public hitPoint: Vector3d;
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SEND_STORM_HIT_POINT, bytes)
+        super(Protocol.SEND_STORM_HIT_POINT_SHOT, bytes)
     }
 
     public decode() {

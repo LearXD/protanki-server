@@ -3,7 +3,7 @@ import { Vector3d } from "../../utils/game/vector-3d";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SendShotWithTargetPacket extends Packet {
+export class SendSmokyTargetShotPacket extends Packet {
 
     public time: number;
     public target: string;
@@ -13,7 +13,7 @@ export class SendShotWithTargetPacket extends Packet {
     public hitPointPosition: Vector3d;
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SEND_SHOT_WITH_TARGET, bytes)
+        super(Protocol.SEND_SMOKY_TARGET_SHOT, bytes)
     }
 
     public decode() {

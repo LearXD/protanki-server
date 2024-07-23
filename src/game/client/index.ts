@@ -25,7 +25,7 @@ export abstract class Client {
     public language: string;
 
     private lastPing: number = 0;
-    private lastPong: number = 0;
+    private ping: number = 0;
 
     private captchaManager: ClientCaptchaManager;
 
@@ -66,13 +66,12 @@ export abstract class Client {
     public getServer(): Server { return this.server }
     public getSocket(): net.Socket { return this.socket }
 
-    public updateLastPong() {
-        this.lastPong = Date.now()
+    public handlePong() {
+        this.ping = Date.now() - this.lastPing;
     }
 
     public getPing() {
-        const ping = this.lastPong - this.lastPing;
-        return ping < 0 ? 0 : ping;
+        return this.ping;
     }
 
     public sendPing() {
@@ -110,7 +109,7 @@ export abstract class Client {
         this.captchaManager.handlePacket(packet);
 
         if (packet instanceof PongPacket) {
-            this.updateLastPong();
+            this.handlePong();
             return true;
         }
 

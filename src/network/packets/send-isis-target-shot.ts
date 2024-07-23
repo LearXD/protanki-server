@@ -3,15 +3,16 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SendIsisShotPacket extends Packet {
+
+export class SendIsisTargetShotPacket extends Packet {
 
     public time: number;
     public target: string;
-    public type: number;
-    public vector_1: Vector3d;
+    public damaging: number;
+    public position: Vector3d;
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SEND_ISIS_SHOT, bytes)
+        super(Protocol.SEND_ISIS_TARGET_SHOT, bytes)
     }
 
     public decode() {
@@ -19,14 +20,14 @@ export class SendIsisShotPacket extends Packet {
 
         this.time = bytes.readInt();
         this.target = bytes.readString();
-        this.type = bytes.readShort();
-        this.vector_1 = bytes.readVector3d();
+        this.damaging = bytes.readShort()
+        this.position = bytes.readVector3d();
 
         return {
             time: this.time,
             target: this.target,
-            type: this.type,
-            vector_1: this.vector_1
+            damaging: this.damaging,
+            position: this.position
         }
     }
 
@@ -35,8 +36,8 @@ export class SendIsisShotPacket extends Packet {
 
         bytes.writeInt(this.time);
         bytes.writeString(this.target);
-        bytes.writeShort(this.type);
-        bytes.writeVector3d(this.vector_1);
+        bytes.writeShort(this.damaging);
+        bytes.writeVector3d(this.position);
 
         return bytes;
     }

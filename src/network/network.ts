@@ -106,7 +106,7 @@ import { SendMoveTankPacket } from "./packets/send-move-tank";
 import { SendMoveTankAndTurretPacket } from "./packets/send-move-tank-and-turret";
 import { SendTankTurretDirectionPacket } from "./packets/send-tank-turret-direction";
 import { SetSmokyHitPointPacket } from "./packets/set-smoky-hit-point";
-import { SendShotWithTargetPacket } from "./packets/send-shot-with-target";
+import { SendSmokyTargetShotPacket } from "./packets/send-smoky-target-shot";
 import { SetDamageIndicatorsPacket } from "./packets/set-damage-indicators";
 import { SetSpawnBonusBoxPacket } from "./packets/set-spawn-bonus-box";
 import { SendMoveTankTracksPacket } from "./packets/send-move-tank-tracks";
@@ -129,7 +129,7 @@ import { SetScorePacket } from "./packets/set-score";
 import { SetStartShaftShotPacket } from "./packets/set-start-shaft-shot";
 import { SetMoveShaftVerticalAxisPacket } from "./packets/set-move-shaft-vertical-axis";
 import { SendCollectBonusBoxPacket } from "./packets/send-collect-bonus-box";
-import { SetShooterTankSpotPacket } from "./packets/set-shooter-tank-spot";
+import { SetShaftLocalSpotPacket } from "./packets/set-shaft-local-spot";
 import { SetShaftShotPacket } from "./packets/set-shaft-shot";
 import { SetBattleMessagePacket } from "./packets/set-battle-message";
 import { SetCaptureTheFlagCCPacket } from "./packets/set-capture-the-flag-cc";
@@ -276,12 +276,12 @@ import { SetStormVoidShotPacket } from "./packets/set-storm-void-shot";
 import { SetStormHitPointShotPacket } from "./packets/set-storm-hit-point-shot";
 import { SendStormTargetShotPacket } from "./packets/send-storm-target-shot";
 import { SendStormVoidShotPacket } from "./packets/send-storm-void-shot";
-import { SendStormHitPointPacket } from "./packets/send-storm-hit-point";
+import { SendStormHitPointShotPacket } from "./packets/send-storm-hit-point-shot";
 import { SetIsisShotPositionPacket } from "./packets/set-isis-shot-position";
 import { SetStopIsisShotPacket } from "./packets/set-stop-isis-shot";
 import { SetStartIsisShotPacket } from "./packets/set-start-isis-shot";
 import { SendStopIsisShotPacket } from "./packets/send-stop-isis-shot";
-import { SendIsisShotPacket } from "./packets/send-isis-shot";
+import { SendIsisTargetShotPacket } from "./packets/send-isis-target-shot";
 import { SendRailgunShotPacket } from "./packets/send-railgun-shot";
 import { SendStartRailgunShotPacket } from "./packets/send-start-railgun-shot";
 import { SendTwinsHitPointShotPacket } from "./packets/send-twins-hit-point-shot";
@@ -498,7 +498,7 @@ export class Network {
         this.registerPacket(Protocol.SET_SHAFT_SHOT, SetShaftShotPacket)
         this.registerPacket(Protocol.SET_STORM_TARGET_SHOT, SetStormTargetShotPacket)
 
-        this.registerPacket(Protocol.SEND_SHOT_WITH_TARGET, SendShotWithTargetPacket)
+        this.registerPacket(Protocol.SEND_SMOKY_TARGET_SHOT, SendSmokyTargetShotPacket)
         this.registerPacket(Protocol.SET_RAILGUN_SHOT, SetRailgunShotPacket)
 
         this.registerPacket(Protocol.SET_START_FLAME_SHOT, SetStartFlameShotPacket)
@@ -506,7 +506,7 @@ export class Network {
         this.registerPacket(Protocol.SET_START_SHAFT_SHOT, SetStartShaftShotPacket)
         this.registerPacket(Protocol.SET_START_RAILGUN_SHOT, SetStartRailgunShotPacket)
         this.registerPacket(Protocol.SET_MOVE_SHAFT_VERTICAL_AXIS, SetMoveShaftVerticalAxisPacket)
-        this.registerPacket(Protocol.SET_SHOOTER_TANK_SPOT, SetShooterTankSpotPacket)
+        this.registerPacket(Protocol.SET_SHAFT_LOCAL_SPOT, SetShaftLocalSpotPacket)
 
         this.registerPacket(Protocol.SET_DAMAGE_INDICATORS, SetDamageIndicatorsPacket)
 
@@ -631,12 +631,12 @@ export class Network {
         this.registerPacket(Protocol.SET_STORM_HIT_POINT_SHOT, SetStormHitPointShotPacket);
         this.registerPacket(Protocol.SEND_STORM_TARGET_SHOT, SendStormTargetShotPacket);
         this.registerPacket(Protocol.SEND_STORM_VOID_SHOT, SendStormVoidShotPacket);
-        this.registerPacket(Protocol.SEND_STORM_HIT_POINT, SendStormHitPointPacket);
+        this.registerPacket(Protocol.SEND_STORM_HIT_POINT_SHOT, SendStormHitPointShotPacket);
         this.registerPacket(Protocol.SET_ISIS_SHOT_POSITION, SetIsisShotPositionPacket);
         this.registerPacket(Protocol.SET_STOP_ISIS_SHOT, SetStopIsisShotPacket);
         this.registerPacket(Protocol.SET_START_ISIS_SHOT, SetStartIsisShotPacket);
         this.registerPacket(Protocol.SEND_STOP_ISIS_SHOT, SendStopIsisShotPacket);
-        this.registerPacket(Protocol.SEND_ISIS_SHOT, SendIsisShotPacket);
+        this.registerPacket(Protocol.SEND_ISIS_TARGET_SHOT, SendIsisTargetShotPacket);
         this.registerPacket(Protocol.SEND_START_ISIS_SHOT, SendStartIsisShotPacket);
         this.registerPacket(Protocol.SEND_ISIS_SHOT_POSITION, SendIsisShotPositionPacket);
         this.registerPacket(Protocol.SEND_RAILGUN_SHOT, SendRailgunShotPacket);

@@ -20,7 +20,7 @@ export class ClientsHandler {
         const player = new Player(socket, this.server);
 
         socket.on('data', (data) => player.getPacketHandler().handleReceivedData(data));
-        socket.on('error', (error) => player.close());
+        socket.on('error', () => player.close());
         socket.on('close', () => this.handleDisconnection(player));
 
         this.clients.set(player.getIdentifier(), player);
@@ -30,7 +30,7 @@ export class ClientsHandler {
     public handleDisconnection = (player: Player) => {
         Logger.info(`Client disconnected: ${player.getIdentifier()}`);
 
-        if (player.getUsername() && this.server.getPlayersManager().hasPlayer(player)) {
+        if (player.getAuthManager().isAuthenticated() && this.server.getPlayersManager().hasPlayer(player)) {
             this.server.getPlayersManager().removePlayer(player)
         }
 

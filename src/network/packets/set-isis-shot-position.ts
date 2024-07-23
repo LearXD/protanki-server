@@ -1,4 +1,4 @@
-import { IsidaState } from "../../utils/game/isida-state";
+import { IsidaState, IsidaStateType } from "../../utils/game/isida-state";
 import { Vector3d } from "../../utils/game/vector-3d";
 import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
@@ -14,7 +14,7 @@ export interface ITarget {
 export class SetIsisShotPositionPacket extends Packet {
 
     public shooter: string;
-    public state: string;
+    public state: IsidaStateType;
     public target: ITarget;
 
     constructor(bytes?: ByteArray) {
@@ -25,7 +25,7 @@ export class SetIsisShotPositionPacket extends Packet {
         const bytes = this.cloneBytes();
 
         this.shooter = bytes.readString();
-        this.state = IsidaState.STATES[bytes.readInt()];
+        this.state = IsidaState.STATES[bytes.readInt()] as IsidaStateType;
         this.target = {
             direction: bytes.readVector3d(),
             position: bytes.readVector3d(),

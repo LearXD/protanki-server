@@ -38,7 +38,7 @@ export interface IItem {
     previewResourceId: number
     rank: number
     category: string
-    properts: IProperty
+    properts: IProperty[]
     discount: IDiscount
     grouped: boolean
     isForRent: boolean

@@ -88,6 +88,14 @@ export class Tank {
         this.position = position
     }
 
+    public getDirection(): Vector3d {
+        return this.orientation
+    }
+
+    public setDirection(orientation: Vector3d) {
+        this.orientation = orientation
+    }
+
     public setTurret(turret: string) {
 
         if (this.turret && this.turret.getName() === turret) {

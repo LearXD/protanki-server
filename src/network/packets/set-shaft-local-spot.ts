@@ -3,14 +3,14 @@ import { Vector3d } from "../../utils/game/vector-3d";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetShooterTankSpotPacket extends Packet {
+export class SetShaftLocalSpotPacket extends Packet {
 
     public shooter: string;
     public target: string;
     public position: Vector3d;
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_SHOOTER_TANK_SPOT, bytes)
+        super(Protocol.SET_SHAFT_LOCAL_SPOT, bytes)
     }
 
     public decode() {

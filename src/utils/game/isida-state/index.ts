@@ -1,8 +1,8 @@
 export class IsidaState {
-    public static OFF = 'OFF';
-    public static IDLE = 'IDLE';
-    public static HEALING = 'HEALING';
-    public static DAMAGING = 'DAMAGING';
+    public static readonly OFF = 'OFF';
+    public static readonly IDLE = 'IDLE';
+    public static readonly HEALING = 'HEALING';
+    public static readonly DAMAGING = 'DAMAGING';
 
     public static STATES = [
         IsidaState.OFF,
