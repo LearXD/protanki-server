@@ -1,4 +1,5 @@
 import { Player } from "../..";
+import { SendBattleMessagePacket } from "../../../../network/packets/send-battle-message";
 import { SendCreateBattlePacket } from "../../../../network/packets/send-create-battle";
 import { SendJoinOnBattlePacket } from "../../../../network/packets/send-join-on-battle";
 import { SendOpenBattlesListPacket } from "../../../../network/packets/send-open-battles-list";
@@ -50,6 +51,12 @@ export class PlayerBattlesManager {
         this.player.sendPacket(setBattleInviteCCPacket);
     }
 
+    public sendBattlesList() {
+        this.player.setLayoutState(LayoutState.BATTLE_SELECT)
+        this.sendBattles();
+        this.player.setSubLayoutState(LayoutState.BATTLE_SELECT)
+    }
+
     public handleJoinBattle(team: string) {
         const battle = this.player.getViewingBattle();
         if (battle) {
@@ -65,9 +72,7 @@ export class PlayerBattlesManager {
     }
 
     public handleOpenBattlesList() {
-        this.player.setLayoutState(LayoutState.BATTLE_SELECT)
-        this.sendBattles();
-        this.player.setSubLayoutState(LayoutState.BATTLE_SELECT)
+
     }
 
     public handleViewBattle(battleId: string) {
@@ -112,6 +117,32 @@ export class PlayerBattlesManager {
         battle.getViewersManager().addViewer(this.player);
     }
 
+    public handleOpenBattleList() {
+        if (this.player.isInBattle()) {
+            if (this.player.getLayoutState() === LayoutState.BATTLE) {
+                this.sendBattlesList();
+                return true;
+            }
+
+            if (this.player.getLayoutState() === LayoutState.BATTLE_SELECT) {
+                this.sendRemoveBattlesScreen();
+                this.player.setLayoutState(LayoutState.BATTLE);
+                this.player.setSubLayoutState(LayoutState.BATTLE);
+                return true;
+            }
+
+            if (this.player.getLayoutState() === LayoutState.GARAGE) {
+                this.player.getGarageManager().removeGarageScreen();
+                this.sendBattlesList();
+                return true;
+            }
+
+            return true;
+        }
+
+        this.sendBattlesList();
+    }
+
     public handlePacket(packet: SimplePacket) {
 
         if (packet instanceof SendJoinOnBattlePacket) {
@@ -124,46 +155,25 @@ export class PlayerBattlesManager {
 
         if (packet instanceof SendCreateBattlePacket) {
             this.handleCreateBattle(packet)
-            return true;
         }
 
         if (packet instanceof SetViewingBattlePacket) {
             this.handleViewBattle(packet.battleId.trim())
-            return true;
         }
 
         if (packet instanceof SendOpenLinkPacket) {
             this.handleViewBattle(packet.battleId);
-            return true;
         }
 
         if (packet instanceof SendOpenBattlesListPacket) {
-            if (this.player.isInBattle()) {
-                if (this.player.getLayoutState() === LayoutState.BATTLE) {
-                    this.handleOpenBattlesList()
-                    return true;
-                }
-
-                if (this.player.getLayoutState() === LayoutState.BATTLE_SELECT) {
-                    this.sendRemoveBattlesScreen();
-                    this.player.setLayoutState(LayoutState.BATTLE);
-                    this.player.setSubLayoutState(LayoutState.BATTLE);
-                    return true;
-                }
-
-                if (this.player.getLayoutState() === LayoutState.GARAGE) {
-                    this.player.getGarageManager().removeGarageScreen();
-                    this.handleOpenBattlesList()
-                    return true;
-                }
-
-                return true;
-            }
-
-            this.handleOpenBattlesList();
-            return true;
+            this.handleOpenBattleList()
         }
 
-        return false;
+        if (this.player.isInBattle()) {
+            if (packet instanceof SendBattleMessagePacket) {
+                this.player.getBattle().getChatManager().handleSendMessage(this.player, packet.message, packet.team);
+            }
+        }
+
     }
 }

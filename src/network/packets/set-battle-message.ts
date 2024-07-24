@@ -1,5 +1,5 @@
 import { ByteArray } from "../../utils/network/byte-array";
-import { Team } from "../../utils/game/team";
+import { Team, TeamType } from "../../utils/game/team";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
@@ -7,7 +7,7 @@ export class SetBattleMessagePacket extends Packet {
 
     public userId: string;
     public message: string;
-    public team: string;
+    public team: TeamType;
 
     constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_MESSAGE, bytes)
@@ -18,7 +18,7 @@ export class SetBattleMessagePacket extends Packet {
 
         this.userId = bytes.readString();
         this.message = bytes.readString();
-        this.team = Team.TEAMS[bytes.readInt()];
+        this.team = Team.TEAMS[bytes.readInt()] as TeamType;
 
         return {
             userId: this.userId,
