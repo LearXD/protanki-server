@@ -179,6 +179,10 @@ import { SetRemoveViewingBattlePacket } from "./packets/set-remove-viewing-battl
 import { SetCaptchaCorrectPacket } from "./packets/set-captcha-correct";
 
 // GENERATE IMPORT HERE
+import { SetBattleTeamMessagePacket } from "./packets/set-battle-team-message";
+
+import { SetTwinsOverturnedShotPacket } from "./packets/set-twins-overturned-shot";
+import { SetRicochetOverturnedShotPacket } from "./packets/set-ricochet-overturned-shot";
 import { SetOpenCountrySelectPacket } from "./packets/set-open-country-select";
 import { SetCaptchaIncorrectPacket } from "./packets/set-captcha-incorrect";
 import { SetRegisterUsernameAlreadyUsedPacket } from "./packets/set-register-username-already-used";
@@ -225,7 +229,7 @@ import { SendVerifyEmailPacket } from "./packets/send-verify-email";
 import { SetSuccessfulPurchasePacket } from "./packets/set-successful-purchase";
 import { SetSomeShaftShooterPacket } from "./packets/set-some-shaft-shooter";
 import { SendShaftLocalSpotPacket } from "./packets/send-shaft-local-spot";
-import { SetSomeRailgunShooterPacket } from "./packets/set-some-railgun-shooter";
+import { SetRailgunOverturnedShotPacket } from "./packets/set-railgun-overturned-shot";
 import { SetOpenDailyQuestsPacket } from "./packets/set-open-daily-quests";
 import { SetAddSpecialItemPacket } from "./packets/set-add-special-item";
 import { SetEmailPacket } from "./packets/set-email";
@@ -328,8 +332,9 @@ import { SetRemoveChatPacket } from "./packets/set-remove-chat";
 import { SetRemoveBattlesScreenPacket } from "./packets/set-remove-battles-screen";
 import { SendIsisShotPositionPacket } from "./packets/send-isis-shot-position";
 import { SendStartIsisShotPacket } from "./packets/send-start-isis-shot";
-import { SetRemoveMinePacket } from "./packets/set-remove-mine";
+import { SetMinePlacedPacket } from "./packets/set-mine-placed";
 import { SetCloseConfigPacket } from "./packets/set-close-config";
+import { SetRemoveUserMinesPacket } from "./packets/set-remove-user-mines";
 
 export class Network {
     private packetPool = new Map<number, typeof require>()
@@ -578,7 +583,7 @@ export class Network {
         // GENERATE SEND_REGISTER HERE
         this.registerPacket(Protocol.SET_SOME_SHAFT_SHOOTER, SetSomeShaftShooterPacket);
         this.registerPacket(Protocol.SEND_SHAFT_LOCAL_SPOT, SendShaftLocalSpotPacket);
-        this.registerPacket(Protocol.SET_SOME_RAILGUN_SHOOTER, SetSomeRailgunShooterPacket);
+        this.registerPacket(Protocol.SET_RAILGUN_OVERTURNED_SHOT, SetRailgunOverturnedShotPacket);
         this.registerPacket(Protocol.SET_OPEN_DAILY_QUESTS, SetOpenDailyQuestsPacket);
         this.registerPacket(Protocol.SET_ADD_SPECIAL_ITEM, SetAddSpecialItemPacket);
         this.registerPacket(Protocol.SET_CLOSE_CONFIG, SetCloseConfigPacket);
@@ -604,7 +609,7 @@ export class Network {
         this.registerPacket(Protocol.SET_USE_SUPPLY, SetUseSupplyPacket);
         this.registerPacket(Protocol.SEND_USE_SUPPLY, SendUseSupplyPacket);
         this.registerPacket(Protocol.SET_EXPLODE_MINE, SetExplodeMinePacket);
-        this.registerPacket(Protocol.SET_REMOVE_MINE, SetRemoveMinePacket);
+        this.registerPacket(Protocol.SET_MINE_PLACED, SetMinePlacedPacket);
         this.registerPacket(Protocol.SET_PLACE_MINE, SetPlaceMinePacket);
         this.registerPacket(Protocol.SET_STOP_SHAFT_SHOT, SetStopShaftShotPacket);
         this.registerPacket(Protocol.SEND_OPEN_SHAFT_AIM, SendOpenShaftAimPacket);
@@ -685,6 +690,10 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);
 
         // GENERATE REGISTER HERE
+		this.registerPacket(Protocol.SET_BATTLE_TEAM_MESSAGE, SetBattleTeamMessagePacket);
+        this.registerPacket(Protocol.SET_REMOVE_USER_MINES, SetRemoveUserMinesPacket);
+        this.registerPacket(Protocol.SET_TWINS_OVERTURNED_SHOT, SetTwinsOverturnedShotPacket);
+        this.registerPacket(Protocol.SET_RICOCHET_OVERTURNED_SHOT, SetRicochetOverturnedShotPacket);
         this.registerPacket(Protocol.SET_OPEN_COUNTRY_SELECT, SetOpenCountrySelectPacket);
         this.registerPacket(Protocol.SET_CAPTCHA_INCORRECT, SetCaptchaIncorrectPacket);
         this.registerPacket(Protocol.SET_REGISTER_USERNAME_ALREADY_USED, SetRegisterUsernameAlreadyUsedPacket);

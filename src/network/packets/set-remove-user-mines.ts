@@ -2,25 +2,25 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetRemoveMinePacket extends Packet {
+export class SetRemoveUserMinesPacket extends Packet {
 
-    public mineId: string;
+    public ownerId: string;
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_REMOVE_MINE, bytes)
+        super(Protocol.SET_REMOVE_USER_MINES, bytes)
     }
 
     public decode() {
         const bytes = this.cloneBytes();
-        this.mineId = bytes.readString();
+        this.ownerId = bytes.readString();
         return {
-            mineId: this.mineId
+            ownerId: this.ownerId
         }
     }
 
     public encode() {
         const bytes = new ByteArray();
-        bytes.writeString(this.mineId);
+        bytes.writeString(this.ownerId);
         return bytes;
     }
 }

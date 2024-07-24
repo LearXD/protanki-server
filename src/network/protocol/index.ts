@@ -176,7 +176,7 @@ export class Protocol {
 
     /** BATTLE CHAT */
     // -1331361684
-    // -449356094
+    static SET_BATTLE_TEAM_MESSAGE = -449356094;
     // 1532749363
     static SET_BATTLE_MESSAGE = 1259981343;
     static SEND_BATTLE_MESSAGE = 945463181
@@ -282,9 +282,9 @@ export class Protocol {
     /** MINE */
     static SET_PLACE_MINE = 272183855;
     // -718866741
-    static SET_REMOVE_MINE = -624217047;
+    static SET_MINE_PLACED = -624217047;
     static SET_EXPLODE_MINE = 1387974401;
-    // -1200619383
+    static SET_REMOVE_USER_MINES = -1200619383;
     static SET_BATTLE_MINES_RESOURCES = -226978906;
 
 
@@ -372,7 +372,7 @@ export class Protocol {
     static SET_TWINS_SHOT = -44282936;
     static SEND_TWINS_SHOT = -159686980;
     static SEND_TWINS_HIT_POINT_SHOT = -482023661;
-    // -328554480
+    static SET_TWINS_OVERTURNED_SHOT = -328554480;
     // -1723353904
 
 
@@ -413,7 +413,7 @@ export class Protocol {
 
 
     /** RAILGUN SHOT */
-    static SET_SOME_RAILGUN_SHOOTER = 1459211021;
+    static SET_RAILGUN_OVERTURNED_SHOT = 1459211021;
     static SEND_START_RAILGUN_SHOT = -1759063234;
     static SEND_RAILGUN_SHOT = -484994657;
     static SET_RAILGUN_SHOT = -369590613;
@@ -530,7 +530,7 @@ export class Protocol {
     static SEND_STOP_VULCAN_SHOT = 1794372798;
     static SEND_VULCAN_SHOT = -1889502569;
     // 299028276
-    static SET_STOP_VULCAN_SHOT = 133452238; // static SOME_SHOOTER = 133452238;
+    static SET_STOP_VULCAN_SHOT = 133452238;
     static SET_START_VULCAN_SHOT = -1616602030;
     static SEND_START_VULCAN_SHOT = -520655432;
     static SET_VULCAN_SHOT = -891286317;
@@ -538,7 +538,7 @@ export class Protocol {
 
     /** RICOCHET SHOT */
     static SEND_RICOCHET_SHOT = -1907971330;
-    // -1670466290
+    static SET_RICOCHET_OVERTURNED_SHOT = -1670466290;
     static SET_RICOCHET_SHOT = -118119523;
     static SEND_RICOCHET_OVERTURNED_SHOT = 1147113344;
     // -1823935471
@@ -640,5 +640,4 @@ export class Protocol {
 
 
     // GENERATE HERE
-
 }

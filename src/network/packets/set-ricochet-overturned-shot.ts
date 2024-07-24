@@ -2,19 +2,17 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetSomeRailgunShooterPacket extends Packet {
+export class SetRicochetOverturnedShotPacket extends Packet {
 
-    private shooter: string;
+    public shooter: string;
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_SOME_RAILGUN_SHOOTER, bytes)
+        super(Protocol.SET_RICOCHET_OVERTURNED_SHOT, bytes)
     }
 
     public decode() {
         const bytes = this.cloneBytes();
-
         this.shooter = bytes.readString();
-
         return {
             shooter: this.shooter
         }

@@ -1,23 +1,27 @@
+import { Team, TeamType } from "../../utils/game/team";
 import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SendBattleMessagePacket extends Packet {
+export class SetBattleTeamMessagePacket extends Packet {
 
-    public message: string;
-    public team: boolean;
+    public userId: string
+    public message: string
+    public team: TeamType
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SEND_BATTLE_MESSAGE, bytes)
+        super(Protocol.SET_BATTLE_TEAM_MESSAGE, bytes)
     }
 
     public decode() {
         const bytes = this.cloneBytes();
 
+        this.userId = bytes.readString();
         this.message = bytes.readString();
-        this.team = bytes.readBoolean();
+        this.team = Team.TEAMS[bytes.readInt()] as TeamType;
 
         return {
+            userId: this.userId,
             message: this.message,
             team: this.team
         }
@@ -25,8 +29,9 @@ export class SendBattleMessagePacket extends Packet {
 
     public encode() {
         const bytes = new ByteArray();
+        bytes.writeString(this.userId);
         bytes.writeString(this.message);
-        bytes.writeBoolean(this.team);
+        bytes.writeInt(Team.TEAMS.indexOf(this.team));
         return bytes;
     }
 }

@@ -309,7 +309,7 @@ export class Turret {
         }
 
         if (packet instanceof SendVulcanShotPacket) {
-            // const pk = new SetVulcanShotPacket();
+            const pk = new SetVulcanShotPacket();
         }
 
         /** SHAFT */

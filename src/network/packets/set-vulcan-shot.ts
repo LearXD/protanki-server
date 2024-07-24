@@ -5,7 +5,7 @@ import { Packet } from "./packet";
 
 export interface ITargetHit {
     direction: Vector3d;
-    vector_1: Vector3d;
+    shotPosition: Vector3d;
     byte_1: number;
     target: string;
 }
@@ -32,7 +32,7 @@ export class SetVulcanShotPacket extends Packet {
         for (let i = 0; i < targetsLength; i++) {
             this.targets[i] = {
                 direction: bytes.readVector3d(),
-                vector_1: bytes.readVector3d(),
+                shotPosition: bytes.readVector3d(),
                 byte_1: bytes.readByte(),
                 target: bytes.readString()
             }
@@ -54,7 +54,7 @@ export class SetVulcanShotPacket extends Packet {
         bytes.writeInt(this.targets.length);
         this.targets.forEach(target => {
             bytes.writeVector3d(target.direction);
-            bytes.writeVector3d(target.vector_1);
+            bytes.writeVector3d(target.shotPosition);
             bytes.writeByte(target.byte_1);
             bytes.writeString(target.target);
         })

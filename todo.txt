@@ -1,0 +1,2 @@
++30% maxSpeed
++0,5 acceleration
