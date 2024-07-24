@@ -80,6 +80,10 @@ export class Player extends Client {
         clearInterval(this.updateInterval);
         this.getSocket().destroy();
 
+        if (this.viewingBattle) {
+            this.viewingBattle.getViewersManager().removeViewer(this);
+        }
+
         if (this.isInBattle()) {
             this.getBattle().handleClientLeave(this)
         }
