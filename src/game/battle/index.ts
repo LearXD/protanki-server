@@ -34,6 +34,7 @@ import { SetBattleTimePacket } from "../../network/packets/set-battle-time"
 import { Rank } from "../../utils/game/rank"
 import { BattleChatManager } from "./managers/chat"
 import { SetUserTankResourcesDataPacket } from "../../network/packets/set-user-tank-resources-data"
+import { SetBattleUserLeftNotificationPacket } from "../../network/packets/set-battle-user-left-notification"
 
 export class Battle {
 
@@ -179,18 +180,24 @@ export class Battle {
         Logger.info(`${player.getUsername()} joined the battle ${this.getName()}`)
     }
 
-    public handleClientLeave(client: Player) {
+    public handleClientLeave(player: Player) {
 
-        if (!this.getPlayersManager().hasPlayer(client.getUsername())) {
-            Logger.warn(`${client.getUsername()} is not in the battle ${this.getName()}`)
+        if (!this.getPlayersManager().hasPlayer(player.getUsername())) {
+            Logger.warn(`${player.getUsername()} is not in the battle ${this.getName()}`)
             return false
         }
 
-        this.sendPlayerLeft(client)
-        this.sendRemoveBattleScreen(client)
+        this.sendPlayerLeft(player)
 
-        this.getPlayersManager().removePlayer(client.getUsername())
-        Logger.info(`${client.getUsername()} left the battle ${this.getName()}`)
+
+        if (player.getTank()) {
+            player.getTank().sendRemoveTank();
+        }
+
+        this.sendRemoveBattleScreen(player)
+
+        this.getPlayersManager().removePlayer(player.getUsername())
+        Logger.info(`${player.getUsername()} left the battle ${this.getName()}`)
 
     }
 
@@ -244,9 +251,12 @@ export class Battle {
     }
 
     public sendPlayerLeft(player: Player) {
-        const setUserLeftBattlePacket = new SetUserLeftBattlePacket()
-        setUserLeftBattlePacket.userId = player.getUsername()
-        this.broadcastPacket(setUserLeftBattlePacket)
+        // const setUserLeftBattlePacket = new SetUserLeftBattlePacket()
+        // setUserLeftBattlePacket.userId = player.getUsername()
+        // this.broadcastPacket(setUserLeftBattlePacket)
+        const packet = new SetBattleUserLeftNotificationPacket();
+        packet.userId = player.getUsername();
+        this.broadcastPacket(packet);
     }
 
     public toBattleListItem(): IBattleList {

@@ -21,20 +21,15 @@ export class ClientsHandler {
 
         socket.on('data', (data) => player.getPacketHandler().handleReceivedData(data));
         socket.on('error', () => player.close());
-        socket.on('close', () => this.handleDisconnection(player));
+        socket.on('close', () => player.close());
 
         this.clients.set(player.getIdentifier(), player);
         Logger.info(`Client connected: ${player.getIdentifier()}`);
     }
 
-    public handleDisconnection = (player: Player) => {
-        Logger.info(`Client disconnected: ${player.getIdentifier()}`);
-
-        if (player.getAuthManager().isAuthenticated() && this.server.getPlayersManager().hasPlayer(player)) {
-            this.server.getPlayersManager().removePlayer(player)
-        }
-
-        this.clients.delete(player.getIdentifier());
+    public handleDisconnection = (client: Client) => {
+        Logger.info(`Client disconnected: ${client.getIdentifier()}`);
+        this.clients.delete(client.getIdentifier());
     }
 
 }

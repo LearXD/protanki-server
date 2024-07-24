@@ -355,6 +355,33 @@ export class PlayerGarageManager {
             garageItems.push(item)
         }
 
+        if (this.player.getData().hasDoubleCrystals()) {
+            userItems.push({
+                id: 'double_crystalls',
+                name: 'Dobro de cristais',
+                description: 'O nome deste cartão é auto-explicativo. Comprando cristais com dinheiro real você ganha o dobro deles do que o normal. Qualquer quantidade de cristais que você comprou será multiplicada por dois! Mas cuidado! Este cartão permanece ativo por apenas 24 horas. Certifique-se de usá-lo enquanto pode para aproveitar ao máximo suas compras!',
+                isInventory: true,
+                index: 8150,
+                next_price: -1,
+                next_rank: 1,
+                type: 5,
+                baseItemId: 948382,
+                previewResourceId: 948382,
+                rank: 1,
+                category: 'special',
+                properts: [],
+                discount: {
+                    percent: 0,
+                    timeLeftInSeconds: -1721658919,
+                    timeToStartInSeconds: -1721658919
+                },
+                grouped: false,
+                isForRent: false,
+                price: -1,
+                remainingTimeInSec: Math.round(this.player.getData().getDoubleCrystalsLeftTime() / 1000),
+            })
+        }
+
         this.sendUserGarageItems(userItems);
 
         this.sendEquippedItems()

@@ -5,7 +5,7 @@ const server = new Server();
 
 process.on('uncaughtException', (err) => {
     Logger.error('Uncaught Exception:', err);
-    // TODO: save server data and stop server
+    server.close();
 });
 
 server.start(1338);

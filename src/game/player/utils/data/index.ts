@@ -1,5 +1,6 @@
 import { ChatModeratorLevel } from "../../../../utils/game/chat-moderator-level";
 import { Rank } from "../../../../utils/game/rank";
+import { Logger } from "../../../../utils/logger";
 import { IPlayerAuthData, IPlayerGarageData, IPlayerProfileData, IPremiumData } from "./types";
 
 export class PlayerData {
@@ -13,14 +14,16 @@ export class PlayerData {
             data: {
                 crystals: 2000,
                 moderatorLevel: ChatModeratorLevel.MODERATOR,
-                hasDoubleCrystal: true,
-                durationCrystalAbonement: 0,
+                doubleCrystals: {
+                    enabled: false,
+                    endAt: 0
+                },
                 rank: Rank.BRIGADIER,
                 score: 2000,
                 premium: {
                     notified: false,
                     startedAt: Date.now(),
-                    endAt: Date.now() + 1000 * 60 * 10
+                    endAt: Date.now() + (1000 * 60 * 10)
                 }
             }
         },
@@ -29,8 +32,10 @@ export class PlayerData {
             data: {
                 crystals: 1e9,
                 moderatorLevel: ChatModeratorLevel.COMMUNITY_MANAGER,
-                hasDoubleCrystal: false,
-                durationCrystalAbonement: 48602763,
+                doubleCrystals: {
+                    enabled: true,
+                    endAt: Date.now() + (1000 * 60 * 10) // 10 minutes
+                },
                 rank: Rank.GENERALISSIMO,
                 score: 2000,
                 premium: {
@@ -98,8 +103,10 @@ export class PlayerData {
         data.profileData = {
             crystals: 500,
             moderatorLevel: ChatModeratorLevel.NONE,
-            hasDoubleCrystal: false,
-            durationCrystalAbonement: 0,
+            doubleCrystals: {
+                enabled: false,
+                endAt: 0
+            },
             rank: Rank.RECRUIT,
             score: 0,
             premium: {
@@ -190,8 +197,13 @@ export class PlayerData {
         return this.profileData.crystals
     }
 
-    public getCrytalAbonementDuration() {
-        return this.profileData.durationCrystalAbonement
+    public getDoubleCrystalsLeftTime() {
+        if (!this.hasDoubleCrystals()) {
+            return 0
+        }
+        const leftTime = this.profileData.doubleCrystals.endAt - Date.now()
+        Logger.debug(`Double crystals left time: ${leftTime}`)
+        return leftTime < 0 ? 0 : leftTime
     }
 
     public decreaseCrystals(amount: number) {
@@ -206,8 +218,8 @@ export class PlayerData {
         this.profileData.crystals = amount
     }
 
-    public hasDoubleCrystal() {
-        return this.profileData.hasDoubleCrystal
+    public hasDoubleCrystals() {
+        return this.profileData.doubleCrystals.enabled
     }
 
     public getRank() {
@@ -226,9 +238,9 @@ export class PlayerData {
 
         return {
             enabled: leftTime > 0,
-            showReminder: true,
+            showReminder: false,
             showWelcome: leftTime > 0 && !data.notified,
-            reminderTime: Date.now(),
+            reminderTime: -1,
             leftTime: leftTime > 0 ? leftTime : -1,
             lifeTime: lifeTime
         }

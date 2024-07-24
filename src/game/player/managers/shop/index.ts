@@ -46,7 +46,7 @@ export class PlayerShopManager {
 
     public sendShopData() {
         const setShopDataPacket = new SetShopDataPacket()
-        setShopDataPacket.haveDoubleCrystals = this.player.getData().hasDoubleCrystal();
+        setShopDataPacket.haveDoubleCrystals = this.player.getData().hasDoubleCrystals();
         setShopDataPacket.data = this.player.getServer().getShopManager().getShopProducts()
         this.player.sendPacket(setShopDataPacket)
     }

@@ -21,7 +21,6 @@ import { ShopManager } from './managers/shop';
 import { PlayersManager } from './managers/players';
 import { Client } from './game/client';
 
-
 export class Server {
 
     private server: net.Server;
@@ -52,9 +51,32 @@ export class Server {
 
     private static instance: Server;
 
+    public static getInstance() {
+        return this.instance
+    }
+
     public constructor() {
         Server.instance = this;
         this.server = net.createServer();
+    }
+
+    public start = (port: number) => {
+        const start = Date.now();
+        Logger.info('Starting server...');
+
+        this.init();
+
+        this.server.listen(port, () => {
+            const time = Date.now() - start;
+            this.sendMessage(`[SERVER] Servidor iniciado em ${time} ms`)
+            Logger.info(`Server started on port ${port} (${time}ms)`);
+            Logger.debug(`Memory usage: ${this.getMemoryUsage()} MB`);
+        })
+    }
+
+    public close = () => {
+        this.server.close();
+        Logger.info('Server closed');
     }
 
     public init() {
@@ -85,7 +107,45 @@ export class Server {
         this.shopManager = new ShopManager(this);
     }
 
-    public getNetwork() { return this.network }
+    public registerListeners = () => {
+        this.server.on('connection', (socket) => this.clientsHandler.handleConnection(socket));
+        this.server.on('error', (error) => Logger.error(error.message));
+    }
+
+    public getMemoryUsage() {
+        return Math.round(process.memoryUsage().heapUsed / 1024 / 1024 * 100) / 100;
+    }
+
+    public getNetwork() {
+        return this.network
+    }
+
+    public sendMessage = (message: string, warning: boolean = false) => {
+        this.getChatManager().sendServerMessage(message, warning);
+    }
+
+    public sendPacket(client: Client, packet: SimplePacket) {
+        return client.sendPacket(packet);
+    }
+
+    public isWhitelisted() {
+        return this.whitelisted
+    }
+
+    public setWhitelisted(whitelisted: boolean) {
+        this.whitelisted = whitelisted;
+    }
+
+    public broadcastPacket(packet: SimplePacket, clients: boolean = false) {
+
+        if (clients) {
+            return this.clientsHandler.getClients()
+                .forEach((client) => this.sendPacket(client, packet));
+        }
+
+        return this.playersManager.getPlayers()
+            .forEach((client) => this.sendPacket(client, packet));
+    }
 
     public getClientHandler() { return this.clientsHandler }
     public getPlayersManager() { return this.playersManager }
@@ -106,60 +166,4 @@ export class Server {
 
     public getCaptchaManager(): CaptchaManager { return this.captchaManager }
     public getShopManager(): ShopManager { return this.shopManager }
-
-    public static getInstance() { return this.instance }
-
-    public registerListeners = () => {
-        this.server.on('connection', (socket) => this.clientsHandler.handleConnection(socket));
-        this.server.on('error', (error) => Logger.error(error.message));
-    }
-
-    public start = (port: number) => {
-        const start = Date.now();
-        Logger.info('Starting server...');
-
-        this.init();
-
-        this.server.listen(port, () => {
-            const time = Date.now() - start;
-            this.sendMessage(`[SERVER] Servidor iniciado em ${time} ms`)
-            Logger.info(`Server started on port ${port} (${time}ms)`);
-            Logger.debug(`Memory usage: ${this.getMemoryUsage()} MB`);
-        })
-    }
-
-    public close = () => {
-        Logger.info('Closing server...');
-        this.server.close();
-        Logger.info('Server closed');
-    }
-
-    public sendMessage = (message: string, warning: boolean = false) => {
-        this.getChatManager().sendServerMessage(message, warning);
-    }
-
-    public sendPacket(client: Client, packet: SimplePacket) {
-        return client.sendPacket(packet);
-    }
-
-    public broadcastPacket(packet: SimplePacket, clients: boolean = false) {
-
-        if (clients) {
-            return this.clientsHandler.getClients()
-                .forEach((client) => this.sendPacket(client, packet));
-        }
-
-        return this.playersManager.getPlayers()
-            .forEach((client) => this.sendPacket(client, packet));
-    }
-
-    public isWhitelisted() { return this.whitelisted }
-
-    public setWhitelisted(whitelisted: boolean) {
-        this.whitelisted = whitelisted;
-    }
-
-    public getMemoryUsage() {
-        return Math.round(process.memoryUsage().heapUsed / 1024 / 1024 * 100) / 100;
-    }
 }

@@ -77,8 +77,18 @@ export class Player extends Client {
     }
 
     public close() {
-        this.getSocket().destroy();
         clearInterval(this.updateInterval);
+        this.getSocket().destroy();
+
+        if (this.isInBattle()) {
+            this.getBattle().handleClientLeave(this)
+        }
+
+        if (this.authManager.isAuthenticated()) {
+            this.getServer().getPlayersManager().removePlayer(this)
+        }
+
+        this.getServer().getClientHandler().handleDisconnection(this);
     }
 
     public getUsername() {
@@ -116,46 +126,6 @@ export class Player extends Client {
 
     public setViewingBattle(battle: Battle) {
         this.viewingBattle = battle
-    }
-
-    public getPacketHandler(): PlayerPacketHandler {
-        return this.packetHandler
-    }
-
-    public getDataManager(): PlayerDataManager {
-        return this.dataManager
-    }
-
-    public getFriendsManager(): PlayerFriendsManager {
-        return this.friendsManager
-    }
-
-    public getGarageManager(): PlayerGarageManager {
-        return this.garageManager
-    }
-
-    public getAuthManager(): PlayerAuthManager {
-        return this.authManager
-    }
-
-    public getChatManager(): PlayerChatManager {
-        return this.chatManager
-    }
-
-    public getBattlesManager(): PlayerBattlesManager {
-        return this.battlesManager
-    }
-
-    public getConfigsManager(): PlayerConfigsManager {
-        return this.configsManager
-    }
-
-    public getShopManager(): PlayerShopManager {
-        return this.shopManager
-    }
-
-    public getDailyQuestsManager(): PlayerDailyQuestsManager {
-        return this.dailyQuestsManager
     }
 
     public getLayoutState() {
@@ -279,6 +249,46 @@ export class Player extends Client {
 
     public update() {
         super.update();
+    }
+
+    public getPacketHandler(): PlayerPacketHandler {
+        return this.packetHandler
+    }
+
+    public getDataManager(): PlayerDataManager {
+        return this.dataManager
+    }
+
+    public getFriendsManager(): PlayerFriendsManager {
+        return this.friendsManager
+    }
+
+    public getGarageManager(): PlayerGarageManager {
+        return this.garageManager
+    }
+
+    public getAuthManager(): PlayerAuthManager {
+        return this.authManager
+    }
+
+    public getChatManager(): PlayerChatManager {
+        return this.chatManager
+    }
+
+    public getBattlesManager(): PlayerBattlesManager {
+        return this.battlesManager
+    }
+
+    public getConfigsManager(): PlayerConfigsManager {
+        return this.configsManager
+    }
+
+    public getShopManager(): PlayerShopManager {
+        return this.shopManager
+    }
+
+    public getDailyQuestsManager(): PlayerDailyQuestsManager {
+        return this.dailyQuestsManager
     }
 
 }

@@ -116,18 +116,23 @@ export class Tank {
         this.hull = new Hull(resources.item, resources.properties)
     }
 
-    public isVisible() {
-        return this.visible
+    public isAlive() {
+        return this.alive
     }
 
-    public setVisible(visible: boolean) {
-        this.visible = visible
+    public setAlive(alive: boolean) {
+        this.alive = alive
+    }
 
-        if (visible) {
-            const setTankVisiblePacket = new SetTankVisiblePacket();
-            setTankVisiblePacket.tankId = this.player.getUsername();
-            this.battle.broadcastPacket(setTankVisiblePacket);
-        }
+    public isVisible() {
+        return this.alive && this.visible
+    }
+
+    public sendVisible() {
+        this.visible = true
+        const setTankVisiblePacket = new SetTankVisiblePacket();
+        setTankVisiblePacket.tankId = this.player.getUsername();
+        this.battle.broadcastPacket(setTankVisiblePacket);
     }
 
     public setCameraPosition(position: Vector3d, orientation: Vector3d) {
@@ -231,6 +236,7 @@ export class Tank {
 
     public handleDestroyed() {
         this.alive = false;
+        this.visible = false;
         this.health = 0;
     }
 
@@ -254,7 +260,7 @@ export class Tank {
         }
 
         if (packet instanceof SendRequestSetTankVisiblePacket) {
-            this.setVisible(true);
+            this.sendVisible();
         }
 
         if (packet instanceof SendAutoDestroyPacket) {

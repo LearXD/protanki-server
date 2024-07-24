@@ -10,8 +10,10 @@ export interface IPlayerAuthData {
 export interface IPlayerProfileData {
     crystals: number
     moderatorLevel: ChatModeratorLevelType
-    hasDoubleCrystal: boolean
-    durationCrystalAbonement: number
+    doubleCrystals: {
+        enabled: boolean,
+        endAt: number
+    },
     rank: number
     score: number
     premium: {
