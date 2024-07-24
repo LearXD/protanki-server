@@ -5,7 +5,6 @@ import { Logger } from "../../utils/logger"
 import { BattleMode, BattleModeType } from "../../utils/game/battle-mode"
 import { EquipmentConstraintsMode } from "../../utils/game/equipment-constraints-mode"
 
-import { SetBattleChatEnabledPacket } from "../../network/packets/set-battle-chat-enabled"
 import { SetLoadBattleObjectsPacket } from "../../network/packets/set-load-battle-objects"
 import { SetShowBattleNotificationsPacket } from "../../network/packets/set-show-battle-notifications"
 
@@ -24,7 +23,6 @@ import { BattleStatisticsManager } from "./managers/statistics"
 import { BattleBoxesManager } from "./managers/boxes"
 import { BattleDeathMatchModeManager } from "./managers/mode/modes/death-match"
 import { SetRemoveBattleScreenPacket } from "../../network/packets/set-remove-battle-screen"
-import { SetUserLeftBattlePacket } from "../../network/packets/set-user-left-battle"
 import { SimplePacket } from "../../network/packets/simple-packet"
 import { IMap } from "../../managers/maps/types"
 import { IBattleData } from "./types"
@@ -33,7 +31,6 @@ import { IBattleList } from "../../network/packets/set-battle-list"
 import { SetBattleTimePacket } from "../../network/packets/set-battle-time"
 import { Rank } from "../../utils/game/rank"
 import { BattleChatManager } from "./managers/chat"
-import { SetUserTankResourcesDataPacket } from "../../network/packets/set-user-tank-resources-data"
 import { SetBattleUserLeftNotificationPacket } from "../../network/packets/set-battle-user-left-notification"
 
 export class Battle {
@@ -127,27 +124,38 @@ export class Battle {
     }
 
 
-    public async handleClientJoin(player: Player) {
+    public async handlePlayerJoin(player: Player, spectator: boolean = false) {
 
-        if (this.getPlayersManager().hasPlayer(player.getUsername())) {
+        if (this.getPlayersManager().hasPlayer(player) || this.getPlayersManager().hasSpectator(player)) {
             Logger.warn(`${player.getUsername()} already joined the battle ${this.getName()}`)
             return false;
         }
 
         /** ADD PLAYER */
+        player.setBattle(this)
         player.setLayoutState(LayoutState.BATTLE)
-        this.getPlayersManager().addPlayer(player);
+
+        if (spectator) {
+            this.getPlayersManager().addSpectator(player)
+        }
+
+        if (!spectator) {
+            this.getPlayersManager().addPlayer(player);
+            this.getStatisticsManager().addPlayer(player)
+        }
 
         /** SEND DATA & RESOURCES */
         await this.resourcesManager.sendResources(player)
-        this.resourcesManager.sendBattleMapProperties(player)
+        this.resourcesManager.sendBattleMapProperties(player, spectator)
         this.resourcesManager.sendTurretsData(player)
 
         /** SEND PROPERTIES & STATISTICS */
-        this.statisticsManager.sendAddUserProperties(player)
-        this.statisticsManager.sendBattleData(player)
-        this.statisticsManager.sendUserProperties()
-        this.statisticsManager.broadcastPlayerStatistics(player)
+        this.statisticsManager.sendBattleData(player, true)
+        this.statisticsManager.sendUserProperties(player)
+        if (!spectator) {
+            this.statisticsManager.sendAddUserProperties(player)
+            this.statisticsManager.broadcastPlayerStatistics(player)
+        }
 
         /** SEND CHAT */
         this.chatManager.sendEnableChat(player)
@@ -161,15 +169,19 @@ export class Battle {
         this.minesManager.sendMines(player);
 
         /** SEND TANKS DATA */
-        const tankData = player.getTank().getData();
-        this.playersManager.broadcastTankData(tankData)
-
         this.playersManager.sendTanksData(player)
-        this.playersManager.sendTankData(tankData, player)
+        if (!spectator) {
+            const tankData = player.getTank().getData();
+            this.playersManager.broadcastTankData(tankData)
+            this.playersManager.sendTankData(tankData, player)
+        }
+
 
         /** SEND BATTLE EFFECTS */
         this.effectsManager.sendBattleEffects(player);
-        player.getGarageManager().sendSupplies(player);
+        if (!spectator) {
+            player.getGarageManager().sendSupplies(player);
+        }
 
         player.setSubLayoutState(LayoutState.BATTLE)
 
@@ -182,21 +194,31 @@ export class Battle {
 
     public handleClientLeave(player: Player) {
 
-        if (!this.getPlayersManager().hasPlayer(player.getUsername())) {
+        if (!this.getPlayersManager().hasPlayer(player) && !this.getPlayersManager().hasSpectator(player)) {
             Logger.warn(`${player.getUsername()} is not in the battle ${this.getName()}`)
             return false
         }
 
-        this.sendPlayerLeft(player)
+        if (this.getPlayersManager().hasPlayer(player)) {
+            if (player.getTank()) {
+                player.getTank().sendRemoveTank(true);
+            }
 
+            this.sendPlayerLeft(player)
 
-        if (player.getTank()) {
-            player.getTank().sendRemoveTank();
+            this.getStatisticsManager().removePlayer(player.getUsername());
+            this.getPlayersManager().removePlayer(player)
+        }
+
+        if (this.getPlayersManager().hasSpectator(player)) {
+            this.getPlayersManager().removeSpectator(player)
         }
 
         this.sendRemoveBattleScreen(player)
 
-        this.getPlayersManager().removePlayer(player.getUsername())
+        player.tank = null
+        player.setBattle(null)
+
         Logger.info(`${player.getUsername()} left the battle ${this.getName()}`)
 
     }
@@ -279,7 +301,7 @@ export class Battle {
     }
 
     public broadcastPacket(packet: SimplePacket, ignore: string[] = []) {
-        for (const player of this.getPlayersManager().getPlayers()) {
+        for (const player of this.getPlayersManager().getAll()) {
             if (!ignore.includes(player.getUsername())) {
                 player.sendPacket(packet)
             }

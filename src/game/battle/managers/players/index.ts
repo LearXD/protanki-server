@@ -13,12 +13,25 @@ export class BattlePlayersManager {
         private readonly battle: Battle
     ) { }
 
-    public hasPlayer(username: string) {
-        return this.players.has(username)
+    public hasSpectator(player: Player) {
+        return this.spectators.has(player.getUsername())
+    }
+
+    public hasPlayer(player: Player) {
+        return this.players.has(player.getUsername())
+    }
+
+    public getSpectators() {
+        return Array.from(this.spectators.values())
     }
 
     public getPlayers() {
         return Array.from(this.players.values())
+    }
+
+    public getAll() {
+        return this.getPlayers()
+            .concat(this.getSpectators())
     }
 
     public getPlayer(username: string) {
@@ -27,17 +40,18 @@ export class BattlePlayersManager {
 
     public addPlayer(player: Player) {
         this.players.set(player.getUsername(), player)
-        this.battle.getStatisticsManager().addPlayer(player.getUsername())
-        player.setBattle(this.battle)
     }
 
-    public removePlayer(username: string) {
-        const player = this.players.get(username)
-        if (player) {
-            this.players.delete(username);
-            this.battle.getStatisticsManager().removePlayer(username);
-            player.setBattle(null)
-        }
+    public addSpectator(player: Player) {
+        this.spectators.set(player.getUsername(), player)
+    }
+
+    public removePlayer(player: Player) {
+        this.players.delete(player.getUsername());
+    }
+
+    public removeSpectator(player: Player) {
+        this.spectators.delete(player.getUsername());
     }
 
     public sendTanksData(player: Player) {
@@ -50,7 +64,7 @@ export class BattlePlayersManager {
     }
 
     public broadcastTankData(data: IUserTankResourcesData) {
-        for (const player of this.getPlayers()) {
+        for (const player of this.getAll()) {
             if (player.getUsername() !== data.tank_id) {
                 this.sendTankData({ ...data, state_null: false }, player)
             }

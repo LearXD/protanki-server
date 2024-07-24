@@ -37,10 +37,10 @@ export class BattleStatisticsManager {
         }
     }
 
-    public addPlayer(player: string) {
-        this.scores.set(player, 0)
-        this.kills.set(player, 0)
-        this.deaths.set(player, 0)
+    public addPlayer(player: Player) {
+        this.scores.set(player.getUsername(), 0)
+        this.kills.set(player.getUsername(), 0)
+        this.deaths.set(player.getUsername(), 0)
     }
 
     public removePlayer(player: string) {
@@ -120,7 +120,7 @@ export class BattleStatisticsManager {
         this.battle.broadcastPacket(setBattleUserStatusPacket)
     }
 
-    public sendBattleData(client: Player) {
+    public sendBattleData(client: Player, spectator: boolean = false) {
         const packet = new SetBattleDataPacket();
         packet.mode = this.battle.getMode()
         packet.equipmentConstraintsMode = this.battle.getEquipmentConstraintsMode()
@@ -133,13 +133,13 @@ export class BattleStatisticsManager {
         packet.maxPeopleCount = this.battle.getMaxPeopleCount()
         packet.parkourMode = this.battle.isParkourMode();
         packet.scoreLimit = 100 // scoreLimit?
-        packet.spectator = false
+        packet.spectator = spectator
         packet.strings_1 = []
         packet.lastTime = this.battle.getTimeLeft()
         client.sendPacket(packet);
     }
 
-    public sendUserProperties() {
+    public sendUserProperties(player: Player) {
         const statistics = this.battle.getStatisticsManager()
 
         const packet = new SetBattleUsersPropertiesPacket();
@@ -155,7 +155,7 @@ export class BattleStatisticsManager {
                 }
             })
 
-        this.battle.broadcastPacket(packet);
+        player.sendPacket(packet);
     }
 
     public sendAddUserProperties(player: Player) {

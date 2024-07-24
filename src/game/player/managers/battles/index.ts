@@ -3,6 +3,7 @@ import { SendCreateBattlePacket } from "../../../../network/packets/send-create-
 import { SendJoinOnBattlePacket } from "../../../../network/packets/send-join-on-battle";
 import { SendOpenBattlesListPacket } from "../../../../network/packets/send-open-battles-list";
 import { SendOpenLinkPacket } from "../../../../network/packets/send-open-link";
+import { SendSpectateBattlePacket } from "../../../../network/packets/send-spectate-battle";
 import { SetBattleInviteCCPacket } from "../../../../network/packets/set-battle-invite-cc";
 import { SetBattleListPacket } from "../../../../network/packets/set-battle-list";
 import { SetBattleNotExistPacket } from "../../../../network/packets/set-battle-not-exist";
@@ -52,7 +53,14 @@ export class PlayerBattlesManager {
     public handleJoinBattle(team: string) {
         const battle = this.player.getViewingBattle();
         if (battle) {
-            battle.handleClientJoin(this.player);
+            battle.handlePlayerJoin(this.player);
+        }
+    }
+
+    public handleSpectateBattle() {
+        const battle = this.player.getViewingBattle();
+        if (battle) {
+            battle.handlePlayerJoin(this.player, true);
         }
     }
 
@@ -108,6 +116,10 @@ export class PlayerBattlesManager {
 
         if (packet instanceof SendJoinOnBattlePacket) {
             this.handleJoinBattle(packet.team);
+        }
+
+        if (packet instanceof SendSpectateBattlePacket) {
+            this.handleSpectateBattle()
         }
 
         if (packet instanceof SendCreateBattlePacket) {

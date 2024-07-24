@@ -149,10 +149,10 @@ export class Tank {
         this.player.sendPacket(setLatencyPacket);
     }
 
-    public sendRemoveTank() {
+    public sendRemoveTank(ignoreSelf: boolean = false) {
         const setRemoveTankPacket = new SetRemoveTankPacket();
         setRemoveTankPacket.tankId = this.player.getUsername();
-        this.battle.broadcastPacket(setRemoveTankPacket);
+        this.battle.broadcastPacket(setRemoveTankPacket, ignoreSelf ? [this.player.getUsername()] : []);
     }
 
     public sendChangeEquipment() {

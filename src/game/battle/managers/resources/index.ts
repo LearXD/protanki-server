@@ -10,7 +10,7 @@ export class BattleResourcesManager {
         private readonly battle: Battle
     ) { }
 
-    public sendBattleMapProperties(client: Player) {
+    public sendBattleMapProperties(client: Player, spectator: boolean = false) {
         const data = client.getServer().getMapsManager()
             .getMapData(this.battle.getMap().mapId, this.battle.getMap().theme)
 
@@ -25,7 +25,7 @@ export class BattleResourcesManager {
             map_id: this.battle.getMap().mapId,
             mapId: data.mapId,
             invisible_time: 3500,
-            spectator: false,
+            spectator: spectator,
             active: true,
             dustParticle: data.dustParticle,
             battleId: this.battle.getBattleId(),
