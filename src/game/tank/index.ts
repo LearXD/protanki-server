@@ -243,13 +243,13 @@ export class Tank {
         this.handleDestroyed()
     }
 
-    public sendTankSpeed(multiply: number = 0) {
+    public sendTankSpeed(multiply: number = 1) {
         const setTankSpeedPacket = new SetTankSpeedPacket();
         setTankSpeedPacket.tankId = this.player.getUsername();
-        setTankSpeedPacket.maxSpeed = this.hull.properties.maxSpeed * ((1.3 * multiply) || 1);
+        setTankSpeedPacket.maxSpeed = this.hull.properties.maxSpeed * ((1.3 * (multiply - 1)) || 1);
         setTankSpeedPacket.maxTurnSpeed = this.hull.properties.maxTurnSpeed;
         setTankSpeedPacket.maxTurretRotationSpeed = this.turret.properties.turret_turn_speed;
-        setTankSpeedPacket.acceleration = this.hull.properties.acceleration + (0.5 * multiply);
+        setTankSpeedPacket.acceleration = this.hull.properties.acceleration + (0.5 * (multiply - 1));
         setTankSpeedPacket.specificationId = this.incarnation;
         this.player.sendPacket(setTankSpeedPacket);
     }
