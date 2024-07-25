@@ -32,24 +32,35 @@ export class BattleDamageManager {
         modifiers: IDamageModifiers = { critical: false }
     ): boolean {
 
-        if (!target.getTank().isAlive() || !attacker.getTank().isAlive()) {
+        if (!target.getTank().isVisible()) {
             return false;
         }
 
-        const damage = turretDamage * 10000 / target.getTank().getHull().getProtection();
+        if (!attacker.getTank().isVisible()) {
+            return false;
+        }
+
+        const protection = target.getTank().getHull().getProtection();
         const health = target.getTank().getHealth();
+
+        const damage = turretDamage * 10000 / protection;
         const newHealth = health - damage;
 
         Logger.debug('')
-        Logger.debug(`Attacker: ${attacker.getUsername()} attacked ${target.getUsername()} with ${damage} (${damage}) damage.`);
-        Logger.debug(`Target health: ${target.getTank().getHealth()} New health: ${newHealth}`);
+        Logger.debug(`Attacker: ${attacker.getUsername()} attacked ${target.getUsername()}`);
+        Logger.debug(`Damage: ${turretDamage} (${damage})`);
+        Logger.debug(`Target health: ${health}`);
+        Logger.debug(`New health: ${newHealth}`);
+        Logger.debug(`Protection: ${protection}`);
+        Logger.debug(`${attacker.getUsername()} position ${attacker.getTank().getPosition().toString()}`);
+        Logger.debug(`${target.getUsername()} position ${target.getTank().getPosition().toString()}`);
         Logger.debug('')
 
         target.getTank().setHealth(newHealth);
 
         if (newHealth <= 0) {
             target.getTank().kill(attacker)
-            this.sendDamageIndicator(attacker, target, health, DamageIndicator.FATAL);
+            this.sendDamageIndicator(attacker, target, protection * health / 10000, DamageIndicator.FATAL);
             return true;
         }
 

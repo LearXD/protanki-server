@@ -8,9 +8,9 @@ export class SendStormTargetShotPacket extends Packet {
     public time: number;
     public relativeHitPoint: Vector3d;
     public target: string;
-    public short_1: number;
-    public vector_1: Vector3d;
-    public vector_2: Vector3d;
+    public incarnation: number;
+    public targetPosition: Vector3d;
+    public hitPoint: Vector3d;
 
     constructor(bytes?: ByteArray) {
         super(Protocol.SEND_STORM_TARGET_SHOT, bytes)
@@ -22,17 +22,17 @@ export class SendStormTargetShotPacket extends Packet {
         this.time = bytes.readInt();
         this.relativeHitPoint = bytes.readVector3d();
         this.target = bytes.readString();
-        this.short_1 = bytes.readShort();
-        this.vector_1 = bytes.readVector3d();
-        this.vector_2 = bytes.readVector3d();
+        this.incarnation = bytes.readShort();
+        this.targetPosition = bytes.readVector3d();
+        this.hitPoint = bytes.readVector3d();
 
         return {
             time: this.time,
             relativeHitPoint: this.relativeHitPoint,
             target: this.target,
-            short_1: this.short_1,
-            vector_1: this.vector_1,
-            vector_2: this.vector_2
+            incarnation: this.incarnation,
+            targetPosition: this.targetPosition,
+            hitPoint: this.hitPoint
         }
     }
 
@@ -42,9 +42,9 @@ export class SendStormTargetShotPacket extends Packet {
         bytes.writeInt(this.time);
         bytes.writeVector3d(this.relativeHitPoint);
         bytes.writeString(this.target);
-        bytes.writeShort(this.short_1);
-        bytes.writeVector3d(this.vector_1);
-        bytes.writeVector3d(this.vector_2);
+        bytes.writeShort(this.incarnation);
+        bytes.writeVector3d(this.targetPosition);
+        bytes.writeVector3d(this.hitPoint);
 
         return bytes;
     }

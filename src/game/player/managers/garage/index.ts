@@ -14,6 +14,7 @@ import { SetUseSupplyPacket } from "../../../../network/packets/set-use-supply";
 import { SetUserGarageItemsPacket } from "../../../../network/packets/set-user-garage-items";
 import { SimplePacket } from "../../../../network/packets/simple-packet";
 import { LayoutState } from "../../../../utils/game/layout-state";
+import { Supply, SupplyType } from "../../../../utils/game/supply";
 import { Logger } from "../../../../utils/logger";
 import { IGarageHull, IGarageTurret, IPlayerGarageData } from "../../utils/data/types";
 
@@ -42,6 +43,10 @@ export class PlayerGarageManager {
 
     public getSupplies() {
         return this.getGarageItems().supplies
+    }
+
+    public getSupplyCount(supply: SupplyType) {
+        return this.getSupplies()[supply] ?? 0
     }
 
     public getEquippedTurret() {
@@ -236,7 +241,9 @@ export class PlayerGarageManager {
 
         const battle = this.player.getBattle();
         if (battle && this.player.tank.changedEquipment) {
-            this.player.getTank().destroy()
+            if (this.player.getTank().isAlive()) {
+                this.player.getTank().destroy()
+            }
         }
     }
 
@@ -248,11 +255,11 @@ export class PlayerGarageManager {
     public sendSupplies(client: Player) {
         const setSuppliesPacket = new SetSuppliesPacket();
         setSuppliesPacket.supplies = [
-            { count: this.getSupplies().health, id: 'health', itemEffectTime: 0, itemRestSec: 0, slotId: 1 },
-            { count: this.getSupplies().armor, id: 'armor', itemEffectTime: 0, itemRestSec: 0, slotId: 2 },
-            { count: this.getSupplies().double_damage, id: 'double_damage', itemEffectTime: 0, itemRestSec: 0, slotId: 3 },
-            { count: this.getSupplies().n2o, id: 'n2o', itemEffectTime: 30, itemRestSec: 30, slotId: 4 },
-            { count: this.getSupplies().mine, id: 'mine', itemEffectTime: 0, itemRestSec: 0, slotId: 5 }
+            { count: this.getSupplyCount(Supply.HEALTH), id: Supply.HEALTH, itemEffectTime: 0, itemRestSec: 0, slotId: 1 },
+            { count: this.getSupplyCount(Supply.ARMOR), id: Supply.ARMOR, itemEffectTime: 0, itemRestSec: 0, slotId: 2 },
+            { count: this.getSupplyCount(Supply.DOUBLE_DAMAGE), id: Supply.DOUBLE_DAMAGE, itemEffectTime: 0, itemRestSec: 0, slotId: 3 },
+            { count: this.getSupplyCount(Supply.N2O), id: Supply.N2O, itemEffectTime: 30, itemRestSec: 30, slotId: 4 },
+            { count: this.getSupplyCount(Supply.MINE), id: Supply.MINE, itemEffectTime: 0, itemRestSec: 0, slotId: 5 }
         ]
 
         client.sendPacket(setSuppliesPacket);

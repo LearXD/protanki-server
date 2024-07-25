@@ -19,4 +19,8 @@ export class Vector3d implements IVector3d {
         // TODO: why the z and y are swapped?
         return { x: this.x, y: this.z, z: this.y }
     }
+
+    public toString() {
+        return `(X: ${this.x} Y: ${this.y} Z: ${this.z})`
+    }
 }

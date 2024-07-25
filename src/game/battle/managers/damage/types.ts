@@ -1,5 +1,6 @@
 export interface IDamageModifiers {
     critical?: boolean;
-    position?: number;
+    splash?: boolean;
+    order?: number;
     temperature?: number;
 }

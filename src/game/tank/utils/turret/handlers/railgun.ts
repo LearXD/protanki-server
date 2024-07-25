@@ -28,7 +28,7 @@ export class RailgunHandler extends TurretHandler {
         }
 
         const damage = MathUtils.randomInt(parseInt(damageFrom.value), parseInt(damageTo.value));
-        return damage / modifiers.position;
+        return damage / modifiers.order;
     }
 
     public handleDamage(target: Player): void {
@@ -45,7 +45,7 @@ export class RailgunHandler extends TurretHandler {
         if (packet instanceof SendRailgunShotPacket) {
 
             if (packet.targets && packet.targets.length > 0) {
-                packet.targets.filter((target, i) => this.attack(target, { position: i + 1 }))
+                packet.targets = packet.targets.filter((target, i) => this.attack(target, { order: i + 1 }))
             }
 
             const pk = new SetRailgunShotPacket();

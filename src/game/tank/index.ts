@@ -20,7 +20,7 @@ import { SetRemoveTankPacket } from "../../network/packets/set-remove-tank";
 import { SetDestroyTankPacket } from "../../network/packets/set-destroy-tank";
 import { Battle } from "../battle";
 import { IUserTankResourcesData } from "../../network/packets/set-user-tank-resources-data";
-import { Supply } from "../../utils/game/supply";
+import { Supply, SupplyType } from "../../utils/game/supply";
 import { Hull } from "./utils/hull";
 import { SendMoveTankTracksPacket } from "../../network/packets/send-move-tank-tracks";
 import { SendMoveTankPacket } from "../../network/packets/send-move-tank";
@@ -193,7 +193,6 @@ export class Tank {
             this.sendChangeEquipment();
 
             this.changedEquipment = false;
-
         }
 
         this.alive = true;
@@ -244,13 +243,13 @@ export class Tank {
         this.handleDestroyed()
     }
 
-    public sendTankSpeed(multiply: number = 1) {
+    public sendTankSpeed(multiply: number = 0) {
         const setTankSpeedPacket = new SetTankSpeedPacket();
         setTankSpeedPacket.tankId = this.player.getUsername();
-        setTankSpeedPacket.maxSpeed = this.hull.properties.maxSpeed * multiply;
+        setTankSpeedPacket.maxSpeed = this.hull.properties.maxSpeed * ((1.3 * multiply) || 1);
         setTankSpeedPacket.maxTurnSpeed = this.hull.properties.maxTurnSpeed;
         setTankSpeedPacket.maxTurretRotationSpeed = this.turret.properties.turret_turn_speed;
-        setTankSpeedPacket.acceleration = this.hull.properties.acceleration;
+        setTankSpeedPacket.acceleration = this.hull.properties.acceleration + (0.5 * multiply);
         setTankSpeedPacket.specificationId = this.incarnation;
         this.player.sendPacket(setTankSpeedPacket);
     }
@@ -261,13 +260,28 @@ export class Tank {
         this.health = 0;
     }
 
-    public handleUseSupply(item: string) {
+    public handleUseSupply(item: SupplyType) {
+
+        if (this.player.getGarageManager().getSupplyCount(item) <= 0) {
+            return;
+        }
+
+        let time = 0;
+        let decrease = true;
+
         switch (item) {
+            case Supply.HEALTH: {
+                this.setHealth(10000);
+                break
+            }
+
             case Supply.N2O:
                 this.sendTankSpeed(2)
-                this.player.getGarageManager().sendUseSupply(Supply.N2O, 10, true)
                 break;
         }
+
+        this.player.getGarageManager().sendUseSupply(item, time, decrease)
+
     }
 
     public handlePacket(packet: SimplePacket) {
@@ -289,7 +303,7 @@ export class Tank {
         }
 
         if (packet instanceof SendUseSupplyPacket) {
-            this.handleUseSupply(packet.itemId)
+            this.handleUseSupply(packet.itemId as SupplyType)
         }
 
         if (this.turret) {

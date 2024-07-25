@@ -31,8 +31,8 @@ export class SmokyHandler extends TurretHandler {
         }
 
         return {
-            from: parseInt(min.value),
-            to: parseInt(max.value)
+            min: parseInt(min.value),
+            max: parseInt(max.value)
         }
     }
 
@@ -69,10 +69,7 @@ export class SmokyHandler extends TurretHandler {
         return damage
     }
 
-    public handleDamage(target: Player): void {
-        return;
-    }
-
+    public handleDamage(target: Player): void { }
 
     public handlePacket(packet: SimplePacket): void {
         if (packet instanceof SendSmokyHitPointShotPacket) {
