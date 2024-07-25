@@ -32,6 +32,7 @@ import { SetBattleTimePacket } from "../../network/packets/set-battle-time"
 import { Rank } from "../../utils/game/rank"
 import { BattleChatManager } from "./managers/chat"
 import { SetBattleUserLeftNotificationPacket } from "../../network/packets/set-battle-user-left-notification"
+import { BattleDamageManager } from "./managers/damage"
 
 export class Battle {
 
@@ -55,6 +56,8 @@ export class Battle {
     private minesManager: BattleMinesManager
     private effectsManager: BattleEffectsManager
     private boxesManager: BattleBoxesManager
+
+    private damageManager: BattleDamageManager;
 
     public static getManager(battle: Battle) {
         switch (battle.getMode() as BattleModeType) {
@@ -103,6 +106,8 @@ export class Battle {
         this.minesManager = new BattleMinesManager()
         this.effectsManager = new BattleEffectsManager()
         this.boxesManager = new BattleBoxesManager()
+
+        this.damageManager = new BattleDamageManager(this)
 
         this.updateInterval = setInterval(this.update.bind(this), 1000)
     }
@@ -345,6 +350,10 @@ export class Battle {
 
     public getBoxesManager(): BattleBoxesManager {
         return this.boxesManager
+    }
+
+    public getDamageManager(): BattleDamageManager {
+        return this.damageManager
     }
 
     public update() {

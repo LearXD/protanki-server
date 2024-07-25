@@ -21,7 +21,6 @@ import { SetDestroyTankPacket } from "../../network/packets/set-destroy-tank";
 import { Battle } from "../battle";
 import { IUserTankResourcesData } from "../../network/packets/set-user-tank-resources-data";
 import { Supply } from "../../utils/game/supply";
-import { Turret } from "./utils/turret";
 import { Hull } from "./utils/hull";
 import { SendMoveTankTracksPacket } from "../../network/packets/send-move-tank-tracks";
 import { SendMoveTankPacket } from "../../network/packets/send-move-tank";
@@ -32,18 +31,23 @@ import { SendTankTurretDirectionPacket } from "../../network/packets/send-tank-t
 import { SetTankTurretAngleControlPacket } from "../../network/packets/set-tank-turret-angle-control";
 import { SendMoveTankAndTurretPacket } from "../../network/packets/send-move-tank-and-turret";
 import { SetMoveTankAndTurretPacket } from "../../network/packets/set-move-tank-and-turret";
+import { TurretUtils } from "./utils/turret/utils";
+import { TurretHandler } from "./utils/turret";
+import { SetTankTemperaturePacket } from "../../network/packets/set-tank-temperature";
+import { SetTankDestroyedPacket } from "../../network/packets/set-tank-destroyed";
 
 export class Tank {
 
-    private incarnation: number = 0;
+    public incarnation: number = 0;
     private alive: boolean = false
 
     private health: number = 0;
+    private temperature: number = 0;
 
     private position: Vector3d = new Vector3d(0, 0, 0);
     private orientation: Vector3d = new Vector3d(0, 0, 0);
 
-    private turret: Turret
+    private turret: TurretHandler
     private hull: Hull
 
     private visible: boolean = false;
@@ -57,15 +61,8 @@ export class Tank {
     }
 
     public updateProperties() {
-        const turret = this.player.getGarageManager().getEquippedTurret();
-        this.setTurret(turret)
-
-        const hull = this.player.getGarageManager().getEquippedTurret();
-        this.setHull(hull)
-    }
-
-    public getIncarnationId() {
-        return this.incarnation
+        this.updateTurret()
+        this.updateHull()
     }
 
     public getHealth() {
@@ -78,6 +75,20 @@ export class Tank {
         setTankHealthPacket.tankId = this.player.getUsername();
         setTankHealthPacket.health = health;
         this.battle.broadcastPacket(setTankHealthPacket);
+    }
+
+    public getTemperature() {
+        return this.temperature
+    }
+
+    public setTemperature(temperature: number) {
+        this.temperature = temperature
+
+        const packet = new SetTankTemperaturePacket();
+        packet.tankId = this.player.getUsername();
+        packet.temperature = temperature;
+
+        this.battle.broadcastPacket(packet);
     }
 
     public getPosition(): Vector3d {
@@ -96,24 +107,23 @@ export class Tank {
         this.orientation = orientation
     }
 
-    public setTurret(turret: string) {
-
-        if (this.turret && this.turret.getName() === turret) {
-            return
-        }
-
+    public updateTurret() {
         const resources = this.player.getGarageManager().getTurretResources()
-        this.turret = new Turret(resources.item, resources.properties, resources.sfx)
+        const turretInstance = TurretUtils.getTurretHandler(resources.item.id)
+        this.turret = new turretInstance(resources.item, resources.properties, resources.sfx, this)
     }
 
-    public setHull(hull: string) {
-
-        if (this.hull && this.hull.getName() === hull) {
-            return
-        }
-
+    public updateHull() {
         const resources = this.player.getGarageManager().getHullResources()
         this.hull = new Hull(resources.item, resources.properties)
+    }
+
+    public getTurret() {
+        return this.turret
+    }
+
+    public getHull() {
+        return this.hull
     }
 
     public isAlive() {
@@ -223,6 +233,17 @@ export class Tank {
         setTimeout(() => { this.sendRespawnDelay(respawnDelay) }, delay)
     }
 
+    public kill(killer: Player) {
+        const packet = new SetTankDestroyedPacket();
+
+        packet.tankId = this.player.getUsername();
+        packet.killerId = killer.getUsername();
+        packet.respawnDelay = 3000;
+
+        this.battle.broadcastPacket(packet);
+        this.handleDestroyed()
+    }
+
     public sendTankSpeed(multiply: number = 1) {
         const setTankSpeedPacket = new SetTankSpeedPacket();
         setTankSpeedPacket.tankId = this.player.getUsername();
@@ -272,7 +293,7 @@ export class Tank {
         }
 
         if (this.turret) {
-            this.turret.handlePacket(packet, this)
+            this.turret.handlePacket(packet)
         }
 
         /** MOVEMENT PACKETS */

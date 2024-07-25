@@ -1,11 +1,11 @@
 import { ByteArray } from "../../utils/network/byte-array";
-import { DamageIndicator } from "../../utils/game/damage-indicator";
+import { DamageIndicator, DamageIndicatorType } from "../../utils/game/damage-indicator";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
 export interface IIndicator {
     damage: number;
-    type: string;
+    type: DamageIndicatorType;
     target: string;
 }
 
@@ -26,7 +26,7 @@ export class SetDamageIndicatorsPacket extends Packet {
         for (let i = 0; i < length; i++) {
             this.indicators[i] = {
                 damage: bytes.readFloat(),
-                type: DamageIndicator.INDICATORS[bytes.readInt()],
+                type: DamageIndicator.INDICATORS[bytes.readInt()] as DamageIndicatorType,
                 target: bytes.readString()
             }
         }
