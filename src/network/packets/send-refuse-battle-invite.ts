@@ -2,25 +2,25 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetUserAcceptedBattleInvitePacket extends Packet {
+export class SendRefuseBattleInvitePacket extends Packet {
 
-    public user: string;
+    public sender: string
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_USER_ACCEPTED_BATTLE_INVITE, bytes)
+        super(Protocol.SEND_REFUSE_BATTLE_INVITE, bytes)
     }
 
     public decode() {
         const bytes = this.cloneBytes();
-        this.user = bytes.readString();
+        this.sender = bytes.readString();
         return {
-            user: this.user
+            sender: this.sender
         }
     }
 
     public encode() {
         const bytes = new ByteArray();
-        bytes.writeString(this.user);
+        bytes.writeString(this.sender);
         return bytes;
     }
 }

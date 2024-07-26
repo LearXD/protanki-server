@@ -2,12 +2,12 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SendOpenLinkPacket extends Packet {
+export class SendCheckBattlePacket extends Packet {
 
-    public battleId: string;
+    public battleId: string
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SEND_OPEN_LINK, bytes)
+        super(Protocol.SEND_CHECK_BATTLE, bytes)
     }
 
     public decode() {

@@ -18,6 +18,7 @@ export class TwinsHandler extends TurretHandler {
     public handlePacket(packet: SimplePacket): void {
         if (packet instanceof SendTwinsShotPacket) {
             const pk = new SetTwinsShotPacket();
+
             pk.shooter = this.tank.player.getUsername();
             pk.barrel = packet.barrel;
             pk.shotId = packet.shotId;
@@ -26,7 +27,7 @@ export class TwinsHandler extends TurretHandler {
             this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
         }
 
-        if (packet instanceof SendTwinsHitPointShotPacket) {
+        if (packet instanceof SendTwinsHitPointShotPacket) { // SetTwinsShotPacket -> SetTwinsHitPointShotPacket
             // TODO: implement
         }
     }

@@ -13,7 +13,7 @@ import { LayoutState } from "../../utils/game/layout-state"
 import { BattlePlayersManager } from "./managers/players"
 import { BattleViewersManager } from "./managers/viewers"
 import { BattleTeamsManager } from "./managers/teams"
-import { BattleUtils } from "../../utils/game/battle"
+import { BattleUtils } from "../../utils/battle"
 import { BattleResourcesManager } from "./managers/resources"
 import { BattleModeManager } from "./managers/mode"
 

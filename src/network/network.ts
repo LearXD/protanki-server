@@ -93,7 +93,6 @@ import { SetTankVisiblePacket } from "./packets/set-tank-visible";
 import { SetMoveTankPacket } from "./packets/set-move-tank";
 import { SetTankSpeedPacket } from "./packets/set-tank-speed";
 import { SetMoveCameraPacket } from "./packets/set-move-camera";
-import { SetTwinsShotPacket } from "./packets/set-twins-shot";
 import { SetTankHealthPacket } from "./packets/set-tank-health";
 import { SetSmokyTargetShotPacket } from "./packets/set-smoky-target-shot";
 import { SetTankControlPacket } from "./packets/set-tank-control";
@@ -179,6 +178,13 @@ import { SetRemoveViewingBattlePacket } from "./packets/set-remove-viewing-battl
 import { SetCaptchaCorrectPacket } from "./packets/set-captcha-correct";
 
 // GENERATE IMPORT HERE
+import { SetBattleFoundPacket } from "./packets/set-battle-found";
+import { SendCheckBattlePacket } from "./packets/send-check-battle";
+import { SendRefuseBattleInvitePacket } from "./packets/send-refuse-battle-invite";
+import { SendAcceptBattleInvitePacket } from "./packets/send-accept-battle-invite";
+import { SendTwinsTargetShotPacket } from "./packets/send-twins-target-shot";
+import { SendTwinsOverturnedShotPacket } from "./packets/send-twins-overturned-shot";
+import { SendVulcanOverturnedShotPacket } from "./packets/send-vulcan-overturned-shot";
 import { SetBattleTeamMessagePacket } from "./packets/set-battle-team-message";
 
 import { SetTwinsOverturnedShotPacket } from "./packets/set-twins-overturned-shot";
@@ -294,11 +300,11 @@ import { SendHammerShotPacket } from "./packets/send-hammer-shot";
 import { SendOpenBattlesListPacket } from "./packets/send-open-battles-list";
 import { SetAddFriendRequestPacket } from "./packets/set-add-friend-request";
 import { ValidateFriendRequestPacket } from "./packets/validate-friend-request";
-import { SendOpenLinkPacket } from "./packets/send-open-link";
+import { SendOpenBattlePacket } from "./packets/send-open-battle";
 import { SendAcceptFriendRequestPacket } from "./packets/send-accept-friend-request";
 import { SetAddFriendPacket } from "./packets/set-add-friend";
-import { SetUserAcceptedBattleInvitePacket } from "./packets/set-user-accepted-battle-invite";
-import { SetUserRecusedBattleInvitePacket } from "./packets/set-user-recused-battle-invite";
+import { SetBattleInviteAcceptedPacket } from "./packets/set-battle-invite-accepted";
+import { SetBattleInviteRefusedPacket } from "./packets/set-battle-invite-refused";
 import { SendBattleInvitePacket } from "./packets/send-battle-invite";
 import { SetOkPopupPacket } from "./packets/set-ok-popup";
 import { SetServerWillUpdatePacket } from "./packets/set-server-will-update";
@@ -311,7 +317,7 @@ import { SetDestroyTankPacket } from "./packets/set-destroy-tank";
 import { SetSuicideDelayPacket } from "./packets/set-suicide-delay";
 import { SetRemoveGaragePacket } from "./packets/set-remove-garage";
 import { SetOpenFriendsListPacket } from "./packets/set-open-friends-list";
-import { SetBattleNotExistPacket } from "./packets/set-battle-not-exist";
+import { SetBattleNotFoundPacket } from "./packets/set-battle-not-found";
 import { SetSmokyVoidShotPacket } from "./packets/set-smoky-void-shot";
 import { SetControlPointStatePacket } from "./packets/set-control-point-state";
 import { SetTankStopCapturingControlPointPacket } from "./packets/set-tank-stop-capturing-control-point";
@@ -335,6 +341,7 @@ import { SendStartIsisShotPacket } from "./packets/send-start-isis-shot";
 import { SetMinePlacedPacket } from "./packets/set-mine-placed";
 import { SetCloseConfigPacket } from "./packets/set-close-config";
 import { SetRemoveUserMinesPacket } from "./packets/set-remove-user-mines";
+import { SetTwinsShotPacket } from "./packets/set-twins-shot";
 
 export class Network {
     private packetPool = new Map<number, typeof require>()
@@ -652,11 +659,11 @@ export class Network {
         this.registerPacket(Protocol.SEND_OPEN_BATTLES_LIST, SendOpenBattlesListPacket);
         this.registerPacket(Protocol.SET_ADD_FRIEND_REQUEST, SetAddFriendRequestPacket);
         this.registerPacket(Protocol.VALIDATE_FRIEND_REQUEST, ValidateFriendRequestPacket);
-        this.registerPacket(Protocol.SEND_OPEN_LINK, SendOpenLinkPacket);
+        this.registerPacket(Protocol.SEND_OPEN_BATTLE, SendOpenBattlePacket);
         this.registerPacket(Protocol.SEND_ACCEPT_FRIEND_REQUEST, SendAcceptFriendRequestPacket);
         this.registerPacket(Protocol.SET_ADD_FRIEND, SetAddFriendPacket);
-        this.registerPacket(Protocol.SET_USER_ACCEPTED_BATTLE_INVITE, SetUserAcceptedBattleInvitePacket);
-        this.registerPacket(Protocol.SET_USER_RECUSED_BATTLE_INVITE, SetUserRecusedBattleInvitePacket);
+        this.registerPacket(Protocol.SET_BATTLE_INVITE_ACCEPTED, SetBattleInviteAcceptedPacket);
+        this.registerPacket(Protocol.SET_BATTLE_INVITE_REFUSED, SetBattleInviteRefusedPacket);
         this.registerPacket(Protocol.SEND_BATTLE_INVITE, SendBattleInvitePacket);
         this.registerPacket(Protocol.SET_OK_POPUP, SetOkPopupPacket);
         this.registerPacket(Protocol.SET_SERVER_WILL_UPDATE, SetServerWillUpdatePacket);
@@ -669,7 +676,7 @@ export class Network {
         this.registerPacket(Protocol.SET_SUICIDE_DELAY, SetSuicideDelayPacket);
         this.registerPacket(Protocol.SET_REMOVE_GARAGE, SetRemoveGaragePacket);
         this.registerPacket(Protocol.SET_OPEN_FRIENDS_LIST, SetOpenFriendsListPacket);
-        this.registerPacket(Protocol.SET_BATTLE_NOT_EXIST, SetBattleNotExistPacket);
+        this.registerPacket(Protocol.SET_BATTLE_NOT_FOUND, SetBattleNotFoundPacket);
         this.registerPacket(Protocol.SET_SMOKY_VOID_SHOT, SetSmokyVoidShotPacket);
         this.registerPacket(Protocol.SET_CONTROL_POINT_STATE, SetControlPointStatePacket);
         this.registerPacket(Protocol.SET_TANK_STOP_CAPTURING_CONTROL_POINT, SetTankStopCapturingControlPointPacket);
@@ -690,7 +697,14 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);
 
         // GENERATE REGISTER HERE
-		this.registerPacket(Protocol.SET_BATTLE_TEAM_MESSAGE, SetBattleTeamMessagePacket);
+        this.registerPacket(Protocol.SET_BATTLE_FOUND, SetBattleFoundPacket);
+        this.registerPacket(Protocol.SEND_CHECK_BATTLE, SendCheckBattlePacket);
+        this.registerPacket(Protocol.SEND_REFUSE_BATTLE_INVITE, SendRefuseBattleInvitePacket);
+        this.registerPacket(Protocol.SEND_ACCEPT_BATTLE_INVITE, SendAcceptBattleInvitePacket);
+        this.registerPacket(Protocol.SEND_TWINS_TARGET_SHOT, SendTwinsTargetShotPacket);
+        this.registerPacket(Protocol.SEND_TWINS_OVERTURNED_SHOT, SendTwinsOverturnedShotPacket);
+        this.registerPacket(Protocol.SEND_VULCAN_OVERTURNED_SHOT, SendVulcanOverturnedShotPacket);
+        this.registerPacket(Protocol.SET_BATTLE_TEAM_MESSAGE, SetBattleTeamMessagePacket);
         this.registerPacket(Protocol.SET_REMOVE_USER_MINES, SetRemoveUserMinesPacket);
         this.registerPacket(Protocol.SET_TWINS_OVERTURNED_SHOT, SetTwinsOverturnedShotPacket);
         this.registerPacket(Protocol.SET_RICOCHET_OVERTURNED_SHOT, SetRicochetOverturnedShotPacket);

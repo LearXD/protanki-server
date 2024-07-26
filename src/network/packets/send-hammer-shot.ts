@@ -4,9 +4,9 @@ import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
 export interface ITarget {
-    vector_1: Vector3d;
+    hitPosition: Vector3d;
     orientation: Vector3d;
-    position: Vector3d;
+    targetPosition: Vector3d;
     target: string;
     turretAngle: number;
 }
@@ -32,9 +32,9 @@ export class SendHammerShotPacket extends Packet {
 
         for (let i = 0; i < targetsLength; i++) {
             this.targets[i] = {
-                vector_1: bytes.readVector3d(),
+                hitPosition: bytes.readVector3d(),
                 orientation: bytes.readVector3d(),
-                position: bytes.readVector3d(),
+                targetPosition: bytes.readVector3d(),
                 target: bytes.readString(),
                 turretAngle: bytes.readFloat()
             }
@@ -55,9 +55,9 @@ export class SendHammerShotPacket extends Packet {
 
         bytes.writeInt(this.targets.length);
         this.targets.forEach((target) => {
-            bytes.writeVector3d(target.vector_1);
+            bytes.writeVector3d(target.hitPosition);
             bytes.writeVector3d(target.orientation);
-            bytes.writeVector3d(target.position);
+            bytes.writeVector3d(target.targetPosition);
             bytes.writeString(target.target);
             bytes.writeFloat(target.turretAngle);
         })

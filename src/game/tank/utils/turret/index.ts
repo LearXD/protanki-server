@@ -3,6 +3,7 @@ import { IGarageItem, ITurretProperties, ITurretSfx } from "../../../../managers
 
 import { SimplePacket } from "../../../../network/packets/simple-packet";
 import { Vector3d } from "../../../../utils/game/vector-3d";
+import { Logger } from "../../../../utils/logger";
 import { IDamageModifiers } from "../../../battle/managers/damage/types";
 import { Player } from "../../../player";
 
@@ -17,6 +18,28 @@ export abstract class TurretHandler {
 
     public getName() {
         return this.item.id + '_m' + this.item.modificationID;
+    }
+
+    public getItemProperty(name: string) {
+        return this.item.properts.find(({ property }) => property === name)
+    }
+
+    public getItemSubProperty(primary: string, secondary: string) {
+        const property = this.getItemProperty(primary);
+
+        if (!property) {
+            Logger.warn(`${primary} property not found`);
+            return null;
+        }
+
+        const sub = property.subproperties.find(({ property }) => property === secondary)
+
+        if (!sub) {
+            Logger.warn(`${secondary} property not found`);
+            return null;
+        }
+
+        return sub;
     }
 
     public abstract getDamage(distance: number, modifiers?: IDamageModifiers): number;

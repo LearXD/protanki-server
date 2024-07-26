@@ -2,12 +2,12 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetBattleNotExistPacket extends Packet {
+export class SetBattleNotFoundPacket extends Packet {
 
     public battleId: string
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_BATTLE_NOT_EXIST, bytes)
+        super(Protocol.SET_BATTLE_NOT_FOUND, bytes)
     }
 
     public decode() {

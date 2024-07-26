@@ -2,12 +2,12 @@ import { Player } from "../..";
 import { SendBattleMessagePacket } from "../../../../network/packets/send-battle-message";
 import { SendCreateBattlePacket } from "../../../../network/packets/send-create-battle";
 import { SendJoinOnBattlePacket } from "../../../../network/packets/send-join-on-battle";
+import { SendOpenBattlePacket } from "../../../../network/packets/send-open-battle";
 import { SendOpenBattlesListPacket } from "../../../../network/packets/send-open-battles-list";
-import { SendOpenLinkPacket } from "../../../../network/packets/send-open-link";
 import { SendSpectateBattlePacket } from "../../../../network/packets/send-spectate-battle";
 import { SetBattleInviteCCPacket } from "../../../../network/packets/set-battle-invite-cc";
 import { SetBattleListPacket } from "../../../../network/packets/set-battle-list";
-import { SetBattleNotExistPacket } from "../../../../network/packets/set-battle-not-exist";
+import { SetBattleNotFoundPacket } from "../../../../network/packets/set-battle-not-found";
 import { SetRemoveBattlesScreenPacket } from "../../../../network/packets/set-remove-battles-screen";
 import { SetViewingBattlePacket } from "../../../../network/packets/set-viewing-battle";
 import { SimplePacket } from "../../../../network/packets/simple-packet";
@@ -79,7 +79,7 @@ export class PlayerBattlesManager {
         const battle = this.player.getServer().getBattlesManager().getBattle(battleId);
 
         if (!battle) {
-            const setBattleNotExistPacket = new SetBattleNotExistPacket()
+            const setBattleNotExistPacket = new SetBattleNotFoundPacket()
             setBattleNotExistPacket.battleId = battleId;
             this.player.sendPacket(setBattleNotExistPacket);
             return;
@@ -161,7 +161,7 @@ export class PlayerBattlesManager {
             this.handleViewBattle(packet.battleId.trim())
         }
 
-        if (packet instanceof SendOpenLinkPacket) {
+        if (packet instanceof SendOpenBattlePacket) {
             this.handleViewBattle(packet.battleId);
         }
 

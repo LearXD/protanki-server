@@ -5,7 +5,7 @@ export class Turret {
     public static TWINS = 'twins';
     public static RICOCHET = 'ricochet';
     public static ISIDA = 'isida';
-    public static HAMMER = 'hammer';
+    public static HAMMER = 'shotgun';
     public static SHAFT = 'shaft';
     public static FREEZE = 'freeze';
     public static THUNDER = 'thunder';
