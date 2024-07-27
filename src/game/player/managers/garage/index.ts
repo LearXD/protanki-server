@@ -1,6 +1,5 @@
+import { GarageItemCategory, IGarageItem } from "../../../../server/managers/garage/types";
 import { Player } from "../..";
-import { GarageItemCategory, IGarageItem } from "../../../../managers/garage/types";
-import { ResourceType } from "../../../../managers/resources";
 import { SendBuyGarageItemPacket } from "../../../../network/packets/send-buy-garage-item";
 import { SendBuyGarageKitPacket } from "../../../../network/packets/send-buy-garage-kit";
 import { SendEquipItemPacket } from "../../../../network/packets/send-equip-item";
@@ -17,6 +16,7 @@ import { LayoutState } from "../../../../states/layout-state";
 import { Supply, SupplyType } from "../../../../states/supply";
 import { Logger } from "../../../../utils/logger";
 import { IGarageHull, IGarageTurret, IPlayerGarageData } from "../../utils/data/types";
+import { ResourceType } from "../../../../server/managers/resources/types";
 
 export class PlayerGarageManager {
 

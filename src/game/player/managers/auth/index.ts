@@ -1,5 +1,5 @@
 import { Player } from "../..";
-import { ResourceType } from "../../../../managers/resources";
+
 import { SetIncorrectPasswordPopupPacket } from "../../../../network/packets/set-incorrect-password-popup";
 import { Packet } from "../../../../network/packets/packet";
 import { SendLoginPacket } from "../../../../network/packets/send-login";
@@ -12,6 +12,7 @@ import { SetAdvisedUsernamesPacket } from "../../../../network/packets/set-advis
 import { IPlayerAuthData } from "../../utils/data/types";
 import { PlayerData } from "../../utils/data";
 import { SendRegisterPacket } from "../../../../network/packets/send-register";
+import { ResourceType } from "../../../../server/managers/resources/types";
 
 export class PlayerAuthManager {
 

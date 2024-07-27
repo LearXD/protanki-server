@@ -38,6 +38,7 @@ export class PlayerBattlesManager {
         const setBattleListPacket = new SetBattleListPacket();
         setBattleListPacket.battles = this.player.getServer().getBattlesManager().getBattles()
             .map(battle => battle.toBattleListItem());
+
         this.player.sendPacket(setBattleListPacket);
 
         if (this.player.getViewingBattle()) {

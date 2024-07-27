@@ -2,75 +2,39 @@
 import { Player } from "../player"
 import { Logger } from "../../utils/logger"
 
-import { BattleMode, BattleModeType } from "../../states/battle-mode"
+import { BattleMode } from "../../states/battle-mode"
 import { EquipmentConstraintsMode } from "../../states/equipment-constraints-mode"
 
 import { SetLoadBattleObjectsPacket } from "../../network/packets/set-load-battle-objects"
 import { SetShowBattleNotificationsPacket } from "../../network/packets/set-show-battle-notifications"
 
 import { LayoutState } from "../../states/layout-state"
-
-import { BattlePlayersManager } from "./managers/players"
-import { BattleViewersManager } from "./managers/viewers"
-import { BattleTeamsManager } from "./managers/teams"
 import { BattleUtils } from "../../utils/battle"
-import { BattleResourcesManager } from "./managers/resources"
-import { BattleModeManager } from "./managers/mode"
-
-import { BattleMinesManager } from "./managers/mines"
-import { BattleEffectsManager } from "./managers/effects"
-import { BattleStatisticsManager } from "./managers/statistics"
-import { BattleBoxesManager } from "./managers/boxes"
-import { BattleDeathMatchModeManager } from "./managers/mode/modes/death-match"
 import { SetRemoveBattleScreenPacket } from "../../network/packets/set-remove-battle-screen"
 import { SimplePacket } from "../../network/packets/simple-packet"
-import { IMap } from "../../managers/maps/types"
+
 import { IBattleData } from "./types"
 import { SuspiciousLevel } from "../../states/suspicious-level"
 import { IBattleList } from "../../network/packets/set-battle-list"
 import { SetBattleTimePacket } from "../../network/packets/set-battle-time"
 import { Rank } from "../../states/rank"
-import { BattleChatManager } from "./managers/chat"
 import { SetBattleUserLeftNotificationPacket } from "../../network/packets/set-battle-user-left-notification"
-import { BattleDamageManager } from "./managers/damage"
+import { BattleManager } from "./utils/managers"
+import { IMap } from "@/server/managers/maps/types"
 
-export class Battle {
+export class Battle extends BattleManager {
+
+    public static readonly TICK_RATE = 10
 
     private battleId: string;
     private running: boolean = false
 
     private time: number = 0
+    private tick: number = 0
 
     private updateInterval: NodeJS.Timeout
 
-    private playersManager: BattlePlayersManager
-    private viewersManager: BattleViewersManager
-    private teamsManager: BattleTeamsManager
-    private chatManager: BattleChatManager
-
-    private modeManager: BattleModeManager
-    private statisticsManager: BattleStatisticsManager
-
-    private resourcesManager: BattleResourcesManager
-
-    private minesManager: BattleMinesManager
-    private effectsManager: BattleEffectsManager
-    private boxesManager: BattleBoxesManager
-
-    private damageManager: BattleDamageManager;
-
-    public static getManager(battle: Battle) {
-        switch (battle.getMode() as BattleModeType) {
-            case BattleMode.DM: {
-                return new BattleDeathMatchModeManager(battle)
-            }
-            default: {
-                throw new Error(`Unknown battle mode: ${battle.getMode()}`)
-            }
-        }
-    }
-
-    constructor(
+    public constructor(
         private name: string,
         private map: IMap,
         private data: IBattleData = {
@@ -91,25 +55,12 @@ export class Battle {
             withoutSupplies: false
         },
     ) {
+        super();
+
         this.battleId = BattleUtils.generateBattleId()
+        this.registerManagers(this);
         this.time = this.data.timeLimitInSec
-
-        this.playersManager = new BattlePlayersManager(this)
-        this.viewersManager = new BattleViewersManager(this)
-        this.teamsManager = new BattleTeamsManager(this)
-        this.chatManager = new BattleChatManager(this)
-
-        this.modeManager = Battle.getManager(this)
-        this.statisticsManager = new BattleStatisticsManager(this)
-
-        this.resourcesManager = new BattleResourcesManager(this)
-        this.minesManager = new BattleMinesManager()
-        this.effectsManager = new BattleEffectsManager()
-        this.boxesManager = new BattleBoxesManager()
-
-        this.damageManager = new BattleDamageManager(this)
-
-        this.updateInterval = setInterval(this.update.bind(this), 1000)
+        this.updateInterval = setInterval(this.update.bind(this), 1000 / Battle.TICK_RATE)
     }
 
     public start() {
@@ -169,6 +120,7 @@ export class Battle {
         this.sendLoadBattleObjects(player)
         this.sendShowBattleNotifications(player)
 
+
         /** SEND IN-GAME PROPERTIES */
         this.boxesManager.sendData(player)
         this.minesManager.sendMines(player);
@@ -181,18 +133,14 @@ export class Battle {
             this.playersManager.sendTankData(tankData, player)
         }
 
-
         /** SEND BATTLE EFFECTS */
         this.effectsManager.sendBattleEffects(player);
         if (!spectator) {
             player.getGarageManager().sendSupplies(player);
         }
 
+        if (!this.isRunning()) this.start()
         player.setSubLayoutState(LayoutState.BATTLE)
-
-        if (!this.isRunning()) {
-            this.start()
-        }
 
         Logger.info(`${player.getUsername()} joined the battle ${this.getName()}`)
     }
@@ -229,6 +177,7 @@ export class Battle {
     }
 
     public getBattleId() { return this.battleId }
+
     public getName() { return this.name }
     public getMap() { return this.map }
 
@@ -278,9 +227,6 @@ export class Battle {
     }
 
     public sendPlayerLeft(player: Player) {
-        // const setUserLeftBattlePacket = new SetUserLeftBattlePacket()
-        // setUserLeftBattlePacket.userId = player.getUsername()
-        // this.broadcastPacket(setUserLeftBattlePacket)
         const packet = new SetBattleUserLeftNotificationPacket();
         packet.userId = player.getUsername();
         this.broadcastPacket(packet);
@@ -293,7 +239,7 @@ export class Battle {
             map: this.map.mapId,
             maxPeople: this.data.maxPeopleCount,
             name: this.getName(),
-            privateBattle: this.isProBattle(),
+            privateBattle: this.isPrivateBattle(),
             proBattle: this.isProBattle(),
             minRank: this.getRankRange().min,
             maxRank: this.getRankRange().max,
@@ -313,56 +259,19 @@ export class Battle {
         }
     }
 
-    public getPlayersManager(): BattlePlayersManager {
-        return this.playersManager
-    }
-
-    public getViewersManager(): BattleViewersManager {
-        return this.viewersManager
-    }
-    public getTeamsManager(): BattleTeamsManager {
-        return this.teamsManager
-    }
-
-    public getChatManager(): BattleChatManager {
-        return this.chatManager
-    }
-
-    public getModeManager(): BattleModeManager {
-        return this.modeManager
-    }
-
-    public getResourcesManager(): BattleResourcesManager {
-        return this.resourcesManager
-    }
-
-    public getMinesManager(): BattleMinesManager {
-        return this.minesManager
-    }
-
-    public getEffectsManager(): BattleEffectsManager {
-        return this.effectsManager
-    }
-
-    public getStatisticsManager(): BattleStatisticsManager {
-        return this.statisticsManager
-    }
-
-    public getBoxesManager(): BattleBoxesManager {
-        return this.boxesManager
-    }
-
-    public getDamageManager(): BattleDamageManager {
-        return this.damageManager
-    }
-
     public update() {
-        if (this.isRunning()) {
-            this.time--;
-        }
+        this.tick++
 
-        for (const player of this.getPlayersManager().getPlayers()) {
-            player.sendLatency()
+
+        if (this.tick % Battle.TICK_RATE === 0) {
+
+            if (this.isRunning()) {
+                this.time--;
+            }
+
+            for (const player of this.getPlayersManager().getPlayers()) {
+                player.sendLatency()
+            }
         }
     }
 

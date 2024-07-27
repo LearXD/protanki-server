@@ -1,5 +1,4 @@
 import util from 'util'
-
 import chalk from 'chalk'
 
 enum Colors {

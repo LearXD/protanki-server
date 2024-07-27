@@ -1,6 +1,5 @@
-import { Tank } from "../..";
-import { IGarageItem, IHullProperties } from "../../../../managers/garage/types";
-import { SimplePacket } from "../../../../network/packets/simple-packet";
+
+import { IGarageItem, IHullProperties } from "@/server/managers/garage/types";
 import { Logger } from "../../../../utils/logger";
 
 export class Hull {

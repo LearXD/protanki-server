@@ -6,7 +6,7 @@ import { Server } from "../../server";
 import { SetLayoutStatePacket } from "../../network/packets/set-layout-state";
 import { LayoutState, LayoutStateType } from "../../states/layout-state";
 import { SetSubLayoutStatePacket } from "../../network/packets/set-sub-layout-state";
-import { ResourceType } from "../../managers/resources";
+
 import { Battle } from "../battle";
 import { Tank } from "../tank";
 import { PlayerFriendsManager } from "./managers/friends";
@@ -22,6 +22,7 @@ import { PlayerDailyQuestsManager } from "./managers/daily-quests";
 import { Client } from "../client";
 import { PlayerData } from "./utils/data";
 import { PlayerPacketHandler } from "./handlers/packet";
+import { ResourceType } from "../../server/managers/resources/types";
 
 export class Player extends Client {
 
