@@ -1,6 +1,6 @@
-import { BattleModeType } from "../../utils/game/battle-mode";
-import { EquipmentConstraintsModeType } from "../../utils/game/equipment-constraints-mode";
-import { ByteArray } from "../../utils/network/byte-array";
+import { BattleModeType } from "../../states/battle-mode";
+import { EquipmentConstraintsModeType } from "../../states/equipment-constraints-mode";
+import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 

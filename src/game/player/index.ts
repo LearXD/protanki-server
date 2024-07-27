@@ -4,7 +4,7 @@ import { Logger } from "../../utils/logger";
 import { SimplePacket } from "../../network/packets/simple-packet";
 import { Server } from "../../server";
 import { SetLayoutStatePacket } from "../../network/packets/set-layout-state";
-import { LayoutState, LayoutStateType } from "../../utils/game/layout-state";
+import { LayoutState, LayoutStateType } from "../../states/layout-state";
 import { SetSubLayoutStatePacket } from "../../network/packets/set-sub-layout-state";
 import { ResourceType } from "../../managers/resources";
 import { Battle } from "../battle";

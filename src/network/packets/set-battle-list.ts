@@ -1,7 +1,7 @@
-import { BattleModeType } from "../../utils/game/battle-mode";
-import { EquipmentConstraintsMode } from "../../utils/game/equipment-constraints-mode";
-import { SuspiciousLevel } from "../../utils/game/suspicious-level";
-import { ByteArray } from "../../utils/network/byte-array";
+import { BattleModeType } from "../../states/battle-mode";
+import { EquipmentConstraintsMode } from "../../states/equipment-constraints-mode";
+import { SuspiciousLevel } from "../../states/suspicious-level";
+import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 

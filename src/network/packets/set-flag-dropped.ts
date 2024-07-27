@@ -1,6 +1,6 @@
-import { Team } from "../../utils/game/team";
+import { Team } from "../../states/team";
 import { Vector3d } from "../../utils/vector-3d";
-import { ByteArray } from "../../utils/network/byte-array";
+import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 

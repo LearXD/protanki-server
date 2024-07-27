@@ -2,7 +2,7 @@ import { Player } from "../..";
 import { Packet } from "../../../../network/packets/packet";
 import { SimplePacket } from "../../../../network/packets/simple-packet";
 import { Logger } from "../../../../utils/logger";
-import { ByteArray } from "../../../../utils/network/byte-array";
+import { ByteArray } from "../../../../network/utils/byte-array";
 
 export const IGNORE_PACKETS = [
     1484572481, // Pong

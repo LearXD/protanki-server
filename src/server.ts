@@ -75,8 +75,8 @@ export class Server {
     }
 
     public close = () => {
-        this.server.close();
         this.playersManager.getPlayers().forEach((player) => player.close());
+        this.server.close();
         Logger.info('Server closed');
     }
 

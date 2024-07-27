@@ -1,6 +1,6 @@
-import { BattleModeType } from "../../utils/game/battle-mode"
-import { EquipmentConstraintsModeType } from "../../utils/game/equipment-constraints-mode"
-import { ThemeType } from "../../utils/game/theme"
+import { BattleModeType } from "../../states/battle-mode"
+import { EquipmentConstraintsModeType } from "../../states/equipment-constraints-mode"
+import { ThemeType } from "../../states/theme"
 
 export interface IBattleData {
     autoBalance: boolean,

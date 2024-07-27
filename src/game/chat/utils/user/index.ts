@@ -1,6 +1,6 @@
 import { IUser } from "../../../../network/packets/set-chat-messages";
-import { ChatModeratorLevel, ChatModeratorLevelType } from "../../../../utils/game/chat-moderator-level";
-import { Rank } from "../../../../utils/game/rank";
+import { ChatModeratorLevel, ChatModeratorLevelType } from "../../../../states/chat-moderator-level";
+import { Rank } from "../../../../states/rank";
 import { Player } from "../../../player";
 import { PlayerData } from "../../../player/utils/data";
 

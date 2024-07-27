@@ -5,8 +5,8 @@ import { SetCaptchaCorrectPacket } from "../../../../network/packets/set-captcha
 import { SetCaptchaDataPacket } from "../../../../network/packets/set-captcha-data";
 import { SetCaptchaIncorrectPacket } from "../../../../network/packets/set-captcha-incorrect";
 import { SimplePacket } from "../../../../network/packets/simple-packet";
-import { CaptchaUtils } from "../../../../utils/game/captcha";
-import { CaptchaLocationType } from "../../../../utils/game/captcha-location";
+import { CaptchaUtils } from "../../../../utils/captcha";
+import { CaptchaLocationType } from "../../../../states/captcha-location";
 import { Logger } from "../../../../utils/logger";
 
 export class ClientCaptchaManager {

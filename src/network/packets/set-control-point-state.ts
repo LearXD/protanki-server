@@ -1,5 +1,5 @@
-import { ControlPointState } from "../../utils/game/control-point-state";
-import { ByteArray } from "../../utils/network/byte-array";
+import { ControlPointState } from "../../states/control-point-state";
+import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 

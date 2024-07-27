@@ -1,5 +1,5 @@
-import { ByteArray } from "../../utils/network/byte-array";
-import { DamageIndicator, DamageIndicatorType } from "../../utils/game/damage-indicator";
+import { ByteArray } from "../utils/byte-array";
+import { DamageIndicator, DamageIndicatorType } from "../../states/damage-indicator";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 

@@ -1,4 +1,4 @@
-import { Turret } from "../../../../../utils/game/turret";
+import { Turret } from "../../../../../states/turret";
 import { FlamethrowerHandler } from "../handlers/flamethrower";
 import { FreezeHandler } from "../handlers/freeze";
 import { HammerHandler } from "../handlers/hammer";

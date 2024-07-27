@@ -5,7 +5,7 @@ import { SetMapsDataPacket } from "../../network/packets/set-maps-data";
 import { Server } from "../../server";
 import { IBattleAsset } from "./types";
 import { Logger } from "../../utils/logger";
-import { Theme, ThemeType } from "../../utils/game/theme";
+import { Theme, ThemeType } from "../../states/theme";
 
 export class MapsManager {
 

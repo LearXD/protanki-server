@@ -1,5 +1,5 @@
-import { Achievement } from "../../utils/game/achievement";
-import { ByteArray } from "../../utils/network/byte-array";
+import { Achievement } from "../../states/achievement";
+import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 

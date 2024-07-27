@@ -1,5 +1,5 @@
-import { ChatModeratorLevel } from "../../../../utils/game/chat-moderator-level";
-import { Rank } from "../../../../utils/game/rank";
+import { ChatModeratorLevel } from "../../../../states/chat-moderator-level";
+import { Rank } from "../../../../states/rank";
 import { Logger } from "../../../../utils/logger";
 import { IPlayerAuthData, IPlayerGarageData, IPlayerProfileData, IPremiumData } from "./types";
 

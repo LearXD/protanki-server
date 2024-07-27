@@ -1,7 +1,7 @@
 import { Battle } from "../..";
 import { SetBattleChatEnabledPacket } from "../../../../network/packets/set-battle-chat-enabled";
 import { SetBattleMessagePacket } from "../../../../network/packets/set-battle-message";
-import { Team, TeamType } from "../../../../utils/game/team";
+import { Team, TeamType } from "../../../../states/team";
 import { Player } from "../../../player";
 import { IBattleMessage } from "./types";
 

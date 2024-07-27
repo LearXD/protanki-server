@@ -3,7 +3,7 @@ import { User } from "../../game/chat/utils/user";
 import { Player } from "../../game/player";
 import { SetChatMessagesPacket } from "../../network/packets/set-chat-messages";
 import { Server } from "../../server";
-import { ByteArray } from "../../utils/network/byte-array";
+import { ByteArray } from "../../network/utils/byte-array";
 
 export class ChatManager {
 

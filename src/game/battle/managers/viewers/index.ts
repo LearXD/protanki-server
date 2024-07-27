@@ -2,7 +2,7 @@ import { Battle } from "../..";
 import { SetRemoveViewingBattlePacket } from "../../../../network/packets/set-remove-viewing-battle";
 import { SetViewingBattlePacket } from "../../../../network/packets/set-viewing-battle";
 import { SetViewingBattleDataPacket } from "../../../../network/packets/set-viewing-battle-data";
-import { BattleMode } from "../../../../utils/game/battle-mode";
+import { BattleMode } from "../../../../states/battle-mode";
 import { Player } from "../../../player";
 
 export class BattleViewersManager {

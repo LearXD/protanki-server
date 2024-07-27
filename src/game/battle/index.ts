@@ -2,13 +2,13 @@
 import { Player } from "../player"
 import { Logger } from "../../utils/logger"
 
-import { BattleMode, BattleModeType } from "../../utils/game/battle-mode"
-import { EquipmentConstraintsMode } from "../../utils/game/equipment-constraints-mode"
+import { BattleMode, BattleModeType } from "../../states/battle-mode"
+import { EquipmentConstraintsMode } from "../../states/equipment-constraints-mode"
 
 import { SetLoadBattleObjectsPacket } from "../../network/packets/set-load-battle-objects"
 import { SetShowBattleNotificationsPacket } from "../../network/packets/set-show-battle-notifications"
 
-import { LayoutState } from "../../utils/game/layout-state"
+import { LayoutState } from "../../states/layout-state"
 
 import { BattlePlayersManager } from "./managers/players"
 import { BattleViewersManager } from "./managers/viewers"
@@ -26,10 +26,10 @@ import { SetRemoveBattleScreenPacket } from "../../network/packets/set-remove-ba
 import { SimplePacket } from "../../network/packets/simple-packet"
 import { IMap } from "../../managers/maps/types"
 import { IBattleData } from "./types"
-import { SuspiciousLevel } from "../../utils/game/suspicious-level"
+import { SuspiciousLevel } from "../../states/suspicious-level"
 import { IBattleList } from "../../network/packets/set-battle-list"
 import { SetBattleTimePacket } from "../../network/packets/set-battle-time"
-import { Rank } from "../../utils/game/rank"
+import { Rank } from "../../states/rank"
 import { BattleChatManager } from "./managers/chat"
 import { SetBattleUserLeftNotificationPacket } from "../../network/packets/set-battle-user-left-notification"
 import { BattleDamageManager } from "./managers/damage"

@@ -1,5 +1,5 @@
-import { ByteArray } from "../../utils/network/byte-array";
-import { ChatModeratorLevel } from "../../utils/game/chat-moderator-level";
+import { ByteArray } from "../utils/byte-array";
+import { ChatModeratorLevel } from "../../states/chat-moderator-level";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 

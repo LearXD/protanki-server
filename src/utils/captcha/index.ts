@@ -1,4 +1,4 @@
-import { ByteArray } from "../../network/byte-array";
+import { ByteArray } from "../../network/utils/byte-array";
 
 export class CaptchaUtils {
     public static decode(data: number[]) {

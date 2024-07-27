@@ -1,4 +1,4 @@
-import { ChatModeratorLevelType } from "../../../../utils/game/chat-moderator-level"
+import { ChatModeratorLevelType } from "../../../../states/chat-moderator-level"
 
 export interface IPlayerAuthData {
     username: string;

@@ -4,7 +4,7 @@ import { SetIncorrectPasswordPopupPacket } from "../../../../network/packets/set
 import { Packet } from "../../../../network/packets/packet";
 import { SendLoginPacket } from "../../../../network/packets/send-login";
 import { SetEmailInfoPacket } from "../../../../network/packets/set-email-info";
-import { LayoutState } from "../../../../utils/game/layout-state";
+import { LayoutState } from "../../../../states/layout-state";
 import { SendRegisterCheckUsernamePacket } from "../../../../network/packets/send-register-check-username";
 import { SetRegisterUsernameAvailablePacket } from "../../../../network/packets/set-register-username-available";
 import { SetRegisterUsernameAlreadyUsedPacket } from "../../../../network/packets/set-register-username-already-used";

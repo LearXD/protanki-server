@@ -1,5 +1,5 @@
 import { Logger } from "../../utils/logger";
-import { ByteArray } from "../../utils/network/byte-array";
+import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 

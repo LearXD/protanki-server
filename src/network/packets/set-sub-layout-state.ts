@@ -1,5 +1,5 @@
-import { LayoutState } from "../../utils/game/layout-state";
-import { ByteArray } from "../../utils/network/byte-array";
+import { LayoutState } from "../../states/layout-state";
+import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 

@@ -3,7 +3,6 @@ import { SetAuthResourcesPacket } from "../../network/packets/set-auth-resources
 import { SetInviteEnabledPacket } from "../../network/packets/set-invite-enabled";
 import { Server } from "../../server";
 import { SetNetworkParamsPacket } from "../../network/packets/set-network-params";
-import { SocialNetwork } from "../../utils/game/social-network";
 import { ResolveFullLoadedPacket } from "../../network/packets/resolve-full-loaded";
 import { IAuthConfig } from "./types";
 
@@ -23,7 +22,16 @@ export class AuthManager {
 
     public sendAuthConfig(client: Player) {
         const socialNetworksPacket = new SetNetworkParamsPacket();
-        socialNetworksPacket.socialParams = SocialNetwork.NETWORKS;
+        socialNetworksPacket.socialParams = [
+            {
+                authorizationUrl: 'https://learxd.dev',
+                snId: 'vkontakte'
+            },
+            {
+                authorizationUrl: 'https://learxd.dev',
+                snId: 'google'
+            }
+        ]
         client.sendPacket(socialNetworksPacket);
 
         const setInviteEnabledPacket = new SetInviteEnabledPacket();

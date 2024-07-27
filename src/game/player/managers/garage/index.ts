@@ -13,8 +13,8 @@ import { SetSuppliesPacket } from "../../../../network/packets/set-supplies";
 import { SetUseSupplyPacket } from "../../../../network/packets/set-use-supply";
 import { SetUserGarageItemsPacket } from "../../../../network/packets/set-user-garage-items";
 import { SimplePacket } from "../../../../network/packets/simple-packet";
-import { LayoutState } from "../../../../utils/game/layout-state";
-import { Supply, SupplyType } from "../../../../utils/game/supply";
+import { LayoutState } from "../../../../states/layout-state";
+import { Supply, SupplyType } from "../../../../states/supply";
 import { Logger } from "../../../../utils/logger";
 import { IGarageHull, IGarageTurret, IPlayerGarageData } from "../../utils/data/types";
 

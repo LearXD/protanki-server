@@ -1,6 +1,6 @@
-import { ByteArray } from "../../utils/network/byte-array";
-import { ItemCategory } from "../../utils/game/item-category";
-import { ItemViewCategory } from "../../utils/game/item-view-category";
+import { ByteArray } from "../utils/byte-array";
+import { ItemCategory } from "../../states/item-category";
+import { ItemViewCategory } from "../../states/item-view-category";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 

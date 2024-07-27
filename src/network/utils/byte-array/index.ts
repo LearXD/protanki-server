@@ -1,4 +1,4 @@
-import { IVector3d, Vector3d } from "../../vector-3d";
+import { IVector3d, Vector3d } from "../../../utils/vector-3d";
 
 export class ByteArray {
 

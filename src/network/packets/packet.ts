@@ -1,4 +1,4 @@
-import { ByteArray } from "../../utils/network/byte-array";
+import { ByteArray } from "../utils/byte-array";
 
 export class Packet {
 

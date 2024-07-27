@@ -1,7 +1,7 @@
 import { Battle } from "../..";
 import { SetDamageIndicatorsPacket } from "../../../../network/packets/set-damage-indicators";
 import { SetTankDestroyedPacket } from "../../../../network/packets/set-tank-destroyed";
-import { DamageIndicator, DamageIndicatorType } from "../../../../utils/game/damage-indicator";
+import { DamageIndicator, DamageIndicatorType } from "../../../../states/damage-indicator";
 import { Logger } from "../../../../utils/logger";
 import { Player } from "../../../player";
 import { IDamageModifiers } from "./types";

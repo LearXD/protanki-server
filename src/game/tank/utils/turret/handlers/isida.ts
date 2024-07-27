@@ -6,7 +6,7 @@ import { SetIsisTargetShotPacket } from "../../../../../network/packets/set-isis
 import { SetStartIsisShotPacket } from "../../../../../network/packets/set-start-isis-shot";
 import { SetStopIsisShotPacket } from "../../../../../network/packets/set-stop-isis-shot";
 import { SimplePacket } from "../../../../../network/packets/simple-packet";
-import { IsidaState } from "../../../../../utils/game/isida-state";
+import { IsidaState } from "../../../../../states/isida-state";
 import { Player } from "../../../../player";
 
 export class IsidaHandler extends TurretHandler {

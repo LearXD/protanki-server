@@ -1,5 +1,5 @@
-import { ByteArray } from "../../utils/network/byte-array";
-import { Team, TeamType } from "../../utils/game/team";
+import { ByteArray } from "../utils/byte-array";
+import { Team, TeamType } from "../../states/team";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 

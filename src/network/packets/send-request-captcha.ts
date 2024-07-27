@@ -1,5 +1,5 @@
-import { CaptchaLocation, CaptchaLocationType } from "../../utils/game/captcha-location";
-import { ByteArray } from "../../utils/network/byte-array";
+import { CaptchaLocation, CaptchaLocationType } from "../../states/captcha-location";
+import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
