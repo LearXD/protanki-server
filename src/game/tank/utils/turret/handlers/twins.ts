@@ -1,19 +1,33 @@
 import { TurretHandler } from "..";
 import { SendTwinsHitPointShotPacket } from "../../../../../network/packets/send-twins-hit-point-shot";
+import { SendTwinsOverturnedShotPacket } from "../../../../../network/packets/send-twins-overturned-shot";
 import { SendTwinsShotPacket } from "../../../../../network/packets/send-twins-shot";
+import { SendTwinsTargetShotPacket } from "../../../../../network/packets/send-twins-target-shot";
+import { SetTwinsOverturnedShotPacket } from "../../../../../network/packets/set-twins-overturned-shot";
 import { SetTwinsShotPacket } from "../../../../../network/packets/set-twins-shot";
 import { SimplePacket } from "../../../../../network/packets/simple-packet";
+import { MathUtils } from "../../../../../utils/math";
 import { Player } from "../../../../player";
 
 export class TwinsHandler extends TurretHandler {
 
-    public getDamage(): number {
-        throw new Error("Method not implemented.");
+    public getDamageRange() {
+        const min = this.getItemSubProperty("DAMAGE", "DAMAGE_FROM")
+        const max = this.getItemSubProperty("DAMAGE", "DAMAGE_TO")
+
+        return {
+            min: parseInt(min.value),
+            max: parseInt(max.value)
+        }
     }
 
-    public handleDamage(target: Player): void {
-
+    public getDamage(distance: number): number {
+        const range = this.getDamageRange()
+        const damage = MathUtils.randomInt(range.min, range.max);
+        return damage
     }
+
+    public handleDamage(target: Player): void { }
 
     public handlePacket(packet: SimplePacket): void {
         if (packet instanceof SendTwinsShotPacket) {
@@ -27,8 +41,18 @@ export class TwinsHandler extends TurretHandler {
             this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
         }
 
-        if (packet instanceof SendTwinsHitPointShotPacket) { // SetTwinsShotPacket -> SetTwinsHitPointShotPacket
-            // TODO: implement
+        if (packet instanceof SendTwinsTargetShotPacket) {
+            this.attack(packet.target)
+        }
+
+        if (packet instanceof SendTwinsHitPointShotPacket) {
+        }
+
+        if (packet instanceof SendTwinsOverturnedShotPacket) {
+            const pk = new SetTwinsOverturnedShotPacket();
+            pk.shooter = this.tank.player.getUsername();
+            pk.barrel = packet.barrel;
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
         }
     }
 }

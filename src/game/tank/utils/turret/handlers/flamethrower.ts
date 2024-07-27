@@ -11,38 +11,18 @@ import { Player } from "../../../../player";
 export class FlamethrowerHandler extends TurretHandler {
 
     public getDamagePerSecond(): number {
-        const properties = this.item.properts.find(({ property }) => property === "DAMAGE_PER_SECOND")
-
-        if (!properties) {
-            Logger.warn("Damage per second property not found");
-            return 0
-        }
-
-        const damage = properties.subproperties.find(({ property }) => property === "DAMAGE_PER_PERIOD")
-
+        const damage = this.getItemSubProperty("DAMAGE_PER_SECOND", "DAMAGE_PER_PERIOD");
         if (!damage) {
-            Logger.warn("Damage per period property not found");
             return 0
         }
-
-        return parseInt(damage.value)
+        return parseInt(damage.value) / 2
     }
 
     public getTemperatureLimit() {
-        const properties = this.item.properts.find(({ property }) => property === "FIRE_DAMAGE")
-
-        if (!properties) {
-            Logger.warn("Fire damage property not found");
-            return 0
-        }
-
-        const limit = properties.subproperties.find(({ property }) => property === "FLAME_TEMPERATURE_LIMIT")
-
+        const limit = this.getItemSubProperty("FIRE_DAMAGE", "FLAME_TEMPERATURE_LIMIT")
         if (!limit) {
-            Logger.warn("Flame temperature limit property not found");
             return 0
         }
-
         return parseInt(limit.value)
     }
 

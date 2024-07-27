@@ -14,20 +14,8 @@ import { Player } from "../../../../player";
 export class ThunderHandler extends TurretHandler {
 
     public getDamageRange() {
-        const properties = this.item.properts.find(({ property }) => property === "DAMAGE")
-
-        if (!properties) {
-            Logger.error("Damage property not found");
-            return { min: 0, max: 0 }
-        }
-
-        const min = properties.subproperties.find(({ property }) => property === "DAMAGE_TO")
-        const max = properties.subproperties.find(({ property }) => property === "DAMAGE_FROM")
-
-        if (!min || !max) {
-            Logger.error("Damage to/from property not found");
-            return { min: 0, max: 0 }
-        }
+        const min = this.getItemSubProperty("DAMAGE", "DAMAGE_FROM")
+        const max = this.getItemSubProperty("DAMAGE", "DAMAGE_TO")
 
         return {
             min: parseInt(min.value),
@@ -39,7 +27,7 @@ export class ThunderHandler extends TurretHandler {
 
         if (modifiers.splash) {
 
-            if (distance >= 800) {
+            if (distance >= 1000) {
                 return 0;
             }
 

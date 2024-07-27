@@ -4,30 +4,25 @@ import { SendStartRailgunShotPacket } from "../../../../../network/packets/send-
 import { SetRailgunShotPacket } from "../../../../../network/packets/set-railgun-shot";
 import { SetStartRailgunShotPacket } from "../../../../../network/packets/set-start-railgun-shot";
 import { SimplePacket } from "../../../../../network/packets/simple-packet";
-import { Logger } from "../../../../../utils/logger";
 import { MathUtils } from "../../../../../utils/math";
 import { IDamageModifiers } from "../../../../battle/managers/damage/types";
 import { Player } from "../../../../player";
 
 export class RailgunHandler extends TurretHandler {
 
+    public getDamageRange() {
+        const min = this.getItemSubProperty("DAMAGE", "DAMAGE_FROM")
+        const max = this.getItemSubProperty("DAMAGE", "DAMAGE_TO")
+
+        return {
+            min: parseInt(min.value),
+            max: parseInt(max.value)
+        }
+    }
+
     public getDamage(distance: number, modifiers: IDamageModifiers): number {
-        const properties = this.item.properts.find(({ property }) => property === "DAMAGE")
-
-        if (!properties) {
-            Logger.error("Damage property not found");
-            return 0
-        }
-
-        const damageTo = properties.subproperties.find(({ property }) => property === "DAMAGE_TO")
-        const damageFrom = properties.subproperties.find(({ property }) => property === "DAMAGE_FROM")
-
-        if (!damageTo || !damageFrom) {
-            Logger.error("Damage to/from property not found");
-            return 0
-        }
-
-        const damage = MathUtils.randomInt(parseInt(damageFrom.value), parseInt(damageTo.value));
+        const range = this.getDamageRange()
+        const damage = MathUtils.randomInt(range.min, range.max);
         return damage / modifiers.order;
     }
 

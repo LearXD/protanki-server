@@ -276,6 +276,8 @@ export class Tank {
             }
 
             case Supply.N2O:
+                time = 3000;
+
                 this.sendTankSpeed(2)
                 break;
         }

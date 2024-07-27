@@ -9,12 +9,22 @@ import { Player } from "../../../../player";
 
 export class FreezeHandler extends TurretHandler {
 
-    public getDamage(): number {
-        throw new Error("Method not implemented.");
+    public getDamagePerPeriod(): number {
+        const damage = this.getItemSubProperty("DAMAGE_PER_SECOND", "DAMAGE_PER_PERIOD");
+        if (!damage) {
+            return 0
+        }
+        return parseInt(damage.value) / 2
+    }
+
+    public getDamage(distance: number): number {
+        const damage = this.getDamagePerPeriod();
+        return damage;
     }
 
     public handleDamage(target: Player): void {
-
+        const temperature = target.getTank().getTemperature();
+        target.getTank().setTemperature(temperature - 0.1);
     }
 
     public handlePacket(packet: SimplePacket): void {
@@ -31,7 +41,9 @@ export class FreezeHandler extends TurretHandler {
         }
 
         if (packet instanceof SendFreezeTargetsShotPacket) {
-            // TODO: implement
+            if (packet.targets && packet.targets.length > 0) {
+                packet.targets.forEach(target => this.attack(target))
+            }
         }
     }
 }

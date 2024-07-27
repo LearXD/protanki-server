@@ -15,20 +15,8 @@ import { Player } from "../../../../player";
 export class SmokyHandler extends TurretHandler {
 
     public getDamageRange() {
-        const properties = this.item.properts.find(({ property }) => property === "DAMAGE")
-
-        if (!properties) {
-            Logger.error("Damage property not found");
-            return { min: 0, max: 0 }
-        }
-
-        const min = properties.subproperties.find(({ property }) => property === "DAMAGE_TO")
-        const max = properties.subproperties.find(({ property }) => property === "DAMAGE_FROM")
-
-        if (!min || !max) {
-            Logger.error("Damage to/from property not found");
-            return { min: 0, max: 0 }
-        }
+        const min = this.getItemSubProperty("DAMAGE", "DAMAGE_FROM")
+        const max = this.getItemSubProperty("DAMAGE", "DAMAGE_TO")
 
         return {
             min: parseInt(min.value),
@@ -37,23 +25,13 @@ export class SmokyHandler extends TurretHandler {
     }
 
     public getCriticalChance(): number {
-        const properties = this.item.properts.find(({ property }) => property === "CRITICAL_HIT_CHANCE")
-        if (!properties) {
-            Logger.error("Critical hit chance property not found");
-            return 0
-        }
-
-        return parseInt(properties.value)
+        const chance = this.getItemProperty("CRITICAL_HIT_CHANCE");
+        return parseInt(chance.value)
     }
 
     public getCriticalDamage(): number {
-        const properties = this.item.properts.find(({ property }) => property === "CRITICAL_HIT_DAMAGE")
-        if (!properties) {
-            Logger.error("Critical hit damage property not found");
-            return 0
-        }
-
-        return parseInt(properties.value)
+        const chance = this.getItemProperty("CRITICAL_HIT_DAMAGE");
+        return parseInt(chance.value)
     }
 
     public getDamage(distance: number, modifiers: IDamageModifiers): number {

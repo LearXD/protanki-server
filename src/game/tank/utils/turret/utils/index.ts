@@ -17,6 +17,7 @@ export class TurretUtils {
         switch (turret) {
             case Turret.SMOKY: return SmokyHandler;
             case Turret.RAILGUN: return RailgunHandler;
+            case Turret.RAILGUN_XT: return RailgunHandler;
             case Turret.FLAMETHROWER: return FlamethrowerHandler;
             case Turret.TWINS: return TwinsHandler;
             case Turret.RICOCHET: return RicochetHandler;
@@ -28,4 +29,4 @@ export class TurretUtils {
             case Turret.VULCAN: return VulcanHandler;
         }
     }
-}
+} 

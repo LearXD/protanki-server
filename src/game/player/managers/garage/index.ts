@@ -255,7 +255,7 @@ export class PlayerGarageManager {
     public sendSupplies(client: Player) {
         const setSuppliesPacket = new SetSuppliesPacket();
         setSuppliesPacket.supplies = [
-            { count: this.getSupplyCount(Supply.HEALTH), id: Supply.HEALTH, itemEffectTime: 0, itemRestSec: 0, slotId: 1 },
+            { count: this.getSupplyCount(Supply.HEALTH), id: Supply.HEALTH, itemEffectTime: 3000, itemRestSec: 3000, slotId: 1 },
             { count: this.getSupplyCount(Supply.ARMOR), id: Supply.ARMOR, itemEffectTime: 0, itemRestSec: 0, slotId: 2 },
             { count: this.getSupplyCount(Supply.DOUBLE_DAMAGE), id: Supply.DOUBLE_DAMAGE, itemEffectTime: 0, itemRestSec: 0, slotId: 3 },
             { count: this.getSupplyCount(Supply.N2O), id: Supply.N2O, itemEffectTime: 30, itemRestSec: 30, slotId: 4 },

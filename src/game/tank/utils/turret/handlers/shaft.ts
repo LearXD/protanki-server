@@ -22,20 +22,8 @@ export class ShaftHandler extends TurretHandler {
     private aiming: boolean = false;
 
     public getDamageRange() {
-        const properties = this.item.properts.find(({ property }) => property === "DAMAGE")
-
-        if (!properties) {
-            Logger.error("Damage property not found");
-            return { min: 0, max: 0 }
-        }
-
-        const min = properties.subproperties.find(({ property }) => property === "DAMAGE_TO")
-        const max = properties.subproperties.find(({ property }) => property === "DAMAGE_FROM")
-
-        if (!min || !max) {
-            Logger.error("Damage to/from property not found");
-            return { min: 0, max: 0 }
-        }
+        const min = this.getItemSubProperty("DAMAGE", "DAMAGE_FROM")
+        const max = this.getItemSubProperty("DAMAGE", "DAMAGE_TO")
 
         return {
             min: parseInt(min.value),
@@ -44,26 +32,13 @@ export class ShaftHandler extends TurretHandler {
     }
 
     public getImpactForce() {
-        const force = this.item.properts.find(({ property }) => property === "IMPACT_FORCE")
-
-        if (!force) {
-            Logger.error("Damage property not found");
-            return 0
-        }
-
-        return parseInt(force.value)
+        const chance = this.getItemProperty("IMPACT_FORCE");
+        return parseInt(chance.value)
     }
 
     public getMaxAimingDamage() {
-        const properties = this.item.properts.find(({ property }) => property === "AIMING_MODE_DAMAGE")
-
-        if (!properties) {
-            Logger.error("Aiming damage property not found");
-            return 0
-        }
-
-        const max = properties.subproperties.find(({ property }) => property === "SHAFT_AIMING_MODE_MAX_DAMAGE")
-        return parseInt(max.value)
+        const damage = this.getItemSubProperty("AIMING_MODE_DAMAGE", "SHAFT_AIMING_MODE_MAX_DAMAGE")
+        return parseInt(damage.value)
     }
 
     public getDamage(

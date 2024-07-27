@@ -287,7 +287,7 @@ import { SetStormHitPointShotPacket } from "./packets/set-storm-hit-point-shot";
 import { SendStormTargetShotPacket } from "./packets/send-storm-target-shot";
 import { SendStormVoidShotPacket } from "./packets/send-storm-void-shot";
 import { SendStormHitPointShotPacket } from "./packets/send-storm-hit-point-shot";
-import { SetIsisShotPositionPacket } from "./packets/set-isis-shot-position";
+import { SetIsisTargetShotPacket } from "./packets/set-isis-target-shot";
 import { SetStopIsisShotPacket } from "./packets/set-stop-isis-shot";
 import { SetStartIsisShotPacket } from "./packets/set-start-isis-shot";
 import { SendStopIsisShotPacket } from "./packets/send-stop-isis-shot";
@@ -644,7 +644,7 @@ export class Network {
         this.registerPacket(Protocol.SEND_STORM_TARGET_SHOT, SendStormTargetShotPacket);
         this.registerPacket(Protocol.SEND_STORM_VOID_SHOT, SendStormVoidShotPacket);
         this.registerPacket(Protocol.SEND_STORM_HIT_POINT_SHOT, SendStormHitPointShotPacket);
-        this.registerPacket(Protocol.SET_ISIS_SHOT_POSITION, SetIsisShotPositionPacket);
+        this.registerPacket(Protocol.SET_ISIS_TARGET_SHOT, SetIsisTargetShotPacket);
         this.registerPacket(Protocol.SET_STOP_ISIS_SHOT, SetStopIsisShotPacket);
         this.registerPacket(Protocol.SET_START_ISIS_SHOT, SetStartIsisShotPacket);
         this.registerPacket(Protocol.SEND_STOP_ISIS_SHOT, SendStopIsisShotPacket);

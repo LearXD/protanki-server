@@ -3,7 +3,7 @@ import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export interface ITargetHit {
+export interface ITarget {
     direction: Vector3d;
     shotPosition: Vector3d;
     byte_1: number;
@@ -14,7 +14,7 @@ export class SetVulcanShotPacket extends Packet {
 
     public shooter: string;
     public direction: Vector3d
-    public targets: ITargetHit[];
+    public targets: ITarget[];
 
     constructor(bytes?: ByteArray) {
         super(Protocol.SET_VULCAN_SHOT, bytes)

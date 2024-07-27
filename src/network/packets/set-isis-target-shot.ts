@@ -11,14 +11,14 @@ export interface ITarget {
     target: string;
 }
 
-export class SetIsisShotPositionPacket extends Packet {
+export class SetIsisTargetShotPacket extends Packet {
 
     public shooter: string;
     public state: IsidaStateType;
     public target: ITarget;
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_ISIS_SHOT_POSITION, bytes)
+        super(Protocol.SET_ISIS_TARGET_SHOT, bytes)
     }
 
     public decode() {
