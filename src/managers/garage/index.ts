@@ -34,6 +34,7 @@ export class GarageManager {
         this.addItems(this.getItemData(GarageItemFolder.TURRET, 'machinegun.json'));
         this.addItems(this.getItemData(GarageItemFolder.TURRET, 'shaft.json'));
         this.addItems(this.getItemData(GarageItemFolder.TURRET, 'railgun-xt.json'));
+
         this.addItems(this.getItemData(GarageItemFolder.HULL, 'hunter.json'));
         this.addItems(this.getItemData(GarageItemFolder.HULL, 'wasp.json'));
         this.addItems(this.getItemData(GarageItemFolder.HULL, 'hornet.json'));
@@ -44,7 +45,6 @@ export class GarageManager {
         this.addItems(this.getItemData(GarageItemFolder.HULL, 'hornet-xt.json'));
 
         this.addItems(this.getItemData(GarageItemFolder.PAINT, 'paintings.json'));
-
         this.addItems(this.getItemData(GarageItemFolder.SUPPLY, 'supplies.json'));
 
         this.addItems(this.getItemData(GarageItemFolder.SPECIAL, 'gifts.json'));
@@ -56,9 +56,7 @@ export class GarageManager {
     }
 
     public addItems(items: IGarageItem[]) {
-        for (const item of items) {
-            this.addItem(item);
-        }
+        items.forEach(item => this.addItem(item));
     }
 
     public addItem(item: IGarageItem) {

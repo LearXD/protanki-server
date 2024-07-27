@@ -41,7 +41,7 @@ export class Packet {
     }
 
     public getLength() {
-        return this.bytes.length()
+        return this.bytes.length
     }
 
     public getPacketId() {

@@ -1,5 +1,5 @@
 import { ByteArray } from "../../utils/network/byte-array";
-import { Vector3d } from "../../utils/game/vector-3d";
+import { Vector3d } from "../../utils/vector-3d";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 

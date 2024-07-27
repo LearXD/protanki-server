@@ -1,5 +1,5 @@
 import { SetTankSpeedPacket } from "../../network/packets/set-tank-speed";
-import { Vector3d } from "../../utils/game/vector-3d";
+import { Vector3d } from "../../utils/vector-3d";
 import { SetMoveCameraPacket } from "../../network/packets/set-move-camera";
 import { SetTankHealthPacket } from "../../network/packets/set-tank-health";
 import { SetSpawnTankPacket } from "../../network/packets/set-spawn-tank";
@@ -283,7 +283,6 @@ export class Tank {
         }
 
         this.player.getGarageManager().sendUseSupply(item, time, decrease)
-
     }
 
     public handlePacket(packet: SimplePacket) {

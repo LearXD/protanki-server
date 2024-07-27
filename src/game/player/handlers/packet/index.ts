@@ -20,13 +20,13 @@ export class PlayerPacketHandler {
     public handleReceivedData(data: Buffer) {
         this.bufferPool.write(data)
 
-        if (this.bufferPool.length() < Packet.HEADER_SIZE) {
+        if (this.bufferPool.length < Packet.HEADER_SIZE) {
             return;
         }
 
         while (true) {
 
-            if (this.bufferPool.length() === 0) {
+            if (this.bufferPool.length === 0) {
                 break;
             }
 
@@ -35,16 +35,13 @@ export class PlayerPacketHandler {
 
             const realLength = length - Packet.HEADER_SIZE;
 
-            if (this.bufferPool.length() < realLength) {
-                this.bufferPool = new ByteArray()
-                    .writeInt(length)
-                    .writeInt(pid)
-                    .write(this.bufferPool.buffer);
+            if (this.bufferPool.length < realLength) {
+                this.bufferPool = new ByteArray().writeInt(length).writeInt(pid).write(this.bufferPool.buffer);
                 break;
             }
 
-            const bytes = new ByteArray(this.bufferPool.readBytes(realLength));
-            const decoded = this.player.getCryptoHandler().decrypt(bytes);
+            const bytes = new ByteArray(this.bufferPool.read(realLength));
+            const decrypted = this.player.getCryptoHandler().decrypt(bytes);
 
             try {
                 const packetInstance = this.player.getServer().getNetwork().findPacket<typeof SimplePacket>(pid);
@@ -53,8 +50,9 @@ export class PlayerPacketHandler {
                     Logger.log(`Packet ${packetInstance.name} (${pid}) received - ${realLength} bytes`)
                 }
 
-                const packet = new packetInstance(decoded);
+                const packet = new packetInstance(decrypted);
                 packet.decode();
+
                 this.player.handlePacket(packet);
             } catch (error) {
                 Logger.alert(`Packet Unknown (${pid}) received - ${realLength} bytes`)

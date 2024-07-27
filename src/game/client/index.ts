@@ -149,12 +149,12 @@ export abstract class Client {
         packet.setBytes(packet.encode());
         const buffer = packet.getBytes();
 
-        if (buffer.length() && encrypt) {
+        if (buffer.length && encrypt) {
             packet.setBytes(this.getCryptoHandler().encrypt(buffer));
         }
 
         if (!IGNORE_PACKETS.includes(packet.getPacketId())) {
-            Logger.log(`Packet ${packet.constructor.name} (${packet.getPacketId()}) sent - ${packet.getBytes().length()} bytes`)
+            Logger.log(`Packet ${packet.constructor.name} (${packet.getPacketId()}) sent - ${packet.getBytes().length} bytes`)
         }
 
         const data = packet.toByteArray().getBuffer()

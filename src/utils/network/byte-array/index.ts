@@ -1,12 +1,10 @@
-import { Vector3d } from "../../game/vector-3d";
+import { IVector3d, Vector3d } from "../../vector-3d";
 
 export class ByteArray {
 
-    static MAX_BUFFER_SIZE = 2900;
+    static readonly MAX_BUFFER_SIZE = 2900;
 
-    constructor(
-        public buffer?: Buffer
-    ) {
+    constructor(public buffer?: Buffer) {
         this.buffer = buffer ? Buffer.from(buffer) : Buffer.alloc(0);
     }
 
@@ -14,167 +12,90 @@ export class ByteArray {
         return this.buffer;
     }
 
-    writeByte(value: number) {
-        let buffer = Buffer.alloc(1);
+    public get length() {
+        return this.buffer.length;
+    }
+
+    public writeByte(value: number) {
+        const buffer = Buffer.alloc(1);
         buffer.writeInt8(value);
-        this.buffer = Buffer.concat([this.buffer, buffer]);
+        this.write(buffer)
         return this;
     }
 
-    writeUByte(value: number) {
-        let buffer = Buffer.alloc(1);
-        buffer.writeUInt8(value);
-        this.buffer = Buffer.concat([this.buffer, buffer]);
-        return this;
-    }
-
-    writeShort(value: number) {
-        let buffer = Buffer.alloc(2);
+    public writeShort(value: number) {
+        const buffer = Buffer.alloc(2);
         buffer.writeInt16BE(value);
-        this.buffer = Buffer.concat([this.buffer, buffer]);
+        this.write(buffer);
         return this;
     }
 
-    writeUShort(value: number) {
-        let buffer = Buffer.alloc(2);
-        buffer.writeUInt16BE(value);
-        this.buffer = Buffer.concat([this.buffer, buffer]);
-        return this;
-    }
-
-    writeInt(value: number) {
-        let buffer = Buffer.alloc(4);
+    public writeInt(value: number) {
+        const buffer = Buffer.alloc(4);
         buffer.writeInt32BE(value);
-        this.buffer = Buffer.concat([this.buffer, buffer]);
+        this.write(buffer);
         return this;
     }
 
-    writeUInt(value: number) {
-        let buffer = Buffer.alloc(4);
-        buffer.writeUInt32BE(value);
-        this.buffer = Buffer.concat([this.buffer, buffer]);
-        return this;
+    public readFloat() {
+        return this.read(4).readFloatBE();
     }
 
-    readFloat() {
-        let value = this.buffer.subarray(0, 4).readFloatBE();
-        this.buffer = this.buffer.subarray(4);
-
-        if (typeof value === 'string') {
-            return parseFloat(value)
-        }
-
-        return value
-    }
-
-    writeFloat(value: number) {
-        let buffer = Buffer.alloc(4);
+    public writeFloat(value: number) {
+        const buffer = Buffer.alloc(4);
         buffer.writeFloatBE(value);
-        this.buffer = Buffer.concat([this.buffer, buffer]);
+        this.write(buffer);
         return this;
     }
 
-    writeBoolean(value: boolean) {
+    public readBoolean() {
+        return this.readByte() !== 0;
+    }
+
+    public writeBoolean(value: boolean) {
         return this.writeByte(value ? 1 : 0);
     }
 
-    write(value: string | Buffer) {
-        this.buffer = Buffer.concat([this.buffer, Buffer.from(value)]);
+    public readByte() {
+        return this.read(1).readInt8();
+    }
+
+    public readShort() {
+        return this.read(2).readInt16BE();
+    }
+
+    public readInt() {
+        return this.read(4).readInt32BE()
+    }
+
+    public readString() {
+        if (this.readBoolean()) {
+            return null;
+        }
+
+        const length = this.readInt();
+
+        if (length === 0) {
+            return null;
+        }
+
+        return this.read(length).toString()
+    }
+
+    public writeString(value: string) {
+        if (value === null) {
+            return this.writeBoolean(true);
+        }
+
+        this.writeBoolean(false);
+        this.writeInt(Buffer.byteLength(value));
+
+        this.write(Buffer.from(value));
+
         return this;
     }
 
-    readByte() {
-        let value = this.buffer.subarray(0, 1).readInt8();
-        this.buffer = this.buffer.subarray(1);
-
-        if (typeof value === 'string') {
-            return parseInt(value)
-        }
-
-        return value
-    }
-
-    readBytes(length: number) {
-        let value = this.buffer.subarray(0, length);
-        this.buffer = this.buffer.subarray(length);
-
-        return value
-    }
-
-    readUByte() {
-        let value = this.buffer.subarray(0, 1).readUInt8();
-        this.buffer = this.buffer.subarray(1);
-
-        if (typeof value === 'string') {
-            return parseInt(value)
-        }
-
-        return value
-    }
-
-    readShort() {
-        let value = this.buffer.subarray(0, 2).readInt16BE();
-        this.buffer = this.buffer.subarray(2);
-
-        if (typeof value === 'string') {
-            return parseInt(value)
-        }
-
-        return value
-    }
-
-    readUShort() {
-        let value = this.buffer.subarray(0, 2).readUInt16BE();
-        this.buffer = this.buffer.subarray(2);
-
-        if (typeof value === 'string') {
-            return parseInt(value)
-        }
-
-        return value
-    }
-
-    readUnsignedInt() {
-        let value = this.buffer.subarray(0, 4).readUInt32BE();
-        this.buffer = this.buffer.subarray(4);
-
-        if (typeof value === 'string') {
-            return parseInt(value)
-        }
-
-        return value
-    }
-
-    writeUnsignedInt(value: number) {
-        let buffer = Buffer.alloc(4);
-        buffer.writeUInt32BE(value);
-        this.buffer = Buffer.concat([this.buffer, buffer]);
-        return this;
-    }
-
-    readInt() {
-        let value = this.buffer.subarray(0, 4).readInt32BE();
-        this.buffer = this.buffer.subarray(4);
-
-        if (typeof value === 'string') {
-            return parseInt(value)
-        }
-
-        return value
-    }
-
-    readUInt() {
-        let value = this.buffer.subarray(0, 4).readUInt32BE();
-        this.buffer = this.buffer.subarray(4);
-
-        if (typeof value === 'string') {
-            return parseInt(value)
-        }
-
-        return value
-    }
-
-    readStringArray(): string[] | null {
+    public readStringArray(): string[] | null {
         if (this.readBoolean()) {
             return null;
         }
@@ -189,7 +110,7 @@ export class ByteArray {
         return strings;
     }
 
-    writeStringArray(strings: string[] | null) {
+    public writeStringArray(strings: string[] | null) {
         if (strings === null) {
             return this.writeBoolean(true);
         }
@@ -201,34 +122,7 @@ export class ByteArray {
         return this;
     }
 
-    readString() {
-        if (this.readBoolean()) {
-            return null;
-        }
-
-        const length = this.readInt();
-
-        if (length === 0) {
-            return null;
-        }
-
-        return this.readBytes(length).toString()
-    }
-
-    public writeString(value: string) {
-        if (value === null) {
-            return this.writeBoolean(true);
-        }
-
-        this.writeBoolean(false);
-        this.writeInt(Buffer.byteLength(value));
-
-        this.write(value);
-
-        return this;
-    }
-
-    readVector3d() {
+    public readVector3d() {
         if (this.readBoolean()) {
             return null;
         }
@@ -240,7 +134,7 @@ export class ByteArray {
         return new Vector3d(x, z, y);
     }
 
-    writeVector3d(value?: { x: number, z: number, y: number }) {
+    public writeVector3d(value?: IVector3d) {
         if (value === null) {
             return this.writeBoolean(true);
         }
@@ -253,7 +147,7 @@ export class ByteArray {
         return this;
     }
 
-    readVector3dArray() {
+    public readVector3dArray(): Vector3d[] | null {
         if (this.readBoolean()) {
             return null;
         }
@@ -268,7 +162,7 @@ export class ByteArray {
         return vectors;
     }
 
-    writeVector3dArray(vectors: { x: number, z: number, y: number }[]) {
+    public writeVector3dArray(vectors: { x: number, z: number, y: number }[]) {
         if (vectors === null || vectors.length === 0) {
             return this.writeBoolean(true);
         }
@@ -284,12 +178,7 @@ export class ByteArray {
     }
 
 
-
-    readBoolean() {
-        return this.readByte() !== 0;
-    }
-
-    readArray<T>(elementsFunction: Function): T[] {
+    public readArray<T>(elementsFunction: Function): T[] {
 
         if (this.readBoolean()) {
             return null;
@@ -305,7 +194,7 @@ export class ByteArray {
         return elements;
     }
 
-    writeArray<T>(elements: T[], elementsFunction: Function) {
+    public writeArray<T>(elements: T[], elementsFunction: Function) {
         if (elements === null || elements.length === 0) {
             return this.writeBoolean(true);
         }
@@ -320,7 +209,14 @@ export class ByteArray {
         return this;
     }
 
-    length() {
-        return this.buffer.length;
+    public read(length: number) {
+        const value = this.buffer.subarray(0, length);
+        this.buffer = this.buffer.subarray(length);
+        return value
+    }
+
+    public write(buffer: Buffer) {
+        this.buffer = Buffer.concat([this.buffer, Buffer.from(buffer)]);
+        return this;
     }
 }

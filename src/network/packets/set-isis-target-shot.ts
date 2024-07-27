@@ -1,5 +1,5 @@
 import { IsidaState, IsidaStateType } from "../../utils/game/isida-state";
-import { Vector3d } from "../../utils/game/vector-3d";
+import { Vector3d } from "../../utils/vector-3d";
 import { ByteArray } from "../../utils/network/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";

@@ -1,6 +1,6 @@
 import { Battle } from "../..";
 import { IUserTankResourcesData, SetUserTankResourcesDataPacket } from "../../../../network/packets/set-user-tank-resources-data";
-import { Vector3d } from "../../../../utils/game/vector-3d";
+import { Vector3d } from "../../../../utils/vector-3d";
 import { Logger } from "../../../../utils/logger";
 import { Player } from "../../../player";
 

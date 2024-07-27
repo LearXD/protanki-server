@@ -63,7 +63,7 @@ export class XorDecoder {
 
         const encryptedData = new ByteArray(data.buffer);
 
-        while (_loc2_ < encryptedData.length()) {
+        while (_loc2_ < encryptedData.length) {
             _loc3_ = data.readByte();
             encryptedData.buffer[_loc2_] = _loc3_ ^ this.encrypt_keys[this.encryptPosition];
             this.encrypt_keys[this.encryptPosition] = _loc3_;
@@ -80,7 +80,7 @@ export class XorDecoder {
 
         const decryptedData = new ByteArray(data.buffer);
 
-        while (_loc2_ < decryptedData.length()) {
+        while (_loc2_ < decryptedData.length) {
             _loc3_ = data.readByte();
             this.decrypt_keys[this.decryptPosition] = _loc3_ ^ this.decrypt_keys[this.decryptPosition];
             decryptedData.buffer[_loc2_] = this.decrypt_keys[this.decryptPosition];

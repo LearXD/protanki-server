@@ -3,7 +3,7 @@ import { SendHammerOverturnedShotPacket } from "../../../../../network/packets/s
 import { SendHammerShotPacket } from "../../../../../network/packets/send-hammer-shot";
 import { ITarget, SetHammerShotPacket } from "../../../../../network/packets/set-hammer-shot";
 import { SimplePacket } from "../../../../../network/packets/simple-packet";
-import { Vector3d } from "../../../../../utils/game/vector-3d";
+import { Vector3d } from "../../../../../utils/vector-3d";
 import { Player } from "../../../../player";
 
 export class HammerHandler extends TurretHandler {
