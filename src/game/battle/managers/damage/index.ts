@@ -58,7 +58,8 @@ export class BattleDamageManager {
 
         target.getTank().setHealth(newHealth);
 
-        if (newHealth <= 0) {
+        // TODO: check this if
+        if (newHealth <= 10) {
             target.getTank().kill(attacker)
             this.sendDamageIndicator(attacker, target, protection * health / 10000, DamageIndicator.FATAL);
             return true;

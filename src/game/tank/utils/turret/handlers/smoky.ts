@@ -19,19 +19,24 @@ export class SmokyHandler extends TurretHandler {
         const max = this.getItemSubProperty("DAMAGE", "DAMAGE_TO")
 
         return {
-            min: parseInt(min.value),
-            max: parseInt(max.value)
+            min: min ? parseInt(min.value) : 0,
+            max: max ? parseInt(max.value) : 0
         }
     }
 
     public getCriticalChance(): number {
         const chance = this.getItemProperty("CRITICAL_HIT_CHANCE");
-        return parseInt(chance.value)
+        return chance ? parseInt(chance.value) : 0
     }
 
     public getCriticalDamage(): number {
-        const chance = this.getItemProperty("CRITICAL_HIT_DAMAGE");
-        return parseInt(chance.value)
+        const damage = this.getItemProperty("CRITICAL_HIT_DAMAGE");
+        return damage ? parseInt(damage.value) : 0
+    }
+
+    public getImpactForce() {
+        const force = this.getItemProperty("IMPACT_FORCE");
+        return force ? parseInt(force.value) : 0
     }
 
     public getDamage(distance: number, modifiers: IDamageModifiers): number {
@@ -74,7 +79,7 @@ export class SmokyHandler extends TurretHandler {
                 pk.shooter = this.tank.player.getUsername();
                 pk.target = packet.target;
                 pk.hitPoint = packet.hitPoint;
-                pk.weakeningCoeff = 100; // TODO: see this
+                pk.weakeningCoeff = this.getImpactForce(); // TODO: see this
                 pk.isCritical = isCritical
 
                 if (isCritical) {
