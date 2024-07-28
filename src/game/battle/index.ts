@@ -21,6 +21,7 @@ import { Rank } from "../../states/rank"
 import { SetBattleUserLeftNotificationPacket } from "../../network/packets/set-battle-user-left-notification"
 import { BattleManager } from "./utils/managers"
 import { IMap } from "@/server/managers/maps/types"
+import { TimeType } from "./managers/task/types"
 
 export class Battle extends BattleManager {
 
@@ -29,10 +30,11 @@ export class Battle extends BattleManager {
     private battleId: string;
     private running: boolean = false
 
-    private time: number = 0
+    private startedAt: number;
     private tick: number = 0
 
     private updateInterval: NodeJS.Timeout
+    private updateTimeInterval: NodeJS.Timeout
 
     public constructor(
         private name: string,
@@ -59,20 +61,39 @@ export class Battle extends BattleManager {
 
         this.battleId = BattleUtils.generateBattleId()
         this.registerManagers(this);
-        this.time = this.data.timeLimitInSec
-        this.updateInterval = setInterval(this.update.bind(this), 1000 / Battle.TICK_RATE)
+
+        this.updateInterval = setInterval(this.update.bind(this), 1000 / Battle.TICK_RATE);
+        this.updateTimeInterval = setInterval(this.updateTime.bind(this), 1000);
     }
 
     public start() {
+        this.startedAt = Date.now()
         this.running = true
     }
 
     public restart() {
-        this.time = this.getTimeLimitInSec()
+
+        if (this.getPlayersManager().getPlayers().length === 0) {
+            return;
+        }
+
+        this.startedAt = Date.now()
+        this.running = true
+
+        this.restartTime();
+
+        for (const player of this.getPlayersManager().getPlayers()) {
+            player.getTank().prepareRespawn();
+        }
     }
 
     public finish() {
         this.running = false
+
+        this.taskManager.unregisterAll();
+        this.getStatisticsManager().sendFinishRewards()
+
+        this.taskManager.registerTask(this.restart.bind(this), 10, TimeType.SECONDS)
     }
 
     public close() {
@@ -96,6 +117,8 @@ export class Battle extends BattleManager {
         }
 
         if (!spectator) {
+            if (!this.isRunning()) this.start()
+
             this.getPlayersManager().addPlayer(player);
             this.getStatisticsManager().addPlayer(player)
         }
@@ -139,7 +162,6 @@ export class Battle extends BattleManager {
             player.getGarageManager().sendSupplies(player);
         }
 
-        if (!this.isRunning()) this.start()
         player.setSubLayoutState(LayoutState.BATTLE)
 
         Logger.info(`${player.getUsername()} joined the battle ${this.getName()}`)
@@ -186,12 +208,15 @@ export class Battle extends BattleManager {
     }
 
     public getTimeLeft(): number {
-        return this.isRunning() ? this.time : this.data.timeLimitInSec
+        if (this.running) {
+            return this.getTimeLimitInSec() - (Date.now() - this.startedAt) / 1000
+        }
+        return this.getTimeLimitInSec()
     }
 
-    public sendTime() {
+    public restartTime() {
         const packet = new SetBattleTimePacket();
-        packet.time = this.time;
+        packet.time = this.getTimeLeft();
         this.broadcastPacket(packet)
     }
 
@@ -259,16 +284,25 @@ export class Battle extends BattleManager {
         }
     }
 
-    public update() {
+    public updateTime() {
+        if (this.getTimeLeft() <= 0) {
+            if (this.running) {
+                this.finish()
+            }
+            return;
+        }
+
+        if (this.playersManager.getPlayers().length > 0) {
+            Logger.debug(`Battle ${this.getName()}. Time left: ${this.getTimeLeft()}`)
+        }
+    }
+
+    public async update() {
         this.tick++
 
+        this.taskManager.update()
 
         if (this.tick % Battle.TICK_RATE === 0) {
-
-            if (this.isRunning()) {
-                this.time--;
-            }
-
             for (const player of this.getPlayersManager().getPlayers()) {
                 player.sendLatency()
             }

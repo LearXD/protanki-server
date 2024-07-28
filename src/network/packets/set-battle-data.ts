@@ -14,10 +14,10 @@ export class SetBattleDataPacket extends Packet {
     public mapName: string;
     public maxPeopleCount: number;
     public parkourMode: boolean;
-    public scoreLimit: number;
+    public premiumBonusInPercent: number;
     public spectator: boolean;
-    public strings_1: string[];
-    public lastTime: number;
+    public suspiciousUsers: string[];
+    public timeLeft: number;
 
     constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_DATA, bytes)
@@ -36,10 +36,10 @@ export class SetBattleDataPacket extends Packet {
         this.mapName = bytes.readString();
         this.maxPeopleCount = bytes.readInt();
         this.parkourMode = bytes.readBoolean();
-        this.scoreLimit = bytes.readInt();
+        this.premiumBonusInPercent = bytes.readInt();
         this.spectator = bytes.readBoolean();
-        this.strings_1 = bytes.readStringArray();
-        this.lastTime = bytes.readInt();
+        this.suspiciousUsers = bytes.readStringArray();
+        this.timeLeft = bytes.readInt();
 
         return {
             mode: this.mode,
@@ -49,10 +49,10 @@ export class SetBattleDataPacket extends Packet {
             mapName: this.mapName,
             maxPeopleCount: this.maxPeopleCount,
             parkourMode: this.parkourMode,
-            scoreLimit: this.scoreLimit,
+            premiumBonusInPercent: this.premiumBonusInPercent,
             spectator: this.spectator,
-            strings_1: this.strings_1,
-            lastTime: this.lastTime
+            suspiciousUsers: this.suspiciousUsers,
+            timeLeft: this.timeLeft
         }
     }
 
@@ -67,10 +67,10 @@ export class SetBattleDataPacket extends Packet {
         bytes.writeString(this.mapName);
         bytes.writeInt(this.maxPeopleCount);
         bytes.writeBoolean(this.parkourMode);
-        bytes.writeInt(this.scoreLimit);
+        bytes.writeInt(this.premiumBonusInPercent);
         bytes.writeBoolean(this.spectator);
-        bytes.writeStringArray(this.strings_1);
-        bytes.writeInt(this.lastTime);
+        bytes.writeStringArray(this.suspiciousUsers);
+        bytes.writeInt(this.timeLeft);
 
         return bytes;
     }

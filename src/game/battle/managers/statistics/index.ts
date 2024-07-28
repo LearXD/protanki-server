@@ -132,10 +132,10 @@ export class BattleStatisticsManager {
         packet.mapName = this.battle.getName();
         packet.maxPeopleCount = this.battle.getMaxPeopleCount()
         packet.parkourMode = this.battle.isParkourMode();
-        packet.scoreLimit = 100 // scoreLimit?
+        packet.premiumBonusInPercent = 0
         packet.spectator = spectator
-        packet.strings_1 = []
-        packet.lastTime = this.battle.getTimeLeft()
+        packet.suspiciousUsers = ["TheUnknown"]
+        packet.timeLeft = this.battle.getTimeLeft()
         client.sendPacket(packet);
     }
 

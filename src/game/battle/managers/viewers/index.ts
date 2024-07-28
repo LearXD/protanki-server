@@ -48,10 +48,13 @@ export class BattleViewersManager {
             setRemoveViewingBattlePacket.battleId = this.battle.getBattleId();
             viewer.sendPacket(setRemoveViewingBattlePacket);
             viewer.setViewingBattle(null);
-
-            return true;
         }
-        return false;
+    }
+
+    public removeAllViewers() {
+        for (const viewer of this.viewers.values()) {
+            this.removeViewer(viewer);
+        }
     }
 
     public sendViewingBattleData(client: Player) {

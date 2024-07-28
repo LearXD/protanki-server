@@ -1,5 +1,6 @@
 import { Player } from "@/game/player";
 import { Server } from "@/server";
+import { LayoutState } from "@/states/layout-state";
 
 export class PlayersManager {
 
@@ -8,6 +9,10 @@ export class PlayersManager {
     public constructor(
         private readonly server: Server
     ) { }
+
+    public getPlayers() {
+        return this.players;
+    }
 
     private resolvePlayerName(player: Player | string) {
         return typeof player === 'string' ? player : player.getIdentifier();
@@ -21,10 +26,6 @@ export class PlayersManager {
         return this.players.get(string);
     }
 
-    public getPlayers() {
-        return this.players;
-    }
-
     public addPlayer(player: Player) {
         if (!player.getUsername()) {
             throw new Error('Player must have a username');
@@ -34,5 +35,15 @@ export class PlayersManager {
 
     public removePlayer(player: Player | string) {
         this.players.delete(this.resolvePlayerName(player));
+    }
+
+    public getPlayersOnState(state: LayoutState) {
+        const payers = []
+        for (const player of this.players.values()) {
+            if (player.getLayoutState() === state) {
+                payers.push(player);
+            }
+        }
+        return payers;
     }
 }

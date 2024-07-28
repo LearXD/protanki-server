@@ -1,3 +1,4 @@
+import { SetBattleSystemMessagePacket } from "@/network/packets/set-battle-system-message";
 import { Battle } from "../..";
 import { SetBattleChatEnabledPacket } from "../../../../network/packets/set-battle-chat-enabled";
 import { SetBattleMessagePacket } from "../../../../network/packets/set-battle-message";
@@ -31,6 +32,12 @@ export class BattleChatManager {
         packet.message = message;
         packet.team = team;
 
+        this.battle.broadcastPacket(packet);
+    }
+
+    public broadcastSystemMessage(message: string) {
+        const packet = new SetBattleSystemMessagePacket();
+        packet.message = message;
         this.battle.broadcastPacket(packet);
     }
 }

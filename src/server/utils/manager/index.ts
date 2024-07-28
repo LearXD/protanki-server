@@ -61,8 +61,8 @@ export abstract class ServerManager {
         this.shopManager = new ShopManager(server);
     }
 
-    public getPlayersManager() { return this.playersManager }
-    public getAuthManager() { return this.authManager }
+    public getPlayersManager(): PlayersManager { return this.playersManager }
+    public getAuthManager(): AuthManager { return this.authManager }
 
     public getLocaleManager(): LocaleManager { return this.localeManager }
     public getTipsManager(): TipsManager { return this.tipsManager }

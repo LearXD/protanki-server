@@ -67,7 +67,6 @@ export class Server extends ServerManager {
     }
 
     public broadcastPacket(packet: SimplePacket, clients: boolean = false) {
-
         if (clients) {
             return this.clientsHandler.getClients()
                 .forEach((client) => this.sendPacket(client, packet));

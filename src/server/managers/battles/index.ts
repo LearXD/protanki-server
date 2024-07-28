@@ -5,7 +5,9 @@ import { Battle } from "@/game/battle";
 import { IBattleData } from "@/game/battle/types";
 import { Logger } from "@/utils/logger";
 import { SetAddBattleOnListPacket } from "@/network/packets/set-add-battle-on-list";
-
+import { LayoutState } from "@/states/layout-state";
+import { SimplePacket } from "@/network/packets/simple-packet";
+import { SetRemoveBattleFromListPacket } from "@/network/packets/set-remove-battle-from-list";
 
 export class BattlesManager {
 
@@ -17,7 +19,7 @@ export class BattlesManager {
         private readonly server: Server
     ) {
         this.createBattle('For Newbies', 'map_sandbox')
-        this.createBattle('For Newbies 2', 'map_noise')
+        // this.createBattle('For Newbies 2', 'map_noise')
     }
 
     public getData(_path: string) {
@@ -47,12 +49,33 @@ export class BattlesManager {
     public addBattle(battle: Battle) {
         this.battles.push(battle);
 
-        const sendBattleCreated = new SetAddBattleOnListPacket();
-        sendBattleCreated.data = battle.toBattleListItem();
-        this.server.broadcastPacket(sendBattleCreated);
+        const packet = new SetAddBattleOnListPacket();
+        packet.data = battle.toBattleListItem();
+
+        this.broadcastPacket(packet);
+    }
+
+    public removeBattle(battle: Battle) {
+
+        battle.getViewersManager().removeAllViewers()
+        this.battles = this.battles.filter(b => b.getBattleId() !== battle.getBattleId())
+
+        const packet = new SetRemoveBattleFromListPacket();
+        packet.battle = battle.getBattleId();
+
+        this.broadcastPacket(packet);
     }
 
     public getBattle(battleId: string) {
         return this.battles.find(battle => battle.getBattleId() == battleId)
+    }
+
+    public broadcastPacket(packet: SimplePacket) {
+        this.getPlayers().forEach(player => player.sendPacket(packet))
+    }
+
+    public getPlayers() {
+        return this.server.getPlayersManager()
+            .getPlayersOnState(LayoutState.BATTLE_SELECT)
     }
 }
