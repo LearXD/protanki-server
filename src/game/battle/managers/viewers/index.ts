@@ -58,8 +58,8 @@ export class BattleViewersManager {
     }
 
     public sendViewingBattleData(client: Player) {
-        const setViewingBattleDataPacket = new SetViewingBattleDataPacket();
-        setViewingBattleDataPacket.data = {
+        const packet = new SetViewingBattleDataPacket();
+        packet.data = {
             battleMode: this.battle.getMode(),
             itemId: this.battle.getBattleId(),
             scoreLimit: this.battle.getScoreLimit(),
@@ -84,14 +84,23 @@ export class BattleViewersManager {
             equipmentConstraintsMode: this.battle.getEquipmentConstraintsMode(),
             reArmorEnabled: this.battle.isReArmorEnabled(),
             // TODO: get team users
-            usersBlue: this.battle.getMode() === BattleMode.DM ? [] : [],
-            usersRed: this.battle.getMode() === BattleMode.DM ? [] : [],
-            scoreRed: this.battle.getMode() === BattleMode.DM ? 0 : 0,
-            scoreBlue: this.battle.getMode() === BattleMode.DM ? 0 : 0,
-            autoBalance: this.battle.haveAutoBalance(),
-            friendlyFire: this.battle.isFriendlyFire(),
+            // usersBlue: this.battle.getMode() === BattleMode.DM ? [] : [],
+            // usersRed: this.battle.getMode() === BattleMode.DM ? [] : [],
+            // scoreRed: this.battle.getMode() === BattleMode.DM ? 0 : 0,
+            // scoreBlue: this.battle.getMode() === BattleMode.DM ? 0 : 0,
+            // autoBalance: this.battle.haveAutoBalance(),
+            // friendlyFire: this.battle.isFriendlyFire(),
         }
 
-        client.sendPacket(setViewingBattleDataPacket);
+        if (this.battle.getMode() === BattleMode.DM) {
+            packet.data.users = this.battle.getPlayersManager().getPlayers().map(player => ({
+                kills: this.battle.getStatisticsManager().getPlayerKills(player.getUsername()),
+                score: this.battle.getStatisticsManager().getPlayerScore(player.getUsername()),
+                suspicious: false,
+                user: player.getUsername(),
+            }));
+        }
+
+        client.sendPacket(packet);
     }
 }

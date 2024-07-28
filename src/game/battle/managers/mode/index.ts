@@ -1,11 +1,13 @@
+import { Player } from "@/game/player";
 import { Battle } from "../..";
 
 export abstract class BattleModeManager {
     public constructor(
-        private readonly battle: Battle
+        protected readonly battle: Battle
     ) { }
 
-    public getBattle() { return this.battle }
+    public abstract sendLoadBattleMode(player: Player): void
 
-    public abstract sendUserProperties(): void
+    public abstract broadcastUserStats(player: Player): void;
+    public abstract sendUsersProperties(player: Player): void
 }

@@ -3,7 +3,7 @@ import { Vector3d } from "../../utils/vector-3d";
 import { SetMoveCameraPacket } from "../../network/packets/set-move-camera";
 import { SetTankHealthPacket } from "../../network/packets/set-tank-health";
 import { SetSpawnTankPacket } from "../../network/packets/set-spawn-tank";
-import { Team } from "../../states/team";
+import { Team, TeamType } from "../../states/team";
 import { SetTankVisiblePacket } from "../../network/packets/set-tank-visible";
 import { SetLatencyPacket } from "../../network/packets/set-latency";
 import { SimplePacket } from "../../network/packets/simple-packet";
@@ -35,6 +35,7 @@ import { TurretUtils } from "./utils/turret/utils";
 import { TurretHandler } from "./utils/turret";
 import { SetTankTemperaturePacket } from "../../network/packets/set-tank-temperature";
 import { SetTankDestroyedPacket } from "../../network/packets/set-tank-destroyed";
+import { TimeType } from "../battle/managers/task/types";
 
 export class Tank {
 
@@ -55,7 +56,8 @@ export class Tank {
 
     public constructor(
         public readonly player: Player,
-        public readonly battle: Battle
+        public readonly battle: Battle,
+        public readonly team: TeamType = Team.NONE
     ) {
         this.updateProperties()
     }
@@ -63,6 +65,10 @@ export class Tank {
     public updateProperties() {
         this.updateTurret()
         this.updateHull()
+    }
+
+    public getTeam() {
+        return this.team
     }
 
     public getHealth() {
@@ -200,7 +206,7 @@ export class Tank {
 
         const setSpawnTankPacket = new SetSpawnTankPacket();
         setSpawnTankPacket.tankId = this.player.getUsername();
-        setSpawnTankPacket.team = Team.NONE;
+        setSpawnTankPacket.team = this.team;
         setSpawnTankPacket.position = this.position;
         setSpawnTankPacket.orientation = this.orientation;
         setSpawnTankPacket.health = this.health;
@@ -209,27 +215,38 @@ export class Tank {
         this.battle.broadcastPacket(setSpawnTankPacket);
     }
 
-    public suicide() {
-        const packet = new SetAutoDestroyPacket()
-        packet.tankId = this.player.getUsername()
-        packet.respawnDelay = 3000
-        this.battle.broadcastPacket(packet)
-        this.handleDestroyed();
+    public scheduleSuicide(delay: number = 3000, respawnDelay: number = 3000) {
+
+        const packet = new SetSuicideDelayPacket();
+        packet.delay = delay;
+
+        this.player.sendPacket(packet);
+
+        this.battle.getTaskManager().registerTask(
+            () => this.sendRespawnDelay(respawnDelay), delay
+        )
     }
+
+
 
     public sendRespawnDelay(delay: number) {
         const packet = new SetDestroyTankPacket();
         packet.tank = this.player.getUsername();
         packet.respawnDelay = delay;
         this.battle.broadcastPacket(packet);
-        this.handleDestroyed();
+
+        this.onDestroyed();
     }
 
-    public destroy(delay: number = 3000, respawnDelay: number = 3000) {
-        const packet = new SetSuicideDelayPacket();
-        packet.delay = delay;
-        this.player.sendPacket(packet);
-        setTimeout(() => { this.sendRespawnDelay(respawnDelay) }, delay)
+    public suicide() {
+        this.battle.getDamageManager().onKill(this.player)
+
+        const packet = new SetAutoDestroyPacket()
+        packet.tankId = this.player.getUsername()
+        packet.respawnDelay = 3000
+        this.battle.broadcastPacket(packet)
+
+        this.onDestroyed();
     }
 
     public kill(killer: Player) {
@@ -240,7 +257,7 @@ export class Tank {
         packet.respawnDelay = 3000;
 
         this.battle.broadcastPacket(packet);
-        this.handleDestroyed()
+        this.onDestroyed()
     }
 
     public sendTankSpeed(multiply: number = 1) {
@@ -254,10 +271,16 @@ export class Tank {
         this.player.sendPacket(setTankSpeedPacket);
     }
 
-    public handleDestroyed() {
+    public onDestroyed() {
         this.alive = false;
         this.visible = false;
         this.health = 0;
+    }
+
+    public handleSuicide() {
+        this.battle.getTaskManager().registerTask(
+            this.suicide.bind(this), 10, TimeType.SECONDS
+        )
     }
 
     public handleUseSupply(item: SupplyType) {
@@ -277,7 +300,6 @@ export class Tank {
 
             case Supply.N2O:
                 time = 3000;
-
                 this.sendTankSpeed(2)
                 break;
         }
@@ -300,7 +322,7 @@ export class Tank {
         }
 
         if (packet instanceof SendAutoDestroyPacket) {
-            this.suicide();
+            this.handleSuicide();
         }
 
         if (packet instanceof SendUseSupplyPacket) {
@@ -380,7 +402,7 @@ export class Tank {
             colormap_id: painting.item.coloring,
             hull_id: this.hull.getName(),
             turret_id: this.turret.getName(),
-            team_type: 'NONE',
+            team_type: this.team,
             partsObject: '{"engineIdleSound":386284,"engineStartMovingSound":226985,"engineMovingSound":75329,"turretSound":242699}',
             hullResource: this.hull.item.object3ds,
             turretResource: this.turret.item.object3ds,

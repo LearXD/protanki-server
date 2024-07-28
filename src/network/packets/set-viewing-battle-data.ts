@@ -4,6 +4,13 @@ import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
+export interface IBattleUser {
+    kills: number,
+    score: number,
+    suspicious: boolean,
+    user: string,
+}
+
 export interface IViewingData {
     battleMode: BattleModeType,
     itemId: string,
@@ -27,12 +34,15 @@ export interface IViewingData {
     parkourMode: boolean,
     equipmentConstraintsMode: EquipmentConstraintsModeType,
     reArmorEnabled: boolean,
-    usersBlue: string[],
-    usersRed: string[],
-    scoreRed: number,
-    scoreBlue: number,
-    autoBalance: boolean,
-    friendlyFire: boolean,
+    // SOLO PROPS
+    users?: IBattleUser[],
+    // TEAM PROPS
+    autoBalance?: boolean,
+    friendlyFire?: boolean,
+    usersBlue?: IBattleUser[],
+    usersRed?: IBattleUser[],
+    scoreRed?: number,
+    scoreBlue?: number,
 }
 
 export class SetViewingBattleDataPacket extends Packet {

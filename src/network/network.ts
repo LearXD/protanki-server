@@ -132,7 +132,7 @@ import { SetShaftLocalSpotPacket } from "./packets/set-shaft-local-spot";
 import { SetShaftShotPacket } from "./packets/set-shaft-shot";
 import { SetBattleMessagePacket } from "./packets/set-battle-message";
 import { SetCaptureTheFlagCCPacket } from "./packets/set-capture-the-flag-cc";
-import { SetBattleStatisticsTeamCCPacket } from "./packets/set-battle-statistics-team-cc";
+import { SetTeamBattleUsersPropertiesPacket } from "./packets/set-team-battle-users-properties";
 import { SetTeamBattleUserStatPacket } from "./packets/set-team-battle-user-stat";
 import { SetWinnerTeamPacket } from "./packets/set-winner-team";
 import { SetTeamScorePacket } from "./packets/set-team-score";
@@ -332,7 +332,7 @@ import { SetBattleUsersStatPacket } from "./packets/set-battle-users-stat";
 import { SetBattleTimePacket } from "./packets/set-battle-time";
 import { SomeJsonRankUpPacket } from "./packets/some-json-rank-up";
 import { SetShowBattleNotificationsPacket } from "./packets/set-show-battle-notifications";
-import { SetLoadBattleObjectsPacket } from "./packets/set-load-battle-objects";
+import { SetLoadDeathMatchPacket } from "./packets/set-load-death-match";
 import { SetBattleChatEnabledPacket } from "./packets/set-battle-chat-enabled";
 import { SetRemoveChatPacket } from "./packets/set-remove-chat";
 import { SetRemoveBattlesScreenPacket } from "./packets/set-remove-battles-screen";
@@ -407,7 +407,7 @@ export class Network {
         this.registerPacket(Protocol.SET_BATTLE_DATA, SetBattleDataPacket)
         this.registerPacket(Protocol.SET_BATTLE_USERS_PROPERTIES, SetBattleUsersPropertiesPacket)
         this.registerPacket(Protocol.SET_CAPTURE_THE_FLAG_CC, SetCaptureTheFlagCCPacket)
-        this.registerPacket(Protocol.SET_BATTLE_STATISTICS_TEAM_CC, SetBattleStatisticsTeamCCPacket)
+        this.registerPacket(Protocol.SET_TEAM_BATTLE_USERS_PROPERTIES, SetTeamBattleUsersPropertiesPacket)
         this.registerPacket(Protocol.SET_TEAM_BATTLE_USER_STAT, SetTeamBattleUserStatPacket)
 
         this.registerPacket(Protocol.SET_WINNER_TEAM, SetWinnerTeamPacket)
@@ -691,7 +691,7 @@ export class Network {
         this.registerPacket(Protocol.SET_BATTLE_TIME, SetBattleTimePacket);
         this.registerPacket(Protocol.SOME_JSON_RANK_UP, SomeJsonRankUpPacket);
         this.registerPacket(Protocol.SET_SHOW_BATTLE_NOTIFICATIONS, SetShowBattleNotificationsPacket);
-        this.registerPacket(Protocol.SET_LOAD_BATTLE_OBJECTS, SetLoadBattleObjectsPacket);
+        this.registerPacket(Protocol.SET_LOAD_DEATH_MATCH, SetLoadDeathMatchPacket);
         this.registerPacket(Protocol.SET_BATTLE_CHAT_ENABLED, SetBattleChatEnabledPacket);
         this.registerPacket(Protocol.SET_REMOVE_CHAT, SetRemoveChatPacket);
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);

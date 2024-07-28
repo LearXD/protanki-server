@@ -12,7 +12,6 @@ export class BattleDamageManager {
         private readonly battle: Battle
     ) { }
 
-
     public sendDamageIndicator(
         player: Player,
         target: Player,
@@ -24,6 +23,13 @@ export class BattleDamageManager {
         player.sendPacket(packet);
     }
 
+    public onKill(target: Player, killer?: Player) {
+        if (killer && killer.getUsername() !== target.getUsername()) {
+            this.battle.getStatisticsManager().increaseKill(killer.getUsername());
+            this.battle.getStatisticsManager().addScore(target.getUsername(), 20);
+        }
+        this.battle.getStatisticsManager().increaseDeath(target.getUsername());
+    }
 
     public handleAttack(
         attacker: Player,
@@ -60,6 +66,7 @@ export class BattleDamageManager {
 
         // TODO: check this if
         if (newHealth <= 10) {
+            this.onKill(target, attacker);
             target.getTank().kill(attacker)
             this.sendDamageIndicator(attacker, target, protection * health / 10000, DamageIndicator.FATAL);
             return true;

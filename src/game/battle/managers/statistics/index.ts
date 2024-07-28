@@ -59,14 +59,17 @@ export class BattleStatisticsManager {
 
     public addScore(player: string, score: number) {
         this.scores.set(player, this.getPlayerScore(player) + score)
+        this.broadcastPlayerStatistics(player)
     }
 
-    public addKill(player: string) {
+    public increaseKill(player: string) {
         this.kills.set(player, this.getPlayerKills(player) + 1)
+        this.broadcastPlayerStatistics(player)
     }
 
-    public addDeath(player: string) {
+    public increaseDeath(player: string) {
         this.deaths.set(player, this.getPlayerDeaths(player) + 1)
+        this.broadcastPlayerStatistics(player)
     }
 
     public getFund(): number {
@@ -111,13 +114,13 @@ export class BattleStatisticsManager {
         this.battle.broadcastPacket(packet);
     }
 
-    public broadcastPlayerStatistics(client: Player) {
-        const setBattleUserStatusPacket = new SetBattleUserStatusPacket()
-        setBattleUserStatusPacket.deaths = this.getPlayerDeaths(client.getUsername())
-        setBattleUserStatusPacket.kills = this.getPlayerKills(client.getUsername())
-        setBattleUserStatusPacket.score = this.getPlayerScore(client.getUsername())
-        setBattleUserStatusPacket.user = client.getUsername()
-        this.battle.broadcastPacket(setBattleUserStatusPacket)
+    public broadcastPlayerStatistics(player: string) {
+        // const setBattleUserStatusPacket = new SetBattleUserStatusPacket()
+        // setBattleUserStatusPacket.deaths = this.getPlayerDeaths(player)
+        // setBattleUserStatusPacket.kills = this.getPlayerKills(player)
+        // setBattleUserStatusPacket.score = this.getPlayerScore(player)
+        // setBattleUserStatusPacket.user = player
+        // this.battle.broadcastPacket(setBattleUserStatusPacket)
     }
 
     public sendBattleData(client: Player, spectator: boolean = false) {

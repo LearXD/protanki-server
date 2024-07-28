@@ -205,7 +205,7 @@ export class Protocol {
     static SET_USER_ID_USERS_INFO_TEAM = 2040021062;
     static SET_BATTLE_TEAM_USERS = -1668779175;
     static SET_TEAM_SCORE = 561771020; // ctf
-    static SET_BATTLE_STATISTICS_TEAM_CC = -1233891872;
+    static SET_TEAM_BATTLE_USERS_PROPERTIES = -1233891872;
     static SET_USER_LEFT_BATTLE = 1411656080;
     static SET_TEAM_BATTLE_USER_STAT = -497293992;
 
@@ -496,7 +496,7 @@ export class Protocol {
 
     /** SOME JSON */
     static SOME_JSON_RANK_UP = -1709511848;
-    static SET_LOAD_BATTLE_OBJECTS = 930618015;
+    static SET_LOAD_DEATH_MATCH = 930618015;
 
 
     /** SHOP */

@@ -2,6 +2,7 @@ export class Team {
     static readonly RED = 'RED';
     static readonly BLUE = 'BLUE';
     static readonly NONE = 'NONE';
+    static readonly SPECTATOR = 'SPECTATOR';
 
     static readonly TEAMS = [
         Team.RED,

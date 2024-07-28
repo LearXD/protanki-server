@@ -1,5 +1,5 @@
 import { Battle } from "../.."
-import { BattleUtils } from "../../../../utils/battle"
+import { BattleUtils } from "../battle"
 import { BattleBoxesManager } from "../../managers/boxes"
 import { BattleChatManager } from "../../managers/chat"
 import { BattleDamageManager } from "../../managers/damage"

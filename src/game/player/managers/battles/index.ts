@@ -1,3 +1,4 @@
+import { Team, TeamType } from "@/states/team";
 import { Player } from "../..";
 import { SendBattleMessagePacket } from "../../../../network/packets/send-battle-message";
 import { SendCreateBattlePacket } from "../../../../network/packets/send-create-battle";
@@ -58,17 +59,17 @@ export class PlayerBattlesManager {
         this.player.setSubLayoutState(LayoutState.BATTLE_SELECT)
     }
 
-    public handleJoinBattle(team: string) {
+    public handleJoinBattle(team: TeamType) {
         const battle = this.player.getViewingBattle();
         if (battle) {
-            battle.handlePlayerJoin(this.player);
+            battle.handlePlayerJoin(this.player, team);
         }
     }
 
     public handleSpectateBattle() {
         const battle = this.player.getViewingBattle();
         if (battle) {
-            battle.handlePlayerJoin(this.player, true);
+            battle.handlePlayerJoin(this.player, Team.SPECTATOR);
         }
     }
 

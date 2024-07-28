@@ -242,7 +242,7 @@ export class PlayerGarageManager {
         const battle = this.player.getBattle();
         if (battle && this.player.tank.changedEquipment) {
             if (this.player.getTank().isAlive()) {
-                this.player.getTank().destroy()
+                this.player.getTank().scheduleSuicide()
             }
         }
     }

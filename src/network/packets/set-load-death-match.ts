@@ -2,10 +2,10 @@ import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetLoadBattleObjectsPacket extends Packet {
+export class SetLoadDeathMatchPacket extends Packet {
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_LOAD_BATTLE_OBJECTS, bytes)
+        super(Protocol.SET_LOAD_DEATH_MATCH, bytes)
     }
 
     public decode() {

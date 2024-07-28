@@ -121,7 +121,6 @@ export class Player extends Client {
     }
 
     public setBattle(battle: Battle) {
-        this.tank = new Tank(this, battle)
         this.battle = battle
     }
 

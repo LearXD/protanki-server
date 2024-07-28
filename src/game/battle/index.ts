@@ -5,11 +5,11 @@ import { Logger } from "../../utils/logger"
 import { BattleMode } from "../../states/battle-mode"
 import { EquipmentConstraintsMode } from "../../states/equipment-constraints-mode"
 
-import { SetLoadBattleObjectsPacket } from "../../network/packets/set-load-battle-objects"
+import { SetLoadDeathMatchPacket } from "../../network/packets/set-load-death-match"
 import { SetShowBattleNotificationsPacket } from "../../network/packets/set-show-battle-notifications"
 
 import { LayoutState } from "../../states/layout-state"
-import { BattleUtils } from "../../utils/battle"
+
 import { SetRemoveBattleScreenPacket } from "../../network/packets/set-remove-battle-screen"
 import { SimplePacket } from "../../network/packets/simple-packet"
 
@@ -22,6 +22,9 @@ import { SetBattleUserLeftNotificationPacket } from "../../network/packets/set-b
 import { BattleManager } from "./utils/managers"
 import { IMap } from "@/server/managers/maps/types"
 import { TimeType } from "./managers/task/types"
+import { BattleUtils } from "./utils/battle"
+import { Team, TeamType } from "@/states/team"
+import { Tank } from "../tank"
 
 export class Battle extends BattleManager {
 
@@ -98,10 +101,13 @@ export class Battle extends BattleManager {
 
     public close() {
         clearInterval(this.updateInterval)
+        clearInterval(this.updateTimeInterval)
     }
 
 
-    public async handlePlayerJoin(player: Player, spectator: boolean = false) {
+    public async handlePlayerJoin(player: Player, team: TeamType = Team.NONE) {
+
+        const isSpectator = team === Team.SPECTATOR
 
         if (this.getPlayersManager().hasPlayer(player) || this.getPlayersManager().hasSpectator(player)) {
             Logger.warn(`${player.getUsername()} already joined the battle ${this.getName()}`)
@@ -110,13 +116,15 @@ export class Battle extends BattleManager {
 
         /** ADD PLAYER */
         player.setBattle(this)
+        player.tank = new Tank(player, this, team)
+
         player.setLayoutState(LayoutState.BATTLE)
 
-        if (spectator) {
+        if (isSpectator) {
             this.getPlayersManager().addSpectator(player)
         }
 
-        if (!spectator) {
+        if (!isSpectator) {
             if (!this.isRunning()) this.start()
 
             this.getPlayersManager().addPlayer(player);
@@ -125,22 +133,22 @@ export class Battle extends BattleManager {
 
         /** SEND DATA & RESOURCES */
         await this.resourcesManager.sendResources(player)
-        this.resourcesManager.sendBattleMapProperties(player, spectator)
+        this.resourcesManager.sendBattleMapProperties(player, isSpectator)
         this.resourcesManager.sendTurretsData(player)
 
         /** SEND PROPERTIES & STATISTICS */
         this.statisticsManager.sendBattleData(player, true)
-        this.statisticsManager.sendUserProperties(player)
-        if (!spectator) {
+        this.modeManager.sendUsersProperties(player) // SetTeamBattleUsersPropertiesPacket
+        if (!isSpectator) {
             this.statisticsManager.sendAddUserProperties(player)
-            this.statisticsManager.broadcastPlayerStatistics(player)
+            this.modeManager.broadcastUserStats(player)
         }
 
         /** SEND CHAT */
         this.chatManager.sendEnableChat(player)
 
         /** SEND IMPORTANT PACKETS */
-        this.sendLoadBattleObjects(player)
+        this.modeManager.sendLoadBattleMode(player)
         this.sendShowBattleNotifications(player)
 
 
@@ -150,7 +158,7 @@ export class Battle extends BattleManager {
 
         /** SEND TANKS DATA */
         this.playersManager.sendTanksData(player)
-        if (!spectator) {
+        if (!isSpectator) {
             const tankData = player.getTank().getData();
             this.playersManager.broadcastTankData(tankData)
             this.playersManager.sendTankData(tankData, player)
@@ -158,7 +166,7 @@ export class Battle extends BattleManager {
 
         /** SEND BATTLE EFFECTS */
         this.effectsManager.sendBattleEffects(player);
-        if (!spectator) {
+        if (!isSpectator) {
             player.getGarageManager().sendSupplies(player);
         }
 
@@ -237,11 +245,6 @@ export class Battle extends BattleManager {
     public isWithoutCrystals() { return this.data.withoutCrystals }
     public isWithoutSupplies() { return this.data.withoutSupplies }
 
-
-    public sendLoadBattleObjects(player: Player) {
-        player.sendPacket(new SetLoadBattleObjectsPacket())
-    }
-
     public sendShowBattleNotifications(player: Player) {
         player.sendPacket(new SetShowBattleNotificationsPacket())
     }
@@ -290,10 +293,6 @@ export class Battle extends BattleManager {
                 this.finish()
             }
             return;
-        }
-
-        if (this.playersManager.getPlayers().length > 0) {
-            Logger.debug(`Battle ${this.getName()}. Time left: ${this.getTimeLeft()}`)
         }
     }
 

@@ -12,7 +12,7 @@ export interface IUser {
     name: string;
 }
 
-export class SetBattleStatisticsTeamCCPacket extends Packet {
+export class SetTeamBattleUsersPropertiesPacket extends Packet {
 
     public bluePoints: number
     public redPoints: number
@@ -20,7 +20,7 @@ export class SetBattleStatisticsTeamCCPacket extends Packet {
     public redUsers: IUser[]
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_BATTLE_STATISTICS_TEAM_CC, bytes)
+        super(Protocol.SET_TEAM_BATTLE_USERS_PROPERTIES, bytes)
     }
 
     public decode() {
@@ -29,10 +29,10 @@ export class SetBattleStatisticsTeamCCPacket extends Packet {
         this.bluePoints = bytes.readInt();
         this.redPoints = bytes.readInt();
 
-        const length_1 = bytes.readInt();
-        this.blueUsers = new Array(length_1);
+        const blueUsersLength = bytes.readInt();
+        this.blueUsers = new Array(blueUsersLength);
 
-        for (let i = 0; i < length_1; i++) {
+        for (let i = 0; i < blueUsersLength; i++) {
             this.blueUsers[i] = {
                 chatModeratorLevel: ChatModeratorLevel.LEVELS[bytes.readInt()],
                 deaths: bytes.readInt(),
@@ -43,10 +43,10 @@ export class SetBattleStatisticsTeamCCPacket extends Packet {
             }
         }
 
-        const length_2 = bytes.readInt();
-        this.redUsers = new Array(length_2);
+        const redUsersLength = bytes.readInt();
+        this.redUsers = new Array(redUsersLength);
 
-        for (let i = 0; i < length_2; i++) {
+        for (let i = 0; i < redUsersLength; i++) {
             this.redUsers[i] = {
                 chatModeratorLevel: ChatModeratorLevel.LEVELS[bytes.readInt()],
                 deaths: bytes.readInt(),
@@ -71,7 +71,7 @@ export class SetBattleStatisticsTeamCCPacket extends Packet {
         bytes.writeInt(this.bluePoints);
         bytes.writeInt(this.redPoints);
 
-        bytes.writeShort(this.blueUsers.length);
+        bytes.writeInt(this.blueUsers.length);
 
         this.blueUsers.forEach((user: IUser) => {
             bytes.writeInt(ChatModeratorLevel.LEVELS.indexOf(user.chatModeratorLevel))
@@ -82,7 +82,7 @@ export class SetBattleStatisticsTeamCCPacket extends Packet {
             bytes.writeString(user.name);
         });
 
-        bytes.writeShort(this.redUsers.length);
+        bytes.writeInt(this.redUsers.length);
 
         this.redUsers.forEach((user: IUser) => {
             bytes.writeInt(ChatModeratorLevel.LEVELS.indexOf(user.chatModeratorLevel))
