@@ -17,6 +17,7 @@ import { Supply, SupplyType } from "../../../../states/supply";
 import { Logger } from "../../../../utils/logger";
 import { IGarageHull, IGarageTurret, IPlayerGarageData } from "../../utils/data/types";
 import { ResourceType } from "../../../../server/managers/resources/types";
+import { GarageItemUtils } from "./utils/item";
 
 export class PlayerGarageManager {
 
@@ -29,8 +30,16 @@ export class PlayerGarageManager {
         return this.player.getData().getGarageData();
     }
 
+    public getTurret(name: string) {
+        return this.getTurrets().find(turret => turret.name === name)
+    }
+
     public getTurrets() {
         return this.getGarageItems().turrets
+    }
+
+    public getHull(name: string) {
+        return this.getHulls().find(hull => hull.name === name)
     }
 
     public getHulls() {
@@ -89,21 +98,32 @@ export class PlayerGarageManager {
         const category = this.player.getServer().getGarageManager().getItemCategory(itemId);
 
         switch (category) {
-            case GarageItemCategory.TURRET:
-                this.getTurrets().forEach(turret => {
-                    if (turret.name == item.id) {
-                        turret.level = level
+            case GarageItemCategory.TURRET: {
+                const turret = this.getTurret(item.id)
+                if (turret) {
+                    if (turret.level >= level) {
+                        Logger.warn(`Invalid upgrade level ${level} for item ${itemId} for player ${this.player.getUsername()}`);
+                        return false;
                     }
-                })
+                    turret.level = level
+                    return true;
+                }
                 break;
-            case GarageItemCategory.HULL:
-                this.getHulls().forEach(hull => {
-                    if (hull.name == item.id) {
-                        hull.level = level
+            }
+            case GarageItemCategory.HULL: {
+                const hull = this.getHull(item.id)
+                if (hull) {
+                    if (hull.level >= level) {
+                        Logger.warn(`Invalid upgrade level ${level} for item ${itemId} for player ${this.player.getUsername()}`);
+                        return false;
                     }
-                })
+                    hull.level = level
+                    return true;
+                }
                 break;
+            }
         }
+        return false;
     }
 
     public addItem(itemId: string, quantity: number = 1) {
@@ -111,7 +131,7 @@ export class PlayerGarageManager {
 
         switch (item.category) {
             case GarageItemCategory.TURRET: {
-                const inventory = this.getInventoryItem<IGarageTurret>(itemId);
+                const inventory = this.getInventoryItem<IGarageTurret>(itemId, false);
 
                 if (inventory) {
                     return this.upgradeItem(itemId, inventory.level + 1);
@@ -125,7 +145,7 @@ export class PlayerGarageManager {
                 break;
             }
             case GarageItemCategory.HULL: {
-                const inventory = this.getInventoryItem<IGarageHull>(itemId);
+                const inventory = this.getInventoryItem<IGarageHull>(itemId, false);
 
                 if (inventory) {
                     return this.upgradeItem(itemId, inventory.level + 1);
@@ -183,18 +203,16 @@ export class PlayerGarageManager {
         return false
     }
 
-
-
-    public getInventoryItem<R extends any>(itemId: string): R {
-        const item = this.player.getServer().getGarageManager().getItem(itemId);
+    public getInventoryItem<R extends any>(name: string, checkLevel: boolean = true): R {
+        const item = this.player.getServer().getGarageManager().getItem(name);
 
         switch (item.category) {
             case GarageItemCategory.TURRET:
                 return this.getTurrets()
-                    .find(turret => turret.name == item.id && turret.level == item.modificationID) as R;
+                    .find(turret => turret.name == item.id && ((!checkLevel && turret.level >= 0) || turret.level == item.modificationID)) as R;
             case GarageItemCategory.HULL:
                 return this.getHulls()
-                    .find(hull => hull.name == item.id && hull.level == item.modificationID) as R;
+                    .find(hull => hull.name == item.id && ((!checkLevel && hull.level >= 0) || hull.level == item.modificationID)) as R;
             case GarageItemCategory.PAINT:
                 return this.getPaintings()
                     .find(painting => painting.name == item.id) as R;
@@ -407,6 +425,7 @@ export class PlayerGarageManager {
     }
 
     public handleBuyKit(kitId: string, price: number) {
+        // Logger.debug('handleBuyKit', kitId, price)
         if (this.player.getData().getCrystals() < price) {
             return false;
         }
@@ -426,6 +445,8 @@ export class PlayerGarageManager {
     }
 
     public handleBuyItem(itemId: string, amount: number, price: number) {
+        // Logger.debug('handleBuyItem', itemId, amount, price)
+
         if (this.player.getData().getCrystals() < price) {
             return false;
         }
