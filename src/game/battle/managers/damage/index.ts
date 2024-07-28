@@ -1,6 +1,5 @@
 import { Battle } from "../..";
 import { SetDamageIndicatorsPacket } from "../../../../network/packets/set-damage-indicators";
-import { SetTankDestroyedPacket } from "../../../../network/packets/set-tank-destroyed";
 import { DamageIndicator, DamageIndicatorType } from "../../../../states/damage-indicator";
 import { Logger } from "../../../../utils/logger";
 import { Player } from "../../../player";
@@ -25,10 +24,10 @@ export class BattleDamageManager {
 
     public onKill(target: Player, killer?: Player) {
         if (killer && killer.getUsername() !== target.getUsername()) {
-            this.battle.getStatisticsManager().increaseKill(killer.getUsername());
-            this.battle.getStatisticsManager().addScore(target.getUsername(), 20);
+            this.battle.getStatisticsManager().increaseKill(killer);
+            this.battle.getStatisticsManager().addScore(target, 20);
         }
-        this.battle.getStatisticsManager().increaseDeath(target.getUsername());
+        this.battle.getStatisticsManager().increaseDeath(target);
     }
 
     public handleAttack(

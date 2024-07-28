@@ -113,7 +113,7 @@ export class Protocol {
     static SET_CHAT_INIT_PARAMS = 178154988;
     static SET_REMOVE_USER_CHAT_MESSAGES = 1993050216 // TODO: see what is this (BAN?)
     static SET_CHAT_MESSAGES = -1263520410;
-    // -1062190024
+    // -1062190024 
 
 
     /** PREMIUM */
@@ -629,7 +629,6 @@ export class Protocol {
     static SEND_STORM_TARGET_SHOT = 259979915;
 
     // GENERATE HERE
-
-
+    static SET_LOAD_TEAM_DEATH_MATCH = 183561709;
 
 }

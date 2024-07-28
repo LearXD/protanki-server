@@ -178,6 +178,7 @@ import { SetRemoveViewingBattlePacket } from "./packets/set-remove-viewing-battl
 import { SetCaptchaCorrectPacket } from "./packets/set-captcha-correct";
 
 // GENERATE IMPORT HERE
+import { SetLoadTeamDeathMatchPacket } from "./packets/set-load-team-death-match";
 import { SetBattleFoundPacket } from "./packets/set-battle-found";
 import { SendCheckBattlePacket } from "./packets/send-check-battle";
 import { SendRefuseBattleInvitePacket } from "./packets/send-refuse-battle-invite";
@@ -697,6 +698,7 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);
 
         // GENERATE REGISTER HERE
+		this.registerPacket(Protocol.SET_LOAD_TEAM_DEATH_MATCH, SetLoadTeamDeathMatchPacket);
         this.registerPacket(Protocol.SET_BATTLE_FOUND, SetBattleFoundPacket);
         this.registerPacket(Protocol.SEND_CHECK_BATTLE, SendCheckBattlePacket);
         this.registerPacket(Protocol.SEND_REFUSE_BATTLE_INVITE, SendRefuseBattleInvitePacket);
