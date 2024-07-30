@@ -18,7 +18,7 @@ export class PlayerData {
                     enabled: false,
                     endAt: 0
                 },
-                rank: Rank.BRIGADIER,
+                rank: Rank.COMMANDER,
                 score: 2000,
                 premium: {
                     notified: false,
