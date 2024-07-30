@@ -6,9 +6,9 @@ export abstract class BattleModeManager {
         protected readonly battle: Battle
     ) { }
 
+    public abstract init(): void
+
     public abstract sendLoadBattleMode(player: Player): void
-
-    public abstract broadcastUserStats(player: Player): void;
-
+    public abstract broadcastUserStats(player: Player): void
     public abstract sendUsersProperties(player: Player): void
 }

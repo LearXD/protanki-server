@@ -1,24 +1,43 @@
-import { Server } from "@/server";
 import { BattleTask } from "../../utils/task";
 import { ITask, TimeType } from "./types";
 
 export class BattleTaskManager {
 
-    private tasks: BattleTask[] = []
+    private generatedTasks = 0;
+    private tasks: Map<number, BattleTask> = new Map();
 
-    public registerTask(task: ITask, time: number, timeType: TimeType = TimeType.MILLISECONDS) {
-        this.tasks.push(new BattleTask(Date.now() + (time * timeType), task))
+    public scheduleTask(
+        callable: ITask,
+        time: number,
+        timeType: TimeType = TimeType.MILLISECONDS,
+        owner?: string
+    ) {
+        const taskId = ++this.generatedTasks;
+        const formattedTime = Date.now() + (time * timeType);
+        this.tasks.set(taskId, new BattleTask(callable, formattedTime, owner))
+        return taskId
+    }
+
+    public unregisterTask(id: number) {
+        this.tasks.delete(id)
+    }
+
+    public unregisterOwnerTasks(owner: string) {
+        for (const [id, task] of this.tasks) {
+            if (task.owner === owner) { this.tasks.delete(id) }
+        }
     }
 
     public unregisterAll() {
-        this.tasks = []
+        this.tasks.clear()
     }
 
     public update() {
         const now = Date.now()
-        for (const task of this.tasks) {
+        for (const [id, task] of this.tasks) {
             if (task.time < now) {
                 task.execute()
+                this.tasks.delete(id)
             }
         }
     }

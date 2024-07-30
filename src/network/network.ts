@@ -131,7 +131,7 @@ import { SendCollectBonusBoxPacket } from "./packets/send-collect-bonus-box";
 import { SetShaftLocalSpotPacket } from "./packets/set-shaft-local-spot";
 import { SetShaftShotPacket } from "./packets/set-shaft-shot";
 import { SetBattleMessagePacket } from "./packets/set-battle-message";
-import { SetCaptureTheFlagCCPacket } from "./packets/set-capture-the-flag-cc";
+import { SetLoadCaptureTheFlagPacket } from "./packets/set-load-capture-the-flag";
 import { SetTeamBattleUsersPropertiesPacket } from "./packets/set-team-battle-users-properties";
 import { SetTeamBattleUserStatPacket } from "./packets/set-team-battle-user-stat";
 import { SetWinnerTeamPacket } from "./packets/set-winner-team";
@@ -324,7 +324,7 @@ import { SetControlPointStatePacket } from "./packets/set-control-point-state";
 import { SetTankStopCapturingControlPointPacket } from "./packets/set-tank-stop-capturing-control-point";
 import { SetTankCapturingControlPointPacket } from "./packets/set-tank-capturing-control-point";
 import { SetTeamStartedCapturingControlPointPacket } from "./packets/set-team-started-capturing-control-point";
-import { SetBattleControlPointsConfigurationPacket } from "./packets/set-battle-control-points-configuration";
+import { SetLoadControlPointPacket } from "./packets/set-load-control-point";
 import { SetBattleTeamUsersPacket } from "./packets/set-battle-team-users";
 import { SetFlagReturnedPacket } from "./packets/set-flag-returned";
 import { SetFlagDroppedPacket } from "./packets/set-flag-dropped";
@@ -407,7 +407,7 @@ export class Network {
 
         this.registerPacket(Protocol.SET_BATTLE_DATA, SetBattleDataPacket)
         this.registerPacket(Protocol.SET_BATTLE_USERS_PROPERTIES, SetBattleUsersPropertiesPacket)
-        this.registerPacket(Protocol.SET_CAPTURE_THE_FLAG_CC, SetCaptureTheFlagCCPacket)
+        this.registerPacket(Protocol.SET_LOAD_CAPTURE_THE_FLAG, SetLoadCaptureTheFlagPacket)
         this.registerPacket(Protocol.SET_TEAM_BATTLE_USERS_PROPERTIES, SetTeamBattleUsersPropertiesPacket)
         this.registerPacket(Protocol.SET_TEAM_BATTLE_USER_STAT, SetTeamBattleUserStatPacket)
 
@@ -683,7 +683,7 @@ export class Network {
         this.registerPacket(Protocol.SET_TANK_STOP_CAPTURING_CONTROL_POINT, SetTankStopCapturingControlPointPacket);
         this.registerPacket(Protocol.SET_TANK_CAPTURING_CONTROL_POINT, SetTankCapturingControlPointPacket);
         this.registerPacket(Protocol.SET_TEAM_STARTED_CAPTURING_CONTROL_POINT, SetTeamStartedCapturingControlPointPacket);
-        this.registerPacket(Protocol.SET_BATTLE_CONTROL_POINTS_CONFIGURATION, SetBattleControlPointsConfigurationPacket);
+        this.registerPacket(Protocol.SET_LOAD_CONTROL_POINT, SetLoadControlPointPacket);
         this.registerPacket(Protocol.SET_BATTLE_TEAM_USERS, SetBattleTeamUsersPacket);
         this.registerPacket(Protocol.SET_FLAG_RETURNED, SetFlagReturnedPacket);
         this.registerPacket(Protocol.SET_FLAG_DROPPED, SetFlagDroppedPacket);
@@ -698,7 +698,7 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);
 
         // GENERATE REGISTER HERE
-		this.registerPacket(Protocol.SET_LOAD_TEAM_DEATH_MATCH, SetLoadTeamDeathMatchPacket);
+        this.registerPacket(Protocol.SET_LOAD_TEAM_DEATH_MATCH, SetLoadTeamDeathMatchPacket);
         this.registerPacket(Protocol.SET_BATTLE_FOUND, SetBattleFoundPacket);
         this.registerPacket(Protocol.SEND_CHECK_BATTLE, SendCheckBattlePacket);
         this.registerPacket(Protocol.SEND_REFUSE_BATTLE_INVITE, SendRefuseBattleInvitePacket);

@@ -16,7 +16,7 @@ export interface ISoundResources {
     resourceId_4: number
 }
 
-export class SetCaptureTheFlagCCPacket extends Packet {
+export class SetLoadCaptureTheFlagPacket extends Packet {
 
     public flag_1: IFlag
     public flag_1_image: number
@@ -28,7 +28,7 @@ export class SetCaptureTheFlagCCPacket extends Packet {
     public sounds: ISoundResources
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_CAPTURE_THE_FLAG_CC, bytes)
+        super(Protocol.SET_LOAD_CAPTURE_THE_FLAG, bytes)
     }
 
     public decode() {

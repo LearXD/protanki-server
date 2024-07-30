@@ -4,6 +4,8 @@ import { SetLoadTeamDeathMatchPacket } from "@/network/packets/set-load-team-dea
 
 export class BattleTeamDeathMatchModeManager extends BattleTeamModeManager {
 
+    public init(): void { }
+
     public sendLoadBattleMode(player: Player): void {
         player.sendPacket(new SetLoadTeamDeathMatchPacket())
     }

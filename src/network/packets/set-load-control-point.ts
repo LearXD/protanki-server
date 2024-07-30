@@ -14,7 +14,7 @@ export interface IControlPoint {
     strings_1: string[]
 }
 
-export class SetBattleControlPointsConfigurationPacket extends Packet {
+export class SetLoadControlPointPacket extends Packet {
 
     public float_1: number
     public float_2: number
@@ -50,7 +50,7 @@ export class SetBattleControlPointsConfigurationPacket extends Packet {
     }
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_BATTLE_CONTROL_POINTS_CONFIGURATION, bytes)
+        super(Protocol.SET_LOAD_CONTROL_POINT, bytes)
     }
 
     public decode() {

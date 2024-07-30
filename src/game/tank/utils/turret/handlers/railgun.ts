@@ -5,7 +5,7 @@ import { SetRailgunShotPacket } from "../../../../../network/packets/set-railgun
 import { SetStartRailgunShotPacket } from "../../../../../network/packets/set-start-railgun-shot";
 import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { MathUtils } from "../../../../../utils/math";
-import { IDamageModifiers } from "../../../../battle/managers/damage/types";
+import { IDamageModifiers } from "../../../../battle/managers/combat/types";
 import { Player } from "../../../../player";
 
 export class RailgunHandler extends TurretHandler {

@@ -5,14 +5,15 @@ export class BattleTask {
     public executed: boolean = false
 
     public constructor(
+        public readonly callable: ITask,
         public readonly time: number,
-        public readonly task: ITask,
+        public owner?: string
     ) { }
 
     public execute() {
         if (!this.executed) {
             this.executed = true
-            this.task()
+            this.callable()
         }
     }
 }

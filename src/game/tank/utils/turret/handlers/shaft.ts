@@ -14,7 +14,7 @@ import { SetStopShaftShotPacket } from "../../../../../network/packets/set-stop-
 import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { Logger } from "../../../../../utils/logger";
 import { MathUtils } from "../../../../../utils/math";
-import { IDamageModifiers } from "../../../../battle/managers/damage/types";
+import { IDamageModifiers } from "../../../../battle/managers/combat/types";
 import { Player } from "../../../../player";
 
 export class ShaftHandler extends TurretHandler {

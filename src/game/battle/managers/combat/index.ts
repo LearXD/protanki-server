@@ -5,7 +5,7 @@ import { Logger } from "../../../../utils/logger";
 import { Player } from "../../../player";
 import { IDamageModifiers } from "./types";
 
-export class BattleDamageManager {
+export class BattleCombatManager {
 
     public constructor(
         private readonly battle: Battle
@@ -22,7 +22,7 @@ export class BattleDamageManager {
         player.sendPacket(packet);
     }
 
-    public onKill(target: Player, killer?: Player) {
+    public handleKill(target: Player, killer?: Player) {
         if (killer && killer.getUsername() !== target.getUsername()) {
             this.battle.getStatisticsManager().increaseKill(killer);
             this.battle.getStatisticsManager().addScore(target, 20);
@@ -65,7 +65,7 @@ export class BattleDamageManager {
 
         // TODO: check this if
         if (newHealth <= 10) {
-            this.onKill(target, attacker);
+            this.handleKill(target, attacker);
             target.getTank().kill(attacker)
             this.sendDamageIndicator(attacker, target, protection * health / 10000, DamageIndicator.FATAL);
             return true;

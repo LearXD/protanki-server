@@ -1110,7 +1110,7 @@
             "theme": "SPACE"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_event_relay",
             "mapName": "Relay",
@@ -1126,7 +1126,7 @@
             "theme": "SUMMER"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_event_relay",
             "mapName": "Relay",
@@ -1206,7 +1206,7 @@
             "theme": "SPACE"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_ringnew",
             "mapName": "map_ringnew_test",
@@ -1222,7 +1222,7 @@
             "theme": "SUMMER"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_ny_yorkshire",
             "mapName": "Feliz Ano Novo! (Yorkshire)",
@@ -1306,7 +1306,7 @@
             "theme": "SPACE"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_legacy",
             "mapName": "Legado",
@@ -1322,7 +1322,7 @@
             "theme": "SUMMER"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_event_furyroad",
             "mapName": "Furyroad",
@@ -1339,7 +1339,7 @@
             "theme": "SUMMER"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_event_furyroad",
             "mapName": "Furyroad",
@@ -1356,7 +1356,7 @@
             "theme": "SPACE"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_Ice_v5",
             "mapName": "Ice",
@@ -1509,7 +1509,7 @@
             "theme": "SPACE"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_ny_megahill",
             "mapName": "Feliz Ano Novo! (Megahill)",
@@ -1676,7 +1676,7 @@
             "theme": "SPACE"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_ny_trassa",
             "mapName": "Feliz Ano Novo! (Track)",
@@ -1693,7 +1693,7 @@
             "theme": "WINTER_NIGHT"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_minecraft",
             "mapName": "Ilha REMASTER",
@@ -1710,7 +1710,7 @@
             "theme": "SUMMER"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_event_headspinners",
             "mapName": "Head Spinners",
@@ -1726,7 +1726,7 @@
             "theme": "SUMMER"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_event_headspinners",
             "mapName": "Head Spinners",
@@ -1802,7 +1802,7 @@
             "theme": "SPACE"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_cologne",
             "mapName": "Colônia",
@@ -1818,7 +1818,7 @@
             "theme": "SUMMER"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_baggage",
             "mapName": "map_baggage_test",
@@ -2038,7 +2038,7 @@
             "theme": "SPACE"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_new_year_yorkshir",
             "mapName": "Feliz Ano Novo!",
@@ -2052,7 +2052,7 @@
             "theme": "WINTER"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_halloween",
             "mapName": "Halloween",
@@ -2069,7 +2069,7 @@
             "theme": "SUMMER"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_gallery",
             "mapName": "Galeria",
@@ -2289,7 +2289,7 @@
             "theme": "SPACE"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_halloween_2023_dxxth",
             "mapName": "Vale fantasma",
@@ -2489,7 +2489,7 @@
             "theme": "SPACE"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_ny_Castle",
             "mapName": "Feliz Ano Novo! (Castle)",
@@ -2862,7 +2862,7 @@
             "theme": "SPACE"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_ny_island",
             "mapName": "Feliz Ano Novo! (Island)",
@@ -2946,7 +2946,7 @@
             "theme": "SPACE"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_Ice_v5_2",
             "mapName": "Ice2",
@@ -3031,7 +3031,7 @@
             "theme": "SPACE"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_event_sumo",
             "mapName": "Sumo",
@@ -3047,7 +3047,7 @@
             "theme": "SUMMER"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_event_sumo",
             "mapName": "Sumo",
@@ -3063,7 +3063,7 @@
             "theme": "SPACE"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_cosmicstation",
             "mapName": "Estação espacial",
@@ -3420,7 +3420,7 @@
             "theme": "SPACE"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_moon",
             "mapName": "Battle City",
@@ -3572,7 +3572,7 @@
             "theme": "SPACE"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_ny_aleksandrovsk",
             "mapName": "Feliz Ano Novo! (Alexandrovsk)",
@@ -3588,7 +3588,7 @@
             "theme": "WINTER_NIGHT"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_halloween_2023_errorcg",
             "mapName": "Cemitério abandonado",
@@ -3673,7 +3673,7 @@
             "theme": "SPACE"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_ny_boombox",
             "mapName": "Feliz Ano Novo! (Boombox)",
@@ -4675,7 +4675,7 @@
             "theme": "SPACE"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_madness_old",
             "mapName": "Velha Loucura",
@@ -5311,7 +5311,7 @@
             "theme": "SPACE"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_springfalls",
             "mapName": "Rochas de primavera",
@@ -5769,7 +5769,7 @@
             "theme": "SPACE"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_crash",
             "mapName": "Crash",
@@ -5989,7 +5989,7 @@
             "theme": "SPACE"
         },
         {
-            "enabled": false,
+            "enabled": true,
             "additionalCrystalsPercent": 0,
             "mapId": "map_battlecity",
             "mapName": "Battle City",

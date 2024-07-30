@@ -64,7 +64,7 @@ export class BattleViewersManager {
             itemId: this.battle.getBattleId(),
             scoreLimit: this.battle.getScoreLimit(),
             timeLimitInSec: this.battle.getTimeLimitInSec(),
-            preview: this.battle.getMap().preview,
+            preview: this.battle.getMap().getPreview(),
             maxPeopleCount: this.battle.getMaxPeopleCount(),
             name: this.battle.getName(),
             proBattle: this.battle.isProBattle(),

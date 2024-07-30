@@ -5,7 +5,6 @@ import { Logger } from "../../utils/logger"
 import { BattleMode } from "../../states/battle-mode"
 import { EquipmentConstraintsMode } from "../../states/equipment-constraints-mode"
 
-import { SetLoadDeathMatchPacket } from "../../network/packets/set-load-death-match"
 import { SetShowBattleNotificationsPacket } from "../../network/packets/set-show-battle-notifications"
 
 import { LayoutState } from "../../states/layout-state"
@@ -25,6 +24,7 @@ import { TimeType } from "./managers/task/types"
 import { BattleUtils } from "./utils/battle"
 import { Team, TeamType } from "@/states/team"
 import { Tank } from "../tank"
+import { Map } from "../map"
 
 export class Battle extends BattleManager {
 
@@ -41,7 +41,7 @@ export class Battle extends BattleManager {
 
     public constructor(
         private name: string,
-        private map: IMap,
+        private map: Map,
         private data: IBattleData = {
             autoBalance: true,
             battleMode: BattleMode.DM,
@@ -64,6 +64,8 @@ export class Battle extends BattleManager {
 
         this.battleId = BattleUtils.generateBattleId()
         this.registerManagers(this);
+
+        this.modeManager.init();
 
         this.updateInterval = setInterval(this.update.bind(this), 1000 / Battle.TICK_RATE);
         this.updateTimeInterval = setInterval(this.updateTime.bind(this), 1000);
@@ -96,14 +98,13 @@ export class Battle extends BattleManager {
         this.taskManager.unregisterAll();
         this.getStatisticsManager().sendFinishRewards()
 
-        this.taskManager.registerTask(this.restart.bind(this), 10, TimeType.SECONDS)
+        this.taskManager.scheduleTask(this.restart.bind(this), 10, TimeType.SECONDS)
     }
 
     public close() {
         clearInterval(this.updateInterval)
         clearInterval(this.updateTimeInterval)
     }
-
 
     public async handlePlayerJoin(player: Player, team: TeamType = Team.NONE) {
 
@@ -151,7 +152,6 @@ export class Battle extends BattleManager {
         this.modeManager.sendLoadBattleMode(player)
         this.sendShowBattleNotifications(player)
 
-
         /** SEND IN-GAME PROPERTIES */
         this.boxesManager.sendData(player)
         this.minesManager.sendMines(player);
@@ -198,6 +198,7 @@ export class Battle extends BattleManager {
         }
 
         this.sendRemoveBattleScreen(player)
+        this.taskManager.unregisterOwnerTasks(player.getUsername())
 
         player.tank = null
         player.setBattle(null)
@@ -264,14 +265,14 @@ export class Battle extends BattleManager {
         return {
             battleId: this.getBattleId(),
             battleMode: this.data.battleMode,
-            map: this.map.mapId,
+            map: this.map.getId(),
             maxPeople: this.data.maxPeopleCount,
             name: this.getName(),
             privateBattle: this.isPrivateBattle(),
             proBattle: this.isProBattle(),
             minRank: this.getRankRange().min,
             maxRank: this.getRankRange().max,
-            preview: this.map.preview,
+            preview: this.map.getPreview(),
             parkourMode: this.isParkourMode(),
             equipmentConstraintsMode: this.getEquipmentConstraintsMode(),
             suspicionLevel: SuspiciousLevel.NONE,

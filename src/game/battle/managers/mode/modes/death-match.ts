@@ -6,6 +6,8 @@ import { SetLoadDeathMatchPacket } from "@/network/packets/set-load-death-match"
 
 export class BattleDeathMatchModeManager extends BattleModeManager {
 
+    public init(): void { }
+
     public sendLoadBattleMode(player: Player): void {
         player.sendPacket(new SetLoadDeathMatchPacket())
     }

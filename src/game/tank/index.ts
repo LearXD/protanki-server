@@ -36,10 +36,17 @@ import { TurretHandler } from "./utils/turret";
 import { SetTankTemperaturePacket } from "../../network/packets/set-tank-temperature";
 import { SetTankDestroyedPacket } from "../../network/packets/set-tank-destroyed";
 import { TimeType } from "../battle/managers/task/types";
+import { BattleMode } from "@/states/battle-mode";
+import { SendDropFlagPacket } from "@/network/packets/send-drop-flag";
+import { BattleCaptureTheFlagModeManager } from "../battle/managers/mode/modes/capture-the-flag";
 
 export class Tank {
 
     public incarnation: number = 0;
+
+    public hasFlag: boolean = false;
+    public changedEquipment = false;
+    private visible: boolean = false;
     private alive: boolean = false
 
     private health: number = 0;
@@ -51,8 +58,6 @@ export class Tank {
     private turret: TurretHandler
     private hull: Hull
 
-    private visible: boolean = false;
-    public changedEquipment = false;
 
     public constructor(
         public readonly player: Player,
@@ -222,8 +227,8 @@ export class Tank {
 
         this.player.sendPacket(packet);
 
-        this.battle.getTaskManager().registerTask(
-            () => this.sendRespawnDelay(respawnDelay), delay
+        this.battle.getTaskManager().scheduleTask(
+            () => this.sendRespawnDelay(respawnDelay), delay, TimeType.MILLISECONDS, this.player.getUsername()
         )
     }
 
@@ -239,7 +244,7 @@ export class Tank {
     }
 
     public suicide() {
-        this.battle.getDamageManager().onKill(this.player)
+        this.battle.getDamageManager().handleKill(this.player)
 
         const packet = new SetAutoDestroyPacket()
         packet.tankId = this.player.getUsername()
@@ -278,8 +283,13 @@ export class Tank {
     }
 
     public handleSuicide() {
-        this.battle.getTaskManager().registerTask(
-            this.suicide.bind(this), 10, TimeType.SECONDS
+
+        if (!this.isVisible()) {
+            return;
+        }
+
+        this.battle.getTaskManager().scheduleTask(
+            this.suicide.bind(this), 10, TimeType.SECONDS, this.player.getUsername()
         )
     }
 
@@ -307,7 +317,99 @@ export class Tank {
         this.player.getGarageManager().sendUseSupply(item, time, decrease)
     }
 
+    public handleMove(position: Vector3d, orientation?: Vector3d) {
+        if (this.orientation) {
+            this.orientation = orientation
+        }
+        this.position = position;
+
+        this.battle.getCollisionManager()
+            .handlePlayerMovement(this.player)
+    }
+
     public handlePacket(packet: SimplePacket) {
+
+        if (this.turret) {
+            this.turret.handlePacket(packet)
+        }
+
+        if (this.isAlive()) {
+
+            if (packet instanceof SendMoveTankTracksPacket) {
+                const pk = new SetTankControlPacket();
+                pk.tankId = this.player.getUsername();
+                pk.control = packet.control;
+
+                this.battle.broadcastPacket(pk, [this.player.getUsername()])
+            }
+
+            if (packet instanceof SendMoveTankPacket) {
+
+                if (packet.specificationId !== this.incarnation) {
+                    Logger.warn("Invalid movement with different incarnation id");
+                    return;
+                }
+
+                this.handleMove(packet.position, packet.orientation)
+
+                const pk = new SetMoveTankPacket();
+                pk.tankId = this.player.getUsername()
+                pk.angularVelocity = packet.angularVelocity;
+                pk.control = packet.control;
+                pk.impulse = packet.impulse;
+                pk.orientation = packet.orientation;
+                pk.position = packet.position;
+                this.battle.broadcastPacket(pk, [this.player.getUsername()])
+            }
+
+            if (packet instanceof SendTankTurretDirectionPacket) {
+                const pk = new SetTankTurretAngleControlPacket();
+
+                pk.tankId = this.player.getUsername();
+                pk.angle = packet.angle;
+                pk.control = packet.control;
+
+                this.battle.broadcastPacket(pk, [this.player.getUsername()])
+            }
+
+            if (packet instanceof SendMoveTankAndTurretPacket) {
+                this.handleMove(packet.position, packet.orientation)
+
+                const pk = new SetMoveTankAndTurretPacket();
+                pk.tankId = this.player.getUsername();
+                pk.angularVelocity = packet.angularVelocity;
+                pk.control = packet.control;
+                pk.impulse = packet.impulse;
+                pk.orientation = packet.orientation;
+                pk.position = packet.position;
+                pk.turretDirection = packet.turretDirection;
+                this.battle.broadcastPacket(pk, [this.player.getUsername()])
+            }
+
+            if (this.isVisible()) {
+
+                if (this.battle.getMode() === BattleMode.CTF) {
+                    if (packet instanceof SendDropFlagPacket) {
+                        const manager = this.battle.getModeManager() as BattleCaptureTheFlagModeManager;
+                        manager.handleDropFlag(this.player)
+                    }
+                }
+
+                if (packet instanceof SendAutoDestroyPacket) {
+                    this.handleSuicide();
+                }
+
+                if (packet instanceof SendUseSupplyPacket) {
+                    this.handleUseSupply(packet.itemId as SupplyType)
+                }
+                return
+            }
+
+            if (packet instanceof SendRequestSetTankVisiblePacket) {
+                this.sendVisible();
+            }
+            return;
+        }
 
         if (packet instanceof SendRequestSpawnPositionPacket) {
             this.prepareRespawn();
@@ -317,81 +419,6 @@ export class Tank {
             this.spawn();
         }
 
-        if (packet instanceof SendRequestSetTankVisiblePacket) {
-            this.sendVisible();
-        }
-
-        if (packet instanceof SendAutoDestroyPacket) {
-            this.handleSuicide();
-        }
-
-        if (packet instanceof SendUseSupplyPacket) {
-            this.handleUseSupply(packet.itemId as SupplyType)
-        }
-
-        if (this.turret) {
-            this.turret.handlePacket(packet)
-        }
-
-        /** MOVEMENT PACKETS */
-
-        if (packet instanceof SendMoveTankTracksPacket) {
-            const pk = new SetTankControlPacket();
-            pk.tankId = this.player.getUsername();
-            pk.control = packet.control;
-
-            this.battle.broadcastPacket(pk, [this.player.getUsername()])
-
-        }
-
-        if (packet instanceof SendMoveTankPacket) {
-
-            if (packet.specificationId !== this.incarnation) {
-                Logger.warn("Invalid movement with different incarnation id");
-                return;
-            }
-
-            const pk = new SetMoveTankPacket();
-
-            this.position = packet.position;
-            this.orientation = packet.orientation;
-
-            pk.tankId = this.player.getUsername()
-            pk.angularVelocity = packet.angularVelocity;
-            pk.control = packet.control;
-            pk.impulse = packet.impulse;
-            pk.orientation = packet.orientation;
-            pk.position = packet.position;
-
-            this.battle.broadcastPacket(pk, [this.player.getUsername()])
-        }
-
-        if (packet instanceof SendTankTurretDirectionPacket) {
-            const pk = new SetTankTurretAngleControlPacket();
-
-            pk.tankId = this.player.getUsername();
-            pk.angle = packet.angle;
-            pk.control = packet.control;
-
-            this.battle.broadcastPacket(pk, [this.player.getUsername()])
-        }
-
-        if (packet instanceof SendMoveTankAndTurretPacket) {
-            const pk = new SetMoveTankAndTurretPacket();
-
-            this.position = packet.position;
-            this.orientation = packet.orientation;
-
-            pk.tankId = this.player.getUsername();
-            pk.angularVelocity = packet.angularVelocity;
-            pk.control = packet.control;
-            pk.impulse = packet.impulse;
-            pk.orientation = packet.orientation;
-            pk.position = packet.position;
-            pk.turretDirection = packet.turretDirection;
-
-            this.battle.broadcastPacket(pk, [this.player.getUsername()])
-        }
     }
 
     public getData(): IUserTankResourcesData {

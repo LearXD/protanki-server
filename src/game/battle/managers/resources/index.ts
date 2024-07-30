@@ -12,17 +12,17 @@ export class BattleResourcesManager {
 
     public sendBattleMapProperties(client: Player, spectator: boolean = false) {
         const data = client.getServer().getMapsManager()
-            .getMapData(this.battle.getMap().mapId, this.battle.getMap().theme)
+            .getMapData(this.battle.getMap().getId(), this.battle.getMap().getTheme())
 
         if (!data) {
-            Logger.error(`Map data not found for map ${this.battle.getMap().mapId} and theme ${this.battle.getMap().theme}`)
+            Logger.error(`Map data not found for map ${this.battle.getMap().getId()} and theme ${this.battle.getMap().getTheme()}`)
             return;
         }
 
         const packet = new SetBattleMapPropertiesPacket();
         packet.data = {
             kick_period_ms: 300000,
-            map_id: this.battle.getMap().mapId,
+            map_id: this.battle.getMap().getId(),
             mapId: data.mapId,
             invisible_time: 3500,
             spectator: spectator,
@@ -61,7 +61,7 @@ export class BattleResourcesManager {
 
     public async sendObjectsResources(player: Player) {
         const objects = player.getServer().getMapsManager()
-            .getMapResource(this.battle.getMap().mapId, this.battle.getMap().theme, 'objects.json')
+            .getMapResource(this.battle.getMap().getId(), this.battle.getMap().getTheme(), 'objects.json')
 
         if (!objects) {
             throw new Error('Objects data not found')
@@ -73,7 +73,7 @@ export class BattleResourcesManager {
 
     public async sendSkyboxResource(player: Player) {
         const skybox = player.getServer().getMapsManager()
-            .getMapResource(this.battle.getMap().mapId, this.battle.getMap().theme, 'skybox.json')
+            .getMapResource(this.battle.getMap().getId(), this.battle.getMap().getTheme(), 'skybox.json')
 
         if (!skybox) {
             throw new Error('Skybox data not found')
@@ -85,7 +85,7 @@ export class BattleResourcesManager {
 
     public async sendMapResources(player: Player) {
         const map = player.getServer().getMapsManager()
-            .getMapResource(this.battle.getMap().mapId, this.battle.getMap().theme, 'map.json')
+            .getMapResource(this.battle.getMap().getId(), this.battle.getMap().getTheme(), 'map.json')
 
         if (!map) {
             throw new Error('Map data not found')

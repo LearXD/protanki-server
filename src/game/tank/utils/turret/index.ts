@@ -4,7 +4,7 @@ import { Tank } from "../..";
 import { SimplePacket } from "../../../../network/packets/simple-packet";
 import { Vector3d } from "../../../../utils/vector-3d";
 import { Logger } from "../../../../utils/logger";
-import { IDamageModifiers } from "../../../battle/managers/damage/types";
+import { IDamageModifiers } from "../../../battle/managers/combat/types";
 import { Player } from "../../../player";
 import { IGarageItem, ITurretProperties, ITurretSfx } from "@/server/managers/garage/types";
 

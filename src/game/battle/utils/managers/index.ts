@@ -2,7 +2,7 @@ import { Battle } from "../.."
 import { BattleUtils } from "../battle"
 import { BattleBoxesManager } from "../../managers/boxes"
 import { BattleChatManager } from "../../managers/chat"
-import { BattleDamageManager } from "../../managers/damage"
+import { BattleCombatManager } from "../../managers/combat"
 import { BattleEffectsManager } from "../../managers/effects"
 import { BattleMinesManager } from "../../managers/mines"
 import { BattleModeManager } from "../../managers/mode"
@@ -10,18 +10,19 @@ import { BattlePlayersManager } from "../../managers/players"
 import { BattleResourcesManager } from "../../managers/resources"
 import { BattleStatisticsManager } from "../../managers/statistics"
 import { BattleTaskManager } from "../../managers/task"
-import { BattleTeamsManager } from "../../managers/teams"
 import { BattleViewersManager } from "../../managers/viewers"
+import { BattleCollisionsManager } from "../../managers/collisions"
 
 export abstract class BattleManager {
 
     protected modeManager: BattleModeManager
+    protected collisionManager: BattleCollisionsManager
+
     protected statisticsManager: BattleStatisticsManager
-    protected damageManager: BattleDamageManager
+    protected damageManager: BattleCombatManager
 
     protected playersManager: BattlePlayersManager
     protected viewersManager: BattleViewersManager
-    protected teamsManager: BattleTeamsManager
 
     protected chatManager: BattleChatManager
 
@@ -35,12 +36,14 @@ export abstract class BattleManager {
 
     protected registerManagers(battle: Battle) {
         this.modeManager = BattleUtils.getBattleManager(battle)
+
+        this.collisionManager = new BattleCollisionsManager(battle)
+
         this.statisticsManager = new BattleStatisticsManager(battle)
-        this.damageManager = new BattleDamageManager(battle)
+        this.damageManager = new BattleCombatManager(battle)
 
         this.playersManager = new BattlePlayersManager(battle)
         this.viewersManager = new BattleViewersManager(battle)
-        this.teamsManager = new BattleTeamsManager(battle)
 
         this.chatManager = new BattleChatManager(battle)
 
@@ -52,15 +55,16 @@ export abstract class BattleManager {
         this.taskManager = new BattleTaskManager()
     }
 
+    public getCollisionManager(): BattleCollisionsManager {
+        return this.collisionManager
+    }
+
     public getPlayersManager(): BattlePlayersManager {
         return this.playersManager
     }
 
     public getViewersManager(): BattleViewersManager {
         return this.viewersManager
-    }
-    public getTeamsManager(): BattleTeamsManager {
-        return this.teamsManager
     }
 
     public getChatManager(): BattleChatManager {
@@ -91,7 +95,7 @@ export abstract class BattleManager {
         return this.boxesManager
     }
 
-    public getDamageManager(): BattleDamageManager {
+    public getDamageManager(): BattleCombatManager {
         return this.damageManager
     }
 

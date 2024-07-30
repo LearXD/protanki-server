@@ -3,7 +3,6 @@ import { SetBattleAddUserPropertiesPacket } from "../../../../network/packets/se
 import { SetBattleFundPacket } from "../../../../network/packets/set-battle-fund";
 import { SetBattleRewardsPacket } from "../../../../network/packets/set-battle-rewards";
 import { SetBattleDataPacket } from "../../../../network/packets/set-battle-data";
-import { SetBattleUserStatusPacket } from "../../../../network/packets/set-battle-user-status";
 import { Player } from "../../../player";
 import { SetBattleUsersPropertiesPacket } from "../../../../network/packets/set-battle-users-properties";
 

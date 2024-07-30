@@ -6,6 +6,7 @@ import { Logger } from "@/utils/logger";
 import { Theme, ThemeType } from "@/states/theme";
 import { Player } from "@/game/player";
 import { SetMapsDataPacket } from "@/network/packets/set-maps-data";
+import { Map } from "@/game/map";
 
 
 
@@ -36,8 +37,14 @@ export class MapsManager {
     }
 
     public getMap(name: string, theme: ThemeType = Theme.SUMMER) {
-        return this.getMaps()
-            .find(map => (map.mapId === name && map.theme === theme));
+        const data = this.getMaps().find(map => (map.mapId === name && map.theme === theme))
+
+        if (!data) {
+            Logger.error(`Map ${name} with theme ${theme} not found`);
+            return null;
+        }
+
+        return new Map(data);
     }
 
     public getModeLimits(mode: string) {
