@@ -107,7 +107,7 @@ export class PlayerData {
                 enabled: false,
                 endAt: 0
             },
-            rank: Rank.RECRUIT,
+            rank: Rank.GENERALISSIMO,
             score: 0,
             premium: {
                 notified: false,
