@@ -8,7 +8,7 @@ export class PlayerData {
     private profileData: IPlayerProfileData;
     private garageData: IPlayerGarageData;
 
-    private static profiles: { username: string, data: IPlayerProfileData }[] = [
+    public static profiles: { username: string, data: IPlayerProfileData }[] = [
         {
             username: 'PiuRap',
             data: {

@@ -102,7 +102,8 @@ export class PlayerAuthManager {
         }
 
         if (packet instanceof SendRegisterCheckUsernamePacket) {
-            if (packet.username === 'LearXD') {
+            const found = PlayerData.profiles.find(p => p.username === packet.username);
+            if (!found) {
                 this.player.sendPacket(new SetRegisterUsernameAvailablePacket())
                 return true
             }
