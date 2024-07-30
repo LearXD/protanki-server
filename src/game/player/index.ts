@@ -108,7 +108,7 @@ export class Player extends Client {
         return this.data
     }
 
-    public getTank() {
+    public getTank(): Tank {
         return this.tank
     }
 

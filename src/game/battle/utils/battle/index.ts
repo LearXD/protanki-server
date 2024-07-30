@@ -1,11 +1,11 @@
 import { v4 } from "uuid"
 import { Battle } from "../.."
 import { BattleMode } from "../../../../states/battle-mode"
-import { BattleDeathMatchModeManager } from "../../managers/mode/modes/death-match"
 import { BattleTeamDeathMatchModeManager } from "../../managers/mode/modes/team-death-match"
 import { BattleCaptureTheFlagModeManager } from "../../managers/mode/modes/capture-the-flag"
-import { BattleControlPointsModeManager } from "../../managers/mode/modes/control-points"
 import { Logger } from "@/utils/logger"
+import { BattleDeathMatchModeManager } from "../../managers/mode/modes/death-match"
+import { BattleControlPointsModeManager } from "../../managers/mode/modes/control-point"
 
 export class BattleUtils {
 

@@ -19,7 +19,6 @@ import { SetBattleTimePacket } from "../../network/packets/set-battle-time"
 import { Rank } from "../../states/rank"
 import { SetBattleUserLeftNotificationPacket } from "../../network/packets/set-battle-user-left-notification"
 import { BattleManager } from "./utils/managers"
-import { IMap } from "@/server/managers/maps/types"
 import { TimeType } from "./managers/task/types"
 import { BattleUtils } from "./utils/battle"
 import { Team, TeamType } from "@/states/team"
@@ -96,7 +95,7 @@ export class Battle extends BattleManager {
         this.running = false
 
         this.taskManager.unregisterAll();
-        this.getStatisticsManager().sendFinishRewards()
+        this.modeManager.sendFinishRewards()
 
         this.taskManager.scheduleTask(this.restart.bind(this), 10, TimeType.SECONDS)
     }
@@ -127,9 +126,7 @@ export class Battle extends BattleManager {
 
         if (!isSpectator) {
             if (!this.isRunning()) this.start()
-
             this.getPlayersManager().addPlayer(player);
-            this.getStatisticsManager().addPlayer(player)
         }
 
         /** SEND DATA & RESOURCES */
@@ -138,10 +135,10 @@ export class Battle extends BattleManager {
         this.resourcesManager.sendTurretsData(player)
 
         /** SEND PROPERTIES & STATISTICS */
-        this.statisticsManager.sendBattleData(player, true)
+        this.modeManager.sendBattleData(player, isSpectator)
         this.modeManager.sendUsersProperties(player) // SetTeamBattleUsersPropertiesPacket
         if (!isSpectator) {
-            this.statisticsManager.sendAddUserProperties(player)
+            this.modeManager.broadcastAddUserProperties(player)
             this.modeManager.broadcastUserStats(player)
         }
 
@@ -188,8 +185,6 @@ export class Battle extends BattleManager {
             }
 
             this.sendPlayerLeft(player)
-
-            this.getStatisticsManager().removePlayer(player.getUsername());
             this.getPlayersManager().removePlayer(player)
         }
 

@@ -14,7 +14,7 @@ export class BattleCollisionsManager {
     public addObject(object: BattleObject) {
         if (this.objects.has(object.getName())) {
             Logger.warn(`Object ${object.getName()} already exists in the battle ${this.battle.getBattleId()}`);
-            return;
+            // return;
         }
         this.objects.set(object.getName(), object);
     }

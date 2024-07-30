@@ -1,15 +1,15 @@
 import { Player } from "@/game/player";
 import { BattleObject } from "../../managers/collisions/utils/object";
-import { TeamType } from "@/states/team";
 import { Vector3d } from "@/utils/vector-3d";
 import { BattleCaptureTheFlagModeManager } from "../../managers/mode/modes/capture-the-flag";
-import { FlagState } from "../../managers/mode/modes/capture-the-flag/types";
+import { CaptureTheFlagTeam, FlagState } from "../../managers/mode/modes/capture-the-flag/types";
+import { Team } from "@/states/team";
 
 export class Flag extends BattleObject {
 
     public constructor(
         public readonly manager: BattleCaptureTheFlagModeManager,
-        public readonly team: Extract<TeamType, 'RED' | 'BLUE'>,
+        public readonly team: CaptureTheFlagTeam,
         position: Vector3d,
     ) {
         super(`${team}_FLAG`, position, 250);
@@ -21,8 +21,14 @@ export class Flag extends BattleObject {
         if (player.getTank().getTeam() === this.team) {
             if (flagState === FlagState.DROPPED) {
                 this.manager.handleReturnFlag(player, this);
-                return true;
+                return false;
             }
+
+            if (flagState === FlagState.PLACED && player.getTank().hasFlag) {
+                this.manager.handleCaptureFlag(player);
+                return false;
+            }
+
             return false;
         }
 
@@ -32,7 +38,7 @@ export class Flag extends BattleObject {
         }
 
         if (flagState === FlagState.DROPPED) {
-            this.manager.handleCaptureFlag(player, this);
+            this.manager.handleTakeFlag(player, this);
             return true;
         }
 

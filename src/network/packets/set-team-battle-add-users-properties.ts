@@ -13,14 +13,14 @@ export interface IUser {
     name: string;
 }
 
-export class SetUserIdUsersInfoTeamPacket extends Packet {
+export class SetTeamBattleAddUsersPropertiesPacket extends Packet {
 
     public userId: string
     public usersInfo: IUser[]
     public team: string
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_USER_ID_USERS_INFO_TEAM, bytes)
+        super(Protocol.SET_TEAM_BATTLE_ADD_USERS_PROPERTIES, bytes)
     }
 
     public decode() {

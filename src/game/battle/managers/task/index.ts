@@ -8,7 +8,7 @@ export class BattleTaskManager {
 
     public scheduleTask(
         callable: ITask,
-        time: number,
+        time: number = 1000,
         timeType: TimeType = TimeType.MILLISECONDS,
         owner?: string
     ) {

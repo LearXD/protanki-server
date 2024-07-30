@@ -3,13 +3,13 @@ import { Team } from "../../states/team";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetWinnerTeamPacket extends Packet {
+export class SetCaptureFlagPacket extends Packet {
 
     public winnerTeam: string
     public delivererTankId: string
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_WINNER_TEAM, bytes)
+        super(Protocol.SET_CAPTURE_FLAG, bytes)
     }
 
     public decode() {

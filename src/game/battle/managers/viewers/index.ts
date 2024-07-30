@@ -1,9 +1,11 @@
+import { Team } from "@/states/team";
 import { Battle } from "../..";
 import { SetRemoveViewingBattlePacket } from "../../../../network/packets/set-remove-viewing-battle";
 import { SetViewingBattlePacket } from "../../../../network/packets/set-viewing-battle";
 import { SetViewingBattleDataPacket } from "../../../../network/packets/set-viewing-battle-data";
 import { BattleMode } from "../../../../states/battle-mode";
 import { Player } from "../../../player";
+import { BattleTeamModeManager } from "../mode/modes/team/team";
 
 export class BattleViewersManager {
 
@@ -83,22 +85,43 @@ export class BattleViewersManager {
             parkourMode: this.battle.isParkourMode(),
             equipmentConstraintsMode: this.battle.getEquipmentConstraintsMode(),
             reArmorEnabled: this.battle.isReArmorEnabled(),
-            // TODO: get team users
-            // usersBlue: this.battle.getMode() === BattleMode.DM ? [] : [],
-            // usersRed: this.battle.getMode() === BattleMode.DM ? [] : [],
-            // scoreRed: this.battle.getMode() === BattleMode.DM ? 0 : 0,
-            // scoreBlue: this.battle.getMode() === BattleMode.DM ? 0 : 0,
-            // autoBalance: this.battle.haveAutoBalance(),
-            // friendlyFire: this.battle.isFriendlyFire(),
         }
 
         if (this.battle.getMode() === BattleMode.DM) {
             packet.data.users = this.battle.getPlayersManager().getPlayers().map(player => ({
-                kills: this.battle.getStatisticsManager().getPlayerKills(player.getUsername()),
-                score: this.battle.getStatisticsManager().getPlayerScore(player.getUsername()),
+                kills: player.getTank().getKills(),
+                score: player.getTank().getScore(),
                 suspicious: false,
                 user: player.getUsername(),
             }));
+        }
+
+        if ([BattleMode.CP, BattleMode.CTF, BattleMode.TDM].includes(this.battle.getMode())) {
+            const manager = this.battle.getModeManager() as BattleTeamModeManager;
+
+            packet.data.autoBalance = this.battle.haveAutoBalance();
+            packet.data.friendlyFire = this.battle.isFriendlyFire();
+
+            packet.data.scoreRed = manager.redPoints;
+            packet.data.scoreBlue = manager.bluePoints;
+
+            packet.data.usersRed = this.battle.getPlayersManager().getPlayers()
+                .filter(player => player.getTank().getTeam() === Team.RED)
+                .map(player => ({
+                    kills: player.getTank().getKills(),
+                    score: player.getTank().getScore(),
+                    suspicious: false,
+                    user: player.getUsername(),
+                }));
+
+            packet.data.usersBlue = this.battle.getPlayersManager().getPlayers()
+                .filter(player => player.getTank().getTeam() === Team.BLUE)
+                .map(player => ({
+                    kills: player.getTank().getKills(),
+                    score: player.getTank().getScore(),
+                    suspicious: false,
+                    user: player.getUsername(),
+                }));
         }
 
         client.sendPacket(packet);

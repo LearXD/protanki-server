@@ -8,6 +8,9 @@ import { SetAddBattleOnListPacket } from "@/network/packets/set-add-battle-on-li
 import { LayoutState } from "@/states/layout-state";
 import { SimplePacket } from "@/network/packets/simple-packet";
 import { SetRemoveBattleFromListPacket } from "@/network/packets/set-remove-battle-from-list";
+import { BattleMode } from "@/states/battle-mode";
+import { EquipmentConstraintsMode } from "@/states/equipment-constraints-mode";
+import { Rank } from "@/states/rank";
 
 export class BattlesManager {
 
@@ -19,7 +22,26 @@ export class BattlesManager {
         private readonly server: Server
     ) {
         this.createBattle('For Newbies', 'map_sandbox')
-        // this.createBattle('For Newbies 2', 'map_noise')
+        this.createBattle('For Newbies 2', 'map_sandbox', {
+            autoBalance: true,
+            battleMode: BattleMode.CTF,
+            equipmentConstraintsMode: EquipmentConstraintsMode.NONE,
+            friendlyFire: false,
+            scoreLimit: 10,
+            timeLimitInSec: 60 * 10,
+            maxPeopleCount: 2,
+            parkourMode: false,
+            privateBattle: false,
+            proBattle: false,
+            rankRange: {
+                max: Rank.GENERALISSIMO,
+                min: Rank.RECRUIT
+            },
+            reArmorEnabled: true,
+            withoutBonuses: true,
+            withoutCrystals: false,
+            withoutSupplies: false
+        })
     }
 
     public getData(_path: string) {

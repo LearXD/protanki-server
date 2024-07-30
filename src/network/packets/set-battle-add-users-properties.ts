@@ -12,13 +12,13 @@ export interface IUser {
     name: string;
 }
 
-export class SetBattleAddUserPropertiesPacket extends Packet {
+export class SetBattleAddUsersPropertiesPacket extends Packet {
 
     public userId: string;
     public users: IUser[];
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_BATTLE_CHAT_CONFIG, bytes)
+        super(Protocol.SET_BATTLE_ADD_USERS_PROPERTIES, bytes)
     }
 
     public decode() {

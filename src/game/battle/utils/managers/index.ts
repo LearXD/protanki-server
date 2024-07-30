@@ -8,7 +8,6 @@ import { BattleMinesManager } from "../../managers/mines"
 import { BattleModeManager } from "../../managers/mode"
 import { BattlePlayersManager } from "../../managers/players"
 import { BattleResourcesManager } from "../../managers/resources"
-import { BattleStatisticsManager } from "../../managers/statistics"
 import { BattleTaskManager } from "../../managers/task"
 import { BattleViewersManager } from "../../managers/viewers"
 import { BattleCollisionsManager } from "../../managers/collisions"
@@ -18,7 +17,6 @@ export abstract class BattleManager {
     protected modeManager: BattleModeManager
     protected collisionManager: BattleCollisionsManager
 
-    protected statisticsManager: BattleStatisticsManager
     protected damageManager: BattleCombatManager
 
     protected playersManager: BattlePlayersManager
@@ -39,7 +37,6 @@ export abstract class BattleManager {
 
         this.collisionManager = new BattleCollisionsManager(battle)
 
-        this.statisticsManager = new BattleStatisticsManager(battle)
         this.damageManager = new BattleCombatManager(battle)
 
         this.playersManager = new BattlePlayersManager(battle)
@@ -85,10 +82,6 @@ export abstract class BattleManager {
 
     public getEffectsManager(): BattleEffectsManager {
         return this.effectsManager
-    }
-
-    public getStatisticsManager(): BattleStatisticsManager {
-        return this.statisticsManager
     }
 
     public getBoxesManager(): BattleBoxesManager {

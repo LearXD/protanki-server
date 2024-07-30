@@ -1,7 +1,7 @@
 import { Player } from "@/game/player";
-import { BattleTeamModeManager } from "./team";
 import { SetLoadControlPointPacket } from "@/network/packets/set-load-control-point";
 import { Vector3d } from "@/utils/vector-3d";
+import { BattleTeamModeManager } from "../team/team";
 
 export class BattleControlPointsModeManager extends BattleTeamModeManager {
 

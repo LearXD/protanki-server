@@ -116,7 +116,7 @@ import { SetCrystalsPacket } from "./packets/set-crystals";
 import { SetRemoveBonusBoxPacket } from "./packets/set-remove-bonus-box";
 import { SetBattleRewardsPacket } from "./packets/set-battle-rewards";
 import { SetAchievementMessagePacket } from "./packets/set-achievement-message";
-import { SetBattleAddUserPropertiesPacket } from "./packets/set-battle-chat-config";
+import { SetBattleAddUsersPropertiesPacket } from "./packets/set-battle-add-users-properties";
 import { SetBattleUserLeftNotificationPacket } from "./packets/set-battle-user-left-notification";
 import { SetRemoveTankPacket } from "./packets/set-remove-tank";
 import { SetAddTankEffectPacket } from "./packets/set-add-tank-effect";
@@ -134,12 +134,12 @@ import { SetBattleMessagePacket } from "./packets/set-battle-message";
 import { SetLoadCaptureTheFlagPacket } from "./packets/set-load-capture-the-flag";
 import { SetTeamBattleUsersPropertiesPacket } from "./packets/set-team-battle-users-properties";
 import { SetTeamBattleUserStatPacket } from "./packets/set-team-battle-user-stat";
-import { SetWinnerTeamPacket } from "./packets/set-winner-team";
+import { SetCaptureFlagPacket } from "./packets/set-capture-flag";
 import { SetTeamScorePacket } from "./packets/set-team-score";
 import { SetStartRailgunShotPacket } from "./packets/set-start-railgun-shot";
 import { SetRailgunShotPacket } from "./packets/set-railgun-shot";
 import { SetTankFlagPacket } from "./packets/set-tank-flag";
-import { SetUserIdUsersInfoTeamPacket } from "./packets/set-user-id-users-info-team";
+import { SetTeamBattleAddUsersPropertiesPacket } from "./packets/set-team-battle-add-users-properties";
 import { SetStormTargetShotPacket } from "./packets/set-storm-target-shot";
 import { SetUserNewRankPacket } from "./packets/set-user-new-rank";
 import { SetUserRankUpDialogPacket } from "./packets/set-user-rank-up-dialog";
@@ -411,7 +411,7 @@ export class Network {
         this.registerPacket(Protocol.SET_TEAM_BATTLE_USERS_PROPERTIES, SetTeamBattleUsersPropertiesPacket)
         this.registerPacket(Protocol.SET_TEAM_BATTLE_USER_STAT, SetTeamBattleUserStatPacket)
 
-        this.registerPacket(Protocol.SET_WINNER_TEAM, SetWinnerTeamPacket)
+        this.registerPacket(Protocol.SET_CAPTURE_FLAG, SetCaptureFlagPacket)
         this.registerPacket(Protocol.SET_TEAM_SCORE, SetTeamScorePacket)
 
         this.registerPacket(Protocol.SET_BATTLE_MINES_RESOURCES, SetBattleMinesResourcesPacket)
@@ -426,7 +426,7 @@ export class Network {
 
         this.registerPacket(Protocol.SEND_SHOW_DAMAGE_INDICATOR, SendShowDamageIndicatorPacket)
 
-        this.registerPacket(Protocol.SET_USER_ID_USERS_INFO_TEAM, SetUserIdUsersInfoTeamPacket)
+        this.registerPacket(Protocol.SET_TEAM_BATTLE_ADD_USERS_PROPERTIES, SetTeamBattleAddUsersPropertiesPacket)
         this.registerPacket(Protocol.SEND_REQUEST_USER_DATA, SendRequestUserDataPacket)
         this.registerPacket(Protocol.SET_REMOVE_USER_PLAYING, SetRemoveUserPlayingPacket)
         this.registerPacket(Protocol.SET_BATTLE_USER_LEFT_NOTIFICATION, SetBattleUserLeftNotificationPacket)
@@ -548,7 +548,7 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_BONUS_BOX, SetRemoveBonusBoxPacket)
         this.registerPacket(Protocol.SET_BATTLE_REWARDS, SetBattleRewardsPacket)
         this.registerPacket(Protocol.SET_ACHIEVEMENT_MESSAGE, SetAchievementMessagePacket)
-        this.registerPacket(Protocol.SET_BATTLE_CHAT_CONFIG, SetBattleAddUserPropertiesPacket)
+        this.registerPacket(Protocol.SET_BATTLE_ADD_USERS_PROPERTIES, SetBattleAddUsersPropertiesPacket)
         this.registerPacket(Protocol.SET_BONUS_BOX_COLLECTED, SetBonusBoxCollectedPacket)
         this.registerPacket(Protocol.SET_SMOKY_CRITICAL_EFFECT, SetSmokyCriticalEffectPacket)
 

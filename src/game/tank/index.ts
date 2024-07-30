@@ -44,20 +44,28 @@ export class Tank {
 
     public incarnation: number = 0;
 
+    /** TANK STATES */
     public hasFlag: boolean = false;
     public changedEquipment = false;
     private visible: boolean = false;
     private alive: boolean = false
 
+    /** TANK PROPERTIES */
     private health: number = 0;
     private temperature: number = 0;
 
+    /** TANK POSITION */
     private position: Vector3d = new Vector3d(0, 0, 0);
     private orientation: Vector3d = new Vector3d(0, 0, 0);
 
+    /** BATTLE STATS */
+    public score: number = 0;
+    public kills: number = 0;
+    public deaths: number = 0;
+
+    /** TANK EQUIPMENTS */
     private turret: TurretHandler
     private hull: Hull
-
 
     public constructor(
         public readonly player: Player,
@@ -149,6 +157,10 @@ export class Tank {
         return this.alive && this.visible
     }
 
+    public getKills() { return this.kills }
+    public getDeaths() { return this.deaths }
+    public getScore() { return this.score }
+
     public sendVisible() {
         this.visible = true
         const setTankVisiblePacket = new SetTankVisiblePacket();
@@ -232,29 +244,36 @@ export class Tank {
         )
     }
 
-
-
+    /** MORTE POR TROCA DE EQUIPAMENTO */
     public sendRespawnDelay(delay: number) {
         const packet = new SetDestroyTankPacket();
+
         packet.tank = this.player.getUsername();
         packet.respawnDelay = delay;
         this.battle.broadcastPacket(packet);
 
-        this.onDestroyed();
+        this.battle.getModeManager().handleDeath(this.player)
+
+        this.handleDeath();
     }
 
+    /** MORTE POR AUTO DESTRUIÇÃO */
     public suicide() {
-        this.battle.getDamageManager().handleKill(this.player)
-
         const packet = new SetAutoDestroyPacket()
         packet.tankId = this.player.getUsername()
         packet.respawnDelay = 3000
         this.battle.broadcastPacket(packet)
 
-        this.onDestroyed();
+        this.handleDeath();
     }
 
+    /** MORTO POR ALGUÉM */
     public kill(killer: Player) {
+
+        if (killer.getUsername() === this.player.getUsername()) {
+            this.suicide();
+        }
+
         const packet = new SetTankDestroyedPacket();
 
         packet.tankId = this.player.getUsername();
@@ -262,7 +281,9 @@ export class Tank {
         packet.respawnDelay = 3000;
 
         this.battle.broadcastPacket(packet);
-        this.onDestroyed()
+
+        this.battle.getModeManager().handleKill(killer, this.player)
+        this.handleDeath()
     }
 
     public sendTankSpeed(multiply: number = 1) {
@@ -276,10 +297,12 @@ export class Tank {
         this.player.sendPacket(setTankSpeedPacket);
     }
 
-    public onDestroyed() {
+    public handleDeath() {
         this.alive = false;
         this.visible = false;
         this.health = 0;
+
+        this.battle.getModeManager().handleDeath(this.player)
     }
 
     public handleSuicide() {
