@@ -1,8 +1,8 @@
 export class Team {
-    static readonly RED = 'RED';
-    static readonly BLUE = 'BLUE';
-    static readonly NONE = 'NONE';
-    static readonly SPECTATOR = 'SPECTATOR';
+    static readonly RED = 'red';
+    static readonly BLUE = 'blue';
+    static readonly NONE = 'none';
+    static readonly SPECTATOR = 'spectator';
 
     static readonly TEAMS = [
         Team.RED,

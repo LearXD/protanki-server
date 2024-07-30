@@ -21,14 +21,15 @@ export class BattlesManager {
     constructor(
         private readonly server: Server
     ) {
+        /*
         this.createBattle('For Newbies', 'map_sandbox')
         this.createBattle('For Newbies 2', 'map_sandbox', {
             autoBalance: true,
             battleMode: BattleMode.CTF,
             equipmentConstraintsMode: EquipmentConstraintsMode.NONE,
             friendlyFire: false,
-            scoreLimit: 10,
-            timeLimitInSec: 60 * 10,
+            scoreLimit: 1,
+            timeLimitInSec: 30,//60 * 10,
             maxPeopleCount: 2,
             parkourMode: false,
             privateBattle: false,
@@ -42,6 +43,7 @@ export class BattlesManager {
             withoutCrystals: false,
             withoutSupplies: false
         })
+            */
     }
 
     public getData(_path: string) {
@@ -53,7 +55,7 @@ export class BattlesManager {
         mapName: string,
         config?: IBattleData
     ) {
-        const map = this.server.getMapsManager().getMap(mapName, config?.theme)
+        const map = this.server.getMapsManager().findMap(mapName, config?.theme)
 
         if (!map) {
             Logger.error(`Could not create battle ${name} because map ${mapName} was not found`)

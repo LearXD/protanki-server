@@ -2,14 +2,14 @@ import { Player } from "@/game/player";
 import { BattleObject } from "../../managers/collisions/utils/object";
 import { Vector3d } from "@/utils/vector-3d";
 import { BattleCaptureTheFlagModeManager } from "../../managers/mode/modes/capture-the-flag";
-import { CaptureTheFlagTeam, FlagState } from "../../managers/mode/modes/capture-the-flag/types";
-import { Team } from "@/states/team";
+import { FlagState } from "../../managers/mode/modes/capture-the-flag/types";
+import { TeamType } from "@/states/team";
 
 export class Flag extends BattleObject {
 
     public constructor(
         public readonly manager: BattleCaptureTheFlagModeManager,
-        public readonly team: CaptureTheFlagTeam,
+        public readonly team: TeamType,
         position: Vector3d,
     ) {
         super(`${team}_FLAG`, position, 250);

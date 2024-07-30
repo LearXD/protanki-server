@@ -3,6 +3,7 @@ import { Battle } from "../..";
 import { SetBattleDataPacket } from "@/network/packets/set-battle-data";
 import { SetBattleFundPacket } from "@/network/packets/set-battle-fund";
 import { SetBattleRewardsPacket } from "@/network/packets/set-battle-rewards";
+import { IMapSpawn } from "@/game/map/types";
 
 export abstract class BattleModeManager {
 
@@ -39,6 +40,10 @@ export abstract class BattleModeManager {
         packet.timeLeft = this.battle.getTimeLeft()
 
         client.sendPacket(packet);
+    }
+
+    public getRandomSpawn(player: Player): IMapSpawn {
+        return null
     }
 
     public sendFinishRewards() {

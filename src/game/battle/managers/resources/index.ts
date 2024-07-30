@@ -11,8 +11,7 @@ export class BattleResourcesManager {
     ) { }
 
     public sendBattleMapProperties(client: Player, spectator: boolean = false) {
-        const data = client.getServer().getMapsManager()
-            .getMapData(this.battle.getMap().getId(), this.battle.getMap().getTheme())
+        const data = this.battle.getMap().getProperties();
 
         if (!data) {
             Logger.error(`Map data not found for map ${this.battle.getMap().getId()} and theme ${this.battle.getMap().getTheme()}`)
@@ -60,8 +59,7 @@ export class BattleResourcesManager {
     }
 
     public async sendObjectsResources(player: Player) {
-        const objects = player.getServer().getMapsManager()
-            .getMapResource(this.battle.getMap().getId(), this.battle.getMap().getTheme(), 'objects.json')
+        const objects = this.battle.getMap().getResource('objects.json')
 
         if (!objects) {
             throw new Error('Objects data not found')
@@ -72,8 +70,7 @@ export class BattleResourcesManager {
     }
 
     public async sendSkyboxResource(player: Player) {
-        const skybox = player.getServer().getMapsManager()
-            .getMapResource(this.battle.getMap().getId(), this.battle.getMap().getTheme(), 'skybox.json')
+        const skybox = this.battle.getMap().getResource('skybox.json')
 
         if (!skybox) {
             throw new Error('Skybox data not found')
@@ -84,8 +81,7 @@ export class BattleResourcesManager {
     }
 
     public async sendMapResources(player: Player) {
-        const map = player.getServer().getMapsManager()
-            .getMapResource(this.battle.getMap().getId(), this.battle.getMap().getTheme(), 'map.json')
+        const map = this.battle.getMap().getResource('map.json')
 
         if (!map) {
             throw new Error('Map data not found')

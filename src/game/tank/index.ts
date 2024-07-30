@@ -47,8 +47,8 @@ export class Tank {
     /** TANK STATES */
     public hasFlag: boolean = false;
     public changedEquipment = false;
-    private visible: boolean = false;
-    private alive: boolean = false
+    public visible: boolean = false;
+    public alive: boolean = false
 
     /** TANK PROPERTIES */
     private health: number = 0;
@@ -197,8 +197,17 @@ export class Tank {
     public prepareRespawn() {
         this.incarnation++;
 
-        this.position = new Vector3d(-4669.8310546875, -1442.4090576171875, 200);
-        this.orientation = new Vector3d(0, 0, -1.5);
+        const spawn = this.battle.getModeManager().getRandomSpawn(this.player)
+
+        if (!spawn) {
+            Logger.warn("Invalid spawn position")
+            return;
+        }
+
+        this.position = Vector3d.fromInterface(spawn.position)
+        this.position.y += 200;
+
+        this.orientation = Vector3d.fromInterface(spawn.rotation)
         this.sendTankSpeed();
 
         this.setCameraPosition(this.position, this.orientation)

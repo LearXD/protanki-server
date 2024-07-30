@@ -84,9 +84,12 @@ export class Battle extends BattleManager {
         this.startedAt = Date.now()
         this.running = true
 
+        this.modeManager.init();
         this.restartTime();
 
         for (const player of this.getPlayersManager().getPlayers()) {
+            player.getTank().alive = false;
+            player.getTank().visible = false;
             player.getTank().prepareRespawn();
         }
     }
@@ -164,7 +167,9 @@ export class Battle extends BattleManager {
         /** SEND BATTLE EFFECTS */
         this.effectsManager.sendBattleEffects(player);
         if (!isSpectator) {
-            player.getGarageManager().sendSupplies(player);
+            if (!this.isWithoutSupplies()) {
+                player.getGarageManager().sendSupplies(player);
+            }
         }
 
         player.setSubLayoutState(LayoutState.BATTLE)

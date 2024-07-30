@@ -4,11 +4,12 @@ import { SetLoadCaptureTheFlagPacket } from "@/network/packets/set-load-capture-
 import { Vector3d } from "@/utils/vector-3d";
 import { Flag } from "@/game/battle/objects/flag";
 import { Team, TeamType } from "@/states/team";
-import { CaptureTheFlagTeam, FlagState } from "./types";
 import { SetTankFlagPacket } from "@/network/packets/set-tank-flag";
 import { SetFlagReturnedPacket } from "@/network/packets/set-flag-returned";
 import { SetFlagDroppedPacket } from "@/network/packets/set-flag-dropped";
 import { SetCaptureFlagPacket } from "@/network/packets/set-capture-flag";
+import { FlagState } from "./types";
+import { MathUtils } from "@/utils/math";
 
 export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
 
@@ -16,17 +17,20 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
     public blueFlagState: FlagState = FlagState.PLACED
 
     public init(): void {
+        super.init();
         this.initFlag(Team.RED)
         this.initFlag(Team.BLUE)
     }
 
-    public initFlag(team: CaptureTheFlagTeam) {
+    public initFlag(team: TeamType) {
         switch (team) {
             case Team.RED: {
+                this.redFlagState = FlagState.PLACED
                 this.battle.getCollisionManager().addObject(new Flag(this, Team.RED, new Vector3d(4750, -1750, 80)))
                 break;
             }
             case Team.BLUE: {
+                this.blueFlagState = FlagState.PLACED
                 this.battle.getCollisionManager().addObject(new Flag(this, Team.BLUE, new Vector3d(-3750, 2750, 80)))
                 break;
             }
@@ -58,6 +62,21 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
         }
 
         player.sendPacket(packet);
+    }
+
+    public getSpawns() {
+        return this.battle.getMap().getSpawns()
+            .filter(spawn => spawn.type === Team.RED || spawn.type === Team.BLUE)
+    }
+
+    public getRandomSpawn(player: Player) {
+        const spawns = this.getSpawns().filter(spawn => spawn.type === player.getTank().getTeam())
+        if (spawns.length === 0) {
+            return null
+        }
+
+        const random = MathUtils.randomInt(0, spawns.length - 1)
+        return spawns[random]
     }
 
     public setTeamFlagState(team: TeamType, state: FlagState) {
@@ -101,7 +120,6 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
     }
 
     public handleReturnFlag(player: Player, flag: Flag) {
-        this.setTeamFlagState(flag.team, FlagState.PLACED)
         this.initFlag(flag.team)
 
         const packet = new SetFlagReturnedPacket();
@@ -124,18 +142,20 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
 
     public handleCaptureFlag(player: Player) {
         const team = player.getTank().getTeam() === Team.BLUE ? Team.RED : Team.BLUE
-
-        this.setTeamFlagState(team, FlagState.PLACED)
         player.getTank().hasFlag = false
-        this.initFlag(team)
-
-        this.addTeamScore(player.getTank().getTeam(), 1)
 
         const packet = new SetCaptureFlagPacket()
         packet.winnerTeam = player.getTank().getTeam()
         packet.delivererTankId = player.getUsername()
-
         this.battle.broadcastPacket(packet)
+
+        this.addTeamScore(player.getTank().getTeam(), 1)
+
+        if (this.battle.getScoreLimit() === this.getTeamScore(player.getTank().getTeam())) {
+            return this.battle.finish()
+        }
+
+        this.initFlag(team)
     }
 
 }

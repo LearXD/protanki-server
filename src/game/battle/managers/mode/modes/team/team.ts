@@ -11,6 +11,18 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
     public bluePoints: number = 0;
     public redPoints: number = 0;
 
+    public init() {
+        this.bluePoints = 0;
+        this.redPoints = 0;
+    }
+
+    public getTeamScore(team: TeamType): number {
+        switch (team) {
+            case Team.RED: return this.redPoints;
+            case Team.BLUE: return this.bluePoints;
+        }
+    }
+
     public addTeamScore(team: TeamType, increase: number): void {
 
         switch (team) {

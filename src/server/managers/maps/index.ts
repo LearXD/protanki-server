@@ -1,5 +1,6 @@
 
 import path from "path";
+
 import { IBattleAsset } from "./types";
 import { Server } from "@/server";
 import { Logger } from "@/utils/logger";
@@ -7,8 +8,6 @@ import { Theme, ThemeType } from "@/states/theme";
 import { Player } from "@/game/player";
 import { SetMapsDataPacket } from "@/network/packets/set-maps-data";
 import { Map } from "@/game/map";
-
-
 
 export class MapsManager {
 
@@ -21,22 +20,19 @@ export class MapsManager {
         this.data = this.getData('maps.json');
     }
 
-    public getMaps() { return this.data.maps }
-    public getBattlesLimits() { return this.data.battleLimits }
-
-    public getMapResource(map: string, theme: string, resource: string) {
-        return this.getData(path.join(map, theme, 'resources', resource));
+    public getMaps() {
+        return this.data.maps
     }
 
-    public getMapData(map: string, theme: string) {
-        return this.getData(path.join(map, theme, 'data.json'));
+    public getBattlesLimits() {
+        return this.data.battleLimits
     }
 
     public getData(_path: string) {
         return this.server.getAssetsManager().getData(path.join('maps', _path));
     }
 
-    public getMap(name: string, theme: ThemeType = Theme.SUMMER) {
+    public findMap(name: string, theme: ThemeType = Theme.SUMMER) {
         const data = this.getMaps().find(map => (map.mapId === name && map.theme === theme))
 
         if (!data) {
@@ -44,7 +40,7 @@ export class MapsManager {
             return null;
         }
 
-        return new Map(data);
+        return new Map(this, data);
     }
 
     public getModeLimits(mode: string) {

@@ -1,49 +1,26 @@
-import { IMap } from "./types";
+import path from 'path';
+import { MapsManager } from "@/server/managers/maps";
+import { MapDataManager } from './managers/data';
+import { IMapData, IMapSpawn } from './types';
 
-export class Map {
+export class Map extends MapDataManager {
+
     public constructor(
-        public readonly data: IMap,
+        public readonly manager: MapsManager,
+        data: IMapData
     ) {
-
+        super(data)
     }
 
-    public getName() {
-        return this.data.mapName;
+    public getProperties() {
+        return this.manager.getData(path.join(this.getPath(), 'properties.json'))
     }
 
-    public getId() {
-        return this.data.mapId;
+    public getResource(resource: string) {
+        return this.manager.getData(path.join(this.getPath(), 'resources', resource))
     }
 
-    public getTheme() {
-        return this.data.theme;
-    }
-
-    public getPreview() {
-        return this.data.preview;
-    }
-
-    public getMaxPeople() {
-        return this.data.maxPeople;
-    }
-
-    public getMinRank() {
-        return this.data.minRank;
-    }
-
-    public getMaxRank() {
-        return this.data.maxRank;
-    }
-
-    public getSupportedModes() {
-        return this.data.supportedModes;
-    }
-
-    public getAdditionalCrystalsPercent() {
-        return this.data.additionalCrystalsPercent;
-    }
-
-    public isEnabled() {
-        return this.data.enabled;
+    public getSpawns(): IMapSpawn[] {
+        return this.manager.getData(path.join(this.getPath(), 'spawns.json'))
     }
 }
