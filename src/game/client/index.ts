@@ -9,7 +9,7 @@ import { Server } from "../../server";
 import { Logger } from "../../utils/logger";
 import { PingPacket } from "../../network/packets/ping";
 import { ResolveCallbackPacket } from "../../network/packets/resolve-callback";
-import { SetGameLoadedPacket } from "../../network/packets/set-game-loaded";
+import { SetLoginSuccessfulPacket } from "../../network/packets/set-login-successful";
 import { SendLanguagePacket } from "../../network/packets/send-language";
 import { SendRequestLoadScreenPacket } from "../../network/packets/send-request-load-screen";
 import { PongPacket } from "../../network/packets/pong";
@@ -17,6 +17,8 @@ import { SendRequestUserDataPacket } from "../../network/packets/send-request-us
 import { IGNORE_PACKETS } from "../player/handlers/packet";
 import { ClientCaptchaManager } from "./managers/captcha";
 import { SetLatencyPacket } from "../../network/packets/set-latency";
+import { KickPacket } from "@/network/packets/kick";
+import { SetAlertPacket } from "@/network/packets/set-alert";
 
 export abstract class Client {
 
@@ -39,9 +41,10 @@ export abstract class Client {
         private readonly server: Server
     ) {
         this.captchaManager = new ClientCaptchaManager(this);
-
         this.sendCryptKeys();
     }
+
+    public getCaptchaManager() { return this.captchaManager }
 
     public getIdentifier() {
         return this.socket.remoteAddress + ':' + this.socket.remotePort;
@@ -86,7 +89,6 @@ export abstract class Client {
         this.sendPacket(packet);
     }
 
-    public getCaptchaManager() { return this.captchaManager }
 
     public addResourceLoading(callback: () => void) {
         this.resourcesLoaded++;
@@ -94,14 +96,16 @@ export abstract class Client {
         return this.resourcesLoaded;
     }
 
-    public update() {
-        this.sendPing();
-        this.lastPing = Date.now();
+    public showAlert(message: string) {
+        const packet = new SetAlertPacket()
+        packet.message = message;
+        this.sendPacket(packet);
     }
 
-    public sendGameLoaded() {
-        const setGameLoadedPacket = new SetGameLoadedPacket();
-        this.sendPacket(setGameLoadedPacket);
+    public kick(reason: string) {
+        const packet = new KickPacket();
+        packet.reason = reason;
+        this.sendPacket(packet);
     }
 
     public handlePacket(packet: SimplePacket) {
@@ -146,7 +150,14 @@ export abstract class Client {
             return;
         }
 
-        packet.setBytes(packet.encode());
+        try {
+            packet.setBytes(packet.encode());
+        } catch (error) {
+            Logger.error(`Error encoding packet ${packet.constructor.name} (${packet.getPacketId()})`)
+            Logger.error(error)
+            return;
+        }
+
         const buffer = packet.getBytes();
 
         if (buffer.length && encrypt) {
@@ -164,6 +175,11 @@ export abstract class Client {
             this.getSocket()
                 .write(data.subarray(i * ByteArray.MAX_BUFFER_SIZE, (i + 1) * ByteArray.MAX_BUFFER_SIZE));
         }
+    }
+
+    public update() {
+        this.sendPing();
+        this.lastPing = Date.now();
     }
 
 } 

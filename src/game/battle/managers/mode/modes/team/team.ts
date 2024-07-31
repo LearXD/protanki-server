@@ -5,6 +5,7 @@ import { Player } from "@/game/player";
 import { SetTeamBattleUserStatPacket } from "@/network/packets/set-team-battle-user-stat";
 import { SetTeamBattleAddUsersPropertiesPacket } from "@/network/packets/set-team-battle-add-users-properties";
 import { SetTeamScorePacket } from "@/network/packets/set-team-score";
+import { SetUserLeftBattlePacket } from "@/network/packets/set-user-left-battle";
 
 export abstract class BattleTeamModeManager extends BattleModeManager {
 
@@ -58,6 +59,12 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
         packet.team = player.getTank().getTeam();
 
         this.battle.broadcastPacket(packet, [player.getUsername()]);
+    }
+
+    public broadcastRemovePlayer(player: Player): void {
+        const packet = new SetUserLeftBattlePacket();
+        packet.userId = player.getUsername();
+        this.battle.broadcastPacket(packet);
     }
 
     public broadcastUserStats(player: Player): void {

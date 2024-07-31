@@ -15,6 +15,7 @@ import { SendRegisterPacket } from "../../../../network/packets/send-register";
 import { ResourceType } from "../../../../server/managers/resources/types";
 import { SendLoginHashPacket } from "@/network/packets/send-login-hash";
 import { SetWrongLoginHashPacket } from "@/network/packets/set-wrong-login-hash";
+import { SetLoginSuccessfulPacket } from "@/network/packets/set-login-successful";
 
 export class PlayerAuthManager {
 
@@ -31,6 +32,11 @@ export class PlayerAuthManager {
         this.player.sendPacket(new SetIncorrectPasswordPopupPacket());
     }
 
+    public sendLoginSuccessful() {
+        const setGameLoadedPacket = new SetLoginSuccessfulPacket();
+        this.player.sendPacket(setGameLoadedPacket);
+    }
+
     public sendUserEmail() {
         const setEmailInfoPacket = new SetEmailInfoPacket();
         setEmailInfoPacket.email = this.data.email;
@@ -44,7 +50,7 @@ export class PlayerAuthManager {
         this.player.getDataManager().load(this.data.username);
         this.player.getServer().getPlayersManager().addPlayer(this.player);
 
-        this.player.sendGameLoaded();
+        this.sendLoginSuccessful();
         this.player.setLayoutState(LayoutState.BATTLE_SELECT);
 
         this.player.getDataManager().sendPremiumData();
@@ -65,6 +71,7 @@ export class PlayerAuthManager {
         this.player.getFriendsManager().sendInviteFriendsProperties()
 
         this.player.getBattlesManager().sendBattleSelectScreen();
+
     }
 
     public handleLoginPacket(packet: SendLoginPacket) {
@@ -109,6 +116,7 @@ export class PlayerAuthManager {
 
         if (packet instanceof SendRegisterCheckUsernamePacket) {
             const found = PlayerData.profiles.find(p => p.username === packet.username);
+
             if (!found) {
                 this.player.sendPacket(new SetRegisterUsernameAvailablePacket())
                 return true
@@ -117,7 +125,8 @@ export class PlayerAuthManager {
             this.player.sendPacket(new SetRegisterUsernameAlreadyUsedPacket())
 
             const setAdvisedUsernamesPacket = new SetAdvisedUsernamesPacket();
-            setAdvisedUsernamesPacket.usernames = ['LearXD', 'LearXD1', 'LearXD2', 'LearXD3', 'LearXD4']
+            const subNames = ['gay', 'viado', 'boiola', 'baitola', 'chola']
+            setAdvisedUsernamesPacket.usernames = Array.from({ length: 5 }, (_, i) => found.username + "_" + subNames[i])
             this.player.sendPacket(setAdvisedUsernamesPacket)
         }
     }

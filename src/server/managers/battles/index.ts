@@ -21,7 +21,6 @@ export class BattlesManager {
     constructor(
         private readonly server: Server
     ) {
-        /*
         this.createBattle('For Newbies', 'map_sandbox')
         this.createBattle('For Newbies 2', 'map_sandbox', {
             autoBalance: true,
@@ -29,7 +28,7 @@ export class BattlesManager {
             equipmentConstraintsMode: EquipmentConstraintsMode.NONE,
             friendlyFire: false,
             scoreLimit: 1,
-            timeLimitInSec: 30,//60 * 10,
+            timeLimitInSec: 60 * 10,
             maxPeopleCount: 2,
             parkourMode: false,
             privateBattle: false,
@@ -43,7 +42,6 @@ export class BattlesManager {
             withoutCrystals: false,
             withoutSupplies: false
         })
-            */
     }
 
     public getData(_path: string) {

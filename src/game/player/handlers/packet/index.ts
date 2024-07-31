@@ -3,6 +3,7 @@ import { Packet } from "../../../../network/packets/packet";
 import { SimplePacket } from "../../../../network/packets/simple-packet";
 import { Logger } from "../../../../utils/logger";
 import { ByteArray } from "../../../../network/utils/byte-array";
+import { UnknownPacketException } from "@/network/utils/unknown-packet-exception";
 
 export const IGNORE_PACKETS = [
     1484572481, // Pong
@@ -55,11 +56,16 @@ export class PlayerPacketHandler {
 
                 this.player.handlePacket(packet);
             } catch (error) {
-                Logger.alert(`Packet Unknown (${pid}) received - ${realLength} bytes`)
+
                 if (error instanceof Error) {
                     Logger.error(error.message)
                     console.error(error.stack)
                 }
+
+                if (error instanceof UnknownPacketException) {
+                    Logger.error(error.message)
+                }
+
             }
         }
     }

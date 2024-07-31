@@ -1,5 +1,6 @@
 import { Player } from "@/game/player";
 import { Server } from "@/server";
+import { ServerError } from "@/server/utils/error";
 import { LayoutState } from "@/states/layout-state";
 
 export class PlayersManager {
@@ -28,7 +29,7 @@ export class PlayersManager {
 
     public addPlayer(player: Player) {
         if (!player.getUsername()) {
-            throw new Error('Player must have a username');
+            throw new ServerError('Player must have a username');
         }
         this.players.set(player.getUsername(), player);
     }

@@ -65,7 +65,7 @@ export class Protocol {
 
     /** DO SEND_LOGIN */
     static SEND_LOGIN = -739684591;
-    static SET_GAME_LOADED = -1923286328 // login success?
+    static SET_LOGIN_SUCCESSFUL = -1923286328 // login success?
     static SET_INCORRECT_PASSWORD_POPUP = 103812952;
 
 
@@ -460,7 +460,7 @@ export class Protocol {
 
 
     /** ??? */
-    static SET_POPUP_MESSAGE = -322235316;
+    static SET_ALERT = -322235316;
 
 
     /** ???? */

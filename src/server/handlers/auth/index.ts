@@ -5,6 +5,7 @@ import { Server } from "../..";
 import { SetNetworkParamsPacket } from "../../../network/packets/set-network-params";
 import { ResolveFullLoadedPacket } from "../../../network/packets/resolve-full-loaded";
 import { IAuthConfig } from "./types";
+import { ServerError } from "@/server/utils/error";
 
 export class AuthManager {
 
@@ -16,7 +17,7 @@ export class AuthManager {
         this.config = server.getAssetsManager().getData('auth.json')
 
         if (!this.config) {
-            throw new Error('Auth config not found!')
+            throw new ServerError('Auth config not found!')
         }
     }
 

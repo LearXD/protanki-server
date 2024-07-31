@@ -2,25 +2,19 @@ import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetPopupMessagePacket extends Packet {
-
-    public message: string
+export class SetLoginSuccessfulPacket extends Packet {
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_POPUP_MESSAGE, bytes)
+        super(Protocol.SET_LOGIN_SUCCESSFUL, bytes)
     }
 
     public decode() {
         const bytes = this.cloneBytes();
-        this.message = bytes.readString();
-        return {
-            message: this.message
-        }
+        return {}
     }
 
     public encode() {
         const bytes = new ByteArray();
-        bytes.writeString(this.message);
         return bytes;
     }
 }

@@ -16,11 +16,20 @@ export class ByteArray {
         return this.buffer.length;
     }
 
+    public write(buffer: Buffer) {
+        this.buffer = Buffer.concat([this.buffer, Buffer.from(buffer)]);
+        return this;
+    }
+
     public writeByte(value: number) {
         const buffer = Buffer.alloc(1);
         buffer.writeInt8(value);
         this.write(buffer)
         return this;
+    }
+
+    public readByte() {
+        return this.read(1).readInt8();
     }
 
     public writeShort(value: number) {
@@ -30,6 +39,10 @@ export class ByteArray {
         return this;
     }
 
+    public readShort() {
+        return this.read(2).readInt16BE();
+    }
+
     public writeInt(value: number) {
         const buffer = Buffer.alloc(4);
         buffer.writeInt32BE(value);
@@ -37,8 +50,8 @@ export class ByteArray {
         return this;
     }
 
-    public readFloat() {
-        return this.read(4).readFloatBE();
+    public readInt() {
+        return this.read(4).readInt32BE()
     }
 
     public writeFloat(value: number) {
@@ -48,24 +61,16 @@ export class ByteArray {
         return this;
     }
 
-    public readBoolean() {
-        return this.readByte() !== 0;
+    public readFloat() {
+        return this.read(4).readFloatBE();
     }
 
     public writeBoolean(value: boolean) {
         return this.writeByte(value ? 1 : 0);
     }
 
-    public readByte() {
-        return this.read(1).readInt8();
-    }
-
-    public readShort() {
-        return this.read(2).readInt16BE();
-    }
-
-    public readInt() {
-        return this.read(4).readInt32BE()
+    public readBoolean() {
+        return this.readByte() !== 0;
     }
 
     public readString() {
@@ -177,7 +182,6 @@ export class ByteArray {
         return this;
     }
 
-
     public readArray<T>(elementsFunction: Function): T[] {
 
         if (this.readBoolean()) {
@@ -215,8 +219,5 @@ export class ByteArray {
         return value
     }
 
-    public write(buffer: Buffer) {
-        this.buffer = Buffer.concat([this.buffer, Buffer.from(buffer)]);
-        return this;
-    }
+
 }

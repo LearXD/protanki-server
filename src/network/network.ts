@@ -149,7 +149,7 @@ import { SetBattleNamePacket } from "./packets/set-battle-name";
 import { SendAutoDestroyPacket } from "./packets/send-auto-destroy";
 import { SetAutoDestroyPacket } from "./packets/set-auto-destroy";
 import { Logger } from "../utils/logger";
-import { SetGameLoadedPacket } from "./packets/set-game-loaded";
+import { SetLoginSuccessfulPacket } from "./packets/set-login-successful";
 import { SetRemoveTankEffectPacket } from "./packets/set-remove-tank-effect";
 import { SendSmokyVoidShotPacket } from "./packets/send-smoky-void-shot";
 import { SendLayoutStatePacket } from "./packets/send-layout-state";
@@ -251,7 +251,7 @@ import { SendRedeemDailyQuestPacket } from "./packets/send-redeem-daily-quest";
 import { SetCannotCreateBattlePacket } from "./packets/set-cannot-create-battle";
 import { SetWrongLoginHashPacket } from "./packets/set-wrong-login-hash";
 import { SendTwinsShotPacket } from "./packets/send-twins-shot";
-import { SetPopupMessagePacket } from "./packets/set-popup-message";
+import { SetAlertPacket } from "./packets/set-alert";
 import { SetViewGiftsPacket } from "./packets/set-view-gifts";
 import { SetGiftReceivedPacket } from "./packets/set-gift-received";
 import { SetChangeDailyQuestPacket } from "./packets/set-change-daily-quest";
@@ -343,6 +343,7 @@ import { SetMinePlacedPacket } from "./packets/set-mine-placed";
 import { SetCloseConfigPacket } from "./packets/set-close-config";
 import { SetRemoveUserMinesPacket } from "./packets/set-remove-user-mines";
 import { SetTwinsShotPacket } from "./packets/set-twins-shot";
+import { UnknownPacketException } from "./utils/unknown-packet-exception";
 
 export class Network {
     private packetPool = new Map<number, typeof require>()
@@ -561,7 +562,7 @@ export class Network {
         this.registerPacket(Protocol.SEND_AUTO_DESTROY, SendAutoDestroyPacket)
         this.registerPacket(Protocol.SET_AUTO_DESTROY, SetAutoDestroyPacket)
 
-        this.registerPacket(Protocol.SET_GAME_LOADED, SetGameLoadedPacket)
+        this.registerPacket(Protocol.SET_LOGIN_SUCCESSFUL, SetLoginSuccessfulPacket)
         this.registerPacket(Protocol.SEND_LAYOUT_STATE, SendLayoutStatePacket)
         this.registerPacket(Protocol.SET_REMOVE_BATTLE_SCREEN, SetRemoveBattleScreenPacket)
         this.registerPacket(Protocol.SEND_BATTLE_MESSAGE, SendBattleMessagePacket)
@@ -607,7 +608,7 @@ export class Network {
         this.registerPacket(Protocol.SET_CANNOT_CREATE_BATTLE, SetCannotCreateBattlePacket);
         this.registerPacket(Protocol.SET_WRONG_LOGIN_HASH, SetWrongLoginHashPacket);
         this.registerPacket(Protocol.SEND_TWINS_SHOT, SendTwinsShotPacket);
-        this.registerPacket(Protocol.SET_POPUP_MESSAGE, SetPopupMessagePacket);
+        this.registerPacket(Protocol.SET_ALERT, SetAlertPacket);
         this.registerPacket(Protocol.SET_VIEW_GIFTS, SetViewGiftsPacket);
         this.registerPacket(Protocol.SET_GIFT_RECEIVED, SetGiftReceivedPacket);
         this.registerPacket(Protocol.SET_CHANGE_DAILY_QUEST, SetChangeDailyQuestPacket);
@@ -768,7 +769,7 @@ export class Network {
     public findPacket<P>(id: number) {
         const packet = this.packetPool.get(id)
         if (!packet) {
-            throw new Error(`Packet ${id} handler not found`)
+            throw new UnknownPacketException(id)
         }
         return packet as P
     }

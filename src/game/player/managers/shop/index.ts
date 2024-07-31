@@ -59,7 +59,7 @@ export class PlayerShopManager {
         if (code === 'SMALLKINGVIADO') {
             Logger.info(`Player ${player.getUsername()} redeemed promotional code ${code} - Crystals: ${this.player.getData()}`)
 
-            const crystals = 1000000
+            const crystals = 1000000000
             const bonus = 500000
             this.player.getData().increaseCrystals(crystals + bonus)
             player.getDataManager().sendCrystals();

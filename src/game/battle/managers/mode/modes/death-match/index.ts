@@ -4,9 +4,15 @@ import { SetLoadDeathMatchPacket } from "@/network/packets/set-load-death-match"
 import { SetBattleAddUsersPropertiesPacket } from "@/network/packets/set-battle-add-users-properties";
 import { BattleModeManager } from "../..";
 import { SetBattleUsersPropertiesPacket } from "@/network/packets/set-battle-users-properties";
+import { SetBattleUserLeftNotificationPacket } from "@/network/packets/set-battle-user-left-notification";
 
 
 export class BattleDeathMatchModeManager extends BattleModeManager {
+
+
+    public sendLoadBattleMode(player: Player): void {
+        player.sendPacket(new SetLoadDeathMatchPacket())
+    }
 
     public broadcastAddUserProperties(player: Player): void {
         const packet = new SetBattleAddUsersPropertiesPacket();
@@ -26,8 +32,10 @@ export class BattleDeathMatchModeManager extends BattleModeManager {
         this.battle.broadcastPacket(packet, [player.getUsername()]);
     }
 
-    public sendLoadBattleMode(player: Player): void {
-        player.sendPacket(new SetLoadDeathMatchPacket())
+    public broadcastRemovePlayer(player: Player): void {
+        const packet = new SetBattleUserLeftNotificationPacket();
+        packet.userId = player.getUsername();
+        this.battle.broadcastPacket(packet);
     }
 
     public broadcastUserStats(player: Player): void {

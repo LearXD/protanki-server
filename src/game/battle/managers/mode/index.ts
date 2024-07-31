@@ -79,8 +79,10 @@ export abstract class BattleModeManager {
     }
 
     public abstract sendLoadBattleMode(player: Player): void
+
     public abstract broadcastUserStats(player: Player): void
+    public abstract sendUsersProperties(player: Player): void
 
     public abstract broadcastAddUserProperties(player: Player): void
-    public abstract sendUsersProperties(player: Player): void
+    public abstract broadcastRemovePlayer(player: Player): void
 }

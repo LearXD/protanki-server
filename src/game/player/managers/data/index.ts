@@ -1,3 +1,4 @@
+import { ServerError } from "@/server/utils/error";
 import { Player } from "../..";
 import { SetAchievementsPacket } from "../../../../network/packets/set-achievements";
 import { SetCrystalsPacket } from "../../../../network/packets/set-crystals";
@@ -21,7 +22,7 @@ export class PlayerDataManager {
         Logger.info(`Loading data for player username`);
 
         if (!this.player.getAuthManager().isAuthenticated()) {
-            throw new Error('Trying to load data for an unauthenticated player');
+            throw new ServerError('Trying to load data for an unauthenticated player', username);
         }
 
         this.player.setData(PlayerData.findPlayerData(username, true));

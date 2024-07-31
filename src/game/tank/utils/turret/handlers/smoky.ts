@@ -36,7 +36,8 @@ export class SmokyHandler extends TurretHandler {
 
     public getImpactForce() {
         const force = this.getItemProperty("IMPACT_FORCE");
-        return force ? parseInt(force.value) : 0
+        // return force ? parseInt(force.value) : 0
+        return 1.07
     }
 
     public getDamage(distance: number, modifiers: IDamageModifiers): number {

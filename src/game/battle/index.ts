@@ -133,8 +133,8 @@ export class Battle extends BattleManager {
         }
 
         /** SEND DATA & RESOURCES */
-        await this.resourcesManager.sendResources(player)
-        this.resourcesManager.sendBattleMapProperties(player, isSpectator)
+        await this.map.sendResources(player)
+        this.map.sendProperties(player, isSpectator)
         this.resourcesManager.sendTurretsData(player)
 
         /** SEND PROPERTIES & STATISTICS */
@@ -189,7 +189,7 @@ export class Battle extends BattleManager {
                 player.getTank().sendRemoveTank(true);
             }
 
-            this.sendPlayerLeft(player)
+            this.modeManager.broadcastRemovePlayer(player)
             this.getPlayersManager().removePlayer(player)
         }
 
@@ -210,7 +210,7 @@ export class Battle extends BattleManager {
     public getBattleId() { return this.battleId }
 
     public getName() { return this.name }
-    public getMap() { return this.map }
+    public getMap(): Map { return this.map }
 
     public isRunning() {
         return this.running
@@ -253,12 +253,6 @@ export class Battle extends BattleManager {
     public sendRemoveBattleScreen(player: Player) {
         const setRemoveBattleScreenPacket = new SetRemoveBattleScreenPacket()
         player.sendPacket(setRemoveBattleScreenPacket)
-    }
-
-    public sendPlayerLeft(player: Player) {
-        const packet = new SetBattleUserLeftNotificationPacket();
-        packet.userId = player.getUsername();
-        this.broadcastPacket(packet);
     }
 
     public toBattleListItem(): IBattleList {

@@ -1,3 +1,4 @@
+import { INT_MAX, INT_MIN } from "@/network/utils/primitive-types";
 import { ChatModeratorLevel } from "../../../../states/chat-moderator-level";
 import { Rank } from "../../../../states/rank";
 import { Logger } from "../../../../utils/logger";
@@ -45,22 +46,24 @@ export class PlayerData {
                 }
             }
         },
-        // {
-        //     username: 'LearXD',
-        //     data: {
-        //         crystals: 10000000,
-        //         moderatorLevel: ChatModeratorLevel.ADMINISTRATOR,
-        //         hasDoubleCrystal: false,
-        //         durationCrystalAbonement: 0,
-        //         rank: Rank.GENERALISSIMO,
-        //         score: 2000,
-        //         premium: {
-        //             notified: true,
-        //             startedAt: Date.now(),
-        //             endAt: Date.now() + 1000 * 60 * 10
-        //         }
-        //     }
-        // }
+        {
+            username: 'LearXD',
+            data: {
+                crystals: 10000000,
+                moderatorLevel: ChatModeratorLevel.ADMINISTRATOR,
+                doubleCrystals: {
+                    enabled: true,
+                    endAt: Date.now() + (1000 * 60 * 10) // 10 minutes
+                },
+                rank: Rank.GENERALISSIMO,
+                score: 2000,
+                premium: {
+                    notified: true,
+                    startedAt: Date.now(),
+                    endAt: Date.now() + 1000 * 60 * 10
+                }
+            }
+        }
     ]
 
     public constructor(
@@ -197,24 +200,23 @@ export class PlayerData {
         return this.profileData.crystals
     }
 
-    public getDoubleCrystalsLeftTime() {
-        if (!this.hasDoubleCrystals()) {
-            return 0
-        }
-        const leftTime = this.profileData.doubleCrystals.endAt - Date.now()
-        Logger.debug(`Double crystals left time: ${leftTime}`)
-        return leftTime < 0 ? 0 : leftTime
-    }
+
 
     public decreaseCrystals(amount: number) {
-        this.profileData.crystals -= amount
+        this.setCrystals(this.profileData.crystals - amount)
     }
 
     public increaseCrystals(amount: number) {
-        this.profileData.crystals += amount
+        this.setCrystals(this.profileData.crystals + amount)
     }
 
     public setCrystals(amount: number) {
+
+        // if (amount < INT_MIN || amount > INT_MAX) {
+        //     Logger.error(`Invalid crystals value: ${amount}`)
+        //     return;
+        // }
+
         this.profileData.crystals = amount
     }
 
@@ -228,6 +230,15 @@ export class PlayerData {
 
     public getScore() {
         return this.profileData.score
+    }
+
+    public getDoubleCrystalsLeftTime() {
+        if (!this.hasDoubleCrystals()) {
+            return 0
+        }
+        const leftTime = this.profileData.doubleCrystals.endAt - Date.now()
+        Logger.debug(`Double crystals left time: ${leftTime}`)
+        return leftTime < 0 ? 0 : leftTime
     }
 
     public getPremiumData(): IPremiumData {

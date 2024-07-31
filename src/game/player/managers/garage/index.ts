@@ -15,9 +15,10 @@ import { SimplePacket } from "../../../../network/packets/simple-packet";
 import { LayoutState } from "../../../../states/layout-state";
 import { Supply, SupplyType } from "../../../../states/supply";
 import { Logger } from "../../../../utils/logger";
-import { IGarageHull, IGarageTurret, IPlayerGarageData } from "../../utils/data/types";
+import { IGarageHull, IGaragePainting, IGarageTurret, IPlayerGarageData } from "../../utils/data/types";
 import { ResourceType } from "../../../../server/managers/resources/types";
 import { GarageItemUtils } from "./utils/item";
+import { ServerError } from "@/server/utils/error";
 
 export class PlayerGarageManager {
 
@@ -62,8 +63,9 @@ export class PlayerGarageManager {
         const turret = this.getTurrets().find(turret => turret.equipped);
 
         if (!turret) {
-            throw new Error('No turret equipped');
+            throw new ServerError('No turret equipped', this.player.getUsername());
         }
+
         return `${turret.name}_m${turret.level}`;
     }
 
@@ -71,8 +73,9 @@ export class PlayerGarageManager {
         const hull = this.getHulls().find(hull => hull.equipped);
 
         if (!hull) {
-            throw new Error('No hull equipped');
+            throw new ServerError('No hull equipped', this.player.getUsername());
         }
+
         return `${hull.name}_m${hull.level}`;
     }
 
@@ -80,8 +83,9 @@ export class PlayerGarageManager {
         const painting = this.getPaintings().find(painting => painting.equipped);
 
         if (!painting) {
-            throw new Error('No painting equipped');
+            throw new ServerError('No painting equipped', this.player.getUsername());
         }
+
         return `${painting.name}_m0`;
     }
 
@@ -131,31 +135,26 @@ export class PlayerGarageManager {
 
         switch (item.category) {
             case GarageItemCategory.TURRET: {
-                const inventory = this.getInventoryItem<IGarageTurret>(itemId, false);
+                const inventory = this.getInventoryItem<IGarageTurret>(itemId);
 
                 if (inventory) {
                     return this.upgradeItem(itemId, inventory.level + 1);
                 }
 
-                this.getTurrets().forEach(turret => {
-                    if (turret.name == item.id) {
-                        turret.level = item.modificationID;
-                    }
-                })
+                const turret = this.getTurret(item.id);
+                turret.level = item.modificationID;
+
                 break;
             }
             case GarageItemCategory.HULL: {
-                const inventory = this.getInventoryItem<IGarageHull>(itemId, false);
+                const inventory = this.getInventoryItem<IGarageHull>(itemId);
 
                 if (inventory) {
                     return this.upgradeItem(itemId, inventory.level + 1);
                 }
 
-                this.getHulls().forEach(hull => {
-                    if (hull.name == item.id) {
-                        hull.level = item.modificationID;
-                    }
-                })
+                const hull = this.getHull(item.id);
+                hull.level = item.modificationID;
                 break;
             }
             case GarageItemCategory.SUPPLY: {
@@ -171,48 +170,69 @@ export class PlayerGarageManager {
         Logger.info(`Item ${itemId} (x${quantity}) added to player ${this.player.getUsername()}`);
     }
 
-    public equipItem(itemName: string) {
-        if (this.getInventoryItem(itemName)) {
-            const item = this.player.getServer().getGarageManager().getItem(itemName);
+    public equipItem(name: string): string {
 
-            switch (item.category) {
-                case GarageItemCategory.TURRET:
-                    this.getTurrets().forEach(
-                        turret => { turret.equipped = turret.name == item.id && turret.level == item.modificationID }
-                    );
-                    break;
-                case GarageItemCategory.HULL:
-                    this.getHulls().forEach(
-                        hull => { hull.equipped = hull.name == item.id && hull.level == item.modificationID }
-                    );
-                    break;
-                case GarageItemCategory.PAINT:
-                    this.getPaintings().forEach(
-                        painting => { painting.equipped = painting.name == item.id }
-                    );
-                    break;
-            }
+        const inventory = this.getInventoryItem<IGarageHull | IGarageTurret | IGaragePainting>(name);
 
-            if (this.player.isInBattle()) {
-                Logger.debug(`Player ${this.player.getUsername()} changed equipment`);
-                this.player.getTank().changedEquipment = true;
-            }
-
-            return true
+        if (!inventory) {
+            return null;
         }
-        return false
+
+        const item = this.player.getServer().getGarageManager().getItem(name);
+
+        switch (item.category) {
+            case GarageItemCategory.TURRET:
+                this.getTurrets().forEach(
+                    turret => { turret.equipped = turret.name == item.id && turret.level == (inventory as IGarageTurret).level }
+                );
+                break;
+            case GarageItemCategory.HULL:
+                this.getHulls().forEach(
+                    hull => { hull.equipped = hull.name == item.id && hull.level == (inventory as IGarageHull).level }
+                );
+                break;
+            case GarageItemCategory.PAINT:
+                this.getPaintings().forEach(
+                    painting => { painting.equipped = painting.name == item.id }
+                );
+                break;
+        }
+
+        if (this.player.isInBattle()) {
+            this.player.getTank().changedEquipment = true;
+        }
+
+        return GarageItemUtils.serialize(inventory.name, 'level' in inventory ? inventory.level : 0);
     }
 
-    public getInventoryItem<R extends any>(name: string, checkLevel: boolean = true): R {
+    public hasItem(name: string) {
         const item = this.player.getServer().getGarageManager().getItem(name);
 
         switch (item.category) {
             case GarageItemCategory.TURRET:
                 return this.getTurrets()
-                    .find(turret => turret.name == item.id && ((!checkLevel && turret.level >= 0) || turret.level == item.modificationID)) as R;
+                    .some(turret => turret.name == item.id && turret.level == item.modificationID);
             case GarageItemCategory.HULL:
                 return this.getHulls()
-                    .find(hull => hull.name == item.id && ((!checkLevel && hull.level >= 0) || hull.level == item.modificationID)) as R;
+                    .some(hull => hull.name == item.id && hull.level == item.modificationID);
+            case GarageItemCategory.PAINT:
+                return this.getPaintings()
+                    .some(painting => painting.name == item.id)
+        }
+
+        return false
+    }
+
+    public getInventoryItem<R extends any>(name: string): R {
+        const item = this.player.getServer().getGarageManager().getItem(name);
+
+        switch (item.category) {
+            case GarageItemCategory.TURRET:
+                return this.getTurrets()
+                    .find(turret => turret.name == item.id && turret.level >= 0) as R;
+            case GarageItemCategory.HULL:
+                return this.getHulls()
+                    .find(hull => hull.name == item.id && hull.level >= 0) as R;
             case GarageItemCategory.PAINT:
                 return this.getPaintings()
                     .find(painting => painting.name == item.id) as R;
@@ -416,9 +436,10 @@ export class PlayerGarageManager {
     }
 
     public handleEquipItem(itemId: string) {
-        if (this.equipItem(itemId)) {
+        const equipped = this.player.getGarageManager().equipItem(itemId);
+        if (equipped) {
             const setEquipGarageItemPacket = new SetEquipGarageItemPacket();
-            setEquipGarageItemPacket.itemId = itemId;
+            setEquipGarageItemPacket.itemId = equipped;
             setEquipGarageItemPacket.equipped = true;
             this.player.sendPacket(setEquipGarageItemPacket)
         }
