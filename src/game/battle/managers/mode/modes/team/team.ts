@@ -40,19 +40,21 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
     }
 
     public broadcastAddUserProperties(player: Player): void {
+        const players = this.battle.getPlayersManager().getPlayers()
+            .filter(p => player.getTank().getTeam() === p.getTank().getTeam());
 
         const packet = new SetTeamBattleAddUsersPropertiesPacket();
         packet.userId = player.getUsername();
-        packet.usersInfo = [
+        packet.usersInfo = players.map(p => (
             {
-                chatModeratorLevel: player.getData().getModeratorLevel(),
-                deaths: player.getTank().getDeaths(),
-                kills: player.getTank().getKills(),
-                rank: player.getData().getRank(),
-                score: player.getTank().getScore(),
-                name: player.getUsername()
+                chatModeratorLevel: p.getData().getModeratorLevel(),
+                deaths: p.getTank().getDeaths(),
+                kills: p.getTank().getKills(),
+                rank: p.getData().getRank(),
+                score: p.getTank().getScore(),
+                name: p.getUsername()
             }
-        ]
+        ))
         packet.team = player.getTank().getTeam();
 
         this.battle.broadcastPacket(packet, [player.getUsername()]);

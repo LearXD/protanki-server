@@ -13,6 +13,8 @@ import { IPlayerAuthData } from "../../utils/data/types";
 import { PlayerData } from "../../utils/data";
 import { SendRegisterPacket } from "../../../../network/packets/send-register";
 import { ResourceType } from "../../../../server/managers/resources/types";
+import { SendLoginHashPacket } from "@/network/packets/send-login-hash";
+import { SetWrongLoginHashPacket } from "@/network/packets/set-wrong-login-hash";
 
 export class PlayerAuthManager {
 
@@ -99,6 +101,10 @@ export class PlayerAuthManager {
 
         if (packet instanceof SendRegisterPacket) {
             this.handleRegisterPacket(packet)
+        }
+
+        if (packet instanceof SendLoginHashPacket) {
+            this.player.sendPacket(new SetWrongLoginHashPacket())
         }
 
         if (packet instanceof SendRegisterCheckUsernamePacket) {
