@@ -275,7 +275,7 @@ export class Protocol {
     static SET_FLAG_DROPPED = 1925237062;
     static SET_FLAG_RETURNED = -1026428589;
     static SEND_DROP_FLAG = -1832611824;
-    // -1142938284
+    // -1142938284 // useless
     static SET_CAPTURE_FLAG = -1870108387;
 
 

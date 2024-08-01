@@ -1,5 +1,5 @@
 export enum FlagState {
-    PLACED = 'PLACED',
-    TAKEN = 'TAKEN',
+    AT_BASE = 'AT_BASE',
+    CARRIED = 'CARRIED',
     DROPPED = 'DROPPED',
 }

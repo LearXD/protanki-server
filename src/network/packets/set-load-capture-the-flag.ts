@@ -4,9 +4,9 @@ import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
 export interface IFlag {
-    vector3d_1: Vector3d,
-    string_1: string,
-    vector3d_2: Vector3d,
+    basePosition: Vector3d,
+    carrier: string,
+    droppedPosition: Vector3d,
 }
 
 export interface ISoundResources {
@@ -18,12 +18,12 @@ export interface ISoundResources {
 
 export class SetLoadCaptureTheFlagPacket extends Packet {
 
-    public flag_1: IFlag
-    public flag_1_image: number
-    public flag_1_model: number
-    public flag_2: IFlag
-    public flag_2_image: number
-    public flag_2_model: number
+    public blueFlag: IFlag
+    public blueFlagImage: number
+    public blueFlagModel: number
+    public redFlag: IFlag
+    public redFlagImage: number
+    public redFlagModel: number
 
     public sounds: ISoundResources
 
@@ -34,23 +34,23 @@ export class SetLoadCaptureTheFlagPacket extends Packet {
     public decode() {
         const bytes = this.cloneBytes();
 
-        this.flag_1 = {
-            vector3d_1: bytes.readVector3d(),
-            string_1: bytes.readString(),
-            vector3d_2: bytes.readVector3d()
+        this.blueFlag = {
+            basePosition: bytes.readVector3d(),
+            carrier: bytes.readString(),
+            droppedPosition: bytes.readVector3d()
         }
 
-        this.flag_1_image = bytes.readInt();
-        this.flag_1_model = bytes.readInt();
+        this.blueFlagImage = bytes.readInt();
+        this.blueFlagModel = bytes.readInt();
 
-        this.flag_2 = {
-            vector3d_1: bytes.readVector3d(),
-            string_1: bytes.readString(),
-            vector3d_2: bytes.readVector3d()
+        this.redFlag = {
+            basePosition: bytes.readVector3d(),
+            carrier: bytes.readString(),
+            droppedPosition: bytes.readVector3d()
         }
 
-        this.flag_2_image = bytes.readInt();
-        this.flag_2_model = bytes.readInt();
+        this.redFlagImage = bytes.readInt();
+        this.redFlagModel = bytes.readInt();
 
         this.sounds = {
             resourceId_1: bytes.readInt(),
@@ -60,12 +60,12 @@ export class SetLoadCaptureTheFlagPacket extends Packet {
         }
 
         return {
-            flag_1: this.flag_1,
-            flag_1_image: this.flag_1_image,
-            flag_1_model: this.flag_1_model,
-            flag_2: this.flag_2,
-            flag_2_image: this.flag_2_image,
-            flag_2_model: this.flag_2_model,
+            blueFlag: this.blueFlag,
+            blueFlagImage: this.blueFlagImage,
+            blueFlagModel: this.blueFlagModel,
+            redFlag: this.redFlag,
+            redFlagImage: this.redFlagImage,
+            redFlagModel: this.redFlagModel,
             sounds: this.sounds
         }
     }
@@ -73,19 +73,19 @@ export class SetLoadCaptureTheFlagPacket extends Packet {
     public encode() {
         const bytes = new ByteArray();
 
-        bytes.writeVector3d(this.flag_1.vector3d_1);
-        bytes.writeString(this.flag_1.string_1);
-        bytes.writeVector3d(this.flag_1.vector3d_2);
+        bytes.writeVector3d(this.blueFlag.basePosition);
+        bytes.writeString(this.blueFlag.carrier);
+        bytes.writeVector3d(this.blueFlag.droppedPosition);
 
-        bytes.writeInt(this.flag_1_image);
-        bytes.writeInt(this.flag_1_model);
+        bytes.writeInt(this.blueFlagImage);
+        bytes.writeInt(this.blueFlagModel);
 
-        bytes.writeVector3d(this.flag_2.vector3d_1);
-        bytes.writeString(this.flag_2.string_1);
-        bytes.writeVector3d(this.flag_2.vector3d_2);
+        bytes.writeVector3d(this.redFlag.basePosition);
+        bytes.writeString(this.redFlag.carrier);
+        bytes.writeVector3d(this.redFlag.droppedPosition);
 
-        bytes.writeInt(this.flag_2_image);
-        bytes.writeInt(this.flag_2_model);
+        bytes.writeInt(this.redFlagImage);
+        bytes.writeInt(this.redFlagModel);
 
         bytes.writeInt(this.sounds.resourceId_1);
         bytes.writeInt(this.sounds.resourceId_2);

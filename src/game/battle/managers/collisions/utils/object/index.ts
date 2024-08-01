@@ -18,5 +18,11 @@ export abstract class BattleObject {
         return this.position.distanceTo(position) <= this.scale;
     }
 
+    public setPosition(position: Vector3d) {
+        this.position.x = position.x;
+        this.position.y = position.y;
+        this.position.z = position.z;
+    }
+
     public abstract handleCollision(player: Player): boolean
 }

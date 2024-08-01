@@ -45,7 +45,6 @@ export class Tank {
     public incarnation: number = 0;
 
     /** TANK STATES */
-    public hasFlag: boolean = false;
     public changedEquipment = false;
     public visible: boolean = false;
     public alive: boolean = false
