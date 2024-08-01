@@ -3,6 +3,9 @@
 echo "Stopping the server"
 pm2 stop protanki-server
 
+echo "Updating the server"
+git pull
+
 echo "Checking dependencies"
 npm install
 
