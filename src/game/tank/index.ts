@@ -196,17 +196,16 @@ export class Tank {
     public prepareRespawn() {
         this.incarnation++;
 
-        const spawn = this.battle.getModeManager().getRandomSpawn(this.player)
+        const spawn = this.battle.getModeManager().getRandomSpawn(this.player);
 
         if (!spawn) {
-            Logger.warn("Invalid spawn position")
-            return;
+            Logger.warn(`Player ${this.player.getUsername()} has no spawn on the map ${this.battle.getMap().getName()}`);
         }
 
-        this.position = Vector3d.fromInterface(spawn.position)
+        this.position = spawn.position ? Vector3d.fromInterface(spawn.position) : new Vector3d(0, 0, 0);
         this.position.y += 200;
 
-        this.orientation = Vector3d.fromInterface(spawn.rotation)
+        this.orientation = spawn.rotation ? Vector3d.fromInterface(spawn.rotation) : new Vector3d(0, 0, 0);
         this.sendTankSpeed();
 
         this.setCameraPosition(this.position, this.orientation)

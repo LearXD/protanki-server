@@ -64,13 +64,13 @@ export class Battle extends BattleManager {
         this.battleId = BattleUtils.generateBattleId()
         this.registerManagers(this);
 
-        this.modeManager.init();
-
         this.updateInterval = setInterval(this.update.bind(this), 1000 / Battle.TICK_RATE);
         this.updateTimeInterval = setInterval(this.updateTime.bind(this), 1000);
     }
 
     public start() {
+        this.modeManager.init();
+
         this.startedAt = Date.now()
         this.running = true
     }
@@ -84,7 +84,6 @@ export class Battle extends BattleManager {
         this.startedAt = Date.now()
         this.running = true
 
-        this.modeManager.init();
         this.restartTime();
 
         for (const player of this.getPlayersManager().getPlayers()) {

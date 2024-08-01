@@ -26,3 +26,19 @@ export interface IMapFlags {
     red: IVector3d,
     blue: IVector3d
 }
+
+export enum MapAreaAction {
+    KICK = 'kick',
+    KILL = 'kill',
+}
+
+export interface IMapArea {
+    minX: number
+    minY: number
+    minZ: number
+    maxX: number
+    maxY: number
+    maxZ: number
+    action: MapAreaAction
+}
+

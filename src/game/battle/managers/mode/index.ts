@@ -13,6 +13,16 @@ export abstract class BattleModeManager {
         protected readonly battle: Battle
     ) { }
 
+    public abstract getRandomSpawn(player: Player): IMapSpawn
+
+    public abstract sendLoadBattleMode(player: Player): void
+
+    public abstract broadcastUserStats(player: Player): void
+    public abstract sendUsersProperties(player: Player): void
+
+    public abstract broadcastAddUserProperties(player: Player): void
+    public abstract broadcastRemovePlayer(player: Player): void
+
     public init() {
         for (const player of this.battle.getPlayersManager().getPlayers()) {
             player.getTank().score = 0;
@@ -40,10 +50,6 @@ export abstract class BattleModeManager {
         packet.timeLeft = this.battle.getTimeLeft()
 
         client.sendPacket(packet);
-    }
-
-    public getRandomSpawn(player: Player): IMapSpawn {
-        return null
     }
 
     public sendFinishRewards() {
@@ -77,12 +83,4 @@ export abstract class BattleModeManager {
         player.getTank().deaths += 1;
         this.broadcastUserStats(player);
     }
-
-    public abstract sendLoadBattleMode(player: Player): void
-
-    public abstract broadcastUserStats(player: Player): void
-    public abstract sendUsersProperties(player: Player): void
-
-    public abstract broadcastAddUserProperties(player: Player): void
-    public abstract broadcastRemovePlayer(player: Player): void
 }

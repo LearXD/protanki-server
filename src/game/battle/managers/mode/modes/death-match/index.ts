@@ -5,10 +5,27 @@ import { SetBattleAddUsersPropertiesPacket } from "@/network/packets/set-battle-
 import { BattleModeManager } from "../..";
 import { SetBattleUsersPropertiesPacket } from "@/network/packets/set-battle-users-properties";
 import { SetBattleUserLeftNotificationPacket } from "@/network/packets/set-battle-user-left-notification";
-
+import { IMapSpawn } from "@/game/map/types";
+import { BattleMode } from "@/states/battle-mode";
+import { MathUtils } from "@/utils/math";
 
 export class BattleDeathMatchModeManager extends BattleModeManager {
 
+    public getSpawns(): IMapSpawn[] {
+        return this.battle.getMap().getSpawns()
+            .filter(spawn => spawn.type?.toUpperCase() === BattleMode.DM)
+    }
+
+    public getRandomSpawn(player: Player): IMapSpawn {
+        const spawns = this.getSpawns()
+
+        if (spawns.length === 0) {
+            return null
+        }
+
+        const random = MathUtils.randomInt(0, spawns.length - 1)
+        return spawns[random]
+    }
 
     public sendLoadBattleMode(player: Player): void {
         player.sendPacket(new SetLoadDeathMatchPacket())

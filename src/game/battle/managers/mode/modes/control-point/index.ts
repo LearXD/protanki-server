@@ -2,10 +2,16 @@ import { Player } from "@/game/player";
 import { SetLoadControlPointPacket } from "@/network/packets/set-load-control-point";
 import { Vector3d } from "@/utils/vector-3d";
 import { BattleTeamModeManager } from "../team/team";
+import { IMapSpawn } from "@/game/map/types";
 
 export class BattleControlPointsModeManager extends BattleTeamModeManager {
 
     public init(): void { }
+
+    public getRandomSpawn(player: Player): IMapSpawn {
+        return null
+    }
+
 
     public sendLoadBattleMode(player: Player): void {
         const packet = new SetLoadControlPointPacket();

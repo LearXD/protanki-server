@@ -2,6 +2,7 @@ import { Player } from "@/game/player";
 import { Battle } from "../..";
 import { BattleObject } from "./utils/object";
 import { Logger } from "@/utils/logger";
+import { MapAreaAction } from "@/game/map/types";
 
 export class BattleCollisionsManager {
 
@@ -12,10 +13,9 @@ export class BattleCollisionsManager {
     ) { }
 
     public addObject(object: BattleObject) {
-        if (this.objects.has(object.getName())) {
-            Logger.warn(`Object ${object.getName()} already exists in the battle ${this.battle.getBattleId()}`);
-            // return;
-        }
+        // if (this.objects.has(object.getName())) {
+        //     Logger.warn(`Object ${object.getName()} already exists in the battle ${this.battle.getBattleId()}`);
+        // }
         this.objects.set(object.getName(), object);
     }
 
@@ -28,10 +28,27 @@ export class BattleCollisionsManager {
     }
 
     public handlePlayerMovement(player: Player) {
+
         if (!player.getTank() || !player.getTank().isVisible()) {
             return;
         }
+
         const position = player.getTank().getPosition();
+
+        for (const area of this.battle.getMap().getAreas()) {
+            const { minX, minY: minZ, minZ: minY, maxX, maxY: maxZ, maxZ: maxY } = area // SWAP Y AND Z
+            if (
+                (position.x > minX && position.x < maxX) &&
+                (position.y > minY && position.y < maxY) &&
+                (position.z > minZ && position.z < maxZ)
+            ) {
+
+                if (area.action === MapAreaAction.KILL) {
+                    player.getTank().suicide();
+                }
+            }
+        }
+
         for (const object of this.objects.values()) {
             if (object.isColliding(position)) {
                 const collided = object.handleCollision(player);

@@ -6,8 +6,7 @@
         "maxX": -2750,
         "maxY": 6750,
         "maxZ": 5700,
-        "action": "kill",
-        "type": "special-geometry"
+        "action": "kill"
     },
     {
         "minX": 4625,
@@ -16,8 +15,7 @@
         "maxX": 8375,
         "maxY": 5375,
         "maxZ": 1200,
-        "action": "kick",
-        "type": "special-geometry"
+        "action": "kick"
     },
     {
         "minX": -2750,
@@ -26,8 +24,7 @@
         "maxX": 9750,
         "maxY": 6750,
         "maxZ": -300,
-        "action": "kill",
-        "type": "special-geometry"
+        "action": "kill"
     },
     {
         "minX": 9750,
@@ -36,8 +33,7 @@
         "maxX": 10250,
         "maxY": 6750,
         "maxZ": 5700,
-        "action": "kill",
-        "type": "special-geometry"
+        "action": "kill"
     },
     {
         "minX": -2750,
@@ -46,8 +42,7 @@
         "maxX": 9750,
         "maxY": 6750,
         "maxZ": 6000,
-        "action": "kick",
-        "type": "special-geometry"
+        "action": "kick"
     },
     {
         "minX": -2750,
@@ -56,8 +51,7 @@
         "maxX": 9750,
         "maxY": 7250,
         "maxZ": 5700,
-        "action": "kill",
-        "type": "special-geometry"
+        "action": "kill"
     },
     {
         "minX": 1625,
@@ -66,8 +60,7 @@
         "maxX": 2375,
         "maxY": 2500,
         "maxZ": 787.5,
-        "action": "kill",
-        "type": "special-geometry"
+        "action": "kill"
     },
     {
         "minX": -2750,
@@ -76,8 +69,7 @@
         "maxX": 9750,
         "maxY": -3250,
         "maxZ": 5700,
-        "action": "kill",
-        "type": "special-geometry"
+        "action": "kill"
     },
     {
         "minX": 4500,
@@ -86,8 +78,7 @@
         "maxX": 7000,
         "maxY": -750,
         "maxZ": 2775,
-        "action": "kill",
-        "type": "special-geometry"
+        "action": "kill"
     },
     {
         "minX": -500,
@@ -96,7 +87,6 @@
         "maxX": 0,
         "maxY": 5000,
         "maxZ": 2550,
-        "action": "kill",
-        "type": "special-geometry"
+        "action": "kill"
     }
 ]
