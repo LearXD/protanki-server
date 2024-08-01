@@ -17,7 +17,8 @@ export class MapsManager {
         private readonly server: Server
     ) {
         Logger.info('Initializing battle and maps data...');
-        this.data = this.getData('maps.json');
+        this.data = this.server.getAssetsManager().getData('maps.json');
+        Logger.info(`Loaded ${this.data.maps.length} maps and ${this.data.battleLimits.length} battle limits`);
     }
 
     public getMaps() {

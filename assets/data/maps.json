@@ -299,7 +299,7 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 33.000004291534424,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_sandbox",
             "mapName": "Caixa de areia",
             "maxPeople": 8,
@@ -316,7 +316,7 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 33.000004291534424,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_sandbox",
             "mapName": "Caixa de areia",
             "maxPeople": 8,
@@ -333,7 +333,7 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 33.000004291534424,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_sandbox",
             "mapName": "Caixa de areia",
             "maxPeople": 8,
@@ -350,7 +350,7 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 33.000004291534424,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_sandbox",
             "mapName": "Caixa de areia",
             "maxPeople": 8,
@@ -367,7 +367,7 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 33.000004291534424,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_sandbox",
             "mapName": "Caixa de areia",
             "maxPeople": 8,
@@ -639,7 +639,7 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 33.000004291534424,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_novel",
             "mapName": "Romance",
             "maxPeople": 20,
@@ -656,7 +656,7 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 33.000004291534424,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_novel",
             "mapName": "Romance",
             "maxPeople": 20,
@@ -673,7 +673,7 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 33.000004291534424,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_novel",
             "mapName": "Romance",
             "maxPeople": 20,
@@ -690,7 +690,7 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 33.000004291534424,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_novel",
             "mapName": "Romance",
             "maxPeople": 20,
@@ -2222,7 +2222,7 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 33.000004291534424,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_magistral",
             "mapName": "Magistral",
             "maxPeople": 24,
@@ -2239,7 +2239,7 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 33.000004291534424,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_magistral",
             "mapName": "Magistral",
             "maxPeople": 24,
@@ -2256,7 +2256,7 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 33.000004291534424,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_magistral",
             "mapName": "Magistral",
             "maxPeople": 24,
@@ -2273,7 +2273,7 @@
         },
         {
             "enabled": true,
-            "additionalCrystalsPercent": 33.000004291534424,
+            "additionalCrystalsPercent": 0,
             "mapId": "map_magistral",
             "mapName": "Magistral",
             "maxPeople": 24,

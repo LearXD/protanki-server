@@ -5,6 +5,7 @@ import { IMapData, IMapSpawn } from './types';
 import { Player } from '../player';
 import { ServerError } from '@/server/utils/error';
 import { SetBattleMapPropertiesPacket } from '@/network/packets/set-battle-map-properties';
+import { XMLParser } from 'fast-xml-parser';
 
 export class Map extends MapDataManager {
 
@@ -13,6 +14,10 @@ export class Map extends MapDataManager {
         data: IMapData
     ) {
         super(data)
+    }
+
+    public getXML() {
+        // XMLParser
     }
 
     public getProperties() {
