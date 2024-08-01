@@ -32,7 +32,7 @@ export class ResourcesManager {
         return this.sendLoadResources(client, this.resources.get(resource));
     }
 
-    public sendLoadResources(client: Client, resources: any[]) {
+    public sendLoadResources(client: Client, resources: IResource[]) {
         return new Promise((resolve) => {
             const setLoadResourcesPacket = new SetLoadResourcesPacket();
             setLoadResourcesPacket.resources = resources;

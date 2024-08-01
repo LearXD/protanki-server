@@ -24,16 +24,16 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
 
     public initFlag(team: TeamType) {
 
-        const positions = this.getFlagsPosition()
+        const positions = this.battle.getMap().getFlags()
 
         switch (team) {
             case Team.RED: {
-                this.redFlag = new Flag(this, Team.RED, positions.red)
+                this.redFlag = new Flag(this, Team.RED, new Vector3d(positions.red.x, positions.red.z, positions.red.y))
                 this.battle.getCollisionManager().addObject(this.redFlag)
                 break;
             }
             case Team.BLUE: {
-                this.blueFlag = new Flag(this, Team.BLUE, positions.blue)
+                this.blueFlag = new Flag(this, Team.BLUE, new Vector3d(positions.blue.x, positions.blue.z, positions.blue.y))
                 this.battle.getCollisionManager().addObject(this.blueFlag)
                 break;
             }
@@ -42,19 +42,19 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
     }
 
     public sendLoadBattleMode(player: Player): void {
-        const positions = this.getFlagsPosition()
+        const positions = this.battle.getMap().getFlags()
 
         const packet = new SetLoadCaptureTheFlagPacket();
 
         packet.blueFlag = {
-            basePosition: positions.blue,
+            basePosition: new Vector3d(positions.blue.x, positions.blue.z, positions.blue.y),
             carrier: this.blueFlag.getCarrier() ? this.blueFlag.getCarrier().getUsername() : null,
             droppedPosition: this.blueFlag.state === FlagState.DROPPED ? this.blueFlag.position : null
         }
         packet.blueFlagImage = 538453
         packet.blueFlagModel = 236578
         packet.redFlag = {
-            basePosition: positions.red,
+            basePosition: new Vector3d(positions.red.x, positions.red.z, positions.red.y),
             carrier: this.redFlag.getCarrier() ? this.redFlag.getCarrier().getUsername() : null,
             droppedPosition: this.redFlag.state === FlagState.DROPPED ? this.redFlag.position : null
         }
@@ -83,13 +83,6 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
 
         const random = MathUtils.randomInt(0, spawns.length - 1)
         return spawns[random]
-    }
-
-    public getFlagsPosition() {
-        return {
-            red: new Vector3d(4750, -1750, 80),
-            blue: new Vector3d(-3750, 2750, 80)
-        }
     }
 
     public getFlag(team: TeamType): Flag {

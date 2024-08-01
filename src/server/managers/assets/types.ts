@@ -4,6 +4,7 @@ export enum AssetType {
 }
 
 export enum ReadType {
-    JSON = 'utf-8',
-    BUFFER = 'binary'
+    JSON = 'json',
+    TEXT = 'text',
+    BUFFER = 'buffer'
 }

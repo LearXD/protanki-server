@@ -11,6 +11,7 @@ import { SetRemoveBattleFromListPacket } from "@/network/packets/set-remove-batt
 import { BattleMode } from "@/states/battle-mode";
 import { EquipmentConstraintsMode } from "@/states/equipment-constraints-mode";
 import { Rank } from "@/states/rank";
+import { ServerError } from "@/server/utils/error";
 
 export class BattlesManager {
 
@@ -22,7 +23,7 @@ export class BattlesManager {
         private readonly server: Server
     ) {
         this.createBattle('For Newbies', 'map_sandbox')
-        this.createBattle('For Newbies 2', 'map_sandbox', {
+        this.createBattle('For Newbies 2', 'map_noise', {
             autoBalance: true,
             battleMode: BattleMode.CTF,
             equipmentConstraintsMode: EquipmentConstraintsMode.NONE,
@@ -56,8 +57,7 @@ export class BattlesManager {
         const map = this.server.getMapsManager().findMap(mapName, config?.theme)
 
         if (!map) {
-            Logger.error(`Could not create battle ${name} because map ${mapName} was not found`)
-            return null;
+            throw new ServerError(`Map ${mapName} has not configured correctly`)
         }
 
         const battle = new Battle(name, map, config);

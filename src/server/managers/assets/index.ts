@@ -3,6 +3,7 @@ import path from 'path';
 import { AssetType, ReadType } from './types';
 import { Logger } from '@/utils/logger';
 import { IResource } from '../resources/types';
+import { ServerError } from '@/server/utils/error';
 
 
 export class AssetsManager {
@@ -21,8 +22,7 @@ export class AssetsManager {
         const dir = path.resolve(this.path, type, _path)
 
         if (!fs.existsSync(dir)) {
-            Logger.error(`Asset ${dir} not found!`)
-            return null;
+            throw new ServerError(`Asset ${dir} not found`)
         }
 
         try {
@@ -31,6 +31,8 @@ export class AssetsManager {
                     return JSON.parse(fs.readFileSync(dir, 'utf-8'));
                 case ReadType.BUFFER:
                     return fs.readFileSync(dir);
+                case ReadType.TEXT:
+                    return fs.readFileSync(dir, 'utf-8');
             }
         } catch (error) {
             if (error instanceof Error) {

@@ -212,10 +212,10 @@ export class PlayerData {
 
     public setCrystals(amount: number) {
 
-        // if (amount < INT_MIN || amount > INT_MAX) {
-        //     Logger.error(`Invalid crystals value: ${amount}`)
-        //     return;
-        // }
+        if (amount < INT_MIN || amount > INT_MAX) {
+            Logger.error(`Invalid crystals value: ${amount}`)
+            return;
+        }
 
         this.profileData.crystals = amount
     }

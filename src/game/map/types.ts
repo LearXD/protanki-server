@@ -21,3 +21,8 @@ export interface IMapSpawn {
     position: IVector3d
     point_id?: string
 }
+
+export interface IMapFlags {
+    red: IVector3d,
+    blue: IVector3d
+}

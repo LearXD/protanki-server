@@ -17,6 +17,12 @@ export interface IMap {
     theme: string;
 }
 
+export interface IMapLibrary {
+    name: string;
+    id: number;
+    version: number;
+}
+
 export interface IBattleAsset {
     maxRangeLength: number;
     battleCreationDisabled: boolean;

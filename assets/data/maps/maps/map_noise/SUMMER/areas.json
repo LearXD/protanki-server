@@ -1,0 +1,102 @@
+[
+    {
+        "minX": -3250,
+        "minY": -3250,
+        "minZ": -300,
+        "maxX": -2750,
+        "maxY": 6750,
+        "maxZ": 5700,
+        "action": "kill",
+        "type": "special-geometry"
+    },
+    {
+        "minX": 4625,
+        "minY": 2625,
+        "minZ": 900,
+        "maxX": 8375,
+        "maxY": 5375,
+        "maxZ": 1200,
+        "action": "kick",
+        "type": "special-geometry"
+    },
+    {
+        "minX": -2750,
+        "minY": -3250,
+        "minZ": -600,
+        "maxX": 9750,
+        "maxY": 6750,
+        "maxZ": -300,
+        "action": "kill",
+        "type": "special-geometry"
+    },
+    {
+        "minX": 9750,
+        "minY": -3250,
+        "minZ": -300,
+        "maxX": 10250,
+        "maxY": 6750,
+        "maxZ": 5700,
+        "action": "kill",
+        "type": "special-geometry"
+    },
+    {
+        "minX": -2750,
+        "minY": -3250,
+        "minZ": 5700,
+        "maxX": 9750,
+        "maxY": 6750,
+        "maxZ": 6000,
+        "action": "kick",
+        "type": "special-geometry"
+    },
+    {
+        "minX": -2750,
+        "minY": 6750,
+        "minZ": -300,
+        "maxX": 9750,
+        "maxY": 7250,
+        "maxZ": 5700,
+        "action": "kill",
+        "type": "special-geometry"
+    },
+    {
+        "minX": 1625,
+        "minY": 1750,
+        "minZ": 637.5,
+        "maxX": 2375,
+        "maxY": 2500,
+        "maxZ": 787.5,
+        "action": "kill",
+        "type": "special-geometry"
+    },
+    {
+        "minX": -2750,
+        "minY": -3750,
+        "minZ": -300,
+        "maxX": 9750,
+        "maxY": -3250,
+        "maxZ": 5700,
+        "action": "kill",
+        "type": "special-geometry"
+    },
+    {
+        "minX": 4500,
+        "minY": -2250,
+        "minZ": 2475,
+        "maxX": 7000,
+        "maxY": -750,
+        "maxZ": 2775,
+        "action": "kill",
+        "type": "special-geometry"
+    },
+    {
+        "minX": -500,
+        "minY": 4500,
+        "minZ": 2250,
+        "maxX": 0,
+        "maxY": 5000,
+        "maxZ": 2550,
+        "action": "kill",
+        "type": "special-geometry"
+    }
+]

@@ -6,7 +6,7 @@ export abstract class MapDataManager {
     public constructor(private readonly data: IMapData) { }
 
     protected getPath() {
-        return path.join(this.getId(), this.getTheme())
+        return path.join(this.getId().toLowerCase(), this.getTheme().toLowerCase())
     }
 
     public getName() {
