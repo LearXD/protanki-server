@@ -74,7 +74,7 @@ export class PlayerChatManager {
 
     public handlePacket(packet: SimplePacket) {
         if (packet instanceof SendChatMessagePacket) {
-            this.player.getServer().getChatManager().sendMessage(this.player, packet.text, packet.target);
+            this.player.getServer().getChatManager().handleSendMessage(this.player, packet.text, packet.target);
             return true
         }
         return false;

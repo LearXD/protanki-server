@@ -5,7 +5,7 @@ import { Packet } from "./packet";
 export class SendBattleMessagePacket extends Packet {
 
     public message: string;
-    public team: boolean;
+    public private: boolean;
 
     constructor(bytes?: ByteArray) {
         super(Protocol.SEND_BATTLE_MESSAGE, bytes)
@@ -15,18 +15,18 @@ export class SendBattleMessagePacket extends Packet {
         const bytes = this.cloneBytes();
 
         this.message = bytes.readString();
-        this.team = bytes.readBoolean();
+        this.private = bytes.readBoolean();
 
         return {
             message: this.message,
-            team: this.team
+            private: this.private
         }
     }
 
     public encode() {
         const bytes = new ByteArray();
         bytes.writeString(this.message);
-        bytes.writeBoolean(this.team);
+        bytes.writeBoolean(this.private);
         return bytes;
     }
 }

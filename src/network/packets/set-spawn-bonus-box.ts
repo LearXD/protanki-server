@@ -7,7 +7,7 @@ export class SetSpawnBonusBoxPacket extends Packet {
 
     public bonusId: string;
     public position: Vector3d;
-    public int_1: number;
+    public life: number;
 
     constructor(bytes?: ByteArray) {
         super(Protocol.SET_SPAWN_BONUS_BOX, bytes)
@@ -18,12 +18,12 @@ export class SetSpawnBonusBoxPacket extends Packet {
 
         this.bonusId = bytes.readString();
         this.position = bytes.readVector3d();
-        this.int_1 = bytes.readInt();
+        this.life = bytes.readInt();
 
         return {
             bonusId: this.bonusId,
             position: this.position,
-            int_1: this.int_1
+            life: this.life
         }
     }
 
@@ -32,7 +32,7 @@ export class SetSpawnBonusBoxPacket extends Packet {
 
         bytes.writeString(this.bonusId);
         bytes.writeVector3d(this.position);
-        bytes.writeInt(this.int_1);
+        bytes.writeInt(this.life);
 
         return bytes;
     }

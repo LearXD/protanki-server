@@ -3,10 +3,9 @@ import { User } from "@/game/chat/utils/user";
 import { Player } from "@/game/player";
 import { Server } from "@/server";
 
-
 export class ChatManager {
 
-    private messages: Message[] = []
+    public messages: Message[] = []
 
     constructor(
         private readonly server: Server
@@ -32,7 +31,12 @@ export class ChatManager {
         })
     }
 
-    public sendMessage(player: Player, text: string, target: string = null) {
+    public handleSendMessage(player: Player, text: string, target: string = null) {
+
+        if (this.server.getCommandsManager().handleSendCommand(player, text)) {
+            return;
+        }
+
         const message = new Message(text, player.getChatManager().getChatUser())
 
         if (target) {

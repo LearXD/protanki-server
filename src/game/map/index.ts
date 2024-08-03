@@ -1,7 +1,7 @@
 import path from 'path';
 import { MapsManager } from "@/server/managers/maps";
 import { MapDataManager } from './managers/data';
-import { IMapArea, IMapData, IMapFlags, IMapSpawn } from './types';
+import { IMapArea, IMapBonus, IMapData, IMapFlags, IMapSpawn } from './types';
 import { Player } from '../player';
 import { SetBattleMapPropertiesPacket } from '@/network/packets/set-battle-map-properties';
 import { IResource } from '@/server/managers/resources/types';
@@ -18,6 +18,7 @@ export class Map extends MapDataManager {
     private spawns: IMapSpawn[] = []
     private flags: IMapFlags = null
     private areas: IMapArea[] = []
+    private bonuses: IMapBonus[] = []
 
     public constructor(
         public readonly manager: MapsManager,
@@ -33,6 +34,7 @@ export class Map extends MapDataManager {
         this.spawns = manager.getMapsData(path.join(this.getId(), 'spawns.json'))
         this.flags = manager.getMapsData(path.join(this.getId(), 'flags.json'))
         this.areas = manager.getMapsData(path.join(this.getId(), 'areas.json'))
+        this.bonuses = manager.getMapsData(path.join(this.getId(), 'bonuses.json'))
     }
 
     public getSpawns(): IMapSpawn[] {
@@ -45,6 +47,10 @@ export class Map extends MapDataManager {
 
     public getAreas(): IMapArea[] {
         return this.areas
+    }
+
+    public getBonuses(): IMapBonus[] {
+        return this.bonuses
     }
 
     public getData(_path: string, readType?: ReadType) {

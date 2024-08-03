@@ -1,3 +1,4 @@
+import { BattleMode } from "@/states/battle-mode";
 import { TeamType } from "@/states/team";
 import { IVector3d } from "@/utils/vector-3d";
 
@@ -40,5 +41,26 @@ export interface IMapArea {
     maxY: number
     maxZ: number
     action: MapAreaAction
+}
+
+export enum BonusType {
+    GOLD = 'gold',
+    CRYSTAL = 'crystal',
+    ARMOR = 'armor',
+    NITRO = 'nitro',
+    HEALTH = 'health',
+    DAMAGE = 'damage',
+}
+
+export interface IMapBonus {
+    rotation: IVector3d
+    min: IVector3d
+    max: IVector3d
+    position: IVector3d
+    name: string
+    parachute: boolean
+    free: boolean
+    types: BonusType[]
+    modes: BattleMode[]
 }
 

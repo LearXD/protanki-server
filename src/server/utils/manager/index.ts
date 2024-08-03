@@ -1,3 +1,4 @@
+import { CommandsManager } from "@/server/managers/commands";
 import { Server } from "../..";
 import { AuthManager } from "../../handlers/auth";
 import { ClientsHandler } from "../../handlers/clients";
@@ -16,6 +17,7 @@ import { TipsManager } from "../../managers/tips";
 import { UserDataManager } from "../../managers/user-data";
 
 export abstract class ServerManager {
+
     protected clientsHandler: ClientsHandler;
     protected playersManager: PlayersManager;
 
@@ -31,6 +33,7 @@ export abstract class ServerManager {
     protected friendsManager: FriendsManager;
 
     protected chatManager: ChatManager;
+    protected commandsManager: CommandsManager;
     protected battleManager: BattlesManager;
     protected mapsManager: MapsManager;
     protected garageManager: GarageManager;
@@ -52,6 +55,7 @@ export abstract class ServerManager {
         this.friendsManager = new FriendsManager(server);
 
         this.chatManager = new ChatManager(server);
+        this.commandsManager = new CommandsManager();
         this.mapsManager = new MapsManager(server);
         this.battleManager = new BattlesManager(server);
 
@@ -73,6 +77,7 @@ export abstract class ServerManager {
     public getFriendsManager(): FriendsManager { return this.friendsManager }
 
     public getChatManager(): ChatManager { return this.chatManager }
+    public getCommandsManager(): CommandsManager { return this.commandsManager }
     public getGarageManager(): GarageManager { return this.garageManager }
     public getBattlesManager(): BattlesManager { return this.battleManager }
     public getMapsManager(): MapsManager { return this.mapsManager }

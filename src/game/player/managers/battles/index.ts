@@ -173,7 +173,7 @@ export class PlayerBattlesManager {
 
         if (this.player.isInBattle()) {
             if (packet instanceof SendBattleMessagePacket) {
-                this.player.getBattle().getChatManager().handleSendMessage(this.player, packet.message, packet.team);
+                this.player.getBattle().getChatManager().handleSendMessage(this.player, packet.message, packet.private);
             }
         }
 

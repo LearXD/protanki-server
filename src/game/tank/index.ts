@@ -39,6 +39,7 @@ import { TimeType } from "../battle/managers/task/types";
 import { BattleMode } from "@/states/battle-mode";
 import { SendDropFlagPacket } from "@/network/packets/send-drop-flag";
 import { BattleCaptureTheFlagModeManager } from "../battle/managers/mode/modes/capture-the-flag";
+import { SendCollectBonusBoxPacket } from "@/network/packets/send-collect-bonus-box";
 
 export class Tank {
 
@@ -202,10 +203,10 @@ export class Tank {
             Logger.warn(`Player ${this.player.getUsername()} has no spawn on the map ${this.battle.getMap().getName()}`);
         }
 
-        this.position = spawn.position ? Vector3d.fromInterface(spawn.position) : new Vector3d(0, 0, 0);
+        this.position = spawn?.position ? Vector3d.fromInterface(spawn.position) : new Vector3d(0, 0, 0);
         this.position.y += 200;
 
-        this.orientation = spawn.rotation ? Vector3d.fromInterface(spawn.rotation) : new Vector3d(0, 0, 0);
+        this.orientation = spawn?.rotation ? Vector3d.fromInterface(spawn.rotation) : new Vector3d(0, 0, 0);
         this.sendTankSpeed();
 
         this.setCameraPosition(this.position, this.orientation)
@@ -432,6 +433,11 @@ export class Tank {
                 if (packet instanceof SendUseSupplyPacket) {
                     this.handleUseSupply(packet.itemId as SupplyType)
                 }
+
+                if (packet instanceof SendCollectBonusBoxPacket) {
+                    this.battle.getBoxesManager().handleCollectBonus(this.player, packet.bonusId)
+                }
+
                 return
             }
 

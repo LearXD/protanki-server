@@ -188,6 +188,17 @@ export class Player extends Client {
         this.sendPacket(setLayoutStatePacket);
     }
 
+    public sendMessage(message: string) {
+        const battle = this.getBattle();
+
+        if (battle) {
+            battle.getChatManager().sendMessage(this, message);
+            return;
+        }
+
+        this.getChatManager().sendMessage(message);
+    }
+
     public handleClientSetLayoutState(state: LayoutStateType) {
 
         switch (state) {

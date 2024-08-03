@@ -5,7 +5,8 @@ import { SetBattleMessagePacket } from "../../../../network/packets/set-battle-m
 import { Team, TeamType } from "../../../../states/team";
 import { Player } from "../../../player";
 import { IBattleMessage } from "./types";
-
+import { BattleMode } from "@/states/battle-mode";
+import { SetBattleTeamMessagePacket } from "@/network/packets/set-battle-team-message";
 
 export class BattleChatManager {
 
@@ -19,25 +20,51 @@ export class BattleChatManager {
         player.sendPacket(new SetBattleChatEnabledPacket());
     }
 
-    public handleSendMessage(player: Player, message: string, isTeam: boolean) {
-        const isSpectator = this.battle.getPlayersManager().hasSpectator(player);
-        this.broadcastMessage(isSpectator ? null : player.getUsername(), message, isTeam ? Team.BLUE : Team.NONE);
+    public broadcastSystemMessage(message: string) {
+        const packet = new SetBattleSystemMessagePacket();
+        packet.message = message;
+        this.battle.broadcastPacket(packet);
     }
 
-    public broadcastMessage(userId: string, message: string, team: TeamType) {
-        this.messages.push({ userId, message, team });
+    public broadcastMessage(userId: string, message: string, team: TeamType, isPrivate: boolean) {
+        this.messages.push({ userId, message, team, isPrivate });
+
+        if (isPrivate) {
+            const packet = new SetBattleTeamMessagePacket();
+            packet.userId = userId;
+            packet.message = message;
+            packet.team = team;
+            this.battle.broadcastPacketToTeam(packet, team);
+            return;
+        }
 
         const packet = new SetBattleMessagePacket();
         packet.userId = userId;
         packet.message = message;
         packet.team = team;
-
         this.battle.broadcastPacket(packet);
     }
 
-    public broadcastSystemMessage(message: string) {
+    public sendMessage(player: Player, message: string) {
         const packet = new SetBattleSystemMessagePacket();
         packet.message = message;
-        this.battle.broadcastPacket(packet);
+        player.sendPacket(packet);
+    }
+
+    public handleSendMessage(player: Player, message: string, isPrivate: boolean) {
+
+        if (player.getServer().getCommandsManager().handleSendCommand(player, message)) {
+            return;
+        }
+
+        const isSpectator = this.battle.getPlayersManager().hasSpectator(player);
+        const sender = isSpectator ? null : player.getUsername();
+
+        if (this.battle.getMode() === BattleMode.DM) {
+            this.broadcastMessage(sender, message, Team.NONE, false);
+            return;
+        }
+
+        this.broadcastMessage(sender, message, isSpectator ? null : player.getTank().getTeam(), isPrivate);
     }
 }

@@ -281,6 +281,16 @@ export class Battle extends BattleManager {
         }
     }
 
+    public broadcastPacketToTeam(packet: SimplePacket, team: TeamType, ignore: string[] = []) {
+        for (const player of this.getPlayersManager().getPlayers()) {
+            if (player.getTank().getTeam() === team) {
+                if (!ignore.includes(player.getUsername())) {
+                    player.sendPacket(packet)
+                }
+            }
+        }
+    }
+
     public updateTime() {
         if (this.getTimeLeft() <= 0) {
             if (this.running) {

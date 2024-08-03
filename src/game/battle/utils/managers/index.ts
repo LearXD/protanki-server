@@ -47,7 +47,7 @@ export abstract class BattleManager {
         this.resourcesManager = new BattleResourcesManager(battle)
         this.minesManager = new BattleMinesManager()
         this.effectsManager = new BattleEffectsManager()
-        this.boxesManager = new BattleBoxesManager()
+        this.boxesManager = new BattleBoxesManager(battle)
 
         this.taskManager = new BattleTaskManager()
     }
