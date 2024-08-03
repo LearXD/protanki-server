@@ -4,6 +4,7 @@ import { SetSpawnBonusBoxPacket } from "@/network/packets/set-spawn-bonus-box";
 import { Vector3d } from "@/utils/vector-3d";
 import { SetRemoveBonusBoxPacket } from "@/network/packets/set-remove-bonus-box";
 import { Battle } from "@/game/battle";
+import { SetBonusBoxCollectedPacket } from "@/network/packets/set-bonus-box-collected";
 
 export class BonusBox {
 
@@ -41,6 +42,12 @@ export class BonusBox {
         this.battle.broadcastPacket(packet);
     }
 
+    public remove() {
+        const packet = new SetRemoveBonusBoxPacket();
+        packet.bonusId = this.getName();
+        this.battle.broadcastPacket(packet);
+    }
+
     public handleCollect(player: Player) {
 
         this.collected = true;
@@ -54,7 +61,7 @@ export class BonusBox {
             }
         }
 
-        const packet = new SetRemoveBonusBoxPacket();
+        const packet = new SetBonusBoxCollectedPacket();
         packet.bonusId = this.getName();
         this.battle.broadcastPacket(packet);
     }
