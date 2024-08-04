@@ -89,10 +89,10 @@ export class PlayerData {
     }
 
     public static findPlayerAuthData(username: string): IPlayerAuthData {
-        const exists = this.profiles.find(p => p.username === username);
-        if (!exists) {
-            return null;
-        }
+        // const exists = this.profiles.find(p => p.username === username);
+        // if (!exists) {
+        //     return null;
+        // }
         return {
             username: username,
             password: 'suasenha123',
@@ -133,7 +133,24 @@ export class PlayerData {
             this.profileData = data.data;
             return true;
         }
-        return false;
+
+        this.profileData = {
+            crystals: 0,
+            moderatorLevel: ChatModeratorLevel.NONE,
+            doubleCrystals: {
+                enabled: false,
+                endAt: 0
+            },
+            rank: Rank.GENERALISSIMO,
+            score: 0,
+            premium: {
+                notified: false,
+                startedAt: Date.now(),
+                endAt: Date.now()
+            }
+        }
+        return true;
+        // return false;
     }
 
     public loadGarage() {
