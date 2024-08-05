@@ -14,12 +14,12 @@ export interface GarageItem {
     premiumItem: boolean
     preview: number
     remaingTimeInMS: number
+    item: string
 }
 
-// TODO: Foi usado para desbloquear itens ao upar de rank
 export class SetGarageItemsPacket extends Packet {
 
-    public items: GarageItem[]
+    public items: GarageItem[] = []
 
     constructor(bytes?: ByteArray) {
         super(Protocol.SET_GARAGE_ITEMS, bytes)
@@ -29,7 +29,6 @@ export class SetGarageItemsPacket extends Packet {
         const bytes = this.cloneBytes();
 
         const length = bytes.readInt();
-        this.items = new Array(length);
 
         for (let i = 0; i < length; i++) {
             this.items[i] = {
@@ -41,7 +40,8 @@ export class SetGarageItemsPacket extends Packet {
                 position: bytes.readInt(),
                 premiumItem: bytes.readBoolean(),
                 preview: bytes.readInt(),
-                remaingTimeInMS: bytes.readInt()
+                remaingTimeInMS: bytes.readInt(),
+                item: bytes.readString()
             }
         }
 
@@ -66,6 +66,7 @@ export class SetGarageItemsPacket extends Packet {
             bytes.writeBoolean(item.premiumItem);
             bytes.writeInt(item.preview);
             bytes.writeInt(item.remaingTimeInMS);
+            bytes.writeString(item.item);
         });
 
         return bytes;
