@@ -40,13 +40,16 @@ import { BattleMode } from "@/states/battle-mode";
 import { SendDropFlagPacket } from "@/network/packets/send-drop-flag";
 import { BattleCaptureTheFlagModeManager } from "../battle/managers/mode/modes/capture-the-flag";
 import { SendCollectBonusBoxPacket } from "@/network/packets/send-collect-bonus-box";
+import { SetViewingBattleUserKillsPacket } from "@/network/packets/set-viewing-battle-user-kills";
+import { SetViewingBattleUserScorePacket } from "@/network/packets/set-viewing-battle-user-score";
+import { IGarageItem } from "@/server/managers/garage/types";
+import { GarageItemUtils } from "../player/managers/garage/utils/item";
 
 export class Tank {
 
     public incarnation: number = 0;
 
     /** TANK STATES */
-    public changedEquipment = false;
     public visible: boolean = false;
     public alive: boolean = false
 
@@ -66,6 +69,7 @@ export class Tank {
     /** TANK EQUIPMENTS */
     private turret: TurretHandler
     private hull: Hull
+    private painting: IGarageItem
 
     public constructor(
         public readonly player: Player,
@@ -78,6 +82,7 @@ export class Tank {
     public updateProperties() {
         this.updateTurret()
         this.updateHull()
+        this.updatePainting()
     }
 
     public getTeam() {
@@ -137,6 +142,11 @@ export class Tank {
         this.hull = new Hull(resources.item, resources.properties)
     }
 
+    public updatePainting() {
+        const resources = this.player.getGarageManager().getPaintingResources()
+        this.painting = resources.item
+    }
+
     public getTurret() {
         return this.turret
     }
@@ -157,9 +167,25 @@ export class Tank {
         return this.alive && this.visible
     }
 
-    public getKills() { return this.kills }
-    public getDeaths() { return this.deaths }
-    public getScore() { return this.score }
+    public setKills(kills: number) {
+        this.kills = kills
+
+        const packet = new SetViewingBattleUserKillsPacket();
+        packet.battle = this.battle.getBattleId();
+        packet.user = this.player.getUsername();
+        packet.kills = this.kills;
+        this.battle.getViewersManager().broadcastPacket(packet);
+    }
+
+    public setScore(score: number) {
+        this.score = score
+
+        const packet = new SetViewingBattleUserScorePacket();
+        packet.battle = this.battle.getBattleId();
+        packet.user = this.player.getUsername();
+        packet.score = this.score;
+        this.battle.getViewersManager().broadcastPacket(packet);
+    }
 
     public sendVisible() {
         this.visible = true
@@ -194,6 +220,18 @@ export class Tank {
         this.battle.broadcastPacket(setChangedEquipmentPacket);
     }
 
+    public hasChangedEquipment() {
+        const turret = this.player.getGarageManager().getEquippedTurret()
+        const hull = this.player.getGarageManager().getEquippedHull()
+        const painting = this.player.getGarageManager().getEquippedPainting()
+
+        return (
+            turret !== this.turret.getName() ||
+            hull !== this.hull.getName() ||
+            painting !== GarageItemUtils.serialize(this.painting.id)
+        )
+    }
+
     public prepareRespawn() {
         this.incarnation++;
 
@@ -204,7 +242,7 @@ export class Tank {
         }
 
         this.position = spawn?.position ? Vector3d.fromInterface(spawn.position) : new Vector3d(0, 0, 0);
-        this.position.y += 200;
+        this.position.add(new Vector3d(0, 200, 0));
 
         this.orientation = spawn?.rotation ? Vector3d.fromInterface(spawn.rotation) : new Vector3d(0, 0, 0);
         this.sendTankSpeed();
@@ -213,8 +251,7 @@ export class Tank {
     }
 
     public spawn() {
-
-        if (this.changedEquipment) {
+        if (this.hasChangedEquipment()) {
             this.updateProperties();
             const data = this.getData();
 
@@ -222,8 +259,6 @@ export class Tank {
             this.battle.getPlayersManager().sendTankData(data, this.player);
             this.battle.getPlayersManager().broadcastTankData(data);
             this.sendChangeEquipment();
-
-            this.changedEquipment = false;
         }
 
         this.alive = true;
@@ -458,11 +493,9 @@ export class Tank {
     }
 
     public getData(): IUserTankResourcesData {
-        const painting = this.player.getGarageManager().getPaintingResources()
-
         return {
             battleId: this.battle.getBattleId(),
-            colormap_id: painting.item.coloring,
+            colormap_id: this.painting.coloring,
             hull_id: this.hull.getName(),
             turret_id: this.turret.getName(),
             team_type: this.team,

@@ -7,6 +7,7 @@ import { Logger } from "../../../../utils/logger";
 import { IDamageModifiers } from "../../../battle/managers/combat/types";
 import { Player } from "../../../player";
 import { IGarageItem, ITurretProperties, ITurretSfx } from "@/server/managers/garage/types";
+import { GarageItemUtils } from "@/game/player/managers/garage/utils/item";
 
 export abstract class TurretHandler {
 
@@ -18,7 +19,7 @@ export abstract class TurretHandler {
     ) { }
 
     public getName() {
-        return this.item.id + '_m' + this.item.modificationID;
+        return GarageItemUtils.serialize(this.item.id, this.item.modificationID);
     }
 
     public getItemProperty(name: string) {

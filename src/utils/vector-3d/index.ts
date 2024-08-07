@@ -1,11 +1,18 @@
-export interface IVector3d {
-    x?: number,
-    y?: number,
-    z?: number
-}
+import { IVector3d } from "./types"
 
 export class Vector3d implements IVector3d {
-    constructor(public x: number = 0, public z: number = 0, public y: number = 0) { }
+
+    public constructor(
+        public x: number = 0,
+        public y: number = 0,
+        public z: number = 0
+    ) { }
+
+    public add(vector: Vector3d) {
+        this.x += vector.x
+        this.y += vector.y
+        this.z += vector.z
+    }
 
     public distanceTo(vector: Vector3d): number {
         return Math.sqrt(
@@ -29,12 +36,15 @@ export class Vector3d implements IVector3d {
             vector.z = parseFloat(vector.z)
         }
 
-        return new Vector3d(vector.x, swap ? vector.y : vector.z, swap ? vector.z : vector.y)
+        return new Vector3d(
+            vector.x,
+            swap ? vector.z : vector.y,
+            swap ? vector.y : vector.z
+        )
     }
 
-    public toObject(): IVector3d {
-        // TODO: why the z and y are swapped?
-        return { x: this.x, y: this.z, z: this.y }
+    public toObject(swap: boolean = true): IVector3d {
+        return { x: this.x, y: swap ? this.z : this.y, z: swap ? this.y : this.z }
     }
 
     public toString() {

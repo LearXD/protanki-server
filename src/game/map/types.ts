@@ -1,6 +1,6 @@
 import { BattleMode } from "@/states/battle-mode";
 import { TeamType } from "@/states/team";
-import { IVector3d } from "@/utils/vector-3d";
+import { IVector3d } from "@/utils/vector-3d/types";
 
 export interface IMapData {
     enabled: boolean;

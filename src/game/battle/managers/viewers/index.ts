@@ -3,27 +3,25 @@ import { Battle } from "../..";
 import { SetRemoveViewingBattlePacket } from "../../../../network/packets/set-remove-viewing-battle";
 import { SetViewingBattlePacket } from "../../../../network/packets/set-viewing-battle";
 import { SetViewingBattleDataPacket } from "../../../../network/packets/set-viewing-battle-data";
-import { BattleMode } from "../../../../states/battle-mode";
 import { Player } from "../../../player";
 import { BattleTeamModeManager } from "../mode/modes/team/team";
+import { BattleDeathMatchModeManager } from "../mode/modes/death-match";
+import { SimplePacket } from "@/network/packets/simple-packet";
 
 export class BattleViewersManager {
 
-    private viewers: Map<string, Player> = new Map();
+    public readonly viewers: Map<string, Player> = new Map();
 
     public constructor(
         private readonly battle: Battle
     ) { }
 
-    public getViewers() { return this.viewers }
-    public clearViewer() { this.getViewers().clear() }
-
     public hasViewer(username: string) {
-        return this.getViewers().has(username);
+        return this.viewers.has(username);
     }
 
     public getViewer(username: string) {
-        return this.getViewers().get(username);
+        return this.viewers.get(username);
     }
 
     public addViewer(client: Player) {
@@ -87,29 +85,28 @@ export class BattleViewersManager {
             reArmorEnabled: this.battle.isReArmorEnabled(),
         }
 
-        if (this.battle.getMode() === BattleMode.DM) {
+        const modeManager = this.battle.getModeManager();
+        if (modeManager instanceof BattleDeathMatchModeManager) {
             packet.data.users = this.battle.getPlayersManager().getPlayers().map(player => ({
-                kills: player.getTank().getKills(),
-                score: player.getTank().getScore(),
+                kills: player.getTank().kills,
+                score: player.getTank().score,
                 suspicious: false,
                 user: player.getUsername(),
             }));
         }
 
-        if ([BattleMode.CP, BattleMode.CTF, BattleMode.TDM].includes(this.battle.getMode())) {
-            const manager = this.battle.getModeManager() as BattleTeamModeManager;
-
+        if (modeManager instanceof BattleTeamModeManager) {
             packet.data.autoBalance = this.battle.haveAutoBalance();
             packet.data.friendlyFire = this.battle.isFriendlyFire();
 
-            packet.data.scoreRed = manager.redPoints;
-            packet.data.scoreBlue = manager.bluePoints;
+            packet.data.scoreRed = modeManager.redPoints;
+            packet.data.scoreBlue = modeManager.bluePoints;
 
             packet.data.usersRed = this.battle.getPlayersManager().getPlayers()
                 .filter(player => player.getTank().getTeam() === Team.RED)
                 .map(player => ({
-                    kills: player.getTank().getKills(),
-                    score: player.getTank().getScore(),
+                    kills: player.getTank().kills,
+                    score: player.getTank().score,
                     suspicious: false,
                     user: player.getUsername(),
                 }));
@@ -117,8 +114,8 @@ export class BattleViewersManager {
             packet.data.usersBlue = this.battle.getPlayersManager().getPlayers()
                 .filter(player => player.getTank().getTeam() === Team.BLUE)
                 .map(player => ({
-                    kills: player.getTank().getKills(),
-                    score: player.getTank().getScore(),
+                    kills: player.getTank().kills,
+                    score: player.getTank().score,
                     suspicious: false,
                     user: player.getUsername(),
                 }));
@@ -126,4 +123,11 @@ export class BattleViewersManager {
 
         client.sendPacket(packet);
     }
+
+    public broadcastPacket(packet: SimplePacket) {
+        for (const viewer of this.viewers.values()) {
+            viewer.sendPacket(packet);
+        }
+    }
+
 }

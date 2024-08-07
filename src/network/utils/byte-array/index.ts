@@ -1,4 +1,5 @@
-import { IVector3d, Vector3d } from "../../../utils/vector-3d";
+import { IVector3d } from "@/utils/vector-3d/types";
+import { Vector3d } from "../../../utils/vector-3d";
 
 export class ByteArray {
 
@@ -136,7 +137,7 @@ export class ByteArray {
         const z = this.readFloat();
         const y = this.readFloat();
 
-        return new Vector3d(x, z, y);
+        return new Vector3d(x, y, z);
     }
 
     public writeVector3d(value?: IVector3d) {

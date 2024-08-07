@@ -1,7 +1,7 @@
-import { IVector3d, Vector3d } from "../../utils/vector-3d";
 import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
+import { IVector3d } from "@/utils/vector-3d/types";
 
 export interface IUserTankResourcesData {
     battleId: string,

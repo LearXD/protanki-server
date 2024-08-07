@@ -2,8 +2,7 @@ import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-// TODO: VER ESSE PACOTE DEPOIS, BEM BUGADO PELO VISTO
-export class SetViewingBattleUserInfoPacket extends Packet {
+export class SetAddUserInfoOnViewingBattlePacket extends Packet {
 
     public battle: string;
     public kills: number;
@@ -12,7 +11,7 @@ export class SetViewingBattleUserInfoPacket extends Packet {
     public user: string;
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_VIEWING_BATTLE_USER_INFO, bytes)
+        super(Protocol.SET_ADD_USER_INFO_ON_VIEWING_BATTLE, bytes)
     }
 
     public decode() {

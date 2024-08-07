@@ -2,13 +2,13 @@ import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetRemoveUserFromViewingTeamBattlePacket extends Packet {
+export class SetRemoveUserFromViewingBattlePacket extends Packet {
 
     public battleId: string;
     public userId: string;
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_REMOVE_USER_FROM_VIEWING_TEAM_BATTLE, bytes)
+        super(Protocol.SET_REMOVE_USER_FROM_VIEWING_BATTLE, bytes)
     }
 
     public decode() {

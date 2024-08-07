@@ -17,7 +17,6 @@ import { SuspiciousLevel } from "../../states/suspicious-level"
 import { IBattleList } from "../../network/packets/set-battle-list"
 import { SetBattleTimePacket } from "../../network/packets/set-battle-time"
 import { Rank } from "../../states/rank"
-import { SetBattleUserLeftNotificationPacket } from "../../network/packets/set-battle-user-left-notification"
 import { BattleManager } from "./utils/managers"
 import { TimeType } from "./managers/task/types"
 import { BattleUtils } from "./utils/battle"
@@ -69,6 +68,8 @@ export class Battle extends BattleManager {
     }
 
     public start() {
+        Logger.info(`Battle ${this.getName()} started`)
+
         this.modeManager.init();
 
         this.startedAt = Date.now()
@@ -76,6 +77,9 @@ export class Battle extends BattleManager {
     }
 
     public restart() {
+        Logger.info(`Battle ${this.getName()} restarted`)
+
+        this.modeManager.init();
 
         if (this.getPlayersManager().getPlayers().length === 0) {
             return;
@@ -94,6 +98,7 @@ export class Battle extends BattleManager {
     }
 
     public finish() {
+        Logger.info(`Battle ${this.getName()} finished`)
         this.running = false
 
         this.taskManager.unregisterAll();

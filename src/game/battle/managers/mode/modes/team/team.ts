@@ -6,6 +6,7 @@ import { SetTeamBattleUserStatPacket } from "@/network/packets/set-team-battle-u
 import { SetTeamBattleAddUsersPropertiesPacket } from "@/network/packets/set-team-battle-add-users-properties";
 import { SetTeamScorePacket } from "@/network/packets/set-team-score";
 import { SetUserLeftBattlePacket } from "@/network/packets/set-user-left-battle";
+import { SetViewingBattleTeamScorePacket } from "@/network/packets/set-viewing-battle-team-score";
 
 export abstract class BattleTeamModeManager extends BattleModeManager {
 
@@ -33,11 +34,16 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
 
         const score = team === Team.RED ? this.redPoints : this.bluePoints;
 
-        const packet = new SetTeamScorePacket();
-        packet.team = team;
-        packet.score = score;
+        const setTeamScorePacket = new SetTeamScorePacket();
+        setTeamScorePacket.team = team;
+        setTeamScorePacket.score = score;
+        this.battle.broadcastPacket(setTeamScorePacket)
 
-        this.battle.broadcastPacket(packet)
+        const setViewingBattleTeamScorePacket = new SetViewingBattleTeamScorePacket();
+        setViewingBattleTeamScorePacket.battle = this.battle.getBattleId();
+        setViewingBattleTeamScorePacket.team = team;
+        setViewingBattleTeamScorePacket.score = score;
+        this.battle.getViewersManager().broadcastPacket(setViewingBattleTeamScorePacket)
     }
 
     public broadcastAddUserProperties(player: Player): void {
@@ -49,10 +55,10 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
         packet.usersInfo = players.map(p => (
             {
                 chatModeratorLevel: p.getData().getModeratorLevel(),
-                deaths: p.getTank().getDeaths(),
-                kills: p.getTank().getKills(),
+                deaths: p.getTank().deaths,
+                kills: p.getTank().kills,
                 rank: p.getData().getRank(),
-                score: p.getTank().getScore(),
+                score: p.getTank().score,
                 name: p.getUsername()
             }
         ))
@@ -70,9 +76,9 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
     public broadcastUserStats(player: Player): void {
         const packet = new SetTeamBattleUserStatPacket();
         packet.user = {
-            deaths: player.getTank().getDeaths(),
-            kills: player.getTank().getKills(),
-            score: player.getTank().getScore(),
+            deaths: player.getTank().deaths,
+            kills: player.getTank().kills,
+            score: player.getTank().score,
             name: player.getUsername()
         }
         packet.team = player.getTank().getTeam();
@@ -87,10 +93,10 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
         for (const player of this.battle.getPlayersManager().getPlayers()) {
             const userData: IUser = {
                 chatModeratorLevel: player.getData().getModeratorLevel(),
-                deaths: player.getTank().getDeaths(),
-                kills: player.getTank().getKills(),
+                deaths: player.getTank().deaths,
+                kills: player.getTank().kills,
                 rank: player.getData().getRank(),
-                score: player.getTank().getScore(),
+                score: player.getTank().score,
                 name: player.getUsername()
             }
 

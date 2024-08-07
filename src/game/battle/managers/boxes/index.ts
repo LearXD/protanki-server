@@ -7,7 +7,7 @@ import { Battle } from "../..";
 import { SetGoldBoxTakenPacket } from "@/network/packets/set-gold-box-taken";
 import { BonusType, IMapBonus } from "@/game/map/types";
 import { MathUtils } from "@/utils/math";
-import { IVector3d, Vector3d } from "@/utils/vector-3d";
+import { Vector3d } from "@/utils/vector-3d";
 import { TimeType } from "../task/types";
 
 export class BattleBoxesManager {

@@ -1,6 +1,7 @@
 
 import { IGarageItem, IHullProperties } from "@/server/managers/garage/types";
 import { Logger } from "../../../../utils/logger";
+import { GarageItemUtils } from "@/game/player/managers/garage/utils/item";
 
 export class Hull {
 
@@ -10,7 +11,7 @@ export class Hull {
     ) { }
 
     public getName() {
-        return this.item.id + '_m' + this.item.modificationID;
+        return GarageItemUtils.serialize(this.item.id, this.item.modificationID);
     }
 
     public getProtection() {

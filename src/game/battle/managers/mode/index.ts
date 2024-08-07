@@ -74,8 +74,8 @@ export abstract class BattleModeManager {
     }
 
     public handleKill(attacker: Player, target: Player) {
-        attacker.getTank().kills += 1;
-        attacker.getTank().score += 10;
+        attacker.getTank().setKills(attacker.getTank().kills + 1);
+        attacker.getTank().setScore(attacker.getTank().score + 100);
         this.broadcastUserStats(attacker);
     }
 

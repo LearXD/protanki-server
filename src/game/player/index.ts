@@ -31,7 +31,7 @@ export class Player extends Client {
     private viewingBattle: Battle;
     public layoutState: LayoutStateType;
 
-    private battle: Battle;
+    protected battle: Battle;
     public tank: Tank;
 
     private data: PlayerData;

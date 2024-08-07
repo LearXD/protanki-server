@@ -1,12 +1,18 @@
 import { Battle } from "../..";
 import { IUserTankResourcesData, SetUserTankResourcesDataPacket } from "../../../../network/packets/set-user-tank-resources-data";
-import { Vector3d } from "../../../../utils/vector-3d";
-import { Logger } from "../../../../utils/logger";
 import { Player } from "../../../player";
+import { SetAddUserOnBattleCounterPacket } from "@/network/packets/set-add-user-on-battle-counter";
+import { SetRemoveUserFromBattleCounterPacket } from "@/network/packets/set-remove-user-from-battle-counter";
+import { BattleMode } from "@/states/battle-mode";
+import { SetAddUserInfoOnViewingBattlePacket } from "@/network/packets/set-add-user-info-on-viewing-battle";
+import { SetRemoveUserFromViewingBattlePacket } from "@/network/packets/set-remove-user-from-viewing-battle";
+import { SetAddUserOnTeamBattleCounterPacket } from "@/network/packets/set-add-user-on-team-battle-counter";
+import { SetRemoveUserFromTeamBattleCounterPacket } from "@/network/packets/set-remove-user-from-team-battle-counter";
+import { SetAddUserInfoOnViewingTeamBattlePacket } from "@/network/packets/set-add-user-info-on-viewing-team-battle";
 
 export class BattlePlayersManager {
 
-    private players: Map<string, Player> = new Map();
+    public readonly players: Map<string, Player> = new Map();
     private spectators: Map<string, Player> = new Map();
 
     public constructor(
@@ -40,14 +46,66 @@ export class BattlePlayersManager {
 
     public addPlayer(player: Player) {
         this.players.set(player.getUsername(), player)
-    }
 
-    public addSpectator(player: Player) {
-        this.spectators.set(player.getUsername(), player)
+        if (this.battle.getMode() === BattleMode.DM) {
+            const setAddUserOnBattleCounterPacket = new SetAddUserOnBattleCounterPacket();
+            setAddUserOnBattleCounterPacket.battleId = this.battle.getBattleId();
+            setAddUserOnBattleCounterPacket.userId = player.getUsername();
+            player.getServer().getBattlesManager().broadcastPacket(setAddUserOnBattleCounterPacket);
+
+            const setAddUserInfoOnViewingBattlePacket = new SetAddUserInfoOnViewingBattlePacket
+            setAddUserInfoOnViewingBattlePacket.battle = player.getUsername()
+            setAddUserInfoOnViewingBattlePacket.kills = 0
+            setAddUserInfoOnViewingBattlePacket.score = 0
+            setAddUserInfoOnViewingBattlePacket.suspicious = false
+            setAddUserInfoOnViewingBattlePacket.user = player.getUsername()
+            this.battle.getViewersManager().broadcastPacket(setAddUserInfoOnViewingBattlePacket);
+        }
+
+        if (this.battle.getMode() !== BattleMode.DM) {
+            const setAddUserOnTeamBattleCounterPacket = new SetAddUserOnTeamBattleCounterPacket();
+            setAddUserOnTeamBattleCounterPacket.battle = this.battle.getBattleId();
+            setAddUserOnTeamBattleCounterPacket.team = player.getTank().getTeam();
+            setAddUserOnTeamBattleCounterPacket.user = player.getUsername();
+            player.getServer().getBattlesManager().broadcastPacket(setAddUserOnTeamBattleCounterPacket);
+
+            const setAddUserInfoOnViewingTeamBattlePacket = new SetAddUserInfoOnViewingTeamBattlePacket();
+            setAddUserInfoOnViewingTeamBattlePacket.battleId = this.battle.getBattleId();
+            setAddUserInfoOnViewingTeamBattlePacket.kills = 0;
+            setAddUserInfoOnViewingTeamBattlePacket.score = 0;
+            setAddUserInfoOnViewingTeamBattlePacket.suspicious = false;
+            setAddUserInfoOnViewingTeamBattlePacket.user = player.getUsername();
+            setAddUserInfoOnViewingTeamBattlePacket.team = player.getTank().getTeam();
+            this.battle.getViewersManager().broadcastPacket(setAddUserInfoOnViewingTeamBattlePacket);
+        }
+
     }
 
     public removePlayer(player: Player) {
         this.players.delete(player.getUsername());
+
+        if (this.battle.getMode() === BattleMode.DM) {
+            const setRemoveUserFromBattleCounterPacket = new SetRemoveUserFromBattleCounterPacket();
+            setRemoveUserFromBattleCounterPacket.battleId = this.battle.getBattleId();
+            setRemoveUserFromBattleCounterPacket.userId = player.getUsername();
+            player.getServer().getBattlesManager().broadcastPacket(setRemoveUserFromBattleCounterPacket);
+        }
+
+        if (this.battle.getMode() !== BattleMode.DM) {
+            const setRemoveUserFromTeamBattleCounterPacket = new SetRemoveUserFromTeamBattleCounterPacket()
+            setRemoveUserFromTeamBattleCounterPacket.battleId = this.battle.getBattleId()
+            setRemoveUserFromTeamBattleCounterPacket.userId = player.getUsername()
+            player.getServer().getBattlesManager().broadcastPacket(setRemoveUserFromTeamBattleCounterPacket)
+        }
+
+        const setRemoveUserFromViewingBattlePacket = new SetRemoveUserFromViewingBattlePacket();
+        setRemoveUserFromViewingBattlePacket.battleId = player.getUsername();
+        setRemoveUserFromViewingBattlePacket.userId = player.getUsername();
+        this.battle.getViewersManager().broadcastPacket(setRemoveUserFromViewingBattlePacket);
+    }
+
+    public addSpectator(player: Player) {
+        this.spectators.set(player.getUsername(), player)
     }
 
     public removeSpectator(player: Player) {

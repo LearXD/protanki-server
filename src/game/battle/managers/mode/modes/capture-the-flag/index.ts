@@ -28,12 +28,12 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
 
         switch (team) {
             case Team.RED: {
-                this.redFlag = new Flag(this, Team.RED, new Vector3d(positions.red.x, positions.red.z, positions.red.y))
+                this.redFlag = new Flag(this, Team.RED, new Vector3d(positions.red.x, positions.red.y, positions.red.z))
                 this.battle.getCollisionManager().addObject(this.redFlag)
                 break;
             }
             case Team.BLUE: {
-                this.blueFlag = new Flag(this, Team.BLUE, new Vector3d(positions.blue.x, positions.blue.z, positions.blue.y))
+                this.blueFlag = new Flag(this, Team.BLUE, new Vector3d(positions.blue.x, positions.blue.y, positions.blue.z))
                 this.battle.getCollisionManager().addObject(this.blueFlag)
                 break;
             }
@@ -47,14 +47,14 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
         const packet = new SetLoadCaptureTheFlagPacket();
 
         packet.blueFlag = {
-            basePosition: new Vector3d(positions.blue.x, positions.blue.z, positions.blue.y),
+            basePosition: new Vector3d(positions.blue.x, positions.blue.y, positions.blue.z),
             carrier: this.blueFlag.getCarrier() ? this.blueFlag.getCarrier().getUsername() : null,
             droppedPosition: this.blueFlag.state === FlagState.DROPPED ? this.blueFlag.position : null
         }
         packet.blueFlagImage = 538453
         packet.blueFlagModel = 236578
         packet.redFlag = {
-            basePosition: new Vector3d(positions.red.x, positions.red.z, positions.red.y),
+            basePosition: new Vector3d(positions.red.x, positions.red.y, positions.red.z),
             carrier: this.redFlag.getCarrier() ? this.redFlag.getCarrier().getUsername() : null,
             droppedPosition: this.redFlag.state === FlagState.DROPPED ? this.redFlag.position : null
         }
@@ -153,7 +153,7 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
 
         this.addTeamScore(player.getTank().getTeam(), 1)
 
-        if (this.battle.getScoreLimit() === this.getTeamScore(player.getTank().getTeam())) {
+        if (this.battle.getScoreLimit() <= this.getTeamScore(player.getTank().getTeam())) {
             return this.battle.finish()
         }
 

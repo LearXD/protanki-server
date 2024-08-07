@@ -38,10 +38,10 @@ export class BattleDeathMatchModeManager extends BattleModeManager {
             .map(player => {
                 return {
                     chatModeratorLevel: player.getData().getModeratorLevel(),
-                    deaths: player.getTank().getDeaths(),
-                    kills: player.getTank().getKills(),
+                    deaths: player.getTank().deaths,
+                    kills: player.getTank().kills,
                     rank: player.getData().getRank(),
-                    score: player.getTank().getScore(),
+                    score: player.getTank().score,
                     name: player.getUsername()
                 }
             })
@@ -58,9 +58,9 @@ export class BattleDeathMatchModeManager extends BattleModeManager {
     public broadcastUserStats(player: Player): void {
 
         const setBattleUserStatusPacket = new SetBattleUserStatusPacket()
-        setBattleUserStatusPacket.deaths = player.getTank().getDeaths()
-        setBattleUserStatusPacket.kills = player.getTank().getKills()
-        setBattleUserStatusPacket.score = player.getTank().getScore()
+        setBattleUserStatusPacket.deaths = player.getTank().deaths
+        setBattleUserStatusPacket.kills = player.getTank().kills
+        setBattleUserStatusPacket.score = player.getTank().score
         setBattleUserStatusPacket.user = player.getUsername()
 
         this.battle.broadcastPacket(setBattleUserStatusPacket)
@@ -72,10 +72,10 @@ export class BattleDeathMatchModeManager extends BattleModeManager {
         packet.users = this.battle.getPlayersManager().getPlayers()
             .map((playing) => ({
                 chatModeratorLevel: playing.getData().getModeratorLevel(),
-                deaths: player.getTank().getDeaths(),
-                kills: player.getTank().getKills(),
+                deaths: player.getTank().deaths,
+                kills: player.getTank().kills,
                 rank: playing.getData().getRank(),
-                score: player.getTank().getScore(),
+                score: player.getTank().score,
                 name: playing.getUsername()
             }))
 

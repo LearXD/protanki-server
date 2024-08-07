@@ -22,7 +22,7 @@ export class BattleControlPointsModeManager extends BattleTeamModeManager {
             {
                 id: 0,
                 name: 'A',
-                position: new Vector3d(500, 500, 300),
+                position: new Vector3d(500, 300, 500),
                 score: 0,
                 float_1: 0,
                 state: 'NEUTRAL',

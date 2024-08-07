@@ -55,13 +55,13 @@ import { SetAddUserOnTeamBattleCounterPacket } from "./packets/set-add-user-on-t
 import { SetViewingBattleUserKillsPacket } from "./packets/set-viewing-battle-user-kills";
 import { SetBattleRestartedPacket } from "./packets/set-battle-restarted";
 import { SetAddUserOnBattleCounterPacket } from "./packets/set-add-user-on-battle-counter";
-import { SetViewingBattleUserInfoPacket } from "./packets/set-viewing-battle-user-info";
+import { SetAddUserInfoOnViewingBattlePacket } from "./packets/set-add-user-info-on-viewing-battle";
 import { SetViewingBattleUserScorePacket } from "./packets/set-viewing-battle-user-score";
 import { SendChatMessagePacket } from "./packets/send-chat-message";
 import { SetRemoveBattleFromListPacket } from "./packets/set-remove-battle-from-list";
 import { SetAddBattleOnListPacket } from "./packets/set-add-battle-on-list";
 import { SetBattleEndedPacket } from "./packets/set-battle-ended";
-import { SetRemoveUserFromViewingTeamBattlePacket } from "./packets/set-remove-user-from-viewing-team-battle";
+import { SetRemoveUserFromViewingBattlePacket } from "./packets/set-remove-user-from-viewing-battle";
 import { SendRequestConfigDataPacket } from "./packets/send-request-config-data";
 import { SetSocialNetworkPanelCCPacket } from "./packets/set-social-network-panel-cc";
 import { SetNotificationEnabledPacket } from "./packets/set-notification-enabled";
@@ -445,10 +445,10 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_USER_FROM_BATTLE_COUNTER, SetRemoveUserFromBattleCounterPacket)
         this.registerPacket(Protocol.SET_REMOVE_USER_FROM_TEAM_BATTLE_COUNTER, SetRemoveUserFromTeamBattleCounterPacket)
         this.registerPacket(Protocol.SET_ADD_USER_ON_BATTLE_COUNTER, SetAddUserOnBattleCounterPacket)
-        this.registerPacket(Protocol.SET_REMOVE_USER_FROM_VIEWING_TEAM_BATTLE, SetRemoveUserFromViewingTeamBattlePacket)
+        this.registerPacket(Protocol.SET_REMOVE_USER_FROM_VIEWING_BATTLE, SetRemoveUserFromViewingBattlePacket)
         this.registerPacket(Protocol.SET_RATTING, SetRattingPacket)
 
-        this.registerPacket(Protocol.SET_VIEWING_BATTLE_USER_INFO, SetViewingBattleUserInfoPacket)
+        this.registerPacket(Protocol.SET_ADD_USER_INFO_ON_VIEWING_BATTLE, SetAddUserInfoOnViewingBattlePacket)
 
         this.registerPacket(Protocol.SET_MAPS_DATA, SetMapsDataPacket)
         this.registerPacket(Protocol.SET_BATTLE_LIST, SetBattleListPacket)

@@ -198,10 +198,6 @@ export class PlayerGarageManager {
                 break;
         }
 
-        if (this.player.isInBattle()) {
-            this.player.getTank().changedEquipment = true;
-        }
-
         return GarageItemUtils.serialize(inventory.name, 'level' in inventory ? inventory.level : 0);
     }
 
@@ -278,7 +274,7 @@ export class PlayerGarageManager {
         this.removeGarageScreen();
 
         const battle = this.player.getBattle();
-        if (battle && this.player.tank.changedEquipment) {
+        if (battle && this.player.tank.hasChangedEquipment()) {
             if (this.player.getTank().isAlive()) {
                 this.player.getTank().scheduleSuicide()
             }
