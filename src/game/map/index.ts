@@ -88,13 +88,13 @@ export class Map extends MapDataManager {
     }
 
     public async sendResources(player: Player) {
-        await player.getServer().getResourcesManager()
+        await player.server.resourcesManager
             .sendLoadResources(player, this.librariesResources)
 
-        await player.getServer().getResourcesManager()
+        await player.server.resourcesManager
             .sendLoadResources(player, this.skyboxResources)
 
-        await player.getServer().getResourcesManager()
+        await player.server.resourcesManager
             .sendLoadResources(player, this.mapResources)
     }
 }

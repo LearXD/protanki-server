@@ -17,7 +17,7 @@ export class UserDataManager {
     ) { }
 
     public findPlayerData(username: string) {
-        const player = this.server.getPlayersManager().getPlayer(username);
+        const player = this.server.playersManager.getPlayer(username);
 
         if (player) {
             return player.getData();

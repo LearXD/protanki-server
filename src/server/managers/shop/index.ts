@@ -8,7 +8,7 @@ export class ShopManager {
     ) { }
 
     public getShopProducts() {
-        const data = this.server.getAssetsManager().getData<IShopData>('shop.json')
+        const data = this.server.assetsManager.getData<IShopData>('shop.json')
         if (!data) {
             Logger.error('Could not load shop data')
             return;

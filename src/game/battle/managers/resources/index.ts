@@ -13,7 +13,7 @@ export class BattleResourcesManager {
 
 
     public sendTurretsData(player: Player) {
-        const turrets = player.getServer().getBattlesManager().getData('turrets.json')
+        const turrets = player.server.battleManager.getData('turrets.json')
 
         if (!turrets) {
             throw new ServerError('Turrets data not found')

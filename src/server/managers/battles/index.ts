@@ -46,7 +46,7 @@ export class BattlesManager {
     }
 
     public getData(_path: string) {
-        return this.server.getAssetsManager().getData(path.join('battle', _path))
+        return this.server.assetsManager.getData(path.join('battle', _path))
     }
 
     public createBattle(
@@ -54,13 +54,13 @@ export class BattlesManager {
         mapName: string,
         config?: IBattleData
     ) {
-        const map = this.server.getMapsManager().findMap(mapName, config?.theme)
+        const map = this.server.mapsManager.findMap(mapName, config?.theme)
 
         if (!map) {
             throw new ServerError(`Map ${mapName} has not configured correctly`)
         }
 
-        const battle = new Battle(name, map, config);
+        const battle = new Battle(this.server, name, map, config);
 
         this.addBattle(battle);
         Logger.debug(`Created battle ${battle.getBattleId()} with name ${name} and map ${mapName}`)
@@ -79,7 +79,7 @@ export class BattlesManager {
 
     public removeBattle(battle: Battle) {
 
-        battle.getViewersManager().removeAllViewers()
+        battle.viewersManager.removeAllViewers()
         this.battles = this.battles.filter(b => b.getBattleId() !== battle.getBattleId())
 
         const packet = new SetRemoveBattleFromListPacket();
@@ -97,7 +97,7 @@ export class BattlesManager {
     }
 
     public getPlayers() {
-        return this.server.getPlayersManager()
+        return this.server.playersManager
             .getPlayersOnState(LayoutState.BATTLE_SELECT)
     }
 }

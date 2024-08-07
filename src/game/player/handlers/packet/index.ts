@@ -45,7 +45,7 @@ export class PlayerPacketHandler {
             const decrypted = this.player.getCryptoHandler().decrypt(bytes);
 
             try {
-                const packetInstance = this.player.getServer().getNetwork().findPacket<typeof SimplePacket>(pid);
+                const packetInstance = this.player.server.getNetwork().findPacket<typeof SimplePacket>(pid);
 
                 if (!IGNORE_PACKETS.includes(pid)) {
                     Logger.log(`Packet ${packetInstance.name} (${pid}) received - ${realLength} bytes`)

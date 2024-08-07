@@ -132,18 +132,18 @@ export class Tank {
     }
 
     public updateTurret() {
-        const resources = this.player.getGarageManager().getTurretResources()
+        const resources = this.player.garageManager.getTurretResources()
         const turretInstance = TurretUtils.getTurretHandler(resources.item.id)
         this.turret = new turretInstance(resources.item, resources.properties, resources.sfx, this)
     }
 
     public updateHull() {
-        const resources = this.player.getGarageManager().getHullResources()
+        const resources = this.player.garageManager.getHullResources()
         this.hull = new Hull(resources.item, resources.properties)
     }
 
     public updatePainting() {
-        const resources = this.player.getGarageManager().getPaintingResources()
+        const resources = this.player.garageManager.getPaintingResources()
         this.painting = resources.item
     }
 
@@ -174,7 +174,7 @@ export class Tank {
         packet.battle = this.battle.getBattleId();
         packet.user = this.player.getUsername();
         packet.kills = this.kills;
-        this.battle.getViewersManager().broadcastPacket(packet);
+        this.battle.viewersManager.broadcastPacket(packet);
     }
 
     public setScore(score: number) {
@@ -184,7 +184,7 @@ export class Tank {
         packet.battle = this.battle.getBattleId();
         packet.user = this.player.getUsername();
         packet.score = this.score;
-        this.battle.getViewersManager().broadcastPacket(packet);
+        this.battle.viewersManager.broadcastPacket(packet);
     }
 
     public sendVisible() {
@@ -221,9 +221,9 @@ export class Tank {
     }
 
     public hasChangedEquipment() {
-        const turret = this.player.getGarageManager().getEquippedTurret()
-        const hull = this.player.getGarageManager().getEquippedHull()
-        const painting = this.player.getGarageManager().getEquippedPainting()
+        const turret = this.player.garageManager.getEquippedTurret()
+        const hull = this.player.garageManager.getEquippedHull()
+        const painting = this.player.garageManager.getEquippedPainting()
 
         return (
             turret !== this.turret.getName() ||
@@ -235,7 +235,7 @@ export class Tank {
     public prepareRespawn() {
         this.incarnation++;
 
-        const spawn = this.battle.getModeManager().getRandomSpawn(this.player);
+        const spawn = this.battle.modeManager.getRandomSpawn(this.player);
 
         if (!spawn) {
             Logger.warn(`Player ${this.player.getUsername()} has no spawn on the map ${this.battle.getMap().getName()}`);
@@ -256,8 +256,8 @@ export class Tank {
             const data = this.getData();
 
             this.sendRemoveTank();
-            this.battle.getPlayersManager().sendTankData(data, this.player);
-            this.battle.getPlayersManager().broadcastTankData(data);
+            this.battle.playersManager.sendTankData(data, this.player);
+            this.battle.playersManager.broadcastTankData(data);
             this.sendChangeEquipment();
         }
 
@@ -282,7 +282,7 @@ export class Tank {
 
         this.player.sendPacket(packet);
 
-        this.battle.getTaskManager().scheduleTask(
+        this.battle.taskManager.scheduleTask(
             () => this.sendRespawnDelay(respawnDelay), delay, TimeType.MILLISECONDS, this.player.getUsername()
         )
     }
@@ -295,7 +295,7 @@ export class Tank {
         packet.respawnDelay = delay;
         this.battle.broadcastPacket(packet);
 
-        this.battle.getModeManager().handleDeath(this.player)
+        this.battle.modeManager.handleDeath(this.player)
 
         this.handleDeath();
     }
@@ -325,7 +325,7 @@ export class Tank {
 
         this.battle.broadcastPacket(packet);
 
-        this.battle.getModeManager().handleKill(killer, this.player)
+        this.battle.modeManager.handleKill(killer, this.player)
         this.handleDeath()
     }
 
@@ -345,7 +345,7 @@ export class Tank {
         this.visible = false;
         this.health = 0;
 
-        this.battle.getModeManager().handleDeath(this.player)
+        this.battle.modeManager.handleDeath(this.player)
     }
 
     public handleSuicide() {
@@ -354,14 +354,14 @@ export class Tank {
             return;
         }
 
-        this.battle.getTaskManager().scheduleTask(
+        this.battle.taskManager.scheduleTask(
             this.suicide.bind(this), 10, TimeType.SECONDS, this.player.getUsername()
         )
     }
 
     public handleUseSupply(item: SupplyType) {
 
-        if (this.player.getGarageManager().getSupplyCount(item) <= 0) {
+        if (this.player.garageManager.getSupplyCount(item) <= 0) {
             return;
         }
 
@@ -380,7 +380,7 @@ export class Tank {
                 break;
         }
 
-        this.player.getGarageManager().sendUseSupply(item, time, decrease)
+        this.player.garageManager.sendUseSupply(item, time, decrease)
     }
 
     public handleMove(position: Vector3d, orientation?: Vector3d) {
@@ -389,7 +389,7 @@ export class Tank {
         }
         this.position = position;
 
-        this.battle.getCollisionManager()
+        this.battle.collisionManager
             .handlePlayerMovement(this.player)
     }
 
@@ -456,7 +456,7 @@ export class Tank {
 
                 if (this.battle.getMode() === BattleMode.CTF) {
                     if (packet instanceof SendDropFlagPacket) {
-                        const manager = this.battle.getModeManager() as BattleCaptureTheFlagModeManager;
+                        const manager = this.battle.modeManager as BattleCaptureTheFlagModeManager;
                         manager.handleDropFlag(this.player)
                     }
                 }
@@ -470,7 +470,7 @@ export class Tank {
                 }
 
                 if (packet instanceof SendCollectBonusBoxPacket) {
-                    this.battle.getBoxesManager().handleCollectBonus(this.player, packet.bonusId)
+                    this.battle.boxesManager.handleCollectBonus(this.player, packet.bonusId)
                 }
 
                 return

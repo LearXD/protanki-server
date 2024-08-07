@@ -54,7 +54,7 @@ export class PlayerFriendsManager {
     public sendInviteFriendsProperties() {
         const setInviteFriendsPropertiesPacket = new SetInviteFriendsPropertiesPacket();
         setInviteFriendsPropertiesPacket.hash = this.player.getUsername();
-        setInviteFriendsPropertiesPacket.host = this.player.getServer().getFriendsManager().getHost();
+        setInviteFriendsPropertiesPacket.host = this.player.server.friendsManager.getHost();
         this.player.sendPacket(setInviteFriendsPropertiesPacket);
     }
 

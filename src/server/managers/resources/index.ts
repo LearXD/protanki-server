@@ -15,7 +15,7 @@ export class ResourcesManager {
     }
 
     public init() {
-        const assetsManager = this.server.getAssetsManager();
+        const assetsManager = this.server.assetsManager;
 
         this.registerResources(ResourceType.LOBBY, assetsManager.getResource('lobby.json'));
         this.registerResources(ResourceType.AUTH, assetsManager.getResource('auth.json'));

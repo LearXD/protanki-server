@@ -27,7 +27,7 @@ export class BattleViewersManager {
     public addViewer(client: Player) {
         const viewing = client.getViewingBattle();
         if (viewing) {
-            viewing.getViewersManager().removeViewer(client);
+            viewing.viewersManager.removeViewer(client);
         }
 
         const setViewingBattlePacket = new SetViewingBattlePacket();
@@ -85,9 +85,9 @@ export class BattleViewersManager {
             reArmorEnabled: this.battle.isReArmorEnabled(),
         }
 
-        const modeManager = this.battle.getModeManager();
+        const modeManager = this.battle.modeManager;
         if (modeManager instanceof BattleDeathMatchModeManager) {
-            packet.data.users = this.battle.getPlayersManager().getPlayers().map(player => ({
+            packet.data.users = this.battle.playersManager.getPlayers().map(player => ({
                 kills: player.getTank().kills,
                 score: player.getTank().score,
                 suspicious: false,
@@ -102,7 +102,7 @@ export class BattleViewersManager {
             packet.data.scoreRed = modeManager.redPoints;
             packet.data.scoreBlue = modeManager.bluePoints;
 
-            packet.data.usersRed = this.battle.getPlayersManager().getPlayers()
+            packet.data.usersRed = this.battle.playersManager.getPlayers()
                 .filter(player => player.getTank().getTeam() === Team.RED)
                 .map(player => ({
                     kills: player.getTank().kills,
@@ -111,7 +111,7 @@ export class BattleViewersManager {
                     user: player.getUsername(),
                 }));
 
-            packet.data.usersBlue = this.battle.getPlayersManager().getPlayers()
+            packet.data.usersBlue = this.battle.playersManager.getPlayers()
                 .filter(player => player.getTank().getTeam() === Team.BLUE)
                 .map(player => ({
                     kills: player.getTank().kills,

@@ -44,7 +44,7 @@ export class PlayerChatManager {
 
     public sendChatMessages() {
         const setChatMessagesPacket = new SetChatMessagesPacket();
-        setChatMessagesPacket.messages = this.player.getServer().getChatManager().getMessages()
+        setChatMessagesPacket.messages = this.player.server.chatManager.getMessages()
             .map(message => message.toObject());
 
         this.player.sendPacket(setChatMessagesPacket);
@@ -74,7 +74,7 @@ export class PlayerChatManager {
 
     public handlePacket(packet: SimplePacket) {
         if (packet instanceof SendChatMessagePacket) {
-            this.player.getServer().getChatManager().handleSendMessage(this.player, packet.text, packet.target);
+            this.player.server.chatManager.handleSendMessage(this.player, packet.text, packet.target);
             return true
         }
         return false;

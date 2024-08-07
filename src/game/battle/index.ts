@@ -17,18 +17,31 @@ import { SuspiciousLevel } from "../../states/suspicious-level"
 import { IBattleList } from "../../network/packets/set-battle-list"
 import { SetBattleTimePacket } from "../../network/packets/set-battle-time"
 import { Rank } from "../../states/rank"
-import { BattleManager } from "./utils/managers"
 import { TimeType } from "./managers/task/types"
 import { BattleUtils } from "./utils/battle"
 import { Team, TeamType } from "@/states/team"
 import { Tank } from "../tank"
 import { Map } from "../map"
+import { SetBattleStartedPacket } from "@/network/packets/set-battle-started"
+import { Server } from "@/server"
+import { SetBattleEndedPacket } from "@/network/packets/set-battle-ended"
+import { BattleModeManager } from "./managers/mode"
+import { BattleCollisionsManager } from "./managers/collisions"
+import { BattleCombatManager } from "./managers/combat"
+import { BattlePlayersManager } from "./managers/players"
+import { BattleViewersManager } from "./managers/viewers"
+import { BattleChatManager } from "./managers/chat"
+import { BattleResourcesManager } from "./managers/resources"
+import { BattleMinesManager } from "./managers/mines"
+import { BattleEffectsManager } from "./managers/effects"
+import { BattleBoxesManager } from "./managers/boxes"
+import { BattleTaskManager } from "./managers/task"
 
-export class Battle extends BattleManager {
+export class Battle {
 
     public static readonly TICK_RATE = 10
 
-    private battleId: string;
+    public readonly battleId: string = BattleUtils.generateBattleId();
     private running: boolean = false
 
     private startedAt: number;
@@ -37,8 +50,22 @@ export class Battle extends BattleManager {
     private updateInterval: NodeJS.Timeout
     private updateTimeInterval: NodeJS.Timeout
 
+    /** Managers */
+    public readonly modeManager: BattleModeManager = BattleUtils.getBattleManager(this)
+    public readonly collisionManager: BattleCollisionsManager = new BattleCollisionsManager(this)
+    public readonly damageManager: BattleCombatManager = new BattleCombatManager(this)
+    public readonly playersManager: BattlePlayersManager = new BattlePlayersManager(this)
+    public readonly viewersManager: BattleViewersManager = new BattleViewersManager(this)
+    public readonly chatManager: BattleChatManager = new BattleChatManager(this)
+    public readonly resourcesManager: BattleResourcesManager = new BattleResourcesManager(this)
+    public readonly minesManager: BattleMinesManager = new BattleMinesManager()
+    public readonly effectsManager: BattleEffectsManager = new BattleEffectsManager()
+    public readonly boxesManager: BattleBoxesManager = new BattleBoxesManager(this)
+    public readonly taskManager: BattleTaskManager = new BattleTaskManager()
+
     public constructor(
-        private name: string,
+        private readonly server: Server,
+        public name: string,
         private map: Map,
         private data: IBattleData = {
             autoBalance: true,
@@ -58,11 +85,6 @@ export class Battle extends BattleManager {
             withoutSupplies: false
         },
     ) {
-        super();
-
-        this.battleId = BattleUtils.generateBattleId()
-        this.registerManagers(this);
-
         this.updateInterval = setInterval(this.update.bind(this), 1000 / Battle.TICK_RATE);
         this.updateTimeInterval = setInterval(this.updateTime.bind(this), 1000);
     }
@@ -70,8 +92,8 @@ export class Battle extends BattleManager {
     public start() {
         Logger.info(`Battle ${this.getName()} started`)
 
+        this.sendStarted()
         this.modeManager.init();
-
         this.startedAt = Date.now()
         this.running = true
     }
@@ -81,16 +103,17 @@ export class Battle extends BattleManager {
 
         this.modeManager.init();
 
-        if (this.getPlayersManager().getPlayers().length === 0) {
+        if (this.playersManager.getPlayers().length === 0) {
             return;
         }
 
+        this.sendStarted()
         this.startedAt = Date.now()
         this.running = true
 
         this.restartTime();
 
-        for (const player of this.getPlayersManager().getPlayers()) {
+        for (const player of this.playersManager.getPlayers()) {
             player.getTank().alive = false;
             player.getTank().visible = false;
             player.getTank().prepareRespawn();
@@ -99,6 +122,11 @@ export class Battle extends BattleManager {
 
     public finish() {
         Logger.info(`Battle ${this.getName()} finished`)
+
+        const packet = new SetBattleEndedPacket();
+        packet.battle = this.getBattleId();
+        this.server.battleManager.broadcastPacket(packet)
+
         this.running = false
 
         this.taskManager.unregisterAll();
@@ -116,7 +144,7 @@ export class Battle extends BattleManager {
 
         const isSpectator = team === Team.SPECTATOR
 
-        if (this.getPlayersManager().hasPlayer(player) || this.getPlayersManager().hasSpectator(player)) {
+        if (this.playersManager.hasPlayer(player) || this.playersManager.hasSpectator(player)) {
             Logger.warn(`${player.getUsername()} already joined the battle ${this.getName()}`)
             return false;
         }
@@ -128,12 +156,12 @@ export class Battle extends BattleManager {
         player.setLayoutState(LayoutState.BATTLE)
 
         if (isSpectator) {
-            this.getPlayersManager().addSpectator(player)
+            this.playersManager.addSpectator(player)
         }
 
         if (!isSpectator) {
             if (!this.isRunning()) this.start()
-            this.getPlayersManager().addPlayer(player);
+            this.playersManager.addPlayer(player);
         }
 
         /** SEND DATA & RESOURCES */
@@ -172,7 +200,7 @@ export class Battle extends BattleManager {
         this.effectsManager.sendBattleEffects(player);
         if (!isSpectator) {
             if (!this.isWithoutSupplies()) {
-                player.getGarageManager().sendSupplies(player);
+                player.garageManager.sendSupplies(player);
             }
         }
 
@@ -183,22 +211,22 @@ export class Battle extends BattleManager {
 
     public handleClientLeave(player: Player) {
 
-        if (!this.getPlayersManager().hasPlayer(player) && !this.getPlayersManager().hasSpectator(player)) {
+        if (!this.playersManager.hasPlayer(player) && !this.playersManager.hasSpectator(player)) {
             Logger.warn(`${player.getUsername()} is not in the battle ${this.getName()}`)
             return false
         }
 
-        if (this.getPlayersManager().hasPlayer(player)) {
+        if (this.playersManager.hasPlayer(player)) {
             if (player.getTank()) {
                 player.getTank().sendRemoveTank(true);
             }
 
             this.modeManager.broadcastRemovePlayer(player)
-            this.getPlayersManager().removePlayer(player)
+            this.playersManager.removePlayer(player)
         }
 
-        if (this.getPlayersManager().hasSpectator(player)) {
-            this.getPlayersManager().removeSpectator(player)
+        if (this.playersManager.hasSpectator(player)) {
+            this.playersManager.removeSpectator(player)
         }
 
         this.sendRemoveBattleScreen(player)
@@ -250,6 +278,12 @@ export class Battle extends BattleManager {
     public isWithoutCrystals() { return this.data.withoutCrystals }
     public isWithoutSupplies() { return this.data.withoutSupplies }
 
+    public sendStarted() {
+        const packet = new SetBattleStartedPacket();
+        packet.battleId = this.getBattleId();
+        this.server.battleManager.broadcastPacket(packet)
+    }
+
     public sendShowBattleNotifications(player: Player) {
         player.sendPacket(new SetShowBattleNotificationsPacket())
     }
@@ -279,7 +313,7 @@ export class Battle extends BattleManager {
     }
 
     public broadcastPacket(packet: SimplePacket, ignore: string[] = []) {
-        for (const player of this.getPlayersManager().getAll()) {
+        for (const player of this.playersManager.getAll()) {
             if (!ignore.includes(player.getUsername())) {
                 player.sendPacket(packet)
             }
@@ -287,7 +321,7 @@ export class Battle extends BattleManager {
     }
 
     public broadcastPacketToTeam(packet: SimplePacket, team: TeamType, ignore: string[] = []) {
-        for (const player of this.getPlayersManager().getPlayers()) {
+        for (const player of this.playersManager.getPlayers()) {
             if (player.getTank().getTeam() === team) {
                 if (!ignore.includes(player.getUsername())) {
                     player.sendPacket(packet)
@@ -311,7 +345,7 @@ export class Battle extends BattleManager {
         this.taskManager.update()
 
         if (this.tick % Battle.TICK_RATE === 0) {
-            for (const player of this.getPlayersManager().getPlayers()) {
+            for (const player of this.playersManager.getPlayers()) {
                 player.sendLatency()
             }
         }

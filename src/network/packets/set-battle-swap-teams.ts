@@ -2,12 +2,12 @@ import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetBattleRestartedPacket extends Packet {
+export class SetBattleSwapTeamsPacket extends Packet {
 
     public battle: string
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_BATTLE_RESTARTED, bytes)
+        super(Protocol.SET_BATTLE_SWAP_TEAMS, bytes)
     }
 
     public decode() {

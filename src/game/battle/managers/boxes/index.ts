@@ -25,7 +25,7 @@ export class BattleBoxesManager {
     }
 
     public sendBoxesData(client: Player) {
-        const bonuses = client.getServer().getBattlesManager().getData('bonuses.json')
+        const bonuses = client.server.battleManager.getData('bonuses.json')
         const setBonusesDataPacket = new SetBonusesDataPacket();
         setBonusesDataPacket.data = bonuses;
         client.sendPacket(setBonusesDataPacket);
@@ -73,7 +73,7 @@ export class BattleBoxesManager {
         const box = new BonusBox(bonus, found.length, Vector3d.fromInterface(area.position, false), this.battle);
         this.boxes.push(box);
 
-        this.battle.getTaskManager().scheduleTask(() => { box.spawn() }, delay, TimeType.SECONDS)
+        this.battle.taskManager.scheduleTask(() => { box.spawn() }, delay, TimeType.SECONDS)
         return true
     }
 

@@ -52,7 +52,7 @@ export abstract class TurretHandler {
 
     public splash(position: Vector3d, ignore: string[] = []): void {
         const battle = this.tank.battle;
-        const players = battle.getPlayersManager().getPlayers();
+        const players = battle.playersManager.getPlayers();
 
         for (const player of players) {
 
@@ -67,14 +67,14 @@ export abstract class TurretHandler {
                 continue;
             }
 
-            battle.getDamageManager()
+            battle.damageManager
                 .handleAttack(this.tank.player, player, damage);
         }
     }
 
     public attack(target: string, modifiers?: IDamageModifiers): boolean {
         const battle = this.tank.battle;
-        const player = battle.getPlayersManager().getPlayer(target);
+        const player = battle.playersManager.getPlayer(target);
 
         if (!player) return false;
 
@@ -86,7 +86,7 @@ export abstract class TurretHandler {
             return true
         }
 
-        const damaged = battle.getDamageManager()
+        const damaged = battle.damageManager
             .handleAttack(this.tank.player, player, damage, modifiers)
 
         if (damaged) {

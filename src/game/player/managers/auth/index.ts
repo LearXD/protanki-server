@@ -47,30 +47,30 @@ export class PlayerAuthManager {
     private async handleAuthenticated() {
         this.authenticated = true;
 
-        this.player.getDataManager().load(this.data.username);
-        this.player.getServer().getPlayersManager().addPlayer(this.player);
+        this.player.dataManager.load(this.data.username);
+        this.player.server.playersManager.addPlayer(this.player);
 
         this.sendLoginSuccessful();
         this.player.setLayoutState(LayoutState.BATTLE_SELECT);
 
-        this.player.getDataManager().sendPremiumData();
-        this.player.getDataManager().sendUserProperty();
+        this.player.dataManager.sendPremiumData();
+        this.player.dataManager.sendUserProperty();
 
         this.sendUserEmail();
 
-        this.player.getServer().getLocaleManager().sendLocaleConfig(this.player)
+        this.player.server.localeManager.sendLocaleConfig(this.player)
 
-        this.player.getBattlesManager().sendBattleInviteSound();
+        this.player.battlesManager.sendBattleInviteSound();
 
-        this.player.getFriendsManager().sendFriendsData();
+        this.player.friendsManager.sendFriendsData();
 
-        await this.player.getServer().getResourcesManager().sendResources(this.player, ResourceType.LOBBY);
+        await this.player.server.resourcesManager.sendResources(this.player, ResourceType.LOBBY);
         this.player.setSubLayoutState(LayoutState.BATTLE_SELECT)
 
-        this.player.getDataManager().sendAchievements();
-        this.player.getFriendsManager().sendInviteFriendsProperties()
+        this.player.dataManager.sendAchievements();
+        this.player.friendsManager.sendInviteFriendsProperties()
 
-        this.player.getBattlesManager().sendBattleSelectScreen();
+        this.player.battlesManager.sendBattleSelectScreen();
 
     }
 

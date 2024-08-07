@@ -12,25 +12,25 @@ export class PlayerConfigsManager {
 
     public handlePacket(packet: SimplePacket) {
         if (packet instanceof SendRequestConfigDataPacket) {
-            this.player.getServer().getUserDataManager()
+            this.player.server.userDataManager
                 .handleSendConfigData(this.player);
             return true;
         }
 
         if (packet instanceof SendOpenConfigPacket) {
-            this.player.getServer().getUserDataManager()
+            this.player.server.userDataManager
                 .handleOpenConfig(this.player);
             return true;
         }
 
         if (packet instanceof SendShowDamageIndicatorPacket) {
-            this.player.getServer().getUserDataManager()
+            this.player.server.userDataManager
                 .handleSetShowDamageIndicator(this.player, packet.enabled);
             return true;
         }
 
         if (packet instanceof SendShowNotificationsPacket) {
-            this.player.getServer().getUserDataManager()
+            this.player.server.userDataManager
                 .handleSetShowNotifications(this.player, packet.enabled);
             return true;
         }

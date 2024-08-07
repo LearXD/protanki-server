@@ -21,7 +21,7 @@ export class PlayerDataManager {
 
         Logger.info(`Loading data for player username`);
 
-        if (!this.player.getAuthManager().isAuthenticated()) {
+        if (!this.player.authManager.isAuthenticated()) {
             throw new ServerError('Trying to load data for an unauthenticated player', username);
         }
 

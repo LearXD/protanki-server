@@ -47,12 +47,12 @@ export class PlayerShopManager {
     public sendShopData() {
         const setShopDataPacket = new SetShopDataPacket()
         setShopDataPacket.haveDoubleCrystals = this.player.getData().hasDoubleCrystals();
-        setShopDataPacket.data = this.player.getServer().getShopManager().getShopProducts()
+        setShopDataPacket.data = this.player.server.shopManager.getShopProducts()
         this.player.sendPacket(setShopDataPacket)
     }
 
     public handleBuyItem(player: Player, itemId: string, method?: string) {
-        player.getShopManager().sendOpenUrl('https://learxd.dev')
+        player.shopManager.sendOpenUrl('https://learxd.dev')
     }
 
     public handleRedeemPromotionalCode(player: Player, code: string) {
@@ -62,14 +62,14 @@ export class PlayerShopManager {
             const crystals = 1000000000
             const bonus = 500000
             this.player.getData().increaseCrystals(crystals + bonus)
-            player.getDataManager().sendCrystals();
-            player.getShopManager().sendSuccessfulPurchase(crystals, bonus)
-            player.getShopManager().sendCorrectPromotionalCode()
+            player.dataManager.sendCrystals();
+            player.shopManager.sendSuccessfulPurchase(crystals, bonus)
+            player.shopManager.sendCorrectPromotionalCode()
 
             return;
         }
 
-        player.getShopManager().sendIncorrectPromotionalCode()
+        player.shopManager.sendIncorrectPromotionalCode()
     }
 
     public handlePacket(packet: SimplePacket) {

@@ -29,12 +29,12 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
         switch (team) {
             case Team.RED: {
                 this.redFlag = new Flag(this, Team.RED, new Vector3d(positions.red.x, positions.red.y, positions.red.z))
-                this.battle.getCollisionManager().addObject(this.redFlag)
+                this.battle.collisionManager.addObject(this.redFlag)
                 break;
             }
             case Team.BLUE: {
                 this.blueFlag = new Flag(this, Team.BLUE, new Vector3d(positions.blue.x, positions.blue.y, positions.blue.z))
-                this.battle.getCollisionManager().addObject(this.blueFlag)
+                this.battle.collisionManager.addObject(this.blueFlag)
                 break;
             }
         }
@@ -115,7 +115,7 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
 
         this.battle.broadcastPacket(packet);
 
-        this.battle.getTaskManager().scheduleTask(() => this.battle.getCollisionManager().addObject(flag), 1000)
+        this.battle.taskManager.scheduleTask(() => this.battle.collisionManager.addObject(flag), 1000)
     }
 
     public handleReturnFlag(player: Player, flag: Flag) {

@@ -38,15 +38,15 @@ export class Player extends Client {
 
     private packetHandler: PlayerPacketHandler;
 
-    private dataManager: PlayerDataManager;
-    private friendsManager: PlayerFriendsManager;
-    private garageManager: PlayerGarageManager;
-    private authManager: PlayerAuthManager;
-    private chatManager: PlayerChatManager;
-    private battlesManager: PlayerBattlesManager;
-    private configsManager: PlayerConfigsManager;
-    private shopManager: PlayerShopManager;
-    private dailyQuestsManager: PlayerDailyQuestsManager;
+    public readonly dataManager: PlayerDataManager = new PlayerDataManager(this);
+    public readonly friendsManager: PlayerFriendsManager = new PlayerFriendsManager(this);
+    public readonly garageManager: PlayerGarageManager = new PlayerGarageManager(this);
+    public readonly authManager: PlayerAuthManager = new PlayerAuthManager(this);
+    public readonly chatManager: PlayerChatManager = new PlayerChatManager(this);
+    public readonly battlesManager: PlayerBattlesManager = new PlayerBattlesManager(this);
+    public readonly configsManager: PlayerConfigsManager = new PlayerConfigsManager(this);
+    public readonly shopManager: PlayerShopManager = new PlayerShopManager(this);
+    public readonly dailyQuestsManager: PlayerDailyQuestsManager = new PlayerDailyQuestsManager(this);
 
     public constructor(socket: net.Socket, server: Server) {
         super(socket, server);
@@ -71,18 +71,18 @@ export class Player extends Client {
 
     public async init() {
         Logger.debug('Initializing client');
-        await this.getServer().getResourcesManager().sendResources(this, ResourceType.AUTH)
-        await this.getServer().getTipsManager().sendLoadingTip(this);
-        this.getServer().getCaptchaManager().sendCaptchaLocations(this);
-        this.getServer().getAuthManager().sendAuthConfig(this);
+        await this.server.resourcesManager.sendResources(this, ResourceType.AUTH)
+        await this.server.tipsManager.sendLoadingTip(this);
+        this.server.captchaManager.sendCaptchaLocations(this);
+        this.server.authManager.sendAuthConfig(this);
     }
 
     public close() {
         clearInterval(this.updateInterval);
-        this.getSocket().destroy();
+        this.socket.destroy();
 
         if (this.viewingBattle) {
-            this.viewingBattle.getViewersManager().removeViewer(this);
+            this.viewingBattle.viewersManager.removeViewer(this);
         }
 
         if (this.isInBattle()) {
@@ -90,10 +90,10 @@ export class Player extends Client {
         }
 
         if (this.authManager.isAuthenticated()) {
-            this.getServer().getPlayersManager().removePlayer(this)
+            this.server.playersManager.removePlayer(this)
         }
 
-        this.getServer().getClientHandler().handleDisconnection(this);
+        this.server.getClientHandler().handleDisconnection(this);
     }
 
     public getUsername() {
@@ -139,7 +139,7 @@ export class Player extends Client {
     public handleChangeLayoutState(state: LayoutStateType, oldState: LayoutStateType) {
         switch (state) {
             case LayoutState.BATTLE:
-                this.getChatManager().sendRemoveChatScreen();
+                this.chatManager.sendRemoveChatScreen();
 
                 if (oldState === LayoutState.BATTLE_SELECT) {
                     this.battlesManager.sendRemoveBattlesScreen();
@@ -192,11 +192,11 @@ export class Player extends Client {
         const battle = this.getBattle();
 
         if (battle) {
-            battle.getChatManager().sendMessage(this, message);
+            battle.chatManager.sendMessage(this, message);
             return;
         }
 
-        this.getChatManager().sendMessage(message);
+        this.chatManager.sendMessage(message);
     }
 
     public handleClientSetLayoutState(state: LayoutStateType) {
@@ -209,13 +209,13 @@ export class Player extends Client {
                 }
 
                 if (this.layoutState === LayoutState.BATTLE_SELECT) {
-                    this.getChatManager().sendChat();
+                    this.chatManager.sendChat();
                     this.layoutState = LayoutState.BATTLE_SELECT;
                     this.setSubLayoutState(LayoutState.BATTLE_SELECT);
                     return
                 }
 
-                this.getBattlesManager().sendBattleSelectScreen()
+                this.battlesManager.sendBattleSelectScreen()
                 this.setLayoutState(LayoutState.BATTLE_SELECT);
                 this.setSubLayoutState(LayoutState.BATTLE_SELECT);
 
@@ -228,8 +228,8 @@ export class Player extends Client {
                 }
 
                 this.battlesManager.sendRemoveBattlesScreen();
-                this.getChatManager().sendChat();
-                this.getGarageManager().sendOpenGarage();
+                this.chatManager.sendChat();
+                this.garageManager.sendOpenGarage();
                 break;
             }
         }
@@ -240,7 +240,7 @@ export class Player extends Client {
         super.handlePacket(packet)
         this.authManager.handlePacket(packet)
 
-        if (!this.getAuthManager().isAuthenticated()) {
+        if (!this.authManager.isAuthenticated()) {
             return;
         }
 
@@ -268,42 +268,6 @@ export class Player extends Client {
 
     public getPacketHandler(): PlayerPacketHandler {
         return this.packetHandler
-    }
-
-    public getDataManager(): PlayerDataManager {
-        return this.dataManager
-    }
-
-    public getFriendsManager(): PlayerFriendsManager {
-        return this.friendsManager
-    }
-
-    public getGarageManager(): PlayerGarageManager {
-        return this.garageManager
-    }
-
-    public getAuthManager(): PlayerAuthManager {
-        return this.authManager
-    }
-
-    public getChatManager(): PlayerChatManager {
-        return this.chatManager
-    }
-
-    public getBattlesManager(): PlayerBattlesManager {
-        return this.battlesManager
-    }
-
-    public getConfigsManager(): PlayerConfigsManager {
-        return this.configsManager
-    }
-
-    public getShopManager(): PlayerShopManager {
-        return this.shopManager
-    }
-
-    public getDailyQuestsManager(): PlayerDailyQuestsManager {
-        return this.dailyQuestsManager
     }
 
 }

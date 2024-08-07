@@ -53,7 +53,7 @@ import { SetRemoveUserFromTeamBattleCounterPacket } from "./packets/set-remove-u
 import { SetRemoveUserPlayingPacket } from "./packets/set-remove-user-playing";
 import { SetAddUserOnTeamBattleCounterPacket } from "./packets/set-add-user-on-team-battle-counter";
 import { SetViewingBattleUserKillsPacket } from "./packets/set-viewing-battle-user-kills";
-import { SetBattleRestartedPacket } from "./packets/set-battle-restarted";
+import { SetBattleSwapTeamsPacket } from "./packets/set-battle-swap-teams";
 import { SetAddUserOnBattleCounterPacket } from "./packets/set-add-user-on-battle-counter";
 import { SetAddUserInfoOnViewingBattlePacket } from "./packets/set-add-user-info-on-viewing-battle";
 import { SetViewingBattleUserScorePacket } from "./packets/set-viewing-battle-user-score";
@@ -474,7 +474,7 @@ export class Network {
         this.registerPacket(Protocol.SET_VIEWING_BATTLE_USER_SCORE, SetViewingBattleUserScorePacket)
         this.registerPacket(Protocol.SET_VIEWING_BATTLE_TEAM_SCORE, SetViewingBattleTeamScorePacket)
 
-        this.registerPacket(Protocol.SET_BATTLE_RESTARTED, SetBattleRestartedPacket)
+        this.registerPacket(Protocol.SET_BATTLE_SWAP_TEAMS, SetBattleSwapTeamsPacket)
         this.registerPacket(Protocol.SET_REMOVE_BATTLE_FROM_LIST, SetRemoveBattleFromListPacket)
         this.registerPacket(Protocol.SET_BATTLE_ENDED, SetBattleEndedPacket)
 

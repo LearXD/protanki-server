@@ -24,7 +24,7 @@ export class PlayerBattlesManager {
     ) { }
 
     public sendBattleSelectScreen() {
-        this.player.getChatManager().sendChat();
+        this.player.chatManager.sendChat();
         this.sendBattles();
     }
 
@@ -34,16 +34,16 @@ export class PlayerBattlesManager {
     }
 
     public sendBattles() {
-        this.player.getServer().getMapsManager().sendMapsData(this.player);
+        this.player.server.mapsManager.sendMapsData(this.player);
 
         const setBattleListPacket = new SetBattleListPacket();
-        setBattleListPacket.battles = this.player.getServer().getBattlesManager().getBattles()
+        setBattleListPacket.battles = this.player.server.battleManager.getBattles()
             .map(battle => battle.toBattleListItem());
 
         this.player.sendPacket(setBattleListPacket);
 
         if (this.player.getViewingBattle()) {
-            this.player.getViewingBattle().getViewersManager().addViewer(this.player);
+            this.player.getViewingBattle().viewersManager.addViewer(this.player);
         }
     }
 
@@ -78,7 +78,7 @@ export class PlayerBattlesManager {
     }
 
     public handleViewBattle(battleId: string) {
-        const battle = this.player.getServer().getBattlesManager().getBattle(battleId);
+        const battle = this.player.server.battleManager.getBattle(battleId);
 
         if (!battle) {
             const setBattleNotExistPacket = new SetBattleNotFoundPacket()
@@ -88,11 +88,11 @@ export class PlayerBattlesManager {
         }
 
         Logger.info(`Player ${this.player.getUsername()} is viewing battle ${battleId}`)
-        battle.getViewersManager().addViewer(this.player);
+        battle.viewersManager.addViewer(this.player);
     }
 
     public handleCreateBattle(packet: SendCreateBattlePacket) {
-        const battle = this.player.getServer().getBattlesManager().createBattle(
+        const battle = this.player.server.battleManager.createBattle(
             packet.name,
             packet.mapId,
             {
@@ -116,7 +116,7 @@ export class PlayerBattlesManager {
         );
 
 
-        battle.getViewersManager().addViewer(this.player);
+        battle.viewersManager.addViewer(this.player);
     }
 
     public handleOpenBattleList() {
@@ -134,7 +134,7 @@ export class PlayerBattlesManager {
             }
 
             if (this.player.getLayoutState() === LayoutState.GARAGE) {
-                this.player.getGarageManager().removeGarageScreen();
+                this.player.garageManager.removeGarageScreen();
                 this.sendBattlesList();
                 return true;
             }
@@ -173,7 +173,7 @@ export class PlayerBattlesManager {
 
         if (this.player.isInBattle()) {
             if (packet instanceof SendBattleMessagePacket) {
-                this.player.getBattle().getChatManager().handleSendMessage(this.player, packet.message, packet.private);
+                this.player.getBattle().chatManager.handleSendMessage(this.player, packet.message, packet.private);
             }
         }
 

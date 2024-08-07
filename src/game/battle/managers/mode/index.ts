@@ -24,7 +24,7 @@ export abstract class BattleModeManager {
     public abstract broadcastRemovePlayer(player: Player): void
 
     public init() {
-        for (const player of this.battle.getPlayersManager().getPlayers()) {
+        for (const player of this.battle.playersManager.getPlayers()) {
             player.getTank().score = 0;
             player.getTank().kills = 0;
             player.getTank().deaths = 0;
@@ -54,7 +54,7 @@ export abstract class BattleModeManager {
 
     public sendFinishRewards() {
         const packet = new SetBattleRewardsPacket();
-        packet.rewards = this.battle.getPlayersManager().getPlayers()
+        packet.rewards = this.battle.playersManager.getPlayers()
             .map(player => {
                 return {
                     user: player.getUsername(),

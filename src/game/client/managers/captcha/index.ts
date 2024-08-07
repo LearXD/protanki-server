@@ -33,7 +33,7 @@ export class ClientCaptchaManager {
     }
 
     public handleRequestCaptcha(type: CaptchaLocationType) {
-        const data = this.client.getServer().getCaptchaManager().generateCaptcha();
+        const data = this.client.server.captchaManager.generateCaptcha();
 
         if (!data) {
             Logger.error('Failed to generate captcha data');
@@ -54,7 +54,7 @@ export class ClientCaptchaManager {
             return;
         }
 
-        const data = this.client.getServer().getCaptchaManager().generateCaptcha();
+        const data = this.client.server.captchaManager.generateCaptcha();
 
         if (!data) {
             Logger.error('Failed to generate captcha data');

@@ -53,11 +53,11 @@ export class BattleChatManager {
 
     public handleSendMessage(player: Player, message: string, isPrivate: boolean) {
 
-        if (player.getServer().getCommandsManager().handleSendCommand(player, message)) {
+        if (player.server.commandsManager.handleSendCommand(player, message)) {
             return;
         }
 
-        const isSpectator = this.battle.getPlayersManager().hasSpectator(player);
+        const isSpectator = this.battle.playersManager.hasSpectator(player);
         const sender = isSpectator ? null : player.getUsername();
 
         if (this.battle.getMode() === BattleMode.DM) {

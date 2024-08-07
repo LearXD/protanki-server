@@ -30,8 +30,15 @@ export class Logger {
             prefix = stack[3].split('at ')[1].split(' (')[0].split('.')[0].replace(/new\ /, '')
         }
 
+        if (args.length > 1) {
+            const strings = args.filter((arg) => typeof arg === 'string')
+            if (strings.length > 1) {
+                prefix = args.shift()
+            }
+        }
+
         console.log(
-            chalk.hex(color)(this.getPrefix(args.length > 1 ? args[0] : prefix)),
+            chalk.hex(color)(this.getPrefix(prefix)),
             ...args.map((arg) => {
                 return typeof arg === 'string' ?
                     chalk.hex(color)(arg) :
@@ -41,7 +48,7 @@ export class Logger {
     }
 
     static log(...args: any[]) {
-        // this.show(Colors.LOG, ...args)
+        this.show(Colors.LOG, ...args)
     }
 
     static error(...args: any[]) {

@@ -90,7 +90,7 @@ export class GarageManager {
     }
 
     public getData(_path: string) {
-        return this.server.getAssetsManager()
+        return this.server.assetsManager
             .getData(path.join('garage', _path));
     }
 

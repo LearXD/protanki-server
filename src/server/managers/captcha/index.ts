@@ -25,7 +25,7 @@ export class CaptchaManager {
     }
 
     public generateCaptcha() {
-        const data = this.server.getAssetsManager().getData<Buffer>
+        const data = this.server.assetsManager.getData<Buffer>
             (path.join('captcha', 'image.jpg'), ReadType.BUFFER);
 
         return {

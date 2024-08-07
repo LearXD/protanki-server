@@ -20,7 +20,7 @@ export class BonusBox {
 
         switch (name) {
             case BonusBoxes.GOLD: {
-                battle.getBoxesManager().broadcastGoldBoxAlert();
+                battle.boxesManager.broadcastGoldBoxAlert();
                 break;
             }
         }
@@ -54,9 +54,9 @@ export class BonusBox {
 
         switch (this.name) {
             case BonusBoxes.GOLD: {
-                this.battle.getBoxesManager().broadcastGoldBoxCollected(player);
+                this.battle.boxesManager.broadcastGoldBoxCollected(player);
                 player.getData().increaseCrystals(1000)
-                player.getDataManager().sendCrystals();
+                player.dataManager.sendCrystals();
                 break;
             }
         }

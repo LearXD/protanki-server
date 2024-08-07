@@ -43,11 +43,11 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
         setViewingBattleTeamScorePacket.battle = this.battle.getBattleId();
         setViewingBattleTeamScorePacket.team = team;
         setViewingBattleTeamScorePacket.score = score;
-        this.battle.getViewersManager().broadcastPacket(setViewingBattleTeamScorePacket)
+        this.battle.viewersManager.broadcastPacket(setViewingBattleTeamScorePacket)
     }
 
     public broadcastAddUserProperties(player: Player): void {
-        const players = this.battle.getPlayersManager().getPlayers()
+        const players = this.battle.playersManager.getPlayers()
             .filter(p => player.getTank().getTeam() === p.getTank().getTeam());
 
         const packet = new SetTeamBattleAddUsersPropertiesPacket();
@@ -90,7 +90,7 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
         const redUsers: IUser[] = [];
         const blueUsers: IUser[] = [];
 
-        for (const player of this.battle.getPlayersManager().getPlayers()) {
+        for (const player of this.battle.playersManager.getPlayers()) {
             const userData: IUser = {
                 chatModeratorLevel: player.getData().getModeratorLevel(),
                 deaths: player.getTank().deaths,

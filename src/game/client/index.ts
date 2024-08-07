@@ -9,7 +9,6 @@ import { Server } from "../../server";
 import { Logger } from "../../utils/logger";
 import { PingPacket } from "../../network/packets/ping";
 import { ResolveCallbackPacket } from "../../network/packets/resolve-callback";
-import { SetLoginSuccessfulPacket } from "../../network/packets/set-login-successful";
 import { SendLanguagePacket } from "../../network/packets/send-language";
 import { SendRequestLoadScreenPacket } from "../../network/packets/send-request-load-screen";
 import { PongPacket } from "../../network/packets/pong";
@@ -29,7 +28,7 @@ export abstract class Client {
     private lastPing: number = 0;
     private ping: number = 0;
 
-    private captchaManager: ClientCaptchaManager;
+    public captchaManager: ClientCaptchaManager = new ClientCaptchaManager(this);
 
     public connected: boolean = true;
 
@@ -37,14 +36,11 @@ export abstract class Client {
     private resourcesCallbackPool: Map<number, () => void> = new Map();
 
     constructor(
-        private readonly socket: net.Socket,
-        private readonly server: Server
+        public readonly socket: net.Socket,
+        public readonly server: Server
     ) {
-        this.captchaManager = new ClientCaptchaManager(this);
         this.sendCryptKeys();
     }
-
-    public getCaptchaManager() { return this.captchaManager }
 
     public getIdentifier() {
         return this.socket.remoteAddress + ':' + this.socket.remotePort;
@@ -65,9 +61,6 @@ export abstract class Client {
         cryptPacket.keys = this.getCryptoHandler().getKeys();
         this.sendPacket(cryptPacket, false);
     }
-
-    public getServer(): Server { return this.server }
-    public getSocket(): net.Socket { return this.socket }
 
     public handlePong() {
         this.ping = Date.now() - this.lastPing;
@@ -124,7 +117,7 @@ export abstract class Client {
         }
 
         if (packet instanceof SendRequestLoadScreenPacket) {
-            this.getServer().getTipsManager().sendLoadingTip(this);
+            this.server.tipsManager.sendLoadingTip(this);
             return true;
         }
 
@@ -137,7 +130,7 @@ export abstract class Client {
         }
 
         if (packet instanceof SendRequestUserDataPacket) {
-            this.getServer().getUserDataManager().handleRequestUserData(this, packet.userId);
+            this.server.userDataManager.handleRequestUserData(this, packet.userId);
             return true;
         }
 
@@ -172,7 +165,7 @@ export abstract class Client {
         const rounds = Math.ceil(data.length / ByteArray.MAX_BUFFER_SIZE);
 
         for (let i = 0; i < rounds; i++) {
-            this.getSocket()
+            this.socket
                 .write(data.subarray(i * ByteArray.MAX_BUFFER_SIZE, (i + 1) * ByteArray.MAX_BUFFER_SIZE));
         }
     }

@@ -26,24 +26,24 @@ export class ChatManager {
     }
 
     public broadcastMessage(message: Message) {
-        this.server.getPlayersManager().getPlayers().forEach(player => {
-            player.getChatManager().sendSetMessage(message)
+        this.server.playersManager.getPlayers().forEach(player => {
+            player.chatManager.sendSetMessage(message)
         })
     }
 
     public handleSendMessage(player: Player, text: string, target: string = null) {
 
-        if (this.server.getCommandsManager().handleSendCommand(player, text)) {
+        if (this.server.commandsManager.handleSendCommand(player, text)) {
             return;
         }
 
-        const message = new Message(text, player.getChatManager().getChatUser())
+        const message = new Message(text, player.chatManager.getChatUser())
 
         if (target) {
-            const data = this.server.getUserDataManager().findPlayerData(target);
+            const data = this.server.userDataManager.findPlayerData(target);
 
             if (!data) {
-                return player.getChatManager().sendMessage(`Usuário ${target} não encontrado`, true)
+                return player.chatManager.sendMessage(`Usuário ${target} não encontrado`, true)
             }
 
             message.setTarget(User.fromData(data).toObject())
