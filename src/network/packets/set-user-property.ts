@@ -1,6 +1,7 @@
 import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
+import { RankType } from "../../states/rank";
 
 export class SetUserPropertyPacket extends Packet {
 
@@ -10,7 +11,7 @@ export class SetUserPropertyPacket extends Packet {
     public hasDoubleCrystal: boolean;
     public nextRankScore: number;
     public place: number;
-    public rank: number;
+    public rank: RankType;
     public rating: number;
     public score: number;
     public serverNumber: number;
@@ -30,7 +31,7 @@ export class SetUserPropertyPacket extends Packet {
         this.hasDoubleCrystal = bytes.readBoolean();
         this.nextRankScore = bytes.readInt();
         this.place = bytes.readInt();
-        this.rank = bytes.readByte();
+        this.rank = bytes.readByte() as RankType;
         this.rating = bytes.readFloat();
         this.score = bytes.readInt();
         this.serverNumber = bytes.readInt();

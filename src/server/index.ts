@@ -20,6 +20,7 @@ import { BattlesManager } from './managers/battles';
 import { MapsManager } from './managers/maps';
 import { GarageManager } from './managers/garage';
 import { ShopManager } from './managers/shop';
+import { RankManager } from './managers/rank';
 
 export class Server {
 
@@ -34,11 +35,13 @@ export class Server {
     /** MANAGERS */
     public readonly assetsManager: AssetsManager = new AssetsManager();
     public readonly mapsManager: MapsManager = new MapsManager(this);
+    public readonly resourcesManager: ResourcesManager = new ResourcesManager(this);
+
+    public readonly rankManager: RankManager = new RankManager(this);
     public readonly playersManager: PlayersManager = new PlayersManager(this);
     public readonly authManager: AuthManager = new AuthManager(this);
     public readonly captchaManager: CaptchaManager = new CaptchaManager(this);
     public readonly tipsManager: TipsManager = new TipsManager(this);
-    public readonly resourcesManager: ResourcesManager = new ResourcesManager(this);
     public readonly localeManager: LocaleManager = new LocaleManager(this);
     public readonly userDataManager: UserDataManager = new UserDataManager(this);
     public readonly friendsManager: FriendsManager = new FriendsManager(this);
@@ -47,6 +50,16 @@ export class Server {
     public readonly battleManager: BattlesManager = new BattlesManager(this);
     public readonly garageManager: GarageManager = new GarageManager(this);
     public readonly shopManager: ShopManager = new ShopManager(this);
+
+    private static instance: Server;
+
+    public static getInstance() {
+        return this.instance;
+    }
+
+    public constructor() {
+        Server.instance = this;
+    }
 
     public start = (port: number) => {
         const start = Date.now();

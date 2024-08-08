@@ -521,7 +521,7 @@ export class Tank {
             dampingCoeff: this.hull.properties.dampingCoeff,
             turret_turn_speed: this.turret.properties.turretTurnAcceleration,
             health: this.alive ? this.health : 0,
-            rank: this.player.getData().getRank(),
+            rank: this.player.data.getRank(),
             kickback: this.turret.properties.kickback,
             turretTurnAcceleration: this.turret.properties.turretTurnAcceleration,
             impact_force: this.turret.properties.impact_force,

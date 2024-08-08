@@ -1,0 +1,152 @@
+[
+    {
+        "rank": 1,
+        "experience": 0,
+        "bonus": 0
+    },
+    {
+        "rank": 2,
+        "experience": 100,
+        "bonus": 10
+    },
+    {
+        "rank": 3,
+        "experience": 500,
+        "bonus": 40
+    },
+    {
+        "rank": 4,
+        "experience": 1500,
+        "bonus": 120
+    },
+    {
+        "rank": 5,
+        "experience": 3700,
+        "bonus": 230
+    },
+    {
+        "rank": 6,
+        "experience": 7100,
+        "bonus": 420
+    },
+    {
+        "rank": 7,
+        "experience": 12300,
+        "bonus": 740
+    },
+    {
+        "rank": 8,
+        "experience": 20000,
+        "bonus": 950
+    },
+    {
+        "rank": 9,
+        "experience": 29000,
+        "bonus": 1400
+    },
+    {
+        "rank": 10,
+        "experience": 41000,
+        "bonus": 2000
+    },
+    {
+        "rank": 11,
+        "experience": 57000,
+        "bonus": 2500
+    },
+    {
+        "rank": 12,
+        "experience": 76000,
+        "bonus": 3100
+    },
+    {
+        "rank": 13,
+        "experience": 98000,
+        "bonus": 3900
+    },
+    {
+        "rank": 14,
+        "experience": 125000,
+        "bonus": 4600
+    },
+    {
+        "rank": 15,
+        "experience": 156000,
+        "bonus": 5600
+    },
+    {
+        "rank": 16,
+        "experience": 192000,
+        "bonus": 6600
+    },
+    {
+        "rank": 17,
+        "experience": 233000,
+        "bonus": 7900
+    },
+    {
+        "rank": 18,
+        "experience": 280000,
+        "bonus": 8900
+    },
+    {
+        "rank": 19,
+        "experience": 332000,
+        "bonus": 10000
+    },
+    {
+        "rank": 20,
+        "experience": 390000,
+        "bonus": 12000
+    },
+    {
+        "rank": 21,
+        "experience": 455000,
+        "bonus": 14000
+    },
+    {
+        "rank": 22,
+        "experience": 527000,
+        "bonus": 16000
+    },
+    {
+        "rank": 23,
+        "experience": 606000,
+        "bonus": 17000
+    },
+    {
+        "rank": 24,
+        "experience": 692000,
+        "bonus": 20000
+    },
+    {
+        "rank": 25,
+        "experience": 787000,
+        "bonus": 22000
+    },
+    {
+        "rank": 26,
+        "experience": 889000,
+        "bonus": 24000
+    },
+    {
+        "rank": 27,
+        "experience": 1000000,
+        "bonus": 28000
+    },
+    {
+        "rank": 28,
+        "experience": 1122000,
+        "bonus": 31000
+    },
+    {
+        "rank": 29,
+        "experience": 1255000,
+        "bonus": 34000
+    },
+    {
+        "rank": 30,
+        "experience": 1400000,
+        "bonus": 37000
+    }
+]

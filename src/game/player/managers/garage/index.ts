@@ -28,7 +28,7 @@ export class PlayerGarageManager {
     }
 
     public getGarageItems() {
-        return this.player.getData().getGarageData();
+        return this.player.data.garage;
     }
 
     public getTurret(name: string) {
@@ -396,7 +396,7 @@ export class PlayerGarageManager {
             garageItems.push(item)
         }
 
-        if (this.player.getData().hasDoubleCrystals()) {
+        if (this.player.data.hasDoubleCrystals()) {
             userItems.push({
                 id: 'double_crystalls',
                 name: 'Dobro de cristais',
@@ -419,7 +419,7 @@ export class PlayerGarageManager {
                 grouped: false,
                 isForRent: false,
                 price: -1,
-                remainingTimeInSec: Math.round(this.player.getData().getDoubleCrystalsLeftTime() / 1000),
+                remainingTimeInSec: Math.round(this.player.data.getDoubleCrystalsLeftTime() / 1000),
             })
         }
 
@@ -443,11 +443,11 @@ export class PlayerGarageManager {
 
     public handleBuyKit(kitId: string, price: number) {
         // Logger.debug('handleBuyKit', kitId, price)
-        if (this.player.getData().getCrystals() < price) {
+        if (this.player.data.crystals < price) {
             return false;
         }
 
-        this.player.getData().decreaseCrystals(price);
+        this.player.data.decreaseCrystals(price);
         const kit = this.player.server.garageManager.getItem(kitId);
 
         if (!kit) {
@@ -464,11 +464,11 @@ export class PlayerGarageManager {
     public handleBuyItem(itemId: string, amount: number, price: number) {
         // Logger.debug('handleBuyItem', itemId, amount, price)
 
-        if (this.player.getData().getCrystals() < price) {
+        if (this.player.data.crystals < price) {
             return false;
         }
 
-        this.player.getData().decreaseCrystals(price);
+        this.player.data.decreaseCrystals(price);
         this.addItem(itemId, amount);
 
         return true

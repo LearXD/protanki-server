@@ -11,15 +11,14 @@ export interface IPlayerProfileData {
     crystals: number
     moderatorLevel: ChatModeratorLevelType
     doubleCrystals: {
-        enabled: boolean,
+        startedAt: number,
         endAt: number
     },
-    rank: number
     score: number
     premium: {
         notified: boolean
-        endAt?: number
-        startedAt?: number
+        endAt: number
+        startedAt: number
     }
 }
 

@@ -55,7 +55,7 @@ export class BonusBox {
         switch (this.name) {
             case BonusBoxes.GOLD: {
                 this.battle.boxesManager.broadcastGoldBoxCollected(player);
-                player.getData().increaseCrystals(1000)
+                player.data.increaseCrystals(1000)
                 player.dataManager.sendCrystals();
                 break;
             }

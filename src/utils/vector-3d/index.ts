@@ -12,6 +12,7 @@ export class Vector3d implements IVector3d {
         this.x += vector.x
         this.y += vector.y
         this.z += vector.z
+        return this
     }
 
     public distanceTo(vector: Vector3d): number {

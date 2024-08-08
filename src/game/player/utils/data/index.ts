@@ -1,13 +1,23 @@
 import { INT_MAX, INT_MIN } from "@/network/utils/primitive-types";
-import { ChatModeratorLevel } from "../../../../states/chat-moderator-level";
-import { Rank } from "../../../../states/rank";
+import { ChatModeratorLevel, ChatModeratorLevelType } from "../../../../states/chat-moderator-level";
 import { Logger } from "../../../../utils/logger";
 import { IPlayerAuthData, IPlayerGarageData, IPlayerProfileData, IPremiumData } from "./types";
+import { Player } from "../..";
+import { SetCrystalsPacket } from "@/network/packets/set-crystals";
+import { RankManager } from "@/server/managers/rank";
+import { SetScorePacket } from "@/network/packets/set-score";
+import { SetUserNewRankPacket } from "@/network/packets/set-user-new-rank";
 
 export class PlayerData {
 
-    private profileData: IPlayerProfileData;
-    private garageData: IPlayerGarageData;
+    public crystals: number = 0;
+    public experience: number = 0;
+    public moderatorLevel: ChatModeratorLevelType = ChatModeratorLevel.NONE;
+
+    public doubleCrystals = { startedAt: 0, endAt: 0 }
+    public premium = { notified: false, startedAt: 0, endAt: 0 }
+
+    public garage: IPlayerGarageData;
 
     public static profiles: { username: string, data: IPlayerProfileData }[] = [
         {
@@ -16,10 +26,9 @@ export class PlayerData {
                 crystals: 2000,
                 moderatorLevel: ChatModeratorLevel.MODERATOR,
                 doubleCrystals: {
-                    enabled: false,
+                    startedAt: Date.now(),
                     endAt: 0
                 },
-                rank: Rank.COMMANDER,
                 score: 2000,
                 premium: {
                     notified: false,
@@ -34,10 +43,9 @@ export class PlayerData {
                 crystals: 1e9,
                 moderatorLevel: ChatModeratorLevel.COMMUNITY_MANAGER,
                 doubleCrystals: {
-                    enabled: true,
+                    startedAt: Date.now(),
                     endAt: Date.now() + (1000 * 60 * 10) // 10 minutes
                 },
-                rank: Rank.GENERALISSIMO,
                 score: 2000,
                 premium: {
                     notified: false,
@@ -52,10 +60,9 @@ export class PlayerData {
                 crystals: 10000000,
                 moderatorLevel: ChatModeratorLevel.ADMINISTRATOR,
                 doubleCrystals: {
-                    enabled: true,
+                    startedAt: Date.now(),
                     endAt: Date.now() + (1000 * 60 * 10) // 10 minutes
                 },
-                rank: Rank.GENERALISSIMO,
                 score: 2000,
                 premium: {
                     notified: true,
@@ -67,25 +74,19 @@ export class PlayerData {
     ]
 
     public constructor(
-        private readonly username: string
+        public readonly username: string,
+        private readonly player?: Player
     ) { }
 
-    public static findPlayerData(
-        username: string,
-        loadGarage: boolean = false
-    ) {
-        const data = new PlayerData(username);
+    public static findPlayerData(username: string, player?: Player) {
+        const data = new PlayerData(username, player);
         const loaded = data.loadProfile();
 
-        if (!loaded) {
-            return null;
+        if (loaded) {
+            return data;
         }
 
-        if (loadGarage) {
-            data.loadGarage();
-        }
-
-        return data;
+        return null;
     }
 
     public static findPlayerAuthData(username: string): IPlayerAuthData {
@@ -102,23 +103,25 @@ export class PlayerData {
     }
 
     public static createPlayerData(username: string, password: string): IPlayerAuthData {
-        const data = new PlayerData(username);
-        data.profileData = {
-            crystals: 500,
-            moderatorLevel: ChatModeratorLevel.NONE,
-            doubleCrystals: {
-                enabled: false,
-                endAt: 0
-            },
-            rank: Rank.GENERALISSIMO,
-            score: 0,
-            premium: {
-                notified: false,
-                startedAt: Date.now(),
-                endAt: Date.now()
+
+        this.profiles.push({
+            username: username,
+            data: {
+                crystals: 500,
+                moderatorLevel: ChatModeratorLevel.NONE,
+                doubleCrystals: {
+                    startedAt: 0,
+                    endAt: 0
+                },
+                score: 0,
+                premium: {
+                    notified: false,
+                    startedAt: Date.now(),
+                    endAt: Date.now()
+                }
             }
-        }
-        this.profiles.push({ username: username, data: data.profileData });
+        });
+
         return {
             username: username,
             password: password,
@@ -129,32 +132,22 @@ export class PlayerData {
 
     public loadProfile() {
         const data = PlayerData.profiles.find(p => p.username === this.username);
+
         if (data) {
-            this.profileData = data.data;
+            this.crystals = data.data.crystals;
+            this.moderatorLevel = data.data.moderatorLevel;
+            this.doubleCrystals = data.data.doubleCrystals;
+            this.experience = data.data.score;
+            this.premium = data.data.premium;
             return true;
         }
 
-        this.profileData = {
-            crystals: 0,
-            moderatorLevel: ChatModeratorLevel.NONE,
-            doubleCrystals: {
-                enabled: false,
-                endAt: 0
-            },
-            rank: Rank.GENERALISSIMO,
-            score: 0,
-            premium: {
-                notified: false,
-                startedAt: Date.now(),
-                endAt: Date.now()
-            }
-        }
         return true;
         // return false;
     }
 
     public loadGarage() {
-        this.garageData = {
+        this.garage = {
             paintings: [
                 { name: 'green', equipped: true },
                 // { name: 'africa', equipped: false },
@@ -193,73 +186,77 @@ export class PlayerData {
         }
     }
 
-    public getUsername() {
-        return this.username
-    }
-
-    public getProfileData() {
-        return this.profileData;
-    }
-
-    public getGarageData() {
-        return this.garageData;
-    }
-
     public isAdmin() {
-        return this.profileData.moderatorLevel === ChatModeratorLevel.COMMUNITY_MANAGER
+        const level = ChatModeratorLevel.LEVELS.indexOf(this.moderatorLevel)
+        return level >= ChatModeratorLevel.LEVELS.indexOf(ChatModeratorLevel.MODERATOR)
     }
 
-    public getModeratorLevel() {
-        return this.profileData.moderatorLevel
+    public decreaseCrystals(amount: number, silent?: boolean) {
+        this.setCrystals(this.crystals - amount, silent)
     }
 
-    public getCrystals() {
-        return this.profileData.crystals
+    public increaseCrystals(amount: number, silent?: boolean) {
+        this.setCrystals(this.crystals + amount, silent)
     }
 
-
-
-    public decreaseCrystals(amount: number) {
-        this.setCrystals(this.profileData.crystals - amount)
-    }
-
-    public increaseCrystals(amount: number) {
-        this.setCrystals(this.profileData.crystals + amount)
-    }
-
-    public setCrystals(amount: number) {
+    public setCrystals(amount: number, silent: boolean = true) {
 
         if (amount < INT_MIN || amount > INT_MAX) {
             Logger.error(`Invalid crystals value: ${amount}`)
             return;
         }
 
-        this.profileData.crystals = amount
+        this.crystals = amount
+
+        if (this.player && !silent) {
+            const packet = new SetCrystalsPacket();
+            packet.crystals = this.crystals
+            this.player.sendPacket(packet)
+        }
     }
 
-    public hasDoubleCrystals() {
-        return this.profileData.doubleCrystals.enabled
+    public addExperience(amount: number, silent?: boolean) {
+        this.setExperience(this.experience + amount, silent)
     }
 
-    public getRank() {
-        return this.profileData.rank
-    }
+    public setExperience(amount: number, silent: boolean = true) {
 
-    public getScore() {
-        return this.profileData.score
+        if (amount < INT_MIN || amount > INT_MAX) {
+            Logger.error(`Invalid experience value: ${amount}`)
+            return;
+        }
+
+        const old = this.getRank()
+        this.experience = amount
+
+        if (this.player && !silent) {
+            const packet = new SetScorePacket();
+            packet.score = this.experience
+            this.player.sendPacket(packet)
+
+            const rank = this.getRank()
+            if (old !== rank) {
+                this.player.server.rankManager.handlePlayerRankChange(this.player)
+            }
+        }
     }
 
     public getDoubleCrystalsLeftTime() {
-        if (!this.hasDoubleCrystals()) {
-            return 0
-        }
-        const leftTime = this.profileData.doubleCrystals.endAt - Date.now()
-        Logger.debug(`Double crystals left time: ${leftTime}`)
-        return leftTime < 0 ? 0 : leftTime
+        const leftTime = this.doubleCrystals.endAt - Date.now()
+        return leftTime <= 0 ? 0 : leftTime
+    }
+
+    public hasDoubleCrystals() {
+        const time = this.getDoubleCrystalsLeftTime()
+        return time > 0
+    }
+
+    public getRank() {
+        return RankManager.getRankByExperience(this.experience)
     }
 
     public getPremiumData(): IPremiumData {
-        const data = this.profileData.premium;
+        const data = this.premium;
 
         const lifeTime = (data.endAt - data.startedAt) / 1000;
         const leftTime = (data.endAt - Date.now()) / 1000;

@@ -105,8 +105,7 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
         flag.setState(FlagState.DROPPED)
         flag.setCarrier(null)
 
-        const position = player.getTank().getPosition();
-        position.y -= 80
+        const position = player.getTank().getPosition().add(new Vector3d(0, -80, 0));
         flag.setPosition(position)
 
         const packet = new SetFlagDroppedPacket();
@@ -152,12 +151,11 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
         this.battle.broadcastPacket(packet)
 
         this.addTeamScore(player.getTank().getTeam(), 1)
+        this.initFlag(flag.team)
 
         if (this.battle.getScoreLimit() <= this.getTeamScore(player.getTank().getTeam())) {
             return this.battle.finish()
         }
-
-        this.initFlag(flag.team)
     }
 
     public broadcastRemovePlayer(player: Player): void {

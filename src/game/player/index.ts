@@ -34,7 +34,7 @@ export class Player extends Client {
     protected battle: Battle;
     public tank: Tank;
 
-    private data: PlayerData;
+    public data: PlayerData;
 
     private packetHandler: PlayerPacketHandler;
 
@@ -97,15 +97,7 @@ export class Player extends Client {
     }
 
     public getUsername() {
-        return this.getData().getUsername()
-    }
-
-    public setData(data: PlayerData) {
-        this.data = data;
-    }
-
-    public getData() {
-        return this.data
+        return this.data.username
     }
 
     public getTank(): Tank {

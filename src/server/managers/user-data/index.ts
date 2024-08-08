@@ -20,7 +20,7 @@ export class UserDataManager {
         const player = this.server.playersManager.getPlayer(username);
 
         if (player) {
-            return player.getData();
+            return player.data;
         }
 
         return PlayerData.findPlayerData(username);

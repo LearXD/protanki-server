@@ -48,7 +48,7 @@ export class Logger {
     }
 
     static log(...args: any[]) {
-        this.show(Colors.LOG, ...args)
+        // this.show(Colors.LOG, ...args)
     }
 
     static error(...args: any[]) {

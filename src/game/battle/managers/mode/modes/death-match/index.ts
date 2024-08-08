@@ -37,10 +37,10 @@ export class BattleDeathMatchModeManager extends BattleModeManager {
         packet.users = this.battle.playersManager.getPlayers()
             .map(player => {
                 return {
-                    chatModeratorLevel: player.getData().getModeratorLevel(),
+                    chatModeratorLevel: player.data.moderatorLevel,
                     deaths: player.getTank().deaths,
                     kills: player.getTank().kills,
-                    rank: player.getData().getRank(),
+                    rank: player.data.getRank(),
                     score: player.getTank().score,
                     name: player.getUsername()
                 }
@@ -71,10 +71,10 @@ export class BattleDeathMatchModeManager extends BattleModeManager {
         const packet = new SetBattleUsersPropertiesPacket();
         packet.users = this.battle.playersManager.getPlayers()
             .map((playing) => ({
-                chatModeratorLevel: playing.getData().getModeratorLevel(),
+                chatModeratorLevel: playing.data.moderatorLevel,
                 deaths: player.getTank().deaths,
                 kills: player.getTank().kills,
-                rank: playing.getData().getRank(),
+                rank: playing.data.getRank(),
                 score: player.getTank().score,
                 name: playing.getUsername()
             }))

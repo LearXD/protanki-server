@@ -85,6 +85,7 @@ export class Battle {
             withoutSupplies: false
         },
     ) {
+        this.modeManager.init();
         this.updateInterval = setInterval(this.update.bind(this), 1000 / Battle.TICK_RATE);
         this.updateTimeInterval = setInterval(this.updateTime.bind(this), 1000);
     }
@@ -93,7 +94,7 @@ export class Battle {
         Logger.info(`Battle ${this.getName()} started`)
 
         this.sendStarted()
-        this.modeManager.init();
+
         this.startedAt = Date.now()
         this.running = true
     }

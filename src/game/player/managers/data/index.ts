@@ -10,6 +10,7 @@ import { SetWelcomeToPremiumPacket } from "../../../../network/packets/set-welco
 import { Achievement } from "../../../../states/achievement";
 import { Logger } from "../../../../utils/logger";
 import { PlayerData } from "../../utils/data";
+import { RankManager } from "@/server/managers/rank";
 
 export class PlayerDataManager {
 
@@ -25,18 +26,19 @@ export class PlayerDataManager {
             throw new ServerError('Trying to load data for an unauthenticated player', username);
         }
 
-        this.player.setData(PlayerData.findPlayerData(username, true));
+        this.player.data = PlayerData.findPlayerData(username, this.player);
+        this.player.data.loadGarage()
     }
 
     public sendCrystals() {
         const setCrystals = new SetCrystalsPacket();
-        setCrystals.crystals = this.player.getData().getCrystals();
+        setCrystals.crystals = this.player.data.crystals
         this.player.sendPacket(setCrystals);
     }
 
     public sendScore() {
         const packet = new SetScorePacket();
-        packet.score = this.player.getData().getScore();
+        packet.score = this.player.data.experience
         this.player.sendPacket(packet);
     }
 
@@ -47,7 +49,7 @@ export class PlayerDataManager {
     }
 
     public sendPremiumData() {
-        const data = this.player.getData().getPremiumData()
+        const data = this.player.data.getPremiumData()
 
         const setPremiumDataPacket = new SetPremiumDataPacket()
         setPremiumDataPacket.needShowNotificationCompletionPremium = data.showReminder
@@ -70,7 +72,7 @@ export class PlayerDataManager {
     }
 
     public sendPremiumLeftTime() {
-        const data = this.player.getData().getPremiumData()
+        const data = this.player.data.getPremiumData()
 
         const setPremiumLeftTimePacket = new SetPremiumLeftTimePacket();
         setPremiumLeftTimePacket.leftTimeInSeconds = data.leftTime;
@@ -94,18 +96,18 @@ export class PlayerDataManager {
     public sendUserProperty() {
         const setUserPropertyPacket = new SetUserPropertyPacket();
 
-        setUserPropertyPacket.crystals = this.player.getData().getCrystals();
+        setUserPropertyPacket.crystals = this.player.data.crystals
         setUserPropertyPacket.currentRankScore = 1000;
-        setUserPropertyPacket.durationCrystalAbonement = this.player.getData().getDoubleCrystalsLeftTime();
-        setUserPropertyPacket.hasDoubleCrystal = this.player.getData().hasDoubleCrystals();
-        setUserPropertyPacket.nextRankScore = 100000
+        setUserPropertyPacket.durationCrystalAbonement = this.player.data.getDoubleCrystalsLeftTime();
+        setUserPropertyPacket.hasDoubleCrystal = this.player.data.hasDoubleCrystals();
         setUserPropertyPacket.place = 0;
-        setUserPropertyPacket.rank = this.player.getData().getRank();
+        setUserPropertyPacket.rank = this.player.data.getRank();
+        setUserPropertyPacket.score = this.player.data.experience;
+        setUserPropertyPacket.nextRankScore = RankManager.getNextRankScore(this.player.data.experience);
         setUserPropertyPacket.rating = 1;
-        setUserPropertyPacket.score = this.player.getData().getScore();
         setUserPropertyPacket.serverNumber = 1;
         setUserPropertyPacket.uid = this.player.getUsername();
-        setUserPropertyPacket.userProfileUrl = 'http://ratings.generaltanks.com/pt_br/user/';
+        setUserPropertyPacket.userProfileUrl = '';
 
         this.player.sendPacket(setUserPropertyPacket);
     }

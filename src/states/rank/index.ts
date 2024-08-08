@@ -30,3 +30,5 @@ export class Rank {
     public static readonly COMMANDER = 29;
     public static readonly GENERALISSIMO = 30;
 }
+
+export type RankType = Extract<typeof Rank[keyof typeof Rank], number>;

@@ -1,5 +1,5 @@
-import { Message } from "@/game/chat/utils/message";
-import { User } from "@/game/chat/utils/user";
+import { Message } from "@/server/managers/chat/utils/message";
+import { ChatUser } from "@/server/managers/chat/utils/user";
 import { Player } from "@/game/player";
 import { Server } from "@/server";
 
@@ -37,7 +37,7 @@ export class ChatManager {
             return;
         }
 
-        const message = new Message(text, player.chatManager.getChatUser())
+        const message = new Message(text, ChatUser.fromData(player.data));
 
         if (target) {
             const data = this.server.userDataManager.findPlayerData(target);
@@ -46,7 +46,7 @@ export class ChatManager {
                 return player.chatManager.sendMessage(`Usuário ${target} não encontrado`, true)
             }
 
-            message.setTarget(User.fromData(data).toObject())
+            message.target = new ChatUser(data.username, data.getRank(), data.moderatorLevel);
         }
 
         return this.addMessage(message);
