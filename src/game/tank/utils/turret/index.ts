@@ -8,6 +8,7 @@ import { IDamageModifiers } from "../../../battle/managers/combat/types";
 import { Player } from "../../../player";
 import { IGarageItem, ITurretProperties, ITurretSfx } from "@/server/managers/garage/types";
 import { GarageItemUtils } from "@/game/player/managers/garage/utils/item";
+import { Turret } from "@/states/turret";
 
 export abstract class TurretHandler {
 
@@ -17,6 +18,8 @@ export abstract class TurretHandler {
         public readonly sfx: ITurretSfx,
         public readonly tank: Tank
     ) { }
+
+    public abstract getTurret(): Turret;
 
     public getName() {
         return GarageItemUtils.serialize(this.item.id, this.item.modificationID);
@@ -60,7 +63,7 @@ export abstract class TurretHandler {
                 continue;
             }
 
-            const distance = player.getTank().getPosition().distanceTo(position);
+            const distance = player.tank.getPosition().distanceTo(position);
             const damage = this.getDamage(distance, { splash: true });
 
             if (damage <= 0) {
@@ -78,7 +81,7 @@ export abstract class TurretHandler {
 
         if (!player) return false;
 
-        const distance = player.getTank().getPosition().distanceTo(this.tank.getPosition());
+        const distance = player.tank.getPosition().distanceTo(this.tank.getPosition());
         const damage = this.getDamage(distance, modifiers);
 
         if (damage <= 0) {

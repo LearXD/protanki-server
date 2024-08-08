@@ -1,3 +1,4 @@
+import { Turret } from "@/states/turret";
 import { TurretHandler } from "..";
 import { SendRicochetOverturnedShotPacket } from "../../../../../network/packets/send-ricochet-overturned-shot";
 import { SendRicochetShotPacket } from "../../../../../network/packets/send-ricochet-shot";
@@ -10,6 +11,10 @@ import { MathUtils } from "../../../../../utils/math";
 import { Player } from "../../../../player";
 
 export class RicochetHandler extends TurretHandler {
+
+    public getTurret() {
+        return Turret.RICOCHET;
+    }
 
     public getDamageRange() {
         const min = this.getItemSubProperty("DAMAGE", "DAMAGE_FROM")

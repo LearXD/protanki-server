@@ -65,7 +65,7 @@ export class BattlePlayersManager {
         if (this.battle.getMode() !== BattleMode.DM) {
             const setAddUserOnTeamBattleCounterPacket = new SetAddUserOnTeamBattleCounterPacket();
             setAddUserOnTeamBattleCounterPacket.battle = this.battle.getBattleId();
-            setAddUserOnTeamBattleCounterPacket.team = player.getTank().getTeam();
+            setAddUserOnTeamBattleCounterPacket.team = player.tank.team;
             setAddUserOnTeamBattleCounterPacket.user = player.getUsername();
             player.server.battleManager.broadcastPacket(setAddUserOnTeamBattleCounterPacket);
 
@@ -75,7 +75,7 @@ export class BattlePlayersManager {
             setAddUserInfoOnViewingTeamBattlePacket.score = 0;
             setAddUserInfoOnViewingTeamBattlePacket.suspicious = false;
             setAddUserInfoOnViewingTeamBattlePacket.user = player.getUsername();
-            setAddUserInfoOnViewingTeamBattlePacket.team = player.getTank().getTeam();
+            setAddUserInfoOnViewingTeamBattlePacket.team = player.tank.team;
             this.battle.viewersManager.broadcastPacket(setAddUserInfoOnViewingTeamBattlePacket);
         }
 
@@ -115,7 +115,7 @@ export class BattlePlayersManager {
     public sendTanksData(player: Player) {
         for (const source of this.getPlayers()) {
             if (source.getUsername() !== player.getUsername()) {
-                const data = source.getTank().getData()
+                const data = source.tank.getData()
                 this.sendTankData({ ...data, state_null: false }, player)
             }
         }

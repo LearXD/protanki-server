@@ -65,6 +65,6 @@ export class BattleChatManager {
             return;
         }
 
-        this.broadcastMessage(sender, message, isSpectator ? null : player.getTank().getTeam(), isPrivate);
+        this.broadcastMessage(sender, message, isSpectator ? null : player.tank.team, isPrivate);
     }
 }

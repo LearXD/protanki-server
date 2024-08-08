@@ -1,3 +1,4 @@
+import { Turret } from "@/states/turret";
 import { TurretHandler } from "..";
 import { SendStartVulcanShotPacket } from "../../../../../network/packets/send-start-vulcan-shot";
 import { SendStopVulcanShotPacket } from "../../../../../network/packets/send-stop-vulcan-shot";
@@ -10,6 +11,10 @@ import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { Player } from "../../../../player";
 
 export class VulcanHandler extends TurretHandler {
+
+    public getTurret() {
+        return Turret.VULCAN;
+    }
 
     public getDamagePerPeriod(): number {
         const damage = this.getItemSubProperty("DAMAGE_PER_SECOND", "DAMAGE_PER_PERIOD");

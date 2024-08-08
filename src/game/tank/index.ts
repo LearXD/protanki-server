@@ -42,8 +42,10 @@ import { BattleCaptureTheFlagModeManager } from "../battle/managers/mode/modes/c
 import { SendCollectBonusBoxPacket } from "@/network/packets/send-collect-bonus-box";
 import { SetViewingBattleUserKillsPacket } from "@/network/packets/set-viewing-battle-user-kills";
 import { SetViewingBattleUserScorePacket } from "@/network/packets/set-viewing-battle-user-score";
-import { IGarageItem } from "@/server/managers/garage/types";
-import { GarageItemUtils } from "../player/managers/garage/utils/item";
+import { ITankEffect } from "./types";
+import { IEffect } from "@/network/packets/set-battle-users-effects";
+import { BattleCombatManager } from "../battle/managers/combat";
+import { Painting } from "./utils/painting";
 
 export class Tank {
 
@@ -57,6 +59,8 @@ export class Tank {
     private health: number = 0;
     private temperature: number = 0;
 
+    private effects: ITankEffect[] = []
+
     /** TANK POSITION */
     private position: Vector3d = new Vector3d(0, 0, 0);
     private orientation: Vector3d = new Vector3d(0, 0, 0);
@@ -67,14 +71,16 @@ export class Tank {
     public deaths: number = 0;
 
     /** TANK EQUIPMENTS */
-    private turret: TurretHandler
-    private hull: Hull
-    private painting: IGarageItem
+    public turret: TurretHandler
+    public hull: Hull
+    public painting: Painting
+
+    public battleStartedSession: number = Date.now()
 
     public constructor(
         public readonly player: Player,
         public readonly battle: Battle,
-        public readonly team: TeamType = Team.NONE
+        public team: TeamType = Team.NONE
     ) {
         this.updateProperties()
     }
@@ -85,19 +91,15 @@ export class Tank {
         this.updatePainting()
     }
 
-    public getTeam() {
-        return this.team
-    }
-
     public getHealth() {
         return this.health
     }
 
     public setHealth(health: number) {
-        this.health = health;
+        this.health = Math.min(10000, Math.max(0, health));
         const setTankHealthPacket = new SetTankHealthPacket();
         setTankHealthPacket.tankId = this.player.getUsername();
-        setTankHealthPacket.health = health;
+        setTankHealthPacket.health = this.health;
         this.battle.broadcastPacket(setTankHealthPacket);
     }
 
@@ -123,14 +125,6 @@ export class Tank {
         this.position = position
     }
 
-    public getDirection(): Vector3d {
-        return this.orientation
-    }
-
-    public setDirection(orientation: Vector3d) {
-        this.orientation = orientation
-    }
-
     public updateTurret() {
         const resources = this.player.garageManager.getTurretResources()
         const turretInstance = TurretUtils.getTurretHandler(resources.item.id)
@@ -144,27 +138,26 @@ export class Tank {
 
     public updatePainting() {
         const resources = this.player.garageManager.getPaintingResources()
-        this.painting = resources.item
-    }
-
-    public getTurret() {
-        return this.turret
-    }
-
-    public getHull() {
-        return this.hull
+        this.painting = new Painting(resources.item)
     }
 
     public isAlive() {
         return this.alive
     }
 
-    public setAlive(alive: boolean) {
-        this.alive = alive
-    }
-
     public isVisible() {
         return this.alive && this.visible
+    }
+
+    public getSessionTime() {
+        return Date.now() - this.battleStartedSession
+    }
+
+    public sendLatency() {
+        const packet = new SetLatencyPacket();
+        packet.serverSessionTime = this.getSessionTime();
+        packet.clientPing = this.player.getPing();
+        this.player.sendPacket(packet);
     }
 
     public setKills(kills: number) {
@@ -201,13 +194,6 @@ export class Tank {
         this.player.sendPacket(setMoveCameraPacket);
     }
 
-    public sendLatency(serverTime: number) {
-        const setLatencyPacket = new SetLatencyPacket();
-        setLatencyPacket.serverSessionTime = serverTime;
-        setLatencyPacket.clientPing = this.player.getPing();
-        this.player.sendPacket(setLatencyPacket);
-    }
-
     public sendRemoveTank(ignoreSelf: boolean = false) {
         const setRemoveTankPacket = new SetRemoveTankPacket();
         setRemoveTankPacket.tankId = this.player.getUsername();
@@ -228,7 +214,7 @@ export class Tank {
         return (
             turret !== this.turret.getName() ||
             hull !== this.hull.getName() ||
-            painting !== GarageItemUtils.serialize(this.painting.id)
+            painting !== this.painting.getName()
         )
     }
 
@@ -275,16 +261,86 @@ export class Tank {
         this.battle.broadcastPacket(setSpawnTankPacket);
     }
 
-    public scheduleSuicide(delay: number = 3000, respawnDelay: number = 3000) {
+    public hasEffect(supply: SupplyType) {
+        return this.effects.find(effect => effect.type === supply)
+    }
 
+    public getEffects(): IEffect[] {
+        return this.effects.map((effect) => {
+            return {
+                userID: this.player.getUsername(),
+                itemIndex: Supply.ALL.indexOf(effect.type) + 1,
+                durationTime: effect.duration - (Date.now() - effect.startedAt),
+                effectLevel: effect.level
+            }
+        })
+    }
+
+    public removeEffect(supply: Supply) {
+        const effect = this.effects.find(effect => effect.type === supply)
+        if (effect) {
+
+            switch (supply) {
+                case Supply.N2O: {
+                    this.sendTankSpeed()
+                    break;
+                }
+            }
+
+            this.effects = this.effects.filter(effect => effect.type !== supply)
+            this.battle.effectsManager.broadcastRemoveBattleEffect(this.player, effect.type)
+        }
+    }
+
+    public addEffect(
+        supply: SupplyType,
+        duration: number = 60000,
+        level: number = 1,
+        activeAfterDeath: boolean = false
+    ) {
+        if (!this.hasEffect(supply)) {
+
+            let delay = 0;
+
+            switch (supply) {
+                case Supply.HEALTH: {
+
+                    const health = BattleCombatManager.parseDamageValue(30, this.hull.getProtection())
+                    const rounds = Math.round(10000 / health)
+
+                    Logger.debug(`Adding health effect to ${this.player.getUsername()} with ${health} (${rounds} rounds)`)
+
+                    for (let i = 0; i < rounds; i++) {
+                        this.battle.taskManager.scheduleTask(() => this.setHealth(this.health + health), i * 1000, this.player.getUsername())
+                    }
+
+                    duration = rounds * 1000;
+                    break;
+                }
+                case Supply.N2O: {
+                    this.sendTankSpeed(2)
+                    delay = 30000;
+                    break;
+                }
+            }
+
+            this.effects.push({ type: supply, startedAt: Date.now(), level, duration, activeAfterDeath });
+            this.battle.effectsManager.broadcastAddBattleEffect(this.player, supply, duration, level, activeAfterDeath)
+            this.battle.taskManager.scheduleTask(() => this.removeEffect(supply), duration)
+
+            return delay
+        }
+        return 0;
+    }
+
+    public scheduleSuicide(delay: number = 3000, respawnDelay: number = 3000) {
         const packet = new SetSuicideDelayPacket();
         packet.delay = delay;
-
         this.player.sendPacket(packet);
 
-        this.battle.taskManager.scheduleTask(
-            () => this.sendRespawnDelay(respawnDelay), delay, TimeType.MILLISECONDS, this.player.getUsername()
-        )
+        this.battle.taskManager.scheduleTask(() => {
+            this.sendRespawnDelay(respawnDelay), delay * TimeType.MILLISECONDS, this.player.getUsername()
+        })
     }
 
     /** MORTE POR TROCA DE EQUIPAMENTO */
@@ -337,25 +393,26 @@ export class Tank {
         setTankSpeedPacket.maxTurretRotationSpeed = this.turret.properties.turret_turn_speed;
         setTankSpeedPacket.acceleration = this.hull.properties.acceleration + (0.5 * (multiply - 1));
         setTankSpeedPacket.specificationId = this.incarnation;
-        this.player.sendPacket(setTankSpeedPacket);
+        this.battle.broadcastPacket(setTankSpeedPacket);
     }
 
     public handleDeath() {
-        this.alive = false;
-        this.visible = false;
         this.health = 0;
 
+        this.alive = false;
+        this.visible = false;
+
         this.battle.modeManager.handleDeath(this.player)
+        this.battle.taskManager.unregisterOwnerTasks(this.player.getUsername())
     }
 
     public handleSuicide() {
-
         if (!this.isVisible()) {
             return;
         }
 
         this.battle.taskManager.scheduleTask(
-            this.suicide.bind(this), 10, TimeType.SECONDS, this.player.getUsername()
+            this.suicide.bind(this), 10 * TimeType.SECONDS, this.player.getUsername()
         )
     }
 
@@ -365,22 +422,18 @@ export class Tank {
             return;
         }
 
-        let time = 0;
-        let decrease = true;
+        let delay = 0;
 
         switch (item) {
-            case Supply.HEALTH: {
-                this.setHealth(10000);
-                break
-            }
-
-            case Supply.N2O:
-                time = 3000;
-                this.sendTankSpeed(2)
+            case Supply.MINE: {
                 break;
+            }
+            default: {
+                delay = this.addEffect(item)
+            }
         }
 
-        this.player.garageManager.sendUseSupply(item, time, decrease)
+        this.player.garageManager.sendUseSupply(item, delay, !this.battle.isParkourMode())
     }
 
     public handleMove(position: Vector3d, orientation?: Vector3d) {
@@ -495,7 +548,7 @@ export class Tank {
     public getData(): IUserTankResourcesData {
         return {
             battleId: this.battle.getBattleId(),
-            colormap_id: this.painting.coloring,
+            colormap_id: this.painting.item.coloring,
             hull_id: this.hull.getName(),
             turret_id: this.turret.getName(),
             team_type: this.team,

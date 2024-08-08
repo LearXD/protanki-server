@@ -59,7 +59,7 @@ export class Battle {
     public readonly chatManager: BattleChatManager = new BattleChatManager(this)
     public readonly resourcesManager: BattleResourcesManager = new BattleResourcesManager(this)
     public readonly minesManager: BattleMinesManager = new BattleMinesManager()
-    public readonly effectsManager: BattleEffectsManager = new BattleEffectsManager()
+    public readonly effectsManager: BattleEffectsManager = new BattleEffectsManager(this)
     public readonly boxesManager: BattleBoxesManager = new BattleBoxesManager(this)
     public readonly taskManager: BattleTaskManager = new BattleTaskManager()
 
@@ -115,9 +115,9 @@ export class Battle {
         this.restartTime();
 
         for (const player of this.playersManager.getPlayers()) {
-            player.getTank().alive = false;
-            player.getTank().visible = false;
-            player.getTank().prepareRespawn();
+            player.tank.alive = false;
+            player.tank.visible = false;
+            player.tank.prepareRespawn();
         }
     }
 
@@ -133,7 +133,7 @@ export class Battle {
         this.taskManager.unregisterAll();
         this.modeManager.sendFinishRewards()
 
-        this.taskManager.scheduleTask(this.restart.bind(this), 10, TimeType.SECONDS)
+        this.taskManager.scheduleTask(this.restart.bind(this), 10 * TimeType.SECONDS)
     }
 
     public close() {
@@ -192,7 +192,7 @@ export class Battle {
         /** SEND TANKS DATA */
         this.playersManager.sendTanksData(player)
         if (!isSpectator) {
-            const tankData = player.getTank().getData();
+            const tankData = player.tank.getData();
             this.playersManager.broadcastTankData(tankData)
             this.playersManager.sendTankData(tankData, player)
         }
@@ -218,8 +218,8 @@ export class Battle {
         }
 
         if (this.playersManager.hasPlayer(player)) {
-            if (player.getTank()) {
-                player.getTank().sendRemoveTank(true);
+            if (player.tank) {
+                player.tank.sendRemoveTank(true);
             }
 
             this.modeManager.broadcastRemovePlayer(player)
@@ -323,7 +323,7 @@ export class Battle {
 
     public broadcastPacketToTeam(packet: SimplePacket, team: TeamType, ignore: string[] = []) {
         for (const player of this.playersManager.getPlayers()) {
-            if (player.getTank().getTeam() === team) {
+            if (player.tank.team === team) {
                 if (!ignore.includes(player.getUsername())) {
                     player.sendPacket(packet)
                 }
@@ -345,9 +345,9 @@ export class Battle {
 
         this.taskManager.update()
 
-        if (this.tick % Battle.TICK_RATE === 0) {
+        if (this.tick % (Battle.TICK_RATE * 2) === 0) {
             for (const player of this.playersManager.getPlayers()) {
-                player.sendLatency()
+                player.tank.sendLatency()
             }
         }
     }

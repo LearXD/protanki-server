@@ -88,8 +88,8 @@ export class BattleViewersManager {
         const modeManager = this.battle.modeManager;
         if (modeManager instanceof BattleDeathMatchModeManager) {
             packet.data.users = this.battle.playersManager.getPlayers().map(player => ({
-                kills: player.getTank().kills,
-                score: player.getTank().score,
+                kills: player.tank.kills,
+                score: player.tank.score,
                 suspicious: false,
                 user: player.getUsername(),
             }));
@@ -103,19 +103,19 @@ export class BattleViewersManager {
             packet.data.scoreBlue = modeManager.bluePoints;
 
             packet.data.usersRed = this.battle.playersManager.getPlayers()
-                .filter(player => player.getTank().getTeam() === Team.RED)
+                .filter(player => player.tank.team === Team.RED)
                 .map(player => ({
-                    kills: player.getTank().kills,
-                    score: player.getTank().score,
+                    kills: player.tank.kills,
+                    score: player.tank.score,
                     suspicious: false,
                     user: player.getUsername(),
                 }));
 
             packet.data.usersBlue = this.battle.playersManager.getPlayers()
-                .filter(player => player.getTank().getTeam() === Team.BLUE)
+                .filter(player => player.tank.team === Team.BLUE)
                 .map(player => ({
-                    kills: player.getTank().kills,
-                    score: player.getTank().score,
+                    kills: player.tank.kills,
+                    score: player.tank.score,
                     suspicious: false,
                     user: player.getUsername(),
                 }));

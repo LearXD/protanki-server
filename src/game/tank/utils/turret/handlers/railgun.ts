@@ -1,3 +1,4 @@
+import { Turret } from "@/states/turret";
 import { TurretHandler } from "..";
 import { SendRailgunShotPacket } from "../../../../../network/packets/send-railgun-shot";
 import { SendStartRailgunShotPacket } from "../../../../../network/packets/send-start-railgun-shot";
@@ -9,6 +10,10 @@ import { IDamageModifiers } from "../../../../battle/managers/combat/types";
 import { Player } from "../../../../player";
 
 export class RailgunHandler extends TurretHandler {
+
+    public getTurret() {
+        return Turret.RAILGUN;
+    }
 
     public getDamageRange() {
         const min = this.getItemSubProperty("DAMAGE", "DAMAGE_FROM")

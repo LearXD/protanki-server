@@ -1,3 +1,4 @@
+import { Turret } from "@/states/turret";
 import { TurretHandler } from "..";
 import { SendMoveShaftVerticalAxisPacket } from "../../../../../network/packets/send-move-shaft-vertical-axis";
 import { SendOpenShaftAimPacket } from "../../../../../network/packets/send-open-shaft-aim";
@@ -20,6 +21,10 @@ import { Player } from "../../../../player";
 export class ShaftHandler extends TurretHandler {
 
     private aiming: boolean = false;
+
+    public getTurret() {
+        return Turret.SHAFT;
+    }
 
     public getDamageRange() {
         const min = this.getItemSubProperty("DAMAGE", "DAMAGE_FROM")

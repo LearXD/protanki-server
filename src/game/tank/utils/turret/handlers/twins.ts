@@ -1,3 +1,4 @@
+import { Turret } from "@/states/turret";
 import { TurretHandler } from "..";
 import { SendTwinsHitPointShotPacket } from "../../../../../network/packets/send-twins-hit-point-shot";
 import { SendTwinsOverturnedShotPacket } from "../../../../../network/packets/send-twins-overturned-shot";
@@ -10,6 +11,10 @@ import { MathUtils } from "../../../../../utils/math";
 import { Player } from "../../../../player";
 
 export class TwinsHandler extends TurretHandler {
+
+    public getTurret() {
+        return Turret.TWINS;
+    }
 
     public getDamageRange() {
         const min = this.getItemSubProperty("DAMAGE", "DAMAGE_FROM")

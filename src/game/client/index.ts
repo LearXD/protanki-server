@@ -75,13 +75,6 @@ export abstract class Client {
         this.sendPacket(packet);
     }
 
-    public sendLatency() {
-        const packet = new SetLatencyPacket();
-        packet.serverSessionTime = 0;
-        packet.clientPing = this.getPing();
-        this.sendPacket(packet);
-    }
-
 
     public addResourceLoading(callback: () => void) {
         this.resourcesLoaded++;

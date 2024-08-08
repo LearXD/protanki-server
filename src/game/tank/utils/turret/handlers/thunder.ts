@@ -1,3 +1,4 @@
+import { Turret } from "@/states/turret";
 import { TurretHandler } from "..";
 import { SendStormHitPointShotPacket } from "../../../../../network/packets/send-storm-hit-point-shot";
 import { SendStormTargetShotPacket } from "../../../../../network/packets/send-storm-target-shot";
@@ -12,6 +13,10 @@ import { IDamageModifiers } from "../../../../battle/managers/combat/types";
 import { Player } from "../../../../player";
 
 export class ThunderHandler extends TurretHandler {
+
+    public getTurret() {
+        return Turret.THUNDER;
+    }
 
     public getDamageRange() {
         const min = this.getItemSubProperty("DAMAGE", "DAMAGE_FROM")

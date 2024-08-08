@@ -29,11 +29,11 @@ export class BattleCollisionsManager {
 
     public handlePlayerMovement(player: Player) {
 
-        if (!player.getTank() || !player.getTank().isVisible()) {
+        if (!player.tank || !player.tank.isVisible()) {
             return;
         }
 
-        const position = player.getTank().getPosition();
+        const position = player.tank.getPosition();
 
         for (const area of this.battle.getMap().getAreas()) {
             const { minX, minY: minZ, minZ: minY, maxX, maxY: maxZ, maxZ: maxY } = area // SWAP Y AND Z
@@ -44,7 +44,7 @@ export class BattleCollisionsManager {
             ) {
 
                 if (area.action === MapAreaAction.KILL) {
-                    player.getTank().suicide();
+                    player.tank.suicide();
                 }
             }
         }

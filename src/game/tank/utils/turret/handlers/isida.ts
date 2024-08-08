@@ -1,3 +1,4 @@
+import { Turret } from "@/states/turret";
 import { TurretHandler } from "..";
 import { SendIsisTargetShotPacket } from "../../../../../network/packets/send-isis-target-shot";
 import { SendStartIsisShotPacket } from "../../../../../network/packets/send-start-isis-shot";
@@ -10,6 +11,10 @@ import { IsidaState } from "../../../../../states/isida-state";
 import { Player } from "../../../../player";
 
 export class IsidaHandler extends TurretHandler {
+
+    public getTurret() {
+        return Turret.ISIDA;
+    }
 
     public getHealingPerPeriod(): number {
         const healing = this.getItemSubProperty("SIS_HEALING_PER_SECOND", "ISIS_HEALING_PER_PERIOD")

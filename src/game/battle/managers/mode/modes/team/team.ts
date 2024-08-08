@@ -48,21 +48,21 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
 
     public broadcastAddUserProperties(player: Player): void {
         const players = this.battle.playersManager.getPlayers()
-            .filter(p => player.getTank().getTeam() === p.getTank().getTeam());
+            .filter(p => player.tank.team === p.tank.team);
 
         const packet = new SetTeamBattleAddUsersPropertiesPacket();
         packet.userId = player.getUsername();
         packet.usersInfo = players.map(p => (
             {
                 chatModeratorLevel: p.data.moderatorLevel,
-                deaths: p.getTank().deaths,
-                kills: p.getTank().kills,
+                deaths: p.tank.deaths,
+                kills: p.tank.kills,
                 rank: p.data.getRank(),
-                score: p.getTank().score,
+                score: p.tank.score,
                 name: p.getUsername()
             }
         ))
-        packet.team = player.getTank().getTeam();
+        packet.team = player.tank.team;
 
         this.battle.broadcastPacket(packet, [player.getUsername()]);
     }
@@ -76,12 +76,12 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
     public broadcastUserStats(player: Player): void {
         const packet = new SetTeamBattleUserStatPacket();
         packet.user = {
-            deaths: player.getTank().deaths,
-            kills: player.getTank().kills,
-            score: player.getTank().score,
+            deaths: player.tank.deaths,
+            kills: player.tank.kills,
+            score: player.tank.score,
             name: player.getUsername()
         }
-        packet.team = player.getTank().getTeam();
+        packet.team = player.tank.team;
         this.battle.broadcastPacket(packet);
     }
 
@@ -93,18 +93,18 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
         for (const player of this.battle.playersManager.getPlayers()) {
             const userData: IUser = {
                 chatModeratorLevel: player.data.moderatorLevel,
-                deaths: player.getTank().deaths,
-                kills: player.getTank().kills,
+                deaths: player.tank.deaths,
+                kills: player.tank.kills,
                 rank: player.data.getRank(),
-                score: player.getTank().score,
+                score: player.tank.score,
                 name: player.getUsername()
             }
 
-            if (player.getTank().getTeam() === Team.BLUE) {
+            if (player.tank.team === Team.BLUE) {
                 blueUsers.push(userData);
             }
 
-            if (player.getTank().getTeam() === Team.RED) {
+            if (player.tank.team === Team.RED) {
                 redUsers.push(userData);
             }
         }

@@ -1,3 +1,4 @@
+import { Turret } from "@/states/turret";
 import { TurretHandler } from "..";
 import { SendSmokyHitPointShotPacket } from "../../../../../network/packets/send-smoky-hit-point-shot";
 import { SendSmokyTargetShotPacket } from "../../../../../network/packets/send-smoky-target-shot";
@@ -13,6 +14,10 @@ import { IDamageModifiers } from "../../../../battle/managers/combat/types";
 import { Player } from "../../../../player";
 
 export class SmokyHandler extends TurretHandler {
+
+    public getTurret() {
+        return Turret.SMOKY;
+    }
 
     public getDamageRange() {
         const min = this.getItemSubProperty("DAMAGE", "DAMAGE_FROM")

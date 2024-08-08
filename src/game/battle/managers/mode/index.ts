@@ -25,9 +25,9 @@ export abstract class BattleModeManager {
 
     public init() {
         for (const player of this.battle.playersManager.getPlayers()) {
-            player.getTank().score = 0;
-            player.getTank().kills = 0;
-            player.getTank().deaths = 0;
+            player.tank.score = 0;
+            player.tank.kills = 0;
+            player.tank.deaths = 0;
         }
     }
 
@@ -58,9 +58,9 @@ export abstract class BattleModeManager {
             .map(player => {
                 return {
                     user: player.getUsername(),
-                    score: player.getTank().score,
-                    kills: player.getTank().kills,
-                    deaths: player.getTank().deaths
+                    score: player.tank.score,
+                    kills: player.tank.kills,
+                    deaths: player.tank.deaths
                 }
             })
         packet.timeToRestart = 10;
@@ -74,13 +74,13 @@ export abstract class BattleModeManager {
     }
 
     public handleKill(attacker: Player, target: Player) {
-        attacker.getTank().setKills(attacker.getTank().kills + 1);
-        attacker.getTank().setScore(attacker.getTank().score + 100);
+        attacker.tank.setKills(attacker.tank.kills + 1);
+        attacker.tank.setScore(attacker.tank.score + 100);
         this.broadcastUserStats(attacker);
     }
 
     public handleDeath(player: Player) {
-        player.getTank().deaths += 1;
+        player.tank.deaths += 1;
         this.broadcastUserStats(player);
     }
 }

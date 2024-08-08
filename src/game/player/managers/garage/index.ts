@@ -274,8 +274,8 @@ export class PlayerGarageManager {
         this.removeGarageScreen();
 
         if (this.player.battle && this.player.tank.hasChangedEquipment()) {
-            if (this.player.getTank().isAlive()) {
-                this.player.getTank().scheduleSuicide()
+            if (this.player.tank.isAlive()) {
+                this.player.tank.scheduleSuicide()
             }
         }
     }

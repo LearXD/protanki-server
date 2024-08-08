@@ -1,3 +1,4 @@
+import { Turret } from "@/states/turret";
 import { TurretHandler } from "..";
 import { SendFlameTargetsShotPacket } from "../../../../../network/packets/send-flame-targets-shot";
 import { SendStartFlameShotPacket } from "../../../../../network/packets/send-start-flame-shot";
@@ -9,6 +10,10 @@ import { Logger } from "../../../../../utils/logger";
 import { Player } from "../../../../player";
 
 export class FlamethrowerHandler extends TurretHandler {
+
+    public getTurret() {
+        return Turret.FLAMETHROWER;
+    }
 
     public getDamagePerSecond(): number {
         const damage = this.getItemSubProperty("DAMAGE_PER_SECOND", "DAMAGE_PER_PERIOD");
@@ -34,13 +39,13 @@ export class FlamethrowerHandler extends TurretHandler {
 
     public handleDamage(target: Player): void {
         const temperatureLimit = this.getTemperatureLimit();
-        const temperature = target.getTank().getTemperature();
+        const temperature = target.tank.getTemperature();
 
         if (temperature >= temperatureLimit) {
             return;
         }
 
-        target.getTank().setTemperature(
+        target.tank.setTemperature(
             temperature + 1 > temperatureLimit ? temperatureLimit : temperature + 1
         )
     }

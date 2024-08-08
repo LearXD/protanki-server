@@ -38,10 +38,10 @@ export class BattleDeathMatchModeManager extends BattleModeManager {
             .map(player => {
                 return {
                     chatModeratorLevel: player.data.moderatorLevel,
-                    deaths: player.getTank().deaths,
-                    kills: player.getTank().kills,
+                    deaths: player.tank.deaths,
+                    kills: player.tank.kills,
                     rank: player.data.getRank(),
-                    score: player.getTank().score,
+                    score: player.tank.score,
                     name: player.getUsername()
                 }
             })
@@ -58,9 +58,9 @@ export class BattleDeathMatchModeManager extends BattleModeManager {
     public broadcastUserStats(player: Player): void {
 
         const setBattleUserStatusPacket = new SetBattleUserStatusPacket()
-        setBattleUserStatusPacket.deaths = player.getTank().deaths
-        setBattleUserStatusPacket.kills = player.getTank().kills
-        setBattleUserStatusPacket.score = player.getTank().score
+        setBattleUserStatusPacket.deaths = player.tank.deaths
+        setBattleUserStatusPacket.kills = player.tank.kills
+        setBattleUserStatusPacket.score = player.tank.score
         setBattleUserStatusPacket.user = player.getUsername()
 
         this.battle.broadcastPacket(setBattleUserStatusPacket)
@@ -72,10 +72,10 @@ export class BattleDeathMatchModeManager extends BattleModeManager {
         packet.users = this.battle.playersManager.getPlayers()
             .map((playing) => ({
                 chatModeratorLevel: playing.data.moderatorLevel,
-                deaths: player.getTank().deaths,
-                kills: player.getTank().kills,
+                deaths: player.tank.deaths,
+                kills: player.tank.kills,
                 rank: playing.data.getRank(),
-                score: player.getTank().score,
+                score: player.tank.score,
                 name: playing.getUsername()
             }))
 

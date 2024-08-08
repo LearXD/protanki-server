@@ -1,3 +1,4 @@
+import { Turret } from "@/states/turret";
 import { TurretHandler } from "..";
 import { SendFreezeTargetsShotPacket } from "../../../../../network/packets/send-freeze-targets-shot";
 import { SendStartFreezeShootPacket } from "../../../../../network/packets/send-start-freeze-shoot";
@@ -8,6 +9,10 @@ import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { Player } from "../../../../player";
 
 export class FreezeHandler extends TurretHandler {
+
+    public getTurret() {
+        return Turret.FREEZE;
+    }
 
     public getDamagePerPeriod(): number {
         const damage = this.getItemSubProperty("DAMAGE_PER_SECOND", "DAMAGE_PER_PERIOD");
@@ -23,8 +28,8 @@ export class FreezeHandler extends TurretHandler {
     }
 
     public handleDamage(target: Player): void {
-        const temperature = target.getTank().getTemperature();
-        target.getTank().setTemperature(temperature - 0.1);
+        const temperature = target.tank.getTemperature();
+        target.tank.setTemperature(temperature - 0.1);
     }
 
     public handlePacket(packet: SimplePacket): void {

@@ -9,11 +9,10 @@ export class BattleTaskManager {
     public scheduleTask(
         callable: ITask,
         time: number = 1000,
-        timeType: TimeType = TimeType.MILLISECONDS,
         owner?: string
     ) {
         const taskId = ++this.generatedTasks;
-        const formattedTime = Date.now() + (time * timeType);
+        const formattedTime = Date.now() + time;
         this.tasks.set(taskId, new BattleTask(callable, formattedTime, owner))
         return taskId
     }

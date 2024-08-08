@@ -1,3 +1,4 @@
+import { Turret } from "@/states/turret";
 import { TurretHandler } from "..";
 import { SendHammerOverturnedShotPacket } from "../../../../../network/packets/send-hammer-overturned-shot";
 import { SendHammerShotPacket } from "../../../../../network/packets/send-hammer-shot";
@@ -7,6 +8,10 @@ import { Vector3d } from "../../../../../utils/vector-3d";
 import { Player } from "../../../../player";
 
 export class HammerHandler extends TurretHandler {
+
+    public getTurret() {
+        return Turret.HAMMER;
+    }
 
     public getDamagePerPeriod() {
         const property = this.getItemSubProperty('DAMAGE_PER_SECOND', 'DAMAGE_PER_PERIOD')

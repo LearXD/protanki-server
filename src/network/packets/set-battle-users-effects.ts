@@ -2,9 +2,16 @@ import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
+export interface IEffect {
+    userID: string,
+    itemIndex: number,
+    durationTime: number,
+    effectLevel: number,
+}
+
 export class SetBattleUsersEffectsPacket extends Packet {
 
-    public effects: any[];
+    public effects: IEffect[] = [];
 
     constructor(bytes?: ByteArray) {
         super(Protocol.SET_BATTLE_USERS_EFFECTS, bytes)

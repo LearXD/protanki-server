@@ -40,7 +40,7 @@ export class Flag extends BattleObject {
 
     public handleCollision(player: Player): boolean {
 
-        if (player.getTank().getTeam() === this.team) {
+        if (player.tank.team === this.team) {
             if (this.state === FlagState.DROPPED) {
                 this.manager.handleReturnFlag(player, this);
             }

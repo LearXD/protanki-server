@@ -100,9 +100,6 @@ export class Player extends Client {
         return this.data.username
     }
 
-    public getTank(): Tank {
-        return this.tank
-    }
     public getViewingBattle(): Battle {
         return this.viewingBattle
     }

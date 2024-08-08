@@ -94,14 +94,15 @@ export class PlayerDataManager {
 
 
     public sendUserProperty() {
-        const setUserPropertyPacket = new SetUserPropertyPacket();
+        const rank = RankManager.getRank(RankManager.getRankByExperience(this.player.data.experience));
 
+        const setUserPropertyPacket = new SetUserPropertyPacket();
         setUserPropertyPacket.crystals = this.player.data.crystals
-        setUserPropertyPacket.currentRankScore = 1000;
         setUserPropertyPacket.durationCrystalAbonement = this.player.data.getDoubleCrystalsLeftTime();
         setUserPropertyPacket.hasDoubleCrystal = this.player.data.hasDoubleCrystals();
         setUserPropertyPacket.place = 0;
-        setUserPropertyPacket.rank = this.player.data.getRank();
+        setUserPropertyPacket.currentRankScore = rank.experience;
+        setUserPropertyPacket.rank = rank.rank;
         setUserPropertyPacket.score = this.player.data.experience;
         setUserPropertyPacket.nextRankScore = RankManager.getNextRankScore(this.player.data.experience);
         setUserPropertyPacket.rating = 1;

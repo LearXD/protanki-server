@@ -73,7 +73,7 @@ export class BattleBoxesManager {
         const box = new BonusBox(bonus, found.length, Vector3d.fromInterface(area.position, false), this.battle);
         this.boxes.push(box);
 
-        this.battle.taskManager.scheduleTask(() => { box.spawn() }, delay, TimeType.SECONDS)
+        this.battle.taskManager.scheduleTask(() => { box.spawn() }, delay * TimeType.SECONDS)
         return true
     }
 
