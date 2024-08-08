@@ -62,7 +62,7 @@ export class Map extends MapDataManager {
     }
 
     public sendProperties(player: Player, spectator: boolean = false) {
-        const battle = player.getBattle();
+        const battle = player.battle;
 
         const packet = new SetBattleMapPropertiesPacket();
         packet.data = {

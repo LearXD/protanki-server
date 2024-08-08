@@ -120,7 +120,7 @@ export class PlayerBattlesManager {
     }
 
     public handleOpenBattleList() {
-        if (this.player.isInBattle()) {
+        if (this.player.battle) {
             if (this.player.getLayoutState() === LayoutState.BATTLE) {
                 this.sendBattlesList();
                 return true;
@@ -171,9 +171,9 @@ export class PlayerBattlesManager {
             this.handleOpenBattleList()
         }
 
-        if (this.player.isInBattle()) {
+        if (this.player.battle) {
             if (packet instanceof SendBattleMessagePacket) {
-                this.player.getBattle().chatManager.handleSendMessage(this.player, packet.message, packet.private);
+                this.player.battle.chatManager.handleSendMessage(this.player, packet.message, packet.private);
             }
         }
 

@@ -12,7 +12,7 @@ export class BonusCommand extends Command {
 
     public execute(sender: CommandSender, args: string[]): void {
         if (sender instanceof Player) {
-            const battle = sender.getBattle();
+            const battle = sender.battle
 
             if (!battle) {
                 sender.sendMessage("Você não está em uma batalha.");

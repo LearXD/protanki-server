@@ -54,7 +54,7 @@ export class RankManager {
 
         player.data.increaseCrystals(rank.bonus, false);
 
-        const battle = player.getBattle();
+        const battle = player.battle;
         if (battle) {
             const setUserNewRankPacket = new SetUserNewRankPacket();
             setUserNewRankPacket.userId = player.getUsername()

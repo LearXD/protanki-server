@@ -151,7 +151,7 @@ export class Battle {
         }
 
         /** ADD PLAYER */
-        player.setBattle(this)
+        player.battle = this
         player.tank = new Tank(player, this, team)
 
         player.setLayoutState(LayoutState.BATTLE)
@@ -234,7 +234,7 @@ export class Battle {
         this.taskManager.unregisterOwnerTasks(player.getUsername())
 
         player.tank = null
-        player.setBattle(null)
+        player.battle = null
 
         Logger.info(`${player.getUsername()} left the battle ${this.getName()}`)
 

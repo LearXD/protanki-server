@@ -31,7 +31,7 @@ export class Player extends Client {
     private viewingBattle: Battle;
     public layoutState: LayoutStateType;
 
-    protected battle: Battle;
+    public battle: Battle;
     public tank: Tank;
 
     public data: PlayerData;
@@ -85,8 +85,8 @@ export class Player extends Client {
             this.viewingBattle.viewersManager.removeViewer(this);
         }
 
-        if (this.isInBattle()) {
-            this.getBattle().handleClientLeave(this)
+        if (this.battle) {
+            this.battle.handleClientLeave(this)
         }
 
         if (this.authManager.isAuthenticated()) {
@@ -103,19 +103,6 @@ export class Player extends Client {
     public getTank(): Tank {
         return this.tank
     }
-
-    public isInBattle() {
-        return !!this.battle
-    }
-
-    public getBattle() {
-        return this.battle
-    }
-
-    public setBattle(battle: Battle) {
-        this.battle = battle
-    }
-
     public getViewingBattle(): Battle {
         return this.viewingBattle
     }
@@ -175,16 +162,14 @@ export class Player extends Client {
 
     public setSubLayoutState(secondary: LayoutStateType) {
         const setLayoutStatePacket = new SetSubLayoutStatePacket();
-        setLayoutStatePacket.principal = this.isInBattle() ? LayoutState.BATTLE : this.layoutState;
+        setLayoutStatePacket.principal = this.battle ? LayoutState.BATTLE : this.layoutState;
         setLayoutStatePacket.secondary = secondary;
         this.sendPacket(setLayoutStatePacket);
     }
 
     public sendMessage(message: string) {
-        const battle = this.getBattle();
-
-        if (battle) {
-            battle.chatManager.sendMessage(this, message);
+        if (this.battle) {
+            this.battle.chatManager.sendMessage(this, message);
             return;
         }
 
@@ -195,9 +180,8 @@ export class Player extends Client {
 
         switch (state) {
             case LayoutState.BATTLE_SELECT: {
-                const battle = this.getBattle();
-                if (battle) {
-                    battle.handleClientLeave(this)
+                if (this.battle) {
+                    this.battle.handleClientLeave(this)
                 }
 
                 if (this.layoutState === LayoutState.BATTLE_SELECT) {
@@ -214,9 +198,8 @@ export class Player extends Client {
                 break;
             }
             case LayoutState.GARAGE: {
-                const battle = this.getBattle();
-                if (battle) {
-                    battle.handleClientLeave(this)
+                if (this.battle) {
+                    this.battle.handleClientLeave(this)
                 }
 
                 this.battlesManager.sendRemoveBattlesScreen();

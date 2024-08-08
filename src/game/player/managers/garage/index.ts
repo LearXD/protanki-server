@@ -273,8 +273,7 @@ export class PlayerGarageManager {
     public closeGarage() {
         this.removeGarageScreen();
 
-        const battle = this.player.getBattle();
-        if (battle && this.player.tank.hasChangedEquipment()) {
+        if (this.player.battle && this.player.tank.hasChangedEquipment()) {
             if (this.player.getTank().isAlive()) {
                 this.player.getTank().scheduleSuicide()
             }
@@ -476,8 +475,7 @@ export class PlayerGarageManager {
 
     public handlePacket(packet: SimplePacket) {
         if (packet instanceof SendOpenGaragePacket) {
-            const battle = this.player.getBattle();
-            if (battle) {
+            if (this.player.battle) {
                 if (this.player.getLayoutState() === LayoutState.BATTLE) {
                     this.sendOpenGarage();
                     return true;
