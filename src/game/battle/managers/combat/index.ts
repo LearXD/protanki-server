@@ -41,44 +41,40 @@ export class BattleCombatManager {
         player.sendPacket(packet);
     }
 
-    public handleAttack(
+    public handleDamage(
         attacker: Player,
         target: Player,
-        turretDamage: number,
+        damage: number,
         modifiers: IDamageModifiers = { critical: false }
-    ): boolean {
+    ): number {
         if (attacker.tank.isVisible() && target.tank.isVisible()) {
             if (this.battle.isFriendlyFire() || target.tank.isEnemy(attacker.tank)) {
 
-                if (attacker.tank.hasEffect(Supply.DOUBLE_DAMAGE)) turretDamage *= 2;
-                if (target.tank.hasEffect(Supply.ARMOR)) turretDamage /= 2;
+                if (attacker.tank.hasEffect(Supply.DOUBLE_DAMAGE)) damage *= 2;
+                if (target.tank.hasEffect(Supply.ARMOR)) damage /= 2;
 
                 const resistance = target.tank.painting.getTurretResistance(attacker.tank.turret.getTurret());
-                if (resistance > 0) turretDamage *= 1 - (resistance / 100);
+                if (resistance > 0) damage *= 1 - (resistance / 100);
 
-                target.tank.damage(turretDamage, attacker, modifiers.critical);
-                return true;
+                return damage;
             }
+            return 0;
         }
-        return false;
+        return null;
     }
 
     public handleHeal(
         healer: Player,
         target: Player,
         heal: number
-    ): boolean {
+    ): number {
 
         if (healer.tank.isVisible() && target.tank.isVisible()) {
             if (!healer.tank.isEnemy(target.tank)) {
-                target.tank.heal
+                return heal
             }
         }
 
-        const health = target.tank.getHealth();
-        target.tank.setHealth(health + heal);
-
-        this.sendDamageIndicator(healer, target, heal, DamageIndicator.HEAL);
-        return true;
+        return null;
     }
 }

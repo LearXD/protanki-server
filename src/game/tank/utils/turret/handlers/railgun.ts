@@ -31,8 +31,8 @@ export class RailgunHandler extends TurretHandler {
         return damage / modifiers.order;
     }
 
-    public handleDamage(target: Player): void {
-
+    public handleDamaged(target: Player, damage: number, modifiers: IDamageModifiers) {
+        super.handleDamage(target, damage, modifiers);
     }
 
     public handlePacket(packet: SimplePacket): void {

@@ -23,8 +23,8 @@ export class BattlesManager {
         private readonly server: Server
     ) {
         this.createBattle('For Newbies', 'map_sandbox')
-        this.createBattle('For Newbies 2', 'map_noise', {
-            autoBalance: true,
+        this.createBattle('For Newbies 2', 'map_sandbox', {
+            autoBalance: false,
             battleMode: BattleMode.CTF,
             equipmentConstraintsMode: EquipmentConstraintsMode.NONE,
             friendlyFire: false,

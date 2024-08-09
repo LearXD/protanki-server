@@ -51,7 +51,18 @@ export abstract class TurretHandler {
 
     public abstract handlePacket(packet: SimplePacket): void
 
-    public abstract handleDamage(target: Player): void;
+    public abstract handleDamaged(target: Player, damage: number, modifiers: IDamageModifiers): void
+
+    public handleDamage(target: Player, damage: number, modifiers: IDamageModifiers): void {
+        Logger.debug(`Turret ${this.getName()} damaging ${target.getUsername()} with ${damage} damage`);
+
+        if (modifiers.enemy) {
+            return target.tank.damage(damage, this.tank.player, modifiers.critical);
+        }
+
+        return target.tank.heal(damage, this.tank.player);
+
+    }
 
     public splash(position: Vector3d, ignore: string[] = []): void {
         const battle = this.tank.battle;
@@ -71,31 +82,38 @@ export abstract class TurretHandler {
             }
 
             battle.combatManager
-                .handleAttack(this.tank.player, player, damage);
+                .handleDamage(this.tank.player, player, damage);
         }
     }
 
-    public attack(target: string, modifiers?: IDamageModifiers): boolean {
+    public attack(target: string, modifiers: IDamageModifiers = {}): boolean {
         const battle = this.tank.battle;
         const player = battle.playersManager.getPlayer(target);
 
         if (!player) return false;
 
+        modifiers.enemy = player.tank.isEnemy(this.tank);
+
         const distance = player.tank.getPosition().distanceTo(this.tank.getPosition());
         const damage = this.getDamage(distance, modifiers);
+        Logger.debug(`Turret ${this.getName()} attacking ${player.getUsername()} with ${damage} damage`);
 
-        if (damage <= 0) {
-            // idk `-`
+        if (damage === 0) {
             return true
         }
 
-        const damaged = battle.combatManager
-            .handleAttack(this.tank.player, player, damage, modifiers)
+        const damaged = modifiers.enemy ?
+            battle.combatManager.handleDamage(this.tank.player, player, damage, modifiers) :
+            battle.combatManager.handleHeal(this.tank.player, player, damage)
 
-        if (damaged) {
-            this.handleDamage(player)
+        if (damaged === null) {
+            return false;
         }
 
-        return damaged;
+        if (damaged > 0) {
+            this.handleDamaged(player, damaged, modifiers);
+        }
+
+        return true;
     }
 }

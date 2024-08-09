@@ -58,7 +58,9 @@ export class SmokyHandler extends TurretHandler {
         return damage
     }
 
-    public handleDamage(target: Player): void { }
+    public handleDamaged(target: Player, damage: number, modifiers: IDamageModifiers) {
+        super.handleDamage(target, damage, modifiers);
+    }
 
     public handlePacket(packet: SimplePacket): void {
         if (packet instanceof SendSmokyHitPointShotPacket) {

@@ -9,6 +9,7 @@ import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { Logger } from "../../../../../utils/logger";
 import { MathUtils } from "../../../../../utils/math";
 import { Player } from "../../../../player";
+import { IDamageModifiers } from "@/game/battle/managers/combat/types";
 
 export class RicochetHandler extends TurretHandler {
 
@@ -32,7 +33,9 @@ export class RicochetHandler extends TurretHandler {
         return damage
     }
 
-    public handleDamage(target: Player): void { }
+    public handleDamaged(target: Player, damage: number, modifiers: IDamageModifiers) {
+        super.handleDamage(target, damage, modifiers);
+    }
 
     public handlePacket(packet: SimplePacket): void {
         if (packet instanceof SendRicochetShotPacket) {

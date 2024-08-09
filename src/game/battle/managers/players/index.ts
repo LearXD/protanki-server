@@ -9,6 +9,8 @@ import { SetRemoveUserFromViewingBattlePacket } from "@/network/packets/set-remo
 import { SetAddUserOnTeamBattleCounterPacket } from "@/network/packets/set-add-user-on-team-battle-counter";
 import { SetRemoveUserFromTeamBattleCounterPacket } from "@/network/packets/set-remove-user-from-team-battle-counter";
 import { SetAddUserInfoOnViewingTeamBattlePacket } from "@/network/packets/set-add-user-info-on-viewing-team-battle";
+import { Team, TeamType } from "@/states/team";
+import { Tank } from "@/game/tank";
 
 export class BattlePlayersManager {
 
@@ -44,7 +46,16 @@ export class BattlePlayersManager {
         return this.players.get(username)
     }
 
-    public addPlayer(player: Player) {
+    public addPlayer(player: Player, team: TeamType = Team.NONE) {
+
+        player.battle = this.battle
+
+        if (team === Team.SPECTATOR) {
+            this.addSpectator(player)
+            return
+        }
+
+        player.tank = new Tank(player, this.battle, team)
         this.players.set(player.getUsername(), player)
 
         if (this.battle.getMode() === BattleMode.DM) {
@@ -82,6 +93,13 @@ export class BattlePlayersManager {
     }
 
     public removePlayer(player: Player) {
+
+        const isSpectator = this.hasSpectator(player)
+        if (isSpectator) {
+            this.removeSpectator(player)
+            return
+        }
+
         this.players.delete(player.getUsername());
 
         if (this.battle.getMode() === BattleMode.DM) {
@@ -121,15 +139,16 @@ export class BattlePlayersManager {
         }
     }
 
-    public broadcastTankData(data: IUserTankResourcesData) {
+    public broadcastTankData(data: Exclude<IUserTankResourcesData, 'state_null'>) {
         for (const player of this.getAll()) {
-            if (player.getUsername() !== data.tank_id) {
-                this.sendTankData({ ...data, state_null: false }, player)
-            }
+            this.sendTankData(
+                { ...data, state_null: player.getUsername() !== data.tank_id },
+                player
+            )
         }
     }
 
-    public sendTankData(data: IUserTankResourcesData, player: Player) {
+    private sendTankData(data: IUserTankResourcesData, player: Player) {
         const packet = new SetUserTankResourcesDataPacket();
         packet.data = data;
         player.sendPacket(packet);

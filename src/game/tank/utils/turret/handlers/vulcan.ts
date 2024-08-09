@@ -9,6 +9,7 @@ import { SetStopVulcanShotPacket } from "../../../../../network/packets/set-stop
 import { ITarget, SetVulcanShotPacket } from "../../../../../network/packets/set-vulcan-shot";
 import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { Player } from "../../../../player";
+import { IDamageModifiers } from "@/game/battle/managers/combat/types";
 
 export class VulcanHandler extends TurretHandler {
 
@@ -31,8 +32,8 @@ export class VulcanHandler extends TurretHandler {
         return damage;
     }
 
-    public handleDamage(target: Player): void {
-
+    public handleDamaged(target: Player, damage: number, modifiers: IDamageModifiers) {
+        super.handleDamage(target, damage, modifiers);
     }
 
     public handlePacket(packet: SimplePacket): void {

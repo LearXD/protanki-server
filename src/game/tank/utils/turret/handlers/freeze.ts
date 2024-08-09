@@ -7,6 +7,7 @@ import { SetStartFreezeShotPacket } from "../../../../../network/packets/set-sta
 import { SetStopFreezeShotPacket } from "../../../../../network/packets/set-stop-freeze-shot";
 import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { Player } from "../../../../player";
+import { IDamageModifiers } from "@/game/battle/managers/combat/types";
 
 export class FreezeHandler extends TurretHandler {
 
@@ -27,7 +28,9 @@ export class FreezeHandler extends TurretHandler {
         return damage;
     }
 
-    public handleDamage(target: Player): void {
+    public handleDamaged(target: Player, damage: number, modifiers: IDamageModifiers) {
+        super.handleDamage(target, damage, modifiers);
+
         const temperature = target.tank.getTemperature();
         target.tank.setTemperature(temperature - 0.1);
     }

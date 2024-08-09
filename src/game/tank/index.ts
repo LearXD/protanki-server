@@ -249,7 +249,7 @@ export class Tank {
             const data = this.getData();
 
             this.sendRemoveTank();
-            this.battle.playersManager.sendTankData(data, this.player);
+            // this.battle.playersManager.sendTankData(data, this.player);
             this.battle.playersManager.broadcastTankData(data);
             this.sendChangeEquipment();
         }
@@ -385,7 +385,7 @@ export class Tank {
         this.player.sendPacket(packet);
 
         this.battle.taskManager.scheduleTask(() => {
-            this.sendRespawnDelay(respawnDelay), delay * TimeType.MILLISECONDS, this.player.getUsername()
+            this.sendRespawnDelay(respawnDelay), delay, this.player.getUsername()
         })
     }
 

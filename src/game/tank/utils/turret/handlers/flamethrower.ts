@@ -8,6 +8,7 @@ import { SetStopFlameShotPacket } from "../../../../../network/packets/set-stop-
 import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { Logger } from "../../../../../utils/logger";
 import { Player } from "../../../../player";
+import { IDamageModifiers } from "@/game/battle/managers/combat/types";
 
 export class FlamethrowerHandler extends TurretHandler {
 
@@ -37,7 +38,9 @@ export class FlamethrowerHandler extends TurretHandler {
         return damage;
     }
 
-    public handleDamage(target: Player): void {
+    public handleDamaged(target: Player, damage: number, modifiers: IDamageModifiers) {
+        super.handleDamage(target, damage, modifiers);
+
         const temperatureLimit = this.getTemperatureLimit();
         const temperature = target.tank.getTemperature();
 

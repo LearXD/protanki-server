@@ -6,6 +6,7 @@ import { ITarget, SetHammerShotPacket } from "../../../../../network/packets/set
 import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { Vector3d } from "../../../../../utils/vector-3d";
 import { Player } from "../../../../player";
+import { IDamageModifiers } from "@/game/battle/managers/combat/types";
 
 export class HammerHandler extends TurretHandler {
 
@@ -22,7 +23,9 @@ export class HammerHandler extends TurretHandler {
         return this.getDamagePerPeriod()
     }
 
-    public handleDamage(target: Player): void { }
+    public handleDamaged(target: Player, damage: number, modifiers: IDamageModifiers) {
+        super.handleDamage(target, damage, modifiers);
+    }
 
     public handlePacket(packet: SimplePacket): void {
         if (packet instanceof SendHammerShotPacket) {

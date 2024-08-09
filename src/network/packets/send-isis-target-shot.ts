@@ -8,7 +8,7 @@ export class SendIsisTargetShotPacket extends Packet {
 
     public time: number;
     public target: string;
-    public damaging: number;
+    public incarnation: number;
     public position: Vector3d;
 
     constructor(bytes?: ByteArray) {
@@ -20,13 +20,13 @@ export class SendIsisTargetShotPacket extends Packet {
 
         this.time = bytes.readInt();
         this.target = bytes.readString();
-        this.damaging = bytes.readShort()
+        this.incarnation = bytes.readShort()
         this.position = bytes.readVector3d();
 
         return {
             time: this.time,
             target: this.target,
-            damaging: this.damaging,
+            incarnation: this.incarnation,
             position: this.position
         }
     }
@@ -36,7 +36,7 @@ export class SendIsisTargetShotPacket extends Packet {
 
         bytes.writeInt(this.time);
         bytes.writeString(this.target);
-        bytes.writeShort(this.damaging);
+        bytes.writeShort(this.incarnation);
         bytes.writeVector3d(this.position);
 
         return bytes;

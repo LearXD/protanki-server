@@ -151,19 +151,10 @@ export class Battle {
         }
 
         /** ADD PLAYER */
-        player.battle = this
-        player.tank = new Tank(player, this, team)
-
         player.setLayoutState(LayoutState.BATTLE)
+        this.playersManager.addPlayer(player, team);
 
-        if (isSpectator) {
-            this.playersManager.addSpectator(player)
-        }
-
-        if (!isSpectator) {
-            if (!this.isRunning()) this.start()
-            this.playersManager.addPlayer(player);
-        }
+        if (!isSpectator && !this.running) this.start()
 
         /** SEND DATA & RESOURCES */
         await this.map.sendResources(player)
@@ -172,7 +163,7 @@ export class Battle {
 
         /** SEND PROPERTIES & STATISTICS */
         this.modeManager.sendBattleData(player, isSpectator)
-        this.modeManager.sendUsersProperties(player) // SetTeamBattleUsersPropertiesPacket
+        this.modeManager.sendUsersProperties(player)
         if (!isSpectator) {
             this.modeManager.broadcastAddUserProperties(player)
             this.modeManager.broadcastUserStats(player)
@@ -192,9 +183,7 @@ export class Battle {
         /** SEND TANKS DATA */
         this.playersManager.sendTanksData(player)
         if (!isSpectator) {
-            const tankData = player.tank.getData();
-            this.playersManager.broadcastTankData(tankData)
-            this.playersManager.sendTankData(tankData, player)
+            this.playersManager.broadcastTankData(player.tank.getData())
         }
 
         /** SEND BATTLE EFFECTS */
@@ -224,12 +213,9 @@ export class Battle {
 
             this.minesManager.removePlayerMines(player)
             this.modeManager.broadcastRemovePlayer(player)
-            this.playersManager.removePlayer(player)
         }
 
-        if (this.playersManager.hasSpectator(player)) {
-            this.playersManager.removeSpectator(player)
-        }
+        this.playersManager.removePlayer(player)
 
         this.sendRemoveBattleScreen(player)
         this.taskManager.unregisterOwnerTasks(player.getUsername())
@@ -296,7 +282,7 @@ export class Battle {
     }
 
     public toBattleListItem(): IBattleList {
-        return {
+        const item: IBattleList = {
             battleId: this.getBattleId(),
             battleMode: this.data.battleMode,
             map: this.map.getId(),
@@ -309,9 +295,19 @@ export class Battle {
             preview: this.map.getPreview(),
             parkourMode: this.isParkourMode(),
             equipmentConstraintsMode: this.getEquipmentConstraintsMode(),
-            suspicionLevel: SuspiciousLevel.NONE,
-            users: this.playersManager.getPlayers().map(player => player.getUsername())
+            suspicionLevel: SuspiciousLevel.NONE
         }
+
+        if (this.getMode() === BattleMode.DM) {
+            item.users = this.playersManager.getPlayers().map(player => player.getUsername())
+        }
+
+        if (this.getMode() !== BattleMode.DM) {
+            item.usersBlue = this.playersManager.getPlayers().filter(player => player.tank.team === Team.BLUE).map(player => player.getUsername())
+            item.usersRed = this.playersManager.getPlayers().filter(player => player.tank.team === Team.RED).map(player => player.getUsername())
+        }
+
+        return item
     }
 
     public broadcastPacket(packet: SimplePacket, ignore: string[] = []) {

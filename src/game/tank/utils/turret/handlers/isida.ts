@@ -9,15 +9,19 @@ import { SetStopIsisShotPacket } from "../../../../../network/packets/set-stop-i
 import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { IsidaState } from "../../../../../states/isida-state";
 import { Player } from "../../../../player";
+import { Vector3d } from "@/utils/vector-3d";
+import { IDamageModifiers } from "@/game/battle/managers/combat/types";
 
 export class IsidaHandler extends TurretHandler {
+
+    public lastShot: SendIsisTargetShotPacket = null;
 
     public getTurret() {
         return Turret.ISIDA;
     }
 
     public getHealingPerPeriod(): number {
-        const healing = this.getItemSubProperty("SIS_HEALING_PER_SECOND", "ISIS_HEALING_PER_PERIOD")
+        const healing = this.getItemSubProperty("ISIS_HEALING_PER_SECOND", "ISIS_HEALING_PER_PERIOD")
         return parseInt(healing.value) / 2;
     }
 
@@ -26,34 +30,43 @@ export class IsidaHandler extends TurretHandler {
         return parseInt(healing.value) / 2;
     }
 
-    public getDamage(): number {
-        return this.getDamagePerPeriod();
+    public getDamage(distance: number, modifiers: IDamageModifiers): number {
+        if (modifiers.enemy) {
+            return this.getDamagePerPeriod();
+        }
+        return this.getHealingPerPeriod();
     }
 
-    public handleDamage(target: Player): void { }
+    public handleDamaged(target: Player, damage: number, modifiers: IDamageModifiers) {
+
+        if (!this.lastShot) {
+            return;
+        }
+
+        const pk = new SetIsisTargetShotPacket();
+        pk.shooter = this.tank.player.getUsername();
+        pk.state = modifiers.enemy ? IsidaState.DAMAGING : IsidaState.HEALING;
+        pk.target = {
+            direction: null,
+            position: this.lastShot.position,
+            byte_1: 0,
+            target: target.getUsername()
+        }
+
+        this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+
+        super.handleDamage(target, damage, modifiers);
+    }
 
     /** 
     static SEND_ISIS_SHOT_POSITION = 244072998;
      */
 
     public handlePacket(packet: SimplePacket): void {
+
         if (packet instanceof SendIsisTargetShotPacket) {
-
-            const attacked = this.attack(packet.target);
-
-            if (attacked) {
-                const pk = new SetIsisTargetShotPacket();
-                pk.shooter = this.tank.player.getUsername();
-                pk.state = packet.damaging ? IsidaState.DAMAGING : IsidaState.HEALING;
-                pk.target = {
-                    direction: null,
-                    position: packet.position,
-                    byte_1: 0,
-                    target: packet.target
-                }
-
-                this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
-            }
+            this.lastShot = packet;
+            this.attack(packet.target);
         }
 
         if (packet instanceof SendStartIsisShotPacket) {

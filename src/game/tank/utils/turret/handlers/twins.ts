@@ -9,6 +9,7 @@ import { SetTwinsShotPacket } from "../../../../../network/packets/set-twins-sho
 import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { MathUtils } from "../../../../../utils/math";
 import { Player } from "../../../../player";
+import { IDamageModifiers } from "@/game/battle/managers/combat/types";
 
 export class TwinsHandler extends TurretHandler {
 
@@ -32,7 +33,9 @@ export class TwinsHandler extends TurretHandler {
         return damage
     }
 
-    public handleDamage(target: Player): void { }
+    public handleDamaged(target: Player, damage: number, modifiers: IDamageModifiers) {
+        super.handleDamage(target, damage, modifiers);
+    }
 
     public handlePacket(packet: SimplePacket): void {
         if (packet instanceof SendTwinsShotPacket) {

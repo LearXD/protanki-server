@@ -184,6 +184,16 @@ export class PlayerData {
                 mine: 100
             }
         }
+
+        if (this.username === "TheUnknown") {
+            this.garage.turrets.map(turret => {
+                turret.level = 3
+            })
+
+            this.garage.hulls.map(hull => {
+                hull.level = 3
+            })
+        }
     }
 
     public isAdmin() {
