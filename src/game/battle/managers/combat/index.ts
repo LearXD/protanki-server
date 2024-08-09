@@ -47,53 +47,38 @@ export class BattleCombatManager {
         turretDamage: number,
         modifiers: IDamageModifiers = { critical: false }
     ): boolean {
+        if (attacker.tank.isVisible() && target.tank.isVisible()) {
+            if (this.battle.isFriendlyFire() || target.tank.isEnemy(attacker.tank)) {
 
-        if (!(target.tank.isVisible() && attacker.tank.isVisible())) {
-            return false;
+                if (attacker.tank.hasEffect(Supply.DOUBLE_DAMAGE)) turretDamage *= 2;
+                if (target.tank.hasEffect(Supply.ARMOR)) turretDamage /= 2;
+
+                const resistance = target.tank.painting.getTurretResistance(attacker.tank.turret.getTurret());
+                if (resistance > 0) turretDamage *= 1 - (resistance / 100);
+
+                target.tank.damage(turretDamage, attacker, modifiers.critical);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public handleHeal(
+        healer: Player,
+        target: Player,
+        heal: number
+    ): boolean {
+
+        if (healer.tank.isVisible() && target.tank.isVisible()) {
+            if (!healer.tank.isEnemy(target.tank)) {
+                target.tank.heal
+            }
         }
 
-        const protection = target.tank.hull.getProtection();
         const health = target.tank.getHealth();
+        target.tank.setHealth(health + heal);
 
-        if (attacker.tank.hasEffect(Supply.DOUBLE_DAMAGE)) {
-            Logger.debug(`Has double damage`);
-            turretDamage *= 2;
-        }
-
-        if (target.tank.hasEffect(Supply.ARMOR)) {
-            Logger.debug(`Has damage reduction`);
-            turretDamage /= 2;
-        }
-
-        const resistance = target.tank.painting.getTurretResistance(attacker.tank.turret.getTurret());
-        if (resistance > 0) {
-            Logger.debug(`Has resistance to ${attacker.tank.turret.getTurret()}. Resistance: ${resistance}%`);
-            turretDamage *= 1 - (resistance / 100);
-        }
-
-        let damage = BattleCombatManager.parseDamageValue(turretDamage, protection)
-        target.tank.setHealth(health - damage);
-
-        const isDead = target.tank.getHealth() <= BattleCombatManager.DEATH_HISTERESES;
-
-        Logger.debug('')
-        Logger.debug(`Attacker: ${attacker.getUsername()} attacked ${target.getUsername()}`);
-        Logger.debug(`Damage: ${turretDamage} (${damage})`);
-        Logger.debug(`Target health: ${health}`);
-        Logger.debug(`New health: ${target.tank.getHealth()}`);
-        Logger.debug(`Protection: ${protection}`);
-        Logger.debug(`${attacker.getUsername()} position ${attacker.tank.getPosition().toString()}`);
-        Logger.debug(`${target.getUsername()} position ${target.tank.getPosition().toString()}`);
-        Logger.debug('')
-
-        // TODO: check this if
-        if (isDead) {
-            target.tank.kill(attacker)
-            this.sendDamageIndicator(attacker, target, BattleCombatManager.parseProtectionValue(protection, health), DamageIndicator.FATAL);
-            return true;
-        }
-
-        this.sendDamageIndicator(attacker, target, turretDamage, modifiers.critical ? DamageIndicator.CRITICAL : DamageIndicator.NORMAL);
+        this.sendDamageIndicator(healer, target, heal, DamageIndicator.HEAL);
         return true;
     }
 }

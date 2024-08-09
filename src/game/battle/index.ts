@@ -53,12 +53,12 @@ export class Battle {
     /** Managers */
     public readonly modeManager: BattleModeManager = BattleUtils.getBattleManager(this)
     public readonly collisionManager: BattleCollisionsManager = new BattleCollisionsManager(this)
-    public readonly damageManager: BattleCombatManager = new BattleCombatManager(this)
+    public readonly combatManager: BattleCombatManager = new BattleCombatManager(this)
     public readonly playersManager: BattlePlayersManager = new BattlePlayersManager(this)
     public readonly viewersManager: BattleViewersManager = new BattleViewersManager(this)
     public readonly chatManager: BattleChatManager = new BattleChatManager(this)
     public readonly resourcesManager: BattleResourcesManager = new BattleResourcesManager(this)
-    public readonly minesManager: BattleMinesManager = new BattleMinesManager()
+    public readonly minesManager: BattleMinesManager = new BattleMinesManager(this)
     public readonly effectsManager: BattleEffectsManager = new BattleEffectsManager(this)
     public readonly boxesManager: BattleBoxesManager = new BattleBoxesManager(this)
     public readonly taskManager: BattleTaskManager = new BattleTaskManager()
@@ -222,6 +222,7 @@ export class Battle {
                 player.tank.sendRemoveTank(true);
             }
 
+            this.minesManager.removePlayerMines(player)
             this.modeManager.broadcastRemovePlayer(player)
             this.playersManager.removePlayer(player)
         }

@@ -23,6 +23,7 @@ import { Client } from "../client";
 import { PlayerData } from "./utils/data";
 import { PlayerPacketHandler } from "./handlers/packet";
 import { ResourceType } from "../../server/managers/resources/types";
+import { BattleMode } from "@/states/battle-mode";
 
 export class Player extends Client {
 

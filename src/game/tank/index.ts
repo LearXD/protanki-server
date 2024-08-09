@@ -46,8 +46,11 @@ import { ITankEffect } from "./types";
 import { IEffect } from "@/network/packets/set-battle-users-effects";
 import { BattleCombatManager } from "../battle/managers/combat";
 import { Painting } from "./utils/painting";
+import { DamageIndicator } from "@/states/damage-indicator";
 
 export class Tank {
+
+    public static readonly MAX_HEALTH = 10000;
 
     public incarnation: number = 0;
 
@@ -83,6 +86,10 @@ export class Tank {
         public team: TeamType = Team.NONE
     ) {
         this.updateProperties()
+    }
+
+    public getSessionTime() {
+        return Date.now() - this.battleStartedSession
     }
 
     public updateProperties() {
@@ -149,8 +156,8 @@ export class Tank {
         return this.alive && this.visible
     }
 
-    public getSessionTime() {
-        return Date.now() - this.battleStartedSession
+    public isEnemy(tank: Tank) {
+        return this.battle.getMode() === BattleMode.DM || tank.team !== this.team;
     }
 
     public sendLatency() {
@@ -261,6 +268,49 @@ export class Tank {
         this.battle.broadcastPacket(setSpawnTankPacket);
     }
 
+    public heal(value: number, healer: Player = this.player) {
+
+        if (this.health >= Tank.MAX_HEALTH) {
+            return;
+        }
+
+        this.setHealth(this.health + BattleCombatManager.parseDamageValue(value, this.hull.getProtection()));
+        this.battle.combatManager.sendDamageIndicator(healer, this.player, value, DamageIndicator.HEAL);
+    }
+
+    public damage(value: number, attacker: Player, isCritical: boolean = false) {
+
+        if (!this.isVisible() || !this.isAlive()) {
+            return
+        }
+
+        const damage = BattleCombatManager.parseDamageValue(value, this.hull.getProtection())
+        const health = this.health;
+        this.setHealth(this.health - damage);
+
+        Logger.debug('')
+        Logger.debug(`Attacker: ${attacker.getUsername()} attacked ${this.player.getUsername()}`);
+        Logger.debug(`Damage: ${value} (${damage})`);
+        Logger.debug(`Target health: ${health}`);
+        Logger.debug(`New health: ${this.health}`);
+        Logger.debug(`Protection: ${this.hull.getProtection()}`);
+        Logger.debug(`${attacker.getUsername()} position ${attacker.tank.getPosition().toString()}`);
+        Logger.debug(`${this.player.getUsername()} position ${this.getPosition().toString()}`);
+        Logger.debug('')
+
+        const isDead = this.health <= BattleCombatManager.DEATH_HISTERESES
+
+        this.battle.combatManager.sendDamageIndicator(
+            attacker, this.player,
+            isDead ? BattleCombatManager.parseProtectionValue(this.hull.getProtection(), health) : value,
+            isDead ? DamageIndicator.FATAL : isCritical ? DamageIndicator.CRITICAL : DamageIndicator.NORMAL
+        );
+
+        if (isDead) {
+            this.kill(attacker)
+        }
+    }
+
     public hasEffect(supply: SupplyType) {
         return this.effects.find(effect => effect.type === supply)
     }
@@ -304,14 +354,10 @@ export class Tank {
 
             switch (supply) {
                 case Supply.HEALTH: {
-
-                    const health = BattleCombatManager.parseDamageValue(30, this.hull.getProtection())
-                    const rounds = Math.round(10000 / health)
-
-                    Logger.debug(`Adding health effect to ${this.player.getUsername()} with ${health} (${rounds} rounds)`)
+                    const rounds = Math.round(this.hull.getProtection() / 30)
 
                     for (let i = 0; i < rounds; i++) {
-                        this.battle.taskManager.scheduleTask(() => this.setHealth(this.health + health), i * 1000, this.player.getUsername())
+                        this.battle.taskManager.scheduleTask(() => this.heal(30), i * 1000, this.player.getUsername())
                     }
 
                     duration = rounds * 1000;
@@ -397,13 +443,15 @@ export class Tank {
     }
 
     public handleDeath() {
+        this.battle.minesManager.removePlayerMines(this.player)
+        this.battle.taskManager.unregisterOwnerTasks(this.player.getUsername())
+
         this.health = 0;
 
         this.alive = false;
         this.visible = false;
 
         this.battle.modeManager.handleDeath(this.player)
-        this.battle.taskManager.unregisterOwnerTasks(this.player.getUsername())
     }
 
     public handleSuicide() {
@@ -426,6 +474,7 @@ export class Tank {
 
         switch (item) {
             case Supply.MINE: {
+                this.battle.minesManager.placeMine(this.player)
                 break;
             }
             default: {

@@ -70,7 +70,7 @@ export abstract class TurretHandler {
                 continue;
             }
 
-            battle.damageManager
+            battle.combatManager
                 .handleAttack(this.tank.player, player, damage);
         }
     }
@@ -89,7 +89,7 @@ export abstract class TurretHandler {
             return true
         }
 
-        const damaged = battle.damageManager
+        const damaged = battle.combatManager
             .handleAttack(this.tank.player, player, damage, modifiers)
 
         if (damaged) {

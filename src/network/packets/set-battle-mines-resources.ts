@@ -47,7 +47,7 @@ export class SetBattleMinesResourcesPacket extends Packet {
 
         for (let i = 0; i < length; i++) {
             this.mines[i] = {
-                activated: true, // já veio true
+                activated: true,
                 mineId: bytes.readString(),
                 ownerId: bytes.readString(),
                 position: bytes.readVector3d()
