@@ -42,7 +42,7 @@ export class Flag extends BattleObject {
 
         if (player.tank.team === this.team) {
             if (this.state === FlagState.DROPPED) {
-                this.manager.handleReturnFlag(player, this);
+                this.manager.handleReturnFlag(this, player);
             }
 
             if (this.state === FlagState.AT_BASE) {

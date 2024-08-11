@@ -6,6 +6,7 @@ import { BonusCommand } from "./commands/bonus";
 import { Logger } from "@/utils/logger";
 import { AddCryCommand } from "./commands/addcry";
 import { AddExpCommand } from "./commands/addexp";
+import { DevCommand } from "./commands/dev";
 
 export class CommandsManager {
 
@@ -20,6 +21,7 @@ export class CommandsManager {
         this.registerCommand(new BonusCommand())
         this.registerCommand(new AddCryCommand())
         this.registerCommand(new AddExpCommand())
+        this.registerCommand(new DevCommand())
     }
 
     public registerCommand(command: Command): void {
@@ -69,7 +71,7 @@ export class CommandsManager {
             return true;
         }
 
-        Logger.debug(`Command ${command} executed by ${sender instanceof Player ? sender.getUsername() : 'Server'}`);
+        Logger.debug(`Command ${text} executed by ${sender instanceof Player ? sender.getUsername() : 'Server'}`);
         instance.execute(sender, args);
         return true;
     }

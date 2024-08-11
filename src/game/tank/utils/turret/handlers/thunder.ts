@@ -28,11 +28,11 @@ export class ThunderHandler extends TurretHandler {
         }
     }
 
-    public getDamage(distance: number, modifiers: IDamageModifiers = { splash: false }): number {
+    public getDamage(modifiers: IDamageModifiers = { splash: false }): number {
 
         if (modifiers.splash) {
 
-            if (distance >= 1000) {
+            if (modifiers.distance >= 1000) {
                 return 0;
             }
 

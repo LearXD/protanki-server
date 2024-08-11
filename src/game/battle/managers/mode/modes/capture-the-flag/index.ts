@@ -10,6 +10,7 @@ import { SetFlagDroppedPacket } from "@/network/packets/set-flag-dropped";
 import { SetCaptureFlagPacket } from "@/network/packets/set-capture-flag";
 import { FlagState } from "./types";
 import { MathUtils } from "@/utils/math";
+import { RayHit } from "@/game/map/managers/collision/utils/ray-hit";
 
 export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
 
@@ -105,11 +106,26 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
         flag.setState(FlagState.DROPPED)
         flag.setCarrier(null)
 
-        const position = player.tank.getPosition().add(new Vector3d(0, -80, 0));
-        flag.setPosition(position)
+        // const position = player.tank.getPosition()
+        const hit = new RayHit()
+        const found = this.battle.getMap().collisionManager.raycastStatic(
+            player.tank.getPosition().swap(),
+            Vector3d.DOWN,
+            16,
+            10000000000,
+            null,
+            hit
+        );
+
+        if (!found) {
+            this.handleReturnFlag(flag)
+            return
+        }
+
+        flag.setPosition(hit.position.swap())
 
         const packet = new SetFlagDroppedPacket();
-        packet.position = position;
+        packet.position = flag.position;
         packet.team = team;
 
         this.battle.broadcastPacket(packet);
@@ -117,12 +133,12 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
         this.battle.taskManager.scheduleTask(() => this.battle.collisionManager.addObject(flag), 1000)
     }
 
-    public handleReturnFlag(player: Player, flag: Flag) {
+    public handleReturnFlag(flag: Flag, player?: Player) {
         this.initFlag(flag.team)
 
         const packet = new SetFlagReturnedPacket();
         packet.team = flag.team;
-        packet.tank = player.getUsername();
+        packet.tank = player ? player.getUsername() : null;
 
         this.battle.broadcastPacket(packet);
     }

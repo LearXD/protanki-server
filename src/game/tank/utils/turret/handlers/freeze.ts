@@ -23,7 +23,7 @@ export class FreezeHandler extends TurretHandler {
         return parseInt(damage.value) / 2
     }
 
-    public getDamage(distance: number): number {
+    public getDamage(): number {
         const damage = this.getDamagePerPeriod();
         return damage;
     }

@@ -9,12 +9,13 @@ import { SetStopIsisShotPacket } from "../../../../../network/packets/set-stop-i
 import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { IsidaState } from "../../../../../states/isida-state";
 import { Player } from "../../../../player";
-import { Vector3d } from "@/utils/vector-3d";
 import { IDamageModifiers } from "@/game/battle/managers/combat/types";
+import { SendIsisShotPositionPacket } from "@/network/packets/send-isis-shot-position";
 
 export class IsidaHandler extends TurretHandler {
 
-    public lastShot: SendIsisTargetShotPacket = null;
+    public startedAt: number = 0;
+    public targetShot: SendIsisTargetShotPacket = null;
 
     public getTurret() {
         return Turret.ISIDA;
@@ -22,60 +23,66 @@ export class IsidaHandler extends TurretHandler {
 
     public getHealingPerPeriod(): number {
         const healing = this.getItemSubProperty("ISIS_HEALING_PER_SECOND", "ISIS_HEALING_PER_PERIOD")
-        return parseInt(healing.value) / 2;
+        return healing ? parseInt(healing.value) : 0;
     }
 
     public getDamagePerPeriod(): number {
-        const healing = this.getItemSubProperty("ISIS_DAMAGE", "DAMAGE_PER_PERIOD")
-        return parseInt(healing.value) / 2;
+        const damage = this.getItemSubProperty("ISIS_DAMAGE", "DAMAGE_PER_PERIOD")
+        return damage ? parseInt(damage.value) : 0;
     }
 
-    public getDamage(distance: number, modifiers: IDamageModifiers): number {
+    public getDamage(modifiers: IDamageModifiers): number {
         if (modifiers.enemy) {
-            return this.getDamagePerPeriod();
+            return this.getDamagePerPeriod() / 4;
         }
-        return this.getHealingPerPeriod();
+        return this.getHealingPerPeriod() / 4;
     }
 
     public handleDamaged(target: Player, damage: number, modifiers: IDamageModifiers) {
-
-        if (!this.lastShot) {
-            return;
-        }
-
-        const pk = new SetIsisTargetShotPacket();
-        pk.shooter = this.tank.player.getUsername();
-        pk.state = modifiers.enemy ? IsidaState.DAMAGING : IsidaState.HEALING;
-        pk.target = {
-            direction: null,
-            position: this.lastShot.position,
-            byte_1: 0,
-            target: target.getUsername()
-        }
-
-        this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
-
         super.handleDamage(target, damage, modifiers);
     }
-
-    /** 
-    static SEND_ISIS_SHOT_POSITION = 244072998;
-     */
 
     public handlePacket(packet: SimplePacket): void {
 
         if (packet instanceof SendIsisTargetShotPacket) {
-            this.lastShot = packet;
-            this.attack(packet.target);
+
+            this.targetShot = packet;
+
+            if (!this.startedAt) {
+                this.startedAt = Date.now()
+            }
+
+            const target = this.tank.battle.playersManager.getPlayer(packet.target);
+
+            if (target) {
+                const pk = new SetIsisTargetShotPacket();
+                pk.shooter = this.tank.player.getUsername();
+                pk.state = target.tank.isEnemy(this.tank) ? IsidaState.DAMAGING : IsidaState.HEALING;
+                pk.target = {
+                    direction: null,
+                    position: packet.position,
+                    hits: 0,
+                    target: target.getUsername()
+                }
+                this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            }
+        }
+
+        if (packet instanceof SendIsisShotPositionPacket) {
+            if (this.startedAt && this.targetShot) {
+                this.attack(this.targetShot.target);
+            }
         }
 
         if (packet instanceof SendStartIsisShotPacket) {
+            this.startedAt = Date.now()
             const pk = new SetStartIsisShotPacket();
             pk.shooter = this.tank.player.getUsername();
             this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
         }
 
         if (packet instanceof SendStopIsisShotPacket) {
+            this.startedAt = 0;
             const pk = new SetStopIsisShotPacket();
             pk.shooter = this.tank.player.getUsername();
             this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);

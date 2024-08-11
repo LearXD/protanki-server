@@ -25,7 +25,7 @@ export class RailgunHandler extends TurretHandler {
         }
     }
 
-    public getDamage(distance: number, modifiers: IDamageModifiers): number {
+    public getDamage(modifiers: IDamageModifiers): number {
         const range = this.getDamageRange()
         const damage = MathUtils.randomInt(range.min, range.max);
         return damage / modifiers.order;

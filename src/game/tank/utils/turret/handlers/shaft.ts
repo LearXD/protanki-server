@@ -46,10 +46,7 @@ export class ShaftHandler extends TurretHandler {
         return parseInt(damage.value)
     }
 
-    public getDamage(
-        distance: number,
-        modifiers: IDamageModifiers = { order: 1 }
-    ): number {
+    public getDamage(modifiers: IDamageModifiers = { order: 1 }): number {
         if (this.aiming) {
             const damage = this.getMaxAimingDamage();
             return damage / modifiers.order;

@@ -27,7 +27,7 @@ export class RicochetHandler extends TurretHandler {
         }
     }
 
-    public getDamage(distance: number): number {
+    public getDamage(): number {
         const range = this.getDamageRange()
         const damage = MathUtils.randomInt(range.min, range.max);
         return damage

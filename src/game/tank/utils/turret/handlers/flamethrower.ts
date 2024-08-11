@@ -6,7 +6,6 @@ import { SendStopFlameShotPacket } from "../../../../../network/packets/send-sto
 import { SetStartFlameShotPacket } from "../../../../../network/packets/set-start-flame-shot";
 import { SetStopFlameShotPacket } from "../../../../../network/packets/set-stop-flame-shot";
 import { SimplePacket } from "../../../../../network/packets/simple-packet";
-import { Logger } from "../../../../../utils/logger";
 import { Player } from "../../../../player";
 import { IDamageModifiers } from "@/game/battle/managers/combat/types";
 
@@ -32,7 +31,7 @@ export class FlamethrowerHandler extends TurretHandler {
         return parseInt(limit.value)
     }
 
-    public getDamage(distance: number): number {
+    public getDamage(): number {
         const damage = this.getDamagePerSecond();
 
         return damage;
@@ -48,9 +47,7 @@ export class FlamethrowerHandler extends TurretHandler {
             return;
         }
 
-        target.tank.setTemperature(
-            temperature + 1 > temperatureLimit ? temperatureLimit : temperature + 1
-        )
+        target.tank.setTemperature(temperature + 0.1)
     }
 
     public handlePacket(packet: SimplePacket): void {

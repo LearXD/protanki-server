@@ -48,6 +48,8 @@ import { BattleCombatManager } from "../battle/managers/combat";
 import { Painting } from "./utils/painting";
 import { DamageIndicator } from "@/states/damage-indicator";
 
+import ws from "ws";
+
 export class Tank {
 
     public static readonly MAX_HEALTH = 10000;
@@ -80,11 +82,41 @@ export class Tank {
 
     public battleStartedSession: number = Date.now()
 
+    public debuggerWs: ws.Server
+
     public constructor(
         public readonly player: Player,
         public readonly battle: Battle,
         public team: TeamType = Team.NONE
     ) {
+        this.debuggerWs = new ws.Server({ port: 8080 })
+
+        this.debuggerWs.on('connection', (client) => {
+            client.on('message', (message) => {
+                const data = JSON.parse(message.toString())
+
+                if (data.type === 'orientation') {
+                    Logger.debug('Orientation', data)
+                    const axis = data.axis
+                    const value = data.value
+
+                    const packet = new SetMoveTankPacket();
+                    packet.angularVelocity = new Vector3d(0, 0, 0);
+                    packet.control = 0;
+                    packet.impulse = new Vector3d(0, 0, 0);
+                    packet.orientation = new Vector3d(
+                        axis === 'x' ? value : this.orientation.x,
+                        axis === 'y' ? value : this.orientation.y,
+                        axis === 'z' ? value : this.orientation.z
+                    );
+                    packet.position = this.position;
+                    packet.tankId = this.player.getUsername();
+
+                    this.orientation = packet.orientation
+                    this.player.sendPacket(packet);
+                }
+            })
+        })
         this.updateProperties()
     }
 
@@ -130,6 +162,16 @@ export class Tank {
 
     public setPosition(position: Vector3d) {
         this.position = position
+
+        const packet = new SetMoveTankPacket();
+        packet.angularVelocity = new Vector3d(0, 0, 0);
+        packet.control = 0;
+        packet.impulse = new Vector3d(0, 0, 0);
+        packet.tankId = this.player.getUsername();
+        packet.position = position;
+        packet.orientation = this.orientation;
+
+        this.battle.broadcastPacket(packet)
     }
 
     public updateTurret() {
@@ -384,9 +426,9 @@ export class Tank {
         packet.delay = delay;
         this.player.sendPacket(packet);
 
-        this.battle.taskManager.scheduleTask(() => {
-            this.sendRespawnDelay(respawnDelay), delay, this.player.getUsername()
-        })
+        this.battle.taskManager.scheduleTask(
+            () => this.sendRespawnDelay(respawnDelay), delay, this.player.getUsername()
+        )
     }
 
     /** MORTE POR TROCA DE EQUIPAMENTO */
@@ -486,9 +528,26 @@ export class Tank {
     }
 
     public handleMove(position: Vector3d, orientation?: Vector3d) {
-        if (this.orientation) {
-            this.orientation = orientation
-        }
+
+        this.debuggerWs.clients.forEach(client => {
+            client.send(JSON.stringify({
+                position: position.toObject(false),
+                orientation: orientation.toObject(false)
+            }))
+        })
+
+        // const collisions = this.battle.getMap().collisionManager.getCollisions(this.position)
+
+        // if (collisions.length > 1) {
+        //     Logger.debug('Collisions', collisions)
+        // }
+
+        // if (collisions.length === 0) {
+        //     // Logger.debug(this.position.toString())
+        //     this.battle.minesManager.placeMine(this.player)
+        // }
+
+        this.orientation = orientation
         this.position = position;
 
         this.battle.collisionManager

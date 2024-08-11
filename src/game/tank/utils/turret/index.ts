@@ -47,7 +47,7 @@ export abstract class TurretHandler {
         return sub;
     }
 
-    public abstract getDamage(distance: number, modifiers?: IDamageModifiers): number;
+    public abstract getDamage(modifiers?: IDamageModifiers): number;
 
     public abstract handlePacket(packet: SimplePacket): void
 
@@ -75,7 +75,7 @@ export abstract class TurretHandler {
             }
 
             const distance = player.tank.getPosition().distanceTo(position);
-            const damage = this.getDamage(distance, { splash: true });
+            const damage = this.getDamage({ distance, splash: true });
 
             if (damage <= 0) {
                 continue;
@@ -86,18 +86,21 @@ export abstract class TurretHandler {
         }
     }
 
-    public attack(target: string, modifiers: IDamageModifiers = {}): boolean {
+    public attack(target: string, modifiers?: IDamageModifiers): boolean {
         const battle = this.tank.battle;
         const player = battle.playersManager.getPlayer(target);
 
         if (!player) return false;
 
-        modifiers.enemy = player.tank.isEnemy(this.tank);
-
         const distance = player.tank.getPosition().distanceTo(this.tank.getPosition());
-        const damage = this.getDamage(distance, modifiers);
-        Logger.debug(`Turret ${this.getName()} attacking ${player.getUsername()} with ${damage} damage`);
 
+        modifiers = {
+            ...modifiers,
+            enemy: player.tank.isEnemy(this.tank),
+            distance
+        }
+
+        const damage = this.getDamage(modifiers);
         if (damage === 0) {
             return true
         }

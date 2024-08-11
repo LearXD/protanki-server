@@ -6,6 +6,7 @@ import { Player } from '../player';
 import { SetBattleMapPropertiesPacket } from '@/network/packets/set-battle-map-properties';
 import { IResource } from '@/server/managers/resources/types';
 import { ReadType } from '@/server/managers/assets/types';
+import { MapCollisionManager } from './managers/collision';
 
 export class Map extends MapDataManager {
 
@@ -19,6 +20,8 @@ export class Map extends MapDataManager {
     private flags: IMapFlags = null
     private areas: IMapArea[] = []
     private bonuses: IMapBonus[] = []
+
+    public collisionManager: MapCollisionManager
 
     public constructor(
         public readonly manager: MapsManager,
@@ -35,6 +38,9 @@ export class Map extends MapDataManager {
         this.flags = manager.getMapsData(path.join(this.getId(), 'flags.json'))
         this.areas = manager.getMapsData(path.join(this.getId(), 'areas.json'))
         this.bonuses = manager.getMapsData(path.join(this.getId(), 'bonuses.json'))
+
+        const collisions = manager.getMapsData(path.join(this.getId(), 'collisions.json'))
+        this.collisionManager = new MapCollisionManager(collisions)
     }
 
     public getSpawns(): IMapSpawn[] {

@@ -8,6 +8,7 @@ import { TimeType } from "../task/types";
 import { SetExplodeMinePacket } from "@/network/packets/set-explode-mine";
 import { MathUtils } from "@/utils/math";
 import { SetRemoveUserMinesPacket } from "@/network/packets/set-remove-user-mines";
+import { Vector3d } from "@/utils/vector-3d";
 
 export class BattleMinesManager {
 
@@ -17,8 +18,8 @@ export class BattleMinesManager {
 
     private mines: Mine[] = [];
 
-    public placeMine(player: Player) {
-        const mine = new Mine(player, this.mines.length, player.tank.getPosition());
+    public placeMine(player: Player, position?: Vector3d) {
+        const mine = new Mine(player, this.mines.length, position || player.tank.getPosition());
 
         this.battle.collisionManager.addObject(mine);
         this.mines.push(mine);

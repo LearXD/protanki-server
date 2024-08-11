@@ -7,10 +7,9 @@ import { Packet } from "./packet";
 export class SendIsisShotPositionPacket extends Packet {
 
     public time: number;
-    public type: IsidaStateType;
-
-    public destinationPosition: Vector3d;
+    public incarnation: IsidaStateType;
     public targetPosition: Vector3d;
+    public shotPosition: Vector3d;
 
     constructor(bytes?: ByteArray) {
         super(Protocol.SEND_ISIS_SHOT_POSITION, bytes)
@@ -20,16 +19,16 @@ export class SendIsisShotPositionPacket extends Packet {
         const bytes = this.cloneBytes();
 
         this.time = bytes.readInt();
-        this.type = IsidaState.STATES[bytes.readShort()] as IsidaStateType;
+        this.incarnation = IsidaState.STATES[bytes.readShort()] as IsidaStateType;
 
-        this.destinationPosition = bytes.readVector3d();
         this.targetPosition = bytes.readVector3d();
+        this.shotPosition = bytes.readVector3d();
 
         return {
             time: this.time,
-            type: this.type,
-            destinationPosition: this.destinationPosition,
-            targetPosition: this.targetPosition
+            incarnation: this.incarnation,
+            targetPosition: this.targetPosition,
+            shotPosition: this.shotPosition
         }
     }
 
@@ -37,9 +36,9 @@ export class SendIsisShotPositionPacket extends Packet {
         const bytes = new ByteArray();
 
         bytes.writeInt(this.time);
-        bytes.writeShort(IsidaState.STATES.indexOf(this.type));
-        bytes.writeVector3d(this.destinationPosition);
+        bytes.writeShort(IsidaState.STATES.indexOf(this.incarnation));
         bytes.writeVector3d(this.targetPosition);
+        bytes.writeVector3d(this.shotPosition);
 
         return bytes;
     }

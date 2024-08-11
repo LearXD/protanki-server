@@ -1,5 +1,5 @@
 import { BattleTask } from "../../utils/task";
-import { ITask, TimeType } from "./types";
+import { ITask } from "./types";
 
 export class BattleTaskManager {
 

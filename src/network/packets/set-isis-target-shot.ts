@@ -7,7 +7,7 @@ import { Packet } from "./packet";
 export interface ITarget {
     direction: Vector3d;
     position: Vector3d;
-    byte_1: number;
+    hits: number;
     target: string;
 }
 
@@ -29,7 +29,7 @@ export class SetIsisTargetShotPacket extends Packet {
         this.target = {
             direction: bytes.readVector3d(),
             position: bytes.readVector3d(),
-            byte_1: bytes.readByte(),
+            hits: bytes.readByte(),
             target: bytes.readString()
         }
 
@@ -48,7 +48,7 @@ export class SetIsisTargetShotPacket extends Packet {
 
         bytes.writeVector3d(this.target.direction);
         bytes.writeVector3d(this.target.position);
-        bytes.writeByte(this.target.byte_1);
+        bytes.writeByte(this.target.hits);
         bytes.writeString(this.target.target);
 
         return bytes;

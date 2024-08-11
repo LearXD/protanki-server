@@ -45,7 +45,7 @@ export class SmokyHandler extends TurretHandler {
         return 1.07
     }
 
-    public getDamage(distance: number, modifiers: IDamageModifiers): number {
+    public getDamage(modifiers: IDamageModifiers): number {
 
         if (modifiers.critical) {
             return this.getCriticalDamage()
@@ -53,7 +53,7 @@ export class SmokyHandler extends TurretHandler {
 
         const range = this.getDamageRange()
         const damage = MathUtils.randomInt(range.min, range.max);
-        Logger.debug('Distance: ' + distance + ' Damage: ' + damage);
+        Logger.debug('Distance: ' + modifiers.distance + ' Damage: ' + damage);
 
         return damage
     }

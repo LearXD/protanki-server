@@ -27,7 +27,7 @@ export class VulcanHandler extends TurretHandler {
         return range ? parseInt(range.value) : 0
     }
 
-    public getDamage(distance: number): number {
+    public getDamage(): number {
         const damage = this.getDamagePerPeriod();
         return damage;
     }
