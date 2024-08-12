@@ -58,6 +58,10 @@ export class SmokyHandler extends Turret {
         return damage
     }
 
+    public onDamage(target: Player, damage: number, modifiers: IDamageModifiers): void {
+
+    }
+
     public handlePacket(packet: SimplePacket): void {
         if (packet instanceof SendSmokyHitPointShotPacket) {
             const pk = new SetSmokyHitPointPacket();
@@ -79,6 +83,7 @@ export class SmokyHandler extends Turret {
             const attacked = this.attack(packet.target, { critical: isCritical })
 
             if (attacked) {
+                Logger.debug('Smoky target shot');
                 const pk = new SetSmokyTargetShotPacket();
                 pk.shooter = this.tank.player.getUsername();
                 pk.target = packet.target;

@@ -31,8 +31,8 @@ export class ShaftHandler extends Turret {
         const max = this.getSubProperty("DAMAGE", "DAMAGE_TO")
 
         return {
-            min: parseInt(min.value),
-            max: parseInt(max.value)
+            min: min ? parseInt(min.value) : 0,
+            max: max ? parseInt(max.value) : 0
         }
     }
 

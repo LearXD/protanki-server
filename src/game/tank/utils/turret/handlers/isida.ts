@@ -38,6 +38,10 @@ export class IsidaHandler extends Turret {
         return this.getHealingPerPeriod() / 4;
     }
 
+    public canAttackAllies(): boolean {
+        return true;
+    }
+
     public handlePacket(packet: SimplePacket): void {
 
         if (packet instanceof SendIsisTargetShotPacket) {

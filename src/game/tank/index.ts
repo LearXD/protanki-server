@@ -82,41 +82,41 @@ export class Tank {
 
     public battleStartedSession: number = Date.now()
 
-    public debuggerWs: ws.Server
+    // public debuggerWs: ws.Server
 
     public constructor(
         public readonly player: Player,
         public readonly battle: Battle,
         public team: TeamType = Team.NONE
     ) {
-        this.debuggerWs = new ws.Server({ port: 8080 })
+        // this.debuggerWs = new ws.Server({ port: 8080 })
 
-        this.debuggerWs.on('connection', (client) => {
-            client.on('message', (message) => {
-                const data = JSON.parse(message.toString())
+        // this.debuggerWs.on('connection', (client) => {
+        //     client.on('message', (message) => {
+        //         const data = JSON.parse(message.toString())
 
-                if (data.type === 'orientation') {
-                    Logger.debug('Orientation', data)
-                    const axis = data.axis
-                    const value = data.value
+        //         if (data.type === 'orientation') {
+        //             Logger.debug('Orientation', data)
+        //             const axis = data.axis
+        //             const value = data.value
 
-                    const packet = new SetMoveTankPacket();
-                    packet.angularVelocity = new Vector3d(0, 0, 0);
-                    packet.control = 0;
-                    packet.impulse = new Vector3d(0, 0, 0);
-                    packet.orientation = new Vector3d(
-                        axis === 'x' ? value : this.rotation.x,
-                        axis === 'y' ? value : this.rotation.y,
-                        axis === 'z' ? value : this.rotation.z
-                    );
-                    packet.position = this.position;
-                    packet.tankId = this.player.getUsername();
+        //             const packet = new SetMoveTankPacket();
+        //             packet.angularVelocity = new Vector3d(0, 0, 0);
+        //             packet.control = 0;
+        //             packet.impulse = new Vector3d(0, 0, 0);
+        //             packet.orientation = new Vector3d(
+        //                 axis === 'x' ? value : this.rotation.x,
+        //                 axis === 'y' ? value : this.rotation.y,
+        //                 axis === 'z' ? value : this.rotation.z
+        //             );
+        //             packet.position = this.position;
+        //             packet.tankId = this.player.getUsername();
 
-                    this.rotation = packet.orientation
-                    this.player.sendPacket(packet);
-                }
-            })
-        })
+        //             this.rotation = packet.orientation
+        //             this.player.sendPacket(packet);
+        //         }
+        //     })
+        // })
         this.updateProperties()
     }
 
@@ -199,7 +199,12 @@ export class Tank {
     }
 
     public isEnemy(tank: Tank) {
-        return this.battle.getMode() === BattleMode.DM || tank.team !== this.team;
+        return (
+            this.battle.getMode() === BattleMode.DM ||
+            tank.team !== this.team ||
+            this.battle.isFriendlyFire()
+        )
+
     }
 
     public sendLatency() {
@@ -311,7 +316,6 @@ export class Tank {
     }
 
     public heal(value: number, healer: Player = this.player) {
-
         if (this.health >= Tank.MAX_HEALTH) {
             return;
         }
@@ -322,34 +326,33 @@ export class Tank {
 
     public damage(value: number, attacker: Player, isCritical: boolean = false) {
 
-        if (!this.isVisible() || !this.isAlive()) {
-            return
-        }
+        if (this.isVisible()) {
+            const damage = BattleCombatManager.parseDamageValue(value, this.hull.getProtection())
 
-        const damage = BattleCombatManager.parseDamageValue(value, this.hull.getProtection())
-        const health = this.health;
-        this.setHealth(this.health - damage);
+            const health = this.health;
+            this.setHealth(this.health - damage);
 
-        Logger.debug('')
-        Logger.debug(`Attacker: ${attacker.getUsername()} attacked ${this.player.getUsername()}`);
-        Logger.debug(`Damage: ${value} (${damage})`);
-        Logger.debug(`Target health: ${health}`);
-        Logger.debug(`New health: ${this.health}`);
-        Logger.debug(`Protection: ${this.hull.getProtection()}`);
-        Logger.debug(`${attacker.getUsername()} position ${attacker.tank.getPosition().toString()}`);
-        Logger.debug(`${this.player.getUsername()} position ${this.getPosition().toString()}`);
-        Logger.debug('')
+            Logger.debug('')
+            Logger.debug(`Attacker: ${attacker.getUsername()} attacked ${this.player.getUsername()}`);
+            Logger.debug(`Damage: ${value} (${damage})`);
+            Logger.debug(`Target health: ${health}`);
+            Logger.debug(`New health: ${this.health}`);
+            Logger.debug(`Protection: ${this.hull.getProtection()}`);
+            Logger.debug(`${attacker.getUsername()} position ${attacker.tank.getPosition().toString()}`);
+            Logger.debug(`${this.player.getUsername()} position ${this.getPosition().toString()}`);
+            Logger.debug('')
 
-        const isDead = this.health <= BattleCombatManager.DEATH_HISTERESES
+            const isDead = this.health <= BattleCombatManager.DEATH_HISTERESES
 
-        this.battle.combatManager.sendDamageIndicator(
-            attacker, this.player,
-            isDead ? BattleCombatManager.parseProtectionValue(this.hull.getProtection(), health) : value,
-            isDead ? DamageIndicator.FATAL : isCritical ? DamageIndicator.CRITICAL : DamageIndicator.NORMAL
-        );
+            this.battle.combatManager.sendDamageIndicator(
+                attacker, this.player,
+                isDead ? BattleCombatManager.parseProtectionValue(this.hull.getProtection(), health) : value,
+                isDead ? DamageIndicator.FATAL : isCritical ? DamageIndicator.CRITICAL : DamageIndicator.NORMAL
+            );
 
-        if (isDead) {
-            this.kill(attacker)
+            if (isDead) {
+                this.kill(attacker)
+            }
         }
     }
 
@@ -529,12 +532,12 @@ export class Tank {
 
     public handleMove(position: Vector3d, orientation?: Vector3d) {
 
-        this.debuggerWs.clients.forEach(client => {
-            client.send(JSON.stringify({
-                position: position.toObject(false),
-                orientation: orientation.toObject(false)
-            }))
-        })
+        // this.debuggerWs.clients.forEach(client => {
+        //     client.send(JSON.stringify({
+        //         position: position.toObject(false),
+        //         orientation: orientation.toObject(false)
+        //     }))
+        // })
 
         // const collisions = this.battle.getMap().collisionManager.getCollisions(this.position)
 

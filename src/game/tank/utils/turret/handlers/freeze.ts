@@ -17,10 +17,7 @@ export class FreezeHandler extends Turret {
 
     public getDamagePerPeriod(): number {
         const damage = this.getSubProperty("DAMAGE_PER_SECOND", "DAMAGE_PER_PERIOD");
-        if (!damage) {
-            return 0
-        }
-        return parseInt(damage.value) / 2
+        return damage ? parseInt(damage.value) / 2 : 0;
     }
 
     public getDamage(): number {

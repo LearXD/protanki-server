@@ -5,6 +5,7 @@ import { DamageIndicator, DamageIndicatorType } from "../../../../states/damage-
 import { Logger } from "../../../../utils/logger";
 import { Player } from "../../../player";
 import { IDamageModifiers } from "./types";
+import { Turret } from "@/game/tank/utils/turret";
 
 export class BattleCombatManager {
 
@@ -30,6 +31,62 @@ export class BattleCombatManager {
         return protection * health / 10000;
     }
 
+    public calculeDamage = (target: Player, damage: number, modifiers: IDamageModifiers) => {
+
+
+        return damage;
+    }
+
+
+    public handleAttack(
+        target: Player,
+        attacker: Player,
+        turret: Turret,
+        modifiers: IDamageModifiers
+    ) {
+
+        if (!(target.tank.isVisible() && attacker.tank.isVisible())) {
+            return false
+        }
+
+        if (target !== attacker && !modifiers.enemy && !turret.canAttackAllies()) {
+            return false;
+        }
+
+        if (target === attacker && !turret.canAttackYourself()) {
+            return false;
+        }
+
+        turret.onAttack(target, modifiers);
+        let damage = turret.getDamage(modifiers);
+
+        if (damage) {
+
+            if (attacker.tank.hasEffect(Supply.DOUBLE_DAMAGE)) {
+                damage *= 2;
+            }
+
+            if (modifiers.enemy) {
+                if (target.tank.hasEffect(Supply.ARMOR)) {
+                    damage /= 2;
+                }
+
+                const resistance = target.tank.painting.getTurretResistance(attacker.tank.turret.getTurret());
+                damage *= 1 - (resistance / 100);
+
+                turret.onDamage(target, damage, modifiers);
+                target.tank.damage(damage, attacker, modifiers.critical);
+
+                return true;
+            }
+
+            target.tank.heal(damage, attacker);
+            return true
+        }
+
+        return false
+    }
+
     public sendDamageIndicator(
         player: Player,
         target: Player,
@@ -41,40 +98,5 @@ export class BattleCombatManager {
         player.sendPacket(packet);
     }
 
-    public handleDamage(
-        attacker: Player,
-        target: Player,
-        damage: number,
-        modifiers: IDamageModifiers = { critical: false }
-    ): number {
-        if (attacker.tank.isVisible() && target.tank.isVisible()) {
-            if (this.battle.isFriendlyFire() || target.tank.isEnemy(attacker.tank)) {
 
-                if (attacker.tank.hasEffect(Supply.DOUBLE_DAMAGE)) damage *= 2;
-                if (target.tank.hasEffect(Supply.ARMOR)) damage /= 2;
-
-                const resistance = target.tank.painting.getTurretResistance(attacker.tank.turret.getTurret());
-                if (resistance > 0) damage *= 1 - (resistance / 100);
-
-                return damage;
-            }
-            return 0;
-        }
-        return null;
-    }
-
-    public handleHeal(
-        healer: Player,
-        target: Player,
-        heal: number
-    ): number {
-
-        if (healer.tank.isVisible() && target.tank.isVisible()) {
-            if (!healer.tank.isEnemy(target.tank)) {
-                return heal
-            }
-        }
-
-        return null;
-    }
 }

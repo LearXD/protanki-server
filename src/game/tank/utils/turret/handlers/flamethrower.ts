@@ -17,18 +17,12 @@ export class FlamethrowerHandler extends Turret {
 
     public getDamagePerSecond(): number {
         const damage = this.getSubProperty("DAMAGE_PER_SECOND", "DAMAGE_PER_PERIOD");
-        if (!damage) {
-            return 0
-        }
-        return parseInt(damage.value) / 2
+        return damage ? parseInt(damage.value) / 2 : 0;
     }
 
     public getTemperatureLimit() {
         const limit = this.getSubProperty("FIRE_DAMAGE", "FLAME_TEMPERATURE_LIMIT")
-        if (!limit) {
-            return 0
-        }
-        return parseInt(limit.value)
+        return limit ? parseInt(limit.value) : 0;
     }
 
     public getDamage(): number {

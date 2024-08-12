@@ -6,10 +6,7 @@ import { SendRicochetTargetShotPacket } from "../../../../../network/packets/sen
 import { SetRicochetOverturnedShotPacket } from "../../../../../network/packets/set-ricochet-overturned-shot";
 import { SetRicochetShotPacket } from "../../../../../network/packets/set-ricochet-shot";
 import { SimplePacket } from "../../../../../network/packets/simple-packet";
-import { Logger } from "../../../../../utils/logger";
 import { MathUtils } from "../../../../../utils/math";
-import { Player } from "../../../../player";
-import { IDamageModifiers } from "@/game/battle/managers/combat/types";
 
 export class RicochetHandler extends Turret {
 
@@ -22,8 +19,8 @@ export class RicochetHandler extends Turret {
         const max = this.getSubProperty("DAMAGE", "DAMAGE_TO")
 
         return {
-            min: parseInt(min.value),
-            max: parseInt(max.value)
+            min: min ? parseInt(min.value) : 0,
+            max: max ? parseInt(max.value) : 0
         }
     }
 
@@ -31,6 +28,10 @@ export class RicochetHandler extends Turret {
         const range = this.getDamageRange()
         const damage = MathUtils.randomInt(range.min, range.max);
         return damage
+    }
+
+    public canAttackYourself(): boolean {
+        return true;
     }
 
     public handlePacket(packet: SimplePacket): void {

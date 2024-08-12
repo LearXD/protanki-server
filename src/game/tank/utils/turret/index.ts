@@ -34,6 +34,14 @@ export abstract class Turret extends GarageItem {
         return 0
     }
 
+    public canAttackYourself(): boolean {
+        return false;
+    }
+
+    public canAttackAllies(): boolean {
+        return false;
+    }
+
     /**
      * Called when the turret is attacking a player (is called even if the damage is not valid)
      * @param target The player that is being attacked
@@ -60,56 +68,28 @@ export abstract class Turret extends GarageItem {
                 continue;
             }
 
-            const distance = player.tank.getPosition().distanceTo(position);
-            const damage = this.getDamage({ distance, splash: true });
-
-            if (damage <= 0) {
-                continue;
-            }
-
             battle.combatManager
-                .handleDamage(this.tank.player, player, damage);
+                .handleAttack(player, this.tank.player, this, {
+                    distance: player.tank.getPosition().distanceTo(position),
+                    enemy: player.tank.isEnemy(this.tank),
+                    splash: true
+                });
         }
     }
 
-    public attack(player: string, modifiers?: IDamageModifiers): boolean {
+    public attack(player: string, modifiers: IDamageModifiers = {}): boolean {
         const battle = this.tank.battle;
         const target = battle.playersManager.getPlayer(player);
 
-        if (!player) return false;
+        if (target) {
+            modifiers.distance = target.tank.getPosition().distanceTo(this.tank.getPosition());
+            modifiers.enemy = target.tank.isEnemy(this.tank);
 
-        const distance = target.tank.getPosition().distanceTo(this.tank.getPosition());
-
-        modifiers = {
-            ...modifiers,
-            enemy: target.tank.isEnemy(this.tank),
-            distance
+            return battle.combatManager
+                .handleAttack(target, this.tank.player, this, modifiers);
         }
 
-        const damage = this.getDamage(modifiers);
-        if (damage === 0) {
-            return true
-        }
-
-        const damaged = modifiers.enemy ?
-            battle.combatManager.handleDamage(this.tank.player, target, damage, modifiers) :
-            battle.combatManager.handleHeal(this.tank.player, target, damage)
-
-        if (damaged === null) {
-            return false;
-        }
-
-        if (damaged > 0) {
-            if (modifiers.enemy) {
-                target.tank.damage(damage, this.tank.player, modifiers.critical);
-                return
-            }
-
-            target.tank.heal(damage, this.tank.player);
-            return
-        }
-
-        return true;
+        return false;
     }
 
     public abstract handlePacket(packet: SimplePacket): void

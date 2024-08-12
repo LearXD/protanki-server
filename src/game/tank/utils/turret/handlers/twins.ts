@@ -8,8 +8,6 @@ import { SetTwinsOverturnedShotPacket } from "../../../../../network/packets/set
 import { SetTwinsShotPacket } from "../../../../../network/packets/set-twins-shot";
 import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { MathUtils } from "../../../../../utils/math";
-import { Player } from "../../../../player";
-import { IDamageModifiers } from "@/game/battle/managers/combat/types";
 
 export class TwinsHandler extends Turret {
 
@@ -22,8 +20,8 @@ export class TwinsHandler extends Turret {
         const max = this.getSubProperty("DAMAGE", "DAMAGE_TO")
 
         return {
-            min: parseInt(min.value),
-            max: parseInt(max.value)
+            min: min ? parseInt(min.value) : 0,
+            max: max ? parseInt(max.value) : 0
         }
     }
 
