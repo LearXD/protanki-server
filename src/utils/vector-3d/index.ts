@@ -42,6 +42,20 @@ export class Vector3d extends Vector2d implements IVector3d {
         return this
     }
 
+    public scale(value: number): Vector3d {
+        this.x *= value;
+        this.y *= value;
+        this.z *= value;
+        return this;
+    }
+
+    public diff(param1: Vector3d, param2: Vector3d): Vector3d {
+        this.x = param1.x - param2.x;
+        this.y = param1.y - param2.y;
+        this.z = param1.z - param2.z;
+        return this;
+    }
+
     public reset(
         x: number = 0,
         y: number = 0,

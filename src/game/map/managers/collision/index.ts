@@ -9,6 +9,8 @@ import { CollisionKdTree } from "./utils/collision-kd-tree";
 import { RayHit } from "./utils/rayhit";
 import { AABB } from "./utils/aabb";
 import { CollisionKdNode } from "./utils/collision-kd-node";
+import { CollisionBox } from "./collisions/box";
+import { CollisionTriangle } from "./collisions/triangle";
 
 
 export class MapCollisionManager {
@@ -27,6 +29,10 @@ export class MapCollisionManager {
         public readonly data: IMapCollisions
     ) {
         this.loadRects()
+        this.loadBoxes()
+        this.loadTriangles()
+
+        this.tree.createTree(this.collisions);
     }
 
     public loadRects(): void {
@@ -39,8 +45,28 @@ export class MapCollisionManager {
             MapCollisionManager.parsePosition(_loc3_, rect);
             this.collisions.push(_loc3_);
         }
+    }
 
-        this.tree.createTree(this.collisions);
+    public loadBoxes(): void {
+        for (const box of this.data.boxes) {
+            const size = new Vector3d(box.size.x, box.size.y, box.size.z)
+            size.scale(0.5)
+            const _loc3_ = new CollisionBox(size, 255, null)
+            MapCollisionManager.parsePosition(_loc3_, box);
+            this.collisions.push(_loc3_);
+        }
+    }
+
+    public loadTriangles(): void {
+        for (const triangle of this.data.triangles) {
+            const [a, b, c] = triangle.vertices
+            const v1 = new Vector3d(a.x, a.y, a.z)
+            const v2 = new Vector3d(b.x, b.y, b.z)
+            const v3 = new Vector3d(c.x, c.y, c.z)
+            const _loc3_ = new CollisionTriangle(v1, v2, v3, 255, null)
+            MapCollisionManager.parsePosition(_loc3_, triangle);
+            this.collisions.push(_loc3_);
+        }
     }
 
     public static parsePosition(shape: CollisionShape, object: ICollisionObject) {
@@ -51,13 +77,6 @@ export class MapCollisionManager {
         shape.transform.setFromMatrix3(matrix, position)
     }
 
-    // TODO: CHECK COLLISIONS
-    // rawPosition
-    // Vector3.DOWN
-    // object id? = 16
-    // 10000000000
-    // null
-    // ray hit object 
     public raycastStatic(param1: Vector3d, param2: Vector3d, param3: number, param4: number, param5: any/*IRayCollisionFilter*/, param6: RayHit): boolean {
         if (!this.__raycastStatic1(param1, param2, this.tree.rootNode.boundBox, this.range1)) {
             return false;
