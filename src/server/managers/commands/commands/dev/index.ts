@@ -3,7 +3,7 @@ import { CommandSender } from "../../types";
 import { Command } from "../../utils/command";
 import { Logger } from "@/utils/logger";
 import { Vector3d } from "@/utils/vector-3d";
-import { RayHit } from "@/game/map/managers/collision/utils/ray-hit";
+import { RayHit } from "@/game/map/managers/collision/utils/rayhit";
 
 export class DevCommand extends Command {
 
@@ -51,11 +51,7 @@ export class DevCommand extends Command {
                     const ray = new RayHit()
                     // battleService.§'x§().§const const true§().raycastStatic(param3,Vector3.DOWN,§super const continue§.§finally catch while§,10000000000,null,_loc10_)
                     const collisions = battle.getMap().collisionManager.raycastStatic(
-                        new Vector3d(
-                            sender.tank.getPosition().getX(),
-                            sender.tank.getPosition().getZ(),
-                            sender.tank.getPosition().getY()
-                        ),
+                        sender.tank.getPosition().swap(),
                         Vector3d.DOWN,
                         16,
                         10000000000,

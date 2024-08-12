@@ -1,16 +1,16 @@
-import { AABB } from "@/utils/aabb";
-import { Matrix4 } from "@/utils/matrix-4";
 import { Vector3d } from "@/utils/vector-3d";
+import { AABB } from "../../utils/aabb";
+import { Matrix4 } from "../../utils/matrix-4";
 
 export class CollisionShape {
 
-    public static readonly BOX: number = 1;
+    public static BOX: number = 1;
 
-    public static readonly SPHERE: number = 2;
+    public static SPHERE: number = 2;
 
-    public static readonly RECT: number = 4;
+    public static RECT: number = 4;
 
-    public static readonly TRIANGLE: number = 8;
+    public static TRIANGLE: number = 8;
 
 
     public type: number;
@@ -25,12 +25,12 @@ export class CollisionShape {
 
     public aabb: AABB;
 
-    public material: any;
+    public material: any//PhysicsMaterial;
 
-    public constructor(param1: number, param2: number, param3: any) {
+    public constructor(param1: number, param2: number, param3: any /*PhysicsMaterial*/) {
         this.transform = new Matrix4();
         this.aabb = new AABB();
-        //  super();
+        // super();
         this.type = param1;
         this.collisionGroup = param2;
         this.material = param3;
@@ -58,12 +58,12 @@ export class CollisionShape {
         return this.aabb;
     }
 
-    public raycast(param1: Vector3d, param2: Vector3d, param3: number, param4: Vector3d): number {
+    public raycast(param1: Vector3d, param2: Vector3d, param3: Number, param4: Vector3d): number {
         return -1;
     }
 
     public clone(): CollisionShape {
-        var _loc1_: CollisionShape = this.createPrimitive();
+        const _loc1_: CollisionShape = this.createPrimitive();
         return _loc1_.copyFrom(this);
     }
 
@@ -83,4 +83,3 @@ export class CollisionShape {
         return new CollisionShape(this.type, this.collisionGroup, this.material);
     }
 }
-

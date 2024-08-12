@@ -1,21 +1,21 @@
-import { AABB } from "@/utils/aabb";
 import { CollisionShape } from "../../collisions/shape";
+import { AABB } from "../aabb";
 import { CollisionKdNode } from "../collision-kd-node";
 import { CollisionKdTree2D } from "../collision-kd-tree-2d";
 
 export class CollisionKdTree {
 
-    private static readonly nodeBoundBoxThreshold: AABB = new AABB();
+    private static nodeBoundBoxThreshold: AABB = new AABB();
 
-    private static readonly splitCoordsX: number[] = [];
+    private static splitCoordsX: number[] = [];
 
-    private static readonly splitCoordsY: number[] = [];
+    private static splitCoordsY: number[] = [];
 
-    private static readonly splitCoordsZ: number[] = [];
+    private static splitCoordsZ: number[] = [];
 
-    private static readonly _nodeBB: number[] = Array.from({ length: 6 }, () => 0);
+    private static _nodeBB: number[] = [];
 
-    private static readonly _bb: number[] = Array.from({ length: 6 }, () => 0);
+    private static _bb: number[] = [];
 
 
     public threshold: number = 0.1;
@@ -38,7 +38,7 @@ export class CollisionKdTree {
 
     public constructor() {
         this.staticBoundBoxes = [];
-        //   super();
+        // super();
     }
 
     public createTree(param1: CollisionShape[], param2: AABB = null): void {
@@ -71,7 +71,7 @@ export class CollisionKdTree {
         var _loc7_: number = NaN;
         var _loc9_: number;
         var _loc8_: number[];
-        if ((_loc9_ = (_loc8_ = param1.indices).length) <= this.minPrimitivesPerNode) {
+        if ((_loc9_ = ((_loc8_ = param1.indices).length)) <= this.minPrimitivesPerNode) {
             return;
         }
         _loc2_ = param1.boundBox;
@@ -185,8 +185,8 @@ export class CollisionKdTree {
         _loc3_ = 0;
         while (_loc3_ < _loc9_) {
             _loc5_ = this.staticBoundBoxes[_loc8_[_loc3_]];
-            _loc6_ = _loc14_ ? _loc5_.minX : (_loc15_ ? _loc5_.minY : _loc5_.minZ);
-            if ((_loc7_ = _loc14_ ? _loc5_.maxX : (_loc15_ ? _loc5_.maxY : _loc5_.maxZ)) <= _loc17_) {
+            _loc6_ = _loc14_ ? (_loc5_.minX) : (_loc15_ ? (_loc5_.minY) : (_loc5_.minZ));
+            if ((_loc7_ = _loc14_ ? (_loc5_.maxX) : (_loc15_ ? (_loc5_.maxY) : (_loc5_.maxZ))) <= _loc17_) {
                 if (_loc6_ < _loc16_) {
                     if (param1.negativeNode.indices == null) {
                         param1.negativeNode.indices = [];
@@ -196,7 +196,7 @@ export class CollisionKdTree {
                 }
                 else {
                     if (param1.splitIndices == null) {
-                        param1.splitIndices = []
+                        param1.splitIndices = [];
                     }
                     param1.splitIndices.push(_loc8_[_loc3_]);
                     _loc8_[_loc3_] = -1;
@@ -245,7 +245,7 @@ export class CollisionKdTree {
         var _loc10_: number = NaN;
         var _loc11_: number = 0;
         var _loc12_: number = 0;
-        var _loc13_: Boolean = false;
+        var _loc13_: boolean = false;
         var _loc14_: number = 0;
         var _loc15_: number = 0;
         var _loc16_: number = NaN;
@@ -260,11 +260,11 @@ export class CollisionKdTree {
                 _loc7_ = _loc6_ - this.threshold;
                 _loc8_ = _loc6_ + this.threshold;
                 _loc9_ = _loc20_ * (_loc6_ - param5[param2]);
-                _loc10_ = _loc20_ * (param5[param2 + 3] - _loc6_);
+                _loc10_ = _loc20_ * (param5[(param2 + 3)] - _loc6_);
                 _loc11_ = 0;
                 _loc12_ = 0;
                 _loc13_ = false;
-                _loc14_ = param1.indices.length;
+                _loc14_ = (param1.indices.length);
                 _loc15_ = 0;
                 while (_loc15_ < _loc14_) {
                     _loc17_ = this.staticBoundBoxes[param1.indices[_loc15_]];

@@ -10,7 +10,7 @@ import { SetFlagDroppedPacket } from "@/network/packets/set-flag-dropped";
 import { SetCaptureFlagPacket } from "@/network/packets/set-capture-flag";
 import { FlagState } from "./types";
 import { MathUtils } from "@/utils/math";
-import { RayHit } from "@/game/map/managers/collision/utils/ray-hit";
+import { RayHit } from "@/game/map/managers/collision/utils/rayhit";
 
 export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
 

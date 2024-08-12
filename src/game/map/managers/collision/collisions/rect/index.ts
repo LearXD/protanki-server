@@ -1,16 +1,15 @@
 import { Vector3d } from "@/utils/vector-3d";
 import { CollisionShape } from "../shape";
-import { Matrix4 } from "@/utils/matrix-4";
-import { AABB } from "@/utils/aabb";
-
+import { Matrix4 } from "../../utils/matrix-4";
+import { AABB } from "../../utils/aabb";
 
 export class CollisionRect extends CollisionShape {
 
-    private static readonly EPSILON: number = 0.005;
+    private static EPSILON: number = 0.005;
 
     public hs: Vector3d;
 
-    public constructor(param1: Vector3d, param2: number, param3: any) {
+    public constructor(param1: Vector3d, param2: number, param3: any/*PhysicsMaterial*/) {
         super(CollisionShape.RECT, param2, param3);
         this.hs = new Vector3d();
         this.hs.copy(param1);
@@ -26,14 +25,14 @@ export class CollisionRect extends CollisionShape {
         var _loc5_: AABB;
         (_loc5_ = this.aabb).maxX = this.hs.x * _loc2_ + this.hs.y * _loc3_ + CollisionRect.EPSILON * _loc4_;
         _loc5_.minX = -_loc5_.maxX;
-        _loc2_ = _loc1_.m10 < 0 ? -_loc1_.m10 : _loc1_.m10;
-        _loc3_ = _loc1_.m11 < 0 ? -_loc1_.m11 : _loc1_.m11;
-        _loc4_ = _loc1_.m12 < 0 ? -_loc1_.m12 : _loc1_.m12;
+        _loc2_ = _loc1_.m10 < 0 ? (-_loc1_.m10) : (_loc1_.m10);
+        _loc3_ = _loc1_.m11 < 0 ? (-_loc1_.m11) : (_loc1_.m11);
+        _loc4_ = _loc1_.m12 < 0 ? (-_loc1_.m12) : (_loc1_.m12);
         _loc5_.maxY = this.hs.x * _loc2_ + this.hs.y * _loc3_ + CollisionRect.EPSILON * _loc4_;
         _loc5_.minY = -_loc5_.maxY;
-        _loc2_ = _loc1_.m20 < 0 ? -_loc1_.m20 : _loc1_.m20;
-        _loc3_ = _loc1_.m21 < 0 ? -_loc1_.m21 : _loc1_.m21;
-        _loc4_ = _loc1_.m22 < 0 ? -_loc1_.m22 : _loc1_.m22;
+        _loc2_ = _loc1_.m20 < 0 ? (-_loc1_.m20) : (_loc1_.m20);
+        _loc3_ = _loc1_.m21 < 0 ? (-_loc1_.m21) : (_loc1_.m21);
+        _loc4_ = _loc1_.m22 < 0 ? (-_loc1_.m22) : (_loc1_.m22);
         _loc5_.maxZ = this.hs.x * _loc2_ + this.hs.y * _loc3_ + CollisionRect.EPSILON * _loc4_;
         _loc5_.minZ = -_loc5_.maxZ;
         _loc5_.minX += _loc1_.m03;
@@ -45,7 +44,7 @@ export class CollisionRect extends CollisionShape {
         return _loc5_;
     }
 
-    public override  copyFrom(param1: CollisionShape): CollisionShape {
+    public override copyFrom(param1: CollisionShape): CollisionShape {
         var _loc2_: CollisionRect = param1 as CollisionRect;
         if (_loc2_ == null) {
             return this;
@@ -59,7 +58,7 @@ export class CollisionRect extends CollisionShape {
         return new CollisionRect(this.hs, this.collisionGroup, this.material);
     }
 
-    public override  raycast(param1: Vector3d, param2: Vector3d, param3: number, param4: Vector3d): number {
+    public override raycast(param1: Vector3d, param2: Vector3d, param3: number, param4: Vector3d): number {
         var _loc5_: Matrix4 = null;
         _loc5_ = this.transform;
         var _loc6_: number = param1.x - _loc5_.m03;

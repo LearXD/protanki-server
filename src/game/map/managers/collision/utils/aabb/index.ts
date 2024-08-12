@@ -1,19 +1,13 @@
 
+
 export class AABB {
 
     public minX: number = 1e+308;
-
     public minY: number = 1e+308;
-
     public minZ: number = 1e+308;
-
     public maxX: number = -1e+308;
-
     public maxY: number = -1e+308;
-
     public maxZ: number = -1e+308;
-
-    public constructor() { }
 
     public setSize(param1: number, param2: number, param3: number, param4: number, param5: number, param6: number): void {
         this.minX = param1;
@@ -63,7 +57,7 @@ export class AABB {
         this.maxZ = -1e+308;
     }
 
-    public intersects(param1: AABB, param2: number): Boolean {
+    public intersects(param1: AABB, param2: number): boolean {
         return !(this.minX > param1.maxX + param2 || this.maxX < param1.minX - param2 || this.minY > param1.maxY + param2 || this.maxY < param1.minY - param2 || this.minZ > param1.maxZ + param2 || this.maxZ < param1.minZ - param2);
     }
 
@@ -77,7 +71,7 @@ export class AABB {
     }
 
     public clone(): AABB {
-        var _loc1_: AABB = new AABB();
+        const _loc1_: AABB = new AABB();
         _loc1_.copyFrom(this);
         return _loc1_;
     }
@@ -95,7 +89,7 @@ export class AABB {
     }
 
     public toString(): String {
-        return 'AABB'
-        //  return getQualifiedClassName(this) + "(" + this.minX.toFixed(3) + ", " + this.minY.toFixed(3) + ", " + this.minZ.toFixed(3) + ": " + this.maxX.toFixed(3) + ", " + this.maxY.toFixed(3) + ", " + this.maxZ.toFixed(3) + ")";
+        return "AABB(" + this.minX.toFixed(3) + ", " + this.minY.toFixed(3) + ", " + this.minZ.toFixed(3) + ": " + this.maxX.toFixed(3) + ", " + this.maxY.toFixed(3) + ", " + this.maxZ.toFixed(3) + ")";
+        // return getQualifiedClassName(this) + "(" + this.minX.toFixed(3) + ", " + this.minY.toFixed(3) + ", " + this.minZ.toFixed(3) + ": " + this.maxX.toFixed(3) + ", " + this.maxY.toFixed(3) + ", " + this.maxZ.toFixed(3) + ")";
     }
 }

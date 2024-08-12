@@ -1,5 +1,5 @@
+import { Vector3d } from "@/utils/vector-3d";
 import { Matrix3 } from "../matrix-3";
-import { Vector3d } from "../vector-3d";
 
 export class Matrix4 {
 
@@ -30,7 +30,7 @@ export class Matrix4 {
     public m23: number;
 
     public constructor(param1: number = 1, param2: number = 0, param3: number = 0, param4: number = 0, param5: number = 0, param6: number = 1, param7: number = 0, param8: number = 0, param9: number = 0, param10: number = 0, param11: number = 1, param12: number = 0) {
-        //   super();
+        //  super();
         this.init(param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12);
     }
 
@@ -56,19 +56,19 @@ export class Matrix4 {
     }
 
     public invert(): Matrix4 {
-        var _loc1_: number = this.m00;
-        var _loc2_: number = this.m01;
-        var _loc3_: number = this.m02;
-        var _loc4_: number = this.m03;
-        var _loc5_: number = this.m10;
-        var _loc6_: number = this.m11;
-        var _loc7_: number = this.m12;
-        var _loc8_: number = this.m13;
-        var _loc9_: number = this.m20;
-        var _loc10_: number = this.m21;
-        var _loc11_: number = this.m22;
-        var _loc12_: number = this.m23;
-        var _loc13_: number = -_loc3_ * _loc6_ * _loc9_ + _loc2_ * _loc7_ * _loc9_ + _loc3_ * _loc5_ * _loc10_ - _loc1_ * _loc7_ * _loc10_ - _loc2_ * _loc5_ * _loc11_ + _loc1_ * _loc6_ * _loc11_;
+        let _loc1_: number = this.m00;
+        let _loc2_: number = this.m01;
+        let _loc3_: number = this.m02;
+        let _loc4_: number = this.m03;
+        let _loc5_: number = this.m10;
+        let _loc6_: number = this.m11;
+        let _loc7_: number = this.m12;
+        let _loc8_: number = this.m13;
+        let _loc9_: number = this.m20;
+        let _loc10_: number = this.m21;
+        let _loc11_: number = this.m22;
+        let _loc12_: number = this.m23;
+        let _loc13_: number = -_loc3_ * _loc6_ * _loc9_ + _loc2_ * _loc7_ * _loc9_ + _loc3_ * _loc5_ * _loc10_ - _loc1_ * _loc7_ * _loc10_ - _loc2_ * _loc5_ * _loc11_ + _loc1_ * _loc6_ * _loc11_;
         this.m00 = (-_loc7_ * _loc10_ + _loc6_ * _loc11_) / _loc13_;
         this.m01 = (_loc3_ * _loc10_ - _loc2_ * _loc11_) / _loc13_;
         this.m02 = (-_loc3_ * _loc6_ + _loc2_ * _loc7_) / _loc13_;
@@ -85,18 +85,18 @@ export class Matrix4 {
     }
 
     public append(param1: Matrix4): Matrix4 {
-        var _loc2_: number = this.m00;
-        var _loc3_: number = this.m01;
-        var _loc4_: number = this.m02;
-        var _loc5_: number = this.m03;
-        var _loc6_: number = this.m10;
-        var _loc7_: number = this.m11;
-        var _loc8_: number = this.m12;
-        var _loc9_: number = this.m13;
-        var _loc10_: number = this.m20;
-        var _loc11_: number = this.m21;
-        var _loc12_: number = this.m22;
-        var _loc13_: number = this.m23;
+        let _loc2_: number = this.m00;
+        let _loc3_: number = this.m01;
+        let _loc4_: number = this.m02;
+        let _loc5_: number = this.m03;
+        let _loc6_: number = this.m10;
+        let _loc7_: number = this.m11;
+        let _loc8_: number = this.m12;
+        let _loc9_: number = this.m13;
+        let _loc10_: number = this.m20;
+        let _loc11_: number = this.m21;
+        let _loc12_: number = this.m22;
+        let _loc13_: number = this.m23;
         this.m00 = param1.m00 * _loc2_ + param1.m01 * _loc6_ + param1.m02 * _loc10_;
         this.m01 = param1.m00 * _loc3_ + param1.m01 * _loc7_ + param1.m02 * _loc11_;
         this.m02 = param1.m00 * _loc4_ + param1.m01 * _loc8_ + param1.m02 * _loc12_;
@@ -113,18 +113,18 @@ export class Matrix4 {
     }
 
     public prepend(param1: Matrix4): Matrix4 {
-        var _loc2_: number = this.m00;
-        var _loc3_: number = this.m01;
-        var _loc4_: number = this.m02;
-        var _loc5_: number = this.m03;
-        var _loc6_: number = this.m10;
-        var _loc7_: number = this.m11;
-        var _loc8_: number = this.m12;
-        var _loc9_: number = this.m13;
-        var _loc10_: number = this.m20;
-        var _loc11_: number = this.m21;
-        var _loc12_: number = this.m22;
-        var _loc13_: number = this.m23;
+        let _loc2_: number = this.m00;
+        let _loc3_: number = this.m01;
+        let _loc4_: number = this.m02;
+        let _loc5_: number = this.m03;
+        let _loc6_: number = this.m10;
+        let _loc7_: number = this.m11;
+        let _loc8_: number = this.m12;
+        let _loc9_: number = this.m13;
+        let _loc10_: number = this.m20;
+        let _loc11_: number = this.m21;
+        let _loc12_: number = this.m22;
+        let _loc13_: number = this.m23;
         this.m00 = _loc2_ * param1.m00 + _loc3_ * param1.m10 + _loc4_ * param1.m20;
         this.m01 = _loc2_ * param1.m01 + _loc3_ * param1.m11 + _loc4_ * param1.m21;
         this.m02 = _loc2_ * param1.m02 + _loc3_ * param1.m12 + _loc4_ * param1.m22;
@@ -178,27 +178,21 @@ export class Matrix4 {
         param2.z = this.m20 * param1.x + this.m21 * param1.y + this.m22 * param1.z + this.m23;
     }
 
-    // renomeado
-    public nativeConstDefault(param1: number, param2: number, param3: number, param4: Vector3d): void {
-        param4.x = this.m00 * param1 + this.m01 * param2 + this.m02 * param3 + this.m03;
-        param4.y = this.m10 * param1 + this.m11 * param2 + this.m12 * param3 + this.m13;
-        param4.z = this.m20 * param1 + this.m21 * param2 + this.m22 * param3 + this.m23;
-    }
 
     public transformVectorInverse(param1: Vector3d, param2: Vector3d): void {
-        var _loc3_: number = param1.x - this.m03;
-        var _loc4_: number = param1.y - this.m13;
-        var _loc5_: number = param1.z - this.m23;
+        let _loc3_: number = param1.x - this.m03;
+        let _loc4_: number = param1.y - this.m13;
+        let _loc5_: number = param1.z - this.m23;
         param2.x = this.m00 * _loc3_ + this.m10 * _loc4_ + this.m20 * _loc5_;
         param2.y = this.m01 * _loc3_ + this.m11 * _loc4_ + this.m21 * _loc5_;
         param2.z = this.m02 * _loc3_ + this.m12 * _loc4_ + this.m22 * _loc5_;
     }
 
     public transformVectors(param1: Vector3d[], param2: Vector3d[]): void {
-        var _loc3_: Vector3d = null;
-        var _loc4_: Vector3d = null;
-        var _loc5_: number = param1.length
-        var _loc6_: number = 0;
+        let _loc3_: Vector3d = null;
+        let _loc4_: Vector3d = null;
+        let _loc5_: number = param1.length;
+        let _loc6_: number = 0;
         while (_loc6_ < _loc5_) {
             _loc3_ = param1[_loc6_];
             (_loc4_ = param2[_loc6_]).x = this.m00 * _loc3_.x + this.m01 * _loc3_.y + this.m02 * _loc3_.z + this.m03;
@@ -209,9 +203,9 @@ export class Matrix4 {
     }
 
     public transformVectorsN(param1: Vector3d[], param2: Vector3d[], param3: number): void {
-        var _loc4_: Vector3d = null;
-        var _loc5_: Vector3d = null;
-        var _loc6_: number = 0;
+        let _loc4_: Vector3d = null;
+        let _loc5_: Vector3d = null;
+        let _loc6_: number = 0;
         while (_loc6_ < param3) {
             _loc4_ = param1[_loc6_];
             (_loc5_ = param2[_loc6_]).x = this.m00 * _loc4_.x + this.m01 * _loc4_.y + this.m02 * _loc4_.z + this.m03;
@@ -222,13 +216,13 @@ export class Matrix4 {
     }
 
     public transformVectorsInverse(param1: Vector3d[], param2: Vector3d[]): void {
-        var _loc3_: Vector3d = null;
-        var _loc4_: Vector3d = null;
-        var _loc5_: number = NaN;
-        var _loc6_: number = NaN;
-        var _loc7_: number = NaN;
-        var _loc8_: number = param1.length;
-        var _loc9_: number = 0;
+        let _loc3_: Vector3d = null;
+        let _loc4_: Vector3d = null;
+        let _loc5_: number = NaN;
+        let _loc6_: number = NaN;
+        let _loc7_: number = NaN;
+        let _loc8_: number = param1.length;
+        let _loc9_: number = 0;
         while (_loc9_ < _loc8_) {
             _loc3_ = param1[_loc9_];
             _loc4_ = param2[_loc9_];
@@ -243,12 +237,12 @@ export class Matrix4 {
     }
 
     public transformVectorsInverseN(param1: Vector3d[], param2: Vector3d[], param3: number): void {
-        var _loc4_: Vector3d = null;
-        var _loc5_: Vector3d = null;
-        var _loc6_: number = NaN;
-        var _loc7_: number = NaN;
-        var _loc8_: number = NaN;
-        var _loc9_: number = 0;
+        let _loc4_: Vector3d = null;
+        let _loc5_: Vector3d = null;
+        let _loc6_: number = NaN;
+        let _loc7_: number = NaN;
+        let _loc8_: number = NaN;
+        let _loc9_: number = 0;
         while (_loc9_ < param3) {
             _loc4_ = param1[_loc9_];
             _loc5_ = param2[_loc9_];
@@ -262,7 +256,7 @@ export class Matrix4 {
         }
     }
 
-    public inPackageConst(param1: Vector3d): void {
+    public slaDoMatrix4(param1: Vector3d): void {
         this.getAxis(0, param1);
     }
 
@@ -359,14 +353,14 @@ export class Matrix4 {
     }
 
     public setRotationMatrix(param1: number, param2: number, param3: number): Matrix4 {
-        var _loc4_: number = Math.cos(param1);
-        var _loc5_: number = Math.sin(param1);
-        var _loc6_: number = Math.cos(param2);
-        var _loc7_: number = Math.sin(param2);
-        var _loc8_: number = Math.cos(param3);
-        var _loc9_: number = Math.sin(param3);
-        var _loc10_: number = _loc8_ * _loc7_;
-        var _loc11_: number = _loc9_ * _loc7_;
+        let _loc4_: number = Math.cos(param1);
+        let _loc5_: number = Math.sin(param1);
+        let _loc6_: number = Math.cos(param2);
+        let _loc7_: number = Math.sin(param2);
+        let _loc8_: number = Math.cos(param3);
+        let _loc9_: number = Math.sin(param3);
+        let _loc10_: number = _loc8_ * _loc7_;
+        let _loc11_: number = _loc9_ * _loc7_;
         this.m00 = _loc8_ * _loc6_;
         this.m01 = _loc10_ * _loc5_ - _loc9_ * _loc4_;
         this.m02 = _loc10_ * _loc4_ + _loc9_ * _loc5_;
@@ -379,20 +373,19 @@ export class Matrix4 {
         return this;
     }
 
-    //     public §9!A§(param1: Object3D): void
-    //    {
-    //         this.setMatrix(param1.x, param1.y, param1.z, param1.rotationX, param1.rotationY, param1.rotationZ);
-    //     }
+    public setMatrixDoMatrix(param1: any /*any*/): void {
+        this.setMatrix(param1.x, param1.y, param1.z, param1.rotationX, param1.rotationY, param1.rotationZ);
+    }
 
     public setMatrix(param1: number, param2: number, param3: number, param4: number, param5: number, param6: number): Matrix4 {
-        var _loc7_: number = Math.cos(param4);
-        var _loc8_: number = Math.sin(param4);
-        var _loc9_: number = Math.cos(param5);
-        var _loc10_: number = Math.sin(param5);
-        var _loc11_: number = Math.cos(param6);
-        var _loc12_: number = Math.sin(param6);
-        var _loc13_: number = _loc11_ * _loc10_;
-        var _loc14_: number = _loc12_ * _loc10_;
+        let _loc7_: number = Math.cos(param4);
+        let _loc8_: number = Math.sin(param4);
+        let _loc9_: number = Math.cos(param5);
+        let _loc10_: number = Math.sin(param5);
+        let _loc11_: number = Math.cos(param6);
+        let _loc12_: number = Math.sin(param6);
+        let _loc13_: number = _loc11_ * _loc10_;
+        let _loc14_: number = _loc12_ * _loc10_;
         this.m00 = _loc11_ * _loc9_;
         this.m01 = _loc13_ * _loc8_ - _loc12_ * _loc7_;
         this.m02 = _loc13_ * _loc7_ + _loc12_ * _loc8_;
@@ -439,17 +432,17 @@ export class Matrix4 {
     }
 
     public toString(): String {
-        return 'Matrix4'
+        return "Matrix4 [" + this.m00.toFixed(3) + " " + this.m01.toFixed(3) + " " + this.m02.toFixed(3) + " " + this.m03.toFixed(3) + "] [" + this.m10.toFixed(3) + " " + this.m11.toFixed(3) + " " + this.m12.toFixed(3) + " " + this.m13.toFixed(3) + "] [" + this.m20.toFixed(3) + " " + this.m21.toFixed(3) + " " + this.m22.toFixed(3) + " " + this.m23.toFixed(3) + ")";
         // return getQualifiedClassName(this) + " (" + this.m00.toFixed(3) + " " + this.m01.toFixed(3) + " " + this.m02.toFixed(3) + " " + this.m03.toFixed(3) + "] [" + this.m10.toFixed(3) + " " + this.m11.toFixed(3) + " " + this.m12.toFixed(3) + " " + this.m13.toFixed(3) + "] [" + this.m20.toFixed(3) + " " + this.m21.toFixed(3) + " " + this.m22.toFixed(3) + " " + this.m23.toFixed(3) + ")";
     }
 
     public fromAxisAngle(param1: Vector3d, param2: number): void {
-        var _loc3_: number = Math.cos(param2);
-        var _loc4_: number = Math.sin(param2);
-        var _loc5_: number = 1 - _loc3_;
-        var _loc6_: number = param1.x;
-        var _loc7_: number = param1.y;
-        var _loc8_: number = param1.z;
+        let _loc3_: number = Math.cos(param2);
+        let _loc4_: number = Math.sin(param2);
+        let _loc5_: number = 1 - _loc3_;
+        let _loc6_: number = param1.x;
+        let _loc7_: number = param1.y;
+        let _loc8_: number = param1.z;
         this.m00 = _loc5_ * _loc6_ * _loc6_ + _loc3_;
         this.m01 = _loc5_ * _loc6_ * _loc7_ - _loc8_ * _loc4_;
         this.m02 = _loc5_ * _loc6_ * _loc8_ + _loc7_ * _loc4_;
@@ -461,8 +454,8 @@ export class Matrix4 {
         this.m22 = _loc5_ * _loc8_ * _loc8_ + _loc3_;
     }
 
-    // public setFromMatrix3D(param1: Matrix3D): void {
-    //     var _loc2_: number[] = param1.rawData;
-    //     this.init(_loc2_[0], _loc2_[4], _loc2_[8], _loc2_[12], _loc2_[1], _loc2_[5], _loc2_[9], _loc2_[13], _loc2_[2], _loc2_[6], _loc2_[10], _loc2_[14]);
-    // }
+    public setFromMatrix3D(param1: any/*Matrix3D*/): void {
+        let _loc2_: number[] = param1.rawData;
+        this.init(_loc2_[0], _loc2_[4], _loc2_[8], _loc2_[12], _loc2_[1], _loc2_[5], _loc2_[9], _loc2_[13], _loc2_[2], _loc2_[6], _loc2_[10], _loc2_[14]);
+    }
 }

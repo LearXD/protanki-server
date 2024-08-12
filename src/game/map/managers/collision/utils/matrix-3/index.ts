@@ -1,18 +1,16 @@
-import { Vector3d } from "../vector-3d";
-
+import { Vector3d } from "@/utils/vector-3d";
 
 export class Matrix3 {
 
-    public static ZERO: Matrix3 = new Matrix3(0, 0, 0, 0, 0, 0, 0, 0, 0);
+    public static readonly ZERO: Matrix3 = new Matrix3(0, 0, 0, 0, 0, 0, 0, 0, 0);
 
-    public static IDENTITY: Matrix3 = new Matrix3();
+    public static readonly IDENTITY: Matrix3 = new Matrix3();
 
-    private static readonly nullForIn: Vector3d = new Vector3d();
+    private static vec0: Vector3d = new Vector3d();
 
-    private static readonly some1: Vector3d = new Vector3d();
+    private static vec1: Vector3d = new Vector3d();
 
-    private static readonly some2: Vector3d = new Vector3d();
-
+    private static vec2: Vector3d = new Vector3d();
 
     public m00: number;
 
@@ -52,16 +50,16 @@ export class Matrix3 {
     }
 
     public invert(): Matrix3 {
-        var _loc1_: number = this.m00;
-        var _loc2_: number = this.m01;
-        var _loc3_: number = this.m02;
-        var _loc4_: number = this.m10;
-        var _loc5_: number = this.m11;
-        var _loc6_: number = this.m12;
-        var _loc7_: number = this.m20;
-        var _loc8_: number = this.m21;
-        var _loc9_: number = this.m22;
-        var _loc10_: number = 1 / (-_loc3_ * _loc5_ * _loc7_ + _loc2_ * _loc6_ * _loc7_ + _loc3_ * _loc4_ * _loc8_ - _loc1_ * _loc6_ * _loc8_ - _loc2_ * _loc4_ * _loc9_ + _loc1_ * _loc5_ * _loc9_);
+        let _loc1_: number = this.m00;
+        let _loc2_: number = this.m01;
+        let _loc3_: number = this.m02;
+        let _loc4_: number = this.m10;
+        let _loc5_: number = this.m11;
+        let _loc6_: number = this.m12;
+        let _loc7_: number = this.m20;
+        let _loc8_: number = this.m21;
+        let _loc9_: number = this.m22;
+        let _loc10_: number = 1 / (-_loc3_ * _loc5_ * _loc7_ + _loc2_ * _loc6_ * _loc7_ + _loc3_ * _loc4_ * _loc8_ - _loc1_ * _loc6_ * _loc8_ - _loc2_ * _loc4_ * _loc9_ + _loc1_ * _loc5_ * _loc9_);
         this.m00 = (_loc5_ * _loc9_ - _loc6_ * _loc8_) * _loc10_;
         this.m01 = (_loc3_ * _loc8_ - _loc2_ * _loc9_) * _loc10_;
         this.m02 = (_loc2_ * _loc6_ - _loc3_ * _loc5_) * _loc10_;
@@ -75,15 +73,15 @@ export class Matrix3 {
     }
 
     public append(param1: Matrix3): Matrix3 {
-        var _loc2_: number = this.m00;
-        var _loc3_: number = this.m01;
-        var _loc4_: number = this.m02;
-        var _loc5_: number = this.m10;
-        var _loc6_: number = this.m11;
-        var _loc7_: number = this.m12;
-        var _loc8_: number = this.m20;
-        var _loc9_: number = this.m21;
-        var _loc10_: number = this.m22;
+        let _loc2_: number = this.m00;
+        let _loc3_: number = this.m01;
+        let _loc4_: number = this.m02;
+        let _loc5_: number = this.m10;
+        let _loc6_: number = this.m11;
+        let _loc7_: number = this.m12;
+        let _loc8_: number = this.m20;
+        let _loc9_: number = this.m21;
+        let _loc10_: number = this.m22;
         this.m00 = param1.m00 * _loc2_ + param1.m01 * _loc5_ + param1.m02 * _loc8_;
         this.m01 = param1.m00 * _loc3_ + param1.m01 * _loc6_ + param1.m02 * _loc9_;
         this.m02 = param1.m00 * _loc4_ + param1.m01 * _loc7_ + param1.m02 * _loc10_;
@@ -97,15 +95,15 @@ export class Matrix3 {
     }
 
     public prepend(param1: Matrix3): Matrix3 {
-        var _loc2_: number = this.m00;
-        var _loc3_: number = this.m01;
-        var _loc4_: number = this.m02;
-        var _loc5_: number = this.m10;
-        var _loc6_: number = this.m11;
-        var _loc7_: number = this.m12;
-        var _loc8_: number = this.m20;
-        var _loc9_: number = this.m21;
-        var _loc10_: number = this.m22;
+        let _loc2_: number = this.m00;
+        let _loc3_: number = this.m01;
+        let _loc4_: number = this.m02;
+        let _loc5_: number = this.m10;
+        let _loc6_: number = this.m11;
+        let _loc7_: number = this.m12;
+        let _loc8_: number = this.m20;
+        let _loc9_: number = this.m21;
+        let _loc10_: number = this.m22;
         this.m00 = _loc2_ * param1.m00 + _loc3_ * param1.m10 + _loc4_ * param1.m20;
         this.m01 = _loc2_ * param1.m01 + _loc3_ * param1.m11 + _loc4_ * param1.m21;
         this.m02 = _loc2_ * param1.m02 + _loc3_ * param1.m12 + _loc4_ * param1.m22;
@@ -119,15 +117,15 @@ export class Matrix3 {
     }
 
     public prependTransposed(param1: Matrix3): Matrix3 {
-        var _loc2_: number = this.m00;
-        var _loc3_: number = this.m01;
-        var _loc4_: number = this.m02;
-        var _loc5_: number = this.m10;
-        var _loc6_: number = this.m11;
-        var _loc7_: number = this.m12;
-        var _loc8_: number = this.m20;
-        var _loc9_: number = this.m21;
-        var _loc10_: number = this.m22;
+        let _loc2_: number = this.m00;
+        let _loc3_: number = this.m01;
+        let _loc4_: number = this.m02;
+        let _loc5_: number = this.m10;
+        let _loc6_: number = this.m11;
+        let _loc7_: number = this.m12;
+        let _loc8_: number = this.m20;
+        let _loc9_: number = this.m21;
+        let _loc10_: number = this.m22;
         this.m00 = _loc2_ * param1.m00 + _loc3_ * param1.m01 + _loc4_ * param1.m02;
         this.m01 = _loc2_ * param1.m10 + _loc3_ * param1.m11 + _loc4_ * param1.m12;
         this.m02 = _loc2_ * param1.m20 + _loc3_ * param1.m21 + _loc4_ * param1.m22;
@@ -167,7 +165,7 @@ export class Matrix3 {
     }
 
     public transpose(): Matrix3 {
-        var _loc1_: number = this.m01;
+        let _loc1_: number = this.m01;
         this.m01 = this.m10;
         this.m10 = _loc1_;
         _loc1_ = this.m02;
@@ -191,7 +189,7 @@ export class Matrix3 {
         param2.z = this.m02 * param1.x + this.m12 * param1.y + this.m22 * param1.z;
     }
 
-    public transformVector3To3D(param1: Vector3d, param2: Vector3d): void {
+    public transformVector3To3D(param1: Vector3d, param2: any/*Vector3D*/): void {
         param2.x = this.m00 * param1.x + this.m01 * param1.y + this.m02 * param1.z;
         param2.y = this.m10 * param1.x + this.m11 * param1.y + this.m12 * param1.z;
         param2.z = this.m20 * param1.x + this.m21 * param1.y + this.m22 * param1.z;
@@ -222,14 +220,14 @@ export class Matrix3 {
     }
 
     public setRotationMatrix(param1: number, param2: number, param3: number): Matrix3 {
-        var _loc4_: number = Math.cos(param1);
-        var _loc5_: number = Math.sin(param1);
-        var _loc6_: number = Math.cos(param2);
-        var _loc7_: number = Math.sin(param2);
-        var _loc8_: number = Math.cos(param3);
-        var _loc9_: number = Math.sin(param3);
-        var _loc10_: number = _loc8_ * _loc7_;
-        var _loc11_: number = _loc9_ * _loc7_;
+        let _loc4_: number = Math.cos(param1);
+        let _loc5_: number = Math.sin(param1);
+        let _loc6_: number = Math.cos(param2);
+        let _loc7_: number = Math.sin(param2);
+        let _loc8_: number = Math.cos(param3);
+        let _loc9_: number = Math.sin(param3);
+        let _loc10_: number = _loc8_ * _loc7_;
+        let _loc11_: number = _loc9_ * _loc7_;
         this.m00 = _loc8_ * _loc6_;
         this.m01 = _loc10_ * _loc5_ - _loc9_ * _loc4_;
         this.m02 = _loc10_ * _loc4_ + _loc9_ * _loc5_;
@@ -242,18 +240,17 @@ export class Matrix3 {
         return this;
     }
 
-    //   public setRotationMatrixForObject3D(param1:Object3d) : void
-    //   {
-    //      this.setRotationMatrix(param1.rotationX,param1.rotationY,param1.rotationZ);
-    //   }
+    public setRotationMatrixForObject3D(param1: any/*Object3D*/): void {
+        this.setRotationMatrix(param1.rotationX, param1.rotationY, param1.rotationZ);
+    }
 
     public fromAxisAngle(param1: Vector3d, param2: number): void {
-        var _loc3_: number = Math.cos(param2);
-        var _loc4_: number = Math.sin(param2);
-        var _loc5_: number = 1 - _loc3_;
-        var _loc6_: number = param1.x;
-        var _loc7_: number = param1.y;
-        var _loc8_: number = param1.z;
+        let _loc3_: number = Math.cos(param2);
+        let _loc4_: number = Math.sin(param2);
+        let _loc5_: number = 1 - _loc3_;
+        let _loc6_: number = param1.x;
+        let _loc7_: number = param1.y;
+        let _loc8_: number = param1.z;
         this.m00 = _loc5_ * _loc6_ * _loc6_ + _loc3_;
         this.m01 = _loc5_ * _loc6_ * _loc7_ - _loc8_ * _loc4_;
         this.m02 = _loc5_ * _loc6_ * _loc8_ + _loc7_ * _loc4_;
@@ -270,8 +267,8 @@ export class Matrix3 {
     }
 
     public toString(): String {
-        return 'Matrix3';
-        //  return getQualifiedClassName(this) + " (" + this.m00 + ", " + this.m01 + ", " + this.m02 + "), (" + this.m10 + ", " + this.m11 + ", " + this.m12 + "), (" + this.m20 + ", " + this.m21 + ", " + this.m22 + ")";
+        return "Matrix3 (" + this.m00 + ", " + this.m01 + ", " + this.m02 + "), (" + this.m10 + ", " + this.m11 + ", " + this.m12 + "), (" + this.m20 + ", " + this.m21 + ", " + this.m22 + ")";
+        // return getQualifiedClassName(this) + " (" + this.m00 + ", " + this.m01 + ", " + this.m02 + "), (" + this.m10 + ", " + this.m11 + ", " + this.m12 + "), (" + this.m20 + ", " + this.m21 + ", " + this.m22 + ")";
     }
 
     public getEulerAngles(param1: Vector3d): void {
@@ -288,7 +285,7 @@ export class Matrix3 {
         }
     }
 
-    public inPackageConst(param1: Vector3d): void {
+    public slaDoMatrix4(param1: Vector3d): void {
         this.getAxis(0, param1);
     }
 
@@ -313,20 +310,20 @@ export class Matrix3 {
         }
     }
 
-    public menosHashtagG(param1: Vector3d): void {
-        Matrix3.some1.copy(param1).normalize();
-        if (Matrix3.some1.dot(Vector3d.X_AXIS) < 0.9) {
-            Matrix3.some2.cross2(Vector3d.X_AXIS, Matrix3.some1);
+    public sla1Matrix3(param1: Vector3d): void {
+        Matrix3.vec1.copy(param1).normalize();
+        if (Matrix3.vec1.dot(Vector3d.X_AXIS) < 0.9) {
+            Matrix3.vec2.cross2(Vector3d.X_AXIS, Matrix3.vec1);
         }
         else {
-            Matrix3.some2.cross2(Matrix3.some1, Vector3d.Y_AXIS);
+            Matrix3.vec2.cross2(Matrix3.vec1, Vector3d.Y_AXIS);
         }
-        Matrix3.some2.normalize();
-        Matrix3.nullForIn.cross2(Matrix3.some1, Matrix3.some2).normalize();
-        this.seisHashtagE(Matrix3.nullForIn, Matrix3.some1, Matrix3.some2);
+        Matrix3.vec2.normalize();
+        Matrix3.vec0.cross2(Matrix3.vec1, Matrix3.vec2).normalize();
+        this.sla2Matrix3(Matrix3.vec0, Matrix3.vec1, Matrix3.vec2);
     }
 
-    public seisHashtagE(param1: Vector3d, param2: Vector3d, param3: Vector3d): void {
+    public sla2Matrix3(param1: Vector3d, param2: Vector3d, param3: Vector3d): void {
         this.m00 = param1.x;
         this.m01 = param2.x;
         this.m02 = param3.x;

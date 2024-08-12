@@ -12,11 +12,12 @@ export class RayHit {
 
     public t: number = 0;
 
-    public staticHit: Boolean;
+    public staticHit: boolean;
 
     public constructor() {
         this.position = new Vector3d();
         this.normal = new Vector3d();
+        //  super();
     }
 
     public copy(param1: RayHit): void {

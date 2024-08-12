@@ -1,4 +1,4 @@
-import { AABB } from "@/utils/aabb";
+import { AABB } from "../aabb";
 import { CollisionKdTree2D } from "../collision-kd-tree-2d";
 
 export class CollisionKdNode {
@@ -21,6 +21,10 @@ export class CollisionKdNode {
     public positiveNode: CollisionKdNode;
 
     public negativeNode: CollisionKdNode;
+
+    public constructor() {
+        //  super();
+    }
 
     public destroy(): void {
         if (this.positiveNode) {

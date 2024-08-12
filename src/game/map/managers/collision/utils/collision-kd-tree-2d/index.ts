@@ -1,20 +1,20 @@
-import { AABB } from "@/utils/aabb";
-import { CollisionKdTree } from "../collision-kd-tree";
+import { AABB } from "../aabb";
 import { CollisionKdNode } from "../collision-kd-node";
+import { CollisionKdTree } from "../collision-kd-tree";
 
 export class CollisionKdTree2D {
 
-    private static readonly nodeBoundBoxThreshold: AABB = new AABB();
+    private static nodeBoundBoxThreshold: AABB = new AABB();
 
-    private static readonly splitCoordsX: number[] = [];
+    private static splitCoordsX: number[] = [];
 
-    private static readonly splitCoordsY: number[] = [];
+    private static splitCoordsY: number[] = [];
 
-    private static readonly splitCoordsZ: number[] = [];
+    private static splitCoordsZ: number[] = [];
 
-    private static readonly _nodeBB: number[] = Array.from({ length: 6 }, () => 0)
+    private static _nodeBB: number[] = []
 
-    private static readonly _bb: number[] = Array.from({ length: 6 }, () => 0);
+    private static _bb: number[] = []
 
 
     public threshold: number = 0.1;
@@ -43,7 +43,7 @@ export class CollisionKdTree2D {
         this.rootNode = new CollisionKdNode();
         this.rootNode.boundBox = this.parentNode.boundBox.clone();
         this.rootNode.indices = [];
-        var _loc1_: number = this.parentNode.splitIndices.length;
+        var _loc1_: number = (this.parentNode.splitIndices.length);
         var _loc2_: number = 0;
         while (_loc2_ < _loc1_) {
             this.rootNode.indices[_loc2_] = this.parentNode.splitIndices[_loc2_];
@@ -77,7 +77,7 @@ export class CollisionKdTree2D {
         CollisionKdTree2D.nodeBoundBoxThreshold.maxZ = _loc5_.maxZ - this.threshold;
         var _loc12_: number = this.threshold * 2;
         var _loc13_: AABB[] = this.parentTree.staticBoundBoxes;
-        var _loc14_: number = _loc2_.length;
+        var _loc14_: number = (_loc2_.length);
         _loc3_ = 0;
         while (_loc3_ < _loc14_) {
             _loc9_ = _loc13_[_loc2_[_loc3_]];
@@ -152,8 +152,8 @@ export class CollisionKdTree2D {
         _loc3_ = 0;
         while (_loc3_ < _loc14_) {
             _loc9_ = _loc13_[_loc2_[_loc3_]];
-            _loc10_ = _loc15_ ? _loc9_.minX : (_loc16_ ? _loc9_.minY : _loc9_.minZ);
-            if ((_loc11_ = _loc15_ ? _loc9_.maxX : (_loc16_ ? _loc9_.maxY : _loc9_.maxZ)) <= _loc18_) {
+            _loc10_ = _loc15_ ? (_loc9_.minX) : (_loc16_ ? (_loc9_.minY) : (_loc9_.minZ));
+            if ((_loc11_ = _loc15_ ? (_loc9_.maxX) : (_loc16_ ? (_loc9_.maxY) : (_loc9_.maxZ))) <= _loc18_) {
                 if (_loc10_ < _loc17_) {
                     if (param1.negativeNode.indices == null) {
                         param1.negativeNode.indices = [];
@@ -203,7 +203,7 @@ export class CollisionKdTree2D {
         var _loc10_: number = NaN;
         var _loc11_: number = 0;
         var _loc12_: number = 0;
-        var _loc13_: Boolean = false;
+        var _loc13_: boolean = false;
         var _loc14_: number = 0;
         var _loc15_: number = 0;
         var _loc16_: number = NaN;
@@ -219,11 +219,11 @@ export class CollisionKdTree2D {
                 _loc7_ = _loc6_ - this.threshold;
                 _loc8_ = _loc6_ + this.threshold;
                 _loc9_ = _loc20_ * (_loc6_ - param5[param2]);
-                _loc10_ = _loc20_ * (param5[param2 + 3] - _loc6_);
+                _loc10_ = _loc20_ * (param5[(param2 + 3)] - _loc6_);
                 _loc11_ = 0;
                 _loc12_ = 0;
                 _loc13_ = false;
-                _loc14_ = param1.indices.length;
+                _loc14_ = (param1.indices.length);
                 _loc15_ = 0;
                 while (_loc15_ < _loc14_) {
                     _loc17_ = _loc21_[param1.indices[_loc15_]];
