@@ -18,7 +18,7 @@ import { ChatManager } from './managers/chat';
 import { CommandsManager } from './managers/commands';
 import { BattlesManager } from './managers/battles';
 import { MapsManager } from './managers/maps';
-import { GarageManager } from './managers/garage';
+import { Garage } from './managers/garage';
 import { ShopManager } from './managers/shop';
 import { RankManager } from './managers/rank';
 
@@ -48,7 +48,7 @@ export class Server {
     public readonly chatManager: ChatManager = new ChatManager(this);
     public readonly commandsManager: CommandsManager = new CommandsManager();
     public readonly battleManager: BattlesManager = new BattlesManager(this);
-    public readonly garageManager: GarageManager = new GarageManager(this);
+    public readonly garageManager: Garage = new Garage(this);
     public readonly shopManager: ShopManager = new ShopManager(this);
 
     private static instance: Server;

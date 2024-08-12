@@ -50,12 +50,6 @@ export class BattleCollisionsManager {
         }
 
         for (const object of this.objects.values()) {
-            // Logger.debug()
-            // Logger.debug(object.name)
-            // Logger.debug(object.position.toString())
-            // Logger.debug(position.toString())
-            // Logger.debug(position.distanceTo(object.position))
-            // Logger.debug()
             if (object.isColliding(position)) {
                 const collided = object.handleCollision(player);
                 if (collided) {

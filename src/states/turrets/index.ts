@@ -1,4 +1,4 @@
-export enum Turret {
+export enum Turrets {
     SMOKY = 'smoky',
     FLAMETHROWER = 'flamethrower',
     RAILGUN = 'railgun',

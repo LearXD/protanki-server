@@ -1,5 +1,5 @@
-import { Turret } from "@/states/turret";
-import { TurretHandler } from "..";
+import { Turrets } from "@/states/turrets";
+import { Turret } from "..";
 import { SendFlameTargetsShotPacket } from "../../../../../network/packets/send-flame-targets-shot";
 import { SendStartFlameShotPacket } from "../../../../../network/packets/send-start-flame-shot";
 import { SendStopFlameShotPacket } from "../../../../../network/packets/send-stop-flame-shot";
@@ -9,14 +9,14 @@ import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { Player } from "../../../../player";
 import { IDamageModifiers } from "@/game/battle/managers/combat/types";
 
-export class FlamethrowerHandler extends TurretHandler {
+export class FlamethrowerHandler extends Turret {
 
     public getTurret() {
-        return Turret.FLAMETHROWER;
+        return Turrets.FLAMETHROWER;
     }
 
     public getDamagePerSecond(): number {
-        const damage = this.getItemSubProperty("DAMAGE_PER_SECOND", "DAMAGE_PER_PERIOD");
+        const damage = this.getSubProperty("DAMAGE_PER_SECOND", "DAMAGE_PER_PERIOD");
         if (!damage) {
             return 0
         }
@@ -24,7 +24,7 @@ export class FlamethrowerHandler extends TurretHandler {
     }
 
     public getTemperatureLimit() {
-        const limit = this.getItemSubProperty("FIRE_DAMAGE", "FLAME_TEMPERATURE_LIMIT")
+        const limit = this.getSubProperty("FIRE_DAMAGE", "FLAME_TEMPERATURE_LIMIT")
         if (!limit) {
             return 0
         }
@@ -37,9 +37,7 @@ export class FlamethrowerHandler extends TurretHandler {
         return damage;
     }
 
-    public handleDamaged(target: Player, damage: number, modifiers: IDamageModifiers) {
-        super.handleDamage(target, damage, modifiers);
-
+    public onDamage(target: Player, damage: number, modifiers: IDamageModifiers) {
         const temperatureLimit = this.getTemperatureLimit();
         const temperature = target.tank.getTemperature();
 

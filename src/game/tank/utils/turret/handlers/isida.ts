@@ -1,5 +1,5 @@
-import { Turret } from "@/states/turret";
-import { TurretHandler } from "..";
+import { Turrets } from "@/states/turrets";
+import { Turret } from "..";
 import { SendIsisTargetShotPacket } from "../../../../../network/packets/send-isis-target-shot";
 import { SendStartIsisShotPacket } from "../../../../../network/packets/send-start-isis-shot";
 import { SendStopIsisShotPacket } from "../../../../../network/packets/send-stop-isis-shot";
@@ -12,22 +12,22 @@ import { Player } from "../../../../player";
 import { IDamageModifiers } from "@/game/battle/managers/combat/types";
 import { SendIsisShotPositionPacket } from "@/network/packets/send-isis-shot-position";
 
-export class IsidaHandler extends TurretHandler {
+export class IsidaHandler extends Turret {
 
     public startedAt: number = 0;
     public targetShot: SendIsisTargetShotPacket = null;
 
     public getTurret() {
-        return Turret.ISIDA;
+        return Turrets.ISIDA;
     }
 
     public getHealingPerPeriod(): number {
-        const healing = this.getItemSubProperty("ISIS_HEALING_PER_SECOND", "ISIS_HEALING_PER_PERIOD")
+        const healing = this.getSubProperty("ISIS_HEALING_PER_SECOND", "ISIS_HEALING_PER_PERIOD")
         return healing ? parseInt(healing.value) : 0;
     }
 
     public getDamagePerPeriod(): number {
-        const damage = this.getItemSubProperty("ISIS_DAMAGE", "DAMAGE_PER_PERIOD")
+        const damage = this.getSubProperty("ISIS_DAMAGE", "DAMAGE_PER_PERIOD")
         return damage ? parseInt(damage.value) : 0;
     }
 
@@ -36,10 +36,6 @@ export class IsidaHandler extends TurretHandler {
             return this.getDamagePerPeriod() / 4;
         }
         return this.getHealingPerPeriod() / 4;
-    }
-
-    public handleDamaged(target: Player, damage: number, modifiers: IDamageModifiers) {
-        super.handleDamage(target, damage, modifiers);
     }
 
     public handlePacket(packet: SimplePacket): void {

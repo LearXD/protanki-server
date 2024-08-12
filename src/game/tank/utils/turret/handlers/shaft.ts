@@ -1,5 +1,5 @@
-import { Turret } from "@/states/turret";
-import { TurretHandler } from "..";
+import { Turrets } from "@/states/turrets";
+import { Turret } from "..";
 import { SendMoveShaftVerticalAxisPacket } from "../../../../../network/packets/send-move-shaft-vertical-axis";
 import { SendOpenShaftAimPacket } from "../../../../../network/packets/send-open-shaft-aim";
 import { SendShaftAimShotPacket } from "../../../../../network/packets/send-shaft-aim-shot";
@@ -18,17 +18,17 @@ import { MathUtils } from "../../../../../utils/math";
 import { IDamageModifiers } from "../../../../battle/managers/combat/types";
 import { Player } from "../../../../player";
 
-export class ShaftHandler extends TurretHandler {
+export class ShaftHandler extends Turret {
 
     private aiming: boolean = false;
 
     public getTurret() {
-        return Turret.SHAFT;
+        return Turrets.SHAFT;
     }
 
     public getDamageRange() {
-        const min = this.getItemSubProperty("DAMAGE", "DAMAGE_FROM")
-        const max = this.getItemSubProperty("DAMAGE", "DAMAGE_TO")
+        const min = this.getSubProperty("DAMAGE", "DAMAGE_FROM")
+        const max = this.getSubProperty("DAMAGE", "DAMAGE_TO")
 
         return {
             min: parseInt(min.value),
@@ -37,12 +37,12 @@ export class ShaftHandler extends TurretHandler {
     }
 
     public getImpactForce() {
-        const chance = this.getItemProperty("IMPACT_FORCE");
+        const chance = this.getProperty("IMPACT_FORCE");
         return parseInt(chance.value)
     }
 
     public getMaxAimingDamage() {
-        const damage = this.getItemSubProperty("AIMING_MODE_DAMAGE", "SHAFT_AIMING_MODE_MAX_DAMAGE")
+        const damage = this.getSubProperty("AIMING_MODE_DAMAGE", "SHAFT_AIMING_MODE_MAX_DAMAGE")
         return parseInt(damage.value)
     }
 
@@ -56,10 +56,6 @@ export class ShaftHandler extends TurretHandler {
         const damage = MathUtils.randomInt(range.min, range.max);
 
         return damage / modifiers.order;
-    }
-
-    public handleDamaged(target: Player, damage: number, modifiers: IDamageModifiers) {
-        super.handleDamage(target, damage, modifiers);
     }
 
     public handlePacket(packet: SimplePacket): void {

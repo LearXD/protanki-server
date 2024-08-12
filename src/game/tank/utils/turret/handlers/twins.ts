@@ -1,5 +1,5 @@
-import { Turret } from "@/states/turret";
-import { TurretHandler } from "..";
+import { Turrets } from "@/states/turrets";
+import { Turret } from "..";
 import { SendTwinsHitPointShotPacket } from "../../../../../network/packets/send-twins-hit-point-shot";
 import { SendTwinsOverturnedShotPacket } from "../../../../../network/packets/send-twins-overturned-shot";
 import { SendTwinsShotPacket } from "../../../../../network/packets/send-twins-shot";
@@ -11,15 +11,15 @@ import { MathUtils } from "../../../../../utils/math";
 import { Player } from "../../../../player";
 import { IDamageModifiers } from "@/game/battle/managers/combat/types";
 
-export class TwinsHandler extends TurretHandler {
+export class TwinsHandler extends Turret {
 
     public getTurret() {
-        return Turret.TWINS;
+        return Turrets.TWINS;
     }
 
     public getDamageRange() {
-        const min = this.getItemSubProperty("DAMAGE", "DAMAGE_FROM")
-        const max = this.getItemSubProperty("DAMAGE", "DAMAGE_TO")
+        const min = this.getSubProperty("DAMAGE", "DAMAGE_FROM")
+        const max = this.getSubProperty("DAMAGE", "DAMAGE_TO")
 
         return {
             min: parseInt(min.value),
@@ -31,10 +31,6 @@ export class TwinsHandler extends TurretHandler {
         const range = this.getDamageRange()
         const damage = MathUtils.randomInt(range.min, range.max);
         return damage
-    }
-
-    public handleDamaged(target: Player, damage: number, modifiers: IDamageModifiers) {
-        super.handleDamage(target, damage, modifiers);
     }
 
     public handlePacket(packet: SimplePacket): void {

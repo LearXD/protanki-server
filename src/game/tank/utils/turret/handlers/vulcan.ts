@@ -1,5 +1,5 @@
-import { Turret } from "@/states/turret";
-import { TurretHandler } from "..";
+import { Turrets } from "@/states/turrets";
+import { Turret } from "..";
 import { SendStartVulcanShotPacket } from "../../../../../network/packets/send-start-vulcan-shot";
 import { SendStopVulcanShotPacket } from "../../../../../network/packets/send-stop-vulcan-shot";
 import { SendVulcanOverturnedShotPacket } from "../../../../../network/packets/send-vulcan-overturned-shot";
@@ -8,22 +8,22 @@ import { SetStartVulcanShotPacket } from "../../../../../network/packets/set-sta
 import { SetStopVulcanShotPacket } from "../../../../../network/packets/set-stop-vulcan-shot";
 import { ITarget, SetVulcanShotPacket } from "../../../../../network/packets/set-vulcan-shot";
 import { SimplePacket } from "../../../../../network/packets/simple-packet";
-import { Player } from "../../../../player";
 import { IDamageModifiers } from "@/game/battle/managers/combat/types";
+import { Player } from "@/game/player";
 
-export class VulcanHandler extends TurretHandler {
+export class VulcanHandler extends Turret {
 
     public getTurret() {
-        return Turret.VULCAN;
+        return Turrets.VULCAN;
     }
 
     public getDamagePerPeriod(): number {
-        const damage = this.getItemSubProperty("DAMAGE_PER_SECOND", "DAMAGE_PER_PERIOD");
+        const damage = this.getSubProperty("DAMAGE_PER_SECOND", "DAMAGE_PER_PERIOD");
         return damage ? parseInt(damage.value) / 2 : 0
     }
 
     public getShotRange(): number {
-        const range = this.getItemSubProperty("SHOT_RANGE", "WEAPON_MIN_DAMAGE_RADIUS");
+        const range = this.getSubProperty("SHOT_RANGE", "WEAPON_MIN_DAMAGE_RADIUS");
         return range ? parseInt(range.value) : 0
     }
 
@@ -32,8 +32,8 @@ export class VulcanHandler extends TurretHandler {
         return damage;
     }
 
-    public handleDamaged(target: Player, damage: number, modifiers: IDamageModifiers) {
-        super.handleDamage(target, damage, modifiers);
+    public onAttack(target: Player, modifiers?: IDamageModifiers): void {
+
     }
 
     public handlePacket(packet: SimplePacket): void {

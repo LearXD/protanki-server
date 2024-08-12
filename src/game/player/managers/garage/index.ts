@@ -15,7 +15,7 @@ import { SimplePacket } from "../../../../network/packets/simple-packet";
 import { LayoutState } from "../../../../states/layout-state";
 import { Supply, SupplyType } from "../../../../states/supply";
 import { Logger } from "../../../../utils/logger";
-import { IGarageHull, IGaragePainting, IGarageTurret, IPlayerGarageData } from "../../utils/data/types";
+import { IGarageHull, IGaragePainting, IGarageTurret } from "../../utils/data/types";
 import { ResourceType } from "../../../../server/managers/resources/types";
 import { GarageItemUtils } from "./utils/item";
 import { ServerError } from "@/server/utils/error";
@@ -99,9 +99,9 @@ export class PlayerGarageManager {
         Logger.debug(`Upgrading item ${itemId} for player ${this.player.getUsername()}`);
 
         const item = this.player.server.garageManager.getItem(itemId);
-        const category = this.player.server.garageManager.getItemCategory(itemId);
+        // const category = this.player.server.garageManager.getItemCategory(itemId);
 
-        switch (category) {
+        switch (item.category) {
             case GarageItemCategory.TURRET: {
                 const turret = this.getTurret(item.id)
                 if (turret) {
@@ -354,7 +354,7 @@ export class PlayerGarageManager {
         const hulls = this.player.garageManager.getHulls();
         const paintings = this.player.garageManager.getPaintings();
 
-        for (const item of this.player.server.garageManager.getItems().values()) {
+        for (const item of this.player.server.garageManager.items.values()) {
             const category = item.category;
 
             if (category === GarageItemCategory.SUPPLY) {
@@ -408,7 +408,7 @@ export class PlayerGarageManager {
                 baseItemId: 948382,
                 previewResourceId: 948382,
                 rank: 1,
-                category: 'special',
+                category: GarageItemCategory.SPECIAL,
                 properts: [],
                 discount: {
                     percent: 0,

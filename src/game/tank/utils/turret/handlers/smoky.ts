@@ -1,5 +1,5 @@
-import { Turret } from "@/states/turret";
-import { TurretHandler } from "..";
+import { Turrets } from "@/states/turrets";
+import { Turret } from "..";
 import { SendSmokyHitPointShotPacket } from "../../../../../network/packets/send-smoky-hit-point-shot";
 import { SendSmokyTargetShotPacket } from "../../../../../network/packets/send-smoky-target-shot";
 import { SendSmokyVoidShotPacket } from "../../../../../network/packets/send-smoky-void-shot";
@@ -13,15 +13,15 @@ import { MathUtils } from "../../../../../utils/math";
 import { IDamageModifiers } from "../../../../battle/managers/combat/types";
 import { Player } from "../../../../player";
 
-export class SmokyHandler extends TurretHandler {
+export class SmokyHandler extends Turret {
 
     public getTurret() {
-        return Turret.SMOKY;
+        return Turrets.SMOKY;
     }
 
     public getDamageRange() {
-        const min = this.getItemSubProperty("DAMAGE", "DAMAGE_FROM")
-        const max = this.getItemSubProperty("DAMAGE", "DAMAGE_TO")
+        const min = this.getSubProperty("DAMAGE", "DAMAGE_FROM")
+        const max = this.getSubProperty("DAMAGE", "DAMAGE_TO")
 
         return {
             min: min ? parseInt(min.value) : 0,
@@ -30,17 +30,17 @@ export class SmokyHandler extends TurretHandler {
     }
 
     public getCriticalChance(): number {
-        const chance = this.getItemProperty("CRITICAL_HIT_CHANCE");
+        const chance = this.getProperty("CRITICAL_HIT_CHANCE");
         return chance ? parseInt(chance.value) : 0
     }
 
     public getCriticalDamage(): number {
-        const damage = this.getItemProperty("CRITICAL_HIT_DAMAGE");
+        const damage = this.getProperty("CRITICAL_HIT_DAMAGE");
         return damage ? parseInt(damage.value) : 0
     }
 
     public getImpactForce() {
-        const force = this.getItemProperty("IMPACT_FORCE");
+        const force = this.getProperty("IMPACT_FORCE");
         // return force ? parseInt(force.value) : 0
         return 1.07
     }
@@ -56,10 +56,6 @@ export class SmokyHandler extends TurretHandler {
         Logger.debug('Distance: ' + modifiers.distance + ' Damage: ' + damage);
 
         return damage
-    }
-
-    public handleDamaged(target: Player, damage: number, modifiers: IDamageModifiers) {
-        super.handleDamage(target, damage, modifiers);
     }
 
     public handlePacket(packet: SimplePacket): void {

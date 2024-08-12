@@ -1,30 +1,24 @@
-import { Turret } from "@/states/turret";
-import { TurretHandler } from "..";
+import { Turrets } from "@/states/turrets";
+import { Turret } from "..";
 import { SendHammerOverturnedShotPacket } from "../../../../../network/packets/send-hammer-overturned-shot";
 import { SendHammerShotPacket } from "../../../../../network/packets/send-hammer-shot";
 import { ITarget, SetHammerShotPacket } from "../../../../../network/packets/set-hammer-shot";
 import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { Vector3d } from "../../../../../utils/vector-3d";
-import { Player } from "../../../../player";
-import { IDamageModifiers } from "@/game/battle/managers/combat/types";
 
-export class HammerHandler extends TurretHandler {
+export class HammerHandler extends Turret {
 
     public getTurret() {
-        return Turret.HAMMER;
+        return Turrets.HAMMER;
     }
 
     public getDamagePerPeriod() {
-        const property = this.getItemSubProperty('DAMAGE_PER_SECOND', 'DAMAGE_PER_PERIOD')
+        const property = this.getSubProperty('DAMAGE_PER_SECOND', 'DAMAGE_PER_PERIOD')
         return property ? parseInt(property.value) : 0;
     }
 
     public getDamage(): number {
         return this.getDamagePerPeriod()
-    }
-
-    public handleDamaged(target: Player, damage: number, modifiers: IDamageModifiers) {
-        super.handleDamage(target, damage, modifiers);
     }
 
     public handlePacket(packet: SimplePacket): void {

@@ -1,69 +1,55 @@
 import { Tank } from "../..";
 
-
 import { SimplePacket } from "../../../../network/packets/simple-packet";
 import { Vector3d } from "../../../../utils/vector-3d";
-import { Logger } from "../../../../utils/logger";
 import { IDamageModifiers } from "../../../battle/managers/combat/types";
 import { Player } from "../../../player";
 import { IGarageItem, ITurretProperties, ITurretSfx } from "@/server/managers/garage/types";
 import { GarageItemUtils } from "@/game/player/managers/garage/utils/item";
-import { Turret } from "@/states/turret";
+import { Turrets } from "@/states/turrets";
+import { GarageItem } from "@/server/managers/garage/utils/item";
 
-export abstract class TurretHandler {
+export abstract class Turret extends GarageItem {
+
+    public startedAt: number = 0;
+
+    public rotation: number = 0;
 
     public constructor(
         public readonly item: IGarageItem,
         public readonly properties: ITurretProperties,
         public readonly sfx: ITurretSfx,
         public readonly tank: Tank
-    ) { }
+    ) {
+        super(item)
+    }
 
-    public abstract getTurret(): Turret;
+    public abstract getTurret(): Turrets;
 
     public getName() {
         return GarageItemUtils.serialize(this.item.id, this.item.modificationID);
     }
 
-    public getItemProperty(name: string) {
-        return this.item.properts.find(({ property }) => property === name)
+    public getDamage(modifiers?: IDamageModifiers): number {
+        return 0
     }
 
-    public getItemSubProperty(primary: string, secondary: string) {
-        const property = this.getItemProperty(primary);
+    /**
+     * Called when the turret is attacking a player (is called even if the damage is not valid)
+     * @param target The player that is being attacked
+     * @param modifiers The damage modifiers
+     */
+    public onAttack(target: Player, modifiers?: IDamageModifiers): void { }
 
-        if (!property) {
-            Logger.warn(`${primary} property not found`);
-            return null;
-        }
+    /**
+     * This function is called when the damage is valid
+     * @param target The player that is being damaged
+     * @param damage The amount of damage
+     * @param modifiers The damage modifiers
+     */
+    public onDamage(target: Player, damage: number, modifiers: IDamageModifiers): void { }
 
-        const sub = property.subproperties.find(({ property }) => property === secondary)
-
-        if (!sub) {
-            Logger.warn(`${secondary} property not found`);
-            return null;
-        }
-
-        return sub;
-    }
-
-    public abstract getDamage(modifiers?: IDamageModifiers): number;
-
-    public abstract handlePacket(packet: SimplePacket): void
-
-    public abstract handleDamaged(target: Player, damage: number, modifiers: IDamageModifiers): void
-
-    public handleDamage(target: Player, damage: number, modifiers: IDamageModifiers): void {
-        Logger.debug(`Turret ${this.getName()} damaging ${target.getUsername()} with ${damage} damage`);
-
-        if (modifiers.enemy) {
-            return target.tank.damage(damage, this.tank.player, modifiers.critical);
-        }
-
-        return target.tank.heal(damage, this.tank.player);
-
-    }
-
+    // TODO: raycast to detect collision
     public splash(position: Vector3d, ignore: string[] = []): void {
         const battle = this.tank.battle;
         const players = battle.playersManager.getPlayers();
@@ -86,17 +72,17 @@ export abstract class TurretHandler {
         }
     }
 
-    public attack(target: string, modifiers?: IDamageModifiers): boolean {
+    public attack(player: string, modifiers?: IDamageModifiers): boolean {
         const battle = this.tank.battle;
-        const player = battle.playersManager.getPlayer(target);
+        const target = battle.playersManager.getPlayer(player);
 
         if (!player) return false;
 
-        const distance = player.tank.getPosition().distanceTo(this.tank.getPosition());
+        const distance = target.tank.getPosition().distanceTo(this.tank.getPosition());
 
         modifiers = {
             ...modifiers,
-            enemy: player.tank.isEnemy(this.tank),
+            enemy: target.tank.isEnemy(this.tank),
             distance
         }
 
@@ -106,17 +92,25 @@ export abstract class TurretHandler {
         }
 
         const damaged = modifiers.enemy ?
-            battle.combatManager.handleDamage(this.tank.player, player, damage, modifiers) :
-            battle.combatManager.handleHeal(this.tank.player, player, damage)
+            battle.combatManager.handleDamage(this.tank.player, target, damage, modifiers) :
+            battle.combatManager.handleHeal(this.tank.player, target, damage)
 
         if (damaged === null) {
             return false;
         }
 
         if (damaged > 0) {
-            this.handleDamaged(player, damaged, modifiers);
+            if (modifiers.enemy) {
+                target.tank.damage(damage, this.tank.player, modifiers.critical);
+                return
+            }
+
+            target.tank.heal(damage, this.tank.player);
+            return
         }
 
         return true;
     }
+
+    public abstract handlePacket(packet: SimplePacket): void
 }

@@ -4,14 +4,9 @@ import { Server } from '@/server';
 import { Logger } from '@/utils/logger';
 
 
-export class GarageManager {
+export class Garage {
 
     public items: Map<string, IGarageItem> = new Map();
-
-    static parseItemName(itemId: string) {
-        const [name, level] = itemId.split('_m');
-        return { name, level: parseInt(level) }
-    }
 
     public constructor(
         private readonly server: Server
@@ -63,8 +58,6 @@ export class GarageManager {
         this.items.set(`${item.id}_m${item.modificationID ?? 0}`, item);
     }
 
-    public getItems() { return this.items }
-
     public getItem(itemId: string) {
         return this.items.get(itemId);
     }
@@ -94,6 +87,9 @@ export class GarageManager {
             .getData(path.join('garage', _path));
     }
 
+    /**
+     * @deprecated test latter
+     */
     public getItemCategory(itemId: string) {
         const item = this.items.get(itemId);
 

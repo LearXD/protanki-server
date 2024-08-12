@@ -32,7 +32,7 @@ import { SetTankTurretAngleControlPacket } from "../../network/packets/set-tank-
 import { SendMoveTankAndTurretPacket } from "../../network/packets/send-move-tank-and-turret";
 import { SetMoveTankAndTurretPacket } from "../../network/packets/set-move-tank-and-turret";
 import { TurretUtils } from "./utils/turret/utils";
-import { TurretHandler } from "./utils/turret";
+import { Turret } from "./utils/turret";
 import { SetTankTemperaturePacket } from "../../network/packets/set-tank-temperature";
 import { SetTankDestroyedPacket } from "../../network/packets/set-tank-destroyed";
 import { TimeType } from "../battle/managers/task/types";
@@ -68,7 +68,7 @@ export class Tank {
 
     /** TANK POSITION */
     private position: Vector3d = new Vector3d(0, 0, 0);
-    private orientation: Vector3d = new Vector3d(0, 0, 0);
+    private rotation: Vector3d = new Vector3d(0, 0, 0); // yaw, pitch, roll
 
     /** BATTLE STATS */
     public score: number = 0;
@@ -76,7 +76,7 @@ export class Tank {
     public deaths: number = 0;
 
     /** TANK EQUIPMENTS */
-    public turret: TurretHandler
+    public turret: Turret
     public hull: Hull
     public painting: Painting
 
@@ -105,14 +105,14 @@ export class Tank {
                     packet.control = 0;
                     packet.impulse = new Vector3d(0, 0, 0);
                     packet.orientation = new Vector3d(
-                        axis === 'x' ? value : this.orientation.x,
-                        axis === 'y' ? value : this.orientation.y,
-                        axis === 'z' ? value : this.orientation.z
+                        axis === 'x' ? value : this.rotation.x,
+                        axis === 'y' ? value : this.rotation.y,
+                        axis === 'z' ? value : this.rotation.z
                     );
                     packet.position = this.position;
                     packet.tankId = this.player.getUsername();
 
-                    this.orientation = packet.orientation
+                    this.rotation = packet.orientation
                     this.player.sendPacket(packet);
                 }
             })
@@ -169,7 +169,7 @@ export class Tank {
         packet.impulse = new Vector3d(0, 0, 0);
         packet.tankId = this.player.getUsername();
         packet.position = position;
-        packet.orientation = this.orientation;
+        packet.orientation = this.rotation;
 
         this.battle.broadcastPacket(packet)
     }
@@ -279,10 +279,10 @@ export class Tank {
         this.position = spawn?.position ? Vector3d.fromInterface(spawn.position) : new Vector3d(0, 0, 0);
         this.position.add(new Vector3d(0, 200, 0));
 
-        this.orientation = spawn?.rotation ? Vector3d.fromInterface(spawn.rotation) : new Vector3d(0, 0, 0);
+        this.rotation = spawn?.rotation ? Vector3d.fromInterface(spawn.rotation) : new Vector3d(0, 0, 0);
         this.sendTankSpeed();
 
-        this.setCameraPosition(this.position, this.orientation)
+        this.setCameraPosition(this.position, this.rotation)
     }
 
     public spawn() {
@@ -303,7 +303,7 @@ export class Tank {
         setSpawnTankPacket.tankId = this.player.getUsername();
         setSpawnTankPacket.team = this.team;
         setSpawnTankPacket.position = this.position;
-        setSpawnTankPacket.orientation = this.orientation;
+        setSpawnTankPacket.orientation = this.rotation;
         setSpawnTankPacket.health = this.health;
         setSpawnTankPacket.incarnationId = this.incarnation;
 
@@ -547,7 +547,7 @@ export class Tank {
         //     this.battle.minesManager.placeMine(this.player)
         // }
 
-        this.orientation = orientation
+        this.rotation = orientation
         this.position = position;
 
         this.battle.collisionManager
@@ -665,7 +665,7 @@ export class Tank {
             turretResource: this.turret.item.object3ds,
             sfxData: JSON.stringify(this.turret.sfx),
             position: this.position.toObject(),
-            orientation: this.orientation.toObject(),
+            orientation: this.rotation.toObject(),
             incarnation: this.incarnation,
             tank_id: this.player.getUsername(),
             nickname: this.player.getUsername(),

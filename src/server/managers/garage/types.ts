@@ -1,24 +1,24 @@
-export interface IKitItem {
+export interface IGarageKitItem {
     count: number
     id: string
 }
 
-export interface IKit {
+export interface IGarageKit {
     image: number
     discountInPercent: number
-    kitItems: IKitItem[]
+    kitItems: IGarageKitItem[]
 }
 
-export interface IDiscount {
+export interface IGarageItemDiscount {
     percent: number
     timeLeftInSeconds: number
     timeToStartInSeconds: number
 }
 
-export interface IProperty {
+export interface IGarageItemProperty {
     property: string
     value: string
-    subproperties: IProperty[]
+    subproperties: IGarageItemProperty[]
 }
 
 export interface IGarageItem {
@@ -33,9 +33,9 @@ export interface IGarageItem {
     baseItemId: number
     previewResourceId: number
     rank: number
-    category: string
-    properts: IProperty[]
-    discount: IDiscount
+    category: GarageItemCategory
+    properts: IGarageItemProperty[]
+    discount: IGarageItemDiscount
     grouped: boolean
     isForRent: boolean
     price: number
@@ -43,7 +43,7 @@ export interface IGarageItem {
     modificationID?: number
     object3ds?: number
     coloring?: number
-    kit?: IKit
+    kit?: IGarageKit
     count?: number
 }
 
@@ -75,8 +75,6 @@ export interface ITurretProperties {
 
 export type ITurretSfx = { [key: string]: any }
 
-//{"maxSpeed":7,"maxTurnSpeed":1.5533430342749532,"acceleration":10.9,"reverseAcceleration":13.53,"sideAcceleration":10.53,"turnAcceleration":1.910786523672936,"reverseTurnAcceleration":3.8030723335692005,"mass":2410,"power":10.9,"dampingCoeff":2500}
-//{"maxSpeed":10,"maxTurnSpeed":1.584759014074073,"acceleration":10.41,"reverseAcceleration":17.77,"sideAcceleration":9.22,"turnAcceleration":2.864608986519448,"reverseTurnAcceleration":4.216192001874434,"mass":1616,"power":10.41,"dampingCoeff":1250}
 export interface IHullProperties {
     maxSpeed: number
     maxTurnSpeed: number

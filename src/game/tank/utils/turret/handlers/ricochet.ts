@@ -1,5 +1,5 @@
-import { Turret } from "@/states/turret";
-import { TurretHandler } from "..";
+import { Turrets } from "@/states/turrets";
+import { Turret } from "..";
 import { SendRicochetOverturnedShotPacket } from "../../../../../network/packets/send-ricochet-overturned-shot";
 import { SendRicochetShotPacket } from "../../../../../network/packets/send-ricochet-shot";
 import { SendRicochetTargetShotPacket } from "../../../../../network/packets/send-ricochet-target-shot";
@@ -11,15 +11,15 @@ import { MathUtils } from "../../../../../utils/math";
 import { Player } from "../../../../player";
 import { IDamageModifiers } from "@/game/battle/managers/combat/types";
 
-export class RicochetHandler extends TurretHandler {
+export class RicochetHandler extends Turret {
 
     public getTurret() {
-        return Turret.RICOCHET;
+        return Turrets.RICOCHET;
     }
 
     public getDamageRange() {
-        const min = this.getItemSubProperty("DAMAGE", "DAMAGE_FROM")
-        const max = this.getItemSubProperty("DAMAGE", "DAMAGE_TO")
+        const min = this.getSubProperty("DAMAGE", "DAMAGE_FROM")
+        const max = this.getSubProperty("DAMAGE", "DAMAGE_TO")
 
         return {
             min: parseInt(min.value),
@@ -31,10 +31,6 @@ export class RicochetHandler extends TurretHandler {
         const range = this.getDamageRange()
         const damage = MathUtils.randomInt(range.min, range.max);
         return damage
-    }
-
-    public handleDamaged(target: Player, damage: number, modifiers: IDamageModifiers) {
-        super.handleDamage(target, damage, modifiers);
     }
 
     public handlePacket(packet: SimplePacket): void {
