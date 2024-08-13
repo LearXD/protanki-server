@@ -98,7 +98,7 @@ import { SetSmokyTargetShotPacket } from "./packets/set-smoky-target-shot";
 import { SetTankControlPacket } from "./packets/set-tank-control";
 import { SetStartFlameShotPacket } from "./packets/set-start-flame-shot";
 import { SetTankTemperaturePacket } from "./packets/set-tank-temperature";
-import { SetTankDestroyedPacket } from "./packets/set-tank-destroyed";
+import { SetKillPacket } from "./packets/set-kill";
 import { SetBattleFundPacket } from "./packets/set-battle-fund";
 import { SetSpawnTankPacket } from "./packets/set-spawn-tank";
 import { SendMoveTankPacket } from "./packets/send-move-tank";
@@ -147,7 +147,7 @@ import { SetGarageItemsPacket } from "./packets/set-garage-items";
 import { SendCheckBattleNamePacket } from "./packets/send-check-battle-name";
 import { SetBattleNamePacket } from "./packets/set-battle-name";
 import { SendAutoDestroyPacket } from "./packets/send-auto-destroy";
-import { SetAutoDestroyPacket } from "./packets/set-auto-destroy";
+import { SetSuicidePacket } from "./packets/set-suicide";
 import { Logger } from "../utils/logger";
 import { SetLoginSuccessfulPacket } from "./packets/set-login-successful";
 import { SetRemoveTankEffectPacket } from "./packets/set-remove-tank-effect";
@@ -315,7 +315,7 @@ import { SetUserLeftBattlePacket } from "./packets/set-user-left-battle";
 import { SetDrugQuantityPacket } from "./packets/set-drug-quantity";
 import { SetCapturingPointPacket } from "./packets/set-capturing-point";
 import { SetDestroyTankPacket } from "./packets/set-destroy-tank";
-import { SetSuicideDelayPacket } from "./packets/set-suicide-delay";
+import { SetAutoDestroyDelayPacket } from "./packets/set-auto-destroy-delay";
 import { SetRemoveGaragePacket } from "./packets/set-remove-garage";
 import { SetOpenFriendsListPacket } from "./packets/set-open-friends-list";
 import { SetBattleNotFoundPacket } from "./packets/set-battle-not-found";
@@ -496,7 +496,7 @@ export class Network {
         this.registerPacket(Protocol.SET_TANK_SPEED, SetTankSpeedPacket)
         this.registerPacket(Protocol.SET_TANK_CONTROL, SetTankControlPacket)
         this.registerPacket(Protocol.SET_TANK_TEMPERATURE, SetTankTemperaturePacket)
-        this.registerPacket(Protocol.SET_TANK_DESTROYED, SetTankDestroyedPacket)
+        this.registerPacket(Protocol.SET_KILL_PACKET, SetKillPacket)
         this.registerPacket(Protocol.SET_TANK_FLAG, SetTankFlagPacket)
 
         this.registerPacket(Protocol.SET_SPAWN_TANK, SetSpawnTankPacket)
@@ -560,7 +560,7 @@ export class Network {
         this.registerPacket(Protocol.SEND_CHECK_BATTLE_NAME, SendCheckBattleNamePacket)
         this.registerPacket(Protocol.SET_BATTLE_NAME, SetBattleNamePacket)
         this.registerPacket(Protocol.SEND_AUTO_DESTROY, SendAutoDestroyPacket)
-        this.registerPacket(Protocol.SET_AUTO_DESTROY, SetAutoDestroyPacket)
+        this.registerPacket(Protocol.SET_SUICIDE, SetSuicidePacket)
 
         this.registerPacket(Protocol.SET_LOGIN_SUCCESSFUL, SetLoginSuccessfulPacket)
         this.registerPacket(Protocol.SEND_LAYOUT_STATE, SendLayoutStatePacket)
@@ -675,7 +675,7 @@ export class Network {
         this.registerPacket(Protocol.SET_DRUG_QUANTITY, SetDrugQuantityPacket);
         this.registerPacket(Protocol.SET_CAPTURING_POINT, SetCapturingPointPacket);
         this.registerPacket(Protocol.SET_DESTROY_TANK, SetDestroyTankPacket);
-        this.registerPacket(Protocol.SET_SUICIDE_DELAY, SetSuicideDelayPacket);
+        this.registerPacket(Protocol.SET_AUTO_DESTROY_DELAY, SetAutoDestroyDelayPacket);
         this.registerPacket(Protocol.SET_REMOVE_GARAGE, SetRemoveGaragePacket);
         this.registerPacket(Protocol.SET_OPEN_FRIENDS_LIST, SetOpenFriendsListPacket);
         this.registerPacket(Protocol.SET_BATTLE_NOT_FOUND, SetBattleNotFoundPacket);

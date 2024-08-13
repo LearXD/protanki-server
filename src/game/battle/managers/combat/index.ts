@@ -1,8 +1,7 @@
 import { Supply } from "@/states/supply";
 import { Battle } from "../..";
 import { SetDamageIndicatorsPacket } from "../../../../network/packets/set-damage-indicators";
-import { DamageIndicator, DamageIndicatorType } from "../../../../states/damage-indicator";
-import { Logger } from "../../../../utils/logger";
+import { DamageIndicatorType } from "../../../../states/damage-indicator";
 import { Player } from "../../../player";
 import { IDamageModifiers } from "./types";
 import { Turret } from "@/game/tank/utils/turret";
@@ -16,27 +15,14 @@ export class BattleCombatManager {
     ) { }
 
     /** OBTER O VALOR DO DANO REAL */
-    public static parseDamageValue(
-        damage: number,
-        protection: number
-    ) {
+    public static parseDamageValue(damage: number, protection: number) {
         return damage * 10000 / protection;
     }
 
     /** OBTER QUANTO UM VALOR BRUTO EQUIVALE A O DANO */
-    public static parseProtectionValue(
-        protection: number,
-        health: number
-    ) {
+    public static parseProtectionValue(protection: number, health: number) {
         return protection * health / 10000;
     }
-
-    public calculeDamage = (target: Player, damage: number, modifiers: IDamageModifiers) => {
-
-
-        return damage;
-    }
-
 
     public handleAttack(
         target: Player,
@@ -97,6 +83,4 @@ export class BattleCombatManager {
         packet.indicators = [{ target: target.getUsername(), damage, type }];
         player.sendPacket(packet);
     }
-
-
 }

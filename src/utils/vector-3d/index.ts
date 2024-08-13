@@ -17,6 +17,35 @@ export class Vector3d extends Vector2d implements IVector3d {
         super(x, y)
     }
 
+    public static fromInterface(vector: IVector3d, swap: boolean = true): Vector3d {
+
+        if (typeof vector.x === 'string') {
+            vector.x = parseFloat(vector.x)
+        }
+
+        if (typeof vector.y === 'string') {
+            vector.y = parseFloat(vector.y)
+        }
+
+        if (typeof vector.z === 'string') {
+            vector.z = parseFloat(vector.z)
+        }
+
+        return new Vector3d(
+            vector.x,
+            swap ? vector.z : vector.y,
+            swap ? vector.y : vector.z
+        )
+    }
+
+    public static copy(vector: Vector3d): Vector3d {
+        return new Vector3d(vector.x, vector.y, vector.z)
+    }
+
+    public static zero(): Vector3d {
+        return new Vector3d()
+    }
+
     public getZ() {
         return this.z
     }
@@ -113,26 +142,5 @@ export class Vector3d extends Vector2d implements IVector3d {
 
     public toString() {
         return `(X: ${this.x} Y: ${this.y} Z: ${this.z})`
-    }
-
-    public static fromInterface(vector: IVector3d, swap: boolean = true): Vector3d {
-
-        if (typeof vector.x === 'string') {
-            vector.x = parseFloat(vector.x)
-        }
-
-        if (typeof vector.y === 'string') {
-            vector.y = parseFloat(vector.y)
-        }
-
-        if (typeof vector.z === 'string') {
-            vector.z = parseFloat(vector.z)
-        }
-
-        return new Vector3d(
-            vector.x,
-            swap ? vector.z : vector.y,
-            swap ? vector.y : vector.z
-        )
     }
 }

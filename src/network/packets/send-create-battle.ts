@@ -5,7 +5,6 @@ import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-// TODO: Acho que aqui é send
 export class SendCreateBattlePacket extends Packet {
 
     public autoBalance: boolean;

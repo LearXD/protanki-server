@@ -275,7 +275,7 @@ export class PlayerGarageManager {
 
         if (this.player.battle && this.player.tank.hasChangedEquipment()) {
             if (this.player.tank.isAlive()) {
-                this.player.tank.scheduleSuicide()
+                this.player.tank.scheduleDestroy()
             }
         }
     }

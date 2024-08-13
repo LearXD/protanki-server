@@ -3,6 +3,7 @@ import { Battle } from "../..";
 import { BattleObject } from "./utils/object";
 import { Logger } from "@/utils/logger";
 import { MapAreaAction } from "@/game/map/types";
+import { Vector3d } from "@/utils/vector-3d";
 
 export class BattleCollisionsManager {
 
@@ -13,9 +14,6 @@ export class BattleCollisionsManager {
     ) { }
 
     public addObject(object: BattleObject) {
-        // if (this.objects.has(object.getName())) {
-        //     Logger.warn(`Object ${object.getName()} already exists in the battle ${this.battle.getBattleId()}`);
-        // }
         this.objects.set(object.getName(), object);
     }
 
@@ -27,13 +25,34 @@ export class BattleCollisionsManager {
         this.objects.delete(name);
     }
 
-    public handlePlayerMovement(player: Player) {
-
+    public checkObjectCollisions(player: Player, position?: Vector3d) {
         if (!player.tank || !player.tank.isVisible()) {
             return;
         }
 
-        const position = player.tank.getPosition();
+        if (!position) {
+            position = player.tank.getPosition();
+        }
+
+        for (const object of this.objects.values()) {
+            if (object.isColliding(position)) {
+                const collided = object.handleCollision(player);
+                if (collided) {
+                    this.objects.delete(object.getName());
+                }
+            }
+        }
+    }
+
+    public checkAreaCollisions(player: Player, position?: Vector3d) {
+
+        if (!player.tank || !player.tank.isAlive()) {
+            return;
+        }
+
+        if (!position) {
+            position = player.tank.getPosition();
+        }
 
         for (const area of this.battle.getMap().getAreas()) {
             const { minX, minY: minZ, minZ: minY, maxX, maxY: maxZ, maxZ: maxY } = area // SWAP Y AND Z
@@ -46,16 +65,16 @@ export class BattleCollisionsManager {
                 if (area.action === MapAreaAction.KILL) {
                     player.tank.suicide();
                 }
-            }
-        }
 
-        for (const object of this.objects.values()) {
-            if (object.isColliding(position)) {
-                const collided = object.handleCollision(player);
-                if (collided) {
-                    this.objects.delete(object.getName());
+                if (area.action === MapAreaAction.KICK) {
+                    player.close()
                 }
             }
         }
+    }
+
+    public handlePlayerMovement(player: Player) {
+        this.checkAreaCollisions(player)
+        this.checkObjectCollisions(player)
     }
 }

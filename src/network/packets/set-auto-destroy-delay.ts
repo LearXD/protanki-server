@@ -2,12 +2,12 @@ import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetSuicideDelayPacket extends Packet {
+export class SetAutoDestroyDelayPacket extends Packet {
 
     public delay: number
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_SUICIDE_DELAY, bytes)
+        super(Protocol.SET_AUTO_DESTROY_DELAY, bytes)
     }
 
     public decode() {

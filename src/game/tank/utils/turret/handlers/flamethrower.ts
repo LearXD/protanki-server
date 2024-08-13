@@ -22,12 +22,11 @@ export class FlamethrowerHandler extends Turret {
 
     public getTemperatureLimit() {
         const limit = this.getSubProperty("FIRE_DAMAGE", "FLAME_TEMPERATURE_LIMIT")
-        return limit ? parseInt(limit.value) : 0;
+        return limit ? parseInt(limit.value) / 2 : 0;
     }
 
     public getDamage(): number {
         const damage = this.getDamagePerSecond();
-
         return damage;
     }
 
@@ -43,6 +42,7 @@ export class FlamethrowerHandler extends Turret {
     }
 
     public handlePacket(packet: SimplePacket): void {
+
         if (packet instanceof SendStartFlameShotPacket) {
             const pk = new SetStartFlameShotPacket();
             pk.shooter = this.tank.player.getUsername();
