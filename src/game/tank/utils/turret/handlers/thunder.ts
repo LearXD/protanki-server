@@ -7,10 +7,10 @@ import { SetStormHitPointShotPacket } from "../../../../../network/packets/set-s
 import { SetStormTargetShotPacket } from "../../../../../network/packets/set-storm-target-shot";
 import { SetStormVoidShotPacket } from "../../../../../network/packets/set-storm-void-shot";
 import { SimplePacket } from "../../../../../network/packets/simple-packet";
-import { Logger } from "../../../../../utils/logger";
 import { MathUtils } from "../../../../../utils/math";
 import { IDamageModifiers } from "../../../../battle/managers/combat/types";
-import { Player } from "../../../../player";
+import { Vector3d } from "@/utils/vector-3d";
+import { RayHit } from "@/game/map/managers/collision/utils/rayhit";
 
 export class ThunderHandler extends Turret {
 
@@ -45,6 +45,44 @@ export class ThunderHandler extends Turret {
         return damage;
     }
 
+    // TODO: raycast to detect collision
+    public splash(position: Vector3d, ignore: string[] = []): void {
+        const battle = this.tank.battle;
+        const players = battle.playersManager.getPlayers();
+
+        for (const player of players) {
+
+            if (ignore.includes(player.getUsername())) {
+                continue;
+            }
+
+            const modifiers: IDamageModifiers = {
+                splash: true,
+                distance: player.tank.getPosition().distanceTo(position),
+                enemy: player.tank.isEnemy(this.tank)
+            }
+
+            if (modifiers.distance >= 1000) {
+                continue;
+            }
+
+            // TODO: improve saporra aqui vai tomar no cu calculo fudido do caraio
+            const direction = Vector3d.copy(player.tank.getPosition())
+            direction.add(new Vector3d(0, 200, 0))
+            direction.subtract(position)
+
+            const rayHit = new RayHit()
+            const hit = this.tank.battle.getMap().collisionManager
+                .raycastStatic(position.swap(), direction.swap(), 16, 1, null, rayHit)
+
+            if (hit) continue;
+
+            battle.combatManager
+                .handleAttack(player, this.tank.player, this, modifiers);
+
+        }
+    }
+
     public handlePacket(packet: SimplePacket): void {
         if (packet instanceof SendStormVoidShotPacket) {
             const pk = new SetStormVoidShotPacket();
@@ -54,6 +92,7 @@ export class ThunderHandler extends Turret {
 
         if (packet instanceof SendStormHitPointShotPacket) {
             this.splash(packet.hitPoint);
+
             const pk = new SetStormHitPointShotPacket();
             pk.shooter = this.tank.player.getUsername();
             pk.hitPoint = packet.hitPoint;

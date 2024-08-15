@@ -57,26 +57,6 @@ export abstract class Turret extends GarageItem {
      */
     public onDamage(target: Player, damage: number, modifiers: IDamageModifiers): void { }
 
-    // TODO: raycast to detect collision
-    public splash(position: Vector3d, ignore: string[] = []): void {
-        const battle = this.tank.battle;
-        const players = battle.playersManager.getPlayers();
-
-        for (const player of players) {
-
-            if (ignore.includes(player.getUsername())) {
-                continue;
-            }
-
-            battle.combatManager
-                .handleAttack(player, this.tank.player, this, {
-                    distance: player.tank.getPosition().distanceTo(position),
-                    enemy: player.tank.isEnemy(this.tank),
-                    splash: true
-                });
-        }
-    }
-
     public attack(player: string, modifiers: IDamageModifiers = {}): boolean {
         const battle = this.tank.battle;
         const target = battle.playersManager.getPlayer(player);

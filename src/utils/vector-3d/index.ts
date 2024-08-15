@@ -7,6 +7,12 @@ export class Vector3d extends Vector2d implements IVector3d {
     public static readonly X_AXIS: Vector3d = new Vector3d(1, 0, 0);
     public static readonly Y_AXIS: Vector3d = new Vector3d(0, 1, 0);
     public static readonly Z_AXIS: Vector3d = new Vector3d(0, 0, 1);
+
+
+    public static readonly RIGHT: Vector3d = new Vector3d(1, 0, 0);
+    public static readonly LEFT: Vector3d = new Vector3d(-1, 0, 0);
+    public static readonly FORWARD: Vector3d = new Vector3d(0, 1, 0);
+    public static readonly BACKWARD: Vector3d = new Vector3d(0, -1, 0);
     public static readonly DOWN: Vector3d = new Vector3d(0, 0, -1);
 
     public constructor(
