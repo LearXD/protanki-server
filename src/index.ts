@@ -16,4 +16,4 @@ process.on('uncaughtException', (error: Error | ServerError) => {
     // process.exit(1);
 });
 
-server.start(1338);
+server.start(Environment.getServerPort());

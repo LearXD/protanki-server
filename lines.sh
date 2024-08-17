@@ -1,25 +1,19 @@
 #!/bin/bash
 
-# Defina o diretório alvo
-diretorio="./src"
+directory="./src"
+lines_count=0
 
-# Contador de linhas
-total_linhas=0
-
-# Função para contar linhas
-contar_linhas() {
-    for arquivo in "$1"/*; do
-        if [ -f "$arquivo" ]; then
-            linhas=$(awk 'END {print NR}' "$arquivo")
-            echo "$arquivo: $linhas linhas"
-            total_linhas=$((total_linhas + linhas))
-        elif [ -d "$arquivo" ]; then
-            contar_linhas "$arquivo"
+lines_count() {
+    for file in "$1"/*; do
+        if [ -f "$file" ]; then
+            lines=$(awk 'END {print NR}' "$file")
+            echo "$file: $lines lines"
+            lines_count=$((lines_count + lines))
+        elif [ -d "$file" ]; then
+            lines_count "$file"
         fi
     done
 }
 
-# Inicie a contagem a partir do diretório alvo
-contar_linhas "$diretorio"
-
-echo "Total de linhas em todos os arquivos: $total_linhas"
+lines_count "$directory"
+echo "Total of lines: $lines_count"

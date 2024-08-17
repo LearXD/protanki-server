@@ -1,7 +1,11 @@
+# Node Environment
 node_modules/
 .env
 
+# Build files
 dist/
 sandbox/
+
+# Logs
 todo/
 todo.txt

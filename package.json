@@ -7,7 +7,9 @@
     "start": "node .",
     "dev": "ts-node-dev -r tsconfig-paths/register src/index.ts",
     "nodemon": "nodemon",
-    "build": "tsc && tsc-alias"
+    "build": "tsc && tsc-alias",
+    "docker:build": "docker build -t tanki-server .",
+    "docker:run": "docker run -d -p 1337:1337 --name tanki-server tanki-server"
   },
   "keywords": [],
   "author": "",
@@ -22,14 +24,12 @@
     "ts-node-dev": "^2.0.0",
     "tsc-alias": "^1.8.10",
     "tsconfig-paths": "^4.2.0",
-    "typecript": "^0.0.1-security"
+    "typescript": "^5.5.4"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
     "chalk": "^4.1.2",
     "dotenv": "^16.4.5",
-    "fast-xml-parser": "^4.4.1",
-    "i": "^0.3.7",
     "npm": "^10.8.2",
     "uuid": "^10.0.0",
     "ws": "^8.18.0"
