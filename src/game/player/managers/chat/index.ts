@@ -1,11 +1,10 @@
-import { ChatUser } from "@/server/managers/chat/utils/user";
+import { Packet } from "@/network/packets/packet";
 import { Player } from "../..";
 import { SendChatMessagePacket } from "../../../../network/packets/send-chat-message";
 import { SetChatCostPacket } from "../../../../network/packets/set-chat-cost";
 import { SetChatInitParamsPacket } from "../../../../network/packets/set-chat-init-params";
-import { IUser, SetChatMessagesPacket } from "../../../../network/packets/set-chat-messages";
+import { SetChatMessagesPacket } from "../../../../network/packets/set-chat-messages";
 import { SetRemoveChatPacket } from "../../../../network/packets/set-remove-chat";
-import { SimplePacket } from "../../../../network/packets/simple-packet";
 import { Message } from "../../../../server/managers/chat/utils/message";
 
 export class PlayerChatManager {
@@ -65,7 +64,7 @@ export class PlayerChatManager {
         this.player.sendPacket(setChatCostPacket);
     }
 
-    public handlePacket(packet: SimplePacket) {
+    public handlePacket(packet: Packet) {
         if (packet instanceof SendChatMessagePacket) {
             this.player.server.chatManager.handleSendMessage(this.player, packet.text, packet.target);
             return true

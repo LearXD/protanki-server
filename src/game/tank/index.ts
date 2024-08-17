@@ -6,7 +6,6 @@ import { SetSpawnTankPacket } from "../../network/packets/set-spawn-tank";
 import { Team, TeamType } from "../../states/team";
 import { SetTankVisiblePacket } from "../../network/packets/set-tank-visible";
 import { SetLatencyPacket } from "../../network/packets/set-latency";
-import { SimplePacket } from "../../network/packets/simple-packet";
 import { SendRequestSpawnPositionPacket } from "../../network/packets/send-request-spawn-position";
 import { SendRequestRespawnPacket } from "../../network/packets/send-request-respawn";
 import { SendRequestSetTankVisiblePacket } from "../../network/packets/send-request-set-tank-visible";
@@ -47,6 +46,7 @@ import { IEffect } from "@/network/packets/set-battle-users-effects";
 import { BattleCombatManager } from "../battle/managers/combat";
 import { Painting } from "./utils/painting";
 import { DamageIndicator } from "@/states/damage-indicator";
+import { Packet } from "@/network/packets/packet";
 
 export class Tank {
 
@@ -169,8 +169,8 @@ export class Tank {
 
     public updateTemperature(temperature: number, updateSpeed: boolean = false) {
 
-        if (updateSpeed) {
-            const multiplier = Math.max(temperature > 0 ? 1 : 0.5, 1 - (temperature / -0.9))
+        if (updateSpeed && temperature <= 0) {
+            const multiplier = Math.max(0.3, 1 - (temperature / -0.9))
             Logger.debug(`Updating speed for ${this.player.getUsername()} with multiplier ${multiplier}`)
             this.updateTankSpeed(multiplier, multiplier, multiplier, multiplier)
         }
@@ -209,6 +209,7 @@ export class Tank {
 
     public isEnemy(tank: Tank) {
         return (
+            tank === this ||
             this.battle.getMode() === BattleMode.DM ||
             tank.team !== this.team ||
             this.battle.isFriendlyFire()
@@ -502,6 +503,8 @@ export class Tank {
     }
 
     public onDeath() {
+        this.temperatureAccumulator = []
+
         this.battle.minesManager.removePlayerMines(this.player)
         this.battle.taskManager.unregisterOwnerTasks(this.player.getUsername())
 
@@ -601,7 +604,7 @@ export class Tank {
         return true;
     }
 
-    public handleMovementPacket(packet: SimplePacket) {
+    public handleMovementPacket(packet: Packet) {
         if (packet instanceof SendMoveTankTracksPacket) {
             if (packet.specificationId === this.incarnation) {
                 const pk = new SetTankControlPacket();
@@ -658,7 +661,7 @@ export class Tank {
         }
     }
 
-    public handlePacket(packet: SimplePacket) {
+    public handlePacket(packet: Packet) {
 
         if (this.turret) {
             this.turret.handlePacket(packet)

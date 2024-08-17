@@ -3,7 +3,6 @@ import net from 'net';
 import { Network } from '../network/network';
 import { Logger } from '../utils/logger';
 import { Client } from '../game/client';
-import { SimplePacket } from '../network/packets/simple-packet';
 import { ClientsHandler } from './handlers/clients';
 import { PlayersManager } from './managers/players';
 import { AuthManager } from './handlers/auth';
@@ -21,6 +20,7 @@ import { MapsManager } from './managers/maps';
 import { Garage } from './managers/garage';
 import { ShopManager } from './managers/shop';
 import { RankManager } from './managers/rank';
+import { Packet } from '@/network/packets/packet';
 
 export class Server {
 
@@ -98,10 +98,6 @@ export class Server {
         this.chatManager.sendServerMessage(message, warning);
     }
 
-    public sendPacket(client: Client, packet: SimplePacket) {
-        return client.sendPacket(packet);
-    }
-
     public isWhitelisted() {
         return this.whitelisted
     }
@@ -110,7 +106,12 @@ export class Server {
         this.whitelisted = whitelisted;
     }
 
-    public broadcastPacket(packet: SimplePacket, clients: boolean = false) {
+    public sendPacket(client: Client, packet: Packet) {
+        return client.sendPacket(packet);
+    }
+
+
+    public broadcastPacket(packet: Packet, clients: boolean = false) {
         if (clients) {
             return this.clientsHandler.getClients()
                 .forEach((client) => this.sendPacket(client, packet));

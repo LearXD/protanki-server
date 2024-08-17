@@ -5,9 +5,9 @@ import { SendStartFreezeShootPacket } from "../../../../../network/packets/send-
 import { SendStopFreezeShotPacket } from "../../../../../network/packets/send-stop-freeze-shot";
 import { SetStartFreezeShotPacket } from "../../../../../network/packets/set-start-freeze-shot";
 import { SetStopFreezeShotPacket } from "../../../../../network/packets/set-stop-freeze-shot";
-import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { Player } from "../../../../player";
 import { IDamageModifiers } from "@/game/battle/managers/combat/types";
+import { Packet } from "@/network/packets/packet";
 
 export class FreezeHandler extends Turret {
 
@@ -50,7 +50,7 @@ export class FreezeHandler extends Turret {
         target.tank.heat(this.getFreezePerSecond(), this.getMaxFreeze(), 0, this.tank.player);
     }
 
-    public handlePacket(packet: SimplePacket): void {
+    public handlePacket(packet: Packet): void {
         if (packet instanceof SendStartFreezeShootPacket) {
             const pk = new SetStartFreezeShotPacket();
             pk.shooter = this.tank.player.getUsername();

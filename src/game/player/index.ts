@@ -1,7 +1,6 @@
 import net from "net";
 
 import { Logger } from "../../utils/logger";
-import { SimplePacket } from "../../network/packets/simple-packet";
 import { Server } from "../../server";
 import { SetLayoutStatePacket } from "../../network/packets/set-layout-state";
 import { LayoutState, LayoutStateType } from "../../states/layout-state";
@@ -24,6 +23,7 @@ import { PlayerData } from "./utils/data";
 import { PlayerPacketHandler } from "./handlers/packet";
 import { ResourceType } from "../../server/managers/resources/types";
 import { BattleMode } from "@/states/battle-mode";
+import { Packet } from "@/network/packets/packet";
 
 export class Player extends Client {
 
@@ -208,7 +208,7 @@ export class Player extends Client {
         }
     }
 
-    public handlePacket(packet: SimplePacket): boolean {
+    public handlePacket(packet: Packet): boolean {
 
         super.handlePacket(packet)
         this.authManager.handlePacket(packet)

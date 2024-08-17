@@ -1,4 +1,5 @@
 
+import { Packet } from "@/network/packets/packet";
 import { Player } from "../..";
 
 import { SendAcceptFriendRequestPacket } from "../../../../network/packets/send-accept-friend-request";
@@ -20,7 +21,6 @@ import { SetRemoveFriendPacket } from "../../../../network/packets/set-remove-fr
 import { SetRemoveFriendRequestPacket } from "../../../../network/packets/set-remove-friend-request";
 import { SetUserFoundOnFriendsListPacket } from "../../../../network/packets/set-user-found-on-friends-list";
 import { SetUserNotFoundOnFriendsListPacket } from "../../../../network/packets/set-user-not-found-on-friends-list";
-import { SimplePacket } from "../../../../network/packets/simple-packet";
 import { ValidateFriendPacket } from "../../../../network/packets/validate-friend";
 import { ValidateFriendRequestPacket } from "../../../../network/packets/validate-friend-request";
 
@@ -149,7 +149,7 @@ export class PlayerFriendsManager {
         this.player.sendPacket(setUserNotFoundOnFriendsListPacket);
     }
 
-    public handlePacket(packet: SimplePacket) {
+    public handlePacket(packet: Packet) {
         if (packet instanceof SendOpenFriendsPacket) {
             this.sendOpenFriendsList();
             return true;

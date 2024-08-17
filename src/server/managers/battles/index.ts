@@ -6,12 +6,12 @@ import { IBattleData } from "@/game/battle/types";
 import { Logger } from "@/utils/logger";
 import { SetAddBattleOnListPacket } from "@/network/packets/set-add-battle-on-list";
 import { LayoutState } from "@/states/layout-state";
-import { SimplePacket } from "@/network/packets/simple-packet";
 import { SetRemoveBattleFromListPacket } from "@/network/packets/set-remove-battle-from-list";
 import { BattleMode } from "@/states/battle-mode";
 import { EquipmentConstraintsMode } from "@/states/equipment-constraints-mode";
 import { Rank } from "@/states/rank";
 import { ServerError } from "@/server/utils/error";
+import { Packet } from "@/network/packets/packet";
 
 export class BattlesManager {
 
@@ -92,7 +92,7 @@ export class BattlesManager {
         return this.battles.find(battle => battle.getBattleId() == battleId)
     }
 
-    public broadcastPacket(packet: SimplePacket) {
+    public broadcastPacket(packet: Packet) {
         this.getPlayers().forEach(player => player.sendPacket(packet))
     }
 

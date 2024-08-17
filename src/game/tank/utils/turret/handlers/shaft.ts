@@ -12,11 +12,9 @@ import { SetShaftLocalSpotPacket } from "../../../../../network/packets/set-shaf
 import { SetShaftShotPacket } from "../../../../../network/packets/set-shaft-shot";
 import { SetStartShaftShotPacket } from "../../../../../network/packets/set-start-shaft-shot";
 import { SetStopShaftShotPacket } from "../../../../../network/packets/set-stop-shaft-shot";
-import { SimplePacket } from "../../../../../network/packets/simple-packet";
-import { Logger } from "../../../../../utils/logger";
 import { MathUtils } from "../../../../../utils/math";
 import { IDamageModifiers } from "../../../../battle/managers/combat/types";
-import { Player } from "../../../../player";
+import { Packet } from "@/network/packets/packet";
 
 export class ShaftHandler extends Turret {
 
@@ -63,7 +61,7 @@ export class ShaftHandler extends Turret {
         return damage / modifiers.order;
     }
 
-    public handlePacket(packet: SimplePacket): void {
+    public handlePacket(packet: Packet): void {
 
         if (packet instanceof SendStartShaftAimPacket) {
             this.aiming = true;

@@ -6,7 +6,7 @@ import { SetViewingBattleDataPacket } from "../../../../network/packets/set-view
 import { Player } from "../../../player";
 import { BattleTeamModeManager } from "../mode/modes/team/team";
 import { BattleDeathMatchModeManager } from "../mode/modes/death-match";
-import { SimplePacket } from "@/network/packets/simple-packet";
+import { Packet } from "@/network/packets/packet";
 
 export class BattleViewersManager {
 
@@ -124,7 +124,7 @@ export class BattleViewersManager {
         client.sendPacket(packet);
     }
 
-    public broadcastPacket(packet: SimplePacket) {
+    public broadcastPacket(packet: Packet) {
         for (const viewer of this.viewers.values()) {
             viewer.sendPacket(packet);
         }

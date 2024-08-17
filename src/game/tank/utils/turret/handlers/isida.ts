@@ -6,11 +6,10 @@ import { SendStopIsisShotPacket } from "../../../../../network/packets/send-stop
 import { SetIsisTargetShotPacket } from "../../../../../network/packets/set-isis-target-shot";
 import { SetStartIsisShotPacket } from "../../../../../network/packets/set-start-isis-shot";
 import { SetStopIsisShotPacket } from "../../../../../network/packets/set-stop-isis-shot";
-import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { IsidaState } from "../../../../../states/isida-state";
-import { Player } from "../../../../player";
 import { IDamageModifiers } from "@/game/battle/managers/combat/types";
 import { SendIsisShotPositionPacket } from "@/network/packets/send-isis-shot-position";
+import { Packet } from "@/network/packets/packet";
 
 export class IsidaHandler extends Turret {
 
@@ -33,16 +32,16 @@ export class IsidaHandler extends Turret {
 
     public getDamage(modifiers: IDamageModifiers): number {
         if (modifiers.enemy) {
-            return this.getDamagePerPeriod() / 4;
+            return this.getDamagePerPeriod() / 2;
         }
-        return this.getHealingPerPeriod() / 4;
+        return this.getHealingPerPeriod() / 2;
     }
 
     public canAttackAllies(): boolean {
         return true;
     }
 
-    public handlePacket(packet: SimplePacket): void {
+    public handlePacket(packet: Packet): void {
 
         if (packet instanceof SendIsisTargetShotPacket) {
 

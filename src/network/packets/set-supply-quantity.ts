@@ -2,13 +2,13 @@ import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class SetDrugQuantityPacket extends Packet {
+export class SetSupplyQuantityPacket extends Packet {
 
     public itemId: string;
     public quantity: number;
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.SET_DRUG_QUANTITY, bytes)
+        super(Protocol.SET_SUPPLY_QUANTITY, bytes)
     }
 
     public decode() {

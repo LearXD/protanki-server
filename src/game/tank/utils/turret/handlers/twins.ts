@@ -6,8 +6,8 @@ import { SendTwinsShotPacket } from "../../../../../network/packets/send-twins-s
 import { SendTwinsTargetShotPacket } from "../../../../../network/packets/send-twins-target-shot";
 import { SetTwinsOverturnedShotPacket } from "../../../../../network/packets/set-twins-overturned-shot";
 import { SetTwinsShotPacket } from "../../../../../network/packets/set-twins-shot";
-import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { MathUtils } from "../../../../../utils/math";
+import { Packet } from "@/network/packets/packet";
 
 export class TwinsHandler extends Turret {
 
@@ -31,7 +31,7 @@ export class TwinsHandler extends Turret {
         return damage
     }
 
-    public handlePacket(packet: SimplePacket): void {
+    public handlePacket(packet: Packet): void {
         if (packet instanceof SendTwinsShotPacket) {
             const pk = new SetTwinsShotPacket();
 

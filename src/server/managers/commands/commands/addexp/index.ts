@@ -23,7 +23,7 @@ export class AddExpCommand extends Command {
                 return;
             }
 
-            const data = args.length > 1 ? PlayerData.findPlayerData(args.shift()) : sender.data;
+            const data = args.length ? PlayerData.findPlayerData(args.shift()) : sender.data;
             if (!data) {
                 sender.sendMessage("Jogador não encontrado.");
                 return;

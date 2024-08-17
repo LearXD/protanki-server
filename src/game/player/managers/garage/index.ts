@@ -11,7 +11,6 @@ import { SetRemoveGaragePacket } from "../../../../network/packets/set-remove-ga
 import { SetSuppliesPacket } from "../../../../network/packets/set-supplies";
 import { SetUseSupplyPacket } from "../../../../network/packets/set-use-supply";
 import { SetUserGarageItemsPacket } from "../../../../network/packets/set-user-garage-items";
-import { SimplePacket } from "../../../../network/packets/simple-packet";
 import { LayoutState } from "../../../../states/layout-state";
 import { Supply, SupplyType } from "../../../../states/supply";
 import { Logger } from "../../../../utils/logger";
@@ -20,6 +19,7 @@ import { ResourceType } from "../../../../server/managers/resources/types";
 import { GarageItemUtils } from "./utils/item";
 import { ServerError } from "@/server/utils/error";
 import { IHullResources, IPaintingResources, ITurretResources } from "./types";
+import { Packet } from "@/network/packets/packet";
 
 export class PlayerGarageManager {
 
@@ -286,17 +286,17 @@ export class PlayerGarageManager {
         this.player.sendPacket(setRemoveGaragePacket);
     }
 
-    public sendSupplies(client: Player) {
+    public sendSupplies() {
         const setSuppliesPacket = new SetSuppliesPacket();
         setSuppliesPacket.supplies = [
-            { count: this.getSupplyCount(Supply.HEALTH), id: Supply.HEALTH, itemEffectTime: 3000, itemRestSec: 3000, slotId: 1 },
+            { count: this.getSupplyCount(Supply.HEALTH), id: Supply.HEALTH, itemEffectTime: 0, itemRestSec: 0, slotId: 1 },
             { count: this.getSupplyCount(Supply.ARMOR), id: Supply.ARMOR, itemEffectTime: 0, itemRestSec: 0, slotId: 2 },
             { count: this.getSupplyCount(Supply.DOUBLE_DAMAGE), id: Supply.DOUBLE_DAMAGE, itemEffectTime: 0, itemRestSec: 0, slotId: 3 },
-            { count: this.getSupplyCount(Supply.N2O), id: Supply.N2O, itemEffectTime: 30, itemRestSec: 30, slotId: 4 },
+            { count: this.getSupplyCount(Supply.N2O), id: Supply.N2O, itemEffectTime: 0, itemRestSec: 0, slotId: 4 },
             { count: this.getSupplyCount(Supply.MINE), id: Supply.MINE, itemEffectTime: 0, itemRestSec: 0, slotId: 5 }
         ]
 
-        client.sendPacket(setSuppliesPacket);
+        this.player.sendPacket(setSuppliesPacket);
     }
 
     public sendUseSupply(itemId: string, time: number, decrease: boolean) {
@@ -474,7 +474,7 @@ export class PlayerGarageManager {
         return true
     }
 
-    public handlePacket(packet: SimplePacket) {
+    public handlePacket(packet: Packet) {
         if (packet instanceof SendOpenGaragePacket) {
             if (this.player.battle) {
                 if (this.player.getLayoutState() === LayoutState.BATTLE) {

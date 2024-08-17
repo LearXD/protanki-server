@@ -6,12 +6,11 @@ import { SendStormVoidShotPacket } from "../../../../../network/packets/send-sto
 import { SetStormHitPointShotPacket } from "../../../../../network/packets/set-storm-hit-point-shot";
 import { SetStormTargetShotPacket } from "../../../../../network/packets/set-storm-target-shot";
 import { SetStormVoidShotPacket } from "../../../../../network/packets/set-storm-void-shot";
-import { SimplePacket } from "../../../../../network/packets/simple-packet";
-import { MathUtils } from "../../../../../utils/math";
 import { IDamageModifiers } from "../../../../battle/managers/combat/types";
 import { Vector3d } from "@/utils/vector-3d";
 import { RayHit } from "@/game/map/managers/collision/utils/rayhit";
 import { Logger } from "@/utils/logger";
+import { Packet } from "@/network/packets/packet";
 
 export class ThunderHandler extends Turret {
 
@@ -107,7 +106,7 @@ export class ThunderHandler extends Turret {
         }
     }
 
-    public handlePacket(packet: SimplePacket): void {
+    public handlePacket(packet: Packet): void {
         if (packet instanceof SendStormVoidShotPacket) {
             const pk = new SetStormVoidShotPacket();
             pk.shooter = this.tank.player.getUsername();

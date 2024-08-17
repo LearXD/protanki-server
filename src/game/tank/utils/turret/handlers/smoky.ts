@@ -7,11 +7,11 @@ import { SetSmokyCriticalEffectPacket } from "../../../../../network/packets/set
 import { SetSmokyHitPointPacket } from "../../../../../network/packets/set-smoky-hit-point";
 import { SetSmokyTargetShotPacket } from "../../../../../network/packets/set-smoky-target-shot";
 import { SetSmokyVoidShotPacket } from "../../../../../network/packets/set-smoky-void-shot";
-import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { Logger } from "../../../../../utils/logger";
 import { MathUtils } from "../../../../../utils/math";
 import { IDamageModifiers } from "../../../../battle/managers/combat/types";
 import { Player } from "../../../../player";
+import { Packet } from "@/network/packets/packet";
 
 export class SmokyHandler extends Turret {
 
@@ -62,7 +62,7 @@ export class SmokyHandler extends Turret {
 
     }
 
-    public handlePacket(packet: SimplePacket): void {
+    public handlePacket(packet: Packet): void {
         if (packet instanceof SendSmokyHitPointShotPacket) {
             const pk = new SetSmokyHitPointPacket();
             pk.shooter = this.tank.player.getUsername();

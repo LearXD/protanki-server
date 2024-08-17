@@ -3,8 +3,8 @@ import { Turret } from "..";
 import { SendHammerOverturnedShotPacket } from "../../../../../network/packets/send-hammer-overturned-shot";
 import { SendHammerShotPacket } from "../../../../../network/packets/send-hammer-shot";
 import { ITarget, SetHammerShotPacket } from "../../../../../network/packets/set-hammer-shot";
-import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { Vector3d } from "../../../../../utils/vector-3d";
+import { Packet } from "@/network/packets/packet";
 
 export class HammerHandler extends Turret {
 
@@ -21,7 +21,7 @@ export class HammerHandler extends Turret {
         return this.getDamagePerPeriod()
     }
 
-    public handlePacket(packet: SimplePacket): void {
+    public handlePacket(packet: Packet): void {
         if (packet instanceof SendHammerShotPacket) {
 
             const targets: Map<string, ITarget> = new Map();

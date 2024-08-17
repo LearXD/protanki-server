@@ -8,7 +8,7 @@ export class Protocol {
     static SET_CRYPT_KEYS = 2001736388
     static SET_LOAD_RESOURCES = -1797047325
     static RESOLVE_CALLBACK = -82304134
-    static RESOLVE_FULL_LOADED = -1282173466
+    static SET_AUTH_SCREEN = -1282173466
     static SEND_LANGUAGE = -1864333717
 
     /** SEND_LOGIN */
@@ -328,7 +328,7 @@ export class Protocol {
 
     /** DRUGS */
     static SET_SUPPLIES = -137249251;
-    static SET_DRUG_QUANTITY = -502907094;
+    static SET_SUPPLY_QUANTITY = -502907094;
     // -1981777467
     static SEND_USE_SUPPLY = -2102525054;
     static SET_USE_SUPPLY = 2032104949;

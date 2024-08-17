@@ -8,11 +8,4 @@ export class PongPacket extends Packet {
         super(Protocol.PONG, bytes)
     }
 
-    public decode() {
-        return {}
-    }
-
-    public encode() {
-        return this.getBytes()
-    }
 }

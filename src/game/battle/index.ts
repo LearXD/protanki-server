@@ -10,7 +10,6 @@ import { SetShowBattleNotificationsPacket } from "../../network/packets/set-show
 import { LayoutState } from "../../states/layout-state"
 
 import { SetRemoveBattleScreenPacket } from "../../network/packets/set-remove-battle-screen"
-import { SimplePacket } from "../../network/packets/simple-packet"
 
 import { IBattleData } from "./types"
 import { SuspiciousLevel } from "../../states/suspicious-level"
@@ -36,6 +35,7 @@ import { BattleMinesManager } from "./managers/mines"
 import { BattleEffectsManager } from "./managers/effects"
 import { BattleBoxesManager } from "./managers/boxes"
 import { BattleTaskManager } from "./managers/task"
+import { Packet } from "@/network/packets/packet"
 
 export class Battle {
 
@@ -190,7 +190,7 @@ export class Battle {
         this.effectsManager.sendBattleEffects(player);
         if (!isSpectator) {
             if (!this.isWithoutSupplies()) {
-                player.garageManager.sendSupplies(player);
+                player.garageManager.sendSupplies();
             }
         }
 
@@ -310,7 +310,7 @@ export class Battle {
         return item
     }
 
-    public broadcastPacket(packet: SimplePacket, ignore: string[] = []) {
+    public broadcastPacket(packet: Packet, ignore: string[] = []) {
         for (const player of this.playersManager.getAll()) {
             if (!ignore.includes(player.getUsername())) {
                 player.sendPacket(packet)
@@ -318,7 +318,7 @@ export class Battle {
         }
     }
 
-    public broadcastPacketToTeam(packet: SimplePacket, team: TeamType, ignore: string[] = []) {
+    public broadcastPacketToTeam(packet: Packet, team: TeamType, ignore: string[] = []) {
         for (const player of this.playersManager.getPlayers()) {
             if (player.tank.team === team) {
                 if (!ignore.includes(player.getUsername())) {

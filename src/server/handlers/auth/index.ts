@@ -3,7 +3,7 @@ import { SetAuthResourcesPacket } from "../../../network/packets/set-auth-resour
 import { SetInviteEnabledPacket } from "../../../network/packets/set-invite-enabled";
 import { Server } from "../..";
 import { SetNetworkParamsPacket } from "../../../network/packets/set-network-params";
-import { ResolveFullLoadedPacket } from "../../../network/packets/resolve-full-loaded";
+import { SetAuthScreenPacket } from "../../../network/packets/set-auth-screen";
 import { IAuthConfig } from "./types";
 import { ServerError } from "@/server/utils/error";
 
@@ -51,7 +51,6 @@ export class AuthManager {
     }
 
     public sendAuthScreen(client: Player) {
-        const resolveFullLoadedPacket = new ResolveFullLoadedPacket();
-        client.sendPacket(resolveFullLoadedPacket);
+        client.sendPacket(new SetAuthScreenPacket());
     }
 }

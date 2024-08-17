@@ -1,7 +1,6 @@
 import net from "net";
 
 import { SetCryptKeysPacket } from "../../network/packets/set-crypt-keys";
-import { SimplePacket } from "../../network/packets/simple-packet";
 import { MathUtils } from "../../utils/math";
 import { ByteArray } from "../../network/utils/byte-array";
 import { XorDecoder, XorType } from "../../network/utils/decoder";
@@ -15,9 +14,9 @@ import { PongPacket } from "../../network/packets/pong";
 import { SendRequestUserDataPacket } from "../../network/packets/send-request-user-data";
 import { IGNORE_PACKETS } from "../player/handlers/packet";
 import { ClientCaptchaManager } from "./managers/captcha";
-import { SetLatencyPacket } from "../../network/packets/set-latency";
 import { KickPacket } from "@/network/packets/kick";
 import { SetAlertPacket } from "@/network/packets/set-alert";
+import { Packet } from "@/network/packets/packet";
 
 export abstract class Client {
 
@@ -94,7 +93,7 @@ export abstract class Client {
         this.sendPacket(packet);
     }
 
-    public handlePacket(packet: SimplePacket) {
+    public handlePacket(packet: Packet) {
 
         this.captchaManager.handlePacket(packet);
 
@@ -130,7 +129,7 @@ export abstract class Client {
         return false;
     }
 
-    public sendPacket(packet: SimplePacket, encrypt: boolean = true) {
+    public sendPacket(packet: Packet, encrypt: boolean = true) {
 
         if (!this.connected) {
             return;

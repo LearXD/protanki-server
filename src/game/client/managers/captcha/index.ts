@@ -4,10 +4,10 @@ import { SendRequestCaptchaPacket } from "../../../../network/packets/send-reque
 import { SetCaptchaCorrectPacket } from "../../../../network/packets/set-captcha-correct";
 import { SetCaptchaDataPacket } from "../../../../network/packets/set-captcha-data";
 import { SetCaptchaIncorrectPacket } from "../../../../network/packets/set-captcha-incorrect";
-import { SimplePacket } from "../../../../network/packets/simple-packet";
 import { CaptchaUtils } from "../../../../utils/captcha";
 import { CaptchaLocationType } from "../../../../states/captcha-location";
 import { Logger } from "../../../../utils/logger";
+import { Packet } from "@/network/packets/packet";
 
 export class ClientCaptchaManager {
 
@@ -66,7 +66,7 @@ export class ClientCaptchaManager {
         this.sendIncorrectCaptchaData(type, data.data);
     }
 
-    public handlePacket(packet: SimplePacket) {
+    public handlePacket(packet: Packet) {
         if (packet instanceof SendRequestCaptchaPacket) {
             this.handleRequestCaptcha(packet.type);
         }

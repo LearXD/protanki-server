@@ -11,12 +11,12 @@ import { SetBattleListPacket } from "../../../../network/packets/set-battle-list
 import { SetBattleNotFoundPacket } from "../../../../network/packets/set-battle-not-found";
 import { SetRemoveBattlesScreenPacket } from "../../../../network/packets/set-remove-battles-screen";
 import { SetViewingBattlePacket } from "../../../../network/packets/set-viewing-battle";
-import { SimplePacket } from "../../../../network/packets/simple-packet";
 import { BattleModeType } from "../../../../states/battle-mode";
 import { EquipmentConstraintsModeType } from "../../../../states/equipment-constraints-mode";
 import { LayoutState } from "../../../../states/layout-state";
 import { ThemeType } from "../../../../states/theme";
 import { Logger } from "../../../../utils/logger";
+import { Packet } from "@/network/packets/packet";
 
 export class PlayerBattlesManager {
     public constructor(
@@ -145,7 +145,7 @@ export class PlayerBattlesManager {
         this.sendBattlesList();
     }
 
-    public handlePacket(packet: SimplePacket) {
+    public handlePacket(packet: Packet) {
 
         if (packet instanceof SendJoinOnBattlePacket) {
             this.handleJoinBattle(packet.team);

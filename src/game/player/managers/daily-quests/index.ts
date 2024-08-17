@@ -1,3 +1,4 @@
+import { Packet } from "@/network/packets/packet";
 import { Player } from "../..";
 import { SendBuyChangeDailyQuestPacket } from "../../../../network/packets/send-buy-change-daily-quest";
 import { SendChangeDailyQuestPacket } from "../../../../network/packets/send-change-daily-quest";
@@ -7,7 +8,6 @@ import { SetChangeDailyQuestPacket } from "../../../../network/packets/set-chang
 import { IQuest, SetDailyQuestsPacket } from "../../../../network/packets/set-daily-quests";
 import { SetRemoveDailyQuestPacket } from "../../../../network/packets/set-remove-daily-quest";
 import { SetWeeklyQuestRewardPacket } from "../../../../network/packets/set-weekly-quest-reward";
-import { SimplePacket } from "../../../../network/packets/simple-packet";
 
 export class PlayerDailyQuestsManager {
 
@@ -108,7 +108,7 @@ export class PlayerDailyQuestsManager {
         this.player.sendPacket(setWeeklyQuestRewardPacket);
     }
 
-    public handlePacket(packet: SimplePacket) {
+    public handlePacket(packet: Packet) {
         if (packet instanceof SendOpenDailyQuestsPacket) {
             this.sendOpenDailyQuests();
             return true;

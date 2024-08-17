@@ -1,16 +1,16 @@
+import { Packet } from "@/network/packets/packet";
 import { Player } from "../..";
 import { SendOpenConfigPacket } from "../../../../network/packets/send-open-config";
 import { SendRequestConfigDataPacket } from "../../../../network/packets/send-request-config-data";
 import { SendShowDamageIndicatorPacket } from "../../../../network/packets/send-show-damage-indicator";
 import { SendShowNotificationsPacket } from "../../../../network/packets/send-show-notifications";
-import { SimplePacket } from "../../../../network/packets/simple-packet";
 
 export class PlayerConfigsManager {
     constructor(
         private readonly player: Player
     ) { }
 
-    public handlePacket(packet: SimplePacket) {
+    public handlePacket(packet: Packet) {
         if (packet instanceof SendRequestConfigDataPacket) {
             this.player.server.userDataManager
                 .handleSendConfigData(this.player);

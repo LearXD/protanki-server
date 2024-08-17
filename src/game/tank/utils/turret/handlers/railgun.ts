@@ -4,10 +4,9 @@ import { SendRailgunShotPacket } from "../../../../../network/packets/send-railg
 import { SendStartRailgunShotPacket } from "../../../../../network/packets/send-start-railgun-shot";
 import { SetRailgunShotPacket } from "../../../../../network/packets/set-railgun-shot";
 import { SetStartRailgunShotPacket } from "../../../../../network/packets/set-start-railgun-shot";
-import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { MathUtils } from "../../../../../utils/math";
 import { IDamageModifiers } from "../../../../battle/managers/combat/types";
-import { Player } from "../../../../player";
+import { Packet } from "@/network/packets/packet";
 
 export class RailgunHandler extends Turret {
 
@@ -31,7 +30,7 @@ export class RailgunHandler extends Turret {
         return damage / modifiers.order;
     }
 
-    public handlePacket(packet: SimplePacket): void {
+    public handlePacket(packet: Packet): void {
         if (packet instanceof SendStartRailgunShotPacket) {
             const pk = new SetStartRailgunShotPacket();
             pk.shooter = this.tank.player.getUsername();

@@ -32,8 +32,6 @@ export class BattleCombatManager {
         modifiers: IDamageModifiers
     ) {
 
-        Logger.debug(`Visible: ${attacker.tank.isVisible()} ${target.tank.isVisible()}`);
-
         if (!attacker.tank.isVisible()) {
             return false;
         }
@@ -41,6 +39,8 @@ export class BattleCombatManager {
         if (!target.tank.isVisible()) {
             return Number.isNaN(modifiers.incarnation) || modifiers.incarnation === target.tank.incarnation;
         }
+
+        modifiers.enemy = target.tank.isEnemy(attacker.tank);
 
         if (target !== attacker && !modifiers.enemy && !turret.canAttackAllies()) {
             return false;
@@ -50,9 +50,13 @@ export class BattleCombatManager {
             return false;
         }
 
+        if (!modifiers.distance) {
+            modifiers.distance = target.tank.getPosition().distanceTo(attacker.tank.getPosition());
+        }
+
         turret.onAttack(target, modifiers);
+
         let damage = turret.getDamage(modifiers);
-        Logger.debug(`Damage: ${damage}`);
 
         if (damage) {
 

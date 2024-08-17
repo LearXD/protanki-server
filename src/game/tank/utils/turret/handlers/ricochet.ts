@@ -5,8 +5,8 @@ import { SendRicochetShotPacket } from "../../../../../network/packets/send-rico
 import { SendRicochetTargetShotPacket } from "../../../../../network/packets/send-ricochet-target-shot";
 import { SetRicochetOverturnedShotPacket } from "../../../../../network/packets/set-ricochet-overturned-shot";
 import { SetRicochetShotPacket } from "../../../../../network/packets/set-ricochet-shot";
-import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { MathUtils } from "../../../../../utils/math";
+import { Packet } from "@/network/packets/packet";
 
 export class RicochetHandler extends Turret {
 
@@ -34,7 +34,7 @@ export class RicochetHandler extends Turret {
         return true;
     }
 
-    public handlePacket(packet: SimplePacket): void {
+    public handlePacket(packet: Packet): void {
         if (packet instanceof SendRicochetShotPacket) {
             const pk = new SetRicochetShotPacket();
             pk.shooter = this.tank.player.getUsername();

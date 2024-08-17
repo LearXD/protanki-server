@@ -1,5 +1,4 @@
 import { Tank } from "../..";
-import { SimplePacket } from "../../../../network/packets/simple-packet";
 import { IDamageModifiers } from "../../../battle/managers/combat/types";
 import { Player } from "../../../player";
 import { ITurretProperties, ITurretSfx } from "@/server/managers/garage/types";
@@ -7,6 +6,7 @@ import { Turrets } from "@/states/turrets";
 import { GarageItem } from "@/server/managers/garage/utils/item";
 import { Logger } from "@/utils/logger";
 import { ITurretResources } from "@/game/player/managers/garage/types";
+import { Packet } from "@/network/packets/packet";
 
 export abstract class Turret extends GarageItem {
 
@@ -24,7 +24,7 @@ export abstract class Turret extends GarageItem {
     }
 
     public abstract getTurret(): Turrets;
-    public abstract handlePacket(packet: SimplePacket): void
+    public abstract handlePacket(packet: Packet): void
 
     /**
      * This function is called when the turret is attacking a player
@@ -80,11 +80,6 @@ export abstract class Turret extends GarageItem {
         const target = player instanceof Player ? player : battle.playersManager.getPlayer(player);
 
         if (target) {
-            if (!modifiers.distance) {
-                modifiers.distance = target.tank.getPosition().distanceTo(this.tank.getPosition());
-            }
-            modifiers.enemy = target.tank.isEnemy(this.tank);
-
             return battle.combatManager
                 .handleAttack(target, this.tank.player, this, modifiers);
         }

@@ -6,13 +6,12 @@ import { SetCaptchaLocationsPacket } from "./packets/set-captcha-locations";
 import { SetTipResourcePacket } from "./packets/set-tip-resource";
 import { SendLanguagePacket } from "./packets/send-language";
 import { SetNetworkParamsPacket } from "./packets/set-network-params";
-import { SimplePacket } from "./packets/simple-packet";
 import { SendRequestLoadScreenPacket } from "./packets/send-request-load-screen";
 import { ResolveCallbackPacket } from "./packets/resolve-callback";
 import { SetAuthResourcesPacket } from "./packets/set-auth-resources";
 import { SetLoadResourcesPacket } from "./packets/set-load-resources";
 import { SetInviteEnabledPacket } from "./packets/set-invite-enabled";
-import { ResolveFullLoadedPacket } from "./packets/resolve-full-loaded";
+import { SetAuthScreenPacket } from "./packets/set-auth-screen";
 import { SendRequestCaptchaPacket } from "./packets/send-request-captcha";
 import { SetCaptchaDataPacket } from "./packets/set-captcha-data";
 import { SendRegisterCheckUsernamePacket } from "./packets/send-register-check-username";
@@ -312,7 +311,7 @@ import { SetServerWillUpdatePacket } from "./packets/set-server-will-update";
 import { SetTeamStoppedCapturingControlPointPacketPacket } from "./packets/set-team-stopped-capturing-control-point-packet";
 import { SendFlameTargetsShotPacket } from "./packets/send-flame-targets-shot";
 import { SetUserLeftBattlePacket } from "./packets/set-user-left-battle";
-import { SetDrugQuantityPacket } from "./packets/set-drug-quantity";
+import { SetSupplyQuantityPacket } from "./packets/set-supply-quantity";
 import { SetCapturingPointPacket } from "./packets/set-capturing-point";
 import { SetDestroyTankPacket } from "./packets/set-destroy-tank";
 import { SetAutoDestroyDelayPacket } from "./packets/set-auto-destroy-delay";
@@ -344,6 +343,7 @@ import { SetCloseConfigPacket } from "./packets/set-close-config";
 import { SetRemoveUserMinesPacket } from "./packets/set-remove-user-mines";
 import { SetTwinsShotPacket } from "./packets/set-twins-shot";
 import { UnknownPacketException } from "./utils/unknown-packet-exception";
+import { Packet } from "./packets/packet";
 
 export class Network {
     private packetPool = new Map<number, typeof require>()
@@ -366,7 +366,7 @@ export class Network {
 
         this.registerPacket(Protocol.SET_LOAD_RESOURCES, SetLoadResourcesPacket)
         this.registerPacket(Protocol.RESOLVE_CALLBACK, ResolveCallbackPacket)
-        this.registerPacket(Protocol.RESOLVE_FULL_LOADED, ResolveFullLoadedPacket)
+        this.registerPacket(Protocol.SET_AUTH_SCREEN, SetAuthScreenPacket)
 
         this.registerPacket(Protocol.SET_INVITE_ENABLED, SetInviteEnabledPacket)
         this.registerPacket(Protocol.SET_AUTH_RESOURCES, SetAuthResourcesPacket)
@@ -672,7 +672,7 @@ export class Network {
         this.registerPacket(Protocol.SET_TEAM_STOPPED_CAPTURING_CONTROL_POINT_PACKET, SetTeamStoppedCapturingControlPointPacketPacket);
         this.registerPacket(Protocol.SEND_FLAME_TARGETS_SHOT, SendFlameTargetsShotPacket);
         this.registerPacket(Protocol.SET_USER_LEFT_BATTLE, SetUserLeftBattlePacket);
-        this.registerPacket(Protocol.SET_DRUG_QUANTITY, SetDrugQuantityPacket);
+        this.registerPacket(Protocol.SET_SUPPLY_QUANTITY, SetSupplyQuantityPacket);
         this.registerPacket(Protocol.SET_CAPTURING_POINT, SetCapturingPointPacket);
         this.registerPacket(Protocol.SET_DESTROY_TANK, SetDestroyTankPacket);
         this.registerPacket(Protocol.SET_AUTO_DESTROY_DELAY, SetAutoDestroyDelayPacket);
@@ -759,7 +759,7 @@ export class Network {
         Logger.info(`${this.packetPool.size} packets registered`)
     }
 
-    private registerPacket<P = SimplePacket>(id: number, packet: P) {
+    private registerPacket<P = Packet>(id: number, packet: P) {
         if (this.packetPool.has(id)) {
             throw new Error(`Packet with id ${id} already exists`)
         }

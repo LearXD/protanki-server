@@ -7,9 +7,9 @@ import { SendVulcanShotPacket } from "../../../../../network/packets/send-vulcan
 import { SetStartVulcanShotPacket } from "../../../../../network/packets/set-start-vulcan-shot";
 import { SetStopVulcanShotPacket } from "../../../../../network/packets/set-stop-vulcan-shot";
 import { ITarget, SetVulcanShotPacket } from "../../../../../network/packets/set-vulcan-shot";
-import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { IDamageModifiers } from "@/game/battle/managers/combat/types";
 import { Player } from "@/game/player";
+import { Packet } from "@/network/packets/packet";
 
 export class VulcanHandler extends Turret {
 
@@ -36,7 +36,7 @@ export class VulcanHandler extends Turret {
 
     }
 
-    public handlePacket(packet: SimplePacket): void {
+    public handlePacket(packet: Packet): void {
         if (packet instanceof SendStartVulcanShotPacket) {
             const pk = new SetStartVulcanShotPacket();
             pk.shooter = this.tank.player.getUsername();

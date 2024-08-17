@@ -5,9 +5,9 @@ import { SendStartFlameShotPacket } from "../../../../../network/packets/send-st
 import { SendStopFlameShotPacket } from "../../../../../network/packets/send-stop-flame-shot";
 import { SetStartFlameShotPacket } from "../../../../../network/packets/set-start-flame-shot";
 import { SetStopFlameShotPacket } from "../../../../../network/packets/set-stop-flame-shot";
-import { SimplePacket } from "../../../../../network/packets/simple-packet";
 import { Player } from "../../../../player";
 import { IDamageModifiers } from "@/game/battle/managers/combat/types";
+import { Packet } from "@/network/packets/packet";
 
 export class FlamethrowerHandler extends Turret {
 
@@ -44,16 +44,23 @@ export class FlamethrowerHandler extends Turret {
     }
 
     public getDamage(): number {
-        return this.getDamagePerSecond();
+        // return this.getDamagePerSecond();
+        return 0;
     }
 
-    public onDamage(target: Player, damage: number, modifiers: IDamageModifiers) {
+    public onAttack(target: Player, modifiers?: IDamageModifiers): void {
         if (modifiers.enemy) {
             target.tank.heat(this.getHeatPerSecond(), this.getMaxHeat(), this.getTemperatureDamageLimit(), this.tank.player);
         }
     }
 
-    public handlePacket(packet: SimplePacket): void {
+    public onDamage(target: Player, damage: number, modifiers: IDamageModifiers) {
+        // if (modifiers.enemy) {
+        //     target.tank.heat(this.getHeatPerSecond(), this.getMaxHeat(), this.getTemperatureDamageLimit(), this.tank.player);
+        // }
+    }
+
+    public handlePacket(packet: Packet): void {
 
         if (packet instanceof SendStartFlameShotPacket) {
             const pk = new SetStartFlameShotPacket();

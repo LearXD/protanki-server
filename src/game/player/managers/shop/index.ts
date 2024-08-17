@@ -1,3 +1,4 @@
+import { Packet } from "@/network/packets/packet";
 import { Player } from "../..";
 import { SendBuyShopItemPacket } from "../../../../network/packets/send-buy-shop-item";
 import { SendOpenShopPacket } from "../../../../network/packets/send-open-shop";
@@ -9,7 +10,6 @@ import { SetShopDataPacket } from "../../../../network/packets/set-shop-data";
 import { SetShopIncorrectPromotionalCodePacket } from "../../../../network/packets/set-shop-incorrect-promotional-code";
 import { SetShopNavigateToUrlPacket } from "../../../../network/packets/set-shop-navigate-to-url";
 import { SetSuccessfulPurchasePacket } from "../../../../network/packets/set-successful-purchase";
-import { SimplePacket } from "../../../../network/packets/simple-packet";
 import { Logger } from "../../../../utils/logger";
 
 export class PlayerShopManager {
@@ -72,7 +72,7 @@ export class PlayerShopManager {
         player.shopManager.sendIncorrectPromotionalCode()
     }
 
-    public handlePacket(packet: SimplePacket) {
+    public handlePacket(packet: Packet) {
         if (packet instanceof SendOpenShopPacket) {
             this.sendOpenShop();
             return true

@@ -2,14 +2,15 @@ import { ByteArray } from "../utils/byte-array";
 
 export class Packet {
 
-    // int size
     static readonly LENGTH_SIZE = 4;
     static readonly PID_SIZE = 4;
 
     static readonly HEADER_SIZE = Packet.LENGTH_SIZE + Packet.PID_SIZE;
 
+    static readonly BYTE_ARRAY = new ByteArray();
+
     constructor(
-        public id: number,
+        public readonly id: number,
         public bytes: ByteArray = new ByteArray()
     ) { }
 
@@ -21,11 +22,11 @@ export class Packet {
     }
 
     public encode() {
-        throw new Error('Method not implemented')
+        return Packet.BYTE_ARRAY
     }
 
     public decode() {
-        throw new Error('Method not implemented')
+        return {}
     }
 
     public setBytes(bytes: ByteArray) {
