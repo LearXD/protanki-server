@@ -41,7 +41,7 @@ export class RailgunHandler extends Turret {
         if (packet instanceof SendRailgunShotPacket) {
 
             if (packet.targets && packet.targets.length > 0) {
-                packet.targets = packet.targets.filter((target, i) => this.attack(target, { order: i + 1 }))
+                packet.targets = packet.targets.filter((target, i) => this.attack(target, { order: i + 1, incarnation: packet.incarnations[i] }))
             }
 
             const pk = new SetRailgunShotPacket();

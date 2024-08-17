@@ -23,13 +23,13 @@ export class PlayerData {
         {
             username: 'PiuRap',
             data: {
-                crystals: 2000,
+                crystals: 1e9,
                 moderatorLevel: ChatModeratorLevel.MODERATOR,
                 doubleCrystals: {
                     startedAt: Date.now(),
                     endAt: 0
                 },
-                score: 2000,
+                score: 1e9,
                 premium: {
                     notified: false,
                     startedAt: Date.now(),
@@ -46,7 +46,7 @@ export class PlayerData {
                     startedAt: Date.now(),
                     endAt: Date.now() + (1000 * 60 * 10) // 10 minutes
                 },
-                score: 2000,
+                score: 1e9,
                 premium: {
                     notified: false,
                     startedAt: Date.now(),
@@ -63,7 +63,7 @@ export class PlayerData {
                     startedAt: Date.now(),
                     endAt: Date.now() + (1000 * 60 * 10) // 10 minutes
                 },
-                score: 2000,
+                score: 1e10,
                 premium: {
                     notified: true,
                     startedAt: Date.now(),
@@ -150,6 +150,7 @@ export class PlayerData {
         this.garage = {
             paintings: [
                 { name: 'green', equipped: true },
+                { name: 'zeus', equipped: false },
                 // { name: 'africa', equipped: false },
             ],
             turrets: [
@@ -187,11 +188,18 @@ export class PlayerData {
 
         if (this.username === "TheUnknown") {
             this.garage.turrets.map(turret => {
-                turret.level = 3
+                turret.equipped = turret.name === 'freeze'
+                // turret.equipped = turret.name === 'flamethrower'
+                turret.level = 0
             })
 
             this.garage.hulls.map(hull => {
+                hull.equipped = hull.name === 'hornet'
                 hull.level = 3
+            })
+
+            this.garage.paintings.map(painting => {
+                painting.equipped = painting.name === 'zeus'
             })
         }
     }

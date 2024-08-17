@@ -5,6 +5,7 @@ import { DamageIndicatorType } from "../../../../states/damage-indicator";
 import { Player } from "../../../player";
 import { IDamageModifiers } from "./types";
 import { Turret } from "@/game/tank/utils/turret";
+import { Logger } from "@/utils/logger";
 
 export class BattleCombatManager {
 
@@ -31,8 +32,14 @@ export class BattleCombatManager {
         modifiers: IDamageModifiers
     ) {
 
-        if (!(target.tank.isVisible() && attacker.tank.isVisible())) {
-            return false
+        Logger.debug(`Visible: ${attacker.tank.isVisible()} ${target.tank.isVisible()}`);
+
+        if (!attacker.tank.isVisible()) {
+            return false;
+        }
+
+        if (!target.tank.isVisible()) {
+            return Number.isNaN(modifiers.incarnation) || modifiers.incarnation === target.tank.incarnation;
         }
 
         if (target !== attacker && !modifiers.enemy && !turret.canAttackAllies()) {
@@ -45,6 +52,7 @@ export class BattleCombatManager {
 
         turret.onAttack(target, modifiers);
         let damage = turret.getDamage(modifiers);
+        Logger.debug(`Damage: ${damage}`);
 
         if (damage) {
 

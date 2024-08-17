@@ -1,25 +1,17 @@
-import { GarageItemUtils } from "@/game/player/managers/garage/utils/item";
-import { IGarageItem } from "@/server/managers/garage/types";
 import { Turrets } from "@/states/turrets";
 import { Resistances } from "./types";
+import { IPaintingResources } from "@/game/player/managers/garage/types";
+import { GarageItem } from "@/server/managers/garage/utils/item";
 
-export class Painting {
-    public constructor(
-        public readonly item: IGarageItem,
-    ) { }
+export class Painting extends GarageItem {
 
-    public getName() {
-        return GarageItemUtils.serialize(this.item.id);
+    public constructor(resources: IPaintingResources) {
+        super(resources.item);
     }
 
     public getResistance(turret: Resistances) {
-        const property = this.item.properts.find(({ property }) => property === turret);
-
-        if (!property) {
-            return 0;
-        }
-
-        return parseInt(property.value);
+        const property = this.getProperty(turret);
+        return property ? parseInt(property.value) : 0;
     }
 
     public getTurretResistance(turret: Turrets) {
@@ -41,8 +33,4 @@ export class Painting {
                 return all > 0 ? all : 0;
         }
     }
-
-
-
-
 }

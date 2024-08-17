@@ -52,6 +52,9 @@ export class Tank {
 
     public static readonly MAX_HEALTH = 10000;
 
+    public static readonly AUTO_COOLING = -0.03
+    public static readonly AUTO_HEATING = 0.15
+
     public incarnation: number = 0;
 
     /** TANK STATES */
@@ -60,7 +63,7 @@ export class Tank {
 
     /** TANK PROPERTIES */
     private health: number = 0;
-    private temperature: number = 0;
+    private temperatureAccumulator: { time: number, attacker: Player, damage: number, max: number, heat: number }[] = [];
 
     private effects: ITankEffect[] = []
 
@@ -102,9 +105,24 @@ export class Tank {
     }
 
     public updateProperties() {
-        this.updateTurret()
-        this.updateHull()
-        this.updatePainting()
+        const turretResources = this.player.garageManager.getTurretResources()
+        const turret = TurretUtils.getTurretHandler(turretResources.item.id)
+        this.turret = new turret(turretResources, this)
+
+        this.hull = new Hull(this.player.garageManager.getHullResources())
+        this.painting = new Painting(this.player.garageManager.getPaintingResources())
+    }
+
+    public hasChangedEquipment() {
+        const turret = this.player.garageManager.getEquippedTurret()
+        const hull = this.player.garageManager.getEquippedHull()
+        const painting = this.player.garageManager.getEquippedPainting()
+
+        return (
+            turret !== this.turret.getName() ||
+            hull !== this.hull.getName() ||
+            painting !== this.painting.getName()
+        )
     }
 
     public getHealth() {
@@ -120,16 +138,46 @@ export class Tank {
     }
 
     public getTemperature() {
-        return this.temperature
+        return this.temperatureAccumulator.reduce((accumulator, { heat: value }) => accumulator + value, 0)
     }
 
-    public setTemperature(temperature: number) {
-        this.temperature = temperature
+    public heat(heat: number, max: number, damage: number, attacker: Player = this.player) {
+
+        const temperature = this.getTemperature()
+
+        if ((heat > 0 && (temperature + heat) > max) || (heat < 0 && (temperature + heat) < max)) {
+            heat = max - temperature
+        }
+
+        Logger.debug(`Heating ${this.player.getUsername()} by ${heat} (max: ${max})`)
+        if (heat === 0) return;
+
+        this.updateTemperature(temperature + heat, heat < 0);
+
+        const accumulator = this.temperatureAccumulator.find(acc => acc.attacker === attacker)
+
+        if (!accumulator) {
+            this.temperatureAccumulator.push({ time: Date.now(), attacker, max, damage, heat });
+            return;
+        }
+
+        accumulator.time = Date.now();
+        accumulator.heat += heat;
+        accumulator.damage = damage;
+    }
+
+
+    public updateTemperature(temperature: number, updateSpeed: boolean = false) {
+
+        if (updateSpeed) {
+            const multiplier = Math.max(temperature > 0 ? 1 : 0.5, 1 - (temperature / -0.9))
+            Logger.debug(`Updating speed for ${this.player.getUsername()} with multiplier ${multiplier}`)
+            this.updateTankSpeed(multiplier, multiplier, multiplier, multiplier)
+        }
 
         const packet = new SetTankTemperaturePacket();
         packet.tankId = this.player.getUsername();
         packet.temperature = temperature;
-
         this.battle.broadcastPacket(packet);
     }
 
@@ -149,22 +197,6 @@ export class Tank {
         packet.orientation = this.rotation;
 
         this.battle.broadcastPacket(packet)
-    }
-
-    public updateTurret() {
-        const resources = this.player.garageManager.getTurretResources()
-        const turretInstance = TurretUtils.getTurretHandler(resources.item.id)
-        this.turret = new turretInstance(resources.item, resources.properties, resources.sfx, this)
-    }
-
-    public updateHull() {
-        const resources = this.player.garageManager.getHullResources()
-        this.hull = new Hull(resources.item, resources.properties)
-    }
-
-    public updatePainting() {
-        const resources = this.player.garageManager.getPaintingResources()
-        this.painting = new Painting(resources.item)
     }
 
     public isAlive() {
@@ -237,18 +269,6 @@ export class Tank {
         this.battle.broadcastPacket(setChangedEquipmentPacket);
     }
 
-    public hasChangedEquipment() {
-        const turret = this.player.garageManager.getEquippedTurret()
-        const hull = this.player.garageManager.getEquippedHull()
-        const painting = this.player.garageManager.getEquippedPainting()
-
-        return (
-            turret !== this.turret.getName() ||
-            hull !== this.hull.getName() ||
-            painting !== this.painting.getName()
-        )
-    }
-
     public prepareRespawn() {
         this.incarnation++;
 
@@ -271,16 +291,13 @@ export class Tank {
     public spawn() {
         if (this.hasChangedEquipment()) {
             this.updateProperties();
-            const data = this.getData();
-
             this.sendRemoveTank();
-            // this.battle.playersManager.sendTankData(data, this.player);
-            this.battle.playersManager.broadcastTankData(data);
+            this.battle.playersManager.broadcastTankData(this.getData());
             this.sendChangeEquipment();
         }
 
         this.alive = true;
-        this.setHealth(10000);
+        this.setHealth(Tank.MAX_HEALTH);
 
         const setSpawnTankPacket = new SetSpawnTankPacket();
         setSpawnTankPacket.tankId = this.player.getUsername();
@@ -294,11 +311,13 @@ export class Tank {
     }
 
     public heal(value: number, healer: Player = this.player) {
+        let health = this.health + BattleCombatManager.parseDamageValue(value, this.hull.getProtection())
+
         if (this.health >= Tank.MAX_HEALTH) {
-            return;
+            health = Tank.MAX_HEALTH;
         }
 
-        this.setHealth(this.health + BattleCombatManager.parseDamageValue(value, this.hull.getProtection()));
+        this.setHealth(health);
         this.battle.combatManager.sendDamageIndicator(healer, this.player, value, DamageIndicator.HEAL);
     }
 
@@ -310,15 +329,16 @@ export class Tank {
             const health = this.health;
             this.setHealth(this.health - damage);
 
-            Logger.debug('')
-            Logger.debug(`Attacker: ${attacker.getUsername()} attacked ${this.player.getUsername()}`);
-            Logger.debug(`Damage: ${value} (${damage})`);
-            Logger.debug(`Target health: ${health}`);
-            Logger.debug(`New health: ${this.health}`);
-            Logger.debug(`Protection: ${this.hull.getProtection()}`);
-            Logger.debug(`${attacker.getUsername()} position ${attacker.tank.getPosition().toString()}`);
-            Logger.debug(`${this.player.getUsername()} position ${this.getPosition().toString()}`);
-            Logger.debug('')
+            // Logger.debug('')
+            // Logger.debug(`Attacker: ${attacker.getUsername()} attacked ${this.player.getUsername()}`);
+            // Logger.debug(`Distance: ${attacker.tank.getPosition().distanceTo(this.position)}`);
+            // Logger.debug(`Damage: ${value} (${damage})`);
+            // Logger.debug(`Target health: ${health}`);
+            // Logger.debug(`New health: ${this.health}`);
+            // Logger.debug(`Protection: ${this.hull.getProtection()}`);
+            // Logger.debug(`${attacker.getUsername()} position ${attacker.tank.getPosition().toString()}`);
+            // Logger.debug(`${this.player.getUsername()} position ${this.getPosition().toString()}`);
+            // Logger.debug('')
 
             const isDead = this.health <= BattleCombatManager.DEATH_HISTERESES
 
@@ -411,14 +431,21 @@ export class Tank {
         }
     }
 
-    public updateTankSpeed() {
+    public updateTankSpeed(
+        maxSpeedMultiplier: number = 1,
+        maxTurretRotationSpeedMultiplier: number = 1,
+        turnSpeedMultiplier: number = 1,
+        accelerationMultiplier: number = 1
+    ) {
         const speed = this.getSpeed()
         const setTankSpeedPacket = new SetTankSpeedPacket();
         setTankSpeedPacket.tankId = this.player.getUsername();
-        setTankSpeedPacket.maxSpeed = speed.maxSpeed;
-        setTankSpeedPacket.maxTurnSpeed = this.hull.properties.maxTurnSpeed;
-        setTankSpeedPacket.maxTurretRotationSpeed = this.turret.properties.turret_turn_speed;
-        setTankSpeedPacket.acceleration = speed.acceleration;
+
+        setTankSpeedPacket.acceleration = speed.acceleration * accelerationMultiplier;
+        setTankSpeedPacket.maxSpeed = speed.maxSpeed * maxSpeedMultiplier;
+        setTankSpeedPacket.maxTurnSpeed = this.hull.properties.maxTurnSpeed * turnSpeedMultiplier;
+        setTankSpeedPacket.maxTurretRotationSpeed = this.turret.properties.turret_turn_speed * maxTurretRotationSpeedMultiplier;
+
         setTankSpeedPacket.specificationId = this.incarnation;
         this.battle.broadcastPacket(setTankSpeedPacket);
     }
@@ -722,6 +749,35 @@ export class Tank {
             turretTurnAcceleration: this.turret.properties.turretTurnAcceleration,
             impact_force: this.turret.properties.impact_force,
             state_null: true
+        }
+    }
+
+    public update() {
+        const temperature = this.getTemperature();
+
+        if (temperature !== 0) {
+
+            Logger.debug(this.temperatureAccumulator.map(acc => ({ name: acc.attacker.getUsername(), heat: acc.heat, damage: acc.damage })))
+
+            const variation = temperature < 0 ? Tank.AUTO_HEATING : Tank.AUTO_COOLING
+
+            for (const accumulator of this.temperatureAccumulator) {
+
+                if ((Date.now() - accumulator.time) < 2000) {
+                    continue;
+                }
+
+                const damageValue = accumulator.damage * (accumulator.heat / accumulator.max)
+                this.damage(damageValue, accumulator.attacker)
+
+                accumulator.heat += variation / this.temperatureAccumulator.length
+
+                if ((variation > 0 && accumulator.heat >= 0.1) || (variation < 0 && accumulator.heat <= 0.1)) {
+                    this.temperatureAccumulator = this.temperatureAccumulator.filter(acc => acc !== accumulator)
+                }
+            }
+
+            this.updateTemperature(this.getTemperature(), true)
         }
     }
 }

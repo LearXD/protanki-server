@@ -11,11 +11,24 @@ import { MathUtils } from "../../../../../utils/math";
 import { IDamageModifiers } from "../../../../battle/managers/combat/types";
 import { Vector3d } from "@/utils/vector-3d";
 import { RayHit } from "@/game/map/managers/collision/utils/rayhit";
+import { Logger } from "@/utils/logger";
 
 export class ThunderHandler extends Turret {
 
     public getTurret() {
         return Turrets.THUNDER;
+    }
+
+    public getExplosionRadius(): number {
+        return 1200;
+    }
+
+    public getDamageRadius() {
+        const range = this.getSubProperty("SHOT_RANGE", "WEAPON_MIN_DAMAGE_RADIUS")
+        return {
+            min: range ? parseInt(range.value) * 100 : 0,
+            max: range ? parseInt(range.value) * 2 * 100 : 0,
+        };
     }
 
     public getDamageRange() {
@@ -28,21 +41,35 @@ export class ThunderHandler extends Turret {
         }
     }
 
-    public getDamage(modifiers: IDamageModifiers = { splash: false }): number {
-
+    public getDamage(modifiers: IDamageModifiers): number {
+        Logger.debug(`Distance: ${modifiers.distance} `);
         if (modifiers.splash) {
 
-            if (modifiers.distance >= 1000) {
+            if (modifiers.distance >= this.getExplosionRadius()) {
                 return 0;
             }
 
-            // TODO: calculate splash damage
-            return 10;
         }
 
+        const radius = this.getDamageRadius();
         const range = this.getDamageRange();
-        const damage = MathUtils.randomInt(range.min, range.max);
+
+        if (modifiers.distance <= radius.min) {
+            return range.max;
+        }
+
+        if (modifiers.distance >= radius.max) {
+            return range.min;
+        }
+
+        const percentage = (modifiers.distance - radius.min) / (radius.max - radius.min);
+        const damage = range.max - (range.max - range.min) * percentage;
+
         return damage;
+    }
+
+    public canAttackYourself(): boolean {
+        return true;
     }
 
     // TODO: raycast to detect collision
@@ -57,12 +84,11 @@ export class ThunderHandler extends Turret {
             }
 
             const modifiers: IDamageModifiers = {
-                splash: true,
                 distance: player.tank.getPosition().distanceTo(position),
-                enemy: player.tank.isEnemy(this.tank)
+                incarnation: player.tank.incarnation,
             }
 
-            if (modifiers.distance >= 1000) {
+            if (modifiers.distance >= this.getExplosionRadius()) {
                 continue;
             }
 
@@ -75,11 +101,9 @@ export class ThunderHandler extends Turret {
             const hit = this.tank.battle.getMap().collisionManager
                 .raycastStatic(position.swap(), direction.swap(), 16, 1, null, rayHit)
 
-            if (hit) continue;
-
-            battle.combatManager
-                .handleAttack(player, this.tank.player, this, modifiers);
-
+            if (!hit) {
+                this.attack(player, modifiers);
+            }
         }
     }
 
@@ -100,7 +124,7 @@ export class ThunderHandler extends Turret {
         }
 
         if (packet instanceof SendStormTargetShotPacket) {
-            const attacked = this.attack(packet.target);
+            const attacked = this.attack(packet.target, { incarnation: packet.incarnation });
 
             if (attacked) {
                 this.splash(packet.hitPoint, [packet.target]);

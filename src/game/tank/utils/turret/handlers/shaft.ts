@@ -46,7 +46,12 @@ export class ShaftHandler extends Turret {
         return parseInt(damage.value)
     }
 
-    public getDamage(modifiers: IDamageModifiers = { order: 1 }): number {
+    public getDamage(modifiers: IDamageModifiers): number {
+
+        if (!modifiers.order) {
+            modifiers.order = 1
+        }
+
         if (this.aiming) {
             const damage = this.getMaxAimingDamage();
             return damage / modifiers.order;
@@ -81,7 +86,7 @@ export class ShaftHandler extends Turret {
         if (packet instanceof SendShaftShotPacket) {
 
             if (packet.targets && packet.targets.length > 0) {
-                packet.targets = packet.targets.filter((target, i) => this.attack(target, { order: i + 1 }))
+                packet.targets = packet.targets.filter((target, i) => this.attack(target, { order: i + 1, incarnation: packet.incarnations[i] }))
             }
 
             const pk = new SetShaftShotPacket();
@@ -96,7 +101,7 @@ export class ShaftHandler extends Turret {
         if (packet instanceof SendShaftAimShotPacket) {
 
             if (packet.targets && packet.targets.length > 0) {
-                packet.targets = packet.targets.filter((target, i) => this.attack(target, { order: i + 1 }))
+                packet.targets = packet.targets.filter((target, i) => this.attack(target, { order: i + 1, incarnation: packet.incarnations[i] }))
             }
 
             const pk = new SetShaftShotPacket();

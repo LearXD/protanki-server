@@ -1,27 +1,19 @@
 
-import { IGarageItem, IHullProperties } from "@/server/managers/garage/types";
-import { Logger } from "../../../../utils/logger";
-import { GarageItemUtils } from "@/game/player/managers/garage/utils/item";
+import { IHullResources } from "@/game/player/managers/garage/types";
+import { IHullProperties } from "@/server/managers/garage/types";
+import { GarageItem } from "@/server/managers/garage/utils/item";
 
-export class Hull {
+export class Hull extends GarageItem {
 
-    public constructor(
-        public readonly item: IGarageItem,
-        public readonly properties: IHullProperties
-    ) { }
+    public properties: IHullProperties
 
-    public getName() {
-        return GarageItemUtils.serialize(this.item.id, this.item.modificationID);
+    public constructor(resources: IHullResources) {
+        super(resources.item)
+        this.properties = resources.properties;
     }
 
     public getProtection() {
-        const properties = this.item.properts.find(({ property }) => property === 'HULL_ARMOR')
-
-        if (!properties) {
-            Logger.warn(`Hull ${this.item.name} does not have HULL_ARMOR property.`);
-            return 0;
-        }
-
-        return parseInt(properties.value);
+        const properties = this.getProperty('HULL_ARMOR')
+        return properties ? parseInt(properties.value) : 0;
     }
 }

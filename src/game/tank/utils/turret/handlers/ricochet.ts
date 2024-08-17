@@ -52,7 +52,7 @@ export class RicochetHandler extends Turret {
         }
 
         if (packet instanceof SendRicochetTargetShotPacket) {
-            this.attack(packet.target);
+            this.attack(packet.target, { incarnation: NaN });
         }
     }
 }

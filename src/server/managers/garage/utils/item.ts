@@ -16,7 +16,7 @@ export class GarageItem {
         const property = this.item.properts.find(({ property }) => property === name)
 
         if (!property) {
-            Logger.warn(`${property} property not found`);
+            Logger.warn(`${name} property not found`);
             return null;
         }
 

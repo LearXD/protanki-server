@@ -70,7 +70,7 @@ export class IsidaHandler extends Turret {
 
         if (packet instanceof SendIsisShotPositionPacket) {
             if (this.startedAt && this.targetShot) {
-                this.attack(this.targetShot.target);
+                this.attack(this.targetShot.target, { incarnation: packet.incarnation });
             }
         }
 

@@ -19,6 +19,7 @@ import { IGarageHull, IGaragePainting, IGarageTurret } from "../../utils/data/ty
 import { ResourceType } from "../../../../server/managers/resources/types";
 import { GarageItemUtils } from "./utils/item";
 import { ServerError } from "@/server/utils/error";
+import { IHullResources, IPaintingResources, ITurretResources } from "./types";
 
 export class PlayerGarageManager {
 
@@ -237,7 +238,7 @@ export class PlayerGarageManager {
         return null
     }
 
-    public getTurretResources() {
+    public getTurretResources(): ITurretResources {
         const turret = this.getEquippedTurret();
 
         const item = this.player.server.garageManager.getItem(turret);
@@ -251,7 +252,7 @@ export class PlayerGarageManager {
         return { turret, sfx, properties, item }
     }
 
-    public getHullResources() {
+    public getHullResources(): IHullResources {
         const hull = this.getEquippedHull();
         const item = this.player.server.garageManager.getItem(hull);
         const properties = this.player.server.garageManager.getHullProperties(hull);
@@ -263,7 +264,7 @@ export class PlayerGarageManager {
         return { hull, item, properties }
     }
 
-    public getPaintingResources() {
+    public getPaintingResources(): IPaintingResources {
         const painting = this.getEquippedPainting();
         const item = this.player.server.garageManager.getItem(painting);
 

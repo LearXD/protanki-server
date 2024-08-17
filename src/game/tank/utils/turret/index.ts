@@ -1,43 +1,52 @@
 import { Tank } from "../..";
-
 import { SimplePacket } from "../../../../network/packets/simple-packet";
-import { Vector3d } from "../../../../utils/vector-3d";
 import { IDamageModifiers } from "../../../battle/managers/combat/types";
 import { Player } from "../../../player";
-import { IGarageItem, ITurretProperties, ITurretSfx } from "@/server/managers/garage/types";
-import { GarageItemUtils } from "@/game/player/managers/garage/utils/item";
+import { ITurretProperties, ITurretSfx } from "@/server/managers/garage/types";
 import { Turrets } from "@/states/turrets";
 import { GarageItem } from "@/server/managers/garage/utils/item";
+import { Logger } from "@/utils/logger";
+import { ITurretResources } from "@/game/player/managers/garage/types";
 
 export abstract class Turret extends GarageItem {
 
     public startedAt: number = 0;
-
     public rotation: number = 0;
 
-    public constructor(
-        public readonly item: IGarageItem,
-        public readonly properties: ITurretProperties,
-        public readonly sfx: ITurretSfx,
-        public readonly tank: Tank
-    ) {
-        super(item)
+    public readonly properties: ITurretProperties
+    public readonly sfx: ITurretSfx
+
+    public constructor(resources: ITurretResources, public readonly tank: Tank) {
+        super(resources.item)
+
+        this.properties = resources.properties;
+        this.sfx = resources.sfx;
     }
 
     public abstract getTurret(): Turrets;
+    public abstract handlePacket(packet: SimplePacket): void
 
-    public getName() {
-        return GarageItemUtils.serialize(this.item.id, this.item.modificationID);
-    }
-
-    public getDamage(modifiers?: IDamageModifiers): number {
+    /**
+     * This function is called when the turret is attacking a player
+     * @param modifiers The damage modifiers
+     * @returns The damage of the turret
+     */
+    public getDamage(modifiers: IDamageModifiers): number {
         return 0
     }
 
+    /**
+     * This function is called when the turret is attacking a player
+     * @returns The damage of the turret
+     */
     public canAttackYourself(): boolean {
         return false;
     }
 
+    /**
+     * This function is called when the turret is attacking a player
+     * @returns If the turret can attack allies
+     */
     public canAttackAllies(): boolean {
         return false;
     }
@@ -57,12 +66,23 @@ export abstract class Turret extends GarageItem {
      */
     public onDamage(target: Player, damage: number, modifiers: IDamageModifiers): void { }
 
-    public attack(player: string, modifiers: IDamageModifiers = {}): boolean {
+    /**
+     * This function is called when the turret is attacking a player
+     * @param player The player that is being attacked
+     * @param modifiers The damage modifiers
+     * @returns If the attack was successful
+     */
+    public attack(player: string | Player, modifiers: IDamageModifiers): boolean {
+
+        Logger.debug(`${this.tank.player.getUsername()} is attacking ${player instanceof Player ? player.getUsername() : player} with ${this.getName()}`);
+
         const battle = this.tank.battle;
-        const target = battle.playersManager.getPlayer(player);
+        const target = player instanceof Player ? player : battle.playersManager.getPlayer(player);
 
         if (target) {
-            modifiers.distance = target.tank.getPosition().distanceTo(this.tank.getPosition());
+            if (!modifiers.distance) {
+                modifiers.distance = target.tank.getPosition().distanceTo(this.tank.getPosition());
+            }
             modifiers.enemy = target.tank.isEnemy(this.tank);
 
             return battle.combatManager
@@ -72,5 +92,4 @@ export abstract class Turret extends GarageItem {
         return false;
     }
 
-    public abstract handlePacket(packet: SimplePacket): void
 }

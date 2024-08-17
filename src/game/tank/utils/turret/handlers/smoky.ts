@@ -80,7 +80,7 @@ export class SmokyHandler extends Turret {
 
         if (packet instanceof SendSmokyTargetShotPacket) {
             const isCritical = MathUtils.randomInt(0, 100) <= this.getCriticalChance();
-            const attacked = this.attack(packet.target, { critical: isCritical })
+            const attacked = this.attack(packet.target, { critical: isCritical, incarnation: packet.incarnation })
 
             if (attacked) {
                 Logger.debug('Smoky target shot');

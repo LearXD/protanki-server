@@ -1,4 +1,5 @@
 export interface IDamageModifiers {
+    incarnation: number;
     distance?: number;
     time?: number
     critical?: boolean;

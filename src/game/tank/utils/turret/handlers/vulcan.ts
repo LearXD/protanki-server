@@ -54,7 +54,7 @@ export class VulcanHandler extends Turret {
 
             if (packet.targets && packet.targets.length > 0) {
                 packet.targets.forEach(target => {
-                    const attacked = this.attack(target.target)
+                    const attacked = this.attack(target.target, { incarnation: NaN })
                     if (attacked) {
                         targets.push({
                             direction: null,

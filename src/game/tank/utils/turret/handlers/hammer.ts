@@ -59,7 +59,7 @@ export class HammerHandler extends Turret {
                 target.hitPosition.y = targetPosition.y - target.hitPosition.y;
                 target.hitPosition.z = targetPosition.z - target.hitPosition.z;
 
-                const attacked = this.attack(target.target, { count: target.count });
+                const attacked = this.attack(target.target, { count: target.count, incarnation: NaN });
                 if (!attacked) {
                     targets.delete(target.target);
                 }

@@ -20,25 +20,37 @@ export class FlamethrowerHandler extends Turret {
         return damage ? parseInt(damage.value) / 2 : 0;
     }
 
-    public getTemperatureLimit() {
+    public getTemperatureDamageLimit() {
         const limit = this.getSubProperty("FIRE_DAMAGE", "FLAME_TEMPERATURE_LIMIT")
-        return limit ? parseInt(limit.value) / 2 : 0;
+        return limit ? parseInt(limit.value) : 0;
+    }
+
+    public getHeatPerSecond(): number {
+        switch (this.item.modificationID) {
+            case 0: return 0.08;
+            case 1: return 0.08 * 2;
+            case 2: return 0.08 * 3;
+            case 3: return 0.08 * 4;
+        }
+    }
+
+    public getMaxHeat(): number {
+        switch (this.item.modificationID) {
+            case 0: return 0.3;
+            case 1: return 0.3 * 2;
+            case 2: return 0.3 * 3;
+            case 3: return 0.3 * 4;
+        }
     }
 
     public getDamage(): number {
-        const damage = this.getDamagePerSecond();
-        return damage;
+        return this.getDamagePerSecond();
     }
 
     public onDamage(target: Player, damage: number, modifiers: IDamageModifiers) {
-        const temperatureLimit = this.getTemperatureLimit();
-        const temperature = target.tank.getTemperature();
-
-        if (temperature >= temperatureLimit) {
-            return;
+        if (modifiers.enemy) {
+            target.tank.heat(this.getHeatPerSecond(), this.getMaxHeat(), this.getTemperatureDamageLimit(), this.tank.player);
         }
-
-        target.tank.setTemperature(temperature + 0.1)
     }
 
     public handlePacket(packet: SimplePacket): void {
@@ -57,7 +69,7 @@ export class FlamethrowerHandler extends Turret {
 
         if (packet instanceof SendFlameTargetsShotPacket) {
             if (packet.targets && packet.targets.length > 0) {
-                packet.targets.forEach(target => this.attack(target))
+                packet.targets.forEach((target, i) => this.attack(target, { incarnation: packet.incarnations[i] }))
             }
         }
     }

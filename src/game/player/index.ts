@@ -237,6 +237,10 @@ export class Player extends Client {
 
     public update() {
         super.update();
+
+        if (this.tank) {
+            this.tank.update()
+        }
     }
 
     public getPacketHandler(): PlayerPacketHandler {
