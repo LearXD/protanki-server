@@ -7,7 +7,7 @@ import { Client } from '../../../game/client';
 
 export class ClientsHandler {
 
-    private clients: Map<string, Client> = new Map();
+    private clients: Map<string, Client> = new Map()
 
     public constructor(
         private readonly server: Server

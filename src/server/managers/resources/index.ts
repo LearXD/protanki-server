@@ -6,7 +6,7 @@ import { SetLoadResourcesPacket } from "@/network/packets/set-load-resources";
 
 export class ResourcesManager {
 
-    private resources: Map<string, any[]> = new Map();
+    private resources: Map<string, any[]> = new Map()
 
     constructor(
         private readonly server: Server

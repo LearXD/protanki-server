@@ -24,7 +24,6 @@ import { BattleCombatManager } from "./managers/combat"
 import { BattlePlayersManager } from "./managers/players"
 import { BattleViewersManager } from "./managers/viewers"
 import { BattleChatManager } from "./managers/chat"
-import { BattleResourcesManager } from "./managers/resources"
 import { BattleMinesManager } from "./managers/mines"
 import { BattleEffectsManager } from "./managers/effects"
 import { BattleBoxesManager } from "./managers/boxes"
@@ -51,7 +50,6 @@ export class Battle {
     public readonly playersManager: BattlePlayersManager = new BattlePlayersManager(this)
     public readonly viewersManager: BattleViewersManager = new BattleViewersManager(this)
     public readonly chatManager: BattleChatManager = new BattleChatManager(this)
-    public readonly resourcesManager: BattleResourcesManager = new BattleResourcesManager(this)
     public readonly minesManager: BattleMinesManager = new BattleMinesManager(this)
     public readonly effectsManager: BattleEffectsManager = new BattleEffectsManager(this)
     public readonly boxesManager: BattleBoxesManager = new BattleBoxesManager(this)
@@ -60,7 +58,7 @@ export class Battle {
     public constructor(
         private readonly server: Server,
         public name: string,
-        private map: Map,
+        public readonly map: Map,
         private data: IBattleData = {
             autoBalance: true,
             battleMode: BattleMode.DM,
@@ -153,7 +151,7 @@ export class Battle {
         /** SEND DATA & RESOURCES */
         await this.map.sendResources(player)
         this.map.sendProperties(player, isSpectator)
-        this.resourcesManager.sendTurretsData(player)
+        this.server.garageManager.sendTurretsProperties(player)
 
         /** SEND PROPERTIES & STATISTICS */
         this.modeManager.sendBattleData(player, isSpectator)
@@ -224,7 +222,6 @@ export class Battle {
     public getBattleId() { return this.battleId }
 
     public getName() { return this.name }
-    public getMap(): Map { return this.map }
 
     public isRunning() {
         return this.running

@@ -1,20 +1,20 @@
 import path from 'path';
-import { GarageItemCategory, GarageItemFolder, IGarageItem, IHullProperties, ITurretProperties, ITurretSfx } from './types';
+import { GarageItemFolder, IGarageItem, IHullPhysics, ITurretPhysics, ITurretSfx } from './types';
 import { Server } from '@/server';
 import { Logger } from '@/utils/logger';
-
+import { GarageItemUtils } from '@/game/player/managers/garage/utils/item';
+import { ServerError } from '@/server/utils/error';
+import { ITurretProperties, SetTurretsDataPacket } from '@/network/packets/set-turrets-data';
+import { Player } from '@/game/player';
 
 export class Garage {
 
-    public items: Map<string, IGarageItem> = new Map();
+    public turretsProperties: ITurretProperties[] = []
+    public items: Map<string, IGarageItem> = new Map()
 
     public constructor(
         private readonly server: Server
     ) {
-        this.init();
-    }
-
-    public init() {
         Logger.info('Initializing garage items...');
 
         this.addItems(this.getItemData(GarageItemFolder.TURRET, 'smoky.json'));
@@ -48,61 +48,60 @@ export class Garage {
         this.addItems(this.getItemData(GarageItemFolder.KIT, 'kits.json'));
 
         Logger.info(`Initialized ${this.items.size} garage items`);
+
+        Logger.info('Loading turret properties...');
+        this.turretsProperties = this.getData('turrets.json');
+
+        if (this.turretsProperties.length === 0) {
+            throw new ServerError('Failed to load turret properties');
+        }
+
+        Logger.info(`Loaded ${this.turretsProperties.length} turret properties`);
     }
 
-    public addItems(items: IGarageItem[]) {
-        items.forEach(item => this.addItem(item));
-    }
-
-    public addItem(item: IGarageItem) {
-        this.items.set(`${item.id}_m${item.modificationID ?? 0}`, item);
-    }
-
-    public getItem(itemId: string) {
-        return this.items.get(itemId);
-    }
-
-    public getTurretProperties(itemId: string): ITurretProperties {
-        return this.getData(path.join('properties', 'turrets', itemId, 'properties.json'));
-    }
-
-    public getTurretSfx(itemId: string): ITurretSfx {
-        return this.getData(path.join('properties', 'turrets', itemId, 'sfx.json'));
-    }
-
-    public getHullProperties(itemId: string): IHullProperties {
-        return this.getData(path.join('properties', 'hulls', itemId, 'properties.json'));
-    }
-
-    public getItemProperties(itemId: string) {
-        return this.getData(path.join('properties', itemId));
+    // ASSETS
+    public getData(_path: string) {
+        return this.server.assetsManager.getData(path.join('garage', _path));
     }
 
     public getItemData(item: GarageItemFolder, file: string) {
         return this.getData(path.join('items', item, file));
     }
 
-    public getData(_path: string) {
-        return this.server.assetsManager
-            .getData(path.join('garage', _path));
+    // GARAGE ITEMS
+    public addItems(items: IGarageItem[]) {
+        items.forEach(item => this.addItem(item));
     }
 
-    /**
-     * @deprecated test latter
-     */
-    public getItemCategory(itemId: string) {
-        const item = this.items.get(itemId);
-
-        switch (item?.category) {
-            case 'armor': return GarageItemCategory.HULL;
-            case 'weapon': return GarageItemCategory.TURRET;
-            case 'paint': return GarageItemCategory.PAINT;
-            case 'inventory': return GarageItemCategory.SUPPLY;
-            case 'kit': return GarageItemCategory.KIT;
-            case 'special': return GarageItemCategory.SPECIAL;
-        }
-
-        return GarageItemCategory.UNKNOWN;
+    public addItem(item: IGarageItem) {
+        this.items.set(GarageItemUtils.serialize(item.id, item.modificationID), item);
     }
 
+    public getItem(itemId: string) {
+        return this.items.get(itemId);
+    }
+
+    // TURRET PHYSICS
+    public getTurretPhysics(itemId: string): ITurretPhysics {
+        return this.getData(path.join('physics', 'turrets', itemId, 'properties.json'));
+    }
+
+    public getTurretSfx(itemId: string): ITurretSfx {
+        return this.getData(path.join('physics', 'turrets', itemId, 'sfx.json'));
+    }
+
+    public getHullPhysics(itemId: string): IHullPhysics {
+        return this.getData(path.join('physics', 'hulls', itemId, 'properties.json'));
+    }
+
+    // TURRET PROPERTIES
+    public getTurretProperties(itemId: string) {
+        return this.turretsProperties.find(turret => turret.id === itemId);
+    }
+
+    public sendTurretsProperties(player: Player) {
+        const setTurretsDataPacket = new SetTurretsDataPacket();
+        setTurretsDataPacket.turrets = this.turretsProperties;
+        player.sendPacket(setTurretsDataPacket);
+    }
 }

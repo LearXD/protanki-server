@@ -10,7 +10,7 @@ import { Packet } from "@/network/packets/packet";
 
 export class BattleViewersManager {
 
-    public readonly viewers: Map<string, Player> = new Map();
+    public readonly viewers: Map<string, Player> = new Map()
 
     public constructor(
         private readonly battle: Battle
@@ -64,7 +64,7 @@ export class BattleViewersManager {
             itemId: this.battle.getBattleId(),
             scoreLimit: this.battle.getScoreLimit(),
             timeLimitInSec: this.battle.getTimeLimitInSec(),
-            preview: this.battle.getMap().getPreview(),
+            preview: this.battle.map.getPreview(),
             maxPeopleCount: this.battle.getMaxPeopleCount(),
             name: this.battle.getName(),
             proBattle: this.battle.isProBattle(),

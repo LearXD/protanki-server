@@ -14,8 +14,8 @@ import { Tank } from "@/game/tank";
 
 export class BattlePlayersManager {
 
-    public readonly players: Map<string, Player> = new Map();
-    private spectators: Map<string, Player> = new Map();
+    public readonly players: Map<string, Player> = new Map()
+    private spectators: Map<string, Player> = new Map()
 
     public constructor(
         private readonly battle: Battle

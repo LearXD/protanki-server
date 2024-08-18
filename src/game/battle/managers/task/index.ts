@@ -4,7 +4,7 @@ import { ITask } from "./types";
 export class BattleTaskManager {
 
     private generatedTasks = 0;
-    private tasks: Map<number, BattleTask> = new Map();
+    private tasks: Map<number, BattleTask> = new Map()
 
     public scheduleTask(
         callable: ITask,

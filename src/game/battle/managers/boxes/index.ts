@@ -56,7 +56,7 @@ export class BattleBoxesManager {
 
     public spawnBox(bonus: BonusType, delay: number = 0) {
 
-        const positions = this.battle.getMap().getBonuses()
+        const positions = this.battle.map.getBonuses()
             .filter(b => b.types.includes(bonus) && b.modes.includes(this.battle.getMode()))
 
         if (positions.length < 1) {

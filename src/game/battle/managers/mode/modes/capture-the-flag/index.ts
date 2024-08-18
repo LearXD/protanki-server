@@ -25,7 +25,7 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
 
     public initFlag(team: TeamType) {
 
-        const positions = this.battle.getMap().getFlags()
+        const positions = this.battle.map.getFlags()
 
         switch (team) {
             case Team.RED: {
@@ -43,7 +43,7 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
     }
 
     public sendLoadBattleMode(player: Player): void {
-        const positions = this.battle.getMap().getFlags()
+        const positions = this.battle.map.getFlags()
 
         const packet = new SetLoadCaptureTheFlagPacket();
 
@@ -72,7 +72,7 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
     }
 
     public getSpawns() {
-        return this.battle.getMap().getSpawns()
+        return this.battle.map.getSpawns()
             .filter(spawn => spawn.type === Team.RED || spawn.type === Team.BLUE)
     }
 
@@ -108,7 +108,7 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
 
         // const position = player.tank.getPosition()
         const hit = new RayHit()
-        const found = this.battle.getMap().collisionManager.raycastStatic(
+        const found = this.battle.map.collisionManager.raycastStatic(
             player.tank.getPosition().swap(),
             Vector3d.DOWN,
             16,

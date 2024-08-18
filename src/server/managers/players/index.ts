@@ -5,7 +5,7 @@ import { LayoutState } from "@/states/layout-state";
 
 export class PlayersManager {
 
-    public players: Map<string, Player> = new Map();
+    public players: Map<string, Player> = new Map()
 
     public constructor(
         private readonly server: Server

@@ -287,11 +287,11 @@ export class Tank {
     public prepareRespawn() {
         this.incarnation++;
 
-        this.effects = this.effects.filter(effect => effect.activeAfterDeath)
+        this.effects.length = 0//this.effects.filter(effect => effect.activeAfterDeath)
         const spawn = this.battle.modeManager.getRandomSpawn(this.player);
 
         if (!spawn) {
-            Logger.warn(`Player ${this.player.getUsername()} has no spawn on the map ${this.battle.getMap().getName()}`);
+            Logger.warn(`Player ${this.player.getUsername()} has no spawn on the map ${this.battle.map.getName()}`);
         }
 
         this.position = spawn?.position ? Vector3d.fromInterface(spawn.position) : new Vector3d(0, 0, 0);
@@ -326,6 +326,12 @@ export class Tank {
     }
 
     public heal(value: number, healer: Player = this.player) {
+
+        const temperature = this.getTemperature()
+        if (temperature !== 0) {
+            const index = value / this.hull.getProtection();
+            this.heat((temperature * index) * -1, 0, value, healer)
+        }
 
         if (this.health >= Tank.MAX_HEALTH) {
             return;
@@ -419,10 +425,11 @@ export class Tank {
 
             switch (supply) {
                 case Supply.HEALTH: {
-                    const rounds = Math.round(this.hull.getProtection() / 30)
+                    const heal = this.hull.getProtection() * 0.2
+                    const rounds = Math.round(this.hull.getProtection() / heal)
 
                     for (let i = 0; i < rounds; i++) {
-                        this.battle.taskManager.scheduleTask(() => this.heal(30), i * 1000, this.player.getUsername())
+                        this.battle.taskManager.scheduleTask(() => this.heal(heal), i * 1000, this.player.getUsername())
                     }
 
                     duration = rounds * 1000;
@@ -464,7 +471,7 @@ export class Tank {
         setTankSpeedPacket.acceleration = speed.acceleration * accelerationMultiplier;
         setTankSpeedPacket.maxSpeed = speed.maxSpeed * maxSpeedMultiplier;
         setTankSpeedPacket.maxTurnSpeed = this.hull.properties.maxTurnSpeed * turnSpeedMultiplier;
-        setTankSpeedPacket.maxTurretRotationSpeed = this.turret.properties.turret_turn_speed * maxTurretRotationSpeedMultiplier;
+        setTankSpeedPacket.maxTurretRotationSpeed = this.turret.physics.turret_turn_speed * maxTurretRotationSpeedMultiplier;
 
         setTankSpeedPacket.specificationId = this.incarnation;
         this.battle.broadcastPacket(setTankSpeedPacket);
@@ -764,17 +771,22 @@ export class Tank {
             mass: this.hull.properties.mass,
             power: this.hull.properties.power,
             dampingCoeff: this.hull.properties.dampingCoeff,
-            turret_turn_speed: this.turret.properties.turret_turn_speed,
+            turret_turn_speed: this.turret.physics.turret_turn_speed,
             health: this.alive ? this.health : 0,
             rank: this.player.data.getRank(),
-            kickback: this.turret.properties.kickback,
-            turretTurnAcceleration: this.turret.properties.turretTurnAcceleration,
-            impact_force: this.turret.properties.impact_force,
+            kickback: this.turret.physics.kickback,
+            turretTurnAcceleration: this.turret.physics.turretTurnAcceleration,
+            impact_force: this.turret.physics.impact_force,
             state_null: true
         }
     }
 
     public update() {
+
+        if (this.turret) {
+            this.turret.update()
+        }
+
         const temperature = this.getTemperature();
 
         if (temperature !== 0) {
@@ -803,5 +815,6 @@ export class Tank {
 
             this.updateTemperature(this.getTemperature(), true)
         }
+
     }
 }

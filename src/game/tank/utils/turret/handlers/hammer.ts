@@ -24,7 +24,7 @@ export class HammerHandler extends Turret {
     public handlePacket(packet: Packet): void {
         if (packet instanceof SendHammerShotPacket) {
 
-            const targets: Map<string, ITarget> = new Map();
+            const targets: Map<string, ITarget> = new Map()
             const targetsPositions = new Map<string, Vector3d>();
 
             for (const target of packet.targets) {

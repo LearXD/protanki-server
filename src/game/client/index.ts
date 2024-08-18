@@ -32,7 +32,7 @@ export abstract class Client {
     public connected: boolean = true;
 
     private resourcesLoaded: number = 0;
-    private resourcesCallbackPool: Map<number, () => void> = new Map();
+    private resourcesCallbackPool: Map<number, () => void> = new Map()
 
     constructor(
         public readonly socket: net.Socket,

@@ -1,4 +1,5 @@
-import { IGarageItem, IHullProperties, ITurretProperties, ITurretSfx } from "@/server/managers/garage/types";
+import { ITurretProperties } from "@/network/packets/set-turrets-data";
+import { IGarageItem, IHullPhysics, ITurretPhysics, ITurretSfx } from "@/server/managers/garage/types";
 
 export enum IItemType {
     TURRET = 'turret',
@@ -9,14 +10,15 @@ export enum IItemType {
 export interface IHullResources {
     hull: string,
     item: IGarageItem
-    properties: IHullProperties
+    physics: IHullPhysics
 }
 
 export interface ITurretResources {
     turret: string,
     item: IGarageItem
-    properties: ITurretProperties
+    physics: ITurretPhysics
     sfx: ITurretSfx
+    properties: ITurretProperties
 }
 
 export interface IPaintingResources {

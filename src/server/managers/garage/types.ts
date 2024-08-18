@@ -66,7 +66,7 @@ export enum GarageItemCategory {
     UNKNOWN = 'unknown'
 }
 
-export interface ITurretProperties {
+export interface ITurretPhysics {
     turret_turn_speed: number
     kickback: number
     turretTurnAcceleration: number
@@ -75,7 +75,7 @@ export interface ITurretProperties {
 
 export type ITurretSfx = { [key: string]: any }
 
-export interface IHullProperties {
+export interface IHullPhysics {
     maxSpeed: number
     maxTurnSpeed: number
     acceleration: number

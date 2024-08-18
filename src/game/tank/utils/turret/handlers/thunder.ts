@@ -97,7 +97,7 @@ export class ThunderHandler extends Turret {
             direction.subtract(position)
 
             const rayHit = new RayHit()
-            const hit = this.tank.battle.getMap().collisionManager
+            const hit = this.tank.battle.map.collisionManager
                 .raycastStatic(position.swap(), direction.swap(), 16, 1, null, rayHit)
 
             if (!hit) {

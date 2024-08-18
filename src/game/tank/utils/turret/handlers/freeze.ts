@@ -15,6 +15,10 @@ export class FreezeHandler extends Turret {
         return Turrets.FREEZE;
     }
 
+    public canAttackAllies(): boolean {
+        return true;
+    }
+
     public getDamagePerPeriod(): number {
         const damage = this.getSubProperty("DAMAGE_PER_SECOND", "DAMAGE_PER_PERIOD");
         return damage ? parseInt(damage.value) / 2 : 0;
@@ -40,14 +44,17 @@ export class FreezeHandler extends Turret {
         }
     }
 
-    public getDamage(): number {
-        const damage = this.getDamagePerPeriod();
-        // return damage;
-        return 0.1
+    public getDamage(modifiers: IDamageModifiers): number {
+        if (modifiers.enemy) {
+            const damage = this.getDamagePerPeriod();
+            // return damage;
+            return 0.1
+        }
+        return 0
     }
 
     public onAttack(target: Player, modifiers?: IDamageModifiers): void {
-        if (!target.tank.isEnemy(this.tank)) {
+        if (!modifiers.enemy) {
             const temperature = target.tank.getTemperature();
             if (temperature > 0) {
                 const freeze = this.getFreezePerSecond();
@@ -57,7 +64,7 @@ export class FreezeHandler extends Turret {
     }
 
     public onDamage(target: Player, damage: number, modifiers: IDamageModifiers): void {
-        if (target.tank.isEnemy(this.tank)) {
+        if (modifiers.enemy) {
             target.tank.heat(this.getFreezePerSecond(), this.getMaxFreeze(), 0, this.tank.player);
         }
     }

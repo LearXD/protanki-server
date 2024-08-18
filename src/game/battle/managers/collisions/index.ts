@@ -2,12 +2,11 @@ import { Player } from "@/game/player";
 import { Battle } from "../..";
 import { BattleObject } from "./utils/object";
 import { Logger } from "@/utils/logger";
-import { MapAreaAction } from "@/game/map/types";
 import { Vector3d } from "@/utils/vector-3d";
 
 export class BattleCollisionsManager {
 
-    public objects: Map<string, BattleObject> = new Map();
+    public objects: Map<string, BattleObject> = new Map()
 
     public constructor(
         private readonly battle: Battle
@@ -26,6 +25,7 @@ export class BattleCollisionsManager {
     }
 
     public checkObjectCollisions(player: Player, position?: Vector3d) {
+
         if (!player.tank || !player.tank.isVisible()) {
             return;
         }
@@ -44,37 +44,8 @@ export class BattleCollisionsManager {
         }
     }
 
-    public checkAreaCollisions(player: Player, position?: Vector3d) {
-
-        if (!player.tank || !player.tank.isAlive()) {
-            return;
-        }
-
-        if (!position) {
-            position = player.tank.getPosition();
-        }
-
-        for (const area of this.battle.getMap().getAreas()) {
-            const { minX, minY: minZ, minZ: minY, maxX, maxY: maxZ, maxZ: maxY } = area // SWAP Y AND Z
-            if (
-                (position.x > minX && position.x < maxX) &&
-                (position.y > minY && position.y < maxY) &&
-                (position.z > minZ && position.z < maxZ)
-            ) {
-
-                if (area.action === MapAreaAction.KILL) {
-                    player.tank.suicide();
-                }
-
-                if (area.action === MapAreaAction.KICK) {
-                    player.close()
-                }
-            }
-        }
-    }
-
     public handlePlayerMovement(player: Player) {
-        this.checkAreaCollisions(player)
+        this.battle.map.areaManager.checkCollisions(player)
         this.checkObjectCollisions(player)
     }
 }

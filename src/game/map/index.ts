@@ -7,6 +7,7 @@ import { SetBattleMapPropertiesPacket } from '@/network/packets/set-battle-map-p
 import { IResource } from '@/server/managers/resources/types';
 import { ReadType } from '@/server/managers/assets/types';
 import { MapCollisionManager } from './managers/collision';
+import { MapAreaManager } from './managers/area';
 
 export class Map extends MapDataManager {
 
@@ -16,12 +17,12 @@ export class Map extends MapDataManager {
 
     private properties: any = []
 
-    private spawns: IMapSpawn[] = []
-    private flags: IMapFlags = null
-    private areas: IMapArea[] = []
-    private bonuses: IMapBonus[] = []
+    public spawns: IMapSpawn[] = []
+    public flags: IMapFlags = null
+    public bonuses: IMapBonus[] = []
 
     public collisionManager: MapCollisionManager
+    public areaManager: MapAreaManager
 
     public constructor(
         public readonly manager: MapsManager,
@@ -36,11 +37,10 @@ export class Map extends MapDataManager {
 
         this.spawns = manager.getMapsData(path.join(this.getId(), 'spawns.json'))
         this.flags = manager.getMapsData(path.join(this.getId(), 'flags.json'))
-        this.areas = manager.getMapsData(path.join(this.getId(), 'areas.json'))
         this.bonuses = manager.getMapsData(path.join(this.getId(), 'bonuses.json'))
 
-        const collisions = manager.getMapsData(path.join(this.getId(), 'collisions.json'))
-        this.collisionManager = new MapCollisionManager(collisions)
+        this.collisionManager = new MapCollisionManager(manager.getMapsData(path.join(this.getId(), 'collisions.json')))
+        this.areaManager = new MapAreaManager(manager.getMapsData(path.join(this.getId(), 'areas.json')))
     }
 
     public getSpawns(): IMapSpawn[] {
@@ -49,10 +49,6 @@ export class Map extends MapDataManager {
 
     public getFlags(): IMapFlags {
         return this.flags
-    }
-
-    public getAreas(): IMapArea[] {
-        return this.areas
     }
 
     public getBonuses(): IMapBonus[] {

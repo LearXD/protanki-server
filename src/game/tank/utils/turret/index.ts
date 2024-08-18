@@ -1,26 +1,34 @@
 import { Tank } from "../..";
 import { IDamageModifiers } from "../../../battle/managers/combat/types";
 import { Player } from "../../../player";
-import { ITurretProperties, ITurretSfx } from "@/server/managers/garage/types";
+import { ITurretPhysics, ITurretSfx } from "@/server/managers/garage/types";
 import { Turrets } from "@/states/turrets";
 import { GarageItem } from "@/server/managers/garage/utils/item";
 import { Logger } from "@/utils/logger";
 import { ITurretResources } from "@/game/player/managers/garage/types";
 import { Packet } from "@/network/packets/packet";
+import { ITurretProperties } from "@/network/packets/set-turrets-data";
 
 export abstract class Turret extends GarageItem {
 
     public startedAt: number = 0;
     public rotation: number = 0;
 
-    public readonly properties: ITurretProperties
+    public readonly physics: ITurretPhysics
     public readonly sfx: ITurretSfx
 
-    public constructor(resources: ITurretResources, public readonly tank: Tank) {
+    public readonly properties: ITurretProperties;
+
+    public constructor(
+        readonly resources: ITurretResources,
+        public readonly tank: Tank
+    ) {
         super(resources.item)
 
-        this.properties = resources.properties;
+        this.physics = resources.physics;
         this.sfx = resources.sfx;
+
+        this.properties = resources.properties;
     }
 
     public abstract getTurret(): Turrets;
@@ -86,5 +94,10 @@ export abstract class Turret extends GarageItem {
         }
         return false;
     }
+
+    /**
+     * This function is called on player tick
+     */
+    public update() { }
 
 }

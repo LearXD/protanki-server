@@ -2,12 +2,7 @@ import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-interface SpecialEntity {
-    chargingTimeMsec: number;
-    weakeningCoeff: number;
-}
-
-interface Weapon {
+export interface ITurretProperties {
     auto_aiming_down: number;
     auto_aiming_up: number;
     num_rays_down: number;
@@ -15,12 +10,12 @@ interface Weapon {
     reload: number;
     id: string;
     has_wwd: boolean;
-    special_entity: SpecialEntity;
+    special_entity: object;
 }
 
 export class SetTurretsDataPacket extends Packet {
 
-    public turrets: Weapon[]
+    public turrets: ITurretProperties[]
 
     constructor(bytes?: ByteArray) {
         super(Protocol.SET_TURRETS_DATA, bytes)

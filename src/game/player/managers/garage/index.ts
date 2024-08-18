@@ -242,26 +242,23 @@ export class PlayerGarageManager {
         const turret = this.getEquippedTurret();
 
         const item = this.player.server.garageManager.getItem(turret);
-        const properties = this.player.server.garageManager.getTurretProperties(turret);
+        const physics = this.player.server.garageManager.getTurretPhysics(turret);
         const sfx = this.player.server.garageManager.getTurretSfx(turret);
+        const properties = this.player.server.garageManager.getTurretProperties(turret);
 
-        if (!properties || !sfx) {
-            return null;
-        }
-
-        return { turret, sfx, properties, item }
+        return { turret, sfx, physics, item, properties }
     }
 
     public getHullResources(): IHullResources {
         const hull = this.getEquippedHull();
         const item = this.player.server.garageManager.getItem(hull);
-        const properties = this.player.server.garageManager.getHullProperties(hull);
+        const properties = this.player.server.garageManager.getHullPhysics(hull);
 
         if (!properties) {
             return null;
         }
 
-        return { hull, item, properties }
+        return { hull, item, physics: properties }
     }
 
     public getPaintingResources(): IPaintingResources {

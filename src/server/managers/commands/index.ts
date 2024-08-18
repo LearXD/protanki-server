@@ -10,7 +10,7 @@ import { DevCommand } from "./commands/dev";
 
 export class CommandsManager {
 
-    public commands: Map<string, Command> = new Map();
+    public commands: Map<string, Command> = new Map()
 
     public constructor() {
         this.registerCommands();
