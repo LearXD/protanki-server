@@ -32,54 +32,44 @@ export class BattleCombatManager {
         modifiers: IDamageModifiers
     ) {
 
-        if (!attacker.tank.isVisible()) {
-            return false;
-        }
-
-        if (!target.tank.isVisible()) {
-            return Number.isNaN(modifiers.incarnation) || modifiers.incarnation === target.tank.incarnation;
-        }
-
         modifiers.enemy = target.tank.isEnemy(attacker.tank);
 
-        if (target !== attacker && !modifiers.enemy && !turret.canAttackAllies()) {
-            return false;
-        }
+        if (
+            (target === attacker && turret.canAttackYourself()) ||
+            ((target !== attacker && modifiers.enemy) || turret.canAttackAllies())
+        ) {
 
-        if (target === attacker && !turret.canAttackYourself()) {
-            return false;
-        }
-
-        if (!modifiers.distance) {
-            modifiers.distance = target.tank.getPosition().distanceTo(attacker.tank.getPosition());
-        }
-
-        turret.onAttack(target, modifiers);
-
-        let damage = turret.getDamage(modifiers);
-
-        if (damage) {
-
-            if (attacker.tank.hasEffect(Supply.DOUBLE_DAMAGE)) {
-                damage *= 2;
+            if (!modifiers.distance) {
+                modifiers.distance = target.tank.getPosition().distanceTo(attacker.tank.getPosition());
             }
 
-            if (modifiers.enemy) {
-                if (target.tank.hasEffect(Supply.ARMOR)) {
-                    damage /= 2;
+            turret.onAttack(target, modifiers);
+
+            if (Number.isNaN(modifiers.incarnation) || modifiers.incarnation === target.tank.incarnation) {
+                let damage = turret.getDamage(modifiers);
+                if (damage) {
+                    if (attacker.tank.hasEffect(Supply.DOUBLE_DAMAGE)) {
+                        damage *= 2;
+                    }
+
+                    if (modifiers.enemy) {
+                        if (target.tank.hasEffect(Supply.ARMOR)) {
+                            damage /= 2;
+                        }
+
+                        const resistance = target.tank.painting.getTurretResistance(attacker.tank.turret.getTurret());
+                        damage *= 1 - (resistance / 100);
+
+                        turret.onDamage(target, damage, modifiers);
+                        target.tank.damage(damage, attacker, modifiers.critical);
+
+                        return true;
+                    }
+
+                    target.tank.heal(damage, attacker);
+                    return true
                 }
-
-                const resistance = target.tank.painting.getTurretResistance(attacker.tank.turret.getTurret());
-                damage *= 1 - (resistance / 100);
-
-                turret.onDamage(target, damage, modifiers);
-                target.tank.damage(damage, attacker, modifiers.critical);
-
-                return true;
             }
-
-            target.tank.heal(damage, attacker);
-            return true
         }
 
         return false

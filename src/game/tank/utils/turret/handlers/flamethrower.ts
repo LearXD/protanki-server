@@ -45,19 +45,13 @@ export class FlamethrowerHandler extends Turret {
 
     public getDamage(): number {
         // return this.getDamagePerSecond();
-        return 0;
-    }
-
-    public onAttack(target: Player, modifiers?: IDamageModifiers): void {
-        if (modifiers.enemy) {
-            target.tank.heat(this.getHeatPerSecond(), this.getMaxHeat(), this.getTemperatureDamageLimit(), this.tank.player);
-        }
+        return 0.1;
     }
 
     public onDamage(target: Player, damage: number, modifiers: IDamageModifiers) {
-        // if (modifiers.enemy) {
-        //     target.tank.heat(this.getHeatPerSecond(), this.getMaxHeat(), this.getTemperatureDamageLimit(), this.tank.player);
-        // }
+        if (modifiers.enemy) {
+            target.tank.heat(this.getHeatPerSecond(), this.getMaxHeat(), this.getTemperatureDamageLimit(), this.tank.player);
+        }
     }
 
     public handlePacket(packet: Packet): void {

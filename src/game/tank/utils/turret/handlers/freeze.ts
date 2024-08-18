@@ -34,20 +34,32 @@ export class FreezeHandler extends Turret {
         const base = -1
         switch (this.item.modificationID) {
             case 0: return base
-            case 1: return base * 2;
-            case 2: return base * 3;
-            case 3: return base * 4;
+            case 1: return base * 1.5;
+            case 2: return base * 2;
+            case 3: return base * 2.5;
         }
     }
 
     public getDamage(): number {
         const damage = this.getDamagePerPeriod();
         // return damage;
-        return 0
+        return 0.1
     }
 
     public onAttack(target: Player, modifiers?: IDamageModifiers): void {
-        target.tank.heat(this.getFreezePerSecond(), this.getMaxFreeze(), 0, this.tank.player);
+        if (!target.tank.isEnemy(this.tank)) {
+            const temperature = target.tank.getTemperature();
+            if (temperature > 0) {
+                const freeze = this.getFreezePerSecond();
+                target.tank.heat((temperature + freeze) < 0 ? 0 : freeze, this.getMaxFreeze(), 0, this.tank.player);
+            }
+        }
+    }
+
+    public onDamage(target: Player, damage: number, modifiers: IDamageModifiers): void {
+        if (target.tank.isEnemy(this.tank)) {
+            target.tank.heat(this.getFreezePerSecond(), this.getMaxFreeze(), 0, this.tank.player);
+        }
     }
 
     public handlePacket(packet: Packet): void {

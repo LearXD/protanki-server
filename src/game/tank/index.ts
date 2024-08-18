@@ -154,6 +154,20 @@ export class Tank {
 
         this.updateTemperature(temperature + heat, heat < 0);
 
+        if (heat < 0 && temperature > 0) {
+            const heaters = this.temperatureAccumulator.filter(acc => acc.heat > 0)
+            if (heaters.length) {
+                heaters.forEach(heater => {
+                    heater.heat += heat / heaters.length
+
+                    if (heater.heat < 0) {
+                        heater.heat = 0
+                    }
+                })
+                return;
+            }
+        }
+
         const accumulator = this.temperatureAccumulator.find(acc => acc.attacker === attacker)
 
         if (!accumulator) {
@@ -312,9 +326,14 @@ export class Tank {
     }
 
     public heal(value: number, healer: Player = this.player) {
-        let health = this.health + BattleCombatManager.parseDamageValue(value, this.hull.getProtection())
 
         if (this.health >= Tank.MAX_HEALTH) {
+            return;
+        }
+
+        let health = this.health + BattleCombatManager.parseDamageValue(value, this.hull.getProtection())
+
+        if (health >= Tank.MAX_HEALTH) {
             health = Tank.MAX_HEALTH;
         }
 
@@ -766,12 +785,14 @@ export class Tank {
 
             for (const accumulator of this.temperatureAccumulator) {
 
-                if ((Date.now() - accumulator.time) < 2000) {
-                    continue;
+                if (accumulator.heat > 0) {
+                    const damageValue = accumulator.damage * (accumulator.heat / accumulator.max)
+                    this.damage(damageValue, accumulator.attacker)
                 }
 
-                const damageValue = accumulator.damage * (accumulator.heat / accumulator.max)
-                this.damage(damageValue, accumulator.attacker)
+                if ((Date.now() - accumulator.time) < 1000) {
+                    continue;
+                }
 
                 accumulator.heat += variation / this.temperatureAccumulator.length
 

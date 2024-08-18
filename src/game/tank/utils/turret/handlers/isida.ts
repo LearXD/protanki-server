@@ -10,6 +10,7 @@ import { IsidaState } from "../../../../../states/isida-state";
 import { IDamageModifiers } from "@/game/battle/managers/combat/types";
 import { SendIsisShotPositionPacket } from "@/network/packets/send-isis-shot-position";
 import { Packet } from "@/network/packets/packet";
+import { Player } from "@/game/player";
 
 export class IsidaHandler extends Turret {
 
@@ -30,6 +31,11 @@ export class IsidaHandler extends Turret {
         return damage ? parseInt(damage.value) : 0;
     }
 
+    public getSelfHealingPercent(): number {
+        const heal = this.getProperty("ISIS_SELF_HEALING_PERCENT")
+        return heal ? parseInt(heal.value) : 0;
+    }
+
     public getDamage(modifiers: IDamageModifiers): number {
         if (modifiers.enemy) {
             return this.getDamagePerPeriod() / 2;
@@ -39,6 +45,12 @@ export class IsidaHandler extends Turret {
 
     public canAttackAllies(): boolean {
         return true;
+    }
+
+    public onDamage(target: Player, damage: number, modifiers: IDamageModifiers): void {
+        if (modifiers.enemy) {
+            this.tank.heal(damage * (this.getSelfHealingPercent() / 100));
+        }
     }
 
     public handlePacket(packet: Packet): void {

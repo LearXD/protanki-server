@@ -73,17 +73,17 @@ export abstract class Turret extends GarageItem {
      * @returns If the attack was successful
      */
     public attack(player: string | Player, modifiers: IDamageModifiers): boolean {
+        if (this.tank.isVisible()) {
+            Logger.debug(`${this.tank.player.getUsername()} is attacking ${player instanceof Player ? player.getUsername() : player} with ${this.getName()}`);
 
-        Logger.debug(`${this.tank.player.getUsername()} is attacking ${player instanceof Player ? player.getUsername() : player} with ${this.getName()}`);
+            const battle = this.tank.battle;
+            const target = player instanceof Player ? player : battle.playersManager.getPlayer(player);
 
-        const battle = this.tank.battle;
-        const target = player instanceof Player ? player : battle.playersManager.getPlayer(player);
-
-        if (target) {
-            return battle.combatManager
-                .handleAttack(target, this.tank.player, this, modifiers);
+            if (target) {
+                return battle.combatManager
+                    .handleAttack(target, this.tank.player, this, modifiers);
+            }
         }
-
         return false;
     }
 

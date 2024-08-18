@@ -1,16 +1,11 @@
 
 import { Player } from "../player"
 import { Logger } from "../../utils/logger"
-
 import { BattleMode } from "../../states/battle-mode"
 import { EquipmentConstraintsMode } from "../../states/equipment-constraints-mode"
-
 import { SetShowBattleNotificationsPacket } from "../../network/packets/set-show-battle-notifications"
-
 import { LayoutState } from "../../states/layout-state"
-
 import { SetRemoveBattleScreenPacket } from "../../network/packets/set-remove-battle-screen"
-
 import { IBattleData } from "./types"
 import { SuspiciousLevel } from "../../states/suspicious-level"
 import { IBattleList } from "../../network/packets/set-battle-list"
@@ -19,7 +14,6 @@ import { Rank } from "../../states/rank"
 import { TimeType } from "./managers/task/types"
 import { BattleUtils } from "./utils/battle"
 import { Team, TeamType } from "@/states/team"
-import { Tank } from "../tank"
 import { Map } from "../map"
 import { SetBattleStartedPacket } from "@/network/packets/set-battle-started"
 import { Server } from "@/server"

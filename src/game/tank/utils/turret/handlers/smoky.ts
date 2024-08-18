@@ -15,6 +15,8 @@ import { Packet } from "@/network/packets/packet";
 
 export class SmokyHandler extends Turret {
 
+    public lastShotPacket: SendSmokyTargetShotPacket = null;
+
     public getTurret() {
         return Turrets.SMOKY;
     }
@@ -41,8 +43,7 @@ export class SmokyHandler extends Turret {
 
     public getImpactForce() {
         const force = this.getProperty("IMPACT_FORCE");
-        // return force ? parseInt(force.value) : 0
-        return 1.07
+        return force ? parseInt(force.value) / 100 : 0
     }
 
     public getDamage(modifiers: IDamageModifiers): number {
@@ -53,13 +54,30 @@ export class SmokyHandler extends Turret {
 
         const range = this.getDamageRange()
         const damage = MathUtils.randomInt(range.min, range.max);
-        Logger.debug('Distance: ' + modifiers.distance + ' Damage: ' + damage);
 
         return damage
     }
 
-    public onDamage(target: Player, damage: number, modifiers: IDamageModifiers): void {
+    public onAttack(target: Player, modifiers?: IDamageModifiers): void {
+        if (this.lastShotPacket) {
+            const pk = new SetSmokyTargetShotPacket();
 
+            pk.shooter = this.tank.player.getUsername();
+            pk.target = target.getUsername();
+            pk.hitPoint = this.lastShotPacket.hitPoint;
+            pk.weakeningCoeff = this.getImpactForce();
+            pk.isCritical = modifiers.critical
+
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+        }
+    }
+
+    public onDamage(target: Player, damage: number, modifiers: IDamageModifiers): void {
+        if (modifiers.critical) {
+            const pk = new SetSmokyCriticalEffectPacket();
+            pk.target = target.getUsername();
+            this.tank.battle.broadcastPacket(pk);
+        }
     }
 
     public handlePacket(packet: Packet): void {
@@ -67,39 +85,22 @@ export class SmokyHandler extends Turret {
             const pk = new SetSmokyHitPointPacket();
             pk.shooter = this.tank.player.getUsername();
             pk.hitPoint = packet.hitPoint;
-
             this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
         }
 
         if (packet instanceof SendSmokyVoidShotPacket) {
             const pk = new SetSmokyVoidShotPacket();
             pk.shooter = this.tank.player.getUsername();
-
             this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
         }
 
         if (packet instanceof SendSmokyTargetShotPacket) {
-            const isCritical = MathUtils.randomInt(0, 100) <= this.getCriticalChance();
-            const attacked = this.attack(packet.target, { critical: isCritical, incarnation: packet.incarnation })
+            this.lastShotPacket = packet;
 
-            if (attacked) {
-                Logger.debug('Smoky target shot');
-                const pk = new SetSmokyTargetShotPacket();
-                pk.shooter = this.tank.player.getUsername();
-                pk.target = packet.target;
-                pk.hitPoint = packet.hitPoint;
-                pk.weakeningCoeff = this.getImpactForce(); // TODO: see this
-                pk.isCritical = isCritical
-
-                if (isCritical) {
-                    const pk = new SetSmokyCriticalEffectPacket();
-                    pk.target = packet.target;
-                    this.tank.battle.broadcastPacket(pk);
-                }
-
-                this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
-            }
-
+            this.attack(packet.target, {
+                critical: MathUtils.randomInt(0, 100) <= this.getCriticalChance(),
+                incarnation: packet.incarnation
+            })
         }
     }
 }

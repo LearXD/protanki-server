@@ -92,6 +92,19 @@ export class DevCommand extends Command {
                     break;
                 }
 
+                case 'temperature': {
+
+                    if (args.length < 3) {
+                        sender.sendMessage("Uso correto: /dev temperature (quantidade) (max) (damage)");
+                        return;
+                    }
+
+                    const [heat, max, damage] = args.map(parseFloat);
+
+                    sender.tank.heat(heat, max, damage, sender);
+                    break;
+                }
+
                 case 'jail': {
                     const battle = sender.battle;
                     if (!battle) {
