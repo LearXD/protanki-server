@@ -11,6 +11,7 @@ import { Vector3d } from "@/utils/vector-3d";
 import { RayHit } from "@/game/map/managers/collision/utils/rayhit";
 import { Logger } from "@/utils/logger";
 import { Packet } from "@/network/packets/packet";
+import { MathUtils } from "@/utils/math";
 
 export class ThunderHandler extends Turret {
 
@@ -18,16 +19,32 @@ export class ThunderHandler extends Turret {
         return Turrets.THUNDER;
     }
 
+    public canAttackYourself(): boolean {
+        return true;
+    }
+
     public getExplosionRadius(): number {
         return 1200;
     }
 
-    public getDamageRadius() {
-        const range = this.getSubProperty("SHOT_RANGE", "WEAPON_MIN_DAMAGE_RADIUS")
-        return {
-            min: range ? parseInt(range.value) * 100 : 0,
-            max: range ? parseInt(range.value) * 2 * 100 : 0,
-        };
+    public getMaxDamageRadius() {
+        const multiplier = 100;
+        switch (this.item.modificationID) {
+            case 0: return 56.9 * multiplier;
+            case 1: return 61.8 * multiplier;
+            case 2: return 66.6 * multiplier;
+            case 3: return 70.0 * multiplier;
+        }
+    }
+
+    public getMinDamageRange() {
+        const multiplier = 100;
+        switch (this.item.modificationID) {
+            case 0: return 113.85 * multiplier;
+            case 1: return 123.49 * multiplier;
+            case 2: return 133.12 * multiplier;
+            case 3: return 140.00 * multiplier;
+        }
     }
 
     public getDamageRange() {
@@ -40,68 +57,59 @@ export class ThunderHandler extends Turret {
         }
     }
 
-    public getDamage(modifiers: IDamageModifiers): number {
-        Logger.debug(`Distance: ${modifiers.distance} `);
-        if (modifiers.splash) {
+    public getSplashDamage(hitDistance: number, distance: number): number {
+        const { min, max } = this.getDamageRange();
 
-            if (modifiers.distance >= this.getExplosionRadius()) {
-                return 0;
-            }
 
+        const damage = MathUtils.randomInt(min, min - (max - min))
+
+        if (this.getMaxDamageRadius() >= distance && hitDistance <= this.getExplosionRadius() * 0.5) {
+            return damage
         }
 
-        const radius = this.getDamageRadius();
-        const range = this.getDamageRange();
-
-        if (modifiers.distance <= radius.min) {
-            return range.max;
-        }
-
-        if (modifiers.distance >= radius.max) {
-            return range.min;
-        }
-
-        const percentage = (modifiers.distance - radius.min) / (radius.max - radius.min);
-        const damage = range.max - (range.max - range.min) * percentage;
-
-        return damage;
+        const factor = Math.min(1, (1 - (hitDistance / this.getExplosionRadius())));
+        const decrease = Math.min(1, 1 - ((distance - this.getMaxDamageRadius()) / this.getMinDamageRange()));
+        return damage * decrease * factor;
     }
 
-    public canAttackYourself(): boolean {
-        return true;
+    public getDamage(distance: number, modifiers: IDamageModifiers): number {
+        const { min, max } = this.getDamageRange();
+        const damage = MathUtils.randomInt(min, max)
+        if (this.getMaxDamageRadius() >= distance) {
+            return damage
+        }
+
+        const decrease = Math.min(1, 1 - ((distance - this.getMaxDamageRadius()) / this.getMinDamageRange()));
+        return damage * decrease;
     }
 
     // TODO: raycast to detect collision
     public splash(position: Vector3d, ignore: string[] = []): void {
-        const battle = this.tank.battle;
-        const players = battle.playersManager.getPlayers();
+        const players = this.tank.battle.playersManager.getPlayers();
 
         for (const player of players) {
 
-            if (ignore.includes(player.getUsername())) {
-                continue;
-            }
+            if (
+                ignore.includes(player.getUsername()) === false &&
+                player.tank.isVisible() && (player.tank.isEnemy(this.tank) || player === this.tank.player)
+            ) {
+                const distance = player.tank.getPosition().distanceTo(position);
+                if (distance <= this.getExplosionRadius()) {
+                    // TODO: improve saporra aqui vai tomar no cu calculo fudido do caraio
 
-            const modifiers: IDamageModifiers = {
-                distance: player.tank.getPosition().distanceTo(position),
-                incarnation: player.tank.incarnation,
-            }
+                    const direction = Vector3d.copy(player.tank.getPosition()).add(new Vector3d(0, 200, 0)).subtract(position)
+                    const rayHit = new RayHit()
 
-            if (modifiers.distance >= this.getExplosionRadius()) {
-                continue;
-            }
+                    const hit = this.tank.battle.map.collisionManager
+                        .raycastStatic(position.swap(), direction.swap(), 16, 1, null, rayHit)
 
-            // TODO: improve saporra aqui vai tomar no cu calculo fudido do caraio
-            const direction = Vector3d.copy(player.tank.getPosition())
-            direction.add(new Vector3d(0, 200, 0))
-            direction.subtract(position)
-
-            const rayHit = new RayHit()
-            const hit = this.tank.battle.map.collisionManager
-                .raycastStatic(position.swap(), direction.swap(), 16, 1, null, rayHit)
-
-            if (!hit) {
-                this.attack(player, modifiers);
+                    if (hit === false) {
+                        const damage = this.getSplashDamage(distance, player.tank.getPosition().distanceTo(this.tank.getPosition()));
+                        if (damage) {
+                            this.tank.battle.combatManager.handleAttack(player, this.tank.player, damage, player.tank.incarnation);
+                        }
+                    }
+                }
             }
         }
     }
@@ -123,7 +131,7 @@ export class ThunderHandler extends Turret {
         }
 
         if (packet instanceof SendStormTargetShotPacket) {
-            const attacked = this.attack(packet.target, { incarnation: packet.incarnation });
+            const attacked = this.attack(packet.target, packet.incarnation);
 
             if (attacked) {
                 this.splash(packet.hitPoint, [packet.target]);

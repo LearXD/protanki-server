@@ -44,7 +44,7 @@ export class TwinsHandler extends Turret {
         }
 
         if (packet instanceof SendTwinsTargetShotPacket) {
-            this.attack(packet.target, { incarnation: NaN })
+            this.attack(packet.target)
         }
 
         if (packet instanceof SendTwinsHitPointShotPacket) {

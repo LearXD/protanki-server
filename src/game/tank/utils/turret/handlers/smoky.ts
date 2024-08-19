@@ -7,7 +7,6 @@ import { SetSmokyCriticalEffectPacket } from "../../../../../network/packets/set
 import { SetSmokyHitPointPacket } from "../../../../../network/packets/set-smoky-hit-point";
 import { SetSmokyTargetShotPacket } from "../../../../../network/packets/set-smoky-target-shot";
 import { SetSmokyVoidShotPacket } from "../../../../../network/packets/set-smoky-void-shot";
-import { Logger } from "../../../../../utils/logger";
 import { MathUtils } from "../../../../../utils/math";
 import { IDamageModifiers } from "../../../../battle/managers/combat/types";
 import { Player } from "../../../../player";
@@ -30,6 +29,19 @@ export class SmokyHandler extends Turret {
             max: max ? parseInt(max.value) : 0
         }
     }
+    public getMaxShotDistance() {
+        switch (this.item.modificationID) {
+            case 0: return 44.4 * 10;
+            case 1: return 49.1 * 10;
+            case 2: return 53.9 * 10;
+            case 3: return 60 * 10;
+        }
+        return 0
+    }
+
+    public getWeaknessDamage() {
+        return 10 / 100;
+    }
 
     public getCriticalChance(): number {
         const chance = this.getProperty("CRITICAL_HIT_CHANCE");
@@ -46,19 +58,20 @@ export class SmokyHandler extends Turret {
         return force ? parseInt(force.value) / 100 : 0
     }
 
-    public getDamage(modifiers: IDamageModifiers): number {
+    public getDamage(distance: number, modifiers: IDamageModifiers): number {
 
         if (modifiers.critical) {
             return this.getCriticalDamage()
         }
 
-        const range = this.getDamageRange()
-        const damage = MathUtils.randomInt(range.min, range.max);
+        let { max, min } = this.getDamageRange()
+        const damage = MathUtils.randomInt(min, max)
 
-        return damage
+        const decrease = Math.floor(distance / this.getMaxShotDistance())
+        return Math.floor(damage - decrease)
     }
 
-    public onAttack(target: Player, modifiers?: IDamageModifiers): void {
+    public onAttack(target: Player, critical: boolean = false): void {
         if (this.lastShotPacket) {
             const pk = new SetSmokyTargetShotPacket();
 
@@ -66,14 +79,14 @@ export class SmokyHandler extends Turret {
             pk.target = target.getUsername();
             pk.hitPoint = this.lastShotPacket.hitPoint;
             pk.weakeningCoeff = this.getImpactForce();
-            pk.isCritical = modifiers.critical
+            pk.isCritical = critical
 
             this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
         }
     }
 
-    public onDamage(target: Player, damage: number, modifiers: IDamageModifiers): void {
-        if (modifiers.critical) {
+    public onDamage(target: Player, damage: number, critical: boolean): void {
+        if (critical) {
             const pk = new SetSmokyCriticalEffectPacket();
             pk.target = target.getUsername();
             this.tank.battle.broadcastPacket(pk);
@@ -97,9 +110,8 @@ export class SmokyHandler extends Turret {
         if (packet instanceof SendSmokyTargetShotPacket) {
             this.lastShotPacket = packet;
 
-            this.attack(packet.target, {
-                critical: MathUtils.randomInt(0, 100) <= this.getCriticalChance(),
-                incarnation: packet.incarnation
+            this.attack(packet.target, packet.incarnation, {
+                critical: MathUtils.randomInt(0, 100) <= this.getCriticalChance()
             })
         }
     }

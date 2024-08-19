@@ -15,10 +15,11 @@ import { SetStopShaftShotPacket } from "../../../../../network/packets/set-stop-
 import { MathUtils } from "../../../../../utils/math";
 import { IDamageModifiers } from "../../../../battle/managers/combat/types";
 import { Packet } from "@/network/packets/packet";
+import { IShaftProperties } from "../types";
 
 export class ShaftHandler extends Turret {
 
-    private aiming: boolean = false;
+    public properties: IShaftProperties;
 
     public getTurret() {
         return Turrets.SHAFT;
@@ -34,38 +35,33 @@ export class ShaftHandler extends Turret {
         }
     }
 
-    public getImpactForce() {
-        const chance = this.getProperty("IMPACT_FORCE");
-        return parseInt(chance.value)
-    }
-
     public getMaxAimingDamage() {
         const damage = this.getSubProperty("AIMING_MODE_DAMAGE", "SHAFT_AIMING_MODE_MAX_DAMAGE")
         return parseInt(damage.value)
     }
 
-    public getDamage(modifiers: IDamageModifiers): number {
+    public getImpactForce() {
+        const chance = this.getProperty("IMPACT_FORCE");
+        return parseInt(chance.value)
+    }
 
-        if (!modifiers.order) {
-            modifiers.order = 1
-        }
 
-        if (this.aiming) {
-            const damage = this.getMaxAimingDamage();
-            return damage / modifiers.order;
-        }
-
+    public getDamage(distance: number, modifiers: IDamageModifiers): number {
         const range = this.getDamageRange();
-        const damage = MathUtils.randomInt(range.min, range.max);
 
+        if (this.startedAt) {
+            const damage = (this.getMaxAimingDamage() - range.min) * Math.min(1, (Date.now() - this.startedAt) / this.properties.special_entity.fadeInTimeMs);
+            return (damage + range.min) / modifiers.order;
+        }
+
+        const damage = MathUtils.randomInt(range.min, range.max);
         return damage / modifiers.order;
     }
 
     public handlePacket(packet: Packet): void {
 
         if (packet instanceof SendStartShaftAimPacket) {
-            this.aiming = true;
-            // TODO: Validate time
+            this.startedAt = Date.now();
         }
 
         if (packet instanceof SendOpenShaftAimPacket) {
@@ -75,49 +71,50 @@ export class ShaftHandler extends Turret {
         }
 
         if (packet instanceof SendShaftStopAimPacket) {
-            this.aiming = false;
             const pk = new SetStopShaftShotPacket();
             pk.shooter = this.tank.player.getUsername();
             this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            this.startedAt = 0;
         }
 
         if (packet instanceof SendShaftShotPacket) {
-
-            if (packet.targets && packet.targets.length > 0) {
-                packet.targets = packet.targets.filter((target, i) => this.attack(target, { order: i + 1, incarnation: packet.incarnations[i] }))
-            }
-
             const pk = new SetShaftShotPacket();
+
             pk.shooter = this.tank.player.getUsername();
             pk.staticHitPoint = packet.staticHitPoint;
             pk.targets = packet.targets;
             pk.targetHitPoints = packet.targetsHitPoints;
             pk.impactForce = this.getImpactForce();
+
             this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+
+            packet.targets && packet.targets
+                .forEach((target, i) => this.attack(target, packet.incarnations[i], { order: i + 1 }))
+
+            this.startedAt = 0;
         }
 
         if (packet instanceof SendShaftAimShotPacket) {
-
-            if (packet.targets && packet.targets.length > 0) {
-                packet.targets = packet.targets.filter((target, i) => this.attack(target, { order: i + 1, incarnation: packet.incarnations[i] }))
-            }
-
             const pk = new SetShaftShotPacket();
+
             pk.shooter = this.tank.player.getUsername();
             pk.staticHitPoint = packet.staticHitPoint;
             pk.targets = packet.targets;
             pk.targetHitPoints = packet.targetsHitPoints;
             pk.impactForce = this.getImpactForce();
+
             this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
 
-            this.aiming = false;
+            packet.targets && packet.targets
+                .forEach((target, i) => this.attack(target, packet.incarnations[i], { order: i + 1 }))
+
+            this.startedAt = 0;
         }
 
         if (packet instanceof SendMoveShaftVerticalAxisPacket) {
             const pk = new SetMoveShaftVerticalAxisPacket();
             pk.shooter = this.tank.player.getUsername();
             pk.projectionOnVerticalAxis = packet.projectionOnVerticalAxis;
-
             this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
         }
 
@@ -126,7 +123,6 @@ export class ShaftHandler extends Turret {
             pk.shooter = this.tank.player.getUsername();
             pk.target = packet.tank;
             pk.position = packet.localSpotPosition;
-
             this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
         }
     }

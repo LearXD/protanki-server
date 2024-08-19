@@ -773,7 +773,7 @@
         "max_damage_radius": 100,
         "min_damage_radius": 100,
         "min_damage_percent": 100,
-        "has_wwd": true,
+        "has_wwd": true, 
         "special_entity": {
             "max_energy": 1000,
             "charge_rate": 124.08,
@@ -797,7 +797,7 @@
             "targetingTransitionTime": 500,
             "reticleImageId": 339826,
             "weakeningCoeff": 0.36,
-            "fadeInTimeMs": 3000,
+            "fadeInTimeMs": 100,
             "laserPointerBlueColor": 48127,
             "laserPointerRedColor": 16711680,
             "locallyVisible": false

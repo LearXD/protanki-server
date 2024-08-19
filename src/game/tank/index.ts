@@ -222,13 +222,15 @@ export class Tank {
     }
 
     public isEnemy(tank: Tank) {
-        return (
-            tank === this ||
-            this.battle.getMode() === BattleMode.DM ||
-            tank.team !== this.team ||
-            this.battle.isFriendlyFire()
-        )
+        if (this.battle.isFriendlyFire()) {
+            return true
+        }
 
+        if (this.battle.getMode() === BattleMode.DM) {
+            return tank !== this
+        }
+
+        return tank.team !== this.team
     }
 
     public sendLatency() {
@@ -350,6 +352,9 @@ export class Tank {
     public damage(value: number, attacker: Player, isCritical: boolean = false) {
 
         if (this.isVisible()) {
+
+            if (this.hasEffect(Supply.ARMOR)) value /= 2
+
             const damage = BattleCombatManager.parseDamageValue(value, this.hull.getProtection())
 
             const health = this.health;
@@ -529,6 +534,7 @@ export class Tank {
     }
 
     public onDeath() {
+        this.turret.onDeath()
         this.temperatureAccumulator = []
 
         this.battle.minesManager.removePlayerMines(this.player)

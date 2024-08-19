@@ -49,7 +49,7 @@ export class VulcanHandler extends Turret {
     }
 
     public getDamage(): number {
-        const damage = this.getDamagePerPeriod() / 2;
+        const damage = this.getDamagePerPeriod() / 4;
         return damage;
     }
 
@@ -57,7 +57,7 @@ export class VulcanHandler extends Turret {
         if (this.startedAt) {
             const time = Date.now() - this.startedAt
 
-            if (time > (this.properties.special_entity.temperatureHittingTime + 500)) {
+            if (time > (this.properties.special_entity.temperatureHittingTime + 1000)) {
                 this.tank.heat(this.getHeatPerSecond(), this.getMaxHeat(), this.getDamagePerPeriod() / 2, this.tank.player)
             }
         }
@@ -85,15 +85,7 @@ export class VulcanHandler extends Turret {
 
             if (packet.targets && packet.targets.length > 0) {
                 packet.targets.forEach(target => {
-                    const attacked = this.attack(target.target, { incarnation: NaN })
-                    if (attacked) {
-                        targets.push({
-                            direction: null,
-                            shotPosition: target.shooterPosition,
-                            hits: 0,
-                            target: target.target
-                        })
-                    }
+                    targets.push({ direction: null, shotPosition: target.shooterPosition, hits: 0, target: target.target })
                 });
             }
 
@@ -101,8 +93,9 @@ export class VulcanHandler extends Turret {
             pk.shooter = this.tank.player.getUsername();
             pk.direction = packet.direction;
             pk.targets = targets
-
             this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+
+            packet.targets.forEach(target => this.attack(target.target))
         }
 
         if (packet instanceof SendVulcanOverturnedShotPacket) { }

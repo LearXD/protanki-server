@@ -44,17 +44,13 @@ export class FreezeHandler extends Turret {
         }
     }
 
-    public getDamage(modifiers: IDamageModifiers): number {
-        if (modifiers.enemy) {
-            const damage = this.getDamagePerPeriod();
-            // return damage;
-            return 0.1
-        }
-        return 0
+    public getDamage(distance: number, modifiers: IDamageModifiers): number {
+        const damage = this.getDamagePerPeriod();
+        return damage;
     }
 
-    public onAttack(target: Player, modifiers?: IDamageModifiers): void {
-        if (!modifiers.enemy) {
+    public onAttack(target: Player): void {
+        if (target.tank.isEnemy(this.tank) === false) {
             const temperature = target.tank.getTemperature();
             if (temperature > 0) {
                 const freeze = this.getFreezePerSecond();
@@ -63,8 +59,8 @@ export class FreezeHandler extends Turret {
         }
     }
 
-    public onDamage(target: Player, damage: number, modifiers: IDamageModifiers): void {
-        if (modifiers.enemy) {
+    public onDamage(target: Player, damage: number): void {
+        if (target.tank.isEnemy(this.tank)) {
             target.tank.heat(this.getFreezePerSecond(), this.getMaxFreeze(), 0, this.tank.player);
         }
     }
@@ -84,7 +80,7 @@ export class FreezeHandler extends Turret {
 
         if (packet instanceof SendFreezeTargetsShotPacket) {
             if (packet.targets && packet.targets.length > 0) {
-                packet.targets.forEach((target, i) => this.attack(target, { incarnation: packet.incarnations[i] }))
+                packet.targets.forEach((target, i) => this.attack(target, packet.incarnations[i]))
             }
         }
     }

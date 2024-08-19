@@ -36,19 +36,20 @@ export class IsidaHandler extends Turret {
         return heal ? parseInt(heal.value) : 0;
     }
 
-    public getDamage(modifiers: IDamageModifiers): number {
-        if (modifiers.enemy) {
-            return this.getDamagePerPeriod() / 2;
-        }
+    public getHeal(): number {
         return this.getHealingPerPeriod() / 2;
+    }
+
+    public getDamage(distance: number, modifiers: IDamageModifiers): number {
+        return this.getDamagePerPeriod() / 2;
     }
 
     public canAttackAllies(): boolean {
         return true;
     }
 
-    public onDamage(target: Player, damage: number, modifiers: IDamageModifiers): void {
-        if (modifiers.enemy) {
+    public onDamage(target: Player, damage: number): void {
+        if (target.tank.isEnemy(this.tank)) {
             this.tank.heal(damage * (this.getSelfHealingPercent() / 100));
         }
     }
@@ -81,7 +82,7 @@ export class IsidaHandler extends Turret {
 
         if (packet instanceof SendIsisShotPositionPacket) {
             if (this.startedAt && this.targetShot) {
-                this.attack(this.targetShot.target, { incarnation: packet.incarnation });
+                this.attack(this.targetShot.target, packet.incarnation);
             }
         }
 

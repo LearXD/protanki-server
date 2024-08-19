@@ -7,6 +7,9 @@ import { SetRicochetOverturnedShotPacket } from "../../../../../network/packets/
 import { SetRicochetShotPacket } from "../../../../../network/packets/set-ricochet-shot";
 import { MathUtils } from "../../../../../utils/math";
 import { Packet } from "@/network/packets/packet";
+import { IDamageModifiers } from "@/game/battle/managers/combat/types";
+import { Player } from "@/game/player";
+import { Logger } from "@/utils/logger";
 
 export class RicochetHandler extends Turret {
 
@@ -24,10 +27,27 @@ export class RicochetHandler extends Turret {
         }
     }
 
-    public getDamage(): number {
+    public getMaxDistance() {
+        const multiplier = 100;
+        switch (this.item.modificationID) {
+            case 0: return 67.4 * multiplier;
+            case 1: return 72.3 * multiplier;
+            case 2: return 77.2 * multiplier;
+            case 3: return 80.0 * multiplier;
+        }
+        return 0;
+    }
+
+    public getDamage(distance: number, modifiers: IDamageModifiers): number {
         const range = this.getDamageRange()
         const damage = MathUtils.randomInt(range.min, range.max);
-        return damage
+
+        const max = this.getMaxDistance() * 0.9
+        if (distance < max) {
+            return damage;
+        }
+
+        return Math.max(0, damage / (distance / this.getMaxDistance() * 1.5));
     }
 
     public canAttackYourself(): boolean {
@@ -52,7 +72,7 @@ export class RicochetHandler extends Turret {
         }
 
         if (packet instanceof SendRicochetTargetShotPacket) {
-            this.attack(packet.target, { incarnation: NaN });
+            this.attack(packet.target);
         }
     }
 }

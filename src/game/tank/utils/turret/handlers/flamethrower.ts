@@ -17,7 +17,7 @@ export class FlamethrowerHandler extends Turret {
 
     public getDamagePerSecond(): number {
         const damage = this.getSubProperty("DAMAGE_PER_SECOND", "DAMAGE_PER_PERIOD");
-        return damage ? parseInt(damage.value) / 2 : 0;
+        return damage ? parseInt(damage.value) : 0;
     }
 
     public getTemperatureDamageLimit() {
@@ -44,12 +44,12 @@ export class FlamethrowerHandler extends Turret {
     }
 
     public getDamage(): number {
-        // return this.getDamagePerSecond();
-        return 0.1;
+        return this.getDamagePerSecond() / 2;
+        // return 0.1;
     }
 
-    public onDamage(target: Player, damage: number, modifiers: IDamageModifiers) {
-        if (modifiers.enemy) {
+    public onDamage(target: Player, damage: number) {
+        if (target.tank.isEnemy(this.tank)) {
             target.tank.heat(this.getHeatPerSecond(), this.getMaxHeat(), this.getTemperatureDamageLimit(), this.tank.player);
         }
     }
@@ -70,7 +70,7 @@ export class FlamethrowerHandler extends Turret {
 
         if (packet instanceof SendFlameTargetsShotPacket) {
             if (packet.targets && packet.targets.length > 0) {
-                packet.targets.forEach((target, i) => this.attack(target, { incarnation: packet.incarnations[i] }))
+                packet.targets.forEach((target, i) => this.attack(target, packet.incarnations[i]))
             }
         }
     }

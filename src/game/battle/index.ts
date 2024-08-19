@@ -45,6 +45,7 @@ export class Battle {
 
     /** Managers */
     public readonly modeManager: BattleModeManager = BattleUtils.getBattleManager(this)
+
     public readonly collisionManager: BattleCollisionsManager = new BattleCollisionsManager(this)
     public readonly combatManager: BattleCombatManager = new BattleCombatManager(this)
     public readonly playersManager: BattlePlayersManager = new BattlePlayersManager(this)
@@ -78,6 +79,7 @@ export class Battle {
         },
     ) {
         this.modeManager.init();
+
         this.updateInterval = setInterval(this.update.bind(this), 1000 / Battle.TICK_RATE);
         this.updateTimeInterval = setInterval(this.updateTime.bind(this), 1000);
     }

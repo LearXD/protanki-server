@@ -39,7 +39,16 @@ export abstract class Turret extends GarageItem {
      * @param modifiers The damage modifiers
      * @returns The damage of the turret
      */
-    public getDamage(modifiers: IDamageModifiers): number {
+    public getDamage(distance: number, modifiers: IDamageModifiers): number {
+        return 0
+    }
+
+    /**
+     * This function is called when the turret is attacking a player
+     * @param modifiers The damage modifiers
+     * @returns The damage of the turret
+     */
+    public getHeal(): number {
         return 0
     }
 
@@ -64,7 +73,7 @@ export abstract class Turret extends GarageItem {
      * @param target The player that is being attacked
      * @param modifiers The damage modifiers
      */
-    public onAttack(target: Player, modifiers?: IDamageModifiers): void { }
+    public onAttack(target: Player, critical: boolean = false): void { }
 
     /**
      * This function is called when the damage is valid
@@ -72,7 +81,7 @@ export abstract class Turret extends GarageItem {
      * @param damage The amount of damage
      * @param modifiers The damage modifiers
      */
-    public onDamage(target: Player, damage: number, modifiers: IDamageModifiers): void { }
+    public onDamage(target: Player, damage: number, critical: boolean = false): void { }
 
     /**
      * This function is called when the turret is attacking a player
@@ -80,19 +89,37 @@ export abstract class Turret extends GarageItem {
      * @param modifiers The damage modifiers
      * @returns If the attack was successful
      */
-    public attack(player: string | Player, modifiers: IDamageModifiers): boolean {
+    public attack(player: string | Player, incarnation?: number, modifiers: IDamageModifiers = {}): boolean {
         if (this.tank.isVisible()) {
-            Logger.debug(`${this.tank.player.getUsername()} is attacking ${player instanceof Player ? player.getUsername() : player} with ${this.getName()}`);
+            Logger.debug(`${this.tank.player.getUsername()} is trying to attacking ${player instanceof Player ? player.getUsername() : player} with ${this.getName()}`);
 
-            const battle = this.tank.battle;
-            const target = player instanceof Player ? player : battle.playersManager.getPlayer(player);
+            const target = player instanceof Player ? player : this.tank.battle.playersManager.getPlayer(player);
 
             if (target) {
-                return battle.combatManager
-                    .handleAttack(target, this.tank.player, this, modifiers);
+                this.onAttack(target, modifiers.critical);
+
+                if ((this.tank.player === target && this.canAttackYourself()) || target.tank.isEnemy(this.tank)) {
+                    const damage = this.getDamage(target.tank.getPosition().distanceTo(this.tank.getPosition()), modifiers)
+                    Logger.debug(`Attacking ${target.getUsername()} with ${damage} raw damage`)
+                    return this.tank.battle.combatManager
+                        .handleAttack(target, this.tank.player, damage, incarnation, modifiers.critical);
+                }
+
+                if (this.canAttackAllies()) {
+                    return this.tank.battle.combatManager
+                        .handleHeal(target, this.tank.player, this.getHeal(), incarnation);
+                }
             }
         }
         return false;
+    }
+
+    /**
+     * This function is called when the player is dead
+     */
+    public onDeath() {
+        this.startedAt = 0;
+        this.rotation = 0;
     }
 
     /**
