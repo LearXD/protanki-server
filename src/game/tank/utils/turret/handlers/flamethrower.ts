@@ -15,6 +15,20 @@ export class FlamethrowerHandler extends Turret {
         return Turrets.FLAMETHROWER;
     }
 
+    public getMaxDamageRadius() {
+        return 500; // 5m
+    }
+
+    public getMinDamageRadius() {
+        const multiplier = 100;
+        switch (this.item.modificationID) {
+            case 0: return 23.7 * multiplier;
+            case 1: return 25.6 * multiplier;
+            case 2: return 27.5 * multiplier;
+            case 3: return 30.0 * multiplier;
+        }
+    }
+
     public getDamagePerSecond(): number {
         const damage = this.getSubProperty("DAMAGE_PER_SECOND", "DAMAGE_PER_PERIOD");
         return damage ? parseInt(damage.value) : 0;
@@ -43,14 +57,20 @@ export class FlamethrowerHandler extends Turret {
         }
     }
 
-    public getDamage(): number {
-        return this.getDamagePerSecond() / 2;
-        // return 0.1;
+    public getDamage(distance: number, modifiers: IDamageModifiers): number {
+        const damage = this.getDamagePerSecond() / 2;
+        if (this.getMaxDamageRadius() >= distance) {
+            return damage
+        }
+
+        const decrease = Math.min(1, 1 - ((distance - this.getMaxDamageRadius()) / this.getMinDamageRadius()));
+        return damage * decrease;
     }
 
     public onDamage(target: Player, damage: number) {
         if (target.tank.isEnemy(this.tank)) {
-            target.tank.heat(this.getHeatPerSecond(), this.getMaxHeat(), this.getTemperatureDamageLimit(), this.tank.player);
+            const index = damage / (this.getDamagePerSecond() / 2);
+            target.tank.heat(this.getHeatPerSecond() * index, this.getMaxHeat(), this.getTemperatureDamageLimit() * index, this.tank.player);
         }
     }
 

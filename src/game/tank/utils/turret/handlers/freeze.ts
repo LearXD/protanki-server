@@ -19,9 +19,23 @@ export class FreezeHandler extends Turret {
         return true;
     }
 
-    public getDamagePerPeriod(): number {
+    public getMaxDamageRadius() {
+        return 500; // 5m
+    }
+
+    public getMinDamageRadius() {
+        const multiplier = 100;
+        switch (this.item.modificationID) {
+            case 0: return 24.8 * multiplier;
+            case 1: return 26.7 * multiplier;
+            case 2: return 28.6 * multiplier;
+            case 3: return 30.0 * multiplier;
+        }
+    }
+
+    public getDamagePerSecond(): number {
         const damage = this.getSubProperty("DAMAGE_PER_SECOND", "DAMAGE_PER_PERIOD");
-        return damage ? parseInt(damage.value) / 2 : 0;
+        return damage ? parseInt(damage.value) : 0;
     }
 
     public getFreezePerSecond(): number {
@@ -45,8 +59,13 @@ export class FreezeHandler extends Turret {
     }
 
     public getDamage(distance: number, modifiers: IDamageModifiers): number {
-        const damage = this.getDamagePerPeriod();
-        return damage;
+        const damage = this.getDamagePerSecond() / 2;
+        if (this.getMaxDamageRadius() >= distance) {
+            return damage
+        }
+
+        const decrease = Math.min(1, 1 - ((distance - this.getMaxDamageRadius()) / this.getMinDamageRadius()));
+        return damage * decrease;
     }
 
     public onAttack(target: Player): void {
@@ -61,7 +80,7 @@ export class FreezeHandler extends Turret {
 
     public onDamage(target: Player, damage: number): void {
         if (target.tank.isEnemy(this.tank)) {
-            target.tank.heat(this.getFreezePerSecond(), this.getMaxFreeze(), 0, this.tank.player);
+            target.tank.heat(this.getFreezePerSecond() * damage / (this.getDamagePerSecond() / 2), this.getMaxFreeze(), 0, this.tank.player);
         }
     }
 

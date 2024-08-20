@@ -8,12 +8,29 @@ import { SetTwinsOverturnedShotPacket } from "../../../../../network/packets/set
 import { SetTwinsShotPacket } from "../../../../../network/packets/set-twins-shot";
 import { MathUtils } from "../../../../../utils/math";
 import { Packet } from "@/network/packets/packet";
+import { IDamageModifiers } from "@/game/battle/managers/combat/types";
 
 export class TwinsHandler extends Turret {
 
     public getTurret() {
         return Turrets.TWINS;
     }
+
+    public getMaxDamageRadius() {
+        return 2000; // 20m
+    }
+
+    public getMinDamageRadius() {
+        const multiplier = 100;
+        switch (this.item.modificationID) {
+            case 0: return 60.7 * multiplier;
+            case 1: return 65.2 * multiplier;
+            case 2: return 69.8 * multiplier;
+            case 3: return 75.0 * multiplier;
+        }
+        return 0
+    }
+
 
     public getDamageRange() {
         const min = this.getSubProperty("DAMAGE", "DAMAGE_FROM")
@@ -25,10 +42,15 @@ export class TwinsHandler extends Turret {
         }
     }
 
-    public getDamage(): number {
-        const range = this.getDamageRange()
-        const damage = MathUtils.randomInt(range.min, range.max);
-        return damage
+    public getDamage(distance: number, modifiers: IDamageModifiers): number {
+        const { min, max } = this.getDamageRange();
+        const damage = MathUtils.randomInt(min, max)
+        if (this.getMaxDamageRadius() >= distance) {
+            return damage
+        }
+
+        const decrease = Math.min(1, 1 - ((distance - this.getMaxDamageRadius()) / this.getMinDamageRadius()));
+        return damage * decrease;
     }
 
     public handlePacket(packet: Packet): void {

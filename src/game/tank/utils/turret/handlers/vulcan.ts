@@ -18,6 +18,26 @@ export class VulcanHandler extends Turret {
         return Turrets.VULCAN;
     }
 
+    public getMaxDamageRadius() {
+        const multiplier = 100;
+        switch (this.item.modificationID) {
+            case 0: return 31.8 * multiplier;
+            case 1: return 36.5 * multiplier;
+            case 2: return 39.4 * multiplier;
+            case 3: return 45.9 * multiplier;
+        }
+    }
+
+    public getMinDamageRadius() {
+        const multiplier = 100;
+        switch (this.item.modificationID) {
+            case 0: return 149.6 * multiplier;
+            case 1: return 169.0 * multiplier;
+            case 2: return 188.4 * multiplier;
+            case 3: return 205.0 * multiplier;
+        }
+    }
+
     public getMaxHeat(): number {
         switch (this.item.modificationID) {
             case 0: return 0.3;
@@ -48,15 +68,19 @@ export class VulcanHandler extends Turret {
         return range ? parseInt(range.value) : 0
     }
 
-    public getDamage(): number {
+    public getDamage(distance: number): number {
         const damage = this.getDamagePerPeriod() / 4;
-        return damage;
+        if (this.getMaxDamageRadius() >= distance) {
+            return damage
+        }
+
+        const decrease = Math.min(1, 1 - ((distance - this.getMaxDamageRadius()) / this.getMinDamageRadius()));
+        return damage * decrease;
     }
 
-    public update(): void {
+    public update() {
         if (this.startedAt) {
             const time = Date.now() - this.startedAt
-
             if (time > (this.properties.special_entity.temperatureHittingTime + 1000)) {
                 this.tank.heat(this.getHeatPerSecond(), this.getMaxHeat(), this.getDamagePerPeriod() / 2, this.tank.player)
             }

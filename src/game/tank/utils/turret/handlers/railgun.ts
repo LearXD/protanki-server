@@ -7,7 +7,6 @@ import { SetStartRailgunShotPacket } from "../../../../../network/packets/set-st
 import { MathUtils } from "../../../../../utils/math";
 import { IDamageModifiers } from "../../../../battle/managers/combat/types";
 import { Packet } from "@/network/packets/packet";
-import { Player } from "@/game/player";
 
 export class RailgunHandler extends Turret {
 
@@ -25,10 +24,19 @@ export class RailgunHandler extends Turret {
         }
     }
 
+    public getPenetratingPower() {
+        switch (this.item.modificationID) {
+            case 0: return 35.36;
+            case 1: return 56.9;
+            case 2: return 78.45;
+            case 3: return 100.0;
+        }
+    }
+
     public getDamage(distance: number, modifiers: IDamageModifiers): number {
         const range = this.getDamageRange()
         const damage = MathUtils.randomInt(range.min, range.max);
-        return damage / modifiers.order;
+        return damage * Math.pow(this.getPenetratingPower(), modifiers.order);
     }
 
     public handlePacket(packet: Packet): void {
@@ -47,7 +55,7 @@ export class RailgunHandler extends Turret {
             pk.targetHitPoints = packet.targetsHitPoints;
             this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
 
-            packet.targets.forEach((target, i) => this.attack(target, packet.incarnations[i], { order: i + 1 }))
+            packet.targets.forEach((target, i) => this.attack(target, packet.incarnations[i], { order: i }))
         }
     }
 }
