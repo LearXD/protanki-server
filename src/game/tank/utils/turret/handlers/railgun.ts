@@ -26,10 +26,10 @@ export class RailgunHandler extends Turret {
 
     public getPenetratingPower() {
         switch (this.item.modificationID) {
-            case 0: return 35.36;
-            case 1: return 56.9;
-            case 2: return 78.45;
-            case 3: return 100.0;
+            case 0: return 0.3536;
+            case 1: return 0.569;
+            case 2: return 0.7845;
+            case 3: return 1;
         }
     }
 
@@ -40,13 +40,18 @@ export class RailgunHandler extends Turret {
     }
 
     public handlePacket(packet: Packet): void {
+
         if (packet instanceof SendStartRailgunShotPacket) {
+            this.startedAt = Date.now();
+
             const pk = new SetStartRailgunShotPacket();
             pk.shooter = this.tank.player.getUsername();
             this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
         }
 
         if (packet instanceof SendRailgunShotPacket) {
+
+            if (this.startedAt === 0) return;
 
             const pk = new SetRailgunShotPacket();
             pk.shooter = this.tank.player.getUsername();
@@ -55,7 +60,11 @@ export class RailgunHandler extends Turret {
             pk.targetHitPoints = packet.targetsHitPoints;
             this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
 
-            packet.targets.forEach((target, i) => this.attack(target, packet.incarnations[i], { order: i }))
+            if (packet.targets) {
+                packet.targets.forEach((target, i) => this.attack(target, packet.incarnations[i], { order: i }))
+            }
+
+            this.startedAt = 0;
         }
     }
 }
