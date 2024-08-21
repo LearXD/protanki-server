@@ -11,6 +11,7 @@ import { MathUtils } from "../../../../../utils/math";
 import { IDamageModifiers } from "../../../../battle/managers/combat/types";
 import { Player } from "../../../../player";
 import { Packet } from "@/network/packets/packet";
+import { ITurretPhysics } from "@/server/managers/garage/types";
 
 export class SmokyHandler extends Turret {
 
@@ -51,11 +52,6 @@ export class SmokyHandler extends Turret {
     public getCriticalDamage(): number {
         const damage = this.getProperty("CRITICAL_HIT_DAMAGE");
         return damage ? parseInt(damage.value) : 0
-    }
-
-    public getImpactForce() {
-        const force = this.getProperty("IMPACT_FORCE");
-        return force ? parseInt(force.value) / 100 : 0
     }
 
     public getDamage(distance: number, modifiers: IDamageModifiers): number {

@@ -52,6 +52,10 @@ export abstract class Turret extends GarageItem {
         return 0
     }
 
+    public getImpactForce(): number {
+        return this.physics.impact_force
+    }
+
     /**
      * This function is called when the turret is attacking a player
      * @returns The damage of the turret

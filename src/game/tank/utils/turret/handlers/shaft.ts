@@ -40,12 +40,6 @@ export class ShaftHandler extends Turret {
         return parseInt(damage.value)
     }
 
-    public getImpactForce() {
-        const chance = this.getProperty("IMPACT_FORCE");
-        return parseInt(chance.value)
-    }
-
-
     public getDamage(distance: number, modifiers: IDamageModifiers): number {
         const range = this.getDamageRange();
 
