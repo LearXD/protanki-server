@@ -1,6 +1,7 @@
 import { Player } from "@/game/player";
 import { IMapArea, MapAreaAction } from "../../types";
 import { Vector3d } from "@/utils/vector-3d";
+import { Logger } from "@/utils/logger";
 
 export class MapAreaManager {
 
@@ -37,6 +38,7 @@ export class MapAreaManager {
             position.y < this.rangeY.min || position.y > this.rangeY.max ||
             position.z < this.rangeZ.min || position.z > this.rangeZ.max
         ) {
+            Logger.alert(`Player ${player.getUsername()} is out of map bounds`)
             player.tank.suicide();
             return;
         }
@@ -50,10 +52,12 @@ export class MapAreaManager {
             ) {
 
                 if (area.action === MapAreaAction.KILL) {
+                    Logger.alert(`Player ${player.getUsername()} entered on kill area`);
                     player.tank.suicide();
                 }
 
                 if (area.action === MapAreaAction.KICK) {
+                    Logger.alert(`Player ${player.getUsername()} entered on kick area`);
                     player.close()
                 }
             }

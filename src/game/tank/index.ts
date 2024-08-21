@@ -589,6 +589,7 @@ export class Tank {
     ): boolean {
 
         if (this.incarnation !== incarnation) {
+            Logger.alert(`Invalid movement for ${this.player.getUsername()}. Invalid incarnation ID!`)
             this.suicide()
             return false
         }
@@ -597,6 +598,7 @@ export class Tank {
             const elapsed = (time - this.lastMovement.time) / 1000
 
             if (elapsed < 0) {
+                Logger.alert(`Invalid movement for ${this.player.getUsername()}. Invalid time!`)
                 this.suicide()
                 return false
             }
