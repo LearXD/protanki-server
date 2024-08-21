@@ -1,1 +1,106 @@
-{"chargingPart1":114424,"chargingPart2":468379,"chargingPart3":932241,"hitMarkTexture":670581,"powTexture":963502,"ringsTexture":966691,"shotSound":900596,"smokeImage":882103,"sphereTexture":212409,"trailImage":550305,"lighting":[{"name":"charge","light":[{"attenuationBegin":200,"attenuationEnd":200,"color":13597945,"intensity":0.7,"time":0},{"attenuationBegin":200,"attenuationEnd":800,"color":13597945,"intensity":0.3,"time":600}]},{"name":"shot","light":[{"attenuationBegin":100,"attenuationEnd":600,"color":13597945,"intensity":0.7,"time":0},{"attenuationBegin":1,"attenuationEnd":2,"color":13597945,"intensity":0,"time":300}]},{"name":"hit","light":[{"attenuationBegin":200,"attenuationEnd":600,"color":13597945,"intensity":0.7,"time":0},{"attenuationBegin":1,"attenuationEnd":2,"color":13597945,"intensity":0,"time":300}]},{"name":"rail","light":[{"attenuationBegin":100,"attenuationEnd":500,"color":13597945,"intensity":0.5,"time":0},{"attenuationBegin":1,"attenuationEnd":2,"color":13597945,"intensity":0,"time":1800}]}],"bcsh":[{"brightness":7.898,"contrast":-2.655,"saturation":35.398,"hue":78.05,"key":"trail"},{"brightness":7.898,"contrast":-2.655,"saturation":35.398,"hue":78.05,"key":"charge"}]}
+{
+    "chargingPart1": 114424,
+    "chargingPart2": 468379,
+    "chargingPart3": 932241,
+    "hitMarkTexture": 670581,
+    "powTexture": 963502,
+    "ringsTexture": 966691,
+    "shotSound": 900596,
+    "smokeImage": 882103,
+    "sphereTexture": 212409,
+    "trailImage": 550305,
+    "lighting": [
+        {
+            "name": "charge",
+            "light": [
+                {
+                    "attenuationBegin": 200,
+                    "attenuationEnd": 200,
+                    "color": 0,
+                    "intensity": 0.7,
+                    "time": 0
+                },
+                {
+                    "attenuationBegin": 200,
+                    "attenuationEnd": 800,
+                    "color": 0,
+                    "intensity": 0.3,
+                    "time": 600
+                }
+            ]
+        },
+        {
+            "name": "shot",
+            "light": [
+                {
+                    "attenuationBegin": 100,
+                    "attenuationEnd": 600,
+                    "color": 0,
+                    "intensity": 0.7,
+                    "time": 0
+                },
+                {
+                    "attenuationBegin": 1,
+                    "attenuationEnd": 2,
+                    "color": 0,
+                    "intensity": 0,
+                    "time": 300
+                }
+            ]
+        },
+        {
+            "name": "hit",
+            "light": [
+                {
+                    "attenuationBegin": 200,
+                    "attenuationEnd": 600,
+                    "color": 0,
+                    "intensity": 0.7,
+                    "time": 0
+                },
+                {
+                    "attenuationBegin": 1,
+                    "attenuationEnd": 2,
+                    "color": 0,
+                    "intensity": 0,
+                    "time": 300
+                }
+            ]
+        },
+        {
+            "name": "rail",
+            "light": [
+                {
+                    "attenuationBegin": 100,
+                    "attenuationEnd": 500,
+                    "color": 0,
+                    "intensity": 0.5,
+                    "time": 0
+                },
+                {
+                    "attenuationBegin": 1,
+                    "attenuationEnd": 2,
+                    "color": 0,
+                    "intensity": 0,
+                    "time": 1800
+                }
+            ]
+        }
+    ],
+    "bcsh": [
+        {
+            "brightness": 7.898,
+            "contrast": -2.655,
+            "saturation": 35.398,
+            "hue": 78.05,
+            "key": "trail"
+        },
+        {
+            "brightness": 7.898,
+            "contrast": -2.655,
+            "saturation": 35.398,
+            "hue": 78.05,
+            "key": "charge"
+        }
+    ]
+}
