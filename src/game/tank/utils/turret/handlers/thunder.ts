@@ -61,8 +61,8 @@ export class ThunderHandler extends Turret {
         const { min, max } = this.getDamageRange();
         const damage = MathUtils.randomInt(min, min - (max - min))
 
-        const factor = hitDistance / (this.getExplosionRadius() * 0.25) * 0.1
-        if (this.getMaxDamageRadius() >= distance && factor < 0.1) {
+        const factor = hitDistance / (this.getExplosionRadius() * 0.25)
+        if (this.getMaxDamageRadius() >= distance && factor < 0.25) {
             return damage
         }
         const decrease = Math.min(1, 1 - ((distance - this.getMaxDamageRadius()) / this.getMinDamageRadius()));
@@ -72,6 +72,7 @@ export class ThunderHandler extends Turret {
     public getDamage(distance: number, modifiers: IDamageModifiers): number {
         const { min, max } = this.getDamageRange();
         const damage = MathUtils.randomInt(min, max)
+
         if (this.getMaxDamageRadius() >= distance) {
             return damage
         }

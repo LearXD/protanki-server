@@ -35,7 +35,7 @@ export class BattleCombatManager {
         heal: number,
         incarnation: number
     ) {
-        if (heal) {
+        if (heal >= 1) {
             if (this.checkIncarnation(target, incarnation) && target.tank.isVisible()) {
                 target.tank.heal(heal, healer);
                 return true;
@@ -51,7 +51,7 @@ export class BattleCombatManager {
         incarnation: number,
         critical: boolean = false
     ) {
-        if (damage) {
+        if (damage >= 1) {
             if (this.checkIncarnation(target, incarnation) && target.tank.isVisible()) {
 
                 if (attacker.tank.hasEffect(Supply.DOUBLE_DAMAGE)) damage *= 2

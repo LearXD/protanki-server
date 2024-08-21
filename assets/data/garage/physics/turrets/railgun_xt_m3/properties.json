@@ -1,1 +1,6 @@
-{"turret_turn_speed":1.6999506914424771,"kickback":3,"turretTurnAcceleration":1.7599900177110819,"impact_force":7}
+{
+    "turret_turn_speed": 1.699950691442477,
+    "kickback": 3,
+    "turretTurnAcceleration": 1.759291886010284,
+    "impact_force": 7
+}

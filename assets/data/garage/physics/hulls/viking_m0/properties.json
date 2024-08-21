@@ -1,1 +1,12 @@
-{"maxSpeed":7.8,"maxTurnSpeed":1.4067353504758187,"acceleration":11.51,"reverseAcceleration":15.3,"sideAcceleration":12.78,"turnAcceleration":2.3848178792724077,"reverseTurnAcceleration":3.367438301408437,"mass":2235,"power":11.51,"dampingCoeff":2000}
+{
+    "maxSpeed": 7.8,
+    "maxTurnSpeed": 1.4067353,
+    "acceleration": 11.51,
+    "reverseAcceleration": 13.53,
+    "sideAcceleration": 12.78,
+    "turnAcceleration": 2.3848178,
+    "reverseTurnAcceleration": 3.3674383,
+    "mass": 2235,
+    "power": 11.51,
+    "dampingCoeff": 2000
+}
