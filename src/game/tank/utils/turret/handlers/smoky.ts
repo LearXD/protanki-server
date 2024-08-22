@@ -11,7 +11,6 @@ import { MathUtils } from "../../../../../utils/math";
 import { IDamageModifiers } from "../../../../battle/managers/combat/types";
 import { Player } from "../../../../player";
 import { Packet } from "@/network/packets/packet";
-import { ITurretPhysics } from "@/server/managers/garage/types";
 
 export class SmokyHandler extends Turret {
 
@@ -30,18 +29,25 @@ export class SmokyHandler extends Turret {
             max: max ? parseInt(max.value) : 0
         }
     }
-    public getMaxShotDistance() {
+
+    public getMinDamageRadius() {
         switch (this.item.modificationID) {
-            case 0: return 44.4 * 10;
-            case 1: return 49.1 * 10;
-            case 2: return 53.9 * 10;
-            case 3: return 60 * 10;
+            case 0: return 13300
+            case 1: return 14730
+            case 2: return 16160
+            case 3: return 18000
         }
         return 0
     }
 
-    public getWeaknessDamage() {
-        return 10 / 100;
+    public getMaxDamageRadius() {
+        switch (this.item.modificationID) {
+            case 0: return 4440
+            case 1: return 4910
+            case 2: return 5390
+            case 3: return 6000
+        }
+        return 0
     }
 
     public getCriticalChance(): number {
@@ -63,8 +69,12 @@ export class SmokyHandler extends Turret {
         let { max, min } = this.getDamageRange()
         const damage = MathUtils.randomInt(min, max)
 
-        const decrease = Math.floor(distance / this.getMaxShotDistance())
-        return Math.floor(damage - decrease)
+        if (this.getMaxDamageRadius() >= distance) {
+            return damage
+        }
+
+        const decrease = Math.min(1, 1 - ((distance - this.getMaxDamageRadius()) / this.getMinDamageRadius()));
+        return damage * decrease;
     }
 
     public onAttack(target: Player, critical: boolean = false): void {
