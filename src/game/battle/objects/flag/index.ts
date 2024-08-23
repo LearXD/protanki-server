@@ -4,8 +4,11 @@ import { Vector3d } from "@/utils/vector-3d";
 import { BattleCaptureTheFlagModeManager } from "../../managers/mode/modes/capture-the-flag";
 import { FlagState } from "../../managers/mode/modes/capture-the-flag/types";
 import { Team, TeamType } from "@/states/team";
+import { BattleTask } from "../../utils/task";
 
 export class Flag extends BattleObject {
+
+    public returnTask: BattleTask = null
 
     public state: FlagState = FlagState.AT_BASE
     public carrier: Player = null
@@ -16,6 +19,12 @@ export class Flag extends BattleObject {
         position: Vector3d,
     ) {
         super(`${team}_flag`, position, 250);
+    }
+
+    public destroy(): void {
+        if (this.returnTask) {
+            this.manager.battle.taskManager.cancelTask(this.returnTask.id)
+        }
     }
 
     public getState(): FlagState {

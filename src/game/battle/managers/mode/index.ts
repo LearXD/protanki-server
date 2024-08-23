@@ -10,7 +10,7 @@ export abstract class BattleModeManager {
     public fund: number = 0
 
     public constructor(
-        protected readonly battle: Battle
+        public readonly battle: Battle
     ) { }
 
     public abstract getRandomSpawn(player: Player): IMapSpawn

@@ -434,7 +434,7 @@ export class Tank {
                     const rounds = Math.round(this.hull.getProtection() / heal)
 
                     for (let i = 0; i < rounds; i++) {
-                        this.battle.taskManager.scheduleTask(() => this.heal(heal), i * 1000, this.player.getUsername())
+                        this.battle.taskManager.scheduleTask(() => this.heal(heal), i * 1000, false, this.player.getUsername())
                     }
 
                     duration = rounds * 1000;
@@ -487,9 +487,9 @@ export class Tank {
         packet.delay = delay;
         this.player.sendPacket(packet);
 
-        this.battle.taskManager.scheduleTask(() => {
-            this.destroy(respawnDelay)
-        }, delay, this.player.getUsername())
+        this.battle.taskManager.scheduleTask(
+            () => this.destroy(respawnDelay), delay, false, this.player.getUsername()
+        )
     }
 
     /** MORTE POR TROCA DE EQUIPAMENTO */
@@ -554,7 +554,7 @@ export class Tank {
         }
 
         this.battle.taskManager.scheduleTask(
-            this.suicide.bind(this), 10 * TimeType.SECONDS, this.player.getUsername()
+            this.suicide.bind(this), 10 * TimeType.SECONDS, false, this.player.getUsername()
         )
     }
 

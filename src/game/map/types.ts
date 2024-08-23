@@ -52,7 +52,7 @@ export enum BonusType {
     DAMAGE = 'damage',
 }
 
-export interface IMapBonus {
+export interface IBonusSpawnArea {
     rotation: IVector3d
     min: IVector3d
     max: IVector3d

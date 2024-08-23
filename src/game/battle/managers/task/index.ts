@@ -1,3 +1,4 @@
+import { Logger } from "@/utils/logger";
 import { BattleTask } from "../../utils/task";
 import { ITask } from "./types";
 
@@ -9,12 +10,20 @@ export class BattleTaskManager {
     public scheduleTask(
         callable: ITask,
         time: number = 1000,
-        owner?: string
+        repeat: boolean = false,
+        owner?: string,
     ) {
-        const taskId = ++this.generatedTasks;
-        const formattedTime = Date.now() + time;
-        this.tasks.set(taskId, new BattleTask(callable, formattedTime, owner))
-        return taskId
+        const task = new BattleTask(++this.generatedTasks, callable, time, repeat, owner)
+        this.tasks.set(task.id, task)
+        return task
+    }
+
+    public cancelTask(id: number) {
+        const task = this.tasks.get(id)
+        if (task) {
+            task.executed = true
+            this.tasks.delete(id)
+        }
     }
 
     public unregisterTask(id: number) {
@@ -34,8 +43,14 @@ export class BattleTaskManager {
     public update() {
         const now = Date.now()
         for (const [id, task] of this.tasks) {
-            if (task.time < now) {
+            if (task.executeAt <= now) {
                 task.execute()
+
+                if (task.repeat) {
+                    task.restart()
+                    continue;
+                }
+
                 this.tasks.delete(id)
             }
         }

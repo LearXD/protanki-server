@@ -25,9 +25,9 @@ export class BattleMinesManager {
         this.mines.push(mine);
 
         this.sendPlaceMine(mine);
-        this.battle.taskManager.scheduleTask(() => {
-            this.sendMinePlaced(mine.owner, mine);
-        }, 1 * TimeType.SECONDS, mine.owner.getUsername());
+        this.battle.taskManager.scheduleTask(
+            () => this.sendMinePlaced(mine.owner, mine), 1000, false, mine.owner.getUsername()
+        );
     }
 
     public removePlayerMines(player: Player) {

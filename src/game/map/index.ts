@@ -1,13 +1,16 @@
 import path from 'path';
 import { MapsManager } from "@/server/managers/maps";
 import { MapDataManager } from './managers/data';
-import { IMapArea, IMapBonus, IMapData, IMapFlags, IMapSpawn } from './types';
+import { BonusType, IMapArea, IBonusSpawnArea, IMapData, IMapFlags, IMapSpawn } from './types';
 import { Player } from '../player';
 import { SetBattleMapPropertiesPacket } from '@/network/packets/set-battle-map-properties';
 import { IResource } from '@/server/managers/resources/types';
 import { ReadType } from '@/server/managers/assets/types';
 import { MapCollisionManager } from './managers/collision';
 import { MapAreaManager } from './managers/area';
+import { BattleModeType } from '@/states/battle-mode';
+import { MathUtils } from '@/utils/math';
+import { Vector3d } from '@/utils/vector-3d';
 
 export class Map extends MapDataManager {
 
@@ -19,7 +22,7 @@ export class Map extends MapDataManager {
 
     public spawns: IMapSpawn[] = []
     public flags: IMapFlags = null
-    public bonuses: IMapBonus[] = []
+    public bonuses: IBonusSpawnArea[] = []
 
     public collisionManager: MapCollisionManager
     public areaManager: MapAreaManager
@@ -51,8 +54,17 @@ export class Map extends MapDataManager {
         return this.flags
     }
 
-    public getBonuses(): IMapBonus[] {
-        return this.bonuses
+    public getBonusSpawn(name: BonusType, mode: BattleModeType): Vector3d {
+        const bonuses = this.bonuses.filter(bonus => bonus.types.includes(name) && bonus.modes.includes(mode))
+        if (bonuses.length > 0) {
+            const spawn = MathUtils.arrayRandom(bonuses)
+            return new Vector3d(
+                MathUtils.randomInt(spawn.min.x, spawn.max.x),
+                MathUtils.randomInt(spawn.min.z, spawn.max.z),
+                MathUtils.randomInt(spawn.min.y, spawn.max.y)
+            )
+        }
+        return null;
     }
 
     public getData(_path: string, readType?: ReadType) {

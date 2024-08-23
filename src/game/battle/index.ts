@@ -37,7 +37,7 @@ export class Battle {
     public readonly battleId: string = BattleUtils.generateBattleId();
     private running: boolean = false
 
-    private startedAt: number;
+    public startedAt: number;
     private tick: number = 0
 
     private updateInterval: NodeJS.Timeout
@@ -79,39 +79,34 @@ export class Battle {
         },
     ) {
         this.modeManager.init();
-
         this.updateInterval = setInterval(this.update.bind(this), 1000 / Battle.TICK_RATE);
-        this.updateTimeInterval = setInterval(this.updateTime.bind(this), 1000);
     }
 
     public start() {
         Logger.info(`Battle ${this.getName()} started`)
 
         this.sendStarted()
-
         this.startedAt = Date.now()
         this.running = true
+
+        if (this.isWithoutBonuses() === false) {
+            this.boxesManager.initTasks()
+        }
     }
 
     public restart() {
         Logger.info(`Battle ${this.getName()} restarted`)
-
         this.modeManager.init();
 
-        if (this.playersManager.getPlayers().length === 0) {
-            return;
-        }
+        if (this.playersManager.getPlayers().length > 0) {
+            this.start()
+            this.restartTime();
 
-        this.sendStarted()
-        this.startedAt = Date.now()
-        this.running = true
-
-        this.restartTime();
-
-        for (const player of this.playersManager.getPlayers()) {
-            player.tank.alive = false;
-            player.tank.visible = false;
-            player.tank.prepareRespawn();
+            for (const player of this.playersManager.getPlayers()) {
+                player.tank.alive = false;
+                player.tank.visible = false;
+                player.tank.prepareRespawn();
+            }
         }
     }
 
@@ -255,6 +250,7 @@ export class Battle {
     public isProBattle() { return this.data.proBattle }
     public getRankRange() { return this.data.rankRange }
     public isReArmorEnabled() { return this.data.reArmorEnabled }
+
     public isWithoutBonuses() { return this.data.withoutBonuses }
     public isWithoutCrystals() { return this.data.withoutCrystals }
     public isWithoutSupplies() { return this.data.withoutSupplies }
@@ -321,19 +317,19 @@ export class Battle {
         }
     }
 
-    public updateTime() {
-        if (this.getTimeLeft() <= 0) {
-            if (this.running) {
-                this.finish()
-            }
-            return;
-        }
-    }
-
     public async update() {
-        this.tick++
 
+        this.tick++
         this.taskManager.update()
+
+        if (this.tick % Battle.TICK_RATE === 0) {
+            if (this.getTimeLeft() <= 0) {
+                if (this.running) {
+                    this.finish()
+                }
+                return;
+            }
+        }
 
         if (this.tick % (Battle.TICK_RATE * 2) === 0) {
             for (const player of this.playersManager.getPlayers()) {

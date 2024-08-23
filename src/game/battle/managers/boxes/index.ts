@@ -5,19 +5,34 @@ import { Player } from "../../../player";
 import { BonusBox } from "./utils/bonus-box";
 import { Battle } from "../..";
 import { SetGoldBoxTakenPacket } from "@/network/packets/set-gold-box-taken";
-import { BonusType, IMapBonus } from "@/game/map/types";
-import { MathUtils } from "@/utils/math";
-import { Vector3d } from "@/utils/vector-3d";
+import { BonusType } from "@/game/map/types";
 import { TimeType } from "../task/types";
+import { Logger } from "@/utils/logger";
 
 export class BattleBoxesManager {
 
     private boxes: BonusBox[] = []
-    public static readonly availableBonuses = [BonusType.GOLD, BonusType.CRYSTAL, BonusType.ARMOR, BonusType.NITRO, BonusType.HEALTH, BonusType.DAMAGE]
+
+    public static readonly CONFIG = [
+        { type: BonusType.GOLD, spawn: 0, alive: 0 },
+        { type: BonusType.CRYSTAL, spawn: 0, alive: 0 },
+        { type: BonusType.ARMOR, spawn: 1, alive: 0 },
+        { type: BonusType.NITRO, spawn: 1, alive: 0 },
+        { type: BonusType.HEALTH, spawn: 3, alive: 0 },
+        { type: BonusType.DAMAGE, spawn: 2, alive: 0 }
+    ]
 
     public constructor(
         public readonly battle: Battle
     ) { }
+
+    public initTasks() {
+        for (const box of BattleBoxesManager.CONFIG) {
+            if (box.spawn > 0) {
+                this.battle.taskManager.scheduleTask(() => this.spawnBox(box.type), box.spawn * TimeType.MINUTES, true)
+            }
+        }
+    }
 
     public sendData(client: Player) {
         this.sendBoxesData(client)
@@ -50,38 +65,27 @@ export class BattleBoxesManager {
         this.battle.broadcastPacket(packet);
     }
 
-    public addBox(box: BonusBox) {
-        this.boxes.push(box)
-    }
-
     public spawnBox(bonus: BonusType, delay: number = 0) {
+        const position = this.battle.map.getBonusSpawn(bonus, this.battle.getMode())
 
-        const positions = this.battle.map.getBonuses()
-            .filter(b => b.types.includes(bonus) && b.modes.includes(this.battle.getMode()))
+        if (position) {
+            const spawned = this.boxes.filter(box => box.name === bonus)
 
-        if (positions.length < 1) {
-            return false
+            Logger.info(`Spawning ${bonus} box at ${position.x}, ${position.y}, ${position.z}`)
+            const box = new BonusBox(bonus, spawned.length, position, this.battle);
+            this.boxes.push(box);
+
+            this.battle.taskManager.scheduleTask(() => { box.spawn() }, delay * TimeType.SECONDS)
+
+            return true
         }
 
-        const area = MathUtils.arrayRandom<IMapBonus>(positions)
-        const found = this.boxes.filter(box => box.name === bonus)
-
-        if (!found) {
-            return false
-        }
-
-        const box = new BonusBox(bonus, found.length, Vector3d.fromInterface(area.position, false), this.battle);
-        this.boxes.push(box);
-
-        this.battle.taskManager.scheduleTask(() => { box.spawn() }, delay * TimeType.SECONDS)
-        return true
+        return false;
     }
 
     public handleCollectBonus(client: Player, bonus: string) {
         const box = this.boxes.find(box => box.getName() === bonus && !box.collected && box.spawned)
-
-        if (box) {
-            box.handleCollect(client)
-        }
+        if (box) box.handleCollect(client)
     }
+
 }

@@ -21,14 +21,13 @@ export class BonusCommand extends Command {
 
             if (args.length < 1) {
                 sender.sendMessage("Uso correto: /bonus (gold) (delay: default = 0s)");
-                sender.sendMessage("Tipos de bônus: " + BattleBoxesManager.availableBonuses.join(", ") + ".");
                 return;
             }
 
             const bonus = args.shift() as BonusType;
             const delay = parseInt(args.shift() || "0");
 
-            if (!BattleBoxesManager.availableBonuses.includes(bonus)) {
+            if (!BattleBoxesManager.CONFIG.find(b => b.type === bonus)) {
                 sender.sendMessage("Tipo de bônus inválido.");
                 return;
             }

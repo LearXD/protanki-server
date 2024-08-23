@@ -11,6 +11,8 @@ import { SetCaptureFlagPacket } from "@/network/packets/set-capture-flag";
 import { FlagState } from "./types";
 import { MathUtils } from "@/utils/math";
 import { RayHit } from "@/game/map/managers/collision/utils/rayhit";
+import { TimeType } from "../../../task/types";
+import { BattleTask } from "@/game/battle/utils/task";
 
 export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
 
@@ -29,11 +31,13 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
 
         switch (team) {
             case Team.RED: {
+                if (this.redFlag) this.redFlag.destroy()
                 this.redFlag = new Flag(this, Team.RED, new Vector3d(positions.red.x, positions.red.y, positions.red.z))
                 this.battle.collisionManager.addObject(this.redFlag)
                 break;
             }
             case Team.BLUE: {
+                if (this.blueFlag) this.blueFlag.destroy()
                 this.blueFlag = new Flag(this, Team.BLUE, new Vector3d(positions.blue.x, positions.blue.y, positions.blue.z))
                 this.battle.collisionManager.addObject(this.blueFlag)
                 break;
@@ -106,15 +110,9 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
         flag.setState(FlagState.DROPPED)
         flag.setCarrier(null)
 
-        // const position = player.tank.getPosition()
         const hit = new RayHit()
         const found = this.battle.map.collisionManager.raycastStatic(
-            player.tank.getPosition().swap(),
-            Vector3d.DOWN,
-            16,
-            10000000000,
-            null,
-            hit
+            player.tank.getPosition().swap(), Vector3d.DOWN, 16, 10000000000, null, hit
         );
 
         if (!found) {
@@ -127,10 +125,10 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
         const packet = new SetFlagDroppedPacket();
         packet.position = flag.position;
         packet.team = team;
-
         this.battle.broadcastPacket(packet);
 
-        this.battle.taskManager.scheduleTask(() => this.battle.collisionManager.addObject(flag), 1000)
+        flag.returnTask = this.battle.taskManager.scheduleTask(() => this.handleReturnFlag(flag), 1 * TimeType.MINUTES)
+        this.battle.taskManager.scheduleTask(() => this.battle.collisionManager.addObject(flag), 3000)
     }
 
     public handleReturnFlag(flag: Flag, player?: Player) {
