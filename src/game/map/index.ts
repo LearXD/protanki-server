@@ -54,17 +54,18 @@ export class Map extends MapDataManager {
         return this.flags
     }
 
-    public getBonusSpawn(name: BonusType, mode: BattleModeType): Vector3d {
+    public getBonusSpawns(name: BonusType, mode: BattleModeType): Vector3d[] {
         const bonuses = this.bonuses.filter(bonus => bonus.types.includes(name) && bonus.modes.includes(mode))
         if (bonuses.length > 0) {
-            const spawn = MathUtils.arrayRandom(bonuses)
-            return new Vector3d(
-                MathUtils.randomInt(spawn.min.x, spawn.max.x),
-                MathUtils.randomInt(spawn.min.z, spawn.max.z),
-                MathUtils.randomInt(spawn.min.y, spawn.max.y)
+            return bonuses.map(spawn =>
+                new Vector3d(
+                    MathUtils.randomInt(spawn.min.x, spawn.max.x),
+                    MathUtils.randomInt(spawn.min.z, spawn.max.z),
+                    MathUtils.randomInt(spawn.min.y, spawn.max.y)
+                )
             )
         }
-        return null;
+        return [];
     }
 
     public getData(_path: string, readType?: ReadType) {

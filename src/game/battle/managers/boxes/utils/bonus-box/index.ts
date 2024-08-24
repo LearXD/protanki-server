@@ -6,16 +6,20 @@ import { SetRemoveBonusBoxPacket } from "@/network/packets/set-remove-bonus-box"
 import { Battle } from "@/game/battle";
 import { SetBonusBoxCollectedPacket } from "@/network/packets/set-bonus-box-collected";
 import { Supply } from "@/states/supply";
+import { Logger } from "@/utils/logger";
 
 export class BonusBox {
 
     public collected = false;
+
     public spawned = false;
+    public spawnedAt: number;
 
     public constructor(
         public readonly name: string,
         public readonly id: number,
         public readonly position: Vector3d,
+        public readonly lifeTime: number = 60000,
         public readonly battle: Battle
     ) {
 
@@ -31,29 +35,41 @@ export class BonusBox {
         return `${this.name}_${this.id}`;
     }
 
-    public spawn(lifeTime: number = 30000) {
+    public spawn() {
+        Logger.info(`Spawning ${this.getName()} box at ${this.position.x}, ${this.position.y}, ${this.position.z}`)
+
         this.spawned = true;
+        this.spawnedAt = Date.now();
 
         const packet = new SetSpawnBonusBoxPacket();
         packet.bonusId = this.getName();
         packet.position = this.position;
-        packet.life = lifeTime;
+        packet.life = this.lifeTime;
 
         this.battle.broadcastPacket(packet);
-
-        this.battle.taskManager.scheduleTask(this.remove.bind(this), lifeTime);
+        return this;
     }
 
     public remove() {
         this.spawned = false;
+
         const packet = new SetRemoveBonusBoxPacket();
         packet.bonusId = this.getName();
         this.battle.broadcastPacket(packet);
     }
 
+    public getSpawnedTime() {
+        return Date.now() - this.spawnedAt;
+    }
+
+    public canCollect(player: Player) {
+        return this.spawned && !this.collected && this.getSpawnedTime() < this.lifeTime;
+    }
+
     public handleCollect(player: Player) {
 
         this.collected = true;
+        this.spawned = false;
 
         switch (this.name) {
             case BonusBoxes.GOLD: {
@@ -89,6 +105,5 @@ export class BonusBox {
         packet.bonusId = this.getName();
         this.battle.broadcastPacket(packet);
     }
-
 
 }

@@ -8,18 +8,20 @@ import { SetGoldBoxTakenPacket } from "@/network/packets/set-gold-box-taken";
 import { BonusType } from "@/game/map/types";
 import { TimeType } from "../task/types";
 import { Logger } from "@/utils/logger";
+import { MathUtils } from "@/utils/math";
+import { Vector3d } from "@/utils/vector-3d";
 
 export class BattleBoxesManager {
 
     private boxes: BonusBox[] = []
 
     public static readonly CONFIG = [
-        { type: BonusType.GOLD, spawn: 0, alive: 0 },
-        { type: BonusType.CRYSTAL, spawn: 0, alive: 0 },
-        { type: BonusType.ARMOR, spawn: 1, alive: 0 },
-        { type: BonusType.NITRO, spawn: 1, alive: 0 },
-        { type: BonusType.HEALTH, spawn: 3, alive: 0 },
-        { type: BonusType.DAMAGE, spawn: 2, alive: 0 }
+        { type: BonusType.GOLD, spawn: 0, lifeTime: 60 * 60 },
+        { type: BonusType.CRYSTAL, spawn: 0, lifeTime: 60 * 4 },
+        { type: BonusType.ARMOR, spawn: 1, lifeTime: 40 },
+        { type: BonusType.NITRO, spawn: 1, lifeTime: 40 },
+        { type: BonusType.HEALTH, spawn: 3, lifeTime: 20 },
+        { type: BonusType.DAMAGE, spawn: 2, lifeTime: 40 }
     ]
 
     public constructor(
@@ -29,7 +31,9 @@ export class BattleBoxesManager {
     public initTasks() {
         for (const box of BattleBoxesManager.CONFIG) {
             if (box.spawn > 0) {
-                this.battle.taskManager.scheduleTask(() => this.spawnBox(box.type), box.spawn * TimeType.MINUTES, true)
+                this.battle.taskManager.scheduleTask(
+                    () => this.spawn(box.type), box.spawn * TimeType.MINUTES, true
+                )
             }
         }
     }
@@ -49,6 +53,15 @@ export class BattleBoxesManager {
     public sendSpawnedBoxes(client: Player) {
         const setBattleSpawnedBoxesPacket = new SetBattleSpawnedBoxesPacket()
         setBattleSpawnedBoxesPacket.boxes = []
+        setBattleSpawnedBoxesPacket.boxes = this.boxes
+            .filter(box => box.spawned && !box.collected)
+            .map(box => ({
+                id: box.getName(),
+                position: box.position.swap(),
+                timeFromAppearing: box.getSpawnedTime(),
+                timeLife: box.lifeTime,
+                bonusFallSpeed: 0
+            }))
         client.sendPacket(setBattleSpawnedBoxesPacket)
     }
 
@@ -65,27 +78,54 @@ export class BattleBoxesManager {
         this.battle.broadcastPacket(packet);
     }
 
-    public spawnBox(bonus: BonusType, delay: number = 0) {
-        const position = this.battle.map.getBonusSpawn(bonus, this.battle.getMode())
+    public spawn(bonus: BonusType, config: { index?: number, delay?: number, count?: number } = {}) {
+        const spawns = this.battle.map.getBonusSpawns(bonus, this.battle.getMode());
 
-        if (position) {
-            const spawned = this.boxes.filter(box => box.name === bonus)
-
-            Logger.info(`Spawning ${bonus} box at ${position.x}, ${position.y}, ${position.z}`)
-            const box = new BonusBox(bonus, spawned.length, position, this.battle);
-            this.boxes.push(box);
-
-            this.battle.taskManager.scheduleTask(() => { box.spawn() }, delay * TimeType.SECONDS)
-
-            return true
+        if (spawns.length === 0) {
+            Logger.error(`No spawns found for bonus ${bonus}`)
+            return false;
         }
 
-        return false;
+        if (config.index) {
+            this.addBonus(bonus, spawns[config.index], config.delay)
+            return true;
+        }
+
+        if (config.count && config.count > 0 && config.count <= spawns.length) {
+            for (let i = 0; i < config.count; i++) {
+                this.addBonus(bonus, spawns[i], config.delay)
+            }
+            return true;
+        }
+
+        this.addBonus(bonus, MathUtils.arrayRandom(spawns), config.delay)
+        return true;
+    }
+
+    public addBonus(bonus: BonusType, position: Vector3d, delay: number = 0) {
+        const data = BattleBoxesManager.CONFIG.find(box => box.type === bonus)
+        if (data) {
+            const spawned = this.boxes.filter(box => box.name === bonus)
+            const box = new BonusBox(bonus, spawned.length, position, data.lifeTime * TimeType.SECONDS, this.battle)
+            this.boxes.push(box)
+            this.battle.taskManager.scheduleTask(() => box.spawn(), delay * TimeType.SECONDS)
+        }
     }
 
     public handleCollectBonus(client: Player, bonus: string) {
         const box = this.boxes.find(box => box.getName() === bonus && !box.collected && box.spawned)
-        if (box) box.handleCollect(client)
+        if (box && box.canCollect(client)) {
+            box.handleCollect(client)
+        }
+    }
+
+    // TODO: VER POSSÍVEL MEMORY LEAK
+    public update() {
+        for (const box of this.boxes) {
+            if (box.spawned && !box.collected && box.getSpawnedTime() > box.lifeTime) {
+                box.remove()
+            }
+        }
     }
 
 }

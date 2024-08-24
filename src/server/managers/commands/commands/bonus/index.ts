@@ -32,7 +32,7 @@ export class BonusCommand extends Command {
                 return;
             }
 
-            const spawned = battle.boxesManager.spawnBox(bonus, delay);
+            const spawned = battle.boxesManager.spawn(bonus, { delay });
 
             if (!spawned) {
                 sender.sendMessage("Não foi possível criar o bônus.");

@@ -130,7 +130,7 @@ export class Tank {
     }
 
     public setHealth(health: number) {
-        this.health = Math.min(10000, Math.max(0, health));
+        this.health = Math.min(Tank.MAX_HEALTH, Math.max(0, health));
         const setTankHealthPacket = new SetTankHealthPacket();
         setTankHealthPacket.tankId = this.player.getUsername();
         setTankHealthPacket.health = this.health;
@@ -289,7 +289,6 @@ export class Tank {
     public prepareRespawn() {
         this.incarnation++;
 
-        this.effects.length = 0//this.effects.filter(effect => effect.activeAfterDeath)
         const spawn = this.battle.modeManager.getRandomSpawn(this.player);
 
         if (!spawn) {
@@ -424,34 +423,34 @@ export class Tank {
         activeAfterDeath: boolean = false,
         delay: number = 90000
     ) {
-        if (!this.hasEffect(supply)) {
+        const effect = this.effects.find(effect => effect.type === supply)
 
-            this.effects.push({ type: supply, startedAt: Date.now(), level, duration, activeAfterDeath });
-
-            switch (supply) {
-                case Supply.HEALTH: {
-                    const heal = this.hull.getProtection() * 0.2
-                    const rounds = Math.round(this.hull.getProtection() / heal)
-
-                    for (let i = 0; i < rounds; i++) {
-                        this.battle.taskManager.scheduleTask(() => this.heal(heal), i * 1000, false, this.player.getUsername())
-                    }
-
-                    duration = rounds * 1000;
-                    break;
-                }
-                case Supply.N2O: {
-                    this.updateTankSpeed()
-                    break;
-                }
-            }
-
-            this.battle.effectsManager.broadcastAddBattleEffect(this.player, supply, duration, level, activeAfterDeath)
-            this.battle.taskManager.scheduleTask(() => this.removeEffect(supply), duration)
-
-            return delay
+        if (effect) {
+            this.removeEffect(supply)
         }
-        return 0;
+
+        this.effects.push({ type: supply, startedAt: Date.now(), level, duration, activeAfterDeath });
+
+        switch (supply) {
+            case Supply.HEALTH: {
+                const heal = this.hull.getProtection() * 0.2
+                const rounds = Math.round(this.hull.getProtection() / heal)
+
+                for (let i = 0; i < rounds; i++) {
+                    this.battle.taskManager.scheduleTask(() => this.heal(heal), i * 1000, false, this.player.getUsername())
+                }
+
+                duration = rounds * 1000;
+                break;
+            }
+            case Supply.N2O: {
+                this.updateTankSpeed()
+                break;
+            }
+        }
+
+        this.battle.effectsManager.broadcastAddBattleEffect(this.player, supply, duration, level, activeAfterDeath)
+        return delay
     }
 
     public getSpeed() {
@@ -535,6 +534,8 @@ export class Tank {
 
     public onDeath() {
         this.turret.onDeath()
+
+        this.effects = this.effects.filter(effect => effect.activeAfterDeath)
         this.temperatureAccumulator = []
 
         this.battle.minesManager.removePlayerMines(this.player)
@@ -796,15 +797,10 @@ export class Tank {
         }
 
         const temperature = this.getTemperature();
-
         if (temperature !== 0) {
-
-            Logger.debug(this.temperatureAccumulator.map(acc => ({ name: acc.attacker.getUsername(), heat: acc.heat, damage: acc.damage })))
-
             const variation = temperature < 0 ? Tank.AUTO_HEATING : Tank.AUTO_COOLING
 
             for (const accumulator of this.temperatureAccumulator) {
-
                 if (accumulator.heat > 0) {
                     const damageValue = accumulator.damage * (accumulator.heat / accumulator.max)
                     this.damage(damageValue, accumulator.attacker)
@@ -820,9 +816,13 @@ export class Tank {
                     this.temperatureAccumulator = this.temperatureAccumulator.filter(acc => acc !== accumulator)
                 }
             }
-
             this.updateTemperature(this.getTemperature(), true)
         }
 
+        for (const effect of this.effects) {
+            if (effect.duration <= (Date.now() - effect.startedAt)) {
+                this.removeEffect(effect.type)
+            }
+        }
     }
 }

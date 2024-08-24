@@ -320,9 +320,12 @@ export class Battle {
     public async update() {
 
         this.tick++
+
         this.taskManager.update()
 
         if (this.tick % Battle.TICK_RATE === 0) {
+            this.boxesManager.update()
+
             if (this.getTimeLeft() <= 0) {
                 if (this.running) {
                     this.finish()
