@@ -5,13 +5,18 @@ import { BattleCaptureTheFlagModeManager } from "../../managers/mode/modes/captu
 import { FlagState } from "../../managers/mode/modes/capture-the-flag/types";
 import { Team, TeamType } from "@/states/team";
 import { BattleTask } from "../../utils/task";
+import { Logger } from "@/utils/logger";
 
 export class Flag extends BattleObject {
 
-    public returnTask: BattleTask = null
-
     public state: FlagState = FlagState.AT_BASE
+
+    public droppedAt: number = 0
+    public carriedBy: Player = null
+
     public carrier: Player = null
+
+    public returnTask: BattleTask = null
 
     public constructor(
         public readonly manager: BattleCaptureTheFlagModeManager,
@@ -40,6 +45,11 @@ export class Flag extends BattleObject {
     }
 
     public setCarrier(player: Player): void {
+        if (player === null) {
+            this.carriedBy = this.carrier;
+            this.droppedAt = Date.now();
+            return;
+        }
         this.carrier = player;
     }
 
@@ -49,6 +59,10 @@ export class Flag extends BattleObject {
 
     public handleCollision(player: Player): boolean {
 
+        if (this.carriedBy && this.carriedBy === player && (Date.now() - this.droppedAt < 3000)) {
+            return false;
+        }
+
         if (player.tank.team === this.team) {
             if (this.state === FlagState.DROPPED) {
                 this.manager.handleReturnFlag(this, player);
@@ -56,7 +70,7 @@ export class Flag extends BattleObject {
 
             if (this.state === FlagState.AT_BASE) {
                 const team = this.team === Team.RED ? Team.BLUE : Team.RED;
-                const flag = this.manager.getFlag(team);
+                const flag = this.manager.flags.get(team);
 
                 if (flag.isCarrier(player)) {
                     this.manager.handleCaptureFlag(flag);

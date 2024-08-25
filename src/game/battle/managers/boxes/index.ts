@@ -10,23 +10,31 @@ import { TimeType } from "../task/types";
 import { Logger } from "@/utils/logger";
 import { MathUtils } from "@/utils/math";
 import { Vector3d } from "@/utils/vector-3d";
+import { IBonusesData } from "./types";
+import { ServerError } from "@/server/utils/error";
 
 export class BattleBoxesManager {
 
-    private boxes: BonusBox[] = []
+    private readonly data: IBonusesData;
+    private boxes: Map<string, BonusBox> = new Map([])
 
     public static readonly CONFIG = [
-        { type: BonusType.GOLD, spawn: 0, lifeTime: 60 * 60 },
-        { type: BonusType.CRYSTAL, spawn: 0, lifeTime: 60 * 4 },
-        { type: BonusType.ARMOR, spawn: 1, lifeTime: 40 },
-        { type: BonusType.NITRO, spawn: 1, lifeTime: 40 },
-        { type: BonusType.HEALTH, spawn: 3, lifeTime: 20 },
-        { type: BonusType.DAMAGE, spawn: 2, lifeTime: 40 }
+        { type: BonusType.GOLD, spawn: 0 },
+        { type: BonusType.CRYSTAL, spawn: 0 },
+        { type: BonusType.ARMOR, spawn: 1 },
+        { type: BonusType.NITRO, spawn: 1 },
+        { type: BonusType.HEALTH, spawn: 3 },
+        { type: BonusType.DAMAGE, spawn: 2 }
     ]
 
     public constructor(
         public readonly battle: Battle
-    ) { }
+    ) {
+        this.data = battle.server.battleManager.getData('bonuses.json')
+        if (!this.data) {
+            throw new ServerError('Bonuses data not found')
+        }
+    }
 
     public initTasks() {
         for (const box of BattleBoxesManager.CONFIG) {
@@ -44,16 +52,14 @@ export class BattleBoxesManager {
     }
 
     public sendBoxesData(client: Player) {
-        const bonuses = client.server.battleManager.getData('bonuses.json')
         const setBonusesDataPacket = new SetBonusesDataPacket();
-        setBonusesDataPacket.data = bonuses;
+        setBonusesDataPacket.data = this.data;
         client.sendPacket(setBonusesDataPacket);
     }
 
     public sendSpawnedBoxes(client: Player) {
         const setBattleSpawnedBoxesPacket = new SetBattleSpawnedBoxesPacket()
-        setBattleSpawnedBoxesPacket.boxes = []
-        setBattleSpawnedBoxesPacket.boxes = this.boxes
+        setBattleSpawnedBoxesPacket.boxes = Array.from(this.boxes.values())
             .filter(box => box.spawned && !box.collected)
             .map(box => ({
                 id: box.getName(),
@@ -105,24 +111,27 @@ export class BattleBoxesManager {
     public addBonus(bonus: BonusType, position: Vector3d, delay: number = 0) {
         const data = BattleBoxesManager.CONFIG.find(box => box.type === bonus)
         if (data) {
-            const spawned = this.boxes.filter(box => box.name === bonus)
-            const box = new BonusBox(bonus, spawned.length, position, data.lifeTime * TimeType.SECONDS, this.battle)
-            this.boxes.push(box)
+            const spawned = Array.from(this.boxes.values()).filter(box => box.name === bonus)
+
+            const lifeTime = this.data.bonuses.find(box => box.id === bonus)?.lifeTimeMs || 30000
+            const box = new BonusBox(bonus, spawned.length, position, lifeTime, this.battle)
+            this.boxes.set(box.getName(), box)
+
             this.battle.taskManager.scheduleTask(() => box.spawn(), delay * TimeType.SECONDS)
         }
     }
 
     public handleCollectBonus(client: Player, bonus: string) {
-        const box = this.boxes.find(box => box.getName() === bonus && !box.collected && box.spawned)
+        const box = this.boxes.get(bonus)
         if (box && box.canCollect(client)) {
             box.handleCollect(client)
         }
     }
 
-    // TODO: VER POSSÍVEL MEMORY LEAK
     public update() {
-        for (const box of this.boxes) {
+        for (const box of this.boxes.values()) {
             if (box.spawned && !box.collected && box.getSpawnedTime() > box.lifeTime) {
+                this.boxes.delete(box.getName())
                 box.remove()
             }
         }

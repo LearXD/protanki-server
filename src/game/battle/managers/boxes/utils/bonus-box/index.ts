@@ -45,12 +45,13 @@ export class BonusBox {
         packet.bonusId = this.getName();
         packet.position = this.position;
         packet.life = this.lifeTime;
-
         this.battle.broadcastPacket(packet);
+
         return this;
     }
 
     public remove() {
+        Logger.info(`Removing ${this.getName()} box`)
         this.spawned = false;
 
         const packet = new SetRemoveBonusBoxPacket();

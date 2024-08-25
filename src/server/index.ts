@@ -21,6 +21,9 @@ import { Garage } from './managers/garage';
 import { ShopManager } from './managers/shop';
 import { RankManager } from './managers/rank';
 import { Packet } from '@/network/packets/packet';
+import { BattleMode } from '@/states/battle-mode';
+import { EquipmentConstraintsMode } from '@/states/equipment-constraints-mode';
+import { Rank } from '@/states/rank';
 
 export class Server {
 
@@ -37,6 +40,8 @@ export class Server {
     public readonly mapsManager: MapsManager = new MapsManager(this);
     public readonly resourcesManager: ResourcesManager = new ResourcesManager(this);
 
+    public readonly battleManager: BattlesManager = new BattlesManager(this);
+
     public readonly rankManager: RankManager = new RankManager(this);
     public readonly playersManager: PlayersManager = new PlayersManager(this);
     public readonly authManager: AuthManager = new AuthManager(this);
@@ -47,7 +52,6 @@ export class Server {
     public readonly friendsManager: FriendsManager = new FriendsManager(this);
     public readonly chatManager: ChatManager = new ChatManager(this);
     public readonly commandsManager: CommandsManager = new CommandsManager();
-    public readonly battleManager: BattlesManager = new BattlesManager(this);
     public readonly garageManager: Garage = new Garage(this);
     public readonly shopManager: ShopManager = new ShopManager(this);
 
@@ -57,6 +61,28 @@ export class Server {
     public start = (port: number) => {
         const start = Date.now();
         Logger.info('Starting server...');
+
+        this.battleManager.createBattle('For Newbies', 'map_sandbox')
+        this.battleManager.createBattle('For Newbies 2', 'map_noise', {
+            autoBalance: false,
+            battleMode: BattleMode.CTF,
+            equipmentConstraintsMode: EquipmentConstraintsMode.NONE,
+            friendlyFire: false,
+            scoreLimit: 1,
+            timeLimitInSec: 0,
+            maxPeopleCount: 2,
+            parkourMode: false,
+            privateBattle: false,
+            proBattle: false,
+            rankRange: {
+                max: Rank.GENERALISSIMO,
+                min: Rank.RECRUIT
+            },
+            reArmorEnabled: true,
+            withoutBonuses: false,
+            withoutCrystals: false,
+            withoutSupplies: false
+        })
 
         this.init();
 

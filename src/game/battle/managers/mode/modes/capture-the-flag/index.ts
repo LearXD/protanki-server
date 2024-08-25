@@ -12,38 +12,32 @@ import { FlagState } from "./types";
 import { MathUtils } from "@/utils/math";
 import { RayHit } from "@/game/map/managers/collision/utils/rayhit";
 import { TimeType } from "../../../task/types";
-import { BattleTask } from "@/game/battle/utils/task";
+import { Logger } from "@/utils/logger";
 
 export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
 
-    public redFlag: Flag;
-    public blueFlag: Flag;
+    public flags = new Map<TeamType, Flag>([[Team.RED, null], [Team.BLUE, null]]);
 
     public init(): void {
-        super.init();
         this.initFlag(Team.RED)
         this.initFlag(Team.BLUE)
+
+        super.init();
     }
 
     public initFlag(team: TeamType) {
-
         const positions = this.battle.map.getFlags()
+        const position = team === Team.RED ? positions.red : positions.blue
 
-        switch (team) {
-            case Team.RED: {
-                if (this.redFlag) this.redFlag.destroy()
-                this.redFlag = new Flag(this, Team.RED, new Vector3d(positions.red.x, positions.red.y, positions.red.z))
-                this.battle.collisionManager.addObject(this.redFlag)
-                break;
-            }
-            case Team.BLUE: {
-                if (this.blueFlag) this.blueFlag.destroy()
-                this.blueFlag = new Flag(this, Team.BLUE, new Vector3d(positions.blue.x, positions.blue.y, positions.blue.z))
-                this.battle.collisionManager.addObject(this.blueFlag)
-                break;
-            }
+        const _flag = this.flags.get(team)
+        if (_flag) {
+            _flag.destroy()
         }
 
+        const flag = new Flag(this, team, new Vector3d(position.x, position.y, position.z))
+        this.flags.set(team, flag)
+
+        this.battle.collisionManager.addObject(flag)
     }
 
     public sendLoadBattleMode(player: Player): void {
@@ -53,15 +47,15 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
 
         packet.blueFlag = {
             basePosition: new Vector3d(positions.blue.x, positions.blue.y, positions.blue.z),
-            carrier: this.blueFlag.getCarrier() ? this.blueFlag.getCarrier().getUsername() : null,
-            droppedPosition: this.blueFlag.state === FlagState.DROPPED ? this.blueFlag.position : null
+            carrier: this.flags.get(Team.BLUE).getCarrier() ? this.flags.get(Team.BLUE).getCarrier().getUsername() : null,
+            droppedPosition: this.flags.get(Team.BLUE).state === FlagState.DROPPED ? this.flags.get(Team.BLUE).position : null
         }
         packet.blueFlagImage = 538453
         packet.blueFlagModel = 236578
         packet.redFlag = {
             basePosition: new Vector3d(positions.red.x, positions.red.y, positions.red.z),
-            carrier: this.redFlag.getCarrier() ? this.redFlag.getCarrier().getUsername() : null,
-            droppedPosition: this.redFlag.state === FlagState.DROPPED ? this.redFlag.position : null
+            carrier: this.flags.get(Team.RED).getCarrier() ? this.flags.get(Team.RED).getCarrier().getUsername() : null,
+            droppedPosition: this.flags.get(Team.RED).state === FlagState.DROPPED ? this.flags.get(Team.RED).position : null
         }
         packet.redFlagImage = 44351
         packet.redFlagModel = 500060
@@ -90,45 +84,39 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
         return spawns[random]
     }
 
-    public getFlag(team: TeamType): Flag {
-        return team === Team.RED ? this.redFlag : this.blueFlag
-    }
-
     public handleDeath(player: Player): void {
         super.handleDeath(player)
         this.handleDropFlag(player)
     }
 
     public handleDropFlag(player: Player) {
-        const team = player.tank.team === Team.BLUE ? Team.RED : Team.BLUE
-        const flag = this.getFlag(team)
+        for (const flag of this.flags.values()) {
+            if (flag.isCarrier(player)) {
 
-        if (!flag.isCarrier(player)) {
-            return
+                flag.setState(FlagState.DROPPED)
+                flag.setCarrier(null)
+
+                const hit = new RayHit()
+                const found = this.battle.map.collisionManager.raycastStatic(player.tank.getPosition().swap(), Vector3d.DOWN, 16, 10000000000, null, hit);
+
+                if (!found) {
+                    this.handleReturnFlag(flag)
+                    break;
+                }
+
+                flag.setPosition(hit.position.swap())
+
+                const packet = new SetFlagDroppedPacket();
+                packet.position = flag.position;
+                packet.team = flag.team;
+                this.battle.broadcastPacket(packet);
+
+                flag.returnTask = this.battle.taskManager.scheduleTask(() => this.handleReturnFlag(flag), 1 * TimeType.MINUTES)
+                this.battle.collisionManager.addObject(flag)
+
+                break;
+            }
         }
-
-        flag.setState(FlagState.DROPPED)
-        flag.setCarrier(null)
-
-        const hit = new RayHit()
-        const found = this.battle.map.collisionManager.raycastStatic(
-            player.tank.getPosition().swap(), Vector3d.DOWN, 16, 10000000000, null, hit
-        );
-
-        if (!found) {
-            this.handleReturnFlag(flag)
-            return
-        }
-
-        flag.setPosition(hit.position.swap())
-
-        const packet = new SetFlagDroppedPacket();
-        packet.position = flag.position;
-        packet.team = team;
-        this.battle.broadcastPacket(packet);
-
-        flag.returnTask = this.battle.taskManager.scheduleTask(() => this.handleReturnFlag(flag), 1 * TimeType.MINUTES)
-        this.battle.taskManager.scheduleTask(() => this.battle.collisionManager.addObject(flag), 3000)
     }
 
     public handleReturnFlag(flag: Flag, player?: Player) {
@@ -142,6 +130,11 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
     }
 
     public handleTakeFlag(player: Player, flag: Flag) {
+
+        if (flag.returnTask) {
+            this.battle.taskManager.cancelTask(flag.returnTask.id)
+        }
+
         flag.setState(FlagState.CARRIED)
         flag.setCarrier(player)
 
@@ -171,8 +164,10 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
     public broadcastRemovePlayer(player: Player): void {
         super.broadcastRemovePlayer(player)
 
-        if (this.redFlag.isCarrier(player) || this.blueFlag.isCarrier(player)) {
-            this.handleDropFlag(player)
+        for (const flag of this.flags.values()) {
+            if (flag.isCarrier(player)) {
+                this.handleDropFlag(player)
+            }
         }
     }
 

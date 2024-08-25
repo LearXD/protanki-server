@@ -1,47 +1,22 @@
 import path from "path";
 
-import { Server } from "@/server";
 import { Battle } from "@/game/battle";
 import { IBattleData } from "@/game/battle/types";
 import { Logger } from "@/utils/logger";
 import { SetAddBattleOnListPacket } from "@/network/packets/set-add-battle-on-list";
 import { LayoutState } from "@/states/layout-state";
 import { SetRemoveBattleFromListPacket } from "@/network/packets/set-remove-battle-from-list";
-import { BattleMode } from "@/states/battle-mode";
-import { EquipmentConstraintsMode } from "@/states/equipment-constraints-mode";
-import { Rank } from "@/states/rank";
 import { ServerError } from "@/server/utils/error";
 import { Packet } from "@/network/packets/packet";
+import { Server } from "@/server";
 
 export class BattlesManager {
 
     public battles: Battle[] = [];
 
-    constructor(
-        private readonly server: Server
-    ) {
-        this.createBattle('For Newbies', 'map_sandbox')
-        this.createBattle('For Newbies 2', 'map_noise', {
-            autoBalance: false,
-            battleMode: BattleMode.CTF,
-            equipmentConstraintsMode: EquipmentConstraintsMode.NONE,
-            friendlyFire: false,
-            scoreLimit: 1,
-            timeLimitInSec: 0,
-            maxPeopleCount: 2,
-            parkourMode: false,
-            privateBattle: false,
-            proBattle: false,
-            rankRange: {
-                max: Rank.GENERALISSIMO,
-                min: Rank.RECRUIT
-            },
-            reArmorEnabled: true,
-            withoutBonuses: false,
-            withoutCrystals: false,
-            withoutSupplies: false
-        })
-    }
+    public constructor(
+        public readonly server: Server
+    ) { }
 
     public getData(_path: string) {
         return this.server.assetsManager.getData(path.join('battle', _path))
