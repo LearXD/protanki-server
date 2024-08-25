@@ -21,13 +21,13 @@ export class BattlesManager {
         private readonly server: Server
     ) {
         this.createBattle('For Newbies', 'map_sandbox')
-        this.createBattle('For Newbies 2', 'map_sandbox', {
+        this.createBattle('For Newbies 2', 'map_noise', {
             autoBalance: false,
             battleMode: BattleMode.CTF,
             equipmentConstraintsMode: EquipmentConstraintsMode.NONE,
             friendlyFire: false,
             scoreLimit: 1,
-            timeLimitInSec: 60 * 10,
+            timeLimitInSec: 0,
             maxPeopleCount: 2,
             parkourMode: false,
             privateBattle: false,
@@ -37,7 +37,7 @@ export class BattlesManager {
                 min: Rank.RECRUIT
             },
             reArmorEnabled: true,
-            withoutBonuses: true,
+            withoutBonuses: false,
             withoutCrystals: false,
             withoutSupplies: false
         })

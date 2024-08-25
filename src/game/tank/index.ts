@@ -662,8 +662,6 @@ export class Tank {
                 pk.position = packet.position;
                 this.battle.broadcastPacket(pk, [this.player.getUsername()])
             }
-
-
         }
 
         if (packet instanceof SendMoveTankAndTurretPacket) {
@@ -698,51 +696,56 @@ export class Tank {
 
     public handlePacket(packet: Packet) {
 
-        if (this.turret) {
-            this.turret.handlePacket(packet)
-        }
+        if (this.battle.isRunning()) {
 
-        if (this.isAlive()) {
+            if (this.turret) {
+                this.turret.handlePacket(packet)
+            }
 
-            this.handleMovementPacket(packet)
+            if (this.isAlive()) {
 
-            if (this.isVisible()) {
+                this.handleMovementPacket(packet)
 
-                if (this.battle.getMode() === BattleMode.CTF) {
-                    if (packet instanceof SendDropFlagPacket) {
-                        const manager = this.battle.modeManager as BattleCaptureTheFlagModeManager;
-                        manager.handleDropFlag(this.player)
+                if (this.isVisible()) {
+
+                    if (this.battle.getMode() === BattleMode.CTF) {
+                        if (packet instanceof SendDropFlagPacket) {
+                            const manager = this.battle.modeManager as BattleCaptureTheFlagModeManager;
+                            manager.handleDropFlag(this.player)
+                        }
                     }
+
+                    if (packet instanceof SendAutoDestroyPacket) {
+                        this.handleSuicide();
+                    }
+
+                    if (packet instanceof SendUseSupplyPacket) {
+                        this.handleUseSupply(packet.itemId as SupplyType)
+                    }
+
+                    if (packet instanceof SendCollectBonusBoxPacket) {
+                        this.battle.boxesManager.handleCollectBonus(this.player, packet.bonusId)
+                    }
+
+                    return
                 }
 
-                if (packet instanceof SendAutoDestroyPacket) {
-                    this.handleSuicide();
+                if (packet instanceof SendRequestSetTankVisiblePacket) {
+                    this.sendVisible();
                 }
-
-                if (packet instanceof SendUseSupplyPacket) {
-                    this.handleUseSupply(packet.itemId as SupplyType)
-                }
-
-                if (packet instanceof SendCollectBonusBoxPacket) {
-                    this.battle.boxesManager.handleCollectBonus(this.player, packet.bonusId)
-                }
-
-                return
+                return;
             }
 
-            if (packet instanceof SendRequestSetTankVisiblePacket) {
-                this.sendVisible();
+            if (packet instanceof SendRequestSpawnPositionPacket) {
+                this.prepareRespawn();
             }
-            return;
+
+            if (packet instanceof SendRequestRespawnPacket) {
+                this.spawn();
+            }
         }
 
-        if (packet instanceof SendRequestSpawnPositionPacket) {
-            this.prepareRespawn();
-        }
 
-        if (packet instanceof SendRequestRespawnPacket) {
-            this.spawn();
-        }
 
     }
 

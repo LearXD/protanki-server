@@ -83,8 +83,8 @@ export class BattleViewersManager {
             reArmorEnabled: this.battle.isReArmorEnabled(),
         }
 
-        const modeManager = this.battle.modeManager;
-        if (modeManager instanceof BattleDeathMatchModeManager) {
+        const manager = this.battle.modeManager;
+        if (manager instanceof BattleDeathMatchModeManager) {
             packet.data.users = this.battle.playersManager.getPlayers().map(player => ({
                 kills: player.tank.kills,
                 score: player.tank.score,
@@ -93,12 +93,12 @@ export class BattleViewersManager {
             }));
         }
 
-        if (modeManager instanceof BattleTeamModeManager) {
+        if (manager instanceof BattleTeamModeManager) {
             packet.data.autoBalance = this.battle.haveAutoBalance();
             packet.data.friendlyFire = this.battle.isFriendlyFire();
 
-            packet.data.scoreRed = modeManager.redPoints;
-            packet.data.scoreBlue = modeManager.bluePoints;
+            packet.data.scoreRed = manager.points.get(Team.RED);
+            packet.data.scoreBlue = manager.points.get(Team.BLUE);
 
             packet.data.usersRed = this.battle.playersManager.getPlayers()
                 .filter(player => player.tank.team === Team.RED)

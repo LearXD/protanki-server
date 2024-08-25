@@ -10,29 +10,17 @@ import { SetViewingBattleTeamScorePacket } from "@/network/packets/set-viewing-b
 
 export abstract class BattleTeamModeManager extends BattleModeManager {
 
-    public bluePoints: number = 0;
-    public redPoints: number = 0;
+    public readonly points = new Map<TeamType, number>([[Team.RED, 0], [Team.BLUE, 0]]);
 
     public init() {
-        this.bluePoints = 0;
-        this.redPoints = 0;
-    }
-
-    public getTeamScore(team: TeamType): number {
-        switch (team) {
-            case Team.RED: return this.redPoints;
-            case Team.BLUE: return this.bluePoints;
-        }
+        this.points.set(Team.RED, 0);
+        this.points.set(Team.BLUE, 0);
     }
 
     public addTeamScore(team: TeamType, increase: number): void {
 
-        switch (team) {
-            case Team.RED: this.redPoints += increase; break
-            case Team.BLUE: this.bluePoints += increase; break
-        }
-
-        const score = team === Team.RED ? this.redPoints : this.bluePoints;
+        let score = this.points.get(team);
+        this.points.set(team, score = score + increase);
 
         const setTeamScorePacket = new SetTeamScorePacket();
         setTeamScorePacket.team = team;
@@ -44,6 +32,10 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
         setViewingBattleTeamScorePacket.team = team;
         setViewingBattleTeamScorePacket.score = score;
         this.battle.viewersManager.broadcastPacket(setViewingBattleTeamScorePacket)
+
+        if (score >= this.battle.getScoreLimit()) {
+            return this.battle.finish()
+        }
     }
 
     public broadcastAddUserProperties(player: Player): void {
@@ -87,33 +79,25 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
 
     public sendUsersProperties(target: Player): void {
 
-        const redUsers: IUser[] = [];
-        const blueUsers: IUser[] = [];
+        const users = new Map<TeamType, IUser[]>([[Team.RED, []], [Team.BLUE, []]]);
 
         for (const player of this.battle.playersManager.getPlayers()) {
-            const userData: IUser = {
-                chatModeratorLevel: player.data.moderatorLevel,
-                deaths: player.tank.deaths,
-                kills: player.tank.kills,
-                rank: player.data.getRank(),
-                score: player.tank.score,
-                name: player.getUsername()
-            }
-
-            if (player.tank.team === Team.BLUE) {
-                blueUsers.push(userData);
-            }
-
-            if (player.tank.team === Team.RED) {
-                redUsers.push(userData);
-            }
+            users.get(player.tank.team)
+                .push({
+                    chatModeratorLevel: player.data.moderatorLevel,
+                    deaths: player.tank.deaths,
+                    kills: player.tank.kills,
+                    rank: player.data.getRank(),
+                    score: player.tank.score,
+                    name: player.getUsername()
+                });
         }
 
         const packet = new SetTeamBattleUsersPropertiesPacket();
-        packet.bluePoints = this.bluePoints;
-        packet.redPoints = this.redPoints;
-        packet.redUsers = redUsers;
-        packet.blueUsers = blueUsers;
+        packet.bluePoints = this.points.get(Team.BLUE);
+        packet.redPoints = this.points.get(Team.RED);
+        packet.redUsers = users.get(Team.RED);
+        packet.blueUsers = users.get(Team.BLUE);
         target.sendPacket(packet);
     }
 

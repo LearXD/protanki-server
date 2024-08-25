@@ -166,10 +166,6 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
 
         this.addTeamScore(player.tank.team, 1)
         this.initFlag(flag.team)
-
-        if (this.battle.getScoreLimit() <= this.getTeamScore(player.tank.team)) {
-            return this.battle.finish()
-        }
     }
 
     public broadcastRemovePlayer(player: Player): void {

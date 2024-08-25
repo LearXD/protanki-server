@@ -32,6 +32,27 @@ import { Packet } from "@/network/packets/packet"
 
 export class Battle {
 
+    public readonly battleId: string = BattleUtils.generateBattleId();
+
+    private running: boolean = false
+    public startedAt: number;
+
+    private tick: number = 0
+    private updateInterval: NodeJS.Timeout
+    private updateTimeInterval: NodeJS.Timeout
+
+    /** Managers */
+    public readonly modeManager: BattleModeManager = BattleUtils.getBattleManager(this)
+    public readonly collisionManager: BattleCollisionsManager = new BattleCollisionsManager(this)
+    public readonly combatManager: BattleCombatManager = new BattleCombatManager(this)
+    public readonly playersManager: BattlePlayersManager = new BattlePlayersManager(this)
+    public readonly viewersManager: BattleViewersManager = new BattleViewersManager(this)
+    public readonly chatManager: BattleChatManager = new BattleChatManager(this)
+    public readonly minesManager: BattleMinesManager = new BattleMinesManager(this)
+    public readonly effectsManager: BattleEffectsManager = new BattleEffectsManager(this)
+    public readonly boxesManager: BattleBoxesManager = new BattleBoxesManager(this)
+    public readonly taskManager: BattleTaskManager = new BattleTaskManager()
+
     public static readonly TICK_RATE = 10
     public static readonly DEFAULT_CONFIG: IBattleData = {
         autoBalance: true,
@@ -50,28 +71,6 @@ export class Battle {
         withoutCrystals: false,
         withoutSupplies: false
     }
-
-    public readonly battleId: string = BattleUtils.generateBattleId();
-    private running: boolean = false
-
-    public startedAt: number;
-    private tick: number = 0
-
-    private updateInterval: NodeJS.Timeout
-    private updateTimeInterval: NodeJS.Timeout
-
-    /** Managers */
-    public readonly modeManager: BattleModeManager = BattleUtils.getBattleManager(this)
-
-    public readonly collisionManager: BattleCollisionsManager = new BattleCollisionsManager(this)
-    public readonly combatManager: BattleCombatManager = new BattleCombatManager(this)
-    public readonly playersManager: BattlePlayersManager = new BattlePlayersManager(this)
-    public readonly viewersManager: BattleViewersManager = new BattleViewersManager(this)
-    public readonly chatManager: BattleChatManager = new BattleChatManager(this)
-    public readonly minesManager: BattleMinesManager = new BattleMinesManager(this)
-    public readonly effectsManager: BattleEffectsManager = new BattleEffectsManager(this)
-    public readonly boxesManager: BattleBoxesManager = new BattleBoxesManager(this)
-    public readonly taskManager: BattleTaskManager = new BattleTaskManager()
 
     public constructor(
         public name: string,
@@ -227,10 +226,16 @@ export class Battle {
     }
 
     public getTimeLeft(): number {
-        if (this.running) {
-            return this.getTimeLimitInSec() - (Date.now() - this.startedAt) / 1000
+        const limit = this.getTimeLimitInSec()
+
+        if (limit > 0) {
+            if (this.running) {
+                return this.getTimeLimitInSec() - (Date.now() - this.startedAt) / 1000
+            }
+            return this.getTimeLimitInSec()
         }
-        return this.getTimeLimitInSec()
+
+        return 0
     }
 
     public restartTime() {
@@ -328,7 +333,7 @@ export class Battle {
         if (this.tick % Battle.TICK_RATE === 0) {
             this.boxesManager.update()
 
-            if (this.getTimeLeft() <= 0) {
+            if (this.getTimeLimitInSec() > 0 && this.getTimeLeft() <= 0) {
                 if (this.running) {
                     this.finish()
                 }
