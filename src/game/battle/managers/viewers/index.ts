@@ -25,16 +25,15 @@ export class BattleViewersManager {
     }
 
     public addViewer(client: Player) {
-        const viewing = client.getViewingBattle();
-        if (viewing) {
-            viewing.viewersManager.removeViewer(client);
+        if (client.viewingBattle) {
+            client.viewingBattle.viewersManager.removeViewer(client);
         }
 
         const setViewingBattlePacket = new SetViewingBattlePacket();
         setViewingBattlePacket.battleId = this.battle.getBattleId();
         client.sendPacket(setViewingBattlePacket);
 
-        client.setViewingBattle(this.battle);
+        client.viewingBattle = this.battle;
         this.viewers.set(client.getUsername(), client);
 
         this.sendViewingBattleData(client);
@@ -47,7 +46,7 @@ export class BattleViewersManager {
             const setRemoveViewingBattlePacket = new SetRemoveViewingBattlePacket();
             setRemoveViewingBattlePacket.battleId = this.battle.getBattleId();
             viewer.sendPacket(setRemoveViewingBattlePacket);
-            viewer.setViewingBattle(null);
+            viewer.viewingBattle = null;
         }
     }
 
@@ -57,7 +56,7 @@ export class BattleViewersManager {
         }
     }
 
-    public sendViewingBattleData(client: Player) {
+    public sendViewingBattleData(player: Player) {
         const packet = new SetViewingBattleDataPacket();
         packet.data = {
             battleMode: this.battle.getMode(),
@@ -71,13 +70,12 @@ export class BattleViewersManager {
             minRank: this.battle.getRankRange().min,
             maxRank: this.battle.getRankRange().max,
             roundStarted: this.battle.isRunning(),
-            spectator: true,
+            spectator: player.data.isAdmin(),
             withoutBonuses: this.battle.isWithoutBonuses(),
             withoutCrystals: this.battle.isWithoutCrystals(),
             withoutSupplies: this.battle.isWithoutSupplies(),
             proBattleEnterPrice: 150,
             timeLeftInSec: this.battle.getTimeLeft(),
-            // TODO: with supplies?
             userPaidNoSuppliesBattle: this.battle.isWithoutSupplies(),
             proBattleTimeLeftInSec: -1,
             parkourMode: this.battle.isParkourMode(),
@@ -121,7 +119,7 @@ export class BattleViewersManager {
                 }));
         }
 
-        client.sendPacket(packet);
+        player.sendPacket(packet);
     }
 
     public broadcastPacket(packet: Packet) {

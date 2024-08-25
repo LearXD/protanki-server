@@ -271,10 +271,11 @@ export class PlayerGarageManager {
     public closeGarage() {
         this.removeGarageScreen();
 
-        if (this.player.battle && this.player.tank.hasChangedEquipment()) {
-            if (this.player.tank.isAlive()) {
-                this.player.tank.scheduleDestroy()
-            }
+        if (
+            this.player.battle && this.player.battle.isReArmorEnabled() &&
+            this.player.tank.hasChangedEquipment() && this.player.tank.isAlive()
+        ) {
+            this.player.tank.scheduleDestroy()
         }
     }
 

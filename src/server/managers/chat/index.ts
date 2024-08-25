@@ -5,30 +5,25 @@ import { Server } from "@/server";
 
 export class ChatManager {
 
-    public messages: Message[] = []
+    public static readonly BATTLE_INVITE_PREFIX = /#\/battle\/([a-zA-Z0-9]+)/g;
+    public readonly messages: Message[] = []
 
     constructor(
         private readonly server: Server
     ) { }
 
-    public addMessage(message: Message) {
-        this.messages.push(message);
-        this.broadcastMessage(message);
-        return message;
-    }
-
-    public getMessages() {
-        return this.messages;
-    }
-
-    public clearMessages() {
-        this.messages = [];
-    }
-
     public broadcastMessage(message: Message) {
+        this.messages.push(message);
+
         this.server.playersManager.getPlayers().forEach(player => {
             player.chatManager.sendSetMessage(message)
         })
+
+        return message;
+    }
+
+    public broadcastServerMessage(text: string, warning: boolean = false) {
+        return this.broadcastMessage(new Message(text, null, null, true, warning))
     }
 
     public handleSendMessage(player: Player, text: string, target: string = null) {
@@ -38,22 +33,28 @@ export class ChatManager {
         }
 
         const message = new Message(text, ChatUser.fromData(player.data));
-
         if (target) {
             const data = this.server.userDataManager.findPlayerData(target);
-
             if (!data) {
-                return player.chatManager.sendMessage(`Usuário ${target} não encontrado`, true)
+                player.chatManager.sendMessage(`Usuário ${target} não encontrado`, true)
+                return;
             }
-
             message.target = new ChatUser(data.username, data.getRank(), data.moderatorLevel);
         }
 
-        return this.addMessage(message);
-    }
+        message.text = message.text.replace(
+            ChatManager.BATTLE_INVITE_PREFIX,
+            (match, battleId) => {
+                if (battleId.length === 0x10) {
+                    const battle = this.server.battleManager.getBattleById(battleId);
+                    if (battle) {
+                        return `#battle|${battle.name}|${battleId}`;
+                    }
+                }
+                return match;
+            }
+        )
 
-    public sendServerMessage(text: string, warning: boolean = false) {
-        return this.addMessage(new Message(text, null, null, true, warning))
+        this.broadcastMessage(message);
     }
-
 }

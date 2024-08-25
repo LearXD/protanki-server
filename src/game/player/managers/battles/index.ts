@@ -17,6 +17,8 @@ import { LayoutState } from "../../../../states/layout-state";
 import { ThemeType } from "../../../../states/theme";
 import { Logger } from "../../../../utils/logger";
 import { Packet } from "@/network/packets/packet";
+import { SendCheckBattleNamePacket } from "@/network/packets/send-check-battle-name";
+import { SetBattleNamePacket } from "@/network/packets/set-battle-name";
 
 export class PlayerBattlesManager {
     public constructor(
@@ -37,13 +39,13 @@ export class PlayerBattlesManager {
         this.player.server.mapsManager.sendMapsData(this.player);
 
         const setBattleListPacket = new SetBattleListPacket();
-        setBattleListPacket.battles = this.player.server.battleManager.getBattles()
+        setBattleListPacket.battles = this.player.server.battleManager.battles
             .map(battle => battle.toBattleListItem());
 
         this.player.sendPacket(setBattleListPacket);
 
-        if (this.player.getViewingBattle()) {
-            this.player.getViewingBattle().viewersManager.addViewer(this.player);
+        if (this.player.viewingBattle) {
+            this.player.viewingBattle.viewersManager.addViewer(this.player);
         }
     }
 
@@ -60,21 +62,17 @@ export class PlayerBattlesManager {
     }
 
     public handleJoinBattle(team: TeamType) {
-        const battle = this.player.getViewingBattle();
+        const battle = this.player.viewingBattle;
         if (battle) {
             battle.handlePlayerJoin(this.player, team);
         }
     }
 
     public handleSpectateBattle() {
-        const battle = this.player.getViewingBattle();
+        const battle = this.player.viewingBattle;
         if (battle) {
             battle.handlePlayerJoin(this.player, Team.SPECTATOR);
         }
-    }
-
-    public handleOpenBattlesList() {
-
     }
 
     public handleViewBattle(battleId: string) {
@@ -112,7 +110,8 @@ export class PlayerBattlesManager {
                 withoutBonuses: packet.withoutBonuses,
                 withoutCrystals: packet.withoutCrystals,
                 withoutSupplies: packet.withoutSupplies
-            }
+            },
+            this.player.getUsername()
         );
 
 
@@ -169,6 +168,12 @@ export class PlayerBattlesManager {
 
         if (packet instanceof SendOpenBattlesListPacket) {
             this.handleOpenBattleList()
+        }
+
+        if (packet instanceof SendCheckBattleNamePacket) {
+            const pk = new SetBattleNamePacket();
+            pk.battleName = packet.battleName;
+            this.player.sendPacket(pk);
         }
 
         if (this.player.battle) {

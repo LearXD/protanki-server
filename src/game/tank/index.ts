@@ -305,7 +305,7 @@ export class Tank {
     }
 
     public spawn() {
-        if (this.hasChangedEquipment()) {
+        if (this.hasChangedEquipment() && this.battle.isReArmorEnabled()) {
             this.updateProperties();
             this.sendRemoveTank();
             this.battle.playersManager.broadcastTankData(this.getData());

@@ -27,15 +27,13 @@ import { Packet } from "@/network/packets/packet";
 
 export class Player extends Client {
 
-    private updateInterval: NodeJS.Timeout;
-
-    private viewingBattle: Battle;
-    public layoutState: LayoutStateType;
-
     public battle: Battle;
     public tank: Tank;
 
     public data: PlayerData;
+
+    public viewingBattle: Battle;
+    public layoutState: LayoutStateType;
 
     private packetHandler: PlayerPacketHandler;
 
@@ -48,6 +46,8 @@ export class Player extends Client {
     public readonly configsManager: PlayerConfigsManager = new PlayerConfigsManager(this);
     public readonly shopManager: PlayerShopManager = new PlayerShopManager(this);
     public readonly dailyQuestsManager: PlayerDailyQuestsManager = new PlayerDailyQuestsManager(this);
+
+    private updateInterval: NodeJS.Timeout;
 
     public constructor(socket: net.Socket, server: Server) {
         super(socket, server);
@@ -99,14 +99,6 @@ export class Player extends Client {
 
     public getUsername() {
         return this.data.username
-    }
-
-    public getViewingBattle(): Battle {
-        return this.viewingBattle
-    }
-
-    public setViewingBattle(battle: Battle) {
-        this.viewingBattle = battle
     }
 
     public getLayoutState() {

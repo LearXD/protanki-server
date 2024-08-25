@@ -41,7 +41,7 @@ export class PlayerData {
             username: 'TheUnknown',
             data: {
                 crystals: 1e9,
-                moderatorLevel: ChatModeratorLevel.COMMUNITY_MANAGER,
+                moderatorLevel: ChatModeratorLevel.ADMINISTRATOR,
                 doubleCrystals: {
                     startedAt: Date.now(),
                     endAt: Date.now() + (1000 * 60 * 10) // 10 minutes

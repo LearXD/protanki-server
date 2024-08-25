@@ -51,15 +51,8 @@ export class Server {
     public readonly garageManager: Garage = new Garage(this);
     public readonly shopManager: ShopManager = new ShopManager(this);
 
-    private static instance: Server;
-
-    public static getInstance() {
-        return this.instance;
-    }
-
-    public constructor() {
-        Server.instance = this;
-    }
+    public static instance: Server;
+    public constructor() { Server.instance = this; }
 
     public start = (port: number) => {
         const start = Date.now();
@@ -95,7 +88,7 @@ export class Server {
     }
 
     public sendMessage = (message: string, warning: boolean = false) => {
-        this.chatManager.sendServerMessage(message, warning);
+        this.chatManager.broadcastServerMessage(message, warning);
     }
 
     public isWhitelisted() {

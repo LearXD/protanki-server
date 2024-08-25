@@ -33,6 +33,23 @@ import { Packet } from "@/network/packets/packet"
 export class Battle {
 
     public static readonly TICK_RATE = 10
+    public static readonly DEFAULT_CONFIG: IBattleData = {
+        autoBalance: true,
+        battleMode: BattleMode.DM,
+        equipmentConstraintsMode: EquipmentConstraintsMode.NONE,
+        friendlyFire: false,
+        scoreLimit: 20,
+        timeLimitInSec: 600,
+        maxPeopleCount: 10,
+        parkourMode: false,
+        privateBattle: false,
+        proBattle: false,
+        rankRange: { max: Rank.GENERALISSIMO, min: Rank.RECRUIT },
+        reArmorEnabled: true,
+        withoutBonuses: false,
+        withoutCrystals: false,
+        withoutSupplies: false
+    }
 
     public readonly battleId: string = BattleUtils.generateBattleId();
     private running: boolean = false
@@ -57,26 +74,11 @@ export class Battle {
     public readonly taskManager: BattleTaskManager = new BattleTaskManager()
 
     public constructor(
-        private readonly server: Server,
         public name: string,
         public readonly map: Map,
-        private data: IBattleData = {
-            autoBalance: true,
-            battleMode: BattleMode.DM,
-            equipmentConstraintsMode: EquipmentConstraintsMode.NONE,
-            friendlyFire: false,
-            scoreLimit: 20,
-            timeLimitInSec: 600,
-            maxPeopleCount: 10,
-            parkourMode: false,
-            privateBattle: false,
-            proBattle: false,
-            rankRange: { max: Rank.GENERALISSIMO, min: Rank.RECRUIT },
-            reArmorEnabled: true,
-            withoutBonuses: false,
-            withoutCrystals: false,
-            withoutSupplies: false
-        },
+        public readonly data: IBattleData = Battle.DEFAULT_CONFIG,
+        public readonly server: Server,
+        public readonly owner?: string
     ) {
         this.modeManager.init();
         this.updateInterval = setInterval(this.update.bind(this), 1000 / Battle.TICK_RATE);

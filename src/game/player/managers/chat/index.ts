@@ -13,7 +13,6 @@ export class PlayerChatManager {
         private readonly player: Player
     ) { }
 
-
     public sendChat() {
         this.sendChatConfig();
         this.sendChatMessages();
@@ -36,7 +35,8 @@ export class PlayerChatManager {
 
     public sendChatMessages() {
         const setChatMessagesPacket = new SetChatMessagesPacket();
-        setChatMessagesPacket.messages = this.player.server.chatManager.getMessages()
+
+        setChatMessagesPacket.messages = this.player.server.chatManager.messages
             .map(message => message.toObject());
 
         this.player.sendPacket(setChatMessagesPacket);
@@ -67,8 +67,6 @@ export class PlayerChatManager {
     public handlePacket(packet: Packet) {
         if (packet instanceof SendChatMessagePacket) {
             this.player.server.chatManager.handleSendMessage(this.player, packet.text, packet.target);
-            return true
         }
-        return false;
     }
 }

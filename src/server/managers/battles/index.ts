@@ -15,9 +15,7 @@ import { Packet } from "@/network/packets/packet";
 
 export class BattlesManager {
 
-    private battles: Battle[] = [];
-
-    public getBattles() { return this.battles }
+    public battles: Battle[] = [];
 
     constructor(
         private readonly server: Server
@@ -49,10 +47,15 @@ export class BattlesManager {
         return this.server.assetsManager.getData(path.join('battle', _path))
     }
 
+    public getBattleById(battleId: string) {
+        return this.battles.find(battle => battle.getBattleId() === battleId)
+    }
+
     public createBattle(
         name: string,
         mapName: string,
-        config?: IBattleData
+        config?: IBattleData,
+        owner?: string
     ) {
         const map = this.server.mapsManager.findMap(mapName, config?.theme)
 
@@ -60,11 +63,10 @@ export class BattlesManager {
             throw new ServerError(`Map ${mapName} has not configured correctly`)
         }
 
-        const battle = new Battle(this.server, name, map, config);
-
+        const battle = new Battle(name, map, config, this.server, owner);
         this.addBattle(battle);
-        Logger.debug(`Created battle ${battle.getBattleId()} with name ${name} and map ${mapName}`)
 
+        Logger.debug(`Created battle ${battle.getBattleId()} with name ${name} and map ${mapName}`)
         return battle;
     }
 
@@ -73,6 +75,16 @@ export class BattlesManager {
 
         const packet = new SetAddBattleOnListPacket();
         packet.data = battle.toBattleListItem();
+
+        if (battle.isPrivateBattle()) {
+            if (battle.owner) {
+                const owner = this.server.playersManager.getPlayer(battle.owner)
+                if (owner) {
+                    owner.sendPacket(packet)
+                }
+            }
+            return;
+        }
 
         this.broadcastPacket(packet);
     }
