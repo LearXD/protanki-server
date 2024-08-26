@@ -422,9 +422,9 @@ export class Tank {
     public addEffect(
         supply: SupplyType,
         duration: number = 60000,
-        level: number = 1,
+        level: number = 0,
         activeAfterDeath: boolean = false,
-        delay: number = 90000
+        delay: number = 75000
     ) {
         const effect = this.effects.find(effect => effect.type === supply)
 

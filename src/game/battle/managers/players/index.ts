@@ -139,11 +139,11 @@ export class BattlePlayersManager {
         }
     }
 
+    // TODO: check tank id to send state_null
     public broadcastTankData(data: Exclude<IUserTankResourcesData, 'state_null'>) {
         for (const player of this.getAll()) {
             this.sendTankData(
-                { ...data, state_null: player.getUsername() !== data.tank_id },
-                player
+                { ...data, state_null: player.getUsername() === data.tank_id }, player
             )
         }
     }
