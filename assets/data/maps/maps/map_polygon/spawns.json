@@ -1,0 +1,900 @@
+[
+    {
+        "rotation": {
+            "z": 4.712
+        },
+        "position": {
+            "x": -3000,
+            "y": -1250,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "blue"
+    },
+    {
+        "rotation": {
+            "z": 4.712
+        },
+        "position": {
+            "x": -5187.5,
+            "y": -2500,
+            "z": 1200
+        },
+        "type": "dom",
+        "team": "blue"
+    },
+    {
+        "rotation": {
+            "z": 8.378
+        },
+        "position": {
+            "x": 8500,
+            "y": 4875,
+            "z": 600
+        },
+        "type": "dom",
+        "team": "blue"
+    },
+    {
+        "rotation": {
+            "z": 7.855
+        },
+        "position": {
+            "x": -1500,
+            "y": 0,
+            "z": 0
+        },
+        "type": "dm"
+    },
+    {
+        "rotation": {
+            "z": 4.974
+        },
+        "position": {
+            "x": -4750,
+            "y": 0,
+            "z": 1200
+        },
+        "type": "dom",
+        "team": "blue"
+    },
+    {
+        "rotation": {
+            "z": 13.439
+        },
+        "position": {
+            "x": 3500,
+            "y": -1500,
+            "z": 0
+        },
+        "type": "dm"
+    },
+    {
+        "rotation": {
+            "z": 4.712
+        },
+        "position": {
+            "x": -4000,
+            "y": -2500,
+            "z": 600
+        },
+        "type": "dom",
+        "team": "red"
+    },
+    {
+        "rotation": {
+            "z": 2.967
+        },
+        "position": {
+            "x": 3187.5,
+            "y": 4625,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "blue"
+    },
+    {
+        "rotation": {
+            "z": 5.498
+        },
+        "position": {
+            "x": -1750,
+            "y": 0,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "red"
+    },
+    {
+        "rotation": {
+            "z": 12.567
+        },
+        "position": {
+            "x": 6125,
+            "y": -750,
+            "z": 0
+        },
+        "type": "dm"
+    },
+    {
+        "rotation": {
+            "z": 3.316
+        },
+        "position": {
+            "x": 1000,
+            "y": 5125,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "blue"
+    },
+    {
+        "rotation": {
+            "z": 0.349
+        },
+        "position": {
+            "x": 10000,
+            "y": 3500,
+            "z": 600
+        },
+        "type": "blue"
+    },
+    {
+        "rotation": {
+            "z": 10.996
+        },
+        "position": {
+            "x": 1000,
+            "y": 4750,
+            "z": 0
+        },
+        "type": "dm"
+    },
+    {
+        "rotation": {
+            "z": 4.712
+        },
+        "position": {
+            "x": -3000,
+            "y": -1250,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "red"
+    },
+    {
+        "rotation": {
+            "z": -0.001
+        },
+        "position": {
+            "x": 1000,
+            "y": -1687.5,
+            "z": 0
+        },
+        "type": "red"
+    },
+    {
+        "rotation": {
+            "z": 4.712
+        },
+        "position": {
+            "x": -4000,
+            "y": -2500,
+            "z": 600
+        },
+        "type": "dom",
+        "team": "blue"
+    },
+    {
+        "rotation": {
+            "z": 7.243
+        },
+        "position": {
+            "x": 6250,
+            "y": 250,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "red"
+    },
+    {
+        "rotation": {
+            "z": 1.658
+        },
+        "position": {
+            "x": 6375,
+            "y": 2750,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "blue"
+    },
+    {
+        "rotation": {
+            "z": 12.567
+        },
+        "position": {
+            "x": 2500,
+            "y": -1000,
+            "z": -900
+        },
+        "type": "dm"
+    },
+    {
+        "rotation": {
+            "z": 2.967
+        },
+        "position": {
+            "x": 4125,
+            "y": 5750,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "red"
+    },
+    {
+        "rotation": {
+            "z": 1.833
+        },
+        "position": {
+            "x": 5125,
+            "y": 4000,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "red"
+    },
+    {
+        "rotation": {
+            "z": 4.102
+        },
+        "position": {
+            "x": -5000,
+            "y": 2125,
+            "z": 1200
+        },
+        "type": "dom",
+        "team": "red"
+    },
+    {
+        "rotation": {
+            "z": 1.571
+        },
+        "position": {
+            "x": 8000,
+            "y": 4000,
+            "z": 600
+        },
+        "type": "blue"
+    },
+    {
+        "rotation": {
+            "z": 6.109
+        },
+        "position": {
+            "x": -750,
+            "y": -2875,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "blue"
+    },
+    {
+        "rotation": {
+            "z": 6.284
+        },
+        "position": {
+            "x": 5500,
+            "y": 1500,
+            "z": 0
+        },
+        "type": "blue"
+    },
+    {
+        "rotation": {
+            "z": 8.378
+        },
+        "position": {
+            "x": 8500,
+            "y": 4875,
+            "z": 600
+        },
+        "type": "dom",
+        "team": "red"
+    },
+    {
+        "rotation": {
+            "z": 20.421
+        },
+        "position": {
+            "x": 7500,
+            "y": 4000,
+            "z": 600
+        },
+        "type": "dm"
+    },
+    {
+        "rotation": {
+            "z": 7.069
+        },
+        "position": {
+            "x": 5000,
+            "y": 2500,
+            "z": 0
+        },
+        "type": "blue"
+    },
+    {
+        "rotation": {
+            "z": 1.658
+        },
+        "position": {
+            "x": 6375,
+            "y": 2750,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "red"
+    },
+    {
+        "rotation": {
+            "z": -1.047
+        },
+        "position": {
+            "x": -1250,
+            "y": 3750,
+            "z": 0
+        },
+        "type": "red"
+    },
+    {
+        "rotation": {
+            "z": 3.142
+        },
+        "position": {
+            "x": -2500,
+            "y": 1500,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "blue"
+    },
+    {
+        "rotation": {
+            "z": -1.571
+        },
+        "position": {
+            "x": -5562.5,
+            "y": 0,
+            "z": 1200
+        },
+        "type": "red"
+    },
+    {
+        "rotation": {
+            "z": 1.571
+        },
+        "position": {
+            "x": 6500,
+            "y": 3000,
+            "z": 0
+        },
+        "type": "blue"
+    },
+    {
+        "rotation": {
+            "z": 1.571
+        },
+        "position": {
+            "x": 10000,
+            "y": 5000,
+            "z": 600
+        },
+        "type": "blue"
+    },
+    {
+        "rotation": {
+            "z": 7.854
+        },
+        "position": {
+            "x": 5000,
+            "y": -1500,
+            "z": 0
+        },
+        "type": "blue"
+    },
+    {
+        "rotation": {
+            "z": 12.218
+        },
+        "position": {
+            "x": -2000,
+            "y": -1000,
+            "z": 0
+        },
+        "type": "dm"
+    },
+    {
+        "rotation": {
+            "z": 4.712
+        },
+        "position": {
+            "x": -5562.5,
+            "y": 0,
+            "z": 1200
+        },
+        "type": "dom",
+        "team": "blue"
+    },
+    {
+        "rotation": {
+            "z": 6.981
+        },
+        "position": {
+            "x": 10125,
+            "y": 4375,
+            "z": 600
+        },
+        "type": "dom",
+        "team": "red"
+    },
+    {
+        "rotation": {
+            "z": 6.545
+        },
+        "position": {
+            "x": 3375,
+            "y": -2500,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "blue"
+    },
+    {
+        "rotation": {
+            "z": 3.316
+        },
+        "position": {
+            "x": 1000,
+            "y": 5125,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "red"
+    },
+    {
+        "rotation": {
+            "z": -1.571
+        },
+        "position": {
+            "x": -500,
+            "y": 1500,
+            "z": 0
+        },
+        "type": "red"
+    },
+    {
+        "rotation": {
+            "z": 18.414
+        },
+        "position": {
+            "x": 5625,
+            "y": -1875,
+            "z": 0
+        },
+        "type": "dm"
+    },
+    {
+        "rotation": {
+            "z": 20.159
+        },
+        "position": {
+            "x": 6500,
+            "y": 2750,
+            "z": 0
+        },
+        "type": "dm"
+    },
+    {
+        "rotation": {
+            "z": 7.854
+        },
+        "position": {
+            "x": 7125,
+            "y": 1500,
+            "z": 300
+        },
+        "type": "dm"
+    },
+    {
+        "rotation": {
+            "z": 7.941
+        },
+        "position": {
+            "x": 7125,
+            "y": 1500,
+            "z": 300
+        },
+        "type": "dom",
+        "team": "blue"
+    },
+    {
+        "rotation": {
+            "z": 4.712
+        },
+        "position": {
+            "x": -5562.5,
+            "y": 0,
+            "z": 1200
+        },
+        "type": "dom",
+        "team": "red"
+    },
+    {
+        "rotation": {
+            "z": 2.967
+        },
+        "position": {
+            "x": 3187.5,
+            "y": 4625,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "red"
+    },
+    {
+        "rotation": {
+            "z": 4.102
+        },
+        "position": {
+            "x": -5000,
+            "y": 2125,
+            "z": 1200
+        },
+        "type": "dom",
+        "team": "blue"
+    },
+    {
+        "rotation": {
+            "z": 2.793
+        },
+        "position": {
+            "x": 3750,
+            "y": 5500,
+            "z": 0
+        },
+        "type": "blue"
+    },
+    {
+        "rotation": {
+            "z": 6.109
+        },
+        "position": {
+            "x": -750,
+            "y": -2875,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "red"
+    },
+    {
+        "rotation": {
+            "z": 4.015
+        },
+        "position": {
+            "x": -5008.775,
+            "y": 2140.54,
+            "z": 1200
+        },
+        "type": "dm"
+    },
+    {
+        "rotation": {
+            "z": 2.967
+        },
+        "position": {
+            "x": 4125,
+            "y": 5750,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "blue"
+    },
+    {
+        "rotation": {
+            "z": 6.283
+        },
+        "position": {
+            "x": -5250,
+            "y": -3125,
+            "z": 1200
+        },
+        "type": "dm"
+    },
+    {
+        "rotation": {
+            "z": 3.927
+        },
+        "position": {
+            "x": -1250,
+            "y": 3750,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "red"
+    },
+    {
+        "rotation": {
+            "z": 5.498
+        },
+        "position": {
+            "x": -1750,
+            "y": 0,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "blue"
+    },
+    {
+        "rotation": {
+            "z": 8.989
+        },
+        "position": {
+            "x": 4000,
+            "y": 6000,
+            "z": 0
+        },
+        "type": "dm"
+    },
+    {
+        "rotation": {
+            "z": 16.232
+        },
+        "position": {
+            "x": 3375,
+            "y": 5250,
+            "z": 0
+        },
+        "type": "dm"
+    },
+    {
+        "rotation": {
+            "z": 11.781
+        },
+        "position": {
+            "x": -250,
+            "y": 3250,
+            "z": 0
+        },
+        "type": "dm"
+    },
+    {
+        "rotation": {
+            "z": 4.974
+        },
+        "position": {
+            "x": -4750,
+            "y": 0,
+            "z": 1200
+        },
+        "type": "dom",
+        "team": "red"
+    },
+    {
+        "rotation": {
+            "z": 6.808
+        },
+        "position": {
+            "x": 8750,
+            "y": 3250,
+            "z": 600
+        },
+        "type": "dm"
+    },
+    {
+        "rotation": {
+            "z": -1.57
+        },
+        "position": {
+            "x": -5187.5,
+            "y": -2500,
+            "z": 1200
+        },
+        "type": "red"
+    },
+    {
+        "rotation": {
+            "z": -3.141
+        },
+        "position": {
+            "x": -2500,
+            "y": 1500,
+            "z": 0
+        },
+        "type": "red"
+    },
+    {
+        "rotation": {
+            "z": 4.015
+        },
+        "position": {
+            "x": -5000,
+            "y": 2187.5,
+            "z": 1200
+        },
+        "type": "dm"
+    },
+    {
+        "rotation": {
+            "z": 4.712
+        },
+        "position": {
+            "x": -5187.5,
+            "y": -2500,
+            "z": 1200
+        },
+        "type": "dom",
+        "team": "red"
+    },
+    {
+        "rotation": {
+            "z": -1.92
+        },
+        "position": {
+            "x": -5000,
+            "y": 2000,
+            "z": 1200
+        },
+        "type": "red"
+    },
+    {
+        "rotation": {
+            "z": 1.571
+        },
+        "position": {
+            "x": 8750,
+            "y": 1500,
+            "z": 600
+        },
+        "type": "blue"
+    },
+    {
+        "rotation": {
+            "z": 3.927
+        },
+        "position": {
+            "x": -1250,
+            "y": 3750,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "blue"
+    },
+    {
+        "rotation": {
+            "z": 8.465
+        },
+        "position": {
+            "x": 9750,
+            "y": 5250,
+            "z": 600
+        },
+        "type": "dm"
+    },
+    {
+        "rotation": {
+            "z": 3.142
+        },
+        "position": {
+            "x": -2500,
+            "y": 1500,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "red"
+    },
+    {
+        "rotation": {
+            "z": 6.284
+        },
+        "position": {
+            "x": -812.5,
+            "y": -3000,
+            "z": 0
+        },
+        "type": "dm"
+    },
+    {
+        "rotation": {
+            "z": 6.545
+        },
+        "position": {
+            "x": 3375,
+            "y": -2500,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "red"
+    },
+    {
+        "rotation": {
+            "z": 6.981
+        },
+        "position": {
+            "x": 10125,
+            "y": 4375,
+            "z": 600
+        },
+        "type": "dom",
+        "team": "blue"
+    },
+    {
+        "rotation": {
+            "z": -2.53
+        },
+        "position": {
+            "x": 662.427,
+            "y": 5664.003,
+            "z": 0
+        },
+        "type": "red"
+    },
+    {
+        "rotation": {
+            "z": 7.941
+        },
+        "position": {
+            "x": 7125,
+            "y": 1500,
+            "z": 300
+        },
+        "type": "dom",
+        "team": "red"
+    },
+    {
+        "rotation": {
+            "z": 7.243
+        },
+        "position": {
+            "x": 6250,
+            "y": 250,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "blue"
+    },
+    {
+        "rotation": {
+            "z": -1.309
+        },
+        "position": {
+            "x": -4750,
+            "y": 0,
+            "z": 1200
+        },
+        "type": "red"
+    },
+    {
+        "rotation": {
+            "z": 10.647
+        },
+        "position": {
+            "x": 4000,
+            "y": 2750,
+            "z": 0
+        },
+        "type": "dm"
+    },
+    {
+        "rotation": {
+            "z": 1.833
+        },
+        "position": {
+            "x": 5125,
+            "y": 4000,
+            "z": 0
+        },
+        "type": "dom",
+        "team": "blue"
+    }
+]

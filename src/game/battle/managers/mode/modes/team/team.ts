@@ -33,7 +33,7 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
         setViewingBattleTeamScorePacket.score = score;
         this.battle.viewersManager.broadcastPacket(setViewingBattleTeamScorePacket)
 
-        if (score >= this.battle.getScoreLimit()) {
+        if (this.battle.getScoreLimit() > 0 && score >= this.battle.getScoreLimit()) {
             return this.battle.finish()
         }
     }

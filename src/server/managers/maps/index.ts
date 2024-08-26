@@ -37,10 +37,10 @@ export class MapsManager {
 
     public findMap(name: string, theme: ThemeType = Theme.SUMMER) {
 
-        const loaded = this.loadedMaps.find(map => map.getName() === name && map.getTheme() === theme);
-        if (loaded) {
-            return loaded;
-        }
+        // const loaded = this.loadedMaps.find(map => map.getName() === name && map.getTheme() === theme);
+        // if (loaded) {
+        //     return loaded;
+        // }
 
         const data = this.data.maps.find(map => (map.mapId === name && map.theme === theme))
 

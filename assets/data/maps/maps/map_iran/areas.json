@@ -1,0 +1,128 @@
+[
+    {
+        "minX": -7000,
+        "minY": -10000,
+        "minZ": -1500,
+        "maxX": 8000,
+        "maxY": -9500,
+        "maxZ": 4500,
+        "action": "kill"
+    },
+    {
+        "minX": -7000,
+        "minY": 8500,
+        "minZ": 0,
+        "maxX": 8000,
+        "maxY": 13000,
+        "maxZ": 4500,
+        "action": "kill"
+    },
+    {
+        "minX": 8000,
+        "minY": 8000,
+        "minZ": 0,
+        "maxX": 13000,
+        "maxY": 13000,
+        "maxZ": 4500,
+        "action": "kill"
+    },
+    {
+        "minX": -7000,
+        "minY": -9500,
+        "minZ": 4500,
+        "maxX": 8000,
+        "maxY": 8000,
+        "maxZ": 4800,
+        "action": "kick"
+    },
+    {
+        "minX": 8000,
+        "minY": -9500,
+        "minZ": -1500,
+        "maxX": 8500,
+        "maxY": 8000,
+        "maxZ": 4500,
+        "action": "kill"
+    },
+    {
+        "minX": 8500,
+        "minY": -9500,
+        "minZ": 0,
+        "maxX": 13000,
+        "maxY": 8000,
+        "maxZ": 4500,
+        "action": "kill"
+    },
+    {
+        "minX": -12000,
+        "minY": -9500,
+        "minZ": 0,
+        "maxX": -7500,
+        "maxY": 8000,
+        "maxZ": 4500,
+        "action": "kill"
+    },
+    {
+        "minX": -7000,
+        "minY": 8000,
+        "minZ": -1500,
+        "maxX": 8000,
+        "maxY": 8500,
+        "maxZ": 4500,
+        "action": "kill"
+    },
+    {
+        "minX": -7000,
+        "minY": -14500,
+        "minZ": 0,
+        "maxX": 8000,
+        "maxY": -10000,
+        "maxZ": 4500,
+        "action": "kill"
+    },
+    {
+        "minX": -7000,
+        "minY": -9500,
+        "minZ": -1800,
+        "maxX": 8000,
+        "maxY": 8000,
+        "maxZ": -1500,
+        "action": "kick"
+    },
+    {
+        "minX": -7500,
+        "minY": -9500,
+        "minZ": -1500,
+        "maxX": -7000,
+        "maxY": 8000,
+        "maxZ": 4500,
+        "action": "kill"
+    },
+    {
+        "minX": -12000,
+        "minY": -14500,
+        "minZ": 0,
+        "maxX": -7000,
+        "maxY": -9500,
+        "maxZ": 4500,
+        "action": "kill"
+    },
+    {
+        "minX": 8000,
+        "minY": -14500,
+        "minZ": 0,
+        "maxX": 13000,
+        "maxY": -9500,
+        "maxZ": 4500,
+        "action": "kill"
+    },
+    {
+        "minX": -12000,
+        "minY": 8000,
+        "minZ": 0,
+        "maxX": -7000,
+        "maxY": 13000,
+        "maxZ": 4500,
+        "action": "kill"
+    }
+]

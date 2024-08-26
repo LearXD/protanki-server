@@ -1,0 +1,393 @@
+[
+    {
+        "rotation": {
+            "z": 0
+        },
+        "min": {
+            "x": 3194.925,
+            "y": 1287.628,
+            "z": 2700
+        },
+        "max": {
+            "x": 4194.925,
+            "y": 1787.628,
+            "z": 3000
+        },
+        "position": {
+            "x": 3194.925,
+            "y": 1287.628,
+            "z": 2700
+        },
+        "name": "free-bonus",
+        "parachute": true,
+        "free": true,
+        "types": [
+            "crystal",
+            "gold"
+        ],
+        "modes": [
+            "DM",
+            "CTF",
+            "DOM",
+            "TDM"
+        ]
+    },
+    {
+        "rotation": {
+            "z": 0
+        },
+        "min": {
+            "x": 2197.555,
+            "y": -1718.37,
+            "z": 2700
+        },
+        "max": {
+            "x": 2697.555,
+            "y": -1218.37,
+            "z": 3000
+        },
+        "position": {
+            "x": 2197.555,
+            "y": -1718.37,
+            "z": 2700
+        },
+        "name": "free-bonus",
+        "parachute": true,
+        "free": true,
+        "types": [
+            "armor"
+        ],
+        "modes": [
+            "DM",
+            "CTF",
+            "DOM",
+            "TDM"
+        ]
+    },
+    {
+        "rotation": {
+            "z": 0
+        },
+        "min": {
+            "x": -1725.88,
+            "y": -8243.814,
+            "z": 3300
+        },
+        "max": {
+            "x": -1225.88,
+            "y": -7743.814,
+            "z": 3600
+        },
+        "position": {
+            "x": -1725.88,
+            "y": -8243.814,
+            "z": 3300
+        },
+        "name": "free-bonus",
+        "parachute": true,
+        "free": true,
+        "types": [
+            "gold",
+            "nitro"
+        ],
+        "modes": [
+            "DM",
+            "CTF",
+            "DOM",
+            "TDM"
+        ]
+    },
+    {
+        "rotation": {
+            "z": 0
+        },
+        "min": {
+            "x": 1253.932,
+            "y": 235.165,
+            "z": 3300
+        },
+        "max": {
+            "x": 1753.932,
+            "y": 735.165,
+            "z": 3600
+        },
+        "position": {
+            "x": 1253.932,
+            "y": 235.165,
+            "z": 3300
+        },
+        "name": "free-bonus",
+        "parachute": true,
+        "free": true,
+        "types": [
+            "gold"
+        ],
+        "modes": [
+            "DM",
+            "CTF",
+            "DOM",
+            "TDM"
+        ]
+    },
+    {
+        "rotation": {
+            "z": 0
+        },
+        "min": {
+            "x": -2754.8,
+            "y": -5719.054,
+            "z": 3300
+        },
+        "max": {
+            "x": -2254.8,
+            "y": -4719.054,
+            "z": 3600
+        },
+        "position": {
+            "x": -2754.8,
+            "y": -5719.054,
+            "z": 3300
+        },
+        "name": "free-bonus",
+        "parachute": true,
+        "free": true,
+        "types": [
+            "armor"
+        ],
+        "modes": [
+            "DM",
+            "CTF",
+            "DOM",
+            "TDM"
+        ]
+    },
+    {
+        "rotation": {
+            "z": 0
+        },
+        "min": {
+            "x": -746.205,
+            "y": -8246.936,
+            "z": 2400
+        },
+        "max": {
+            "x": -246.205,
+            "y": -7746.936,
+            "z": 2700
+        },
+        "position": {
+            "x": -746.205,
+            "y": -8246.936,
+            "z": 2400
+        },
+        "name": "free-bonus",
+        "parachute": true,
+        "free": true,
+        "types": [
+            "crystal",
+            "gold"
+        ],
+        "modes": [
+            "DM",
+            "CTF",
+            "DOM",
+            "TDM"
+        ]
+    },
+    {
+        "rotation": {
+            "z": 0
+        },
+        "min": {
+            "x": -1211.105,
+            "y": -8232.098,
+            "z": 2700
+        },
+        "max": {
+            "x": -711.105,
+            "y": -7732.098,
+            "z": 3000
+        },
+        "position": {
+            "x": -1211.105,
+            "y": -8232.098,
+            "z": 2700
+        },
+        "name": "free-bonus",
+        "parachute": true,
+        "free": true,
+        "types": [
+            "crystal",
+            "gold"
+        ],
+        "modes": [
+            "DM",
+            "CTF",
+            "DOM",
+            "TDM"
+        ]
+    },
+    {
+        "rotation": {
+            "z": 0
+        },
+        "min": {
+            "x": 1953.554,
+            "y": -5694.088,
+            "z": 2100
+        },
+        "max": {
+            "x": 2453.554,
+            "y": -4694.088,
+            "z": 2400
+        },
+        "position": {
+            "x": 1953.554,
+            "y": -5694.088,
+            "z": 2100
+        },
+        "name": "free-bonus",
+        "parachute": true,
+        "free": true,
+        "types": [
+            "damage"
+        ],
+        "modes": [
+            "DM",
+            "CTF",
+            "DOM",
+            "TDM"
+        ]
+    },
+    {
+        "rotation": {
+            "z": 0
+        },
+        "min": {
+            "x": 119.879,
+            "y": -1549.279,
+            "z": 2700
+        },
+        "max": {
+            "x": 619.879,
+            "y": -549.279,
+            "z": 3000
+        },
+        "position": {
+            "x": 119.879,
+            "y": -1549.279,
+            "z": 2700
+        },
+        "name": "free-bonus",
+        "parachute": true,
+        "free": true,
+        "types": [
+            "nitro"
+        ],
+        "modes": [
+            "DM",
+            "CTF",
+            "DOM",
+            "TDM"
+        ]
+    },
+    {
+        "rotation": {
+            "z": 0
+        },
+        "min": {
+            "x": -2267.181,
+            "y": -8234.057,
+            "z": 3300
+        },
+        "max": {
+            "x": -1767.181,
+            "y": -7734.057,
+            "z": 3600
+        },
+        "position": {
+            "x": -2267.181,
+            "y": -8234.057,
+            "z": 3300
+        },
+        "name": "free-bonus",
+        "parachute": true,
+        "free": true,
+        "types": [
+            "armor"
+        ],
+        "modes": [
+            "DM",
+            "CTF",
+            "DOM",
+            "TDM"
+        ]
+    },
+    {
+        "rotation": {
+            "z": 0
+        },
+        "min": {
+            "x": -500,
+            "y": 500,
+            "z": 2700
+        },
+        "max": {
+            "x": 0,
+            "y": 1000,
+            "z": 3000
+        },
+        "position": {
+            "x": -500,
+            "y": 500,
+            "z": 2700
+        },
+        "name": "free-bonus",
+        "parachute": true,
+        "free": true,
+        "types": [
+            "crystal",
+            "gold",
+            "health"
+        ],
+        "modes": [
+            "DM",
+            "CTF",
+            "DOM",
+            "TDM"
+        ]
+    },
+    {
+        "rotation": {
+            "z": 0
+        },
+        "min": {
+            "x": 2243.023,
+            "y": -232.392,
+            "z": 2700
+        },
+        "max": {
+            "x": 2743.023,
+            "y": 267.608,
+            "z": 3000
+        },
+        "position": {
+            "x": 2243.023,
+            "y": -232.392,
+            "z": 2700
+        },
+        "name": "free-bonus",
+        "parachute": true,
+        "free": true,
+        "types": [
+            "crystal",
+            "gold"
+        ],
+        "modes": [
+            "DM",
+            "CTF",
+            "DOM",
+            "TDM"
+        ]
+    }
+]

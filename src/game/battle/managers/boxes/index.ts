@@ -16,6 +16,8 @@ import { ServerError } from "@/server/utils/error";
 export class BattleBoxesManager {
 
     private readonly data: IBonusesData;
+
+    private spawned: Map<BonusType, number> = new Map()
     private boxes: Map<string, BonusBox> = new Map([])
 
     public static readonly CONFIG = [
@@ -111,10 +113,11 @@ export class BattleBoxesManager {
     public addBonus(bonus: BonusType, position: Vector3d, delay: number = 0) {
         const data = BattleBoxesManager.CONFIG.find(box => box.type === bonus)
         if (data) {
-            const spawned = Array.from(this.boxes.values()).filter(box => box.name === bonus)
+            const spawned = (this.spawned.get(bonus) || 0) + 1
+            this.spawned.set(bonus, spawned)
 
             const lifeTime = this.data.bonuses.find(box => box.id === bonus)?.lifeTimeMs || 30000
-            const box = new BonusBox(bonus, spawned.length, position, lifeTime, this.battle)
+            const box = new BonusBox(bonus, spawned, position, lifeTime, this.battle)
             this.boxes.set(box.getName(), box)
 
             this.battle.taskManager.scheduleTask(() => box.spawn(), delay * TimeType.SECONDS)

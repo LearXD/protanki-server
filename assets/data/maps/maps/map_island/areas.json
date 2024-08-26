@@ -1,0 +1,56 @@
+[
+    {
+        "minX": 4000,
+        "minY": -4500,
+        "minZ": -600,
+        "maxX": 4500,
+        "maxY": 3000,
+        "maxZ": 600,
+        "action": "kill"
+    },
+    {
+        "minX": -3500,
+        "minY": -5000,
+        "minZ": -600,
+        "maxX": 4000,
+        "maxY": -4500,
+        "maxZ": 600,
+        "action": "kill"
+    },
+    {
+        "minX": -3500,
+        "minY": -4500,
+        "minZ": 600,
+        "maxX": 4000,
+        "maxY": 3000,
+        "maxZ": 2100,
+        "action": "kill"
+    },
+    {
+        "minX": -3500,
+        "minY": 3000,
+        "minZ": -600,
+        "maxX": 4000,
+        "maxY": 3500,
+        "maxZ": 600,
+        "action": "kill"
+    },
+    {
+        "minX": -4000,
+        "minY": -4500,
+        "minZ": -600,
+        "maxX": -3500,
+        "maxY": 3000,
+        "maxZ": 600,
+        "action": "kill"
+    },
+    {
+        "minX": -3500,
+        "minY": -4500,
+        "minZ": -900,
+        "maxX": 4000,
+        "maxY": 3000,
+        "maxZ": -600,
+        "action": "kill"
+    }
+]

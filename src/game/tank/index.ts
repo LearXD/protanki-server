@@ -289,6 +289,9 @@ export class Tank {
     public prepareRespawn() {
         this.incarnation++;
 
+        this.alive = false;
+        this.visible = false;
+
         const spawn = this.battle.modeManager.getRandomSpawn(this.player);
 
         if (!spawn) {

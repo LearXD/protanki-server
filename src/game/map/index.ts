@@ -1,7 +1,7 @@
 import path from 'path';
 import { MapsManager } from "@/server/managers/maps";
 import { MapDataManager } from './managers/data';
-import { BonusType, IMapArea, IBonusSpawnArea, IMapData, IMapFlags, IMapSpawn } from './types';
+import { BonusType, IBonusSpawnArea, IMapData, IMapFlags, IMapProperties, IMapSpawn } from './types';
 import { Player } from '../player';
 import { SetBattleMapPropertiesPacket } from '@/network/packets/set-battle-map-properties';
 import { IResource } from '@/server/managers/resources/types';
@@ -18,7 +18,7 @@ export class Map extends MapDataManager {
     private skyboxResources: IResource[] = []
     private mapResources: IResource[] = []
 
-    private properties: any = []
+    private properties: IMapProperties = null
 
     public spawns: IMapSpawn[] = []
     public flags: IMapFlags = null
@@ -29,7 +29,7 @@ export class Map extends MapDataManager {
 
     public constructor(
         public readonly manager: MapsManager,
-        data: IMapData
+        public readonly data: IMapData
     ) {
         super(data)
 
@@ -91,12 +91,18 @@ export class Map extends MapDataManager {
             battleId: battle.getBattleId(),
             minRank: battle.getRankRange().min,
             maxRank: battle.getRankRange().max,
-            skybox: this.properties.skybox,
+            skybox: JSON.stringify(this.properties.skybox),
+            // @ts-ignore
+            // skybox: this.properties.skybox,
             sound_id: this.properties.sound_id,
-            map_graphic_data: this.properties.map_graphic_data,
+            map_graphic_data: JSON.stringify(this.properties.map_graphic_data),
+            // @ts-ignore
+            // map_graphic_data: this.properties.map_graphic_data,
             reArmorEnabled: battle.isReArmorEnabled(),
             bonusLightIntensity: this.properties.bonusLightIntensity,
-            lighting: this.properties.lighting
+            lighting: JSON.stringify(this.properties.lighting)
+            // @ts-ignore
+            // lighting: this.properties.lighting
         }
 
         player.sendPacket(packet);

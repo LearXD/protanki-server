@@ -35,7 +35,7 @@ export class Battle {
     public readonly battleId: string = BattleUtils.generateBattleId();
 
     private running: boolean = false
-    public startedAt: number;
+    public startedAt: number = null;
 
     private tick: number = 0
     private updateInterval: NodeJS.Timeout
@@ -85,8 +85,8 @@ export class Battle {
 
     public start() {
         Logger.info(`Battle ${this.getName()} started`)
-
         this.sendStarted()
+
         this.startedAt = Date.now()
         this.running = true
 
@@ -99,16 +99,14 @@ export class Battle {
         Logger.info(`Battle ${this.getName()} restarted`)
         this.modeManager.init();
 
-        if (this.playersManager.getPlayers().length > 0) {
-            this.start()
-            this.restartTime();
+        // if (this.playersManager.getPlayers().length > 0) {
+        this.start()
+        this.restartTime();
 
-            for (const player of this.playersManager.getPlayers()) {
-                player.tank.alive = false;
-                player.tank.visible = false;
-                player.tank.prepareRespawn();
-            }
+        for (const player of this.playersManager.getPlayers()) {
+            player.tank.prepareRespawn();
         }
+        // }
     }
 
     public finish() {
@@ -144,7 +142,13 @@ export class Battle {
         player.setLayoutState(LayoutState.BATTLE)
         this.playersManager.addPlayer(player, team);
 
-        if (!isSpectator && !this.running) this.start()
+        if (
+            isSpectator === false &&
+            this.running === false &&
+            this.startedAt === null
+        ) {
+            this.start()
+        }
 
         /** SEND DATA & RESOURCES */
         await this.map.sendResources(player)

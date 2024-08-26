@@ -36,6 +36,11 @@ export class DevCommand extends Command {
                     sender.sendMessage(`Você setou sua vida para ${sender.tank.getHealth()}`);
                     break
                 }
+
+                case 'position:': {
+                    sender.sendMessage(sender.tank.getPosition().toString())
+                    break
+                }
                 case 'collision': {
                     const battle = sender.battle;
                     if (!battle) {

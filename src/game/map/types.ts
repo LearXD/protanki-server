@@ -64,3 +64,58 @@ export interface IBonusSpawnArea {
     modes: BattleMode[]
 }
 
+export interface IMapProperties {
+    mapId: number
+    dustParticle: number
+    skybox: {
+        top: number
+        front: number
+        back: number
+        bottom: number
+        left: number
+        right: number
+    }
+    sound_id: number
+    map_graphic_data: {
+        mapId: string
+        mapTheme: string
+        angleX: number
+        angleZ: number
+        lightColor: number
+        shadowColor: number
+        fogAlpha: number
+        fogColor: number
+        farLimit: number
+        nearLimit: number
+        gravity: number
+        skyboxRevolutionSpeed: number
+        ssaoColor: number
+        dustAlpha: number
+        dustDensity: number
+        dustFarDistance: number
+        dustNearDistance: number
+        dustParticle: string
+        dustSize: number
+    }
+    bonusLightIntensity: number
+    lighting: {
+        ctfLighting: {
+            redColor: number
+            redColorIntensity: number
+            blueColor: number
+            blueColorIntensity: number
+            attenuationBegin: number
+            attenuationEnd: number
+        }
+        dominationLighting: {
+            redPointColor: number
+            redPointIntensity: number
+            bluePointColor: number
+            bluePointIntensity: number
+            neutralPointColor: number
+            neutralPointIntensity: number
+            attenuationBegin: number
+            attenuationEnd: number
+        }
+    }
+}
