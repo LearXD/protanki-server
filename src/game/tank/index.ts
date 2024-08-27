@@ -760,7 +760,8 @@ export class Tank {
             colormap_id: this.painting.item.coloring,
             hull_id: this.hull.getName(),
             turret_id: this.turret.getName(),
-            team_type: this.team,
+            // TODO: team_type can break :O
+            team_type: this.team.toUpperCase(),
             partsObject: JSON.stringify({
                 engineIdleSound: 386284,
                 engineStartMovingSound: 226985,

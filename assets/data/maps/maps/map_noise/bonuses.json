@@ -120,7 +120,7 @@
         "modes": [
             "DM",
             "CTF",
-            "DOM",
+            "CP",
             "TDM"
         ]
     },
@@ -152,7 +152,7 @@
         "modes": [
             "DM",
             "CTF",
-            "DOM",
+            "CP",
             "TDM"
         ]
     },
@@ -182,7 +182,7 @@
             "nitro"
         ],
         "modes": [
-            "DOM"
+            "CP"
         ]
     },
     {
@@ -213,7 +213,7 @@
         "modes": [
             "DM",
             "CTF",
-            "DOM",
+            "CP",
             "TDM"
         ]
     },
@@ -277,7 +277,7 @@
         "modes": [
             "DM",
             "CTF",
-            "DOM",
+            "CP",
             "TDM"
         ]
     },
@@ -307,7 +307,7 @@
             "damage"
         ],
         "modes": [
-            "DOM",
+            "CP",
             "TDM"
         ]
     },
@@ -370,7 +370,7 @@
         "modes": [
             "DM",
             "CTF",
-            "DOM",
+            "CP",
             "TDM"
         ]
     },
@@ -400,7 +400,7 @@
             "armor"
         ],
         "modes": [
-            "DOM"
+            "CP"
         ]
     },
     {
@@ -462,7 +462,7 @@
         "modes": [
             "DM",
             "CTF",
-            "DOM",
+            "CP",
             "TDM"
         ]
     },

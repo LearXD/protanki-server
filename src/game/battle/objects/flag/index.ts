@@ -57,7 +57,7 @@ export class Flag extends BattleObject {
         return this.state === FlagState.CARRIED && this.carrier === player;
     }
 
-    public handleCollision(player: Player): boolean {
+    public onColliding(player: Player): boolean {
 
         if (this.carriedBy && this.carriedBy === player && (Date.now() - this.droppedAt < 3000)) {
             return false;

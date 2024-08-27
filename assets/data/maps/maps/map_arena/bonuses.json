@@ -26,7 +26,7 @@
             "gold"
         ],
         "modes": [
-            "DOM",
+            "CP",
             "TDM",
             "DM",
             "CTF"
@@ -58,7 +58,7 @@
             "gold"
         ],
         "modes": [
-            "DOM",
+            "CP",
             "TDM",
             "DM",
             "CTF"
@@ -90,7 +90,7 @@
             "gold"
         ],
         "modes": [
-            "DOM",
+            "CP",
             "TDM",
             "DM",
             "CTF"
@@ -122,7 +122,7 @@
             "damage"
         ],
         "modes": [
-            "DOM",
+            "CP",
             "TDM",
             "DM",
             "CTF"
@@ -154,7 +154,7 @@
             "damage"
         ],
         "modes": [
-            "DOM",
+            "CP",
             "TDM",
             "DM",
             "CTF"
@@ -186,7 +186,7 @@
             "gold"
         ],
         "modes": [
-            "DOM",
+            "CP",
             "TDM",
             "DM",
             "CTF"
@@ -218,7 +218,7 @@
             "nitro"
         ],
         "modes": [
-            "DOM",
+            "CP",
             "TDM",
             "DM",
             "CTF"
@@ -250,7 +250,7 @@
             "armor"
         ],
         "modes": [
-            "DOM",
+            "CP",
             "TDM",
             "DM",
             "CTF"
@@ -282,7 +282,7 @@
             "nitro"
         ],
         "modes": [
-            "DOM",
+            "CP",
             "TDM",
             "DM",
             "CTF"
@@ -314,7 +314,7 @@
             "armor"
         ],
         "modes": [
-            "DOM",
+            "CP",
             "TDM",
             "DM",
             "CTF"
@@ -346,7 +346,7 @@
             "crystal"
         ],
         "modes": [
-            "DOM",
+            "CP",
             "TDM",
             "DM",
             "CTF"
@@ -378,7 +378,7 @@
             "gold"
         ],
         "modes": [
-            "DOM",
+            "CP",
             "TDM",
             "DM",
             "CTF"
@@ -410,7 +410,7 @@
             "nitro"
         ],
         "modes": [
-            "DOM",
+            "CP",
             "TDM",
             "DM",
             "CTF"
@@ -442,7 +442,7 @@
             "crystal"
         ],
         "modes": [
-            "DOM",
+            "CP",
             "TDM",
             "DM",
             "CTF"
@@ -475,7 +475,7 @@
             "nitro"
         ],
         "modes": [
-            "DOM",
+            "CP",
             "TDM",
             "DM",
             "CTF"
@@ -507,7 +507,7 @@
             "gold"
         ],
         "modes": [
-            "DOM",
+            "CP",
             "TDM",
             "DM",
             "CTF"
@@ -539,7 +539,7 @@
             "gold"
         ],
         "modes": [
-            "DOM",
+            "CP",
             "TDM",
             "DM",
             "CTF"
@@ -571,7 +571,7 @@
             "gold"
         ],
         "modes": [
-            "DOM",
+            "CP",
             "TDM",
             "DM",
             "CTF"
@@ -603,7 +603,7 @@
             "health"
         ],
         "modes": [
-            "DOM",
+            "CP",
             "TDM",
             "DM",
             "CTF"

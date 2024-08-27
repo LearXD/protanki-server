@@ -12,7 +12,7 @@ import { MathUtils } from "@/utils/math";
 export class BattleDeathMatchModeManager extends BattleModeManager {
 
     public getSpawns(): IMapSpawn[] {
-        return this.battle.map.getSpawns()
+        return this.battle.map.spawns
             .filter(spawn => spawn.type?.toUpperCase() === BattleMode.DM)
     }
 

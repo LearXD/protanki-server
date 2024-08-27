@@ -12,7 +12,6 @@ import { FlagState } from "./types";
 import { MathUtils } from "@/utils/math";
 import { RayHit } from "@/game/map/managers/collision/utils/rayhit";
 import { TimeType } from "../../../task/types";
-import { Logger } from "@/utils/logger";
 
 export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
 
@@ -26,8 +25,7 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
     }
 
     public initFlag(team: TeamType) {
-        const positions = this.battle.map.getFlags()
-        const position = team === Team.RED ? positions.red : positions.blue
+        const position = team === Team.RED ? this.battle.map.flags.red : this.battle.map.flags.blue
 
         const _flag = this.flags.get(team)
         if (_flag) {
@@ -40,48 +38,15 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
         this.battle.collisionManager.addObject(flag)
     }
 
-    public sendLoadBattleMode(player: Player): void {
-        const positions = this.battle.map.getFlags()
-
-        const packet = new SetLoadCaptureTheFlagPacket();
-
-        packet.blueFlag = {
-            basePosition: new Vector3d(positions.blue.x, positions.blue.y, positions.blue.z),
-            carrier: this.flags.get(Team.BLUE).getCarrier() ? this.flags.get(Team.BLUE).getCarrier().getUsername() : null,
-            droppedPosition: this.flags.get(Team.BLUE).state === FlagState.DROPPED ? this.flags.get(Team.BLUE).position : null
-        }
-        packet.blueFlagImage = 538453
-        packet.blueFlagModel = 236578
-        packet.redFlag = {
-            basePosition: new Vector3d(positions.red.x, positions.red.y, positions.red.z),
-            carrier: this.flags.get(Team.RED).getCarrier() ? this.flags.get(Team.RED).getCarrier().getUsername() : null,
-            droppedPosition: this.flags.get(Team.RED).state === FlagState.DROPPED ? this.flags.get(Team.RED).position : null
-        }
-        packet.redFlagImage = 44351
-        packet.redFlagModel = 500060
-        packet.sounds = {
-            resourceId_1: 717912,
-            resourceId_2: 694498,
-            resourceId_3: 89214,
-            resourceId_4: 525427
-        }
-
-        player.sendPacket(packet);
-    }
-
-    public getSpawns() {
-        return this.battle.map.getSpawns()
-            .filter(spawn => spawn.type === Team.RED || spawn.type === Team.BLUE)
-    }
-
     public getRandomSpawn(player: Player) {
-        const spawns = this.getSpawns().filter(spawn => spawn.type === player.tank.team)
-        if (spawns.length === 0) {
-            return null
+        const spawns = this.battle.map.spawns
+            .filter(spawn => spawn.type === player.tank.team)
+
+        if (spawns.length > 0) {
+            return MathUtils.arrayRandom(spawns)
         }
 
-        const random = MathUtils.randomInt(0, spawns.length - 1)
-        return spawns[random]
+        return null
     }
 
     public handleDeath(player: Player): void {
@@ -169,6 +134,41 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
                 this.handleDropFlag(player)
             }
         }
+    }
+
+    public sendLoadBattleMode(player: Player): void {
+        const packet = new SetLoadCaptureTheFlagPacket();
+
+        packet.blueFlag = {
+            basePosition: new Vector3d(
+                this.battle.map.flags.blue.x,
+                this.battle.map.flags.blue.y,
+                this.battle.map.flags.blue.z
+            ),
+            carrier: this.flags.get(Team.BLUE).getCarrier() ? this.flags.get(Team.BLUE).getCarrier().getUsername() : null,
+            droppedPosition: this.flags.get(Team.BLUE).state === FlagState.DROPPED ? this.flags.get(Team.BLUE).position : null
+        }
+        packet.blueFlagImage = 538453
+        packet.blueFlagModel = 236578
+        packet.redFlag = {
+            basePosition: new Vector3d(
+                this.battle.map.flags.red.x,
+                this.battle.map.flags.red.y,
+                this.battle.map.flags.red.z
+            ),
+            carrier: this.flags.get(Team.RED).getCarrier() ? this.flags.get(Team.RED).getCarrier().getUsername() : null,
+            droppedPosition: this.flags.get(Team.RED).state === FlagState.DROPPED ? this.flags.get(Team.RED).position : null
+        }
+        packet.redFlagImage = 44351
+        packet.redFlagModel = 500060
+        packet.sounds = {
+            resourceId_1: 717912,
+            resourceId_2: 694498,
+            resourceId_3: 89214,
+            resourceId_4: 525427
+        }
+
+        player.sendPacket(packet);
     }
 
 }

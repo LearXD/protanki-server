@@ -1,7 +1,7 @@
 import path from 'path';
 import { MapsManager } from "@/server/managers/maps";
 import { MapDataManager } from './managers/data';
-import { BonusType, IBonusSpawnArea, IMapData, IMapFlags, IMapProperties, IMapSpawn } from './types';
+import { BonusType, IBonusSpawnArea, IMapData, IMapFlags, IMapPoint, IMapProperties, IMapSpawn } from './types';
 import { Player } from '../player';
 import { SetBattleMapPropertiesPacket } from '@/network/packets/set-battle-map-properties';
 import { IResource } from '@/server/managers/resources/types';
@@ -14,18 +14,20 @@ import { Vector3d } from '@/utils/vector-3d';
 
 export class Map extends MapDataManager {
 
-    private librariesResources: IResource[] = []
-    private skyboxResources: IResource[] = []
-    private mapResources: IResource[] = []
+    private readonly librariesResources: IResource[] = []
+    private readonly skyboxResources: IResource[] = []
+    private readonly mapResources: IResource[] = []
 
-    private properties: IMapProperties = null
+    private readonly properties: IMapProperties = null
 
-    public spawns: IMapSpawn[] = []
-    public flags: IMapFlags = null
-    public bonuses: IBonusSpawnArea[] = []
+    public readonly spawns: IMapSpawn[] = []
+    public readonly bonuses: IBonusSpawnArea[] = []
 
-    public collisionManager: MapCollisionManager
-    public areaManager: MapAreaManager
+    public readonly points: IMapPoint[] = []
+    public readonly flags: IMapFlags = null
+
+    public readonly collisionManager: MapCollisionManager
+    public readonly areaManager: MapAreaManager
 
     public constructor(
         public readonly manager: MapsManager,
@@ -39,19 +41,13 @@ export class Map extends MapDataManager {
         this.properties = this.getData('properties.json')
 
         this.spawns = manager.getMapsData(path.join(this.getId(), 'spawns.json'))
-        this.flags = manager.getMapsData(path.join(this.getId(), 'flags.json'))
         this.bonuses = manager.getMapsData(path.join(this.getId(), 'bonuses.json'))
+
+        this.flags = manager.getMapsData(path.join(this.getId(), 'flags.json'))
+        this.points = manager.getMapsData(path.join(this.getId(), 'points.json'))
 
         this.collisionManager = new MapCollisionManager(manager.getMapsData(path.join(this.getId(), 'collisions.json')))
         this.areaManager = new MapAreaManager(manager.getMapsData(path.join(this.getId(), 'areas.json')))
-    }
-
-    public getSpawns(): IMapSpawn[] {
-        return this.spawns
-    }
-
-    public getFlags(): IMapFlags {
-        return this.flags
     }
 
     public getBonusSpawns(name: BonusType, mode: BattleModeType): Vector3d[] {

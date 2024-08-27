@@ -15,6 +15,8 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
     public init() {
         this.points.set(Team.RED, 0);
         this.points.set(Team.BLUE, 0);
+
+        super.init();
     }
 
     public addTeamScore(team: TeamType, increase: number): void {

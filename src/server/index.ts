@@ -83,6 +83,26 @@ export class Server {
             withoutCrystals: false,
             withoutSupplies: false
         })
+        this.battleManager.createBattle('For Newbies 3', 'map_sandbox', {
+            autoBalance: false,
+            battleMode: BattleMode.CP,
+            equipmentConstraintsMode: EquipmentConstraintsMode.NONE,
+            friendlyFire: false,
+            scoreLimit: 1,
+            timeLimitInSec: 0,
+            maxPeopleCount: 2,
+            parkourMode: false,
+            privateBattle: false,
+            proBattle: false,
+            rankRange: {
+                max: Rank.GENERALISSIMO,
+                min: Rank.RECRUIT
+            },
+            reArmorEnabled: true,
+            withoutBonuses: false,
+            withoutCrystals: false,
+            withoutSupplies: false
+        })
 
         this.init();
 

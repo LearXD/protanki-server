@@ -2,10 +2,18 @@ import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
+export interface IResource {
+    idhigh: string,
+    idlow: number,
+    versionhigh: string,
+    versionlow: number,
+    lazy: boolean,
+    type: number
+}
 
 export class SetLoadResourcesPacket extends Packet {
 
-    public resources: any[];
+    public resources: IResource[];
     public callbackId: number = 0
 
     constructor(bytes?: ByteArray) {

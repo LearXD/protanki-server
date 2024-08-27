@@ -1,4 +1,4 @@
-import { ControlPointState } from "../../states/control-point-state";
+import { ControlPointState, ControlPointStateType } from "../../states/control-point-state";
 import { Vector3d } from "../../utils/vector-3d";
 import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
@@ -9,44 +9,44 @@ export interface IControlPoint {
     name: string
     position: Vector3d
     score: number
-    float_1: number
-    state: string
-    strings_1: string[]
+    scoreChangeRate: number
+    state: ControlPointStateType
+    tankIds: string[]
 }
 
 export class SetLoadControlPointPacket extends Packet {
 
-    public float_1: number
-    public float_2: number
-    public float_3: number
+    public keypointTriggerRadius: number
+    public keypointVisorHeight: number
+    public minesRestrictionRadius: number
     public controlPoints: IControlPoint[]
 
     public resources: {
-        image_1: number
-        image_2: number
-        image_3: number
-        image_4: number
-        image_5: number
-        image_6: number
-        image_7: number
-        model: number
-        image_8: number
-        image_9: number
-        image_10: number
-        image_11: number
+        bigLetters: number
+        blueCircle: number
+        bluePedestalTexture: number
+        blueRay: number
+        blueRayTip: number
+        neutralCircle: number
+        neutralPedestalTexture: number
+        pedestal: number
+        redCircle: number
+        redPedestalTexture: number
+        redRay: number
+        redRayTip: number
     }
 
     public sounds: {
-        sound_1: number
-        sound_2: number
-        sound_3: number
-        sound_4: number
-        sound_5: number
-        sound_6: number
-        sound_7: number
-        sound_8: number
-        sound_9: number
-        sound_10: number
+        pointCaptureStartNegativeSound: number
+        pointCaptureStartPositiveSound: number
+        pointCaptureStopNegativeSound: number
+        pointCaptureStopPositiveSound: number
+        pointCapturedNegativeSound: number
+        pointCapturedPositiveSound: number
+        pointNeutralizedNegativeSound: number
+        pointNeutralizedPositiveSound: number
+        pointScoreDecreasingSound: number
+        pointScoreIncreasingSound: number
     }
 
     constructor(bytes?: ByteArray) {
@@ -56,9 +56,9 @@ export class SetLoadControlPointPacket extends Packet {
     public decode() {
         const bytes = this.cloneBytes();
 
-        this.float_1 = bytes.readFloat();
-        this.float_2 = bytes.readFloat();
-        this.float_3 = bytes.readFloat();
+        this.keypointTriggerRadius = bytes.readFloat();
+        this.keypointVisorHeight = bytes.readFloat();
+        this.minesRestrictionRadius = bytes.readFloat();
 
         const points = bytes.readInt();
         this.controlPoints = new Array(points);
@@ -69,44 +69,44 @@ export class SetLoadControlPointPacket extends Packet {
                 name: bytes.readString(),
                 position: bytes.readVector3d(),
                 score: bytes.readFloat(),
-                float_1: bytes.readFloat(),
+                scoreChangeRate: bytes.readFloat(),
                 state: ControlPointState.STATES[bytes.readInt()],
-                strings_1: bytes.readStringArray()
+                tankIds: bytes.readStringArray()
             }
         }
 
         this.resources = {
-            image_1: bytes.readInt(),
-            image_2: bytes.readInt(),
-            image_3: bytes.readInt(),
-            image_4: bytes.readInt(),
-            image_5: bytes.readInt(),
-            image_6: bytes.readInt(),
-            image_7: bytes.readInt(),
-            model: bytes.readInt(),
-            image_8: bytes.readInt(),
-            image_9: bytes.readInt(),
-            image_10: bytes.readInt(),
-            image_11: bytes.readInt()
+            bigLetters: bytes.readInt(),
+            blueCircle: bytes.readInt(),
+            bluePedestalTexture: bytes.readInt(),
+            blueRay: bytes.readInt(),
+            blueRayTip: bytes.readInt(),
+            neutralCircle: bytes.readInt(),
+            neutralPedestalTexture: bytes.readInt(),
+            pedestal: bytes.readInt(),
+            redCircle: bytes.readInt(),
+            redPedestalTexture: bytes.readInt(),
+            redRay: bytes.readInt(),
+            redRayTip: bytes.readInt()
         }
 
         this.sounds = {
-            sound_1: bytes.readInt(),
-            sound_2: bytes.readInt(),
-            sound_3: bytes.readInt(),
-            sound_4: bytes.readInt(),
-            sound_5: bytes.readInt(),
-            sound_6: bytes.readInt(),
-            sound_7: bytes.readInt(),
-            sound_8: bytes.readInt(),
-            sound_9: bytes.readInt(),
-            sound_10: bytes.readInt()
+            pointCaptureStartNegativeSound: bytes.readInt(),
+            pointCaptureStartPositiveSound: bytes.readInt(),
+            pointCaptureStopNegativeSound: bytes.readInt(),
+            pointCaptureStopPositiveSound: bytes.readInt(),
+            pointCapturedNegativeSound: bytes.readInt(),
+            pointCapturedPositiveSound: bytes.readInt(),
+            pointNeutralizedNegativeSound: bytes.readInt(),
+            pointNeutralizedPositiveSound: bytes.readInt(),
+            pointScoreDecreasingSound: bytes.readInt(),
+            pointScoreIncreasingSound: bytes.readInt()
         }
 
         return {
-            float_1: this.float_1,
-            float_2: this.float_2,
-            float_3: this.float_3,
+            float_1: this.keypointTriggerRadius,
+            float_2: this.keypointVisorHeight,
+            float_3: this.minesRestrictionRadius,
             controlPoints: this.controlPoints,
             resources: this.resources,
             sounds: this.sounds
@@ -116,9 +116,9 @@ export class SetLoadControlPointPacket extends Packet {
     public encode() {
         const bytes = new ByteArray();
 
-        bytes.writeFloat(this.float_1);
-        bytes.writeFloat(this.float_2);
-        bytes.writeFloat(this.float_3);
+        bytes.writeFloat(this.keypointTriggerRadius);
+        bytes.writeFloat(this.keypointVisorHeight);
+        bytes.writeFloat(this.minesRestrictionRadius);
 
         bytes.writeInt(this.controlPoints.length);
 
@@ -128,9 +128,9 @@ export class SetLoadControlPointPacket extends Packet {
             bytes.writeString(point.name);
             bytes.writeVector3d(point.position);
             bytes.writeFloat(point.score);
-            bytes.writeFloat(point.float_1);
+            bytes.writeFloat(point.scoreChangeRate);
             bytes.writeInt(ControlPointState.STATES.indexOf(point.state));
-            bytes.writeStringArray(point.strings_1);
+            bytes.writeStringArray(point.tankIds);
         }
 
         // TODO: será que vai dar pal?

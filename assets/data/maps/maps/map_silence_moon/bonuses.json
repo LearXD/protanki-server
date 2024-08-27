@@ -28,7 +28,7 @@
         "modes": [
             "DM",
             "CTF",
-            "DOM",
+            "CP",
             "TDM"
         ]
     },
@@ -60,7 +60,7 @@
         "modes": [
             "DM",
             "CTF",
-            "DOM",
+            "CP",
             "TDM"
         ]
     },
@@ -93,7 +93,7 @@
         "modes": [
             "DM",
             "CTF",
-            "DOM",
+            "CP",
             "TDM"
         ]
     },
@@ -125,7 +125,7 @@
         "modes": [
             "DM",
             "CTF",
-            "DOM",
+            "CP",
             "TDM"
         ]
     },
@@ -157,7 +157,7 @@
         "modes": [
             "DM",
             "CTF",
-            "DOM",
+            "CP",
             "TDM"
         ]
     },
@@ -190,7 +190,7 @@
         "modes": [
             "DM",
             "CTF",
-            "DOM",
+            "CP",
             "TDM"
         ]
     },
@@ -223,7 +223,7 @@
         "modes": [
             "DM",
             "CTF",
-            "DOM",
+            "CP",
             "TDM"
         ]
     },
@@ -255,7 +255,7 @@
         "modes": [
             "DM",
             "CTF",
-            "DOM",
+            "CP",
             "TDM"
         ]
     },
@@ -287,7 +287,7 @@
         "modes": [
             "DM",
             "CTF",
-            "DOM",
+            "CP",
             "TDM"
         ]
     },
@@ -319,7 +319,7 @@
         "modes": [
             "DM",
             "CTF",
-            "DOM",
+            "CP",
             "TDM"
         ]
     },
@@ -353,7 +353,7 @@
         "modes": [
             "DM",
             "CTF",
-            "DOM",
+            "CP",
             "TDM"
         ]
     },
@@ -386,7 +386,7 @@
         "modes": [
             "DM",
             "CTF",
-            "DOM",
+            "CP",
             "TDM"
         ]
     }

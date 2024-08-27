@@ -333,6 +333,7 @@ export class Battle {
         this.tick++
 
         this.taskManager.update()
+        this.collisionManager.update(this.tick)
 
         if (this.tick % Battle.TICK_RATE === 0) {
             this.boxesManager.update()

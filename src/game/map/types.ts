@@ -28,6 +28,11 @@ export interface IMapFlags {
     blue: IVector3d
 }
 
+export interface IMapPoint {
+    name: string
+    position: IVector3d
+}
+
 export enum MapAreaAction {
     KICK = 'kick',
     KILL = 'kill',

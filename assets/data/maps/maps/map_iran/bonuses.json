@@ -58,7 +58,7 @@
             "nitro"
         ],
         "modes": [
-            "DOM"
+            "CP"
         ]
     },
     {
@@ -187,7 +187,7 @@
             "crystal"
         ],
         "modes": [
-            "DOM"
+            "CP"
         ]
     },
     {
@@ -217,7 +217,7 @@
         ],
         "modes": [
             "TDM",
-            "DOM",
+            "CP",
             "DM",
             "CTF"
         ]
@@ -249,7 +249,7 @@
             "health"
         ],
         "modes": [
-            "DOM"
+            "CP"
         ]
     },
     {
@@ -278,7 +278,7 @@
             "nitro"
         ],
         "modes": [
-            "DOM"
+            "CP"
         ]
     },
     {
@@ -310,7 +310,7 @@
         ],
         "modes": [
             "TDM",
-            "DOM",
+            "CP",
             "DM",
             "CTF"
         ]
@@ -504,7 +504,7 @@
             "health"
         ],
         "modes": [
-            "DOM"
+            "CP"
         ]
     },
     {
@@ -534,7 +534,7 @@
             "nitro"
         ],
         "modes": [
-            "DOM"
+            "CP"
         ]
     },
     {
@@ -565,7 +565,7 @@
             "health"
         ],
         "modes": [
-            "DOM"
+            "CP"
         ]
     },
     {
@@ -594,7 +594,7 @@
             "gold"
         ],
         "modes": [
-            "DOM"
+            "CP"
         ]
     },
     {
@@ -624,7 +624,7 @@
             "nitro"
         ],
         "modes": [
-            "DOM"
+            "CP"
         ]
     },
     {
@@ -655,7 +655,7 @@
         ],
         "modes": [
             "TDM",
-            "DOM",
+            "CP",
             "DM",
             "CTF"
         ]
@@ -718,7 +718,7 @@
             "nitro"
         ],
         "modes": [
-            "DOM"
+            "CP"
         ]
     },
     {
@@ -747,7 +747,7 @@
             "nitro"
         ],
         "modes": [
-            "DOM"
+            "CP"
         ]
     },
     {
@@ -776,7 +776,7 @@
             "nitro"
         ],
         "modes": [
-            "DOM"
+            "CP"
         ]
     },
     {
@@ -805,7 +805,7 @@
             "armor"
         ],
         "modes": [
-            "DOM"
+            "CP"
         ]
     },
     {
@@ -834,7 +834,7 @@
             "nitro"
         ],
         "modes": [
-            "DOM"
+            "CP"
         ]
     },
     {
@@ -996,7 +996,7 @@
             "crystal"
         ],
         "modes": [
-            "DOM"
+            "CP"
         ]
     },
     {
@@ -1026,7 +1026,7 @@
             "crystal"
         ],
         "modes": [
-            "DOM"
+            "CP"
         ]
     },
     {
@@ -1089,7 +1089,7 @@
             "nitro"
         ],
         "modes": [
-            "DOM"
+            "CP"
         ]
     },
     {
@@ -1121,7 +1121,7 @@
             "health"
         ],
         "modes": [
-            "DOM"
+            "CP"
         ]
     },
     {
@@ -1152,7 +1152,7 @@
             "health"
         ],
         "modes": [
-            "DOM"
+            "CP"
         ]
     },
     {

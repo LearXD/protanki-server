@@ -16,7 +16,7 @@ export class Mine extends BattleObject {
         super(`mine_${id}`, position, 200);
     }
 
-    public handleCollision(player: Player): boolean {
+    public onColliding(player: Player): boolean {
         // Logger.debug(`Mine.handleCollision: ${this.name} collided with ${player.tank.player.getUsername()}`);
         if (player !== this.owner) {
             const battle = player.battle

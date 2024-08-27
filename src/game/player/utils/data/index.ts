@@ -6,7 +6,6 @@ import { Player } from "../..";
 import { SetCrystalsPacket } from "@/network/packets/set-crystals";
 import { RankManager } from "@/server/managers/rank";
 import { SetScorePacket } from "@/network/packets/set-score";
-import { SetUserNewRankPacket } from "@/network/packets/set-user-new-rank";
 
 export class PlayerData {
 
@@ -205,8 +204,8 @@ export class PlayerData {
     }
 
     public isAdmin() {
-        const level = ChatModeratorLevel.LEVELS.indexOf(this.moderatorLevel)
-        return level >= ChatModeratorLevel.LEVELS.indexOf(ChatModeratorLevel.MODERATOR)
+        const levels = [ChatModeratorLevel.ADMINISTRATOR, ChatModeratorLevel.COMMUNITY_MANAGER, ChatModeratorLevel.MODERATOR]
+        return levels.includes(this.moderatorLevel)
     }
 
     public decreaseCrystals(amount: number, silent?: boolean) {

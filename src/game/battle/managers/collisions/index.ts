@@ -13,7 +13,7 @@ export class BattleCollisionsManager {
     ) { }
 
     public addObject(object: BattleObject) {
-        this.objects.set(object.getName(), object);
+        this.objects.set(object.name, object);
     }
 
     public removeObject(name: string) {
@@ -35,11 +35,24 @@ export class BattleCollisionsManager {
         }
 
         for (const object of this.objects.values()) {
-            if (object.isColliding(position)) {
-                const collided = object.handleCollision(player);
-                if (collided) {
-                    this.objects.delete(object.getName());
+            if (object.position.distanceTo(position) <= object.scale) {
+
+                if (!object.isColliding(player)) {
+                    object.colliding.add(player);
+                    object.onStartColliding(player);
                 }
+
+                const collided = object.onColliding(player);
+                if (collided) {
+                    this.objects.delete(object.name);
+                }
+
+                continue;
+            }
+
+            if (object.isColliding(player)) {
+                object.colliding.delete(player);
+                object.onStopColliding(player);
             }
         }
     }
@@ -47,5 +60,11 @@ export class BattleCollisionsManager {
     public handlePlayerMovement(player: Player) {
         this.battle.map.areaManager.checkCollisions(player)
         this.checkObjectCollisions(player)
+    }
+
+    public update(tick: number) {
+        this.objects.forEach(object => {
+            object.update(tick);
+        })
     }
 }
