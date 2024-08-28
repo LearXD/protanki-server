@@ -94,8 +94,7 @@ export class BattlePlayersManager {
 
     public removePlayer(player: Player) {
 
-        const isSpectator = this.hasSpectator(player)
-        if (isSpectator) {
+        if (this.hasSpectator(player)) {
             this.removeSpectator(player)
             return
         }

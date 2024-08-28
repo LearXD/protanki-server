@@ -57,6 +57,15 @@ export class BattleCollisionsManager {
         }
     }
 
+    public onPlayerLeave(player: Player) {
+        this.objects.forEach(object => {
+            if (object.isColliding(player)) {
+                object.colliding.delete(player);
+                object.onStopColliding(player);
+            }
+        })
+    }
+
     public handlePlayerMovement(player: Player) {
         this.battle.map.areaManager.checkCollisions(player)
         this.checkObjectCollisions(player)

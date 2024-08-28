@@ -126,8 +126,8 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
         this.initFlag(flag.team)
     }
 
-    public broadcastRemovePlayer(player: Player): void {
-        super.broadcastRemovePlayer(player)
+    public onPlayerLeave(player: Player): void {
+        super.onPlayerLeave(player)
 
         for (const flag of this.flags.values()) {
             if (flag.isCarrier(player)) {

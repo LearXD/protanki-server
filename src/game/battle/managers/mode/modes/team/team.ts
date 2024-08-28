@@ -40,7 +40,7 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
         }
     }
 
-    public broadcastAddUserProperties(player: Player): void {
+    public onPlayerJoin(player: Player): void {
         const players = this.battle.playersManager.getPlayers()
             .filter(p => player.tank.team === p.tank.team);
 
@@ -61,7 +61,7 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
         this.battle.broadcastPacket(packet, [player.getUsername()]);
     }
 
-    public broadcastRemovePlayer(player: Player): void {
+    public onPlayerLeave(player: Player): void {
         const packet = new SetUserLeftBattlePacket();
         packet.userId = player.getUsername();
         this.battle.broadcastPacket(packet);

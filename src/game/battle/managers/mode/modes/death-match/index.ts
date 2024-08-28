@@ -31,7 +31,7 @@ export class BattleDeathMatchModeManager extends BattleModeManager {
         player.sendPacket(new SetLoadDeathMatchPacket())
     }
 
-    public broadcastAddUserProperties(player: Player): void {
+    public onPlayerJoin(player: Player): void {
         const packet = new SetBattleAddUsersPropertiesPacket();
         packet.userId = player.getUsername();
         packet.users = this.battle.playersManager.getPlayers()
@@ -49,7 +49,7 @@ export class BattleDeathMatchModeManager extends BattleModeManager {
         this.battle.broadcastPacket(packet, [player.getUsername()]);
     }
 
-    public broadcastRemovePlayer(player: Player): void {
+    public onPlayerLeave(player: Player): void {
         const packet = new SetBattleUserLeftNotificationPacket();
         packet.userId = player.getUsername();
         this.battle.broadcastPacket(packet);

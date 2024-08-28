@@ -15,7 +15,6 @@ import { Logger } from "@/utils/logger";
 
 export class ControlPoint extends BattleObject {
 
-
     public static readonly MAX_SCORE = 100
     public static readonly CAPTURE_SPEED = 20
 
@@ -55,13 +54,26 @@ export class ControlPoint extends BattleObject {
         }
 
         if (this.score !== 0) {
-            const speed = this.score > 0 ? -ControlPoint.CAPTURE_SPEED : ControlPoint.CAPTURE_SPEED
 
-            if ((Math.abs(this.score) - Math.abs(speed)) < 0) {
-                return 0;
+            switch (this.state) {
+                case ControlPointState.BLUE: {
+                    if (this.score < ControlPoint.MAX_SCORE) {
+                        return ControlPoint.CAPTURE_SPEED;
+                    }
+                    break;
+                }
+
+                case ControlPointState.RED: {
+                    if (this.score > -ControlPoint.MAX_SCORE) {
+                        return -ControlPoint.CAPTURE_SPEED;
+                    }
+                    break;
+                }
+
+                case ControlPointState.NEUTRAL: {
+                    return ControlPoint.CAPTURE_SPEED * Math.sign(this.score) * -1;
+                }
             }
-
-            return speed
         }
 
         return 0;
@@ -111,13 +123,17 @@ export class ControlPoint extends BattleObject {
     }
 
     public onStartColliding(player: Player): void {
-        this.broadcastTeamStarterCapturing(player.tank.team)
+        if (this.state === ControlPointState.NEUTRAL || this.state !== player.tank.team) {
+            this.broadcastTeamStarterCapturing(player.tank.team)
+        }
         this.broadcastTankStartedCapturing(player)
         this.broadcastCapturingProgress()
     }
 
     public onStopColliding(player: Player): void {
-        this.broadcastTeamStoppedCapturing(player.tank.team)
+        if (this.state === ControlPointState.NEUTRAL || this.state !== player.tank.team) {
+            this.broadcastTeamStoppedCapturing(player.tank.team)
+        }
         this.broadcastTankStoppedCapturing(player)
         this.broadcastCapturingProgress()
     }

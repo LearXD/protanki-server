@@ -20,8 +20,8 @@ export abstract class BattleModeManager {
     public abstract broadcastUserStats(player: Player): void
     public abstract sendUsersProperties(player: Player): void
 
-    public abstract broadcastAddUserProperties(player: Player): void
-    public abstract broadcastRemovePlayer(player: Player): void
+    public abstract onPlayerJoin(player: Player): void
+    public abstract onPlayerLeave(player: Player): void
 
     public init() {
         for (const player of this.battle.playersManager.getPlayers()) {

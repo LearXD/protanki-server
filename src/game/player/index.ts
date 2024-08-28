@@ -87,7 +87,7 @@ export class Player extends Client {
         }
 
         if (this.battle) {
-            this.battle.handleClientLeave(this)
+            this.battle.onPlayerLeave(this)
         }
 
         if (this.authManager.isAuthenticated()) {
@@ -171,7 +171,7 @@ export class Player extends Client {
         switch (state) {
             case LayoutState.BATTLE_SELECT: {
                 if (this.battle) {
-                    this.battle.handleClientLeave(this)
+                    this.battle.onPlayerLeave(this)
                 }
 
                 if (this.layoutState === LayoutState.BATTLE_SELECT) {
@@ -189,7 +189,7 @@ export class Player extends Client {
             }
             case LayoutState.GARAGE: {
                 if (this.battle) {
-                    this.battle.handleClientLeave(this)
+                    this.battle.onPlayerLeave(this)
                 }
 
                 this.battlesManager.sendRemoveBattlesScreen();

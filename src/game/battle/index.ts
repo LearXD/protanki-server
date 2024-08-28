@@ -159,7 +159,7 @@ export class Battle {
         this.modeManager.sendBattleData(player, isSpectator)
         this.modeManager.sendUsersProperties(player)
         if (!isSpectator) {
-            this.modeManager.broadcastAddUserProperties(player)
+            this.modeManager.onPlayerJoin(player)
             this.modeManager.broadcastUserStats(player)
         }
 
@@ -193,8 +193,7 @@ export class Battle {
         Logger.info(`${player.getUsername()} joined the battle ${this.getName()}`)
     }
 
-    public handleClientLeave(player: Player) {
-
+    public onPlayerLeave(player: Player) {
         if (!this.playersManager.hasPlayer(player) && !this.playersManager.hasSpectator(player)) {
             Logger.warn(`${player.getUsername()} is not in the battle ${this.getName()}`)
             return false
@@ -206,7 +205,9 @@ export class Battle {
             }
 
             this.minesManager.removePlayerMines(player)
-            this.modeManager.broadcastRemovePlayer(player)
+
+            this.collisionManager.onPlayerLeave(player)
+            this.modeManager.onPlayerLeave(player)
         }
 
         this.playersManager.removePlayer(player)
@@ -218,7 +219,6 @@ export class Battle {
         player.battle = null
 
         Logger.info(`${player.getUsername()} left the battle ${this.getName()}`)
-
     }
 
     public getBattleId() { return this.battleId }
@@ -277,8 +277,7 @@ export class Battle {
     }
 
     public sendRemoveBattleScreen(player: Player) {
-        const setRemoveBattleScreenPacket = new SetRemoveBattleScreenPacket()
-        player.sendPacket(setRemoveBattleScreenPacket)
+        player.sendPacket(new SetRemoveBattleScreenPacket())
     }
 
     public toBattleListItem(): IBattleList {
