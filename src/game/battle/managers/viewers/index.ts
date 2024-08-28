@@ -30,7 +30,7 @@ export class BattleViewersManager {
         }
 
         const setViewingBattlePacket = new SetViewingBattlePacket();
-        setViewingBattlePacket.battleId = this.battle.getBattleId();
+        setViewingBattlePacket.battleId = this.battle.battleId;
         client.sendPacket(setViewingBattlePacket);
 
         client.viewingBattle = this.battle;
@@ -44,7 +44,7 @@ export class BattleViewersManager {
             this.viewers.delete(viewer.getUsername());
 
             const setRemoveViewingBattlePacket = new SetRemoveViewingBattlePacket();
-            setRemoveViewingBattlePacket.battleId = this.battle.getBattleId();
+            setRemoveViewingBattlePacket.battleId = this.battle.battleId;
             viewer.sendPacket(setRemoveViewingBattlePacket);
             viewer.viewingBattle = null;
         }
@@ -60,16 +60,16 @@ export class BattleViewersManager {
         const packet = new SetViewingBattleDataPacket();
         packet.data = {
             battleMode: this.battle.getMode(),
-            itemId: this.battle.getBattleId(),
+            itemId: this.battle.battleId,
             scoreLimit: this.battle.getScoreLimit(),
             timeLimitInSec: this.battle.getTimeLimitInSec(),
             preview: this.battle.map.getPreview(),
             maxPeopleCount: this.battle.getMaxPeopleCount(),
-            name: this.battle.getName(),
+            name: this.battle.name,
             proBattle: this.battle.isProBattle(),
             minRank: this.battle.getRankRange().min,
             maxRank: this.battle.getRankRange().max,
-            roundStarted: this.battle.isRunning(),
+            roundStarted: this.battle.running,
             spectator: player.data.isAdmin(),
             withoutBonuses: this.battle.isWithoutBonuses(),
             withoutCrystals: this.battle.isWithoutCrystals(),

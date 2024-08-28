@@ -41,7 +41,7 @@ export abstract class BattleModeManager {
             scoreLimit: this.battle.getScoreLimit(),
             timeLimitInSec: this.battle.getTimeLimitInSec()
         }
-        packet.mapName = this.battle.getName();
+        packet.mapName = this.battle.name;
         packet.maxPeopleCount = this.battle.getMaxPeopleCount()
         packet.parkourMode = this.battle.isParkourMode();
         packet.premiumBonusInPercent = 0

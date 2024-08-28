@@ -60,7 +60,7 @@ export class BattlePlayersManager {
 
         if (this.battle.getMode() === BattleMode.DM) {
             const setAddUserOnBattleCounterPacket = new SetAddUserOnBattleCounterPacket();
-            setAddUserOnBattleCounterPacket.battleId = this.battle.getBattleId();
+            setAddUserOnBattleCounterPacket.battleId = this.battle.battleId;
             setAddUserOnBattleCounterPacket.userId = player.getUsername();
             player.server.battleManager.broadcastPacket(setAddUserOnBattleCounterPacket);
 
@@ -75,13 +75,13 @@ export class BattlePlayersManager {
 
         if (this.battle.getMode() !== BattleMode.DM) {
             const setAddUserOnTeamBattleCounterPacket = new SetAddUserOnTeamBattleCounterPacket();
-            setAddUserOnTeamBattleCounterPacket.battle = this.battle.getBattleId();
+            setAddUserOnTeamBattleCounterPacket.battle = this.battle.battleId;
             setAddUserOnTeamBattleCounterPacket.team = player.tank.team;
             setAddUserOnTeamBattleCounterPacket.user = player.getUsername();
             player.server.battleManager.broadcastPacket(setAddUserOnTeamBattleCounterPacket);
 
             const setAddUserInfoOnViewingTeamBattlePacket = new SetAddUserInfoOnViewingTeamBattlePacket();
-            setAddUserInfoOnViewingTeamBattlePacket.battleId = this.battle.getBattleId();
+            setAddUserInfoOnViewingTeamBattlePacket.battleId = this.battle.battleId;
             setAddUserInfoOnViewingTeamBattlePacket.kills = 0;
             setAddUserInfoOnViewingTeamBattlePacket.score = 0;
             setAddUserInfoOnViewingTeamBattlePacket.suspicious = false;
@@ -103,14 +103,14 @@ export class BattlePlayersManager {
 
         if (this.battle.getMode() === BattleMode.DM) {
             const setRemoveUserFromBattleCounterPacket = new SetRemoveUserFromBattleCounterPacket();
-            setRemoveUserFromBattleCounterPacket.battleId = this.battle.getBattleId();
+            setRemoveUserFromBattleCounterPacket.battleId = this.battle.battleId;
             setRemoveUserFromBattleCounterPacket.userId = player.getUsername();
             player.server.battleManager.broadcastPacket(setRemoveUserFromBattleCounterPacket);
         }
 
         if (this.battle.getMode() !== BattleMode.DM) {
             const setRemoveUserFromTeamBattleCounterPacket = new SetRemoveUserFromTeamBattleCounterPacket()
-            setRemoveUserFromTeamBattleCounterPacket.battleId = this.battle.getBattleId()
+            setRemoveUserFromTeamBattleCounterPacket.battleId = this.battle.battleId
             setRemoveUserFromTeamBattleCounterPacket.userId = player.getUsername()
             player.server.battleManager.broadcastPacket(setRemoveUserFromTeamBattleCounterPacket)
         }

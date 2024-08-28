@@ -17,11 +17,9 @@ export class BattleCollisionsManager {
     }
 
     public removeObject(name: string) {
-        if (!this.objects.has(name)) {
-            Logger.warn(`Object ${name} not found in the battle ${this.battle.getBattleId()}`);
-            return;
+        if (this.objects.has(name)) {
+            this.objects.delete(name);
         }
-        this.objects.delete(name);
     }
 
     public checkObjectCollisions(player: Player, position?: Vector3d) {

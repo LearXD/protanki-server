@@ -19,6 +19,7 @@ import { Logger } from "../../../../utils/logger";
 import { Packet } from "@/network/packets/packet";
 import { SendCheckBattleNamePacket } from "@/network/packets/send-check-battle-name";
 import { SetBattleNamePacket } from "@/network/packets/set-battle-name";
+import { BattleUtils } from "@/game/battle/utils/battle";
 
 export class PlayerBattlesManager {
     public constructor(
@@ -40,7 +41,7 @@ export class PlayerBattlesManager {
 
         const setBattleListPacket = new SetBattleListPacket();
         setBattleListPacket.battles = this.player.server.battleManager.battles
-            .map(battle => battle.toBattleListItem());
+            .map(battle => BattleUtils.toBattleListItem(battle));
 
         this.player.sendPacket(setBattleListPacket);
 
@@ -64,14 +65,14 @@ export class PlayerBattlesManager {
     public handleJoinBattle(team: TeamType) {
         const battle = this.player.viewingBattle;
         if (battle) {
-            battle.handlePlayerJoin(this.player, team);
+            battle.onPlayerJoin(this.player, team);
         }
     }
 
     public handleSpectateBattle() {
         const battle = this.player.viewingBattle;
         if (battle) {
-            battle.handlePlayerJoin(this.player, Team.SPECTATOR);
+            battle.onPlayerJoin(this.player, Team.SPECTATOR);
         }
     }
 

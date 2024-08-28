@@ -84,7 +84,7 @@ export class Map extends MapDataManager {
             spectator: spectator,
             active: true,
             dustParticle: this.properties.dustParticle,
-            battleId: battle.getBattleId(),
+            battleId: battle.battleId,
             minRank: battle.getRankRange().min,
             maxRank: battle.getRankRange().max,
             skybox: JSON.stringify(this.properties.skybox),

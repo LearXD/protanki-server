@@ -30,7 +30,7 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
         this.battle.broadcastPacket(setTeamScorePacket)
 
         const setViewingBattleTeamScorePacket = new SetViewingBattleTeamScorePacket();
-        setViewingBattleTeamScorePacket.battle = this.battle.getBattleId();
+        setViewingBattleTeamScorePacket.battle = this.battle.battleId;
         setViewingBattleTeamScorePacket.team = team;
         setViewingBattleTeamScorePacket.score = score;
         this.battle.viewersManager.broadcastPacket(setViewingBattleTeamScorePacket)

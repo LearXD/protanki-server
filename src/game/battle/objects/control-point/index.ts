@@ -185,7 +185,7 @@ export class ControlPoint extends BattleObject {
                 }
             }
 
-            Logger.debug(`Control point ${this.point} score: ${this.score} -> ${score}`)
+            // Logger.debug(`Control point ${this.point} score: ${this.score} -> ${score}`)
             this.score = score
         }
     }

@@ -244,7 +244,7 @@ export class Tank {
         this.kills = kills
 
         const packet = new SetViewingBattleUserKillsPacket();
-        packet.battle = this.battle.getBattleId();
+        packet.battle = this.battle.battleId;
         packet.user = this.player.getUsername();
         packet.kills = this.kills;
         this.battle.viewersManager.broadcastPacket(packet);
@@ -254,7 +254,7 @@ export class Tank {
         this.score = score
 
         const packet = new SetViewingBattleUserScorePacket();
-        packet.battle = this.battle.getBattleId();
+        packet.battle = this.battle.battleId;
         packet.user = this.player.getUsername();
         packet.score = this.score;
         this.battle.viewersManager.broadcastPacket(packet);
@@ -699,7 +699,7 @@ export class Tank {
 
     public handlePacket(packet: Packet) {
 
-        if (this.battle.isRunning()) {
+        if (this.battle.running) {
 
             if (this.turret) {
                 this.turret.handlePacket(packet)
@@ -756,7 +756,7 @@ export class Tank {
         const speed = this.getSpeed()
 
         return {
-            battleId: this.battle.getBattleId(),
+            battleId: this.battle.battleId,
             colormap_id: this.painting.item.coloring,
             hull_id: this.hull.getName(),
             turret_id: this.turret.getName(),

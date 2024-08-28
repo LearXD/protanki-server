@@ -9,6 +9,7 @@ import { SetRemoveBattleFromListPacket } from "@/network/packets/set-remove-batt
 import { ServerError } from "@/server/utils/error";
 import { Packet } from "@/network/packets/packet";
 import { Server } from "@/server";
+import { BattleUtils } from "@/game/battle/utils/battle";
 
 export class BattlesManager {
 
@@ -23,7 +24,7 @@ export class BattlesManager {
     }
 
     public getBattleById(battleId: string) {
-        return this.battles.find(battle => battle.getBattleId() === battleId)
+        return this.battles.find(battle => battle.battleId === battleId)
     }
 
     public createBattle(
@@ -41,7 +42,7 @@ export class BattlesManager {
         const battle = new Battle(name, map, config, this.server, owner);
         this.addBattle(battle);
 
-        Logger.debug(`Created battle ${battle.getBattleId()} with name ${name} and map ${mapName}`)
+        Logger.debug(`Created battle ${battle.battleId} with name ${name} and map ${mapName}`)
         return battle;
     }
 
@@ -49,7 +50,7 @@ export class BattlesManager {
         this.battles.push(battle);
 
         const packet = new SetAddBattleOnListPacket();
-        packet.data = battle.toBattleListItem();
+        packet.data = BattleUtils.toBattleListItem(battle);
 
         if (battle.isPrivateBattle()) {
             if (battle.owner) {
@@ -67,16 +68,16 @@ export class BattlesManager {
     public removeBattle(battle: Battle) {
 
         battle.viewersManager.removeAllViewers()
-        this.battles = this.battles.filter(b => b.getBattleId() !== battle.getBattleId())
+        this.battles = this.battles.filter(b => b.battleId !== battle.battleId)
 
         const packet = new SetRemoveBattleFromListPacket();
-        packet.battle = battle.getBattleId();
+        packet.battle = battle.battleId;
 
         this.broadcastPacket(packet);
     }
 
     public getBattle(battleId: string) {
-        return this.battles.find(battle => battle.getBattleId() == battleId)
+        return this.battles.find(battle => battle.battleId == battleId)
     }
 
     public broadcastPacket(packet: Packet) {

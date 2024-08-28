@@ -6,6 +6,9 @@ import { BattleCaptureTheFlagModeManager } from "../../managers/mode/modes/captu
 import { Logger } from "@/utils/logger"
 import { BattleDeathMatchModeManager } from "../../managers/mode/modes/death-match"
 import { BattleControlPointsModeManager } from "../../managers/mode/modes/control-point"
+import { IBattleList } from "@/network/packets/set-battle-list"
+import { SuspiciousLevel } from "@/states/suspicious-level"
+import { Team } from "@/states/team"
 
 export class BattleUtils {
 
@@ -24,6 +27,35 @@ export class BattleUtils {
                 return new BattleDeathMatchModeManager(battle)
             }
         }
+    }
+
+    public static toBattleListItem(battle: Battle): IBattleList {
+        const item: IBattleList = {
+            battleId: battle.battleId,
+            battleMode: battle.data.battleMode,
+            map: battle.map.getId(),
+            maxPeople: battle.data.maxPeopleCount,
+            name: battle.name,
+            privateBattle: battle.isPrivateBattle(),
+            proBattle: battle.isProBattle(),
+            minRank: battle.getRankRange().min,
+            maxRank: battle.getRankRange().max,
+            preview: battle.map.getPreview(),
+            parkourMode: battle.isParkourMode(),
+            equipmentConstraintsMode: battle.getEquipmentConstraintsMode(),
+            suspicionLevel: SuspiciousLevel.NONE
+        }
+
+        if (battle.getMode() === BattleMode.DM) {
+            item.users = battle.playersManager.getPlayers().map(player => player.getUsername())
+        }
+
+        if (battle.getMode() !== BattleMode.DM) {
+            item.usersBlue = battle.playersManager.getPlayers().filter(player => player.tank.team === Team.BLUE).map(player => player.getUsername())
+            item.usersRed = battle.playersManager.getPlayers().filter(player => player.tank.team === Team.RED).map(player => player.getUsername())
+        }
+
+        return item
     }
 
 }

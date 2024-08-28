@@ -34,7 +34,7 @@ export class Battle {
 
     public readonly battleId: string = BattleUtils.generateBattleId();
 
-    private running: boolean = false
+    public running: boolean = false
     public startedAt: number = null;
 
     private tick: number = 0
@@ -83,9 +83,94 @@ export class Battle {
         this.updateInterval = setInterval(this.update.bind(this), 1000 / Battle.TICK_RATE);
     }
 
+
+    public getData() {
+        return this.data
+    }
+
+    public haveAutoBalance() {
+        return this.data.autoBalance
+    }
+
+    public getMode() {
+        return this.data.battleMode
+    }
+
+    public getEquipmentConstraintsMode() {
+        return this.data.equipmentConstraintsMode
+    }
+
+    public isFriendlyFire() {
+        return this.data.friendlyFire
+    }
+
+    public getScoreLimit() {
+        return this.data.scoreLimit
+    }
+
+    public getTimeLimitInSec() {
+        return this.data.timeLimitInSec
+    }
+
+    public getMaxPeopleCount() {
+        return this.data.maxPeopleCount
+    }
+
+    public isParkourMode() {
+        return this.data.parkourMode
+    }
+
+    public isPrivateBattle() {
+        return this.data.privateBattle
+    }
+
+    public isProBattle() {
+        return this.data.proBattle
+    }
+
+    public getRankRange() {
+        return this.data.rankRange
+    }
+
+    public isReArmorEnabled() {
+        return this.data.reArmorEnabled
+    }
+
+    public isWithoutBonuses() {
+        return this.data.withoutBonuses
+    }
+
+    public isWithoutCrystals() {
+        return this.data.withoutCrystals
+    }
+
+    public isWithoutSupplies() {
+        return this.data.withoutSupplies
+    }
+
+    public restartTime() {
+        const packet = new SetBattleTimePacket();
+        packet.time = this.getTimeLeft();
+        this.broadcastPacket(packet)
+    }
+
+    public getTimeLeft(): number {
+        if (this.getTimeLimitInSec() > 0) {
+            if (this.running) {
+                return this.getTimeLimitInSec() - (Date.now() - this.startedAt) / 1000
+            }
+            return this.getTimeLimitInSec()
+        }
+
+        return 0
+    }
+
     public start() {
-        Logger.info(`Battle ${this.getName()} started`)
-        this.sendStarted()
+        Logger.info(`Battle ${this.name} started`)
+
+        const packet = new SetBattleStartedPacket();
+        packet.battleId = this.battleId;
+        this.server.battleManager.broadcastPacket(packet)
 
         this.startedAt = Date.now()
         this.running = true
@@ -96,24 +181,22 @@ export class Battle {
     }
 
     public restart() {
-        Logger.info(`Battle ${this.getName()} restarted`)
+        Logger.info(`Battle ${this.name} restarted`)
         this.modeManager.init();
 
-        // if (this.playersManager.getPlayers().length > 0) {
         this.start()
         this.restartTime();
 
         for (const player of this.playersManager.getPlayers()) {
             player.tank.prepareRespawn();
         }
-        // }
     }
 
     public finish() {
-        Logger.info(`Battle ${this.getName()} finished`)
+        Logger.info(`Battle ${this.name} finished`)
 
         const packet = new SetBattleEndedPacket();
-        packet.battle = this.getBattleId();
+        packet.battle = this.battleId;
         this.server.battleManager.broadcastPacket(packet)
 
         this.running = false
@@ -129,12 +212,12 @@ export class Battle {
         clearInterval(this.updateTimeInterval)
     }
 
-    public async handlePlayerJoin(player: Player, team: TeamType = Team.NONE) {
+    public async onPlayerJoin(player: Player, team: TeamType = Team.NONE) {
 
         const isSpectator = team === Team.SPECTATOR
 
         if (this.playersManager.hasPlayer(player) || this.playersManager.hasSpectator(player)) {
-            Logger.warn(`${player.getUsername()} already joined the battle ${this.getName()}`)
+            Logger.warn(`${player.getUsername()} already joined the battle ${this.name}`)
             return false;
         }
 
@@ -143,8 +226,7 @@ export class Battle {
         this.playersManager.addPlayer(player, team);
 
         if (
-            isSpectator === false &&
-            this.running === false &&
+            isSpectator === false && this.running === false &&
             this.startedAt === null
         ) {
             this.start()
@@ -168,7 +250,7 @@ export class Battle {
 
         /** SEND IMPORTANT PACKETS */
         this.modeManager.sendLoadBattleMode(player)
-        this.sendShowBattleNotifications(player)
+        player.sendPacket(new SetShowBattleNotificationsPacket())
 
         /** SEND IN-GAME PROPERTIES */
         this.boxesManager.sendData(player)
@@ -183,131 +265,46 @@ export class Battle {
         /** SEND BATTLE EFFECTS */
         this.effectsManager.sendBattleEffects(player);
         if (!isSpectator) {
-            if (!this.isWithoutSupplies()) {
+            if (this.isWithoutSupplies() === false) {
                 player.garageManager.sendSupplies();
             }
         }
 
         player.setSubLayoutState(LayoutState.BATTLE)
 
-        Logger.info(`${player.getUsername()} joined the battle ${this.getName()}`)
+        Logger.info(`${player.getUsername()} joined the battle ${this.name}`)
     }
 
     public onPlayerLeave(player: Player) {
         if (!this.playersManager.hasPlayer(player) && !this.playersManager.hasSpectator(player)) {
-            Logger.warn(`${player.getUsername()} is not in the battle ${this.getName()}`)
+            Logger.warn(`${player.getUsername()} is not in the battle ${this.name}`)
             return false
         }
 
         if (this.playersManager.hasPlayer(player)) {
-            if (player.tank) {
-                player.tank.sendRemoveTank(true);
-            }
 
             this.minesManager.removePlayerMines(player)
 
             this.collisionManager.onPlayerLeave(player)
             this.modeManager.onPlayerLeave(player)
+
+            if (player.tank) {
+                player.tank.sendRemoveTank(true);
+                player.tank = null
+            }
         }
 
         this.playersManager.removePlayer(player)
 
-        this.sendRemoveBattleScreen(player)
+        player.sendPacket(new SetRemoveBattleScreenPacket())
         this.taskManager.unregisterOwnerTasks(player.getUsername())
 
-        player.tank = null
         player.battle = null
 
-        Logger.info(`${player.getUsername()} left the battle ${this.getName()}`)
+        Logger.info(`${player.getUsername()} left the battle ${this.name}`)
     }
 
-    public getBattleId() { return this.battleId }
 
-    public getName() { return this.name }
-
-    public isRunning() {
-        return this.running
-    }
-
-    public getTimeLeft(): number {
-        const limit = this.getTimeLimitInSec()
-
-        if (limit > 0) {
-            if (this.running) {
-                return this.getTimeLimitInSec() - (Date.now() - this.startedAt) / 1000
-            }
-            return this.getTimeLimitInSec()
-        }
-
-        return 0
-    }
-
-    public restartTime() {
-        const packet = new SetBattleTimePacket();
-        packet.time = this.getTimeLeft();
-        this.broadcastPacket(packet)
-    }
-
-    public getData() { return this.data }
-    public haveAutoBalance() { return this.data.autoBalance }
-    public getMode() { return this.data.battleMode }
-    public getEquipmentConstraintsMode() { return this.data.equipmentConstraintsMode }
-    public isFriendlyFire() { return this.data.friendlyFire }
-    public getScoreLimit() { return this.data.scoreLimit }
-    public getTimeLimitInSec() { return this.data.timeLimitInSec }
-    public getMaxPeopleCount() { return this.data.maxPeopleCount }
-    public isParkourMode() { return this.data.parkourMode }
-    public isPrivateBattle() { return this.data.privateBattle }
-    public isProBattle() { return this.data.proBattle }
-    public getRankRange() { return this.data.rankRange }
-    public isReArmorEnabled() { return this.data.reArmorEnabled }
-
-    public isWithoutBonuses() { return this.data.withoutBonuses }
-    public isWithoutCrystals() { return this.data.withoutCrystals }
-    public isWithoutSupplies() { return this.data.withoutSupplies }
-
-    public sendStarted() {
-        const packet = new SetBattleStartedPacket();
-        packet.battleId = this.getBattleId();
-        this.server.battleManager.broadcastPacket(packet)
-    }
-
-    public sendShowBattleNotifications(player: Player) {
-        player.sendPacket(new SetShowBattleNotificationsPacket())
-    }
-
-    public sendRemoveBattleScreen(player: Player) {
-        player.sendPacket(new SetRemoveBattleScreenPacket())
-    }
-
-    public toBattleListItem(): IBattleList {
-        const item: IBattleList = {
-            battleId: this.getBattleId(),
-            battleMode: this.data.battleMode,
-            map: this.map.getId(),
-            maxPeople: this.data.maxPeopleCount,
-            name: this.getName(),
-            privateBattle: this.isPrivateBattle(),
-            proBattle: this.isProBattle(),
-            minRank: this.getRankRange().min,
-            maxRank: this.getRankRange().max,
-            preview: this.map.getPreview(),
-            parkourMode: this.isParkourMode(),
-            equipmentConstraintsMode: this.getEquipmentConstraintsMode(),
-            suspicionLevel: SuspiciousLevel.NONE
-        }
-
-        if (this.getMode() === BattleMode.DM) {
-            item.users = this.playersManager.getPlayers().map(player => player.getUsername())
-        }
-
-        if (this.getMode() !== BattleMode.DM) {
-            item.usersBlue = this.playersManager.getPlayers().filter(player => player.tank.team === Team.BLUE).map(player => player.getUsername())
-            item.usersRed = this.playersManager.getPlayers().filter(player => player.tank.team === Team.RED).map(player => player.getUsername())
-        }
-
-        return item
-    }
 
     public broadcastPacket(packet: Packet, ignore: string[] = []) {
         for (const player of this.playersManager.getAll()) {
@@ -347,7 +344,9 @@ export class Battle {
 
         if (this.tick % (Battle.TICK_RATE * 2) === 0) {
             for (const player of this.playersManager.getPlayers()) {
-                player.tank.sendLatency()
+                if (player.tank) {
+                    player.tank.sendLatency()
+                }
             }
         }
     }
