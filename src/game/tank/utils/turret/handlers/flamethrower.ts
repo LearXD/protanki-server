@@ -78,14 +78,14 @@ export class FlamethrowerHandler extends Turret {
 
         if (packet instanceof SendStartFlameShotPacket) {
             const pk = new SetStartFlameShotPacket();
-            pk.shooter = this.tank.player.getUsername();
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            pk.shooter = this.tank.player.getName();
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
         }
 
         if (packet instanceof SendStopFlameShotPacket) {
             const pk = new SetStopFlameShotPacket();
-            pk.shooter = this.tank.player.getUsername();
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            pk.shooter = this.tank.player.getName();
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
         }
 
         if (packet instanceof SendFlameTargetsShotPacket) {

@@ -45,7 +45,7 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
             .filter(p => player.tank.team === p.tank.team);
 
         const packet = new SetTeamBattleAddUsersPropertiesPacket();
-        packet.userId = player.getUsername();
+        packet.userId = player.getName();
         packet.usersInfo = players.map(p => (
             {
                 chatModeratorLevel: p.data.moderatorLevel,
@@ -53,17 +53,17 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
                 kills: p.tank.kills,
                 rank: p.data.getRank(),
                 score: p.tank.score,
-                name: p.getUsername()
+                name: p.getName()
             }
         ))
         packet.team = player.tank.team;
 
-        this.battle.broadcastPacket(packet, [player.getUsername()]);
+        this.battle.broadcastPacket(packet, [player.getName()]);
     }
 
     public onPlayerLeave(player: Player): void {
         const packet = new SetUserLeftBattlePacket();
-        packet.userId = player.getUsername();
+        packet.userId = player.getName();
         this.battle.broadcastPacket(packet);
     }
 
@@ -73,7 +73,7 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
             deaths: player.tank.deaths,
             kills: player.tank.kills,
             score: player.tank.score,
-            name: player.getUsername()
+            name: player.getName()
         }
         packet.team = player.tank.team;
         this.battle.broadcastPacket(packet);
@@ -91,7 +91,7 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
                     kills: player.tank.kills,
                     rank: player.data.getRank(),
                     score: player.tank.score,
-                    name: player.getUsername()
+                    name: player.getName()
                 });
         }
 

@@ -62,7 +62,7 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
                 flag.setCarrier(null)
 
                 const hit = new RayHit()
-                const found = this.battle.map.collisionManager.raycastStatic(player.tank.getPosition().swap(), Vector3d.DOWN, 16, 10000000000, null, hit);
+                const found = this.battle.map.collisions.raycastStatic(player.tank.getPosition().swap(), Vector3d.DOWN, 16, 10000000000, null, hit);
 
                 if (!found) {
                     this.handleReturnFlag(flag)
@@ -89,7 +89,7 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
 
         const packet = new SetFlagReturnedPacket();
         packet.team = flag.team;
-        packet.tank = player ? player.getUsername() : null;
+        packet.tank = player ? player.getName() : null;
 
         this.battle.broadcastPacket(packet);
     }
@@ -104,7 +104,7 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
         flag.setCarrier(player)
 
         const packet = new SetTankFlagPacket();
-        packet.tankId = player.getUsername();
+        packet.tankId = player.getName();
         packet.flagTeam = flag.team;
 
         this.battle.broadcastPacket(packet);
@@ -119,7 +119,7 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
 
         const packet = new SetCaptureFlagPacket()
         packet.winnerTeam = player.tank.team
-        packet.delivererTankId = player.getUsername()
+        packet.delivererTankId = player.getName()
         this.battle.broadcastPacket(packet)
 
         this.addTeamScore(player.tank.team, 1)
@@ -145,7 +145,7 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
                 this.battle.map.flags.blue.y,
                 this.battle.map.flags.blue.z
             ),
-            carrier: this.flags.get(Team.BLUE).getCarrier() ? this.flags.get(Team.BLUE).getCarrier().getUsername() : null,
+            carrier: this.flags.get(Team.BLUE).getCarrier() ? this.flags.get(Team.BLUE).getCarrier().getName() : null,
             droppedPosition: this.flags.get(Team.BLUE).state === FlagState.DROPPED ? this.flags.get(Team.BLUE).position : null
         }
         packet.blueFlagImage = 538453
@@ -156,7 +156,7 @@ export class BattleCaptureTheFlagModeManager extends BattleTeamModeManager {
                 this.battle.map.flags.red.y,
                 this.battle.map.flags.red.z
             ),
-            carrier: this.flags.get(Team.RED).getCarrier() ? this.flags.get(Team.RED).getCarrier().getUsername() : null,
+            carrier: this.flags.get(Team.RED).getCarrier() ? this.flags.get(Team.RED).getCarrier().getName() : null,
             droppedPosition: this.flags.get(Team.RED).state === FlagState.DROPPED ? this.flags.get(Team.RED).position : null
         }
         packet.redFlagImage = 44351

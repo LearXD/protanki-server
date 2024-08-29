@@ -68,15 +68,15 @@ export class IsidaHandler extends Turret {
 
             if (target) {
                 const pk = new SetIsisTargetShotPacket();
-                pk.shooter = this.tank.player.getUsername();
+                pk.shooter = this.tank.player.getName();
                 pk.state = target.tank.isEnemy(this.tank) ? IsidaState.DAMAGING : IsidaState.HEALING;
                 pk.target = {
                     direction: null,
                     position: packet.position,
                     hits: 0,
-                    target: target.getUsername()
+                    target: target.getName()
                 }
-                this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+                this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
             }
         }
 
@@ -89,15 +89,15 @@ export class IsidaHandler extends Turret {
         if (packet instanceof SendStartIsisShotPacket) {
             this.startedAt = Date.now()
             const pk = new SetStartIsisShotPacket();
-            pk.shooter = this.tank.player.getUsername();
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            pk.shooter = this.tank.player.getName();
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
         }
 
         if (packet instanceof SendStopIsisShotPacket) {
             this.startedAt = 0;
             const pk = new SetStopIsisShotPacket();
-            pk.shooter = this.tank.player.getUsername();
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            pk.shooter = this.tank.player.getName();
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
         }
     }
 }

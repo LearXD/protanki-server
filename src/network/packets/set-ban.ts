@@ -2,12 +2,12 @@ import { ByteArray } from "../utils/byte-array";
 import { Protocol } from "../protocol";
 import { Packet } from "./packet";
 
-export class KickPacket extends Packet {
+export class SetBanPacket extends Packet {
 
     public reason: string
 
     constructor(bytes?: ByteArray) {
-        super(Protocol.KICK, bytes)
+        super(Protocol.SET_BAN, bytes)
     }
 
     public decode() {

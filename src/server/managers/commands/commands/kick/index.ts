@@ -11,20 +11,20 @@ export class KickCommand extends Command {
     public execute(sender: CommandSender, args: string[]): void {
         if (sender instanceof Player) {
             if (args.length < 1) {
-                sender.chatManager.sendMessage("Usage: /kick (player)");
+                sender.chat.sendMessage("Usage: /kick (player)");
                 return;
             }
 
             const target = args.shift();
-            const player = sender.server.playersManager.getPlayer(target);
+            const player = sender.server.players.getPlayer(target);
 
             if (!player) {
-                sender.chatManager.sendMessage(`Player ${target} not found`, true);
+                sender.chat.sendMessage(`Player ${target} not found`, true);
                 return;
             }
 
             player.close();
-            sender.chatManager.sendMessage(`Player ${player.getUsername()} has been kicked`);
+            sender.chat.sendMessage(`Player ${player.getName()} has been kicked`);
         }
     }
 

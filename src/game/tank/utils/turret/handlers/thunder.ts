@@ -99,7 +99,7 @@ export class ThunderHandler extends Turret {
         for (const player of players) {
 
             if (
-                ignore.includes(player.getUsername()) === false &&
+                ignore.includes(player.getName()) === false &&
                 player.tank.isVisible() && (player.tank.isEnemy(this.tank) || player === this.tank.player)
             ) {
                 const distance = player.tank.getPosition().distanceTo(position);
@@ -109,7 +109,7 @@ export class ThunderHandler extends Turret {
                     const direction = Vector3d.copy(player.tank.getPosition()).add(new Vector3d(0, 200, 0)).subtract(position)
                     const rayHit = new RayHit()
 
-                    const hit = this.tank.battle.map.collisionManager
+                    const hit = this.tank.battle.map.collisions
                         .raycastStatic(position.swap(), direction.swap(), 16, 1, null, rayHit)
 
                     if (hit === false) {
@@ -126,17 +126,17 @@ export class ThunderHandler extends Turret {
     public handlePacket(packet: Packet): void {
         if (packet instanceof SendStormVoidShotPacket) {
             const pk = new SetStormVoidShotPacket();
-            pk.shooter = this.tank.player.getUsername();
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            pk.shooter = this.tank.player.getName();
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
         }
 
         if (packet instanceof SendStormHitPointShotPacket) {
             this.splash(packet.hitPoint);
 
             const pk = new SetStormHitPointShotPacket();
-            pk.shooter = this.tank.player.getUsername();
+            pk.shooter = this.tank.player.getName();
             pk.hitPoint = packet.hitPoint;
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
         }
 
         if (packet instanceof SendStormTargetShotPacket) {
@@ -145,10 +145,10 @@ export class ThunderHandler extends Turret {
             if (attacked) {
                 this.splash(packet.hitPoint, [packet.target]);
                 const pk = new SetStormTargetShotPacket();
-                pk.shooter = this.tank.player.getUsername();
+                pk.shooter = this.tank.player.getName();
                 pk.target = packet.target;
                 pk.relativeHitPoint = packet.relativeHitPoint;
-                this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+                this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
             }
         }
     }

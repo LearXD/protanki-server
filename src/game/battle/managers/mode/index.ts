@@ -57,7 +57,7 @@ export abstract class BattleModeManager {
         packet.rewards = this.battle.playersManager.getPlayers()
             .map(player => {
                 return {
-                    user: player.getUsername(),
+                    user: player.getName(),
                     score: player.tank.score,
                     kills: player.tank.kills,
                     deaths: player.tank.deaths

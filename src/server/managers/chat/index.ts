@@ -15,8 +15,8 @@ export class ChatManager {
     public broadcastMessage(message: Message) {
         this.messages.push(message);
 
-        this.server.playersManager.getPlayers().forEach(player => {
-            player.chatManager.sendSetMessage(message)
+        this.server.players.getPlayers().forEach(player => {
+            player.chat.sendSetMessage(message)
         })
 
         return message;
@@ -28,7 +28,7 @@ export class ChatManager {
 
     public handleSendMessage(player: Player, text: string, target: string = null) {
 
-        if (this.server.commandsManager.handleSendCommand(player, text)) {
+        if (this.server.commands.handleSendCommand(player, text)) {
             return;
         }
 
@@ -36,7 +36,7 @@ export class ChatManager {
         if (target) {
             const data = this.server.userDataManager.findPlayerData(target);
             if (!data) {
-                player.chatManager.sendMessage(`Usuário ${target} não encontrado`, true)
+                player.chat.sendMessage(`Usuário ${target} não encontrado`, true)
                 return;
             }
             message.target = new ChatUser(data.username, data.getRank(), data.moderatorLevel);
@@ -46,7 +46,7 @@ export class ChatManager {
             ChatManager.BATTLE_INVITE_PREFIX,
             (match, battleId) => {
                 if (battleId.length === 0x10) {
-                    const battle = this.server.battleManager.getBattleById(battleId);
+                    const battle = this.server.battles.getBattleById(battleId);
                     if (battle) {
                         return `#battle|${battle.name}|${battleId}`;
                     }

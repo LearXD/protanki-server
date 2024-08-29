@@ -92,16 +92,16 @@ export class VulcanHandler extends Turret {
             this.startedAt = Date.now();
 
             const pk = new SetStartVulcanShotPacket();
-            pk.shooter = this.tank.player.getUsername();
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            pk.shooter = this.tank.player.getName();
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
         }
 
         if (packet instanceof SendStopVulcanShotPacket) {
             this.startedAt = 0;
 
             const pk = new SetStopVulcanShotPacket();
-            pk.shooter = this.tank.player.getUsername();
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            pk.shooter = this.tank.player.getName();
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
         }
 
         if (packet instanceof SendVulcanShotPacket) {
@@ -114,10 +114,10 @@ export class VulcanHandler extends Turret {
             }
 
             const pk = new SetVulcanShotPacket();
-            pk.shooter = this.tank.player.getUsername();
+            pk.shooter = this.tank.player.getName();
             pk.direction = packet.direction;
             pk.targets = targets
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
 
             packet.targets.forEach(target => this.attack(target.target))
         }

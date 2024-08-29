@@ -1,3 +1,4 @@
+import { MathUtils } from "@/utils/math";
 import { ByteArray } from "../byte-array";
 
 export enum XorType {
@@ -9,24 +10,25 @@ export class XorDecoder {
 
     private static readonly LENGTH = 8;
 
-    private keys: number[] = [];
-
-    private decrypt_keys: number[] = new Array(XorDecoder.LENGTH);
-    private encrypt_keys: number[] = new Array(XorDecoder.LENGTH);
-
     private cryptoNumber: number;
 
     private encryptPosition: number = 0;
     private decryptPosition: number = 0;
 
-    public init(keys: number[], type: XorType = XorType.CLIENT) {
+    private decrypt_keys: number[] = new Array(XorDecoder.LENGTH);
+    private encrypt_keys: number[] = new Array(XorDecoder.LENGTH);
 
-        var _loc2_ = 0;
-        while (_loc2_ < keys.length) {
-            this.cryptoNumber ^= keys[_loc2_];
+    public constructor(
+        public readonly type: XorType = XorType.SERVER,
+        public readonly keys: number[] = Array.from({ length: 4 }).map(() => MathUtils.randomInt(-128, 127))
+    ) {
+
+        let _loc2_ = 0;
+        while (_loc2_ < this.keys.length) {
+            this.cryptoNumber ^= this.keys[_loc2_];
             _loc2_++;
         }
-        var _loc3_ = 0;
+        let _loc3_ = 0;
         while (_loc3_ < XorDecoder.LENGTH) {
 
             if (type === XorType.CLIENT) {
@@ -38,10 +40,8 @@ export class XorDecoder {
                 this.decrypt_keys[_loc3_] = this.cryptoNumber ^ _loc3_ << 3 ^ 87;
                 this.encrypt_keys[_loc3_] = this.cryptoNumber ^ _loc3_ << 3;
             }
-
             _loc3_++;
         }
-
     }
 
     public static decodeKeys(data: ByteArray): number[] {
@@ -89,13 +89,5 @@ export class XorDecoder {
         }
 
         return decryptedData;
-    }
-
-    public setKeys(keys: number[]) {
-        this.keys = keys;
-    }
-
-    public getKeys() {
-        return this.keys;
     }
 }

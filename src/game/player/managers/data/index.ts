@@ -22,7 +22,7 @@ export class PlayerDataManager {
 
         Logger.info(`Loading data for player username`);
 
-        if (!this.player.authManager.isAuthenticated()) {
+        if (!this.player.auth.authenticated) {
             throw new ServerError('Trying to load data for an unauthenticated player', username);
         }
 
@@ -107,7 +107,7 @@ export class PlayerDataManager {
         setUserPropertyPacket.nextRankScore = RankManager.getNextRankScore(this.player.data.experience);
         setUserPropertyPacket.rating = 1;
         setUserPropertyPacket.serverNumber = 1;
-        setUserPropertyPacket.uid = this.player.getUsername();
+        setUserPropertyPacket.uid = this.player.getName();
         setUserPropertyPacket.userProfileUrl = '';
 
         this.player.sendPacket(setUserPropertyPacket);

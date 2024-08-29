@@ -57,12 +57,12 @@ export class TwinsHandler extends Turret {
         if (packet instanceof SendTwinsShotPacket) {
             const pk = new SetTwinsShotPacket();
 
-            pk.shooter = this.tank.player.getUsername();
+            pk.shooter = this.tank.player.getName();
             pk.barrel = packet.barrel;
             pk.shotId = packet.shotId;
             pk.shotDirection = packet.shotDirection;
 
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
         }
 
         if (packet instanceof SendTwinsTargetShotPacket) {
@@ -74,9 +74,9 @@ export class TwinsHandler extends Turret {
 
         if (packet instanceof SendTwinsOverturnedShotPacket) {
             const pk = new SetTwinsOverturnedShotPacket();
-            pk.shooter = this.tank.player.getUsername();
+            pk.shooter = this.tank.player.getName();
             pk.barrel = packet.barrel;
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
         }
     }
 }

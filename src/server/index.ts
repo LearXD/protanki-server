@@ -27,33 +27,33 @@ import { Rank } from '@/states/rank';
 
 export class Server {
 
-    private server: net.Server = net.createServer();
-    private network: Network = new Network();
+    private readonly server: net.Server = net.createServer();
+    public readonly network: Network = new Network();
 
     private whitelisted: boolean = false;
 
     /** HANDLERS */
-    public readonly clientsHandler: ClientsHandler = new ClientsHandler(this);
+    public readonly clients: ClientsHandler = new ClientsHandler(this);
 
     /** MANAGERS */
-    public readonly assetsManager: AssetsManager = new AssetsManager();
-    public readonly mapsManager: MapsManager = new MapsManager(this);
-    public readonly resourcesManager: ResourcesManager = new ResourcesManager(this);
+    public readonly assets: AssetsManager = new AssetsManager();
+    public readonly maps: MapsManager = new MapsManager(this);
+    public readonly resources: ResourcesManager = new ResourcesManager(this);
 
-    public readonly battleManager: BattlesManager = new BattlesManager(this);
+    public readonly battles: BattlesManager = new BattlesManager(this);
 
-    public readonly rankManager: RankManager = new RankManager(this);
-    public readonly playersManager: PlayersManager = new PlayersManager(this);
-    public readonly authManager: AuthManager = new AuthManager(this);
-    public readonly captchaManager: CaptchaManager = new CaptchaManager(this);
-    public readonly tipsManager: TipsManager = new TipsManager(this);
-    public readonly localeManager: LocaleManager = new LocaleManager(this);
+    public readonly ranks: RankManager = new RankManager(this);
+    public readonly players: PlayersManager = new PlayersManager(this);
+    public readonly auth: AuthManager = new AuthManager(this);
+    public readonly captcha: CaptchaManager = new CaptchaManager(this);
+    public readonly tips: TipsManager = new TipsManager(this);
+    public readonly locale: LocaleManager = new LocaleManager(this);
     public readonly userDataManager: UserDataManager = new UserDataManager(this);
     public readonly friendsManager: FriendsManager = new FriendsManager(this);
-    public readonly chatManager: ChatManager = new ChatManager(this);
-    public readonly commandsManager: CommandsManager = new CommandsManager();
-    public readonly garageManager: Garage = new Garage(this);
-    public readonly shopManager: ShopManager = new ShopManager(this);
+    public readonly chat: ChatManager = new ChatManager(this);
+    public readonly commands: CommandsManager = new CommandsManager();
+    public readonly garage: Garage = new Garage(this);
+    public readonly shop: ShopManager = new ShopManager(this);
 
     public static instance: Server;
     public constructor() { Server.instance = this; }
@@ -62,8 +62,8 @@ export class Server {
         const start = Date.now();
         Logger.info('Starting server...');
 
-        this.battleManager.createBattle('For Newbies', 'map_sandbox')
-        this.battleManager.createBattle('For Newbies 2', 'map_noise', {
+        this.battles.createBattle('For Newbies', 'map_sandbox')
+        this.battles.createBattle('For Newbies 2', 'map_noise', {
             autoBalance: false,
             battleMode: BattleMode.CTF,
             equipmentConstraintsMode: EquipmentConstraintsMode.NONE,
@@ -83,7 +83,7 @@ export class Server {
             withoutCrystals: false,
             withoutSupplies: false
         })
-        this.battleManager.createBattle('For Newbies 3', 'map_sandbox', {
+        this.battles.createBattle('For Newbies 3', 'map_sandbox', {
             autoBalance: false,
             battleMode: BattleMode.CP,
             equipmentConstraintsMode: EquipmentConstraintsMode.NONE,
@@ -115,13 +115,13 @@ export class Server {
     }
 
     public close = () => {
-        this.playersManager.getPlayers().forEach((player) => player.close());
+        this.players.getPlayers().forEach((player) => player.close());
         this.server.close();
         Logger.info('Server closed');
     }
 
     public init() {
-        this.server.on('connection', (socket) => this.clientsHandler.handleConnection(socket));
+        this.server.on('connection', (socket) => this.clients.handleConnection(socket));
         this.server.on('error', (error) => Logger.error(error.message));
     }
 
@@ -129,12 +129,8 @@ export class Server {
         return Math.round(process.memoryUsage().heapUsed / 1024 / 1024 * 100) / 100;
     }
 
-    public getNetwork() {
-        return this.network
-    }
-
     public sendMessage = (message: string, warning: boolean = false) => {
-        this.chatManager.broadcastServerMessage(message, warning);
+        this.chat.broadcastServerMessage(message, warning);
     }
 
     public isWhitelisted() {
@@ -152,14 +148,14 @@ export class Server {
 
     public broadcastPacket(packet: Packet, clients: boolean = false) {
         if (clients) {
-            return this.clientsHandler.getClients()
+            return this.clients.getClients()
                 .forEach((client) => this.sendPacket(client, packet));
         }
 
-        return this.playersManager.getPlayers()
+        return this.players.getPlayers()
             .forEach((client) => this.sendPacket(client, packet));
     }
 
-    public getClientHandler() { return this.clientsHandler }
+    public getClientHandler() { return this.clients }
 
 }

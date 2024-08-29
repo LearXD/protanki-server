@@ -32,7 +32,7 @@ export class BattleBoxesManager {
     public constructor(
         public readonly battle: Battle
     ) {
-        this.data = battle.server.battleManager.getData('bonuses.json')
+        this.data = battle.server.battles.getData('bonuses.json')
         if (!this.data) {
             throw new ServerError('Bonuses data not found')
         }
@@ -82,7 +82,7 @@ export class BattleBoxesManager {
 
     public broadcastGoldBoxCollected(player: Player) {
         const packet = new SetGoldBoxTakenPacket();
-        packet.user = player.getUsername();
+        packet.user = player.getName();
         this.battle.broadcastPacket(packet);
     }
 

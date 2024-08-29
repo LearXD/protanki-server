@@ -45,8 +45,8 @@ export class RailgunHandler extends Turret {
             this.startedAt = Date.now();
 
             const pk = new SetStartRailgunShotPacket();
-            pk.shooter = this.tank.player.getUsername();
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            pk.shooter = this.tank.player.getName();
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
         }
 
         if (packet instanceof SendRailgunShotPacket) {
@@ -54,11 +54,11 @@ export class RailgunHandler extends Turret {
             if (this.startedAt === 0) return;
 
             const pk = new SetRailgunShotPacket();
-            pk.shooter = this.tank.player.getUsername();
+            pk.shooter = this.tank.player.getName();
             pk.staticHitPoint = packet.staticHitPoint;
             pk.targets = packet.targets;
             pk.targetHitPoints = packet.targetsHitPoints;
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
 
             if (packet.targets) {
                 packet.targets.forEach((target, i) => this.attack(target, packet.incarnations[i], { order: i }))

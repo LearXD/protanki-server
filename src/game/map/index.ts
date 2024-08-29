@@ -26,8 +26,8 @@ export class Map extends MapDataManager {
     public readonly points: IMapPoint[] = []
     public readonly flags: IMapFlags = null
 
-    public readonly collisionManager: MapCollisionManager
-    public readonly areaManager: MapAreaManager
+    public readonly collisions: MapCollisionManager
+    public readonly areas: MapAreaManager
 
     public constructor(
         public readonly manager: MapsManager,
@@ -46,8 +46,8 @@ export class Map extends MapDataManager {
         this.flags = manager.getMapsData(path.join(this.getId(), 'flags.json'))
         this.points = manager.getMapsData(path.join(this.getId(), 'points.json'))
 
-        this.collisionManager = new MapCollisionManager(manager.getMapsData(path.join(this.getId(), 'collisions.json')))
-        this.areaManager = new MapAreaManager(manager.getMapsData(path.join(this.getId(), 'areas.json')))
+        this.collisions = new MapCollisionManager(manager.getMapsData(path.join(this.getId(), 'collisions.json')))
+        this.areas = new MapAreaManager(manager.getMapsData(path.join(this.getId(), 'areas.json')))
     }
 
     public getBonusSpawns(name: BonusType, mode: BattleModeType): Vector3d[] {
@@ -88,30 +88,24 @@ export class Map extends MapDataManager {
             minRank: battle.getRankRange().min,
             maxRank: battle.getRankRange().max,
             skybox: JSON.stringify(this.properties.skybox),
-            // @ts-ignore
-            // skybox: this.properties.skybox,
             sound_id: this.properties.sound_id,
             map_graphic_data: JSON.stringify(this.properties.map_graphic_data),
-            // @ts-ignore
-            // map_graphic_data: this.properties.map_graphic_data,
             reArmorEnabled: battle.isReArmorEnabled(),
             bonusLightIntensity: this.properties.bonusLightIntensity,
             lighting: JSON.stringify(this.properties.lighting)
-            // @ts-ignore
-            // lighting: this.properties.lighting
         }
 
         player.sendPacket(packet);
     }
 
     public async sendResources(player: Player) {
-        await player.server.resourcesManager
-            .sendLoadResources(player, this.librariesResources)
+        await player.resources
+            .loadResources(this.librariesResources)
 
-        await player.server.resourcesManager
-            .sendLoadResources(player, this.skyboxResources)
+        await player.resources
+            .loadResources(this.skyboxResources)
 
-        await player.server.resourcesManager
-            .sendLoadResources(player, this.mapResources)
+        await player.resources
+            .loadResources(this.mapResources)
     }
 }

@@ -20,10 +20,9 @@ import { PlayerShopManager } from "./managers/shop";
 import { PlayerDailyQuestsManager } from "./managers/daily-quests";
 import { Client } from "../client";
 import { PlayerData } from "./utils/data";
-import { PlayerPacketHandler } from "./handlers/packet";
 import { ResourceType } from "../../server/managers/resources/types";
-import { BattleMode } from "@/states/battle-mode";
 import { Packet } from "@/network/packets/packet";
+import { SendRequestUserDataPacket } from "@/network/packets/send-request-user-data";
 
 export class Player extends Client {
 
@@ -35,97 +34,87 @@ export class Player extends Client {
     public viewingBattle: Battle;
     public layoutState: LayoutStateType;
 
-    private packetHandler: PlayerPacketHandler;
-
     public readonly dataManager: PlayerDataManager = new PlayerDataManager(this);
-    public readonly friendsManager: PlayerFriendsManager = new PlayerFriendsManager(this);
-    public readonly garageManager: PlayerGarageManager = new PlayerGarageManager(this);
-    public readonly authManager: PlayerAuthManager = new PlayerAuthManager(this);
-    public readonly chatManager: PlayerChatManager = new PlayerChatManager(this);
-    public readonly battlesManager: PlayerBattlesManager = new PlayerBattlesManager(this);
-    public readonly configsManager: PlayerConfigsManager = new PlayerConfigsManager(this);
-    public readonly shopManager: PlayerShopManager = new PlayerShopManager(this);
-    public readonly dailyQuestsManager: PlayerDailyQuestsManager = new PlayerDailyQuestsManager(this);
+    public readonly friends: PlayerFriendsManager = new PlayerFriendsManager(this);
+    public readonly garage: PlayerGarageManager = new PlayerGarageManager(this);
+    public readonly auth: PlayerAuthManager = new PlayerAuthManager(this);
+    public readonly chat: PlayerChatManager = new PlayerChatManager(this);
+    public readonly battles: PlayerBattlesManager = new PlayerBattlesManager(this);
+    public readonly configs: PlayerConfigsManager = new PlayerConfigsManager(this);
+    public readonly shop: PlayerShopManager = new PlayerShopManager(this);
+    public readonly quests: PlayerDailyQuestsManager = new PlayerDailyQuestsManager(this);
 
     private updateInterval: NodeJS.Timeout;
 
     public constructor(socket: net.Socket, server: Server) {
         super(socket, server);
-
-        this.packetHandler = new PlayerPacketHandler(this);
-
-        this.dataManager = new PlayerDataManager(this);
-
-        this.friendsManager = new PlayerFriendsManager(this);
-        this.garageManager = new PlayerGarageManager(this);
-        this.authManager = new PlayerAuthManager(this);
-        this.chatManager = new PlayerChatManager(this);
-        this.battlesManager = new PlayerBattlesManager(this);
-        this.configsManager = new PlayerConfigsManager(this);
-        this.shopManager = new PlayerShopManager(this);
-        this.dailyQuestsManager = new PlayerDailyQuestsManager(this);
-
         this.updateInterval = setInterval(this.update.bind(this), 1000);
+    }
 
-        this.init();
+    public getName() {
+        if (this.data && this.data.username) {
+            return this.data.username
+        }
+        return super.getName();
     }
 
     public async init() {
-        Logger.debug('Initializing client');
-        await this.server.resourcesManager.sendResources(this, ResourceType.AUTH)
-        await this.server.tipsManager.sendLoadingTip(this);
-        this.server.captchaManager.sendCaptchaLocations(this);
-        this.server.authManager.sendAuthConfig(this);
+        super.init();
+        await this.server.resources.sendResources(this, ResourceType.AUTH)
+        await this.server.tips.sendLoadingTip(this);
+        this.server.captcha.sendCaptchaLocations(this);
+        this.server.auth.sendAuthConfig(this);
     }
 
     public close() {
         clearInterval(this.updateInterval);
-        this.socket.destroy();
 
-        if (this.viewingBattle) {
-            this.viewingBattle.viewersManager.removeViewer(this);
+        if (this.auth.authenticated) {
+
+            if (this.viewingBattle) {
+                this.viewingBattle.viewersManager.removeViewer(this);
+            }
+
+            if (this.battle) {
+                this.battle.onPlayerLeave(this)
+            }
+
+            this.server.players.removePlayer(this)
         }
 
+        super.close();
+    }
+
+    public sendMessage(message: string) {
         if (this.battle) {
-            this.battle.onPlayerLeave(this)
+            this.battle.chatManager.sendMessage(this, message);
+            return;
         }
 
-        if (this.authManager.isAuthenticated()) {
-            this.server.playersManager.removePlayer(this)
-        }
-
-        this.server.getClientHandler().handleDisconnection(this);
-    }
-
-    public getUsername() {
-        return this.data.username
-    }
-
-    public getLayoutState() {
-        return this.layoutState
+        this.chat.sendMessage(message);
     }
 
     public handleChangeLayoutState(state: LayoutStateType, oldState: LayoutStateType) {
         switch (state) {
             case LayoutState.BATTLE:
-                this.chatManager.sendRemoveChatScreen();
+                this.chat.sendRemoveChatScreen();
 
                 if (oldState === LayoutState.BATTLE_SELECT) {
-                    this.battlesManager.sendRemoveBattlesScreen();
+                    this.battles.sendRemoveBattlesScreen();
                 }
 
                 if (oldState === LayoutState.GARAGE) {
-                    this.garageManager.closeGarage();
+                    this.garage.closeGarage();
                 }
                 break;
             case LayoutState.BATTLE_SELECT:
                 if (oldState === LayoutState.GARAGE) {
-                    this.garageManager.removeGarageScreen();
+                    this.garage.removeGarageScreen();
                 }
                 break;
             case LayoutState.GARAGE:
                 if (oldState === LayoutState.BATTLE_SELECT) {
-                    this.battlesManager.sendRemoveBattlesScreen();
+                    this.battles.sendRemoveBattlesScreen();
                 }
                 break;
         }
@@ -157,31 +146,23 @@ export class Player extends Client {
         this.sendPacket(setLayoutStatePacket);
     }
 
-    public sendMessage(message: string) {
-        if (this.battle) {
-            this.battle.chatManager.sendMessage(this, message);
-            return;
-        }
-
-        this.chatManager.sendMessage(message);
-    }
-
     public handleClientSetLayoutState(state: LayoutStateType) {
 
         switch (state) {
             case LayoutState.BATTLE_SELECT: {
+
                 if (this.battle) {
                     this.battle.onPlayerLeave(this)
                 }
 
                 if (this.layoutState === LayoutState.BATTLE_SELECT) {
-                    this.chatManager.sendChat();
+                    this.chat.sendChat();
                     this.layoutState = LayoutState.BATTLE_SELECT;
                     this.setSubLayoutState(LayoutState.BATTLE_SELECT);
                     return
                 }
 
-                this.battlesManager.sendBattleSelectScreen()
+                this.battles.sendBattleSelectScreen()
                 this.setLayoutState(LayoutState.BATTLE_SELECT);
                 this.setSubLayoutState(LayoutState.BATTLE_SELECT);
 
@@ -192,39 +173,41 @@ export class Player extends Client {
                     this.battle.onPlayerLeave(this)
                 }
 
-                this.battlesManager.sendRemoveBattlesScreen();
-                this.chatManager.sendChat();
-                this.garageManager.sendOpenGarage();
+                this.battles.sendRemoveBattlesScreen();
+                this.chat.sendChat();
+                this.garage.sendOpenGarage();
                 break;
             }
         }
     }
 
-    public handlePacket(packet: Packet): boolean {
-
+    public handlePacket(packet: Packet) {
         super.handlePacket(packet)
-        this.authManager.handlePacket(packet)
 
-        if (!this.authManager.isAuthenticated()) {
-            return;
+        this.auth.handlePacket(packet)
+
+        if (this.auth.authenticated) {
+
+            if (packet instanceof SendLayoutStatePacket) {
+                this.handleClientSetLayoutState(packet.state as LayoutStateType)
+            }
+
+            if (this.battle && this.tank) {
+                this.tank.handlePacket(packet)
+            }
+
+            if (packet instanceof SendRequestUserDataPacket) {
+                this.server.userDataManager.handleRequestUserData(this, packet.userId);
+            }
+
+            this.friends.handlePacket(packet)
+            this.garage.handlePacket(packet)
+            this.chat.handlePacket(packet)
+            this.battles.handlePacket(packet)
+            this.configs.handlePacket(packet)
+            this.shop.handlePacket(packet)
+            this.quests.handlePacket(packet)
         }
-
-        this.friendsManager.handlePacket(packet)
-        this.garageManager.handlePacket(packet)
-        this.chatManager.handlePacket(packet)
-        this.battlesManager.handlePacket(packet)
-        this.configsManager.handlePacket(packet)
-        this.shopManager.handlePacket(packet)
-        this.dailyQuestsManager.handlePacket(packet)
-
-        if (this.tank) {
-            this.tank.handlePacket(packet)
-        }
-
-        if (packet instanceof SendLayoutStatePacket) {
-            this.handleClientSetLayoutState(packet.state as LayoutStateType)
-        }
-
     }
 
     public update() {
@@ -234,9 +217,4 @@ export class Player extends Client {
             this.tank.update()
         }
     }
-
-    public getPacketHandler(): PlayerPacketHandler {
-        return this.packetHandler
-    }
-
 }

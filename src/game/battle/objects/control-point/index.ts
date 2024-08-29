@@ -11,14 +11,11 @@ import { SetTeamStoppedCapturingControlPointPacketPacket } from "@/network/packe
 import { SetTankStopCapturingControlPointPacket } from "@/network/packets/set-tank-stop-capturing-control-point";
 import { SetControlPointStatePacket } from "@/network/packets/set-control-point-state";
 import { Battle } from "../..";
-import { Logger } from "@/utils/logger";
 
 export class ControlPoint extends BattleObject {
 
     public static readonly MAX_SCORE = 100
     public static readonly CAPTURE_SPEED = 20
-
-    public changeStateTask: number;
 
     public state: ControlPointStateType = ControlPointState.NEUTRAL
     public score: number = 0
@@ -32,13 +29,18 @@ export class ControlPoint extends BattleObject {
         super(`point_${point}`, position, 1500);
     }
 
-    public getCapturingPlayers(): Player[] {
-        return Array.from(this.colliding);
+    public reset() {
+        this.score = 0
+        this.state = ControlPointState.NEUTRAL
     }
 
-    public setScore(number: number) {
-        Logger.debug(`Control point ${this.point} score: ${this.score} -> ${number}`)
-        this.score = number;
+    public getTeamOwner(): TeamType {
+        return this.state === ControlPointState.NEUTRAL ?
+            null : this.state === ControlPointState.BLUE ? Team.BLUE : Team.RED
+    }
+
+    public getCapturingPlayers(): Player[] {
+        return Array.from(this.colliding);
     }
 
     public getCapturingSpeed(): number {
@@ -101,14 +103,14 @@ export class ControlPoint extends BattleObject {
     public broadcastTankStartedCapturing(player: Player): void {
         const packet = new SetTankCapturingControlPointPacket();
         packet.pointId = this.id
-        packet.tankId = player.getUsername()
+        packet.tankId = player.getName()
         this.manager.battle.broadcastPacket(packet)
     }
 
     public broadcastTankStoppedCapturing(player: Player): void {
         const packet = new SetTankStopCapturingControlPointPacket();
         packet.pointId = this.id
-        packet.tankId = player.getUsername()
+        packet.tankId = player.getName()
         this.manager.battle.broadcastPacket(packet)
     }
 
@@ -123,7 +125,7 @@ export class ControlPoint extends BattleObject {
     }
 
     public onStartColliding(player: Player): void {
-        if (this.state === ControlPointState.NEUTRAL || this.state !== player.tank.team) {
+        if (this.state === ControlPointState.NEUTRAL || this.getTeamOwner() !== player.tank.team) {
             this.broadcastTeamStarterCapturing(player.tank.team)
         }
         this.broadcastTankStartedCapturing(player)
@@ -131,7 +133,7 @@ export class ControlPoint extends BattleObject {
     }
 
     public onStopColliding(player: Player): void {
-        if (this.state === ControlPointState.NEUTRAL || this.state !== player.tank.team) {
+        if (this.state === ControlPointState.NEUTRAL || this.getTeamOwner() !== player.tank.team) {
             this.broadcastTeamStoppedCapturing(player.tank.team)
         }
         this.broadcastTankStoppedCapturing(player)

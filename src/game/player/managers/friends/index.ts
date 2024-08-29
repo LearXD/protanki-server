@@ -53,7 +53,7 @@ export class PlayerFriendsManager {
 
     public sendInviteFriendsProperties() {
         const setInviteFriendsPropertiesPacket = new SetInviteFriendsPropertiesPacket();
-        setInviteFriendsPropertiesPacket.hash = this.player.getUsername();
+        setInviteFriendsPropertiesPacket.hash = this.player.getName();
         setInviteFriendsPropertiesPacket.host = this.player.server.friendsManager.getHost();
         this.player.sendPacket(setInviteFriendsPropertiesPacket);
     }
@@ -73,8 +73,8 @@ export class PlayerFriendsManager {
         const setOpenInviteFriendsPacket = new SetOpenInviteFriendsPacket();
         setOpenInviteFriendsPacket.invites = [];
         setOpenInviteFriendsPacket.inviteLink = 'https://learxd.dev';
-        setOpenInviteFriendsPacket.banner = `<h1>Invite your friends ${this.player.getUsername()}</h1>`;
-        setOpenInviteFriendsPacket.inviteMessage = `Olá, ${this.player.getUsername()}! Venha jogar comigo no Tanki Online!`;
+        setOpenInviteFriendsPacket.banner = `<h1>Invite your friends ${this.player.getName()}</h1>`;
+        setOpenInviteFriendsPacket.inviteMessage = `Olá, ${this.player.getName()}! Venha jogar comigo no Tanki Online!`;
 
         this.player.sendPacket(setOpenInviteFriendsPacket);
     }

@@ -14,7 +14,7 @@ export class AuthManager {
     constructor(
         private readonly server: Server
     ) {
-        this.config = server.assetsManager.getData('auth.json')
+        this.config = server.assets.getData('auth.json')
 
         if (!this.config) {
             throw new ServerError('Auth config not found!')

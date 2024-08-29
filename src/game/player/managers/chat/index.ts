@@ -36,7 +36,7 @@ export class PlayerChatManager {
     public sendChatMessages() {
         const setChatMessagesPacket = new SetChatMessagesPacket();
 
-        setChatMessagesPacket.messages = this.player.server.chatManager.messages
+        setChatMessagesPacket.messages = this.player.server.chat.messages
             .map(message => message.toObject());
 
         this.player.sendPacket(setChatMessagesPacket);
@@ -53,7 +53,7 @@ export class PlayerChatManager {
         setChatInitParamsPacket.linksWhiteList = [];
         setChatInitParamsPacket.minChar = 60;
         setChatInitParamsPacket.minWord = 5;
-        setChatInitParamsPacket.selfName = this.player.getUsername();
+        setChatInitParamsPacket.selfName = this.player.getName();
         setChatInitParamsPacket.showLinks = this.player.data.isAdmin();
         setChatInitParamsPacket.typingSpeedAntifloodEnabled = !this.player.data.isAdmin()
         this.player.sendPacket(setChatInitParamsPacket);
@@ -66,7 +66,7 @@ export class PlayerChatManager {
 
     public handlePacket(packet: Packet) {
         if (packet instanceof SendChatMessagePacket) {
-            this.player.server.chatManager.handleSendMessage(this.player, packet.text, packet.target);
+            this.player.server.chat.handleSendMessage(this.player, packet.text, packet.target);
         }
     }
 }

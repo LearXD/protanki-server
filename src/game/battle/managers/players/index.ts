@@ -22,11 +22,11 @@ export class BattlePlayersManager {
     ) { }
 
     public hasSpectator(player: Player) {
-        return this.spectators.has(player.getUsername())
+        return this.spectators.has(player.getName())
     }
 
     public hasPlayer(player: Player) {
-        return this.players.has(player.getUsername())
+        return this.players.has(player.getName())
     }
 
     public getSpectators() {
@@ -56,20 +56,20 @@ export class BattlePlayersManager {
         }
 
         player.tank = new Tank(player, this.battle, team)
-        this.players.set(player.getUsername(), player)
+        this.players.set(player.getName(), player)
 
         if (this.battle.getMode() === BattleMode.DM) {
             const setAddUserOnBattleCounterPacket = new SetAddUserOnBattleCounterPacket();
             setAddUserOnBattleCounterPacket.battleId = this.battle.battleId;
-            setAddUserOnBattleCounterPacket.userId = player.getUsername();
-            player.server.battleManager.broadcastPacket(setAddUserOnBattleCounterPacket);
+            setAddUserOnBattleCounterPacket.userId = player.getName();
+            player.server.battles.broadcastPacket(setAddUserOnBattleCounterPacket);
 
             const setAddUserInfoOnViewingBattlePacket = new SetAddUserInfoOnViewingBattlePacket
-            setAddUserInfoOnViewingBattlePacket.battle = player.getUsername()
+            setAddUserInfoOnViewingBattlePacket.battle = player.getName()
             setAddUserInfoOnViewingBattlePacket.kills = 0
             setAddUserInfoOnViewingBattlePacket.score = 0
             setAddUserInfoOnViewingBattlePacket.suspicious = false
-            setAddUserInfoOnViewingBattlePacket.user = player.getUsername()
+            setAddUserInfoOnViewingBattlePacket.user = player.getName()
             this.battle.viewersManager.broadcastPacket(setAddUserInfoOnViewingBattlePacket);
         }
 
@@ -77,15 +77,15 @@ export class BattlePlayersManager {
             const setAddUserOnTeamBattleCounterPacket = new SetAddUserOnTeamBattleCounterPacket();
             setAddUserOnTeamBattleCounterPacket.battle = this.battle.battleId;
             setAddUserOnTeamBattleCounterPacket.team = player.tank.team;
-            setAddUserOnTeamBattleCounterPacket.user = player.getUsername();
-            player.server.battleManager.broadcastPacket(setAddUserOnTeamBattleCounterPacket);
+            setAddUserOnTeamBattleCounterPacket.user = player.getName();
+            player.server.battles.broadcastPacket(setAddUserOnTeamBattleCounterPacket);
 
             const setAddUserInfoOnViewingTeamBattlePacket = new SetAddUserInfoOnViewingTeamBattlePacket();
             setAddUserInfoOnViewingTeamBattlePacket.battleId = this.battle.battleId;
             setAddUserInfoOnViewingTeamBattlePacket.kills = 0;
             setAddUserInfoOnViewingTeamBattlePacket.score = 0;
             setAddUserInfoOnViewingTeamBattlePacket.suspicious = false;
-            setAddUserInfoOnViewingTeamBattlePacket.user = player.getUsername();
+            setAddUserInfoOnViewingTeamBattlePacket.user = player.getName();
             setAddUserInfoOnViewingTeamBattlePacket.team = player.tank.team;
             this.battle.viewersManager.broadcastPacket(setAddUserInfoOnViewingTeamBattlePacket);
         }
@@ -99,39 +99,39 @@ export class BattlePlayersManager {
             return
         }
 
-        this.players.delete(player.getUsername());
+        this.players.delete(player.getName());
 
         if (this.battle.getMode() === BattleMode.DM) {
             const setRemoveUserFromBattleCounterPacket = new SetRemoveUserFromBattleCounterPacket();
             setRemoveUserFromBattleCounterPacket.battleId = this.battle.battleId;
-            setRemoveUserFromBattleCounterPacket.userId = player.getUsername();
-            player.server.battleManager.broadcastPacket(setRemoveUserFromBattleCounterPacket);
+            setRemoveUserFromBattleCounterPacket.userId = player.getName();
+            player.server.battles.broadcastPacket(setRemoveUserFromBattleCounterPacket);
         }
 
         if (this.battle.getMode() !== BattleMode.DM) {
             const setRemoveUserFromTeamBattleCounterPacket = new SetRemoveUserFromTeamBattleCounterPacket()
             setRemoveUserFromTeamBattleCounterPacket.battleId = this.battle.battleId
-            setRemoveUserFromTeamBattleCounterPacket.userId = player.getUsername()
-            player.server.battleManager.broadcastPacket(setRemoveUserFromTeamBattleCounterPacket)
+            setRemoveUserFromTeamBattleCounterPacket.userId = player.getName()
+            player.server.battles.broadcastPacket(setRemoveUserFromTeamBattleCounterPacket)
         }
 
         const setRemoveUserFromViewingBattlePacket = new SetRemoveUserFromViewingBattlePacket();
-        setRemoveUserFromViewingBattlePacket.battleId = player.getUsername();
-        setRemoveUserFromViewingBattlePacket.userId = player.getUsername();
+        setRemoveUserFromViewingBattlePacket.battleId = player.getName();
+        setRemoveUserFromViewingBattlePacket.userId = player.getName();
         this.battle.viewersManager.broadcastPacket(setRemoveUserFromViewingBattlePacket);
     }
 
     public addSpectator(player: Player) {
-        this.spectators.set(player.getUsername(), player)
+        this.spectators.set(player.getName(), player)
     }
 
     public removeSpectator(player: Player) {
-        this.spectators.delete(player.getUsername());
+        this.spectators.delete(player.getName());
     }
 
     public sendTanksData(player: Player) {
         for (const source of this.getPlayers()) {
-            if (source.getUsername() !== player.getUsername()) {
+            if (source.getName() !== player.getName()) {
                 const data = source.tank.getData()
                 this.sendTankData({ ...data, state_null: false }, player)
             }
@@ -142,7 +142,7 @@ export class BattlePlayersManager {
     public broadcastTankData(data: Exclude<IUserTankResourcesData, 'state_null'>) {
         for (const player of this.getAll()) {
             this.sendTankData(
-                { ...data, state_null: player.getUsername() === data.tank_id }, player
+                { ...data, state_null: player.getName() === data.tank_id }, player
             )
         }
     }

@@ -18,7 +18,7 @@ export class TipsManager {
     }
 
     public init() {
-        this.resources = this.server.assetsManager.getResource('tips.json')
+        this.resources = this.server.assets.getResource('tips.json')
     }
 
     public getResources() {
@@ -37,8 +37,8 @@ export class TipsManager {
     }
 
     public async sendAllLoadingTips(client: Player) {
-        await this.server.resourcesManager
-            .sendLoadResources(client, this.getResources());
+        await client.resources
+            .loadResources(this.getResources());
     }
 
     public async sendLoadingTip(client: Client) {
@@ -50,8 +50,7 @@ export class TipsManager {
             return null
         }
 
-        await this.server.resourcesManager
-            .sendLoadResources(client, [resource]);
+        await client.resources.loadResources([resource]);
 
         this.sendShowLoadingTip(client, resource.idlow);
 

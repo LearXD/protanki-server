@@ -34,14 +34,14 @@ export class BattleViewersManager {
         client.sendPacket(setViewingBattlePacket);
 
         client.viewingBattle = this.battle;
-        this.viewers.set(client.getUsername(), client);
+        this.viewers.set(client.getName(), client);
 
         this.sendViewingBattleData(client);
     }
 
     public removeViewer(viewer: Player) {
-        if (this.hasViewer(viewer.getUsername())) {
-            this.viewers.delete(viewer.getUsername());
+        if (this.hasViewer(viewer.getName())) {
+            this.viewers.delete(viewer.getName());
 
             const setRemoveViewingBattlePacket = new SetRemoveViewingBattlePacket();
             setRemoveViewingBattlePacket.battleId = this.battle.battleId;
@@ -89,7 +89,7 @@ export class BattleViewersManager {
                 kills: player.tank.kills,
                 score: player.tank.score,
                 suspicious: false,
-                user: player.getUsername(),
+                user: player.getName(),
             }));
         }
 
@@ -106,7 +106,7 @@ export class BattleViewersManager {
                     kills: player.tank.kills,
                     score: player.tank.score,
                     suspicious: false,
-                    user: player.getUsername(),
+                    user: player.getName(),
                 }));
 
             packet.data.usersBlue = this.battle.playersManager.getPlayers()
@@ -115,7 +115,7 @@ export class BattleViewersManager {
                     kills: player.tank.kills,
                     score: player.tank.score,
                     suspicious: false,
-                    user: player.getUsername(),
+                    user: player.getName(),
                 }));
         }
 

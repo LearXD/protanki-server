@@ -12,6 +12,7 @@ export class BattleControlPointsModeManager extends BattleTeamModeManager {
         super.init();
 
         if (this.controlPoints.length > 0) {
+            this.controlPoints.forEach(point => point.reset())
             return;
         }
 
@@ -45,7 +46,7 @@ export class BattleControlPointsModeManager extends BattleTeamModeManager {
             score: point.score,
             scoreChangeRate: 0,
             state: point.state,
-            tankIds: point.getCapturingPlayers().map(player => player.getUsername())
+            tankIds: point.getCapturingPlayers().map(player => player.getName())
         }));
         packet.resources = {
             bigLetters: 150231,

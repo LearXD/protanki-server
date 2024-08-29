@@ -14,7 +14,7 @@ export class RankManager {
     public constructor(
         private readonly server: Server
     ) {
-        RankManager.ranks = this.server.assetsManager.getData('ranks.json');
+        RankManager.ranks = this.server.assets.getData('ranks.json');
     }
 
     public static getRank(rank: RankType): IRanksData {
@@ -57,12 +57,12 @@ export class RankManager {
         const battle = player.battle;
         if (battle) {
             const setUserNewRankPacket = new SetUserNewRankPacket();
-            setUserNewRankPacket.userId = player.getUsername()
+            setUserNewRankPacket.userId = player.getName()
             setUserNewRankPacket.newRank = player.data.getRank()
             battle.broadcastPacket(setUserNewRankPacket);
 
             const setUserRankPacket = new SetUserRankPacket();
-            setUserRankPacket.user = player.getUsername();
+            setUserRankPacket.user = player.getName();
             setUserRankPacket.rank = rank.rank;
             player.sendPacket(setUserRankPacket);
         }

@@ -60,27 +60,27 @@ export class ShaftHandler extends Turret {
 
         if (packet instanceof SendOpenShaftAimPacket) {
             const pk = new SetStartShaftShotPacket();
-            pk.shooter = this.tank.player.getUsername();
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            pk.shooter = this.tank.player.getName();
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
         }
 
         if (packet instanceof SendShaftStopAimPacket) {
             const pk = new SetStopShaftShotPacket();
-            pk.shooter = this.tank.player.getUsername();
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            pk.shooter = this.tank.player.getName();
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
             this.startedAt = 0;
         }
 
         if (packet instanceof SendShaftShotPacket) {
             const pk = new SetShaftShotPacket();
 
-            pk.shooter = this.tank.player.getUsername();
+            pk.shooter = this.tank.player.getName();
             pk.staticHitPoint = packet.staticHitPoint;
             pk.targets = packet.targets;
             pk.targetHitPoints = packet.targetsHitPoints;
             pk.impactForce = this.getImpactForce();
 
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
 
             packet.targets && packet.targets
                 .forEach((target, i) => this.attack(target, packet.incarnations[i], { order: i + 1 }))
@@ -91,13 +91,13 @@ export class ShaftHandler extends Turret {
         if (packet instanceof SendShaftAimShotPacket) {
             const pk = new SetShaftShotPacket();
 
-            pk.shooter = this.tank.player.getUsername();
+            pk.shooter = this.tank.player.getName();
             pk.staticHitPoint = packet.staticHitPoint;
             pk.targets = packet.targets;
             pk.targetHitPoints = packet.targetsHitPoints;
             pk.impactForce = this.getImpactForce();
 
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
 
             packet.targets && packet.targets
                 .forEach((target, i) => this.attack(target, packet.incarnations[i], { order: i + 1 }))
@@ -107,17 +107,17 @@ export class ShaftHandler extends Turret {
 
         if (packet instanceof SendMoveShaftVerticalAxisPacket) {
             const pk = new SetMoveShaftVerticalAxisPacket();
-            pk.shooter = this.tank.player.getUsername();
+            pk.shooter = this.tank.player.getName();
             pk.projectionOnVerticalAxis = packet.projectionOnVerticalAxis;
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
         }
 
         if (packet instanceof SendShaftLocalSpotPacket) {
             const pk = new SetShaftLocalSpotPacket();
-            pk.shooter = this.tank.player.getUsername();
+            pk.shooter = this.tank.player.getName();
             pk.target = packet.tank;
             pk.position = packet.localSpotPosition;
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
         }
     }
 }

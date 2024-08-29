@@ -33,7 +33,7 @@ export class BattleDeathMatchModeManager extends BattleModeManager {
 
     public onPlayerJoin(player: Player): void {
         const packet = new SetBattleAddUsersPropertiesPacket();
-        packet.userId = player.getUsername();
+        packet.userId = player.getName();
         packet.users = this.battle.playersManager.getPlayers()
             .map(player => {
                 return {
@@ -42,16 +42,16 @@ export class BattleDeathMatchModeManager extends BattleModeManager {
                     kills: player.tank.kills,
                     rank: player.data.getRank(),
                     score: player.tank.score,
-                    name: player.getUsername()
+                    name: player.getName()
                 }
             })
 
-        this.battle.broadcastPacket(packet, [player.getUsername()]);
+        this.battle.broadcastPacket(packet, [player.getName()]);
     }
 
     public onPlayerLeave(player: Player): void {
         const packet = new SetBattleUserLeftNotificationPacket();
-        packet.userId = player.getUsername();
+        packet.userId = player.getName();
         this.battle.broadcastPacket(packet);
     }
 
@@ -61,7 +61,7 @@ export class BattleDeathMatchModeManager extends BattleModeManager {
         setBattleUserStatusPacket.deaths = player.tank.deaths
         setBattleUserStatusPacket.kills = player.tank.kills
         setBattleUserStatusPacket.score = player.tank.score
-        setBattleUserStatusPacket.user = player.getUsername()
+        setBattleUserStatusPacket.user = player.getName()
 
         this.battle.broadcastPacket(setBattleUserStatusPacket)
     }
@@ -76,7 +76,7 @@ export class BattleDeathMatchModeManager extends BattleModeManager {
                 kills: player.tank.kills,
                 rank: player.data.getRank(),
                 score: player.tank.score,
-                name: player.getUsername()
+                name: player.getName()
             }))
 
         player.sendPacket(packet);

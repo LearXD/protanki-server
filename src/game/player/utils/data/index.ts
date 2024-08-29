@@ -253,7 +253,7 @@ export class PlayerData {
 
             const rank = this.getRank()
             if (old !== rank) {
-                this.player.server.rankManager.handlePlayerRankChange(this.player)
+                this.player.server.ranks.handlePlayerRankChange(this.player)
             }
         }
     }

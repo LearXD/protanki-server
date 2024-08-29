@@ -65,7 +65,7 @@ export class BattleCollisionsManager {
     }
 
     public handlePlayerMovement(player: Player) {
-        this.battle.map.areaManager.checkCollisions(player)
+        this.battle.map.areas.checkCollisions(player)
         this.checkObjectCollisions(player)
     }
 

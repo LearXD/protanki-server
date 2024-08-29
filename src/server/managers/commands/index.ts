@@ -71,7 +71,7 @@ export class CommandsManager {
             return true;
         }
 
-        Logger.debug(`Command ${text} executed by ${sender instanceof Player ? sender.getUsername() : 'Server'}`);
+        Logger.debug(`Command ${text} executed by ${sender instanceof Player ? sender.getName() : 'Server'}`);
         instance.execute(sender, args);
         return true;
     }

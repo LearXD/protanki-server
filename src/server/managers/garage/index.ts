@@ -61,7 +61,7 @@ export class Garage {
 
     // ASSETS
     public getData(_path: string) {
-        return this.server.assetsManager.getData(path.join('garage', _path));
+        return this.server.assets.getData(path.join('garage', _path));
     }
 
     public getItemData(item: GarageItemFolder, file: string) {

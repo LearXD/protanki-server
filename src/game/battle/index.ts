@@ -7,8 +7,6 @@ import { SetShowBattleNotificationsPacket } from "../../network/packets/set-show
 import { LayoutState } from "../../states/layout-state"
 import { SetRemoveBattleScreenPacket } from "../../network/packets/set-remove-battle-screen"
 import { IBattleData } from "./types"
-import { SuspiciousLevel } from "../../states/suspicious-level"
-import { IBattleList } from "../../network/packets/set-battle-list"
 import { SetBattleTimePacket } from "../../network/packets/set-battle-time"
 import { Rank } from "../../states/rank"
 import { TimeType } from "./managers/task/types"
@@ -82,7 +80,6 @@ export class Battle {
         this.modeManager.init();
         this.updateInterval = setInterval(this.update.bind(this), 1000 / Battle.TICK_RATE);
     }
-
 
     public getData() {
         return this.data
@@ -170,7 +167,7 @@ export class Battle {
 
         const packet = new SetBattleStartedPacket();
         packet.battleId = this.battleId;
-        this.server.battleManager.broadcastPacket(packet)
+        this.server.battles.broadcastPacket(packet)
 
         this.startedAt = Date.now()
         this.running = true
@@ -197,7 +194,7 @@ export class Battle {
 
         const packet = new SetBattleEndedPacket();
         packet.battle = this.battleId;
-        this.server.battleManager.broadcastPacket(packet)
+        this.server.battles.broadcastPacket(packet)
 
         this.running = false
 
@@ -217,7 +214,7 @@ export class Battle {
         const isSpectator = team === Team.SPECTATOR
 
         if (this.playersManager.hasPlayer(player) || this.playersManager.hasSpectator(player)) {
-            Logger.warn(`${player.getUsername()} already joined the battle ${this.name}`)
+            Logger.warn(`${player.getName()} already joined the battle ${this.name}`)
             return false;
         }
 
@@ -235,7 +232,7 @@ export class Battle {
         /** SEND DATA & RESOURCES */
         await this.map.sendResources(player)
         this.map.sendProperties(player, isSpectator)
-        this.server.garageManager.sendTurretsProperties(player)
+        this.server.garage.sendTurretsProperties(player)
 
         /** SEND PROPERTIES & STATISTICS */
         this.modeManager.sendBattleData(player, isSpectator)
@@ -266,18 +263,18 @@ export class Battle {
         this.effectsManager.sendBattleEffects(player);
         if (!isSpectator) {
             if (this.isWithoutSupplies() === false) {
-                player.garageManager.sendSupplies();
+                player.garage.sendSupplies();
             }
         }
 
         player.setSubLayoutState(LayoutState.BATTLE)
 
-        Logger.info(`${player.getUsername()} joined the battle ${this.name}`)
+        Logger.info(`${player.getName()} joined the battle ${this.name}`)
     }
 
     public onPlayerLeave(player: Player) {
         if (!this.playersManager.hasPlayer(player) && !this.playersManager.hasSpectator(player)) {
-            Logger.warn(`${player.getUsername()} is not in the battle ${this.name}`)
+            Logger.warn(`${player.getName()} is not in the battle ${this.name}`)
             return false
         }
 
@@ -297,18 +294,20 @@ export class Battle {
         this.playersManager.removePlayer(player)
 
         player.sendPacket(new SetRemoveBattleScreenPacket())
-        this.taskManager.unregisterOwnerTasks(player.getUsername())
+        this.taskManager.unregisterOwnerTasks(player.getName())
 
         player.battle = null
 
-        Logger.info(`${player.getUsername()} left the battle ${this.name}`)
+        Logger.info(`${player.getName()} left the battle ${this.name}`)
     }
 
-
+    public onPlayerDeath(player: Player) {
+        this.collisionManager.onPlayerLeave(player)
+    }
 
     public broadcastPacket(packet: Packet, ignore: string[] = []) {
         for (const player of this.playersManager.getAll()) {
-            if (!ignore.includes(player.getUsername())) {
+            if (!ignore.includes(player.getName())) {
                 player.sendPacket(packet)
             }
         }
@@ -317,7 +316,7 @@ export class Battle {
     public broadcastPacketToTeam(packet: Packet, team: TeamType, ignore: string[] = []) {
         for (const player of this.playersManager.getPlayers()) {
             if (player.tank.team === team) {
-                if (!ignore.includes(player.getUsername())) {
+                if (!ignore.includes(player.getName())) {
                     player.sendPacket(packet)
                 }
             }

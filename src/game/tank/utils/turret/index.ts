@@ -95,7 +95,7 @@ export abstract class Turret extends GarageItem {
      */
     public attack(player: string | Player, incarnation?: number, modifiers: IDamageModifiers = {}): boolean {
         if (this.tank.isVisible()) {
-            Logger.debug(`${this.tank.player.getUsername()} is trying to attacking ${player instanceof Player ? player.getUsername() : player} with ${this.getName()}`);
+            Logger.debug(`${this.tank.player.getName()} is trying to attacking ${player instanceof Player ? player.getName() : player} with ${this.getName()}`);
 
             const target = player instanceof Player ? player : this.tank.battle.playersManager.getPlayer(player);
 
@@ -104,7 +104,7 @@ export abstract class Turret extends GarageItem {
 
                 if ((this.tank.player === target && this.canAttackYourself()) || target.tank.isEnemy(this.tank)) {
                     const damage = this.getDamage(target.tank.getPosition().distanceTo(this.tank.getPosition()), modifiers)
-                    Logger.debug(`Attacking ${target.getUsername()} with ${damage} raw damage`)
+                    Logger.debug(`Attacking ${target.getName()} with ${damage} raw damage`)
                     return this.tank.battle.combatManager
                         .handleAttack(target, this.tank.player, damage, incarnation, modifiers.critical);
                 }

@@ -89,7 +89,7 @@ export class HammerHandler extends Turret {
             }
 
             const pk = new SetHammerShotPacket();
-            pk.shooter = this.tank.player.getUsername();
+            pk.shooter = this.tank.player.getName();
             pk.direction = packet.direction;
             pk.targets = Array.from(targets.values());
             this.tank.battle.broadcastPacket(pk);

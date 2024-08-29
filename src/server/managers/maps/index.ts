@@ -24,7 +24,7 @@ export class MapsManager {
     }
 
     public getData(_path: string, readType?: ReadType) {
-        return this.server.assetsManager.getData(path.join('maps', _path), readType);
+        return this.server.assets.getData(path.join('maps', _path), readType);
     }
 
     public getMapsData(_path: string, readType?: ReadType) {

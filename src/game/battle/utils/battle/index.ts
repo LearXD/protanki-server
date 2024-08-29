@@ -47,12 +47,12 @@ export class BattleUtils {
         }
 
         if (battle.getMode() === BattleMode.DM) {
-            item.users = battle.playersManager.getPlayers().map(player => player.getUsername())
+            item.users = battle.playersManager.getPlayers().map(player => player.getName())
         }
 
         if (battle.getMode() !== BattleMode.DM) {
-            item.usersBlue = battle.playersManager.getPlayers().filter(player => player.tank.team === Team.BLUE).map(player => player.getUsername())
-            item.usersRed = battle.playersManager.getPlayers().filter(player => player.tank.team === Team.RED).map(player => player.getUsername())
+            item.usersBlue = battle.playersManager.getPlayers().filter(player => player.tank.team === Team.BLUE).map(player => player.getName())
+            item.usersRed = battle.playersManager.getPlayers().filter(player => player.tank.team === Team.RED).map(player => player.getName())
         }
 
         return item

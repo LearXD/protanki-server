@@ -87,14 +87,14 @@ export class FreezeHandler extends Turret {
     public handlePacket(packet: Packet): void {
         if (packet instanceof SendStartFreezeShootPacket) {
             const pk = new SetStartFreezeShotPacket();
-            pk.shooter = this.tank.player.getUsername();
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            pk.shooter = this.tank.player.getName();
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
         }
 
         if (packet instanceof SendStopFreezeShotPacket) {
             const pk = new SetStopFreezeShotPacket();
-            pk.shooter = this.tank.player.getUsername();
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            pk.shooter = this.tank.player.getName();
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
         }
 
         if (packet instanceof SendFreezeTargetsShotPacket) {

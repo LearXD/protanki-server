@@ -26,28 +26,28 @@ export class BattleMinesManager {
 
         this.sendPlaceMine(mine);
         this.battle.taskManager.scheduleTask(
-            () => this.sendMinePlaced(mine.owner, mine), 1000, false, mine.owner.getUsername()
+            () => this.sendMinePlaced(mine.owner, mine), 1000, false, mine.owner.getName()
         );
     }
 
     public removePlayerMines(player: Player) {
 
         this.mines.forEach(mine => {
-            if (mine.owner.getUsername() === player.getUsername() && mine.active) {
+            if (mine.owner.getName() === player.getName() && mine.active) {
                 mine.active = false;
                 this.battle.collisionManager.removeObject(mine.name);
             }
         });
 
         const packet = new SetRemoveUserMinesPacket();
-        packet.ownerId = player.getUsername();
+        packet.ownerId = player.getName();
         this.battle.broadcastPacket(packet);
     }
 
     public sendMineExplosion(mine: Mine, target: Player) {
         const packet = new SetExplodeMinePacket();
         packet.mineId = mine.id.toString();
-        packet.targetId = target.getUsername();
+        packet.targetId = target.getName();
         this.battle.broadcastPacket(packet);
     }
 
@@ -58,7 +58,7 @@ export class BattleMinesManager {
         packet.x = mine.position.x;
         packet.y = mine.position.z;
         packet.z = mine.position.y;
-        packet.userId = mine.owner.getUsername();
+        packet.userId = mine.owner.getName();
 
         this.battle.broadcastPacket(packet);
     }
@@ -70,7 +70,7 @@ export class BattleMinesManager {
     }
 
     public getPlayerMines(player: Player) {
-        return this.mines.filter(mine => mine.owner.getUsername() === player.getUsername());
+        return this.mines.filter(mine => mine.owner.getName() === player.getName());
     }
 
     public sendMines(client: Player) {
@@ -82,7 +82,7 @@ export class BattleMinesManager {
             .map(mine => ({
                 activated: mine.active,
                 mineId: mine.id.toString(),
-                ownerId: mine.owner.getUsername(),
+                ownerId: mine.owner.getName(),
                 position: mine.position
             }))
         packet.imageResource = 925137

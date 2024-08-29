@@ -55,7 +55,7 @@ export class DevCommand extends Command {
 
                     const ray = new RayHit()
                     // battleService.§'x§().§const const true§().raycastStatic(param3,Vector3.DOWN,§super const continue§.§finally catch while§,10000000000,null,_loc10_)
-                    const collisions = battle.map.collisionManager.raycastStatic(
+                    const collisions = battle.map.collisions.raycastStatic(
                         sender.tank.getPosition().swap(),
                         Vector3d.DOWN,
                         16,

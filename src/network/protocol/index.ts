@@ -375,9 +375,9 @@ export class Protocol {
     static SET_TIME = 2074243318;
 
 
-    /** KICK */
+    /** BAN */
     // 1200280053
-    static KICK = -600078553;
+    static SET_BAN = -600078553;
 
 
     /** PING & PONG */

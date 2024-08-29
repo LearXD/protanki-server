@@ -28,7 +28,7 @@ export class BattleEffectsManager {
         activeAfterDeath: boolean = false,
     ) {
         const packet = new SetAddTankEffectPacket()
-        packet.tankId = player.getUsername()
+        packet.tankId = player.getName()
         packet.effectId = Supply.ALL.indexOf(effectId) + 1
         packet.duration = duration
         packet.activeAfterDeath = activeAfterDeath
@@ -38,7 +38,7 @@ export class BattleEffectsManager {
 
     public broadcastRemoveBattleEffect(player: Player, effectId: SupplyType) {
         const packet = new SetRemoveTankEffectPacket();
-        packet.tankId = player.getUsername();
+        packet.tankId = player.getName();
         packet.effectId = Supply.ALL.indexOf(effectId) + 1;
         this.battle.broadcastPacket(packet);
     }

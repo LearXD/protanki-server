@@ -81,20 +81,20 @@ export class SmokyHandler extends Turret {
         if (this.lastShotPacket) {
             const pk = new SetSmokyTargetShotPacket();
 
-            pk.shooter = this.tank.player.getUsername();
-            pk.target = target.getUsername();
+            pk.shooter = this.tank.player.getName();
+            pk.target = target.getName();
             pk.hitPoint = this.lastShotPacket.hitPoint;
             pk.weakeningCoeff = this.getImpactForce();
             pk.isCritical = critical
 
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
         }
     }
 
     public onDamage(target: Player, damage: number, critical: boolean): void {
         if (critical) {
             const pk = new SetSmokyCriticalEffectPacket();
-            pk.target = target.getUsername();
+            pk.target = target.getName();
             this.tank.battle.broadcastPacket(pk);
         }
     }
@@ -102,15 +102,15 @@ export class SmokyHandler extends Turret {
     public handlePacket(packet: Packet): void {
         if (packet instanceof SendSmokyHitPointShotPacket) {
             const pk = new SetSmokyHitPointPacket();
-            pk.shooter = this.tank.player.getUsername();
+            pk.shooter = this.tank.player.getName();
             pk.hitPoint = packet.hitPoint;
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
         }
 
         if (packet instanceof SendSmokyVoidShotPacket) {
             const pk = new SetSmokyVoidShotPacket();
-            pk.shooter = this.tank.player.getUsername();
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            pk.shooter = this.tank.player.getName();
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
         }
 
         if (packet instanceof SendSmokyTargetShotPacket) {

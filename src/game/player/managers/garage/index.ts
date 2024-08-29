@@ -64,7 +64,7 @@ export class PlayerGarageManager {
         const turret = this.getTurrets().find(turret => turret.equipped);
 
         if (!turret) {
-            throw new ServerError('No turret equipped', this.player.getUsername());
+            throw new ServerError('No turret equipped', this.player.getName());
         }
 
         return `${turret.name}_m${turret.level}`;
@@ -74,7 +74,7 @@ export class PlayerGarageManager {
         const hull = this.getHulls().find(hull => hull.equipped);
 
         if (!hull) {
-            throw new ServerError('No hull equipped', this.player.getUsername());
+            throw new ServerError('No hull equipped', this.player.getName());
         }
 
         return `${hull.name}_m${hull.level}`;
@@ -84,7 +84,7 @@ export class PlayerGarageManager {
         const painting = this.getPaintings().find(painting => painting.equipped);
 
         if (!painting) {
-            throw new ServerError('No painting equipped', this.player.getUsername());
+            throw new ServerError('No painting equipped', this.player.getName());
         }
 
         return `${painting.name}_m0`;
@@ -93,13 +93,13 @@ export class PlayerGarageManager {
     public upgradeItem(itemId: string, level: number) {
 
         if (level < 1 || level > 3) {
-            Logger.warn(`Invalid upgrade level ${level} for item ${itemId} for player ${this.player.getUsername()}`);
+            Logger.warn(`Invalid upgrade level ${level} for item ${itemId} for player ${this.player.getName()}`);
             return false;
         }
 
-        Logger.debug(`Upgrading item ${itemId} for player ${this.player.getUsername()}`);
+        Logger.debug(`Upgrading item ${itemId} for player ${this.player.getName()}`);
 
-        const item = this.player.server.garageManager.getItem(itemId);
+        const item = this.player.server.garage.getItem(itemId);
         // const category = this.player.server.garageManager.getItemCategory(itemId);
 
         switch (item.category) {
@@ -107,7 +107,7 @@ export class PlayerGarageManager {
                 const turret = this.getTurret(item.id)
                 if (turret) {
                     if (turret.level >= level) {
-                        Logger.warn(`Invalid upgrade level ${level} for item ${itemId} for player ${this.player.getUsername()}`);
+                        Logger.warn(`Invalid upgrade level ${level} for item ${itemId} for player ${this.player.getName()}`);
                         return false;
                     }
                     turret.level = level
@@ -119,7 +119,7 @@ export class PlayerGarageManager {
                 const hull = this.getHull(item.id)
                 if (hull) {
                     if (hull.level >= level) {
-                        Logger.warn(`Invalid upgrade level ${level} for item ${itemId} for player ${this.player.getUsername()}`);
+                        Logger.warn(`Invalid upgrade level ${level} for item ${itemId} for player ${this.player.getName()}`);
                         return false;
                     }
                     hull.level = level
@@ -132,7 +132,7 @@ export class PlayerGarageManager {
     }
 
     public addItem(itemId: string, quantity: number = 1) {
-        const item = this.player.server.garageManager.getItem(itemId);
+        const item = this.player.server.garage.getItem(itemId);
 
         switch (item.category) {
             case GarageItemCategory.TURRET: {
@@ -168,7 +168,7 @@ export class PlayerGarageManager {
 
         }
 
-        Logger.info(`Item ${itemId} (x${quantity}) added to player ${this.player.getUsername()}`);
+        Logger.info(`Item ${itemId} (x${quantity}) added to player ${this.player.getName()}`);
     }
 
     public equipItem(name: string): string {
@@ -179,7 +179,7 @@ export class PlayerGarageManager {
             return null;
         }
 
-        const item = this.player.server.garageManager.getItem(name);
+        const item = this.player.server.garage.getItem(name);
 
         switch (item.category) {
             case GarageItemCategory.TURRET:
@@ -203,7 +203,7 @@ export class PlayerGarageManager {
     }
 
     public hasItem(name: string) {
-        const item = this.player.server.garageManager.getItem(name);
+        const item = this.player.server.garage.getItem(name);
 
         switch (item.category) {
             case GarageItemCategory.TURRET:
@@ -221,7 +221,7 @@ export class PlayerGarageManager {
     }
 
     public getInventoryItem<R extends any>(name: string): R {
-        const item = this.player.server.garageManager.getItem(name);
+        const item = this.player.server.garage.getItem(name);
 
         switch (item.category) {
             case GarageItemCategory.TURRET:
@@ -241,18 +241,18 @@ export class PlayerGarageManager {
     public getTurretResources(): ITurretResources {
         const turret = this.getEquippedTurret();
 
-        const item = this.player.server.garageManager.getItem(turret);
-        const physics = this.player.server.garageManager.getTurretPhysics(turret);
-        const sfx = this.player.server.garageManager.getTurretSfx(turret);
-        const properties = this.player.server.garageManager.getTurretProperties(turret);
+        const item = this.player.server.garage.getItem(turret);
+        const physics = this.player.server.garage.getTurretPhysics(turret);
+        const sfx = this.player.server.garage.getTurretSfx(turret);
+        const properties = this.player.server.garage.getTurretProperties(turret);
 
         return { turret, sfx, physics, item, properties }
     }
 
     public getHullResources(): IHullResources {
         const hull = this.getEquippedHull();
-        const item = this.player.server.garageManager.getItem(hull);
-        const properties = this.player.server.garageManager.getHullPhysics(hull);
+        const item = this.player.server.garage.getItem(hull);
+        const properties = this.player.server.garage.getHullPhysics(hull);
 
         if (!properties) {
             return null;
@@ -263,7 +263,7 @@ export class PlayerGarageManager {
 
     public getPaintingResources(): IPaintingResources {
         const painting = this.getEquippedPainting();
-        const item = this.player.server.garageManager.getItem(painting);
+        const item = this.player.server.garage.getItem(painting);
 
         return { painting, item }
     }
@@ -342,18 +342,18 @@ export class PlayerGarageManager {
 
         // await new Promise((resolve) => setTimeout(resolve, 2000));
 
-        await this.player.server.resourcesManager.sendResources(this.player, ResourceType.GARAGE);
+        await this.player.server.resources.sendResources(this.player, ResourceType.GARAGE);
 
         const userItems: IGarageItem[] = []
         const garageItems: IGarageItem[] = []
 
-        const supplies = this.player.garageManager.getSupplies();
+        const supplies = this.player.garage.getSupplies();
 
-        const turrets = this.player.garageManager.getTurrets();
-        const hulls = this.player.garageManager.getHulls();
-        const paintings = this.player.garageManager.getPaintings();
+        const turrets = this.player.garage.getTurrets();
+        const hulls = this.player.garage.getHulls();
+        const paintings = this.player.garage.getPaintings();
 
-        for (const item of this.player.server.garageManager.items.values()) {
+        for (const item of this.player.server.garage.items.values()) {
             const category = item.category;
 
             if (category === GarageItemCategory.SUPPLY) {
@@ -430,7 +430,7 @@ export class PlayerGarageManager {
     }
 
     public handleEquipItem(itemId: string) {
-        const equipped = this.player.garageManager.equipItem(itemId);
+        const equipped = this.player.garage.equipItem(itemId);
         if (equipped) {
             const setEquipGarageItemPacket = new SetEquipGarageItemPacket();
             setEquipGarageItemPacket.itemId = equipped;
@@ -446,7 +446,7 @@ export class PlayerGarageManager {
         }
 
         this.player.data.decreaseCrystals(price);
-        const kit = this.player.server.garageManager.getItem(kitId);
+        const kit = this.player.server.garage.getItem(kitId);
 
         if (!kit) {
             return false;
@@ -475,19 +475,19 @@ export class PlayerGarageManager {
     public handlePacket(packet: Packet) {
         if (packet instanceof SendOpenGaragePacket) {
             if (this.player.battle) {
-                if (this.player.getLayoutState() === LayoutState.BATTLE) {
+                if (this.player.layoutState === LayoutState.BATTLE) {
                     this.sendOpenGarage();
                     return true;
                 }
 
-                if (this.player.getLayoutState() === LayoutState.GARAGE) {
+                if (this.player.layoutState === LayoutState.GARAGE) {
                     this.player.setLayoutState(LayoutState.BATTLE);
                     this.player.setSubLayoutState(LayoutState.BATTLE);
                     return true;
                 }
 
-                if (this.player.getLayoutState() === LayoutState.BATTLE_SELECT) {
-                    this.player.battlesManager.sendRemoveBattlesScreen();
+                if (this.player.layoutState === LayoutState.BATTLE_SELECT) {
+                    this.player.battles.sendRemoveBattlesScreen();
                     this.sendOpenGarage();
                     return true;
                 }
@@ -498,24 +498,24 @@ export class PlayerGarageManager {
         }
 
         if (packet instanceof SendEquipItemPacket) {
-            this.player.garageManager.handleEquipItem(packet.item);
+            this.player.garage.handleEquipItem(packet.item);
             return true
         }
 
         if (packet instanceof SendBuyGarageItemPacket) {
-            this.player.garageManager.handleBuyItem(packet.item, packet.count, packet.price);
+            this.player.garage.handleBuyItem(packet.item, packet.count, packet.price);
             return true;
         }
 
         if (packet instanceof SendBuyGarageKitPacket) {
-            this.player.garageManager.handleBuyKit(packet.item, packet.price);
+            this.player.garage.handleBuyKit(packet.item, packet.price);
             return true;
         }
 
         if (packet instanceof SendPreviewPaintingPacket) {
-            const item = this.player.server.garageManager.getItem(packet.item);
+            const item = this.player.server.garage.getItem(packet.item);
             if (item && item.category === GarageItemCategory.PAINT) {
-                this.player.garageManager.sendEquipItem(packet.item);
+                this.player.garage.sendEquipItem(packet.item);
             }
             return true;
         }

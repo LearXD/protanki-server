@@ -27,7 +27,7 @@ export class PlayerBattlesManager {
     ) { }
 
     public sendBattleSelectScreen() {
-        this.player.chatManager.sendChat();
+        this.player.chat.sendChat();
         this.sendBattles();
     }
 
@@ -37,10 +37,10 @@ export class PlayerBattlesManager {
     }
 
     public sendBattles() {
-        this.player.server.mapsManager.sendMapsData(this.player);
+        this.player.server.maps.sendMapsData(this.player);
 
         const setBattleListPacket = new SetBattleListPacket();
-        setBattleListPacket.battles = this.player.server.battleManager.battles
+        setBattleListPacket.battles = this.player.server.battles.battles
             .map(battle => BattleUtils.toBattleListItem(battle));
 
         this.player.sendPacket(setBattleListPacket);
@@ -77,7 +77,7 @@ export class PlayerBattlesManager {
     }
 
     public handleViewBattle(battleId: string) {
-        const battle = this.player.server.battleManager.getBattle(battleId);
+        const battle = this.player.server.battles.getBattle(battleId);
 
         if (!battle) {
             const setBattleNotExistPacket = new SetBattleNotFoundPacket()
@@ -86,12 +86,12 @@ export class PlayerBattlesManager {
             return;
         }
 
-        Logger.info(`Player ${this.player.getUsername()} is viewing battle ${battleId}`)
+        Logger.info(`Player ${this.player.getName()} is viewing battle ${battleId}`)
         battle.viewersManager.addViewer(this.player);
     }
 
     public handleCreateBattle(packet: SendCreateBattlePacket) {
-        const battle = this.player.server.battleManager.createBattle(
+        const battle = this.player.server.battles.createBattle(
             packet.name,
             packet.mapId,
             {
@@ -112,7 +112,7 @@ export class PlayerBattlesManager {
                 withoutCrystals: packet.withoutCrystals,
                 withoutSupplies: packet.withoutSupplies
             },
-            this.player.getUsername()
+            this.player.getName()
         );
 
 
@@ -121,20 +121,20 @@ export class PlayerBattlesManager {
 
     public handleOpenBattleList() {
         if (this.player.battle) {
-            if (this.player.getLayoutState() === LayoutState.BATTLE) {
+            if (this.player.layoutState === LayoutState.BATTLE) {
                 this.sendBattlesList();
                 return true;
             }
 
-            if (this.player.getLayoutState() === LayoutState.BATTLE_SELECT) {
+            if (this.player.layoutState === LayoutState.BATTLE_SELECT) {
                 this.sendRemoveBattlesScreen();
                 this.player.setLayoutState(LayoutState.BATTLE);
                 this.player.setSubLayoutState(LayoutState.BATTLE);
                 return true;
             }
 
-            if (this.player.getLayoutState() === LayoutState.GARAGE) {
-                this.player.garageManager.removeGarageScreen();
+            if (this.player.layoutState === LayoutState.GARAGE) {
+                this.player.garage.removeGarageScreen();
                 this.sendBattlesList();
                 return true;
             }

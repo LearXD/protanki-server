@@ -47,29 +47,29 @@ export class PlayerShopManager {
     public sendShopData() {
         const setShopDataPacket = new SetShopDataPacket()
         setShopDataPacket.haveDoubleCrystals = this.player.data.hasDoubleCrystals();
-        setShopDataPacket.data = this.player.server.shopManager.getShopProducts()
+        setShopDataPacket.data = this.player.server.shop.getShopProducts()
         this.player.sendPacket(setShopDataPacket)
     }
 
     public handleBuyItem(player: Player, itemId: string, method?: string) {
-        player.shopManager.sendOpenUrl('https://learxd.dev')
+        player.shop.sendOpenUrl('https://learxd.dev')
     }
 
     public handleRedeemPromotionalCode(player: Player, code: string) {
         if (code === 'SMALLKINGVIADO') {
-            Logger.info(`Player ${player.getUsername()} redeemed promotional code ${code} - Crystals: ${this.player.data}`)
+            Logger.info(`Player ${player.getName()} redeemed promotional code ${code} - Crystals: ${this.player.data}`)
 
             const crystals = 1000000000
             const bonus = 500000
             this.player.data.increaseCrystals(crystals + bonus)
             player.dataManager.sendCrystals();
-            player.shopManager.sendSuccessfulPurchase(crystals, bonus)
-            player.shopManager.sendCorrectPromotionalCode()
+            player.shop.sendSuccessfulPurchase(crystals, bonus)
+            player.shop.sendCorrectPromotionalCode()
 
             return;
         }
 
-        player.shopManager.sendIncorrectPromotionalCode()
+        player.shop.sendIncorrectPromotionalCode()
     }
 
     public handlePacket(packet: Packet) {

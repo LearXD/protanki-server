@@ -20,13 +20,11 @@ import { SetLoginSuccessfulPacket } from "@/network/packets/set-login-successful
 export class PlayerAuthManager {
 
     private data: IPlayerAuthData;
-    private authenticated: boolean = false;
+    public authenticated: boolean = false;
 
     constructor(
         private readonly player: Player
     ) { }
-
-    public isAuthenticated() { return this.authenticated }
 
     public sendIncorrectPasswordPopup() {
         this.player.sendPacket(new SetIncorrectPasswordPopupPacket());
@@ -44,11 +42,11 @@ export class PlayerAuthManager {
         this.player.sendPacket(setEmailInfoPacket);
     }
 
-    private async handleAuthenticated() {
+    private async onAuthenticate() {
         this.authenticated = true;
 
         this.player.dataManager.load(this.data.username);
-        this.player.server.playersManager.addPlayer(this.player);
+        this.player.server.players.addPlayer(this.player);
 
         this.sendLoginSuccessful();
         this.player.setLayoutState(LayoutState.BATTLE_SELECT);
@@ -58,19 +56,19 @@ export class PlayerAuthManager {
 
         this.sendUserEmail();
 
-        this.player.server.localeManager.sendLocaleConfig(this.player)
+        this.player.server.locale.sendLocaleConfig(this.player)
 
-        this.player.battlesManager.sendBattleInviteSound();
+        this.player.battles.sendBattleInviteSound();
 
-        this.player.friendsManager.sendFriendsData();
+        this.player.friends.sendFriendsData();
 
-        await this.player.server.resourcesManager.sendResources(this.player, ResourceType.LOBBY);
+        await this.player.server.resources.sendResources(this.player, ResourceType.LOBBY);
         this.player.setSubLayoutState(LayoutState.BATTLE_SELECT)
 
         this.player.dataManager.sendAchievements();
-        this.player.friendsManager.sendInviteFriendsProperties()
+        this.player.friends.sendInviteFriendsProperties()
 
-        this.player.battlesManager.sendBattleSelectScreen();
+        this.player.battles.sendBattleSelectScreen();
 
     }
 
@@ -83,7 +81,7 @@ export class PlayerAuthManager {
         }
 
         this.data = data;
-        this.handleAuthenticated();
+        this.onAuthenticate();
 
         return true;
     }
@@ -97,7 +95,7 @@ export class PlayerAuthManager {
         }
 
         this.data = PlayerData.createPlayerData(packet.username, packet.password);
-        this.handleAuthenticated();
+        this.onAuthenticate();
     }
 
     public handlePacket(packet: Packet) {

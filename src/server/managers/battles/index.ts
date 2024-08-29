@@ -20,7 +20,7 @@ export class BattlesManager {
     ) { }
 
     public getData(_path: string) {
-        return this.server.assetsManager.getData(path.join('battle', _path))
+        return this.server.assets.getData(path.join('battle', _path))
     }
 
     public getBattleById(battleId: string) {
@@ -33,7 +33,7 @@ export class BattlesManager {
         config?: IBattleData,
         owner?: string
     ) {
-        const map = this.server.mapsManager.findMap(mapName, config?.theme)
+        const map = this.server.maps.findMap(mapName, config?.theme)
 
         if (!map) {
             throw new ServerError(`Map ${mapName} has not configured correctly`)
@@ -54,7 +54,7 @@ export class BattlesManager {
 
         if (battle.isPrivateBattle()) {
             if (battle.owner) {
-                const owner = this.server.playersManager.getPlayer(battle.owner)
+                const owner = this.server.players.getPlayer(battle.owner)
                 if (owner) {
                     owner.sendPacket(packet)
                 }
@@ -85,7 +85,7 @@ export class BattlesManager {
     }
 
     public getPlayers() {
-        return this.server.playersManager
+        return this.server.players
             .getPlayersOnState(LayoutState.BATTLE_SELECT)
     }
 }

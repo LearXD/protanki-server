@@ -61,7 +61,7 @@ export class BattleCombatManager {
 
                 attacker.tank.turret.onDamage(target, damage);
 
-                Logger.debug(`Attacking ${target.getUsername()} with ${damage} damage`)
+                Logger.debug(`Attacking ${target.getName()} with ${damage} damage`)
                 target.tank.damage(damage, attacker, critical);
                 return true
             }
@@ -76,7 +76,7 @@ export class BattleCombatManager {
         type: DamageIndicatorType
     ) {
         const packet = new SetDamageIndicatorsPacket();
-        packet.indicators = [{ target: target.getUsername(), damage, type }];
+        packet.indicators = [{ target: target.getName(), damage, type }];
         player.sendPacket(packet);
     }
 }

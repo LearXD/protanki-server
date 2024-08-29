@@ -57,18 +57,18 @@ export class RicochetHandler extends Turret {
     public handlePacket(packet: Packet): void {
         if (packet instanceof SendRicochetShotPacket) {
             const pk = new SetRicochetShotPacket();
-            pk.shooter = this.tank.player.getUsername();
+            pk.shooter = this.tank.player.getName();
             pk.shotDirectionX = packet.shotDirectionX;
             pk.shotDirectionY = packet.shotDirectionY;
             pk.shotDirectionZ = packet.shotDirectionZ;
 
-            this.tank.battle.broadcastPacket(pk, [this.tank.player.getUsername()]);
+            this.tank.battle.broadcastPacket(pk, [this.tank.player.getName()]);
         }
 
         if (packet instanceof SendRicochetOverturnedShotPacket) {
             const packet = new SetRicochetOverturnedShotPacket();
-            packet.shooter = this.tank.player.getUsername();
-            this.tank.battle.broadcastPacket(packet, [this.tank.player.getUsername()]);
+            packet.shooter = this.tank.player.getName();
+            this.tank.battle.broadcastPacket(packet, [this.tank.player.getName()]);
         }
 
         if (packet instanceof SendRicochetTargetShotPacket) {

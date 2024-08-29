@@ -110,7 +110,7 @@ import { SetSpawnBonusBoxPacket } from "./packets/set-spawn-bonus-box";
 import { SendMoveTankTracksPacket } from "./packets/send-move-tank-tracks";
 import { SetStopFlameShotPacket } from "./packets/set-stop-flame-shot";
 import { SetRattingPacket } from "./packets/set-ratting";
-import { KickPacket } from "./packets/kick";
+import { SetBanPacket } from "./packets/set-ban";
 import { SetCrystalsPacket } from "./packets/set-crystals";
 import { SetRemoveBonusBoxPacket } from "./packets/set-remove-bonus-box";
 import { SetBattleRewardsPacket } from "./packets/set-battle-rewards";
@@ -358,101 +358,72 @@ export class Network {
 
         this.registerPacket(Protocol.SET_NETWORK_PARAMS, SetNetworkParamsPacket)
         this.registerPacket(Protocol.SET_CAPTCHA_LOCATIONS, SetCaptchaLocationsPacket)
-
         this.registerPacket(Protocol.SET_TIP_RESOURCE, SetTipResourcePacket)
         this.registerPacket(Protocol.SEND_REQUEST_LOAD_SCREEN, SendRequestLoadScreenPacket)
-
         this.registerPacket(Protocol.SEND_LANGUAGE, SendLanguagePacket)
-
         this.registerPacket(Protocol.SET_LOAD_RESOURCES, SetLoadResourcesPacket)
         this.registerPacket(Protocol.RESOLVE_CALLBACK, ResolveCallbackPacket)
         this.registerPacket(Protocol.SET_AUTH_SCREEN, SetAuthScreenPacket)
-
         this.registerPacket(Protocol.SET_INVITE_ENABLED, SetInviteEnabledPacket)
         this.registerPacket(Protocol.SET_AUTH_RESOURCES, SetAuthResourcesPacket)
-
         this.registerPacket(Protocol.SEND_REQUEST_CAPTCHA, SendRequestCaptchaPacket)
         this.registerPacket(Protocol.SET_CAPTCHA_CORRECT, SetCaptchaCorrectPacket)
-
         this.registerPacket(Protocol.SET_CAPTCHA_DATA, SetCaptchaDataPacket)
         this.registerPacket(Protocol.SEND_CAPTCHA_RESPONSE, SendCaptchaResponsePacket)
-
         this.registerPacket(Protocol.SEND_REGISTER_CHECK_USERNAME, SendRegisterCheckUsernamePacket)
         this.registerPacket(Protocol.SET_REGISTER_USERNAME_AVAILABLE, SetRegisterUsernameAvailablePacket)
         this.registerPacket(Protocol.SET_ADVISED_USERNAMES, SetAdvisedUsernamesPacket)
-
         this.registerPacket(Protocol.SET_REMEMBER_ME, SetRememberMePacket)
-
         this.registerPacket(Protocol.SEND_REGISTER, SendRegisterPacket)
-
         this.registerPacket(Protocol.SEND_LOGIN, SendLoginPacket)
         this.registerPacket(Protocol.SET_INCORRECT_PASSWORD_POPUP, SetIncorrectPasswordPopupPacket)
         this.registerPacket(Protocol.SET_EMAIL_INFO, SetEmailInfoPacket)
-
         this.registerPacket(Protocol.SET_LOGIN_HASH, SetLoginHashPacket)
         this.registerPacket(Protocol.SEND_LOGIN_HASH, SendLoginHashPacket)
-
         this.registerPacket(Protocol.SET_BONUS, SetBonusPacket)
-
         this.registerPacket(Protocol.SET_LAYOUT_STATE, SetLayoutStatePacket)
         this.registerPacket(Protocol.SET_SUB_LAYOUT_STATE, SetSubLayoutStatePacket)
-
         this.registerPacket(Protocol.SET_PREMIUM_DATA, SetPremiumDataPacket)
         this.registerPacket(Protocol.SET_USER_PROPERTY, SetUserPropertyPacket)
         this.registerPacket(Protocol.SET_FRIENDS_DATA, SetFriendsDataPacket)
         this.registerPacket(Protocol.SET_CHAT_INIT_PARAMS, SetChatInitParamsPacket)
         this.registerPacket(Protocol.SET_ACHIEVEMENTS, SetAchievementsPacket)
-
         this.registerPacket(Protocol.SET_BATTLE_INVITE_CC, SetBattleInviteCCPacket)
         this.registerPacket(Protocol.SET_USER_BATTLE, SetUserBattlePacket)
-
         this.registerPacket(Protocol.SET_BATTLE_DATA, SetBattleDataPacket)
         this.registerPacket(Protocol.SET_BATTLE_USERS_PROPERTIES, SetBattleUsersPropertiesPacket)
         this.registerPacket(Protocol.SET_LOAD_CAPTURE_THE_FLAG, SetLoadCaptureTheFlagPacket)
         this.registerPacket(Protocol.SET_TEAM_BATTLE_USERS_PROPERTIES, SetTeamBattleUsersPropertiesPacket)
         this.registerPacket(Protocol.SET_TEAM_BATTLE_USER_STAT, SetTeamBattleUserStatPacket)
-
         this.registerPacket(Protocol.SET_CAPTURE_FLAG, SetCaptureFlagPacket)
         this.registerPacket(Protocol.SET_TEAM_SCORE, SetTeamScorePacket)
-
         this.registerPacket(Protocol.SET_BATTLE_MINES_RESOURCES, SetBattleMinesResourcesPacket)
         this.registerPacket(Protocol.SET_BATTLE_MESSAGE, SetBattleMessagePacket)
         this.registerPacket(Protocol.SET_BATTLE_FUND, SetBattleFundPacket)
-
         this.registerPacket(Protocol.SET_BATTLE_USER_STATUS, SetBattleUserStatusPacket)
-
         this.registerPacket(Protocol.SET_COUNTRY_LOCALE_NAME, SetCountryLocaleNamePacket)
         this.registerPacket(Protocol.SET_CHAT_COST, SetChatCostPacket)
         this.registerPacket(Protocol.SET_CHAT_MESSAGES, SetChatMessagesPacket)
-
         this.registerPacket(Protocol.SEND_SHOW_DAMAGE_INDICATOR, SendShowDamageIndicatorPacket)
-
         this.registerPacket(Protocol.SET_TEAM_BATTLE_ADD_USERS_PROPERTIES, SetTeamBattleAddUsersPropertiesPacket)
         this.registerPacket(Protocol.SEND_REQUEST_USER_DATA, SendRequestUserDataPacket)
         this.registerPacket(Protocol.SET_REMOVE_USER_PLAYING, SetRemoveUserPlayingPacket)
         this.registerPacket(Protocol.SET_BATTLE_USER_LEFT_NOTIFICATION, SetBattleUserLeftNotificationPacket)
-
         this.registerPacket(Protocol.SEND_FIND_USER_ON_FRIENDS_LIST, SendFindUserOnFriendsListPacket)
         this.registerPacket(Protocol.SET_USER_NOT_FOUND_ON_FRIENDS_LIST, SetUserNotFoundOnFriendsListPacket)
         this.registerPacket(Protocol.SET_USER_FOUND_ON_FRIENDS_LIST, SetUserFoundOnFriendsListPacket)
-
         this.registerPacket(Protocol.SEND_FRIEND_REQUEST, SendFriendRequestPacket)
         this.registerPacket(Protocol.SET_ADD_SENT_FRIEND_REQUEST, SetAddSentFriendRequestPacket)
-
         this.registerPacket(Protocol.REMOVE_FRIEND_REQUEST, RemoveFriendRequestPacket)
         this.registerPacket(Protocol.REMOVED_FRIEND_REQUEST, RemovedFriendRequestPacket)
-
         this.registerPacket(Protocol.SET_REMOVE_USER_FROM_BATTLE_COUNTER, SetRemoveUserFromBattleCounterPacket)
         this.registerPacket(Protocol.SET_REMOVE_USER_FROM_TEAM_BATTLE_COUNTER, SetRemoveUserFromTeamBattleCounterPacket)
         this.registerPacket(Protocol.SET_ADD_USER_ON_BATTLE_COUNTER, SetAddUserOnBattleCounterPacket)
         this.registerPacket(Protocol.SET_REMOVE_USER_FROM_VIEWING_BATTLE, SetRemoveUserFromViewingBattlePacket)
         this.registerPacket(Protocol.SET_RATTING, SetRattingPacket)
-
         this.registerPacket(Protocol.SET_ADD_USER_INFO_ON_VIEWING_BATTLE, SetAddUserInfoOnViewingBattlePacket)
-
         this.registerPacket(Protocol.SET_MAPS_DATA, SetMapsDataPacket)
         this.registerPacket(Protocol.SET_BATTLE_LIST, SetBattleListPacket)
-
         this.registerPacket(Protocol.SET_VIEWING_BATTLE_DATA, SetViewingBattleDataPacket)
         this.registerPacket(Protocol.SET_ADD_BATTLE_ON_LIST, SetAddBattleOnListPacket)
         this.registerPacket(Protocol.SET_TURRETS_DATA, SetTurretsDataPacket)
@@ -462,89 +433,66 @@ export class Network {
         this.registerPacket(Protocol.SET_SUPPLIES, SetSuppliesPacket)
         this.registerPacket(Protocol.SET_BATTLE_USERS_EFFECTS, SetBattleUsersEffectsPacket)
         this.registerPacket(Protocol.SET_BATTLE_SPAWNED_BOXES, SetBattleSpawnedBoxesPacket)
-
         this.registerPacket(Protocol.SET_VIEWING_BATTLE, SetViewingBattlePacket)
         this.registerPacket(Protocol.SET_USER_ONLINE, SetUserOnlinePacket)
         this.registerPacket(Protocol.SET_USER_RANK, SetUserRankPacket)
         this.registerPacket(Protocol.SET_USER_PREMIUM_DATA, SetUserPremiumDataPacket)
         this.registerPacket(Protocol.SET_ADD_USER_ON_TEAM_BATTLE_COUNTER, SetAddUserOnTeamBattleCounterPacket)
         this.registerPacket(Protocol.SET_VIEWING_BATTLE_USER_KILLS, SetViewingBattleUserKillsPacket)
-
         this.registerPacket(Protocol.SET_SCORE, SetScorePacket)
         this.registerPacket(Protocol.SET_VIEWING_BATTLE_USER_SCORE, SetViewingBattleUserScorePacket)
         this.registerPacket(Protocol.SET_VIEWING_BATTLE_TEAM_SCORE, SetViewingBattleTeamScorePacket)
-
         this.registerPacket(Protocol.SET_BATTLE_SWAP_TEAMS, SetBattleSwapTeamsPacket)
         this.registerPacket(Protocol.SET_REMOVE_BATTLE_FROM_LIST, SetRemoveBattleFromListPacket)
         this.registerPacket(Protocol.SET_BATTLE_ENDED, SetBattleEndedPacket)
-
         this.registerPacket(Protocol.SEND_CHAT_MESSAGE, SendChatMessagePacket)
-
         this.registerPacket(Protocol.SEND_REQUEST_CONFIG_DATA, SendRequestConfigDataPacket)
         this.registerPacket(Protocol.SEND_OPEN_FRIENDS, SendOpenFriendsPacket)
-
         this.registerPacket(Protocol.SET_SOCIAL_NETWORK_PANEL_CC, SetSocialNetworkPanelCCPacket)
         this.registerPacket(Protocol.SET_NOTIFICATION_ENABLED, SetNotificationEnabledPacket)
-
         this.registerPacket(Protocol.SET_TANK_TURRET_ANGLE_CONTROL, SetTankTurretAngleControlPacket)
-
         this.registerPacket(Protocol.SET_MOVE_TANK_AND_TURRET, SetMoveTankAndTurretPacket)
         this.registerPacket(Protocol.SEND_MOVE_TANK_AND_TURRET, SendMoveTankAndTurretPacket)
         this.registerPacket(Protocol.SEND_TANK_TURRET_DIRECTION, SendTankTurretDirectionPacket)
-
         this.registerPacket(Protocol.SET_MOVE_TANK, SetMoveTankPacket)
         this.registerPacket(Protocol.SET_TANK_SPEED, SetTankSpeedPacket)
         this.registerPacket(Protocol.SET_TANK_CONTROL, SetTankControlPacket)
         this.registerPacket(Protocol.SET_TANK_TEMPERATURE, SetTankTemperaturePacket)
         this.registerPacket(Protocol.SET_KILL_PACKET, SetKillPacket)
         this.registerPacket(Protocol.SET_TANK_FLAG, SetTankFlagPacket)
-
         this.registerPacket(Protocol.SET_SPAWN_TANK, SetSpawnTankPacket)
         this.registerPacket(Protocol.SET_MOVE_CAMERA, SetMoveCameraPacket)
-
         this.registerPacket(Protocol.SET_TWINS_SHOT, SetTwinsShotPacket)
         this.registerPacket(Protocol.SEND_SMOKY_VOID_SHOT, SendSmokyVoidShotPacket)
-
         this.registerPacket(Protocol.SET_SMOKY_HIT_POINT, SetSmokyHitPointPacket)
         this.registerPacket(Protocol.SEND_SMOKY_HIT_POINT_SHOT, SendSmokyHitPointShotPacket)
-
         this.registerPacket(Protocol.SET_SMOKY_TARGET_SHOT, SetSmokyTargetShotPacket)
         this.registerPacket(Protocol.SET_SHAFT_SHOT, SetShaftShotPacket)
         this.registerPacket(Protocol.SET_STORM_TARGET_SHOT, SetStormTargetShotPacket)
-
         this.registerPacket(Protocol.SEND_SMOKY_TARGET_SHOT, SendSmokyTargetShotPacket)
         this.registerPacket(Protocol.SET_RAILGUN_SHOT, SetRailgunShotPacket)
-
         this.registerPacket(Protocol.SET_START_FLAME_SHOT, SetStartFlameShotPacket)
         this.registerPacket(Protocol.SET_STOP_FLAME_SHOT, SetStopFlameShotPacket)
         this.registerPacket(Protocol.SET_START_SHAFT_SHOT, SetStartShaftShotPacket)
         this.registerPacket(Protocol.SET_START_RAILGUN_SHOT, SetStartRailgunShotPacket)
         this.registerPacket(Protocol.SET_MOVE_SHAFT_VERTICAL_AXIS, SetMoveShaftVerticalAxisPacket)
         this.registerPacket(Protocol.SET_SHAFT_LOCAL_SPOT, SetShaftLocalSpotPacket)
-
         this.registerPacket(Protocol.SET_DAMAGE_INDICATORS, SetDamageIndicatorsPacket)
-
         this.registerPacket(Protocol.SET_TANK_HEALTH, SetTankHealthPacket)
         this.registerPacket(Protocol.SET_ADD_TANK_EFFECT, SetAddTankEffectPacket)
         this.registerPacket(Protocol.SET_REMOVE_TANK_EFFECT, SetRemoveTankEffectPacket)
-
         this.registerPacket(Protocol.SEND_MOVE_TANK, SendMoveTankPacket)
-
         this.registerPacket(Protocol.SET_TANK_VISIBLE, SetTankVisiblePacket)
         this.registerPacket(Protocol.SET_REMOVE_TANK, SetRemoveTankPacket)
-
         this.registerPacket(Protocol.SET_SPAWN_BONUS_BOX, SetSpawnBonusBoxPacket)
         this.registerPacket(Protocol.SEND_COLLECT_BONUS_BOX, SendCollectBonusBoxPacket)
-
         this.registerPacket(Protocol.SEND_MOVE_TANK_TRACKS, SendMoveTankTracksPacket)
-
         this.registerPacket(Protocol.SEND_JOIN_ON_BATTLE, SendJoinOnBattlePacket)
         this.registerPacket(Protocol.SET_LATENCY, SetLatencyPacket)
         this.registerPacket(Protocol.SET_TIME, SetTimePacket)
-        this.registerPacket(Protocol.KICK, KickPacket)
+        this.registerPacket(Protocol.SET_BAN, SetBanPacket)
         this.registerPacket(Protocol.PING, PingPacket)
         this.registerPacket(Protocol.PONG, PongPacket)
-
         this.registerPacket(Protocol.SET_CRYSTALS, SetCrystalsPacket)
         this.registerPacket(Protocol.SET_REMOVE_BONUS_BOX, SetRemoveBonusBoxPacket)
         this.registerPacket(Protocol.SET_BATTLE_REWARDS, SetBattleRewardsPacket)
@@ -552,16 +500,13 @@ export class Network {
         this.registerPacket(Protocol.SET_BATTLE_ADD_USERS_PROPERTIES, SetBattleAddUsersPropertiesPacket)
         this.registerPacket(Protocol.SET_BONUS_BOX_COLLECTED, SetBonusBoxCollectedPacket)
         this.registerPacket(Protocol.SET_SMOKY_CRITICAL_EFFECT, SetSmokyCriticalEffectPacket)
-
         this.registerPacket(Protocol.SET_USER_NEW_RANK, SetUserNewRankPacket)
         this.registerPacket(Protocol.SET_USER_RANK_UP_DIALOG, SetUserRankUpDialogPacket)
         this.registerPacket(Protocol.SET_GARAGE_ITEMS, SetGarageItemsPacket)
-
         this.registerPacket(Protocol.SEND_CHECK_BATTLE_NAME, SendCheckBattleNamePacket)
         this.registerPacket(Protocol.SET_BATTLE_NAME, SetBattleNamePacket)
         this.registerPacket(Protocol.SEND_AUTO_DESTROY, SendAutoDestroyPacket)
         this.registerPacket(Protocol.SET_SUICIDE, SetSuicidePacket)
-
         this.registerPacket(Protocol.SET_LOGIN_SUCCESSFUL, SetLoginSuccessfulPacket)
         this.registerPacket(Protocol.SEND_LAYOUT_STATE, SendLayoutStatePacket)
         this.registerPacket(Protocol.SET_REMOVE_BATTLE_SCREEN, SetRemoveBattleScreenPacket)
@@ -575,7 +520,6 @@ export class Network {
         this.registerPacket(Protocol.SEND_BUY_GARAGE_KIT, SendBuyGarageKitPacket)
         this.registerPacket(Protocol.SET_REMOVE_GARAGE_ITEM, SetRemoveGarageItemPacket)
         this.registerPacket(Protocol.SET_GARAGE_CATEGORY, SetGarageCategoryPacket)
-
         this.registerPacket(Protocol.SEND_REQUEST_SPAWN_POSITION, SendRequestSpawnPositionPacket)
         this.registerPacket(Protocol.SEND_REQUEST_RESPAWN, SendRequestRespawnPacket)
         this.registerPacket(Protocol.SET_TANK_CHANGED_EQUIPMENT, SetTankChangedEquipmentPacket)
@@ -585,7 +529,6 @@ export class Network {
         this.registerPacket(Protocol.SET_REMOVE_USER_CHAT_MESSAGES, SetRemoveUserChatMessagesPacket)
         this.registerPacket(Protocol.SET_ADD_USER_INFO_ON_VIEWING_TEAM_BATTLE, SetAddUserInfoOnViewingTeamBattlePacket)
         this.registerPacket(Protocol.SET_REMOVE_VIEWING_BATTLE, SetRemoveViewingBattlePacket)
-
         this.registerPacket(Protocol.SEND_START_FLAME_SHOT, SendStartFlameShotPacket)
         this.registerPacket(Protocol.SEND_STOP_FLAME_SHOT, SendStopFlameShotPacket)
 
@@ -697,8 +640,6 @@ export class Network {
         this.registerPacket(Protocol.SET_BATTLE_CHAT_ENABLED, SetBattleChatEnabledPacket);
         this.registerPacket(Protocol.SET_REMOVE_CHAT, SetRemoveChatPacket);
         this.registerPacket(Protocol.SET_REMOVE_BATTLES_SCREEN, SetRemoveBattlesScreenPacket);
-
-        // GENERATE REGISTER HERE
         this.registerPacket(Protocol.SET_LOAD_TEAM_DEATH_MATCH, SetLoadTeamDeathMatchPacket);
         this.registerPacket(Protocol.SET_BATTLE_FOUND, SetBattleFoundPacket);
         this.registerPacket(Protocol.SEND_CHECK_BATTLE, SendCheckBattlePacket);
@@ -755,6 +696,8 @@ export class Network {
         this.registerPacket(Protocol.SET_EMAIL_CODE_SCREEN, SetEmailCodeScreenPacket);
         this.registerPacket(Protocol.SEND_VERIFY_EMAIL, SendVerifyEmailPacket);
         this.registerPacket(Protocol.SET_SUCCESSFUL_PURCHASE, SetSuccessfulPurchasePacket);
+
+        // GENERATE REGISTER HERE
 
         Logger.info(`${this.packetPool.size} packets registered`)
     }
