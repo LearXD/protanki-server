@@ -99,8 +99,7 @@ export class PlayerGarageManager {
 
         Logger.debug(`Upgrading item ${itemId} for player ${this.player.getName()}`);
 
-        const item = this.player.server.garage.getItem(itemId);
-        // const category = this.player.server.garageManager.getItemCategory(itemId);
+        const item = this.player.server.garage.items.get(itemId);
 
         switch (item.category) {
             case GarageItemCategory.TURRET: {
@@ -132,7 +131,7 @@ export class PlayerGarageManager {
     }
 
     public addItem(itemId: string, quantity: number = 1) {
-        const item = this.player.server.garage.getItem(itemId);
+        const item = this.player.server.garage.items.get(itemId);
 
         switch (item.category) {
             case GarageItemCategory.TURRET: {
@@ -179,7 +178,7 @@ export class PlayerGarageManager {
             return null;
         }
 
-        const item = this.player.server.garage.getItem(name);
+        const item = this.player.server.garage.items.get(name);
 
         switch (item.category) {
             case GarageItemCategory.TURRET:
@@ -203,7 +202,7 @@ export class PlayerGarageManager {
     }
 
     public hasItem(name: string) {
-        const item = this.player.server.garage.getItem(name);
+        const item = this.player.server.garage.items.get(name);
 
         switch (item.category) {
             case GarageItemCategory.TURRET:
@@ -221,7 +220,7 @@ export class PlayerGarageManager {
     }
 
     public getInventoryItem<R extends any>(name: string): R {
-        const item = this.player.server.garage.getItem(name);
+        const item = this.player.server.garage.items.get(name);
 
         switch (item.category) {
             case GarageItemCategory.TURRET:
@@ -241,7 +240,7 @@ export class PlayerGarageManager {
     public getTurretResources(): ITurretResources {
         const turret = this.getEquippedTurret();
 
-        const item = this.player.server.garage.getItem(turret);
+        const item = this.player.server.garage.items.get(turret);
         const physics = this.player.server.garage.getTurretPhysics(turret);
         const sfx = this.player.server.garage.getTurretSfx(turret);
         const properties = this.player.server.garage.getTurretProperties(turret);
@@ -251,7 +250,7 @@ export class PlayerGarageManager {
 
     public getHullResources(): IHullResources {
         const hull = this.getEquippedHull();
-        const item = this.player.server.garage.getItem(hull);
+        const item = this.player.server.garage.items.get(hull);
         const properties = this.player.server.garage.getHullPhysics(hull);
 
         if (!properties) {
@@ -263,7 +262,7 @@ export class PlayerGarageManager {
 
     public getPaintingResources(): IPaintingResources {
         const painting = this.getEquippedPainting();
-        const item = this.player.server.garage.getItem(painting);
+        const item = this.player.server.garage.items.get(painting);
 
         return { painting, item }
     }
@@ -446,7 +445,7 @@ export class PlayerGarageManager {
         }
 
         this.player.data.decreaseCrystals(price);
-        const kit = this.player.server.garage.getItem(kitId);
+        const kit = this.player.server.garage.items.get(kitId);
 
         if (!kit) {
             return false;
@@ -513,7 +512,7 @@ export class PlayerGarageManager {
         }
 
         if (packet instanceof SendPreviewPaintingPacket) {
-            const item = this.player.server.garage.getItem(packet.item);
+            const item = this.player.server.garage.items.get(packet.item);
             if (item && item.category === GarageItemCategory.PAINT) {
                 this.player.garage.sendEquipItem(packet.item);
             }

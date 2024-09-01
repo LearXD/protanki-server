@@ -77,10 +77,6 @@ export class Garage {
         this.items.set(GarageItemUtils.serialize(item.id, item.modificationID), item);
     }
 
-    public getItem(itemId: string) {
-        return this.items.get(itemId);
-    }
-
     // TURRET PHYSICS
     public getTurretPhysics(itemId: string): ITurretPhysics {
         return this.getData(path.join('physics', 'turrets', itemId, 'properties.json'));
