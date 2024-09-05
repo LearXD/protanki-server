@@ -30,7 +30,7 @@ export class Server {
     private readonly server: net.Server = net.createServer();
     public readonly network: Network = new Network();
 
-    private whitelisted: boolean = false;
+    public whitelisted: boolean = false;
 
     /** HANDLERS */
     public readonly clients: ClientsHandler = new ClientsHandler(this);
@@ -62,6 +62,20 @@ export class Server {
         const start = Date.now();
         Logger.info('Starting server...');
 
+        this.server.on('connection', (socket) => this.clients.handleConnection(socket));
+        this.server.on('error', (error) => Logger.error(error.message));
+
+        this.server.listen(port, () => {
+            const time = Date.now() - start;
+            this.sendMessage(`[SERVER] Servidor iniciado em ${time} ms`)
+            Logger.info(`Server started on port ${port} (${time}ms)`);
+            Logger.debug(`Memory usage: ${this.getMemoryUsage()} MB`);
+
+            this.onStarted()
+        })
+    }
+
+    public onStarted() {
         this.battles.createBattle('For Newbies', 'map_sandbox')
         this.battles.createBattle('For Newbies 2', 'map_noise', {
             autoBalance: false,
@@ -103,26 +117,12 @@ export class Server {
             withoutCrystals: false,
             withoutSupplies: false
         })
-
-        this.init();
-
-        this.server.listen(port, () => {
-            const time = Date.now() - start;
-            this.sendMessage(`[SERVER] Servidor iniciado em ${time} ms`)
-            Logger.info(`Server started on port ${port} (${time}ms)`);
-            Logger.debug(`Memory usage: ${this.getMemoryUsage()} MB`);
-        })
     }
 
     public close = () => {
         this.players.getPlayers().forEach((player) => player.close());
         this.server.close();
         Logger.info('Server closed');
-    }
-
-    public init() {
-        this.server.on('connection', (socket) => this.clients.handleConnection(socket));
-        this.server.on('error', (error) => Logger.error(error.message));
     }
 
     public getMemoryUsage() {
@@ -133,18 +133,9 @@ export class Server {
         this.chat.broadcastServerMessage(message, warning);
     }
 
-    public isWhitelisted() {
-        return this.whitelisted
-    }
-
-    public setWhitelisted(whitelisted: boolean) {
-        this.whitelisted = whitelisted;
-    }
-
     public sendPacket(client: Client, packet: Packet) {
         return client.sendPacket(packet);
     }
-
 
     public broadcastPacket(packet: Packet, clients: boolean = false) {
         if (clients) {
@@ -155,7 +146,5 @@ export class Server {
         return this.players.getPlayers()
             .forEach((client) => this.sendPacket(client, packet));
     }
-
-    public getClientHandler() { return this.clients }
 
 }

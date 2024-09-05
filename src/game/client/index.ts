@@ -30,7 +30,7 @@ export abstract class Client extends PacketHandler {
     }
 
     public close() {
-        this.server.getClientHandler().handleDisconnection(this);
+        this.server.clients.handleDisconnection(this);
         super.close();
     }
 

@@ -36,7 +36,7 @@ export class AuthManager {
         client.sendPacket(socialNetworksPacket);
 
         const setInviteEnabledPacket = new SetInviteEnabledPacket();
-        setInviteEnabledPacket.inviteEnabled = this.server.isWhitelisted();
+        setInviteEnabledPacket.inviteEnabled = this.server.whitelisted;
         client.sendPacket(setInviteEnabledPacket);
 
         const setAuthResourcesPacket = new SetAuthResourcesPacket();

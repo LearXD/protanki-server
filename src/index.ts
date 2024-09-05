@@ -11,7 +11,9 @@ process.on('uncaughtException', (error: Error | ServerError) => {
     Logger.error('Ocorreu um erro inesperado:');
     Logger.error(error)
 
-    Discord.sendError(error);
+    if(Environment.getEnv() === 'production') {
+        Discord.sendError(error);
+    }
     // server.close();
     // process.exit(1);
 });
