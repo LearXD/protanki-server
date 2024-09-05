@@ -5,6 +5,10 @@ export class Environment {
         dotenv.config();
     }
 
+    public static getEnv() {
+        return process.env["NODE_ENV"]
+    }
+
     public static getServerPort(): number {
         return process.env.SERVER_PORT ? parseInt(process.env.SERVER_PORT) : 1337;
     }
