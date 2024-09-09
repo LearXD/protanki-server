@@ -1,13 +1,12 @@
 import net from "net";
 
+import { Battle } from "../battle";
+import { Tank } from "../tank";
 import { Logger } from "../../utils/logger";
 import { Server } from "../../server";
 import { SetLayoutStatePacket } from "../../network/packets/set-layout-state";
 import { LayoutState, LayoutStateType } from "../../states/layout-state";
 import { SetSubLayoutStatePacket } from "../../network/packets/set-sub-layout-state";
-
-import { Battle } from "../battle";
-import { Tank } from "../tank";
 import { PlayerFriendsManager } from "./managers/friends";
 import { PlayerGarageManager } from "./managers/garage";
 import { PlayerAuthManager } from "./managers/auth";

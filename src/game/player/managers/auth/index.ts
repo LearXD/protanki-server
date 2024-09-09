@@ -73,14 +73,15 @@ export class PlayerAuthManager {
     }
 
     public handleLoginPacket(packet: SendLoginPacket) {
-        const data = PlayerData.findPlayerAuthData(packet.username);
+        const data = PlayerData.findByUsername(packet.username);
 
-        if (!data) {
+        // TODO: CORRIGIR
+        if (!data || data.data !== packet.password) {
             this.sendIncorrectPasswordPopup();
             return;
         }
 
-        this.data = data;
+        // this.data = data;
         this.onAuthenticate();
 
         return true;
@@ -123,7 +124,7 @@ export class PlayerAuthManager {
             this.player.sendPacket(new SetRegisterUsernameAlreadyUsedPacket())
 
             const setAdvisedUsernamesPacket = new SetAdvisedUsernamesPacket();
-            const subNames = ['gay', 'viado', 'boiola', 'baitola', 'chola']
+            const subNames = ['_1', '_2', '_3', '_4', '_5']
             setAdvisedUsernamesPacket.usernames = Array.from({ length: 5 }, (_, i) => found.username + "_" + subNames[i])
             this.player.sendPacket(setAdvisedUsernamesPacket)
         }

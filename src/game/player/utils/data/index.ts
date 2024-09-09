@@ -18,108 +18,49 @@ export class PlayerData {
 
     public garage: IPlayerGarageData;
 
-    public static profiles: { username: string, data: IPlayerProfileData }[] = [
+    public static profiles: IPlayerProfileData[] = [
         {
-            username: 'PiuRap',
-            data: {
-                crystals: 1e9,
-                moderatorLevel: ChatModeratorLevel.MODERATOR,
-                doubleCrystals: {
-                    startedAt: Date.now(),
-                    endAt: 0
-                },
-                score: 1e9,
-                premium: {
-                    notified: false,
-                    startedAt: Date.now(),
-                    endAt: Date.now() + (1000 * 60 * 10)
-                }
-            }
-        },
-        {
-            username: 'TheUnknown',
-            data: {
-                crystals: 1e9,
-                moderatorLevel: ChatModeratorLevel.ADMINISTRATOR,
-                doubleCrystals: {
-                    startedAt: Date.now(),
-                    endAt: Date.now() + (1000 * 60 * 10) // 10 minutes
-                },
-                score: 1e9,
-                premium: {
-                    notified: false,
-                    startedAt: Date.now(),
-                    endAt: Date.now()
-                }
-            }
-        },
-        {
-            username: 'LearXD',
-            data: {
-                crystals: 10000000,
-                moderatorLevel: ChatModeratorLevel.ADMINISTRATOR,
-                doubleCrystals: {
-                    startedAt: Date.now(),
-                    endAt: Date.now() + (1000 * 60 * 10) // 10 minutes
-                },
-                score: 1e10,
-                premium: {
-                    notified: true,
-                    startedAt: Date.now(),
-                    endAt: Date.now() + 1000 * 60 * 10
-                }
-            }
+            id: 1,
+            nickname: 'TheUnknown',
+            email: 'contato@learxd.dev',
+            role: ChatModeratorLevel.ADMINISTRATOR,
+            password: '123',
+            crystals: 500,
+            experience: 0,
+            premium_end_at: null,
+            pro_end_at: null,
+            double_crystals_end_at: null,
+            registered_at: Date.now(),
+            last_login_at: Date.now()
         }
     ]
 
     public constructor(
-        public readonly username: string,
+        public readonly profile: IPlayerProfileData,
         private readonly player?: Player
-    ) { }
+    ) {
+
+        this.crystals = profile.crystals;
+        this.moderatorLevel = profile.role;
+        this.experience = profile.experience;
+
+        // this.doubleCrystals = data.data.doubleCrystals;
+        // this.premium = data.data.premium;
+    }
 
     public static findPlayerData(username: string, player?: Player) {
-        const data = new PlayerData(username, player);
-        const loaded = data.loadProfile();
 
-        if (loaded) {
+        const profile = this.profiles.find(p => p.nickname === username)
+
+        if (profile) {
+            const data = new PlayerData(profile, player);
             return data;
         }
 
         return null;
     }
 
-    public static findPlayerAuthData(username: string): IPlayerAuthData {
-        // const exists = this.profiles.find(p => p.username === username);
-        // if (!exists) {
-        //     return null;
-        // }
-        return {
-            username: username,
-            password: 'suasenha123',
-            email: 'contato@learxd.dev',
-            emailConfirmed: true
-        }
-    }
-
     public static createPlayerData(username: string, password: string): IPlayerAuthData {
-
-        this.profiles.push({
-            username: username,
-            data: {
-                crystals: 500,
-                moderatorLevel: ChatModeratorLevel.NONE,
-                doubleCrystals: {
-                    startedAt: 0,
-                    endAt: 0
-                },
-                score: 0,
-                premium: {
-                    notified: false,
-                    startedAt: Date.now(),
-                    endAt: Date.now()
-                }
-            }
-        });
 
         return {
             username: username,
@@ -127,22 +68,6 @@ export class PlayerData {
             email: null,
             emailConfirmed: false
         };
-    }
-
-    public loadProfile() {
-        const data = PlayerData.profiles.find(p => p.username === this.username);
-
-        if (data) {
-            this.crystals = data.data.crystals;
-            this.moderatorLevel = data.data.moderatorLevel;
-            this.doubleCrystals = data.data.doubleCrystals;
-            this.experience = data.data.score;
-            this.premium = data.data.premium;
-            return true;
-        }
-
-        return true;
-        // return false;
     }
 
     public loadGarage() {
@@ -185,22 +110,22 @@ export class PlayerData {
             }
         }
 
-        if (this.username === "TheUnknown") {
-            this.garage.turrets.map(turret => {
-                turret.equipped = turret.name === 'freeze'
-                // turret.equipped = turret.name === 'flamethrower'
-                turret.level = 0
-            })
+        // if (this.username === "TheUnknown") {
+        //     this.garage.turrets.map(turret => {
+        //         turret.equipped = turret.name === 'freeze'
+        //         // turret.equipped = turret.name === 'flamethrower'
+        //         turret.level = 0
+        //     })
 
-            this.garage.hulls.map(hull => {
-                hull.equipped = hull.name === 'hornet'
-                hull.level = 3
-            })
+        //     this.garage.hulls.map(hull => {
+        //         hull.equipped = hull.name === 'hornet'
+        //         hull.level = 3
+        //     })
 
-            this.garage.paintings.map(painting => {
-                painting.equipped = painting.name === 'zeus'
-            })
-        }
+        //     this.garage.paintings.map(painting => {
+        //         painting.equipped = painting.name === 'zeus'
+        //     })
+        // }
     }
 
     public isAdmin() {

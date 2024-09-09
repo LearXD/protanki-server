@@ -1,3 +1,6 @@
+# VsCode 
+.vscode/
+
 # Node Environment
 node_modules/
 .env

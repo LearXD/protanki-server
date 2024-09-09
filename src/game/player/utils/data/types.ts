@@ -8,18 +8,18 @@ export interface IPlayerAuthData {
 }
 
 export interface IPlayerProfileData {
-    crystals: number
-    moderatorLevel: ChatModeratorLevelType
-    doubleCrystals: {
-        startedAt: number,
-        endAt: number
-    },
-    score: number
-    premium: {
-        notified: boolean
-        endAt: number
-        startedAt: number
-    }
+    id: number
+    email: string;
+    nickname: string;
+    role: ChatModeratorLevelType;
+    password: string;
+    crystals: number;
+    experience: number;
+    premium_end_at: number;
+    pro_end_at: number;
+    double_crystals_end_at: number;
+    registered_at: number;
+    last_login_at: number;
 }
 
 export interface IPremiumData {
