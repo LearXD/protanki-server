@@ -9,19 +9,21 @@ import { SetScorePacket } from "@/network/packets/set-score";
 
 export class PlayerData {
 
+    public username: string;
     public crystals: number = 0;
     public experience: number = 0;
-    public moderatorLevel: ChatModeratorLevelType = ChatModeratorLevel.NONE;
+    public role: ChatModeratorLevelType = ChatModeratorLevel.NONE;
 
-    public doubleCrystals = { startedAt: 0, endAt: 0 }
-    public premium = { notified: false, startedAt: 0, endAt: 0 }
+    public doubleCrystals = { startedAt: null, endAt: null}
+    public premium = { startedAt: null, endAt: null }
+    public pro = { startedAt: null, endAt: null }
 
     public garage: IPlayerGarageData;
 
     public static profiles: IPlayerProfileData[] = [
         {
             id: 1,
-            nickname: 'TheUnknown',
+            username: 'TheUnknown',
             email: 'contato@learxd.dev',
             role: ChatModeratorLevel.ADMINISTRATOR,
             password: '123',
@@ -40,17 +42,26 @@ export class PlayerData {
         private readonly player?: Player
     ) {
 
+        this.username = profile.username
+
+        this.role = ChatModeratorLevel.LEVELS[profile.role]
+
         this.crystals = profile.crystals;
-        this.moderatorLevel = profile.role;
         this.experience = profile.experience;
 
-        // this.doubleCrystals = data.data.doubleCrystals;
-        // this.premium = data.data.premium;
+        this.doubleCrystals.startedAt = profile.double_crystals_end_at
+        this.doubleCrystals.endAt = profile.double_crystals_end_at
+
+        this.premium.startedAt = profile.premium_end_at
+        this.premium.endAt = profile.premium_end_at
+
+        this.pro.startedAt = profile.pro_end_at
+        this.pro.endAt = profile.pro_end_at
     }
 
     public static findPlayerData(username: string, player?: Player) {
 
-        const profile = this.profiles.find(p => p.nickname === username)
+        const profile = this.profiles.find(p => p.username === username)
 
         if (profile) {
             const data = new PlayerData(profile, player);
@@ -130,7 +141,7 @@ export class PlayerData {
 
     public isAdmin() {
         const levels = [ChatModeratorLevel.ADMINISTRATOR, ChatModeratorLevel.COMMUNITY_MANAGER, ChatModeratorLevel.MODERATOR]
-        return levels.includes(this.moderatorLevel)
+        return levels.includes(this.role)
     }
 
     public decreaseCrystals(amount: number, silent?: boolean) {
@@ -198,15 +209,14 @@ export class PlayerData {
     }
 
     public getPremiumData(): IPremiumData {
-        const data = this.premium;
 
-        const lifeTime = (data.endAt - data.startedAt) / 1000;
-        const leftTime = (data.endAt - Date.now()) / 1000;
+        const lifeTime = (this.premium.endAt - this.premium.startedAt) / 1000;
+        const leftTime = (this.premium.endAt - Date.now()) / 1000;
 
         return {
             enabled: leftTime > 0,
             showReminder: false,
-            showWelcome: leftTime > 0 && !data.notified,
+            showWelcome: false,
             reminderTime: -1,
             leftTime: leftTime > 0 ? leftTime : -1,
             lifeTime: lifeTime

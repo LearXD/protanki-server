@@ -12,7 +12,7 @@ export class ChatUser {
     ) { }
 
     static fromData(data: PlayerData) {
-        return new ChatUser(data.username, data.getRank(), data.moderatorLevel)
+        return new ChatUser(data.username, data.getRank(), data.role)
     }
 
     public toObject(): IUser {

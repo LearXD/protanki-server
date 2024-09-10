@@ -39,7 +39,7 @@ export class ChatManager {
                 player.chat.sendMessage(`Usuário ${target} não encontrado`, true)
                 return;
             }
-            message.target = new ChatUser(data.username, data.getRank(), data.moderatorLevel);
+            message.target = new ChatUser(data.username, data.getRank(), data.role);
         }
 
         message.text = message.text.replace(

@@ -48,7 +48,7 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
         packet.userId = player.getName();
         packet.usersInfo = players.map(p => (
             {
-                chatModeratorLevel: p.data.moderatorLevel,
+                chatModeratorLevel: p.data.role,
                 deaths: p.tank.deaths,
                 kills: p.tank.kills,
                 rank: p.data.getRank(),
@@ -86,7 +86,7 @@ export abstract class BattleTeamModeManager extends BattleModeManager {
         for (const player of this.battle.playersManager.getPlayers()) {
             users.get(player.tank.team)
                 .push({
-                    chatModeratorLevel: player.data.moderatorLevel,
+                    chatModeratorLevel: player.data.role,
                     deaths: player.tank.deaths,
                     kills: player.tank.kills,
                     rank: player.data.getRank(),

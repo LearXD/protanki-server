@@ -49,7 +49,7 @@ export class PlayerChatManager {
         setChatInitParamsPacket.antiFloodEnabled = !this.player.data.isAdmin();
         setChatInitParamsPacket.bufferSize = 60;
         setChatInitParamsPacket.chatEnabled = true;
-        setChatInitParamsPacket.chatModeratorLevel = this.player.data.moderatorLevel;
+        setChatInitParamsPacket.chatModeratorLevel = this.player.data.role;
         setChatInitParamsPacket.linksWhiteList = [];
         setChatInitParamsPacket.minChar = 60;
         setChatInitParamsPacket.minWord = 5;

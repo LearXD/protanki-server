@@ -10,7 +10,7 @@ export interface IPlayerAuthData {
 export interface IPlayerProfileData {
     id: number
     email: string;
-    nickname: string;
+    username: string;
     role: ChatModeratorLevelType;
     password: string;
     crystals: number;

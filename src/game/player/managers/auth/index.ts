@@ -73,10 +73,10 @@ export class PlayerAuthManager {
     }
 
     public handleLoginPacket(packet: SendLoginPacket) {
-        const data = PlayerData.findByUsername(packet.username);
+        const data = PlayerData.findPlayerData(packet.username);
 
         // TODO: CORRIGIR
-        if (!data || data.data !== packet.password) {
+        if (!data || data.profile.password !== packet.password) {
             this.sendIncorrectPasswordPopup();
             return;
         }
@@ -88,7 +88,7 @@ export class PlayerAuthManager {
     }
 
     public handleRegisterPacket(packet: SendRegisterPacket) {
-        const data = PlayerData.findPlayerAuthData(packet.username);
+        const data = PlayerData.findPlayerData(packet.username);
 
         if (data) {
             this.player.sendPacket(new SetRegisterUsernameAlreadyUsedPacket())
