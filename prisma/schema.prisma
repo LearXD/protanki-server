@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model friends {
+  sender_player                          Int
+  target_player                          Int
+  pending                                Boolean? @default(false)
+  players_friends_sender_playerToplayers players  @relation("friends_sender_playerToplayers", fields: [sender_player], references: [id], onDelete: Cascade, map: "sender_fk")
+  players_friends_target_playerToplayers players  @relation("friends_target_playerToplayers", fields: [target_player], references: [id], onDelete: Cascade, map: "target_fk")
+
+  @@id([sender_player, target_player])
+  @@index([target_player], map: "target_fk")
+}
+
+model inventories {
+  player_id     Int
+  item_name     String    @db.VarChar(20)
+  item_level    Int       @default(0)
+  item_quantity Int       @default(1)
+  expires_at    DateTime? @db.Timestamp(0)
+  created_at    DateTime  @default(now()) @db.Timestamp(0)
+  players       players   @relation(fields: [player_id], references: [id], onDelete: Cascade, map: "inventories_players_FK")
+
+  @@id([player_id, item_name])
+}
+
+model players {
+  id                                     Int           @id @default(autoincrement())
+  email                                  String        @unique(map: "email") @db.VarChar(96)
+  username                               String        @unique(map: "username") @db.VarChar(30)
+  role                                   Int?          @default(0) @db.TinyInt
+  password                               String        @db.VarChar(200)
+  crystals                               Int?          @default(0)
+  experience                             Int?          @default(0)
+  premium_started_at                     DateTime?     @db.Timestamp(0)
+  premium_end_at                         DateTime?     @db.Timestamp(0)
+  pro_started_at                         DateTime?     @db.Timestamp(0)
+  pro_end_at                             DateTime?     @db.Timestamp(0)
+  double_crystals_started_at             DateTime?     @db.Timestamp(0)
+  double_crystals_end_at                 DateTime?     @db.Timestamp(0)
+  last_login_at                          DateTime?     @default(dbgenerated("(now())")) @db.Timestamp(0)
+  registered_at                          DateTime?     @default(dbgenerated("(now())")) @db.Timestamp(0)
+  friends_friends_sender_playerToplayers friends[]     @relation("friends_sender_playerToplayers")
+  friends_friends_target_playerToplayers friends[]     @relation("friends_target_playerToplayers")
+  inventories                            inventories[]
+}
